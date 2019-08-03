@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'BPG WEB 001 Caps';
+  src: url('~assets/fonts/bpg-web-001-caps-webfont.eot'); /* IE9 Compat Modes */
+  src: url('~assets/fonts/bpg-web-001-caps-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('~assets/fonts/bpg-web-001-caps-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+       url('~assets/fonts/bpg-web-001-caps-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('~assets/fonts/bpg-web-001-caps-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('~assets/fonts/bpg-web-001-caps-webfont.svg#bpg_web_001_capsregular') format('svg'); /* Legacy iOS */
+}
+@font-face {
+  font-family: 'BPG WEB 001';
+  src: url('~assets/fonts/bpg-web-001-webfont.eot'); /* IE9 Compat Modes */
+  src: url('~assets/fonts/bpg-web-001-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('~assets/fonts/bpg-web-001-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+       url('~assets/fonts/bpg-web-001-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('~assets/fonts/bpg-web-001-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('~assets/fonts/bpg-web-001-webfont.svg#bpg_web_001regular') format('svg'); /* Legacy iOS */
+}
+
+$font-caps: 'BPG WEB 001 Caps';
+$font: 'BPG WEB 001';
+
+%buttons-main {
+  font-family: $font-caps;
+  line-height: 1;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  font-weight: 200;
+}

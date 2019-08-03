@@ -41,8 +41,14 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
     '@nuxtjs/pwa'
+    // 'nuxt-svg-loader'
   ],
+
+  styleResources: {
+    sass: '~assets/styles/app.scss'
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
