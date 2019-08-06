@@ -1,4 +1,7 @@
 {
+  "sidebar": {
+    "logo_meta": "m2 Some text"
+  },
   "links": {
     "home": "Home"
   },

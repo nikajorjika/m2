@@ -1,4 +1,14 @@
 {
+  "navigation": {
+    "flat": "ბინა",
+    "renovation": "რემონტი",
+    "furniture": "ავეჯი",
+    "decoration": "დეკორეი",
+    "supply": "ტექნიკა"
+  },
+  "sidebar": {
+    "logo_meta": "m2 Some text"
+  },
   "links": {
     "home": "Home"
   },

@@ -2,7 +2,19 @@ export const state = () => ({
   tabletType: '',
   tabletTypes: [
     {
-      name: ''
+      name: 'რემონტები',
+      value: 'renovation',
+      sub_items: [1, 2, 3, 4]
+    },
+    {
+      name: 'მაგიდები',
+      value: 'tables',
+      sub_items: [1, 2, 3, 4]
+    },
+    {
+      name: 'მაკეტი',
+      value: 'tables',
+      sub_items: [1, 2, 3, 4]
     }
   ]
 })

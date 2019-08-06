@@ -1,17 +1,18 @@
 <template>
-  <div>
-    <button-main-orange icon="caret-right" button-text="შემდეგი" />
-    <nuxt />
+  <div class="default-app-layout">
+    <sidebar />
+    <flat-view>
+      <nuxt />
+    </flat-view>
   </div>
 </template>
 <script>
-import ButtonMainOrange from '~/components/partials/ButtonMainOrange'
-
+import Sidebar from '../components/core/Sidebar'
+import FlatView from '../components/core/FlatView'
 export default {
-  components: { ButtonMainOrange },
+  components: { Sidebar, FlatView },
   mounted() {
     if (!this.$store.getters['settings/tabletType'].length) {
-      console.log('123')
     }
   }
 }
@@ -20,5 +21,10 @@ export default {
 <style lang="scss">
 body {
   background: #fff;
+  .default-app-layout {
+    height: 100vh;
+    background: $bg-color-1;
+    display: flex;
+  }
 }
 </style>
