@@ -8,7 +8,12 @@
 import ButtonMainOrange from '~/components/partials/ButtonMainOrange'
 
 export default {
-  components: { ButtonMainOrange }
+  components: { ButtonMainOrange },
+  mounted() {
+    if (!this.$store.getters['settings/tabletType'].length) {
+      console.log('123')
+    }
+  }
 }
 </script>
 

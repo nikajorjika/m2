@@ -27,7 +27,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/i18n.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -49,6 +49,7 @@ module.exports = {
   styleResources: {
     sass: '~assets/styles/app.scss'
   },
+
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
