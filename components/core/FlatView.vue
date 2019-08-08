@@ -2,13 +2,15 @@
   <div class="flat-view">
     <flat-navigation />
     <slot />
+    <faq-button />
   </div>
 </template>
 
 <script>
 import FlatNavigation from './FlatNavigation'
+import FaqButton from './FAQButton'
 export default {
-  components: { FlatNavigation }
+  components: { FlatNavigation, FaqButton }
 }
 </script>
 

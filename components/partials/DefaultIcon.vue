@@ -1,5 +1,5 @@
 <template>
-  <div class="icon" :class="iconName" :style="customStyles" />
+  <div class="icon" :class="iconName" :style="activeStyles || inactiveStyles" />
 </template>
 
 <script>
@@ -9,9 +9,13 @@ export default {
       type: String,
       default: ''
     },
-    customStyles: {
+    inactiveStyles: {
       type: Object,
       default: () => ({})
+    },
+    activeStyles: {
+      type: Object,
+      default: () => null
     }
   }
 }

@@ -2,14 +2,7 @@
   <div class="btn btn-standard btn-standard--orange btn-standard--large">
     <span class="btn-standard__text">{{ buttonText }}</span>
     <span class="btn-standard__icon">
-      <default-icon
-        :icon-name="icon"
-        :custom-styles="{
-          backgroundImage: 'linear-gradient(0, #fff, #fff)',
-          width: '9px',
-          height: '13px'
-        }"
-      />
+      <default-icon :icon-name="icon" :inactive-styles="inactiveStyles" />
     </span>
   </div>
 </template>
@@ -27,6 +20,16 @@ export default {
     icon: {
       type: String,
       default: ''
+    }
+  },
+  data() {
+    return {
+      inactiveStyles: {
+        backgroundImage:
+          'linear-gradient(0,rgba(255,255,255, 1),rgba(255,255,255, 1) 100%)',
+        width: '9px',
+        height: '13px'
+      }
     }
   }
 }
