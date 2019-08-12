@@ -3,12 +3,15 @@
  * 2. redirects if not with locale
  */
 export default function({ isHMR, app, store, route, params, error, redirect }) {
+  if (route.path === '/') {
+    return redirect('/ka' + route.fullPath)
+  }
   if (error) return
   if (isHMR) {
     // ignore if called from hot module replacement
     return
   } // if url does not have language, redirect to english
-  else if (!params.lang) {
+  else if (route.path === '/' || !params.lang) {
     return redirect('/ka' + route.fullPath)
   }
   // based on directory structure _lang/xxxx, en/about has params.lang as "en"
