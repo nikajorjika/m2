@@ -1,5 +1,11 @@
 <template>
   <div class="flat-navigation">
+    <svg width="0" height="0">
+      <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e26479" />
+        <stop offset="100%" stop-color="#684f78" />
+      </linearGradient>
+    </svg>
     <ul class="flat-navigation__list">
       <li
         v-for="(item, index) in navData"
@@ -7,10 +13,10 @@
         class="flat-navigation__list__item"
       >
         <nuxt-link :to="item.route" class="flat-navigation__link">
-          <default-icon
-            :icon-name="item.icon"
-            :inactive-styles="inactiveStyle"
-            :active-styles="$route.path === item.route ? activeStyles : null"
+          <component
+            :is="item.component"
+            :icon-color="$route.path === item.route ? 'url(#gradient)' : '#fff'"
+            class="flat-navigation__link__icon"
           />
           <span class="flat-navigation__link__text">{{ item.title }}</span>
         </nuxt-link>
@@ -20,10 +26,24 @@
 </template>
 
 <script>
-import DefaultIcon from '../partials/DefaultIcon'
+import ArrowIcon from '@/components/icons/ArrowRight'
+import FlatIcon from '@/components/icons/Appartament'
+import RenovationIcon from '@/components/icons/Makeover'
+import FurnitureIcon from '@/components/icons/Furniture'
+import SupplyIcon from '@/components/icons/Technic'
+import DecorationIcon from '@/components/icons/Decor'
+
 export default {
-  components: { DefaultIcon },
+  components: {
+    ArrowIcon,
+    FlatIcon,
+    RenovationIcon,
+    FurnitureIcon,
+    SupplyIcon,
+    DecorationIcon
+  },
   data() {
+    console.log(this.$route.path)
     return {
       inactiveStyle: {
         backgroundImage:
@@ -35,33 +55,39 @@ export default {
         backgroundImage:
           'linear-gradient(0, rgba(104,79,120,1) 50%, rgba(226,100,121,1) 100%)',
         height: '23px',
-        width: '28px'
+        width: '28px',
+        component: 'right-arrow-icon'
       },
       navData: [
         {
           icon: 'appartament',
           route: `/`,
-          title: this.$t('navigation.flat')
+          title: this.$t('navigation.flat'),
+          component: FlatIcon
         },
         {
           icon: 'makeover',
-          route: `${this.$store.state.locale}/makeover`,
-          title: this.$t('navigation.renovation')
+          route: `/${this.$store.state.locale}/makeover`,
+          title: this.$t('navigation.renovation'),
+          component: RenovationIcon
         },
         {
           icon: 'furniture',
-          route: `${this.$store.state.locale}/furniture`,
-          title: this.$t('navigation.furniture')
+          route: `/${this.$store.state.locale}/furniture`,
+          title: this.$t('navigation.furniture'),
+          component: FurnitureIcon
         },
         {
           icon: 'decor',
-          route: `${this.$store.state.locale}/decoration`,
-          title: this.$t('navigation.decoration')
+          route: `/${this.$store.state.locale}/decoration`,
+          title: this.$t('navigation.decoration'),
+          component: DecorationIcon
         },
         {
           icon: 'technick',
-          route: `${this.$store.state.locale}/supply`,
-          title: this.$t('navigation.supply')
+          route: `/${this.$store.state.locale}/supply`,
+          title: this.$t('navigation.supply'),
+          component: SupplyIcon
         }
       ]
     }
@@ -100,6 +126,9 @@ export default {
     letter-spacing: 1px;
     &__text {
       margin-top: 15px;
+    }
+    &__icon {
+      z-index: 2;
     }
     &.nuxt-link-exact-active {
       position: relative;

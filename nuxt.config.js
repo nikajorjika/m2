@@ -42,8 +42,8 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
-    '@nuxtjs/pwa'
-    // 'nuxt-svg-loader'
+    '@nuxtjs/pwa',
+    'nuxt-svg-loader'
   ],
 
   styleResources: {
@@ -63,5 +63,10 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  svgLoader: {
+    svgoConfig: {
+      plugins: [{ prefixIds: false }]
+    }
   }
 }

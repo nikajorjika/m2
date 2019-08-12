@@ -1,9 +1,12 @@
 <template>
-  <div class="icon" :class="iconName" :style="activeStyles || inactiveStyles" />
+  <flat-svg class="svg-icon" :class="{ active: active }" />
 </template>
 
 <script>
+import FlatSvg from '@/assets/icons/arrow-pointing-to-right.svg'
+
 export default {
+  components: { FlatSvg },
   props: {
     iconName: {
       type: String,
@@ -13,15 +16,23 @@ export default {
       type: Object,
       default: () => ({})
     },
-    activeStyles: {
-      type: Object,
-      default: () => null
+    active: {
+      type: Boolean,
+      default: false
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.svg-icon {
+  path {
+    fill: #ddd;
+  }
+  g {
+    fill: #ddd;
+  }
+}
 .icon {
   width: 41px;
   height: 41px;

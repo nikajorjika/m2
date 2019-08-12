@@ -2,16 +2,13 @@
   <div class="btn btn-standard btn-standard--orange btn-standard--large">
     <span class="btn-standard__text">{{ buttonText }}</span>
     <span class="btn-standard__icon">
-      <default-icon :icon-name="icon" :inactive-styles="inactiveStyles" />
+      <slot name="icon" />
     </span>
   </div>
 </template>
 
 <script>
-import DefaultIcon from '~/components/partials/DefaultIcon'
-
 export default {
-  components: { DefaultIcon },
   props: {
     buttonText: {
       type: String,
