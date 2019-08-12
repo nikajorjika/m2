@@ -1,8 +1,23 @@
 <template>
   <div class="default-app-layout">
+    <svg width="0" height="0" data-v-3870f4dc="">
+      <linearGradient
+        id="gradient"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1"
+        data-v-3870f4dc=""
+      >
+        <stop offset="0%" stop-color="#e26479" data-v-3870f4dc=""></stop>
+        <stop offset="100%" stop-color="#684f78" data-v-3870f4dc=""></stop>
+      </linearGradient>
+    </svg>
     <sidebar />
     <flat-view>
-      <nuxt />
+      <div class="app">
+        <nuxt />
+      </div>
     </flat-view>
   </div>
 </template>
@@ -25,6 +40,11 @@ body {
     height: 100vh;
     background: $bg-color-1;
     display: flex;
+  }
+  .app {
+    height: calc(100% - 343px);
+    background: $bg-color-2;
+    box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
 }
 </style>

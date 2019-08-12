@@ -38,7 +38,7 @@ export default {
   display: inline-block;
   color: #fff;
   height: 71px;
-  width: 212px;
+  width: auto;
   display: flex;
 }
 .btn-standard {

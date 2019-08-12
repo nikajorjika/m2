@@ -3,6 +3,7 @@
  * 2. redirects if not with locale
  */
 export default function({ isHMR, app, store, route, params, error, redirect }) {
+  if (error) return
   if (isHMR) {
     // ignore if called from hot module replacement
     return

@@ -1,11 +1,5 @@
 <template>
   <div class="flat-navigation">
-    <svg width="0" height="0">
-      <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#e26479" />
-        <stop offset="100%" stop-color="#684f78" />
-      </linearGradient>
-    </svg>
     <ul class="flat-navigation__list">
       <li
         v-for="(item, index) in navData"
@@ -43,7 +37,6 @@ export default {
     DecorationIcon
   },
   data() {
-    console.log(this.$route.path)
     return {
       inactiveStyle: {
         backgroundImage:
@@ -61,7 +54,7 @@ export default {
       navData: [
         {
           icon: 'appartament',
-          route: `/`,
+          route: `/${this.$store.state.locale}`,
           title: this.$t('navigation.flat'),
           component: FlatIcon
         },
@@ -128,7 +121,7 @@ export default {
       margin-top: 15px;
     }
     &__icon {
-      z-index: 2;
+      z-index: 1;
     }
     &.nuxt-link-exact-active {
       position: relative;

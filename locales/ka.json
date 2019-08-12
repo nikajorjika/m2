@@ -19,5 +19,9 @@
   "about": {
     "title": "About",
     "introduction": "..."
+  },
+  "buttons": {
+    "next": "შემდეგი",
+    "faq": "ხშირად დასმული კითხვები"
   }
 }
