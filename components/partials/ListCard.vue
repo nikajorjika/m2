@@ -46,18 +46,35 @@ export default {
   }
   &--gradient {
     color: #ffffff;
-    background: $gradient-1;
+    position: relative;
     font-family: $font;
     font-size: 18px;
+    background: #f2a47e;
+    &:before {
+      content: '';
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0.7;
+      z-index: 0;
+      position: absolute;
+      background: linear-gradient(
+        to right,
+        rgba(104, 79, 120, 1) 0%,
+        rgba(226, 100, 121, 1) 100%
+      );
+    }
   }
   &__item {
     border-bottom: 1px solid #f3ede7;
     display: flex;
+    z-index: 1;
     &--white {
       padding: 26px 33px 22px 42px;
     }
     &--gradient {
-      padding: 10px 33px 10px 42px;
+      padding: 33px 56px 22px;
     }
     &__label {
       color: inherit;
@@ -71,6 +88,7 @@ export default {
       }
       &--gradient {
         color: #fff;
+        margin-left: 13px;
       }
     }
   }
