@@ -38,19 +38,6 @@ export default {
   },
   data() {
     return {
-      inactiveStyle: {
-        backgroundImage:
-          'linear-gradient(0,rgba(255,255,255, 1),rgba(255,255,255, 1) 100%)',
-        height: '23px',
-        width: '28px'
-      },
-      activeStyles: {
-        backgroundImage:
-          'linear-gradient(0, rgba(104,79,120,1) 50%, rgba(226,100,121,1) 100%)',
-        height: '23px',
-        width: '28px',
-        component: 'right-arrow-icon'
-      },
       navData: [
         {
           icon: 'appartament',

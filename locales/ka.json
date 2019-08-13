@@ -23,5 +23,15 @@
   "buttons": {
     "next": "შემდეგი",
     "faq": "ხშირად დასმული კითხვები"
+  },
+  "labels": {
+    "FullArea": "სრული ფართი",
+    "FlatArea": "ბინის ფართი",
+    "BalconyArea": "აივნის ფართი",
+    "FullPrice": "სრული ფასი",
+    "Renovation": "რემონტი",
+    "Furniture": "ავეჯი",
+    "Decor": "დეკორ",
+    "Supply": "ტექნიკა"
   }
 }
