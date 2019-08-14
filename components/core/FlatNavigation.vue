@@ -9,7 +9,9 @@
         <nuxt-link :to="item.route" class="flat-navigation__link">
           <component
             :is="item.component"
-            :icon-color="$route.path === item.route ? 'url(#gradient)' : '#fff'"
+            :icon-color="
+              isSamePath($route.path, item.route) ? 'url(#gradient)' : '#fff'
+            "
             class="flat-navigation__link__icon"
           />
           <span class="flat-navigation__link__text">{{ item.title }}</span>
@@ -26,6 +28,7 @@ import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
 import SupplyIcon from '@/components/icons/Technic'
 import DecorationIcon from '@/components/icons/Decor'
+import { isSamePath } from '@/utils/Route'
 
 export default {
   components: {
@@ -71,6 +74,9 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    isSamePath: (a, b) => isSamePath(a, b)
   }
 }
 </script>

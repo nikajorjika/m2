@@ -43,6 +43,7 @@ export default {
     background: #fff;
     font-family: $font-caps;
     font-size: 14px;
+    box-shadow: 4px 6px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
   &--gradient {
     color: #ffffff;
@@ -74,7 +75,10 @@ export default {
       padding: 26px 33px 22px 42px;
     }
     &--gradient {
-      padding: 33px 56px 22px;
+      padding: 31px 56px 29px 42px;
+      &:last-child {
+        border-bottom: none;
+      }
     }
     &__label {
       color: inherit;

@@ -32,9 +32,15 @@
     "Renovation": "რემონტი",
     "Furniture": "ავეჯი",
     "Decor": "დეკორ",
-    "Supply": "ტექნიკა"
+    "Supply": "ტექნიკა",
+    "Render": "რენდერი",
+    "Plan": "ნახაზი"
   },
   "titles": {
     "FlatPageTitle": "რეპლიკაზე წარმოდგენილი რემონტი"
+  },
+  "rooms": {
+    "Hall": "ჰოლი",
+    "Bedroom": "საძინებელი"
   }
 }
