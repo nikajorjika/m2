@@ -18,7 +18,6 @@
 <script>
 export default {
   data() {
-    console.log(this.$store)
     return {
       list: this.$store.getters['Flats/roomsList']
     }
