@@ -26,17 +26,23 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['swiper/dist/css/swiper.css'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/i18n.js', '~/plugins/fullscreen.js'],
+  plugins: [
+    '~/plugins/i18n.js',
+    {
+      src: '~/plugins/nuxt-swiper.js',
+      ssr: false
+    }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
   devModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    // '@nuxtjs/eslint-module'
   ],
   /*
    ** Nuxt.js modules
@@ -65,7 +71,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   },
   svgLoader: {
     svgoConfig: {

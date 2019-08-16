@@ -1,16 +1,9 @@
 <template>
   <div class="default-app-layout">
-    <svg width="0" height="0" data-v-3870f4dc="">
-      <linearGradient
-        id="gradient"
-        x1="0"
-        y1="0"
-        x2="0"
-        y2="1"
-        data-v-3870f4dc=""
-      >
-        <stop offset="0%" stop-color="#e26479" data-v-3870f4dc=""></stop>
-        <stop offset="100%" stop-color="#684f78" data-v-3870f4dc=""></stop>
+    <svg width="0" height="0">
+      <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e26479" />
+        <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
     <sidebar />
@@ -37,7 +30,7 @@ export default {
 body {
   background: #fff;
   .default-app-layout {
-    height: 100vh;
+    min-height: 100vh;
     background: $bg-color-1;
     display: flex;
   }
