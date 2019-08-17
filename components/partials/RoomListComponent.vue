@@ -37,7 +37,7 @@ export default {
     padding: 30px 45px 40px 40px;
     &__item {
       display: flex;
-      margin: 15px 0;
+      margin: 9px 0;
       align-items: center;
       &__number {
         background: #fff;
@@ -45,18 +45,18 @@ export default {
         padding: 10px;
         margin-right: 45px;
         color: #4b3f99;
-        font-size: 13px;
+        font-size: 9px;
         line-height: 1;
       }
       &__value {
         margin-left: auto;
         font-family: $font;
-        font-size: 20px;
+        font-size: 13px;
         color: #4b3f99;
       }
       &__label {
         font-family: $font;
-        font-size: 20px;
+        font-size: 13px;
         color: #494949;
       }
     }

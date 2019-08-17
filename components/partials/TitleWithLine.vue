@@ -17,7 +17,7 @@ export default {
 .bordered-title {
   color: #494949;
   position: relative;
-  font-size: 24px;
+  font-size: 16px;
   display: inline-block;
   font-family: $font-caps;
   font-weight: 500;

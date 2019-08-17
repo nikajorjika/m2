@@ -37,7 +37,7 @@ export default {
   background-color: $action-primary-color;
   display: inline-block;
   color: #fff;
-  height: 71px;
+  height: 47px;
   width: auto;
   display: flex;
 }
@@ -52,8 +52,8 @@ export default {
     padding-left: 32px;
   }
   &__icon {
-    width: 41px;
-    height: 41px;
+    width: 28px;
+    height: 28px;
     margin: auto 22px;
     border-radius: 50%;
     border: 1px #fff dashed;

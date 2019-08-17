@@ -32,15 +32,15 @@ export default {
 <style lang="scss" scoped>
 .container {
   display: grid;
-  padding: 70px 50px 55px;
+  padding: 49px 33px 36px;
   height: 100%;
   grid-template-areas:
     'header header header header header'
     'sidetop main main main main'
     'sidebottom main main main main';
-  grid-template-columns: 320px 1fr 1fr 1fr 1fr;
-  grid-template-rows: 95px 250px 390px;
-  grid-column-gap: 62px;
+  grid-template-columns: 216px 1fr 1fr 1fr 1fr;
+  grid-template-rows: 65px 166px 261px;
+  grid-column-gap: 41px;
   .list {
     width: 100%;
   }
@@ -52,7 +52,6 @@ export default {
   }
   .price-list-container {
     grid-area: sidebottom;
-    margin-top: auto;
   }
   .flat-render {
     grid-area: main;

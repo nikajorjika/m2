@@ -2,15 +2,15 @@ export const state = () => ({
   areaList: [
     {
       label: 'labels.FullArea',
-      value: '180 მ2'
+      value: '180 მ²'
     },
     {
       label: 'labels.FlatArea',
-      value: '168 მ2'
+      value: '168 მ²'
     },
     {
       label: 'labels.BalconyArea',
-      value: '12 მ2'
+      value: '12 მ²'
     }
   ],
   priceList: [
@@ -38,31 +38,31 @@ export const state = () => ({
   roomsList: [
     {
       label: 'rooms.Hall',
-      area: '12.06 m2'
+      area: '12.06 მ²'
     },
     {
       label: 'rooms.Bedroom',
-      area: '12.06 m2'
+      area: '12.06 მ²'
     },
     {
       label: 'rooms.Bedroom',
-      area: '12.06 m2'
+      area: '12.06 მ²'
     },
     {
       label: 'rooms.Bedroom',
-      area: '12.06 m2'
+      area: '12.06 მ²'
     },
     {
       label: 'rooms.Hall',
-      area: '12.06 m2'
+      area: '12.06 მ²'
     },
     {
       label: 'rooms.Hall',
-      area: '12.06 m2'
+      area: '12.06 მ²'
     },
     {
       label: 'rooms.Hall',
-      area: '12.06 m2'
+      area: '12.06 მ²'
     }
   ]
 })
