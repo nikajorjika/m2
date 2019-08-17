@@ -4,7 +4,7 @@
       <Slider :items="items" />
     </div>
     <div class="desc-wrapper">
-      <div class="desc_item" v-for="(item, index) in items" :key="item.id">
+      <div v-for="(item, index) in items" :key="item.id" class="desc_item">
         <Description v-if="index == 1" :title="item.title" :text="item.text" />
       </div>
     </div>
@@ -20,7 +20,12 @@ export default {
     Description,
     Slider
   },
-  props: ['items']
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
+  }
 }
 </script>
 

@@ -19,8 +19,8 @@ export default {
   position: relative;
   display: inline-block;
   font-family: $font;
-  font-size: 21px;
-  padding: 19px 36px;
+  font-size: 14px;
+  padding: 10px 23px;
   background: #f2a47e;
   border-radius: 20px;
   overflow: hidden;

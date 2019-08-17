@@ -42,14 +42,14 @@ export default {
     color: #494949;
     background: #fff;
     font-family: $font-caps;
-    font-size: 14px;
+    font-size: 10px;
     box-shadow: 4px 6px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
   &--gradient {
     color: #ffffff;
     position: relative;
     font-family: $font;
-    font-size: 18px;
+    font-size: 12px;
     background: #f2a47e;
     &:before {
       content: '';
@@ -72,10 +72,10 @@ export default {
     display: flex;
     z-index: 1;
     &--white {
-      padding: 26px 33px 22px 42px;
+      padding: 16px 23px 16px 25px;
     }
     &--gradient {
-      padding: 31px 56px 29px 42px;
+      padding: 19px 37px 20px 37px;
       &:last-child {
         border-bottom: none;
       }

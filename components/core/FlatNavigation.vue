@@ -12,6 +12,8 @@
             :icon-color="
               isSamePath($route.path, item.route) ? 'url(#gradient)' : '#fff'
             "
+            width="16"
+            height="16"
             class="flat-navigation__link__icon"
           />
           <span class="flat-navigation__link__text">{{ item.title }}</span>
@@ -83,7 +85,7 @@ export default {
 
 <style lang="scss" scoped>
 .flat-navigation {
-  margin-top: 97px;
+  margin-top: 63px;
   background: $gradient-2;
   border-top-left-radius: 13px;
   &__list {
@@ -92,9 +94,9 @@ export default {
     justify-content: space-between;
     &__item {
       flex: 1;
-      width: 168px;
+      width: 112px;
       align-items: center;
-      height: 92px;
+      height: 60px;
     }
   }
   &__link {
@@ -106,12 +108,13 @@ export default {
     color: #fff;
     height: 100%;
     font-family: $font-caps;
-    padding: 18px 66px;
+    padding: 0 44px;
     margin: auto;
-    width: 168px;
+    width: 112px;
     letter-spacing: 1px;
     &__text {
-      margin-top: 15px;
+      margin-top: 10px;
+      font-size: 10px;
     }
     &__icon {
       z-index: 1;

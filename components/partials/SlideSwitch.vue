@@ -91,12 +91,12 @@ export default {
   }
   &__inner {
     display: flex;
-    padding: 13px;
+    padding: 8px;
     border-radius: 38px;
     position: relative;
     &__item {
-      font-size: 16px;
-      padding: 20px 57px;
+      font-size: 11px;
+      padding: 14px 37px;
       border-radius: 38px;
       position: relative;
       z-index: 1;
@@ -105,12 +105,12 @@ export default {
     &__toggle {
       background-color: rgb(242, 101, 41);
       position: absolute;
-      height: calc(100% - 24px);
+      height: calc(100% - 16px);
       width: calc(50% - 12px);
       z-index: 0;
       border-radius: 38px;
-      top: 12px;
-      left: 12px;
+      top: 8px;
+      left: 8px;
       transition: left 0.2s;
       &.active {
         left: 50%;

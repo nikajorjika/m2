@@ -37,17 +37,17 @@ export default {
 <style lang="scss" scoped>
 .flat-view {
   background: #fff;
-  padding: 40px 18px 24px 32px;
+  padding: 27px 12px 16px 22px;
   height: 100%;
   border-top-left-radius: 17px;
   border-bottom-left-radius: 17px;
   &__header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 22px;
+    margin-bottom: 16px;
   }
   &__image {
-    height: 394px;
+    height: 261px;
     img {
       width: 100%;
       height: 100%;
@@ -55,7 +55,7 @@ export default {
     }
   }
   &__footer {
-    margin-top: 24px;
+    margin-top: 16px;
     display: flex;
     justify-content: center;
   }
