@@ -1,16 +1,11 @@
 <template>
   <div class="card">
-    <div class="card__image">
-      <img src="https://dummyimage.com/420x300/ffffff/000" />
-    </div>
+    <div class="card__image" :style="{ backgroundImage: 'url(' + item.image + ')' }"></div>
     <div class="card__content">
-      <div class="card__title card__title--red">მაცივარი</div>
-      <div class="card__text">
-        შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და ტიპოგრაფიული
-        ნაწარმის შემქმნელებს, რეალურთან მაქსიმალურად
-      </div>
+      <div class="card__title card__title--red">{{ item.title }}</div>
+      <div class="card__text">{{ item.text }}</div>
       <div class="card__button">
-        <GradientButton>ტექნიკის ფერი: ლურჯი</GradientButton>
+        <GradientButton>{{ item.feature }}</GradientButton>
       </div>
     </div>
   </div>
@@ -21,6 +16,12 @@ import GradientButton from '@/components/core/GradientButton'
 export default {
   components: {
     GradientButton
+  },
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>
@@ -30,20 +31,19 @@ export default {
   border-radius: 30px 0;
   overflow: hidden;
   &__image {
-    img {
-      display: block;
-      max-width: 100%;
-    }
+    width: 100%;
+    padding-top: 72%;
+    background-size: cover;
   }
   &__content {
-    padding: 25px 35px;
+    padding: 20px 25px;
     background: #f9f1e9;
   }
 
   &__title {
     font-family: $font-caps;
     font-size: 18px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     &--red {
       color: #f49b73;
     }
@@ -52,7 +52,7 @@ export default {
     font-family: $font;
     font-size: 14px;
     line-height: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
 }
 </style>

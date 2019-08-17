@@ -12,7 +12,7 @@
 .description {
   max-width: 400px;
   &__title {
-    font-size: 24px;
+    font-size: 20px;
     font-family: $font-caps;
     &--red {
       color: red;
@@ -20,7 +20,7 @@
   }
 
   &__text {
-    font-size: 16px;
+    font-size: 15px;
     font-family: $font;
     line-height: 25px;
     margin-top: 40px;

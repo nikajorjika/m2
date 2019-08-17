@@ -1,11 +1,18 @@
 <template>
   <div class="container">
-    <div class="slider-wrapper">
-      <Slider @messageFromSlider="messageFromSlider" :items="items" />
+    <div class="left-content">
+      <div class="slider-wrapper">
+        <Slider @messageFromSlider="messageFromSlider" :items="items" />
+      </div>
+      <div class="price-button">
+        <GradientButton>ფასი: 58.000 $</GradientButton>
+      </div>
     </div>
-    <div class="desc-wrapper">
-      <div v-for="(item, index) in items" :key="item.id" class="desc_item">
-        <Description v-if="index == activeItem" :title="item.title" :text="item.text" />
+    <div class="right-content">
+      <div class="desc-wrapper">
+        <div v-for="(item, index) in items" :key="item.id" class="desc_item">
+          <Description v-if="index == activeItem" :title="item.title" :text="item.text" />
+        </div>
       </div>
     </div>
   </div>
@@ -14,11 +21,13 @@
 <script>
 import Description from '@/components/core/Description'
 import Slider from '@/components/core/Slider'
+import GradientButton from '@/components/core/GradientButton'
 
 export default {
   components: {
     Description,
-    Slider
+    Slider,
+    GradientButton
   },
   props: {
     items: {
@@ -44,18 +53,29 @@ export default {
 .container {
   padding: 50px 20px;
 }
-.slider-wrapper,
-.desc-wrapper {
+.left-content,
+.right-content {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
 }
 
-.slider-wrapper {
-  width: 55%;
+.desc-wrapper {
+  margin-top: 150px;
+}
+
+.left-content {
+  width: 680px;
   margin-right: 4%;
 }
 
-.desc-wrapper {
-  width: 40%;
+.right-content {
+  width: calc(100% - 5% - 680px);
+}
+
+.price-button {
+  margin-top: 20px;
+  button {
+    font-size: 13px;
+  }
 }
 </style>

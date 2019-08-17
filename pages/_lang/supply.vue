@@ -3,7 +3,7 @@
     <div class="title">რეპლიკებზე წარმოდგენილი რემონტი</div>
     <div class="items">
       <div v-for="item in items" :key="item.id" class="item">
-        <TechnicCard button-title="asfasf" />
+        <TechnicCard :item="item" />
       </div>
     </div>
   </div>
@@ -16,19 +16,9 @@ export default {
     TechnicCard
   },
 
-  asyncData() {
+  asyncData({ store }) {
     return {
-      items: [
-        {
-          id: 1
-        },
-        {
-          id: 2
-        },
-        {
-          id: 3
-        }
-      ]
+      items: store.getters['supply/itemList']
     }
   }
 }
@@ -44,7 +34,7 @@ export default {
   justify-content: center;
   flex-flow: wrap;
   .item {
-    width: 285px;
+    width: 300px;
     margin: auto;
   }
 }
