@@ -15,14 +15,17 @@
     </div>
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="(item, index) in items" :key="item.key">
-        <div class="swiper_content">
+        <div class="swiper__content">
           <div class="swiper__content__title">
             <span>{{ "0" + (index+1) }}</span>
             <span>/</span>
             <span>{{ "0" + items.length }}</span>
           </div>
         </div>
-        <img :src="item.image" />
+        <div
+          style="background-image: url('https://via.placeholder.com/680x380')"
+          class="swiper__image"
+        ></div>
       </div>
     </div>
   </div>
@@ -38,6 +41,7 @@ export default {
   data() {
     return {
       swiperOption: {
+        slidesPerView: 'auto',
         centeredSlides: true,
         spaceBetween: 30,
         on: {
@@ -68,11 +72,10 @@ export default {
 
 <style lang="scss" scoped>
 .swiper__container {
-  width: 680px;
+  max-width: 100%;
   border-radius: 10px 0 0 10px;
   position: relative;
   .swiper__pagination {
-    margin-bottom: 30px;
     &__button {
       cursor: pointer;
       padding: 20px 0 20px 20px;
@@ -86,7 +89,12 @@ export default {
     }
   }
   .swiper-slide {
-    .swiper_content {
+    .swiper__image {
+      width: 100%;
+      padding-top: 56%;
+      background-size: cover;
+    }
+    .swiper__content {
       position: absolute;
       bottom: 0;
       left: 0;
