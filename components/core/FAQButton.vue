@@ -12,13 +12,17 @@ import ButtonMainOrange from '../partials/ButtonMainOrange'
 import ArrowIcon from '@/components/icons/ArrowRight'
 
 export default {
-  components: { ButtonMainOrange, ArrowIcon }
+  components: { ButtonMainOrange, ArrowIcon },
+  methods: {
+    onClick() {
+      this.$emit('click')
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .faq-button {
   width: auto;
   display: inline-block;
-  margin: 41px 0;
 }
 </style>

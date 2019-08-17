@@ -48,16 +48,15 @@ export default {
   &--gradient {
     color: #ffffff;
     position: relative;
+    opacity: 0.6;
     font-family: $font;
     font-size: 12px;
-    background: #f2a47e;
     &:before {
       content: '';
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
-      opacity: 0.7;
       z-index: 0;
       position: absolute;
       background: linear-gradient(

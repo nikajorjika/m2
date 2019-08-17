@@ -20,9 +20,9 @@ export default {
   display: inline-block;
   font-family: $font;
   font-size: 14px;
-  padding: 10px 23px;
-  background: #f2a47e;
-  border-radius: 20px;
+  padding: 12px 24px;
+  opacity: 0.6;
+  border-radius: 14px;
   overflow: hidden;
   letter-spacing: 0.8px;
   span {
@@ -35,13 +35,12 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-    opacity: 0.7;
     z-index: 0;
     position: absolute;
     background: linear-gradient(
-      to right,
-      rgba(104, 79, 120, 1) 0%,
-      rgba(226, 100, 121, 1) 100%
+      60deg,
+      #684f78 0%,
+      #e26479 100%
     );
   }
 }

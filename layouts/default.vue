@@ -35,7 +35,7 @@ body {
     display: flex;
   }
   .app {
-    height: calc(100% - 273px);
+    height: calc(100% - 221px);
     background: $bg-color-2;
     box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
