@@ -1,7 +1,7 @@
 <template>
   <div class="description">
     <div class="description__title">
-      <span>{{ staticTitle }}</span>
+      <span>რეპლიკაციაზე წარმოდგენილი ავეჯი</span>
       <span class="description__title--red">{{ title }}</span>
     </div>
     <div class="description__text">{{ text }}</div>
@@ -31,10 +31,6 @@
 <script>
 export default {
   props: {
-    staticTitle: {
-      type: String,
-      required: true
-    },
     title: {
       type: String,
       required: true

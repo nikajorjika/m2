@@ -2,7 +2,7 @@
   <!-- You can find this swiper instance object in current component by the "mySwiper"  -->
   <div v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(banner, index) in banners" :key="banner.key">
+      <div class="swiper-slide" v-for="(item, index) in items" :key="item.key">
         <div class="swiper_content">
           <div class="swiper__content__title">
             <span>{{ "0" + (index+1) }}</span>
@@ -10,7 +10,7 @@
             <span>10</span>
           </div>
         </div>
-        <img :src="banner.url" />
+        <img :src="item.image" />
       </div>
     </div>
     <div class="swiper-pagination swiper-pagination-bullets"></div>
@@ -19,26 +19,9 @@
 
 <script>
 export default {
+  props: ['items'],
   data() {
     return {
-      banners: [
-        {
-          id: 1,
-          url: 'https://via.placeholder.com/680x380'
-        },
-        {
-          id: 2,
-          url: 'https://via.placeholder.com/680x380'
-        },
-        {
-          id: 3,
-          url: 'https://via.placeholder.com/680x380'
-        },
-        {
-          id: 4,
-          url: 'https://via.placeholder.com/680x380'
-        }
-      ],
       swiperOption: {
         loop: true,
         slidesPreview: 3,
