@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div class="title">რეპლიკებზე წარმოდგენილი რემონტი</div>
+    <div class="title">
+      <title-with-border :title="$t('titles.SupplyPageTitle')" />
+    </div>
     <div class="items">
       <div v-for="item in items" :key="item.id" class="item">
         <TechnicCard :item="item" />
@@ -11,9 +13,11 @@
 
 <script>
 import TechnicCard from '@/components/core/TechnicCard'
+import TitleWithBorder from '@/components/partials/TitleWithLine'
 export default {
   components: {
-    TechnicCard
+    TechnicCard,
+    TitleWithBorder
   },
 
   asyncData({ store }) {
@@ -25,9 +29,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  padding-top: 53px;
+}
 .title {
   font-family: $font-caps;
-  margin: 40px 0 40px 35px;
+  margin-left: 33px;
+  margin-bottom: 40px;
 }
 .items {
   display: flex;

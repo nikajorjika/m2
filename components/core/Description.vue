@@ -14,6 +14,7 @@
   &__title {
     font-size: 20px;
     font-family: $font-caps;
+    color: #494949;
     &--red {
       color: red;
     }
@@ -24,6 +25,7 @@
     font-family: $font;
     line-height: 25px;
     margin-top: 40px;
+    color: #494949;
   }
 }
 </style>

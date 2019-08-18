@@ -53,6 +53,7 @@ export default {
     font-size: 14px;
     line-height: 20px;
     margin-bottom: 15px;
+    color: #595959;
   }
 }
 </style>
