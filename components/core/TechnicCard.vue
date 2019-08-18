@@ -44,6 +44,8 @@ export default {
     font-family: $font-caps;
     font-size: 18px;
     margin-bottom: 15px;
+    height: 36px;
+    overflow: hidden;
     &--red {
       color: #f49b73;
     }
@@ -54,6 +56,7 @@ export default {
     line-height: 20px;
     margin-bottom: 15px;
     color: #595959;
+    height: 100px;
   }
 }
 </style>
