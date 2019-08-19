@@ -4,10 +4,18 @@
       <div class="flat-view__header__label">
         <gradient-label text="2 საძინებელი" class="label" />
       </div>
-      <maximize-image image="https://via.placeholder.com/240x240" width="47px" height="47px" />
+      <maximize-image
+        image="https://via.placeholder.com/240x240"
+        width="47px"
+        height="47px"
+      />
     </div>
     <div class="flat-view__image">
-      <img v-if="!renderImage" src="https://via.placeholder.com/240x240" alt="" />
+      <img
+        v-if="!renderImage"
+        src="https://via.placeholder.com/240x240"
+        alt=""
+      />
       <img v-else src="https://via.placeholder.com/250x240" alt="" />
     </div>
     <div class="flat-view__footer">

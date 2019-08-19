@@ -6,7 +6,7 @@ export const state = () => ({
             title: 'ჯინჯერი',
             text:
                 'შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და ტიპოგრაფიული ნაწარმის შემქმნელებს, რეალურთან მაქსიმალურად',
-            image: 'https://via.placeholder.com/300x380'
+            image: 'https://via.placeholder.com/800x420'
         },
         {
             id: 2,

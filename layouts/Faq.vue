@@ -17,7 +17,11 @@
       <div class="faq">
         <div class="faq__header">
           <div class="faq__header__icon">
-            <question-icon icon-color="url(#gradient-reverse)" width="10" height="9" />
+            <question-icon
+              icon-color="url(#gradient-reverse)"
+              width="10"
+              height="9"
+            />
           </div>
           <div class="faq__header__title">
             <title-with-line :title="$t('titles.FrequentlyAskedQuestions')" />

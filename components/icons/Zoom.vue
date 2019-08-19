@@ -1,10 +1,5 @@
 <template>
-  <arrow-icon
-    class="icon"
-    :fill="iconColor"
-    :width="width"
-    :height="height"
-  />
+  <arrow-icon class="icon" :fill="iconColor" :width="width" :height="height" />
 </template>
 <script>
 import ArrowIcon from '@/assets/icons/Zoom1.svg'
