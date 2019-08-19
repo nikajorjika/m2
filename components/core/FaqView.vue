@@ -2,7 +2,7 @@
   <div class="faq-view">
     <slot />
     <div class="close-container">
-      <close-button :button-text="$t('buttons.CLOSE')" @click="goBack"/>
+      <close-button :button-text="$t('buttons.CLOSE')" @click="goBack" />
     </div>
   </div>
 </template>
@@ -12,7 +12,7 @@ import CloseButton from '@/components/partials/CloseButton'
 export default {
   components: { CloseButton },
   methods: {
-    goBack: function() {
+    goBack() {
       this.$router.go(-1)
     }
   }

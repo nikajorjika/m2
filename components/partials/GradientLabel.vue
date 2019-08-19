@@ -37,11 +37,7 @@ export default {
     bottom: 0;
     z-index: 0;
     position: absolute;
-    background: linear-gradient(
-      60deg,
-      #684f78 0%,
-      #e26479 100%
-    );
+    background: linear-gradient(60deg, #684f78 0%, #e26479 100%);
   }
 }
 </style>

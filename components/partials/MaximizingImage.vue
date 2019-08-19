@@ -1,16 +1,17 @@
 <template>
   <div class="maximize">
-    <div class="maximize__icon" :style="{ width: width, height: height }" @click="handleClick">
+    <div
+      class="maximize__icon"
+      :style="{ width, height, backgroundColor: bgColor }"
+      @click="handleClick"
+    >
       <zoom-icon
         :height="iconHeight"
         :width="iconWidth"
-        :iconColor="iconColor"
-        :isActive="isActive"
+        :icon-color="iconColor"
+        :is-active="isActive"
         :fill-opacity="opacity"
       />
-    </div>
-    <div class="maximize__popover" :class="{open: open}" @click="handleClose">
-      <img :src="image" alt="Maximized Image">
     </div>
   </div>
 </template>
@@ -21,19 +22,20 @@ export default {
   props: {
     image: {
       type: String,
-      required: true
+      default: '',
+      required: false
     },
     bgColor: {
       type: String,
-      default: '#fff'
+      default: '#f26529'
     },
     width: {
       type: String,
-      default: 18
+      default: '18'
     },
     height: {
       type: String,
-      default: 18
+      default: '18'
     },
     iconWidth: {
       type: [Number, String],
@@ -62,11 +64,13 @@ export default {
     }
   },
   methods: {
-    handleClick: function() {
-      this.open = !this.open
+    handleClick() {
+      this.updateOverlay(this.image, true)
     },
-    handleClose: function() {
-      this.open = false
+
+    updateOverlay(image, open) {
+      const overlay = { image, open }
+      this.$store.commit('setOverlay', overlay)
     }
   }
 }
@@ -77,38 +81,9 @@ export default {
   &__icon {
     display: flex;
     align-items: center;
-    background: #f26529;
     justify-content: center;
     border-radius: 50%;
-  }
-  &__popover {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    background: rgba(0,0,0,0.3);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    img {
-      max-width: 70%;
-      max-height: 80%;
-    }
-    &.open {
-      display: flex;
-      animation: scaleUp 0.2s;
-    }
-  }
-}
-@keyframes scaleUp {
-  0% {
-    transform: scale(0.3);
-  }
-  100% {
-    transform: scale(1);
+    cursor: pointer;
   }
 }
 </style>

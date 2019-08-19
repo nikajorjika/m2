@@ -2,7 +2,7 @@
   <div class="container">
     <div class="left-content">
       <div class="slider-wrapper">
-        <Slider @messageFromSlider="messageFromSlider" :items="items" />
+        <Slider :items="items" @messageFromSlider="messageFromSlider" />
       </div>
       <div class="price-button">
         <GradientButton>ფასი: 58.000 $</GradientButton>
@@ -11,7 +11,11 @@
     <div class="right-content">
       <div class="desc-wrapper">
         <div v-for="(item, index) in items" :key="item.id" class="desc_item">
-          <Description v-if="index == activeItem" :title="item.title" :text="item.text" />
+          <Description
+            v-if="index == activeItem"
+            :title="item.title"
+            :text="item.text"
+          />
         </div>
       </div>
     </div>

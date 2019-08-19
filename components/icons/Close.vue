@@ -1,10 +1,5 @@
 <template>
-  <close-icon
-    class="icon"
-    :fill="iconColor"
-    :width="width"
-    :height="height"
-  />
+  <close-icon class="icon" :fill="iconColor" :width="width" :height="height" />
 </template>
 <script>
 import CloseIcon from '@/assets/icons/Close1.svg'

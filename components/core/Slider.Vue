@@ -22,10 +22,16 @@
             <span>{{ "0" + items.length }}</span>
           </div>
         </div>
-        <div
-          style="background-image: url('https://via.placeholder.com/680x380')"
-          class="swiper__image"
-        ></div>
+        <div :style="{ backgroundImage: `url(${item.image})` }" class="swiper__image"></div>
+        <div class="swiper__maximaze-item">
+          <maximize-image
+            :image="item.image"
+            width="47px"
+            height="47px"
+            icon-color="#f7ac8b"
+            bg-color="#fff"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -33,10 +39,12 @@
 
 <script>
 import ArrowRight from '@/components/icons/ArrowRight'
+import MaximizeImage from '@/components/partials/MaximizingImage'
 export default {
   props: ['items'],
   components: {
-    ArrowRight
+    ArrowRight,
+    MaximizeImage
   },
   data() {
     return {
@@ -101,6 +109,11 @@ export default {
       background: #ffffff;
       border-top-right-radius: 10px;
       padding: 25px 40px;
+    }
+    .swiper__maximaze-item {
+      position: absolute;
+      right: 20px;
+      top: 20px;
     }
   }
 }

@@ -1,10 +1,23 @@
 <template>
   <div class="faq-slider">
-    <div v-swiper:faqSwiper="swiperOption" ref="mySwiper">
+    <div ref="mySwiper" v-swiper:faqSwiper="swiperOption">
       <div class="swiper-wrapper">
-        <div v-for="(questions, index) in items" :key="index" class="swiper-slide swiper-page">
-          <div v-for="(question, i) in questions" :key="i" class="faq-slider__swiper-slide">
-            <h3><span class="faq-slider__swiper-slide__numeration"> {{ turnToLeadingZero((index * 4) + (i + 1)) }}</span><span>{{ question.title }}</span></h3>
+        <div
+          v-for="(questions, index) in items"
+          :key="index"
+          class="swiper-slide swiper-page"
+        >
+          <div
+            v-for="(question, i) in questions"
+            :key="i"
+            class="faq-slider__swiper-slide"
+          >
+            <h3>
+              <span class="faq-slider__swiper-slide__numeration">{{
+                turnToLeadingZero(index * 4 + (i + 1))
+              }}</span>
+              <span>{{ question.title }}</span>
+            </h3>
             <p>{{ question.content }}</p>
           </div>
         </div>
@@ -14,7 +27,6 @@
   </div>
 </template>
 <script>
-
 export default {
   data() {
     return {
@@ -27,7 +39,7 @@ export default {
     }
   },
   computed: {
-    items: function() {
+    items() {
       const items = []
       const raw = this.$store.getters['FAQ/questionList']
       const length = raw.length + (raw.length % 4)
@@ -84,7 +96,7 @@ export default {
       font-weight: 500;
       line-height: 1.5;
       display: flex;
-      align-items: center; 
+      align-items: center;
       span {
         line-height: 1;
       }
@@ -102,7 +114,7 @@ export default {
 }
 </style>
 <style lang="scss">
-.swiper-container { 
+.swiper-container {
   height: 100%;
 }
 .swiper-pagination {

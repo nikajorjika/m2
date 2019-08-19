@@ -14,8 +14,8 @@ import FaqButton from './FAQButton'
 export default {
   components: { FlatNavigation, FaqButton },
   methods: {
-    goToFaq: function () {
-      this.$router.push({ path: `/${this.$store.state.locale}/faq`})
+    goToFaq() {
+      this.$router.push({ path: `/${this.$store.state.locale}/faq` })
     }
   }
 }
