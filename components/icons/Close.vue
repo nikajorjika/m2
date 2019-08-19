@@ -1,10 +1,16 @@
 <template>
-  <arrow-icon :stroke="iconColor" :width="width" :height="height" />
+  <close-icon
+    class="icon"
+    :fill="iconColor"
+    :width="width"
+    :height="height"
+  />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/Questions1.svg'
+import CloseIcon from '@/assets/icons/Close1.svg'
+
 export default {
-  components: { ArrowIcon },
+  components: { CloseIcon },
   props: {
     width: {
       type: [Number, String],
@@ -17,6 +23,10 @@ export default {
     iconColor: {
       type: String,
       default: '#000'
+    },
+    isActive: {
+      type: Boolean,
+      default: false
     }
   }
 }

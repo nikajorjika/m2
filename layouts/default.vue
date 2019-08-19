@@ -15,8 +15,8 @@
   </div>
 </template>
 <script>
-import Sidebar from '../components/core/Sidebar'
-import FlatView from '../components/core/FlatView'
+import Sidebar from '@/components/core/Sidebar'
+import FlatView from '@/components/core/FlatView'
 export default {
   components: { Sidebar, FlatView },
   mounted() {
