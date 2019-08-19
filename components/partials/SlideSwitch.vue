@@ -106,7 +106,7 @@ export default {
       background-color: rgb(242, 101, 41);
       position: absolute;
       height: calc(100% - 16px);
-      width: calc(50% - 12px);
+      width: calc(50% - 8px);
       z-index: 0;
       border-radius: 38px;
       top: 8px;
