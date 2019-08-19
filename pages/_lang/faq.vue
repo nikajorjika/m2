@@ -13,4 +13,7 @@ export default {
 </script>
 
 <style lang="scss">
+.faq-page {
+  height: 100%;
+}
 </style>
