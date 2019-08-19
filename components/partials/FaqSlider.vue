@@ -1,6 +1,6 @@
 <template>
   <div class="faq-slider">
-    <div ref="mySwiper" v-swiper:faqSwiper="swiperOption">
+    <div ref="faqSwiper" v-swiper:faqSwiper="swiperOption">
       <div class="swiper-wrapper">
         <div
           v-for="(questions, index) in items"

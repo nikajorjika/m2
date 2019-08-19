@@ -1,16 +1,18 @@
 <template>
   <div class="list-slider">
-    <div class="list-slider__list">
-      <div
-        v-for="(item, index) in list"
-        :key="index"
-        class="list-slider__list__item"
-      >
-        <div class="list-slider__list__item__number">
-          {{ turnToLeadingZero(index + 1) }}
+     <div ref="faqSwiper" v-swiper:roomSlider="swiperOption">
+      <div class="swiper-wrapper list-slider__list">
+        <div
+          v-for="(item, index) in list"
+          :key="index"
+          class="swiper-slide list-slider__list__item"
+        >
+          <div class="list-slider__list__item__number">
+            {{ turnToLeadingZero(index + 1) }}
+          </div>
+          <div class="list-slider__list__item__label">{{ $t(item.label) }}</div>
+          <div class="list-slider__list__item__value">{{ item.area }}</div>
         </div>
-        <div class="list-slider__list__item__label">{{ $t(item.label) }}</div>
-        <div class="list-slider__list__item__value">{{ item.area }}</div>
       </div>
     </div>
   </div>
@@ -19,7 +21,13 @@
 export default {
   data() {
     return {
-      list: this.$store.getters['Flats/roomsList']
+      list: this.$store.getters['Flats/roomsList'],
+      swiperOption: {
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination'
+        }
+      }
     }
   },
   methods: {
@@ -35,6 +43,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 30px 45px 40px 40px;
+    height: 100%;
     &__item {
       display: flex;
       margin: 9px 0;
