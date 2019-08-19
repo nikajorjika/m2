@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   mode: 'universal',
   /*
@@ -52,6 +54,7 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     '@nuxtjs/pwa',
+    '@nuxtjs/dotenv',
     'nuxt-svg-loader'
   ],
 
@@ -63,7 +66,10 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: process.env.SERVER_IP,
+    prefix: process.env.API_PREFIX
+  },
   /*
    ** Build configuration
    */

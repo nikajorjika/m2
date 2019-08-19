@@ -16,7 +16,8 @@ export const state = () => ({
       value: 'tables',
       sub_items: [1, 2, 3, 4]
     }
-  ]
+  ],
+  apiUrl: `${process.env.SERVER_IP}/${process.env.API_PATH}`
 })
 
 export const getters = {

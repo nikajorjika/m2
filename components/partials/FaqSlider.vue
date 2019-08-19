@@ -23,22 +23,27 @@ export default {
         pagination: {
           el: '.swiper-pagination'
         }
-      },
-      itemsRaw: this.$store.getters['FAQ/questionList']
+      }
     }
   },
   computed: {
     items: function() {
       const items = []
-      const length = this.itemsRaw.length + (this.itemsRaw.length % 4)
-      for(let i = 4; i<=length; i+=4){
-        if(this.itemsRaw.lenght < i + 4) {
-          items.push(this.itemsRaw.slice(i-4,-1))
-        }else{
-          items.push(this.itemsRaw.slice(i-4,i))
+      const raw = this.$store.getters['FAQ/questionList']
+      const length = raw.length + (raw.length % 4)
+      for(let i = 4; i<=length; i+=4) {
+        if(raw.lenght < i + 4) {
+          items.push(raw.slice(i-4,-1))
+        } else {
+          items.push(raw.slice(i-4,i))
         }
       }
       return items
+    }
+  },
+  mounted: function () {
+    if(!this.$store.getters['FAQ/questionList'].length){
+      this.$store.dispatch('FAQ/fetchFAQ')
     }
   },
   methods: {
@@ -100,7 +105,7 @@ export default {
 .swiper-container { 
   height: 100%;
 }
-.swiper-pagination-bullets {
+.swiper-pagination {
   display: flex;
   span {
     width: 10px;
@@ -109,6 +114,7 @@ export default {
   .swiper-pagination-bullet {
     background: #4b3f99;
     opacity: 0.15;
+    margin-right: 6px;
     &.swiper-pagination-bullet-active {
       background: #4b3f99;
       opacity: 0.5;
