@@ -1,5 +1,5 @@
 <template>
-  <div class="faq-button">
+  <div class="faq-button" @click="handleClick">
     <button-main-orange icon="arrow-right" :button-text="buttonText">
       <template v-slot:icon>
         <close-icon width="13" height="9" icon-color="#fff" />
@@ -20,7 +20,7 @@ export default {
     }
   },
   methods: {
-    onClick() {
+    handleClick() {
       this.$emit('click')
     }
   }

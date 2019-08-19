@@ -17,12 +17,12 @@
 </template>
 <script>
 import ZoomIcon from '@/components/icons/Zoom'
-import CloseIcon from '@/components/icons/Close'
 export default {
-  components: { ZoomIcon, CloseIcon },
+  components: { ZoomIcon },
   props: {
     image: {
       type: String,
+      default: '',
       required: false
     },
     bgColor: {
@@ -69,7 +69,7 @@ export default {
     },
 
     updateOverlay(image, open) {
-      let overlay = { image: image, open: open }
+      const overlay = { image, open }
       this.$store.commit('setOverlay', overlay)
     }
   }

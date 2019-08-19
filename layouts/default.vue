@@ -1,11 +1,15 @@
 <template>
   <div class="default-app-layout">
     <div
-      @click="handleClose"
       class="maximize__popover"
-      :class="{ open : $store.getters.overlay.open}"
+      :class="{ open: $store.getters.overlay.open }"
+      @click="handleClose"
     >
-      <img @click.stop :src="$store.getters.overlay.image" alt="Maximized Image" />
+      <img
+        :src="$store.getters.overlay.image"
+        alt="Maximized Image"
+        @click.stop
+      />
     </div>
     <svg width="0" height="0">
       <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">

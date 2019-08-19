@@ -3,7 +3,7 @@
     <flat-navigation />
     <slot />
     <div class="faq-container">
-      <faq-button />
+      <faq-button @click="goToFaq" />
     </div>
   </div>
 </template>
@@ -12,7 +12,12 @@
 import FlatNavigation from './FlatNavigation'
 import FaqButton from './FAQButton'
 export default {
-  components: { FlatNavigation, FaqButton }
+  components: { FlatNavigation, FaqButton },
+  methods: {
+    goToFaq() {
+      this.$router.push({ path: `/${this.$store.state.locale}/faq` })
+    }
+  }
 }
 </script>
 
