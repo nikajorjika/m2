@@ -1,5 +1,5 @@
 <template>
-  <div class="faq-button">
+  <div class="faq-button" @click="handleClick">
     <button-main-orange icon="arrow-right" :button-text="$t('buttons.faq')">
       <template v-slot:icon>
         <arrow-icon width="13" height="9" icon-color="#fff" />
@@ -14,7 +14,7 @@ import ArrowIcon from '@/components/icons/ArrowRight'
 export default {
   components: { ButtonMainOrange, ArrowIcon },
   methods: {
-    onClick() {
+    handleClick() {
       this.$emit('click')
     }
   }

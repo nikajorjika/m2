@@ -51,7 +51,7 @@ body {
   .faq {
     margin-top: 63.65px;
     height: calc(100% - 156px);
-    max-width: 1157px;
+    max-width: 1150px;
     background: $bg-color-2;
     box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
     padding: 18.09px 368px 28px 117px;
