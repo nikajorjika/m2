@@ -13,10 +13,6 @@ export default {
     buttonText: {
       type: String,
       default: 'შემდეგი'
-    },
-    icon: {
-      type: String,
-      default: ''
     }
   },
   data() {

@@ -18,6 +18,7 @@ export function isObjectEqual(a = {}, b = {}) {
 }
 
 export const formatPrice = function(number) {
+  if (!number) return ''
   const numberArray = number.toString().split('')
   let counter = 1
   const result = []

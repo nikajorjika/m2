@@ -27,6 +27,8 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -39,29 +41,31 @@ export default {
     }
   },
   computed: {
+     ...mapGetters('FAQ',['questionList']),
     items() {
       const items = []
-      const raw = this.$store.getters['FAQ/questionList']
-      let length = raw.length
-      if (raw.length % 4 !== 0) {
-        length = (parseInt(raw.length / 4) + 1) * 4
+      console.log(this.questionList)
+      let length = this.questionList.length
+      if (this.questionList.length % 4 !== 0) {
+        length = (parseInt(this.questionList.length / 4) + 1) * 4
       }
       for (let i = 4; i <= length; i += 4) {
-        if (raw.lenght < i + 4) {
-          items.push(raw.slice(i - 4, -1))
+        if (this.questionList.lenght < i + 4) {
+          items.push(this.questionList.slice(i - 4, -1))
         } else {
-          items.push(raw.slice(i - 4, i))
+          items.push(this.questionList.slice(i - 4, i))
         }
       }
       return items
     }
   },
   mounted() {
-    if (!this.$store.getters['FAQ/questionList'].length) {
-      this.$store.dispatch('FAQ/fetchFAQ')
+    if (!this.questionList.length) {
+      this.fetchFAQ()
     }
   },
   methods: {
+    ...mapActions('FAQ', ['fetchFAQ']),
     turnToLeadingZero(number) {
       return number > 9 ? number : '0'.concat(number)
     }
