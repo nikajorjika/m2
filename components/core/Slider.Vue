@@ -22,10 +22,10 @@
             <span>{{ "0" + items.length }}</span>
           </div>
         </div>
-        <div :style="{ backgroundImage: `url(${item.image})` }" class="swiper__image"></div>
+        <div :style="{ backgroundImage: `url(${item.image.url})` }" class="swiper__image"></div>
         <div class="swiper__maximaze-item">
           <maximize-image
-            :image="item.image"
+            :image="item.image.url"
             width="47px"
             height="47px"
             icon-color="#f7ac8b"

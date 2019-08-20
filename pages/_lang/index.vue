@@ -10,7 +10,11 @@
       <list-block class="list" list-style="gradient" :items="prices" />
     </div>
     <div class="flat-render">
-      <render-viewer class="flat-viewer" :render-image="flat.render_url" :plan-image="flat.blueprint_url" />
+      <render-viewer
+        class="flat-viewer"
+        :render-image="flat.render_url"
+        :plan-image="flat.blueprint_url"
+      />
       <room-list-component class="room-list-slider" />
     </div>
   </div>

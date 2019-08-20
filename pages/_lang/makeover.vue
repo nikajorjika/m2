@@ -12,7 +12,7 @@ export default {
   },
   asyncData({ store }) {
     return {
-      items: store.getters['makeover/itemList']
+      items: store.getters['Flats/flat'].renovation.renovation_info
     }
   },
 

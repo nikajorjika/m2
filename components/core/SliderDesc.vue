@@ -11,11 +11,7 @@
     <div class="right-content">
       <div class="desc-wrapper">
         <div v-for="(item, index) in items" :key="item.id" class="desc_item">
-          <Description
-            v-if="index == activeItem"
-            :title="item.title"
-            :text="item.text"
-          />
+          <Description v-if="index == activeItem" :title="item.name" :text="item.description" />
         </div>
       </div>
     </div>

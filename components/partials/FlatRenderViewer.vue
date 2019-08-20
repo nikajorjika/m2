@@ -4,17 +4,10 @@
       <div class="flat-view__header__label">
         <gradient-label text="2 საძინებელი" class="label" />
       </div>
-      <maximize-image
-        :image="imageToMaximize "
-        width="47px"
-        height="47px"
-      />
+      <maximize-image :image="imageToMaximize" width="47px" height="47px" />
     </div>
     <div class="flat-view__image">
-      <img
-        v-if="!switchValue"
-        :src="renderImage"
-      />
+      <img v-if="!switchValue" :src="renderImage" />
       <img v-else :src="planImage" />
     </div>
     <div class="flat-view__footer">

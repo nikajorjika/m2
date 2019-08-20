@@ -22,7 +22,7 @@ export default {
 
   asyncData({ store }) {
     return {
-      items: store.getters['supply/itemList']
+      items: store.getters['Flats/flat'].appliance.appliance_info
     }
   }
 }

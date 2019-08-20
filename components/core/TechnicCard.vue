@@ -1,14 +1,11 @@
 <template>
   <div class="card">
-    <div
-      class="card__image"
-      :style="{ backgroundImage: 'url(' + item.image + ')' }"
-    ></div>
+    <div class="card__image" :style="{ backgroundImage: 'url(' + item.image.url + ')' }"></div>
     <div class="card__content">
-      <div class="card__title card__title--red">{{ item.title }}</div>
-      <div class="card__text">{{ item.text }}</div>
+      <div class="card__title card__title--red">{{ item.name }}</div>
+      <div class="card__text">{{ item.description }}</div>
       <div class="card__button">
-        <GradientButton>{{ item.feature }}</GradientButton>
+        <GradientButton>ტექნიკის ფასი: {{ item.price }}</GradientButton>
       </div>
     </div>
   </div>
@@ -60,6 +57,7 @@ export default {
     margin-bottom: 15px;
     color: #595959;
     height: 100px;
+    overflow: hidden;
   }
 }
 </style>

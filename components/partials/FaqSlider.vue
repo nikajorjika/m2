@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-     ...mapGetters('FAQ',['questionList']),
+    ...mapGetters('FAQ', ['questionList']),
     items() {
       const items = []
       console.log(this.questionList)
