@@ -16,3 +16,17 @@ export function isObjectEqual(a = {}, b = {}) {
     return String(aVal) === String(bVal)
   })
 }
+
+export const formatPrice = function(number) {
+  const numberArray = number.toString().split('')
+  let counter = 1
+  const result = []
+  for (let i = numberArray.length - 1; i >= 0; i--) {
+    result.unshift(numberArray[i])
+    if (counter % 3 === 0) {
+      result.unshift(' ')
+    }
+    counter++
+  }
+  return result.join('')
+}

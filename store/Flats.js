@@ -1,4 +1,6 @@
 export const state = () => ({
+  flatsData: [],
+  flat: {},
   areaList: [
     {
       label: 'labels.FullArea',
@@ -63,6 +65,62 @@ export const state = () => ({
     {
       label: 'rooms.Hall',
       area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Hall',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Bedroom',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Bedroom',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Bedroom',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Hall',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Hall',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Hall',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Hall',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Bedroom',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Bedroom',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Bedroom',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Hall',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Hall',
+      area: '12.06 მ²'
+    },
+    {
+      label: 'rooms.Hall',
+      area: '12.06 მ²'
     }
   ]
 })
@@ -70,13 +128,37 @@ export const state = () => ({
 export const getters = {
   priceList: (state) => state.priceList,
   areaList: (state) => state.areaList,
-  roomsList: (state) => state.roomsList
+  roomsList: (state) => state.roomsList,
+  flatsData: (state) => state.flatsData,
+  flat: (state) => state.flat
 }
 
 export const mutations = {
   SET_TABLET_TYPE: (state, data) => {
     state.areaList = data
+  },
+  SET_FLATS_DATA: (state, data) => {
+    state.flatsData = data
+  },
+  SET_FLAT_DATA: (state, data) => {
+    state.flat = data
   }
 }
 
-export const actions = {}
+export const actions = {
+  fetchFlatData({ commit }) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get('/renovation-flats')
+        .then(({ data }) => {
+          commit('SET_FLATS_DATA', data.data)
+          resolve(data.data)
+        })
+        .catch((e) => reject(e))
+    })
+  },
+  choseFlatFromFlats({ commit }, data) {
+    console.log(data)
+    commit('SET_FLAT_DATA', data)
+  }
+}

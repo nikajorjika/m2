@@ -4,14 +4,10 @@
       <title-with-border :title="$t('titles.FlatPageTitle')" />
     </div>
     <div class="area-list-container">
-      <list-block class="list" :items="$store.getters['Flats/areaList']" />
+      <list-block class="list" :items="areas" />
     </div>
     <div class="price-list-container">
-      <list-block
-        class="list"
-        list-style="gradient"
-        :items="$store.getters['Flats/priceList']"
-      />
+      <list-block class="list" list-style="gradient" :items="prices" />
     </div>
     <div class="flat-render">
       <render-viewer class="flat-viewer" />
@@ -25,8 +21,44 @@ import ListBlock from '@/components/partials/ListCard'
 import TitleWithBorder from '@/components/partials/TitleWithLine'
 import RenderViewer from '@/components/partials/FlatRenderViewer'
 import RoomListComponent from '@/components/partials/RoomListComponent'
+import { formatPrice } from '@/utils/Mixed'
 export default {
-  components: { ListBlock, TitleWithBorder, RenderViewer, RoomListComponent }
+  components: { ListBlock, TitleWithBorder, RenderViewer, RoomListComponent },
+  data() {
+    return {
+      flat: this.$store.getters['Flats/flat']
+    }
+  },
+  computed: {
+    roomNumber() {
+      return this.flat.renovation_flat_properties.filter(
+        (item) => item.type === 'room'
+      ).length
+    },
+    prices() {
+      const arr = this.flat.renovation_flat_properties.filter(
+        (item) => item.type === 'price'
+      )
+
+      return arr.map((item) => {
+        return {
+          label: this.$t(`labels.${item.name}`),
+          value: `${formatPrice(item.number)}$`
+        }
+      })
+    },
+    areas() {
+      const arr = this.flat.renovation_flat_properties.filter(
+        (item) => item.type === 'area'
+      )
+      return arr.map((item) => {
+        return {
+          label: this.$t(`labels.${item.name}`),
+          value: `${item.number}${this.$t('labels.m2')}`
+        }
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

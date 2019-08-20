@@ -42,19 +42,22 @@ export default {
     items() {
       const items = []
       const raw = this.$store.getters['FAQ/questionList']
-      const length = raw.length + (raw.length % 4)
-      for(let i = 4; i<=length; i+=4) {
-        if(raw.lenght < i + 4) {
-          items.push(raw.slice(i-4,-1))
+      let length = raw.length
+      if (raw.length % 4 !== 0) {
+        length = (parseInt(raw.length / 4) + 1) * 4
+      }
+      for (let i = 4; i <= length; i += 4) {
+        if (raw.lenght < i + 4) {
+          items.push(raw.slice(i - 4, -1))
         } else {
-          items.push(raw.slice(i-4,i))
+          items.push(raw.slice(i - 4, i))
         }
       }
       return items
     }
   },
-  mounted: function () {
-    if(!this.$store.getters['FAQ/questionList'].length){
+  mounted() {
+    if (!this.$store.getters['FAQ/questionList'].length) {
       this.$store.dispatch('FAQ/fetchFAQ')
     }
   },
