@@ -58,6 +58,14 @@ module.exports = {
     'nuxt-svg-loader'
   ],
 
+  icon: {
+    iconSrc: '~static/icon.png'
+  },
+
+  manifest: {
+    theme_color: '#f26529'
+  },
+
   styleResources: {
     sass: '~assets/styles/app.scss'
   },
