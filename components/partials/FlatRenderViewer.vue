@@ -5,21 +5,20 @@
         <gradient-label text="2 საძინებელი" class="label" />
       </div>
       <maximize-image
-        image="https://via.placeholder.com/240x240"
+        :image="imageToMaximize "
         width="47px"
         height="47px"
       />
     </div>
     <div class="flat-view__image">
       <img
-        v-if="!renderImage"
-        src="https://via.placeholder.com/240x240"
-        alt=""
+        v-if="!switchValue"
+        :src="renderImage"
       />
-      <img v-else src="https://via.placeholder.com/250x240" alt="" />
+      <img v-else :src="planImage" />
     </div>
     <div class="flat-view__footer">
-      <slide-switch v-model="renderImage" class="switch" :values="switchData" />
+      <slide-switch v-model="switchValue" class="switch" :values="switchData" />
     </div>
   </div>
 </template>
@@ -30,9 +29,17 @@ import MaximizeImage from '@/components/partials/MaximizingImage'
 
 export default {
   components: { gradientLabel, SlideSwitch, MaximizeImage },
+  props: {
+    renderImage: {
+      type: String
+    },
+    planImage: {
+      type: String
+    }
+  },
   data() {
     return {
-      renderImage: false,
+      switchValue: false,
       switchData: [
         {
           label: this.$t('labels.Render'),
@@ -43,6 +50,11 @@ export default {
           value: 'plan'
         }
       ]
+    }
+  },
+  computed: {
+    imageToMaximize() {
+      return !this.switchValue ? this.renderImage : this.planImage
     }
   }
 }
