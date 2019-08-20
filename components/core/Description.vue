@@ -16,7 +16,7 @@
     font-family: $font-caps;
     color: #494949;
     &--red {
-      color: red;
+      color: #f26529;
     }
   }
 
