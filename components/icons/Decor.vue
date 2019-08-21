@@ -19,5 +19,5 @@ export default {
       default: '#000'
     }
   }
-}
+} 
 </script>
