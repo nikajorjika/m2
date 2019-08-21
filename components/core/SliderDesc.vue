@@ -20,7 +20,7 @@
 
 <script>
 import Description from '@/components/core/Description'
-import Slider from '@/components/core/Slider.vue'
+import Slider from './Slider'
 import GradientButton from '@/components/core/GradientButton'
 
 export default {

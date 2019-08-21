@@ -29,7 +29,7 @@ import FlatIcon from '@/components/icons/Appartament'
 import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
 import SupplyIcon from '@/components/icons/Technic'
-import DecorationIcon from '@/components/icons/Decor'
+import DecorationIcon from '../icons/Decor'
 import { isSamePath } from '@/utils/Route'
 
 export default {
