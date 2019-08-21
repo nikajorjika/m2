@@ -44,7 +44,6 @@ export default {
     ...mapGetters('FAQ', ['questionList']),
     items() {
       const items = []
-      console.log(this.questionList)
       let length = this.questionList.length
       if (this.questionList.length % 4 !== 0) {
         length = (parseInt(this.questionList.length / 4) + 1) * 4
@@ -61,7 +60,7 @@ export default {
   },
   mounted() {
     if (!this.questionList.length) {
-      this.fetchFAQ()
+      this.fetchFAQ().catch(e => console.error(e))
     }
   },
   methods: {

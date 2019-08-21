@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const state = () => ({
   questionList: []
 })
@@ -23,12 +25,13 @@ export const mutations = {
 export const actions = {
   fetchFAQ(context) {
     return new Promise((resolve, reject) => {
-      this.$axios('/faqs')
+      this.$axios
+        .get('/faqs')
         .then(({ data }) => {
           context.commit('MAP_FETCHED_TO_STATE', data)
           resolve(data)
         })
-        .catch((e) => console.error(e))
+        .catch((e) => reject(e))
     })
   }
 }

@@ -1,30 +1,17 @@
-import Vuex from 'vuex'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
-import ButtonOrange from '@/components/partials/FaqSlider.vue'
-import { getters, actions, state, mutations } from '@/store/FAQ'
+import { shallowMount } from '@vue/test-utils'
+import ButtonOrange from '@/components/partials/ButtonMainOrange.vue'
 
-const localVue = createLocalVue()
-
-localVue.use(Vuex)
-
-const factory = (store, localVue) => {
-  return shallowMount(ButtonOrange, { store, localVue })
+const factory = () => {
+  return shallowMount(ButtonOrange, {
+    propsData: {
+      buttonText: 'Text'
+    }
+  })
 }
 
-describe('FaqSlider.vue', () => {
-  let store
-  beforeEach(() => {
-    store = new Vuex.Store({
-      namespaced: true,
-      modules: {
-        namespaced: true,
-        FAQ: { getters, actions, state, mutations }
-      }
-    })
-  })
-
+describe('ButtonMainOrange.vue', () => {
   test('is a Vue instance', () => {
-    const wrapper = factory(store, localVue)
+    const wrapper = factory()
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 })
