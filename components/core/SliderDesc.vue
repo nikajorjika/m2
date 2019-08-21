@@ -20,7 +20,7 @@
 
 <script>
 import Description from '@/components/core/Description'
-import Slider from './Slider'
+import Slider from '@/components/core/Slider'
 import GradientButton from '@/components/core/GradientButton'
 
 export default {
