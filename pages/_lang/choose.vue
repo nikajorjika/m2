@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {}
@@ -32,10 +33,11 @@ export default {
         .catch((e) => console.error(e))
     }
   },
+  computed: mapGetters(['locale']),
   methods: {
     chooseFlat(item) {
       this.$store.dispatch('Flats/choseFlatFromFlats', item)
-      this.$router.push({ path: `/${this.$store.state.locale}/` })
+      this.$router.push({ path: `/${this.locale}/` })
     }
   }
 }

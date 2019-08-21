@@ -16,7 +16,7 @@
             height="16"
             class="flat-navigation__link__icon"
           />
-          <span class="flat-navigation__link__text">{{ item.title }}</span>
+          <span class="flat-navigation__link__text">{{ $t(item.title) }}</span>
         </nuxt-link>
       </li>
     </ul>
@@ -31,6 +31,7 @@ import FurnitureIcon from '@/components/icons/Furniture'
 import SupplyIcon from '@/components/icons/Technic'
 import DecorationIcon from '@/components/icons/Decor'
 import { isSamePath } from '@/utils/Route'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -42,39 +43,43 @@ export default {
     DecorationIcon
   },
   data() {
-    return {
-      navData: [
-        {
-          icon: 'appartament',
-          route: `/${this.$store.state.locale}`,
-          title: this.$t('navigation.flat'),
-          component: FlatIcon
-        },
-        {
-          icon: 'makeover',
-          route: `/${this.$store.state.locale}/makeover`,
-          title: this.$t('navigation.renovation'),
-          component: RenovationIcon
-        },
-        {
-          icon: 'furniture',
-          route: `/${this.$store.state.locale}/furniture`,
-          title: this.$t('navigation.furniture'),
-          component: FurnitureIcon
-        },
-        {
-          icon: 'decor',
-          route: `/${this.$store.state.locale}/decoration`,
-          title: this.$t('navigation.decoration'),
-          component: DecorationIcon
-        },
-        {
-          icon: 'technick',
-          route: `/${this.$store.state.locale}/supply`,
-          title: this.$t('navigation.supply'),
-          component: SupplyIcon
-        }
-      ]
+    return {}
+  },
+  computed: {
+    ...mapGetters(['locale']),
+      navData: function(){
+        return [
+          {
+            icon: 'appartament',
+            route: `/${this.locale}`,
+            title: 'navigation.flat',
+            component: FlatIcon
+          },
+          {
+            icon: 'makeover',
+            route: `/${this.locale}/makeover`,
+            title: 'navigation.renovation',
+            component: RenovationIcon
+          },
+          {
+            icon: 'furniture',
+            route: `/${this.locale}/furniture`,
+            title: 'navigation.furniture',
+            component: FurnitureIcon
+          },
+          {
+            icon: 'decor',
+            route: `/${this.locale}/decoration`,
+            title: 'navigation.decoration',
+            component: DecorationIcon
+          },
+          {
+            icon: 'technick',
+            route: `/${this.locale}/appliance`,
+            title: 'navigation.appliance',
+            component: SupplyIcon
+          }
+        ]
     }
   },
   methods: {
@@ -85,13 +90,13 @@ export default {
 
 <style lang="scss" scoped>
 .flat-navigation {
-  margin-top: 63px;
   background: $gradient-2;
   border-top-left-radius: 13px;
   &__list {
     list-style: none;
     display: flex;
     justify-content: space-between;
+    margin-right: 60px;
     &__item {
       flex: 1;
       width: 112px;

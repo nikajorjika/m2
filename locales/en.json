@@ -1,16 +1,47 @@
 {
+  "languages": {
+    "ka": "ქარ",
+    "en": "ENG"
+  },
+  "navigation": {
+    "flat": "Flat",
+    "renovation": "Renovation",
+    "furniture": "Furniture",
+    "decoration": "Decoration",
+    "appliance": "Appliance"
+  },
   "sidebar": {
     "logo_meta": "m2 Some text"
   },
-  "links": {
-    "home": "Home"
+  "buttons": {
+    "next": "NEXT",
+    "faq": "Frequently asked question",
+    "CLOSE": "CLOSE"
   },
-  "home": {
-    "title": "Welcome",
-    "introduction": "This is an introduction in English."
+  "labels": {
+    "FullArea": "Full Area",
+    "FlatArea": "Flat Area",
+    "BalconyArea": "Balcony Area",
+    "FullPrice": "Full Price",
+    "Renovation": "Renovation",
+    "Furniture": "Furniture",
+    "Decor": "Decoration",
+    "Supply": "Supply",
+    "Render": "Render",
+    "Plan": "Plan",
+    "appliances": "Appliances",
+    "furniture": "Furniture",
+    "flat": "Flat",
+    "balcony": "Balcony",
+    "m2": "m²"
   },
-  "about": {
-    "title": "About",
-    "introduction": "..."
+  "titles": {
+    "FlatPageTitle": "Renovation Displayed On Replication",
+    "SupplyPageTitle": "Appliances Displayed On Replication",
+    "FrequentlyAskedQuestions": "Frequently Asked Question"
+  },
+  "rooms": {
+    "Hall": "Hall",
+    "Bedroom": "Bedroom"
   }
 }

@@ -1,10 +1,14 @@
 {
+  "languages": {
+    "ka": "ქარ",
+    "en": "ENG"
+  },
   "navigation": {
     "flat": "ბინა",
     "renovation": "რემონტი",
     "furniture": "ავეჯი",
     "decoration": "დეკორი",
-    "supply": "ტექნიკა"
+    "appliance": "ტექნიკა"
   },
   "sidebar": {
     "logo_meta": "m2 Some text"

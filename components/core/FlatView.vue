@@ -1,6 +1,7 @@
 <template>
   <div class="flat-view">
-    <flat-navigation />
+    <language-switcher class="flat-view__switcher"/>
+    <flat-navigation class="flat-view__navigation" />
     <slot />
     <div class="faq-container">
       <faq-button @click="goToFaq" />
@@ -11,11 +12,14 @@
 <script>
 import FlatNavigation from './FlatNavigation'
 import FaqButton from './FAQButton'
+import LanguageSwitcher from '@/components/core/LanguageSwitcher'
+import { mapGetters } from 'vuex';
 export default {
-  components: { FlatNavigation, FaqButton },
+  components: { FlatNavigation, FaqButton, LanguageSwitcher },
+  computed: mapGetters(['locale']),
   methods: {
     goToFaq() {
-      this.$router.push({ path: `/${this.$store.state.locale}/faq` })
+      this.$router.push({ path: `/${this.locale}/faq` })
     }
   }
 }
@@ -26,6 +30,9 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
+  &__switcher {
+    margin-right: 67px;
+  }
   .faq-container {
     margin: auto 0;
   }

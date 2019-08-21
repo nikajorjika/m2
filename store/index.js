@@ -10,6 +10,12 @@ export const state = () => ({
 export const getters = {
   overlay: (state) => {
     return state.overlay
+  },
+  locale: (state) => {
+    return state.locale
+  },
+  allLocales: (state) => {
+    return state.locales
   }
 }
 
@@ -19,7 +25,6 @@ export const mutations = {
       state.locale = locale
     }
   },
-
   setOverlay(state, overlay) {
     state.overlay = overlay
   }

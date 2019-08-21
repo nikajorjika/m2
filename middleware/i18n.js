@@ -3,10 +3,7 @@
  * 2. redirects if not with locale
  */
 export default function({ isHMR, app, store, route, params, error, redirect }) {
-  if (route.path === '/') {
-    return redirect('/ka' + route.fullPath)
-  }
-  if (error) return
+  // if (error) return
   if (isHMR) {
     // ignore if called from hot module replacement
     return
@@ -17,5 +14,5 @@ export default function({ isHMR, app, store, route, params, error, redirect }) {
   // based on directory structure _lang/xxxx, en/about has params.lang as "en"
   const locale = params.lang || 'ka'
   store.commit('SET_LANG', locale) // set store
-  app.i18n.locale = store.state.locale
+  app.i18n.locale = locale
 }
