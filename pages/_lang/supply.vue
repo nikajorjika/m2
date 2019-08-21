@@ -3,10 +3,17 @@
     <div class="title">
       <title-with-border :title="$t('titles.SupplyPageTitle')" />
     </div>
-    <div class="items">
-      <div v-for="item in items" :key="item.id" class="item">
-        <TechnicCard :item="item" />
+    <div v-swiper:mySwiper="swiperOption" class="swiper__container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="item in itemsData" :key="item.id">
+          <div class="items">
+            <div v-for="value in item" :key="value.id" class="item">
+              <TechnicCard :item="value" />
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="swiper-pagination" :class="{disabled : disableBullet }"></div>
     </div>
   </div>
 </template>
@@ -20,9 +27,43 @@ export default {
     TitleWithBorder
   },
 
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          watchOverflow: true
+        },
+        on: {
+          slideChange() {},
+          tap() {
+            console.log('onTap', this)
+          }
+        }
+      }
+    }
+  },
+
   asyncData({ store }) {
     return {
       items: store.getters['Flats/flat'].appliance.appliance_info
+    }
+  },
+
+  computed: {
+    itemsData: function() {
+      let arr = []
+      for (let i = 0; i < this.items.length; i = i + 3) {
+        arr.push(this.items.slice(i, i + 3))
+      }
+      return arr
+    },
+
+    disableBullet: function() {
+      return this.items.length <= 3 ? true : false
     }
   }
 }
@@ -31,6 +72,16 @@ export default {
 <style lang="scss" scoped>
 .container {
   padding-top: 53px;
+  padding-bottom: 50px;
+}
+.swiper__container {
+  padding-bottom: 30px;
+  .swiper-pagination {
+    justify-content: center;
+    &.disabled {
+      display: none;
+    }
+  }
 }
 .title {
   font-family: $font-caps;
@@ -39,11 +90,11 @@ export default {
 }
 .items {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-flow: wrap;
   .item {
     width: 300px;
-    margin: auto;
+    margin: 0 auto;
   }
 }
 </style>

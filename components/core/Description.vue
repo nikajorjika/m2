@@ -1,8 +1,8 @@
 <template>
   <div class="description">
     <div class="description__title">
-      <span>რეპლიკაციაზე წარმოდგენილი ავეჯი</span>
-      <span class="description__title--red">{{ title }}</span>
+      <span>{{ firstTitle }}</span>
+      <span class="description__title--red">{{ lastTitle }}</span>
     </div>
     <div class="description__text">{{ text }}</div>
   </div>
@@ -40,6 +40,19 @@ export default {
     text: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    // a computed getter
+    firstTitle: function() {
+      let str = this.title
+      var lastIndex = str.lastIndexOf(' ')
+      str = str.substring(0, lastIndex)
+      return str
+    },
+    lastTitle: function() {
+      var n = this.title.split(' ')
+      return n[n.length - 1]
     }
   }
 }
