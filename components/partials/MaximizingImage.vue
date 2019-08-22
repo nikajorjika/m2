@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     handleClick() {
-      const overlay = { image: thos.image, open: true }
+      const overlay = { image: this.image, open: true }
       this.$store.commit('setOverlay', overlay)
     },
   }

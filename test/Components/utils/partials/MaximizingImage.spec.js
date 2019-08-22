@@ -27,6 +27,12 @@ describe('Description.vue', () => {
     expect(wrapper.vm.handleClick).toHaveBeenCalledTimes(1)
   })
 
+  it('Method:{handleClick} calls commit correctly', () => {
+    const wrapper = factory()
+    wrapper.vm.handleClick()
+    expect(store.$store.commit).toHaveBeenCalledTimes(1)
+  })
+
   it('Props are set correctly', () => {
     const wrapper = factory()
     const props = wrapper.vm.$options.props
