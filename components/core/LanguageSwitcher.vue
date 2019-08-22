@@ -12,9 +12,9 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['locale','allLocales']),
-    opositeLocale: function (){
-      return this.allLocales.filter(item => item !== this.locale)[0]
+    ...mapGetters(['locale', 'allLocales']),
+    opositeLocale() {
+      return this.allLocales.filter((item) => item !== this.locale)[0]
     }
   },
   methods: {
@@ -23,7 +23,10 @@ export default {
       // this.$store.commit('SET_LANG', this.opositeLocale)
       // this.$i18n.locale = this.opositeLocale
       // console.log(this.locale, this.$i18n.locale)
-      this.$router.push({ name, params: { ...params, lang: this.opositeLocale } })
+      this.$router.push({
+        name,
+        params: { ...params, lang: this.opositeLocale }
+      })
     }
   }
 }

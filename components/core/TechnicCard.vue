@@ -1,6 +1,9 @@
 <template>
   <div class="card">
-    <div class="card__image" :style="{ backgroundImage: 'url(' + item.image.url + ')' }"></div>
+    <div
+      class="card__image"
+      :style="{ backgroundImage: 'url(' + item.image.url + ')' }"
+    ></div>
     <div class="card__content">
       <div class="card__title card__title--red">{{ item.name }}</div>
       <div class="card__text">{{ item.description }}</div>

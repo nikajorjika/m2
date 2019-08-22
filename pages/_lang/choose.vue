@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {}
@@ -27,9 +27,6 @@ export default {
     if (!this.$store.getters['Flats/flatsData'].length) {
       this.$store
         .dispatch('Flats/fetchFlatData')
-        .then(({ data }) => {
-          console.log(data)
-        })
         .catch((e) => console.error(e))
     }
   },

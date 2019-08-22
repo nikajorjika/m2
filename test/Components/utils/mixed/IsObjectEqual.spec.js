@@ -1,4 +1,4 @@
-import { isObjectEqual, formatPrice } from '@/utils/Mixed'
+import { isObjectEqual } from '@/utils/Mixed'
 
 describe('IsObjectEqual', () => {
   test('Objects Equal', () => {
@@ -31,24 +31,5 @@ describe('IsObjectEqual', () => {
       test2: 'testa1'
     }
     expect(isObjectEqual(obj1, obj2)).toBe(false)
-  })
-})
-
-describe('formatPrice', () => {
-  test('Number Is Formatted Properly', () => {
-    const val = 12000
-    expect(formatPrice(val)).toBe('12 000')
-  })
-  test('String Is Formatted Properly', () => {
-    const val = '12000'
-    expect(formatPrice(val)).toBe('12 000')
-  })
-  test('Empty String Is Formatted Properly', () => {
-    const val = ''
-    expect(formatPrice(val)).toBe('')
-  })
-  test('Null Is Formatted Properly', () => {
-    const val = null
-    expect(formatPrice(val)).toBe('')
   })
 })

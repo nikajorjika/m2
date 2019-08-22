@@ -27,6 +27,8 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { turnToLeadingZero, sliceUpArray } from '@/utils/Mixed'
 export default {
   data() {
     return {
@@ -40,28 +42,13 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('Flats', ['roomsList']),
     items() {
-      const items = []
-      const raw = this.$store.getters['Flats/roomsList']
-      let length = raw.length
-      if (raw.length % 9 !== 0) {
-        length = (parseInt(raw.length / 9) + 1) * 9
-      }
-
-      for (let i = 9; i <= length; i += 9) {
-        if (raw.lenght < i + 9) {
-          items.push(raw.slice(i - 9, -1))
-        } else {
-          items.push(raw.slice(i - 9, i))
-        }
-      }
-      return items
+      return sliceUpArray(this.roomsList, 9)
     }
   },
   methods: {
-    turnToLeadingZero(number) {
-      return number > 9 ? number : '0'.concat(number)
-    }
+    turnToLeadingZero
   }
 }
 </script>

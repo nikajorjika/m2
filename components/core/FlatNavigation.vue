@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ArrowIcon from '@/components/icons/ArrowRight'
 import FlatIcon from '@/components/icons/Appartament'
 import RenovationIcon from '@/components/icons/Makeover'
@@ -31,7 +32,6 @@ import FurnitureIcon from '@/components/icons/Furniture'
 import SupplyIcon from '@/components/icons/Technic'
 import DecorationIcon from '@/components/icons/Decor'
 import { isSamePath } from '@/utils/Route'
-import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -47,39 +47,39 @@ export default {
   },
   computed: {
     ...mapGetters(['locale']),
-      navData: function(){
-        return [
-          {
-            icon: 'appartament',
-            route: `/${this.locale}`,
-            title: 'navigation.flat',
-            component: FlatIcon
-          },
-          {
-            icon: 'makeover',
-            route: `/${this.locale}/makeover`,
-            title: 'navigation.renovation',
-            component: RenovationIcon
-          },
-          {
-            icon: 'furniture',
-            route: `/${this.locale}/furniture`,
-            title: 'navigation.furniture',
-            component: FurnitureIcon
-          },
-          {
-            icon: 'decor',
-            route: `/${this.locale}/decoration`,
-            title: 'navigation.decoration',
-            component: DecorationIcon
-          },
-          {
-            icon: 'technick',
-            route: `/${this.locale}/appliance`,
-            title: 'navigation.appliance',
-            component: SupplyIcon
-          }
-        ]
+    navData() {
+      return [
+        {
+          icon: 'appartament',
+          route: `/${this.locale}`,
+          title: 'navigation.flat',
+          component: FlatIcon
+        },
+        {
+          icon: 'makeover',
+          route: `/${this.locale}/makeover`,
+          title: 'navigation.renovation',
+          component: RenovationIcon
+        },
+        {
+          icon: 'furniture',
+          route: `/${this.locale}/furniture`,
+          title: 'navigation.furniture',
+          component: FurnitureIcon
+        },
+        {
+          icon: 'decor',
+          route: `/${this.locale}/decoration`,
+          title: 'navigation.decoration',
+          component: DecorationIcon
+        },
+        {
+          icon: 'technick',
+          route: `/${this.locale}/appliance`,
+          title: 'navigation.appliance',
+          component: SupplyIcon
+        }
+      ]
     }
   },
   methods: {

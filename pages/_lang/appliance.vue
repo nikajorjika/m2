@@ -5,7 +5,7 @@
     </div>
     <div v-swiper:mySwiper="swiperOption" class="swiper__container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="item in itemsData" :key="item.id">
+        <div v-for="item in itemsData" :key="item.id" class="swiper-slide">
           <div class="items">
             <div v-for="value in item" :key="value.id" class="item">
               <TechnicCard :item="value" />
@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-      <div class="swiper-pagination" :class="{disabled : disableBullet }"></div>
+      <div class="swiper-pagination" :class="{ disabled: disableBullet }"></div>
     </div>
   </div>
 </template>
@@ -47,23 +47,23 @@ export default {
     }
   },
 
-  asyncData({ store }) {
-    return {
-      items: store.getters['Flats/flat'].appliance.appliance_info
-    }
-  },
-
   computed: {
-    itemsData: function() {
-      let arr = []
+    itemsData() {
+      const arr = []
       for (let i = 0; i < this.items.length; i = i + 3) {
         arr.push(this.items.slice(i, i + 3))
       }
       return arr
     },
 
-    disableBullet: function() {
-      return this.items.length <= 3 ? true : false
+    disableBullet() {
+      return this.items.length <= 3
+    }
+  },
+
+  asyncData({ store }) {
+    return {
+      items: store.getters['Flats/flat'].appliance.appliance_info
     }
   }
 }

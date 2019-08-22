@@ -28,6 +28,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { turnToLeadingZero, sliceUpArray } from '@/utils/Mixed'
 
 export default {
   data() {
@@ -43,31 +44,17 @@ export default {
   computed: {
     ...mapGetters('FAQ', ['questionList']),
     items() {
-      const items = []
-      let length = this.questionList.length
-      if (this.questionList.length % 4 !== 0) {
-        length = (parseInt(this.questionList.length / 4) + 1) * 4
-      }
-      for (let i = 4; i <= length; i += 4) {
-        if (this.questionList.lenght < i + 4) {
-          items.push(this.questionList.slice(i - 4, -1))
-        } else {
-          items.push(this.questionList.slice(i - 4, i))
-        }
-      }
-      return items
+      return sliceUpArray(this.questionList, 4)
     }
   },
   mounted() {
     if (!this.questionList.length) {
-      this.fetchFAQ().catch(e => console.error(e))
+      this.fetchFAQ().catch((e) => console.error(e))
     }
   },
   methods: {
     ...mapActions('FAQ', ['fetchFAQ']),
-    turnToLeadingZero(number) {
-      return number > 9 ? number : '0'.concat(number)
-    }
+    turnToLeadingZero
   }
 }
 </script>
