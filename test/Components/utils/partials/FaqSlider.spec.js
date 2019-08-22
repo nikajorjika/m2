@@ -1,16 +1,10 @@
 import Vuex from 'vuex'
-import * as Axios from 'axios'
 import { mount, createLocalVue } from '@vue/test-utils'
 import FaqSlider from '@/components/partials/FaqSlider.vue'
 import { getters, actions, mutations } from '@/store/FAQ'
 
 const localVue = createLocalVue()
 
-jest.mock('axios', () => {
-  return {
-    get: (...data) => data
-  }
-})
 const mockState = () => ({
   questionList: [
     {
@@ -26,12 +20,10 @@ const mockState = () => ({
 })
 localVue.use(Vuex)
 
-localVue.use(Axios)
-
 localVue.directive('swiper', () => {})
 
 const factory = (store, localVue) => {
-  return mount(FaqSlider, { store, localVue, axios: Axios })
+  return mount(FaqSlider, { store, localVue })
 }
 
 describe('FaqSlider.vue', () => {
@@ -48,10 +40,6 @@ describe('FaqSlider.vue', () => {
         }
       }
     })
-  })
-  test('is a Vue instance', () => {
-    const wrapper = factory(store, localVue)
-    expect(wrapper.isVueInstance()).toBeTruthy()
   })
   test('is a Vue instance', () => {
     const wrapper = factory(store, localVue)

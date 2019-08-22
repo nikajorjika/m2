@@ -22,11 +22,11 @@
 export default {
   props: {
     items: {
-      type: [Array],
+      type: Array,
       default: () => []
     },
     listStyle: {
-      type: [String],
+      type: String,
       default: 'white'
     }
   }
