@@ -13,10 +13,10 @@
                 {{ turnToLeadingZero(index * 9 + (key + 1)) }}
               </div>
               <div class="list-slider__list__item__label">
-                {{ $t(option.label) }}
+                {{ option.name_label && option.name_label.hasOwnProperty(locale) ? option.name_label[locale] : $t(`rooms.${option.name}`) }}
               </div>
               <div class="list-slider__list__item__value">
-                {{ option.area }}
+                {{`${option.number} ${$t('labels.m2')}`}}
               </div>
             </div>
           </div>
@@ -30,9 +30,13 @@
 import { mapGetters } from 'vuex'
 import { turnToLeadingZero, sliceUpArray } from '@/utils/Mixed'
 export default {
+  props: {
+    roomList: {
+      type: Array
+    }
+  },
   data() {
     return {
-      list: this.$store.getters['Flats/roomsList'],
       swiperOption: {
         spaceBetween: 30,
         pagination: {
@@ -42,9 +46,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('Flats', ['roomsList']),
     items() {
-      return sliceUpArray(this.roomsList, 9)
+      return sliceUpArray(this.roomList, 9)
     }
   },
   methods: {

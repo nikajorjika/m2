@@ -49,7 +49,9 @@ export default {
   },
   mounted() {
     if (!this.questionList.length) {
-      this.fetchFAQ().catch((e) => console.error(e))
+      this
+      .fetchFAQ()
+      .catch((e) => console.error(e))
     }
   },
   methods: {

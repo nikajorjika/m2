@@ -12,10 +12,11 @@
     <div class="flat-render">
       <render-viewer
         class="flat-viewer"
+        :bedroom-count="numberOfBedrooms"
         :render-image="flat.render_url"
         :plan-image="flat.blueprint_url"
       />
-      <room-list-component class="room-list-slider" />
+      <room-list-component class="room-list-slider" :room-list="rooms" />
     </div>
   </div>
 </template>
@@ -26,17 +27,14 @@ import TitleWithBorder from '@/components/partials/TitleWithLine'
 import RenderViewer from '@/components/partials/FlatRenderViewer'
 import RoomListComponent from '@/components/partials/RoomListComponent'
 import { formatPrice } from '@/utils/Mixed'
+import { mapGetters } from 'vuex';
 export default {
   components: { ListBlock, TitleWithBorder, RenderViewer, RoomListComponent },
-  data() {
-    return {
-      flat: this.$store.getters['Flats/flat']
-    }
-  },
   computed: {
-    roomNumber() {
+    ...mapGetters('Flats', ['flat', 'rooms']),
+    numberOfBedrooms() {
       return this.flat.renovation_flat_properties.filter(
-        (item) => item.type === 'room'
+        (item) => item.type === 'room' && item.name === 'bedroom'
       ).length
     },
     prices() {
@@ -46,7 +44,7 @@ export default {
 
       return arr.map((item) => {
         return {
-          label: this.$t(`labels.${item.name}`),
+          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? items.name_label[this.locale] : this.$t(`labels.${item.name}`),
           value: `${formatPrice(item.number)}$`
         }
       })
@@ -57,7 +55,7 @@ export default {
       )
       return arr.map((item) => {
         return {
-          label: this.$t(`labels.${item.name}`),
+          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? items.name_label[this.locale] : this.$t(`labels.${item.name}`),
           value: `${item.number}${this.$t('labels.m2')}`
         }
       })
