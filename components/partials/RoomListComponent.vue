@@ -27,12 +27,12 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 import { turnToLeadingZero, sliceUpArray } from '@/utils/Mixed'
 export default {
   props: {
     roomList: {
-      type: Array
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     items() {
-      return sliceUpArray(this.roomList, 9)
+      return this.roomList.length ? sliceUpArray(this.roomList, 9) : []
     }
   },
   methods: {

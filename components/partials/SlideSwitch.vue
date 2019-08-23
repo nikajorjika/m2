@@ -47,10 +47,6 @@ export default {
         }
       ]
     },
-    presetValue: {
-      type: [Boolean],
-      default: false
-    },
     bgColor: {
       type: [String],
       default: '#f2652926'
@@ -70,7 +66,7 @@ export default {
   },
   data() {
     return {
-      value: this.presetValue || this.values[0].value
+      value: this.values[0].value
     }
   },
   methods: {
