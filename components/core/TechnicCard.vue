@@ -5,10 +5,10 @@
       :style="{ backgroundImage: 'url(' + item.image.url + ')' }"
     ></div>
     <div class="card__content">
-      <div class="card__title card__title--red">{{ item.name }}</div>
-      <div class="card__text">{{ item.description }}</div>
+      <div class="card__title card__title--red">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
+      <div class="card__text">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
       <div class="card__button">
-        <GradientButton>ტექნიკის ფასი: {{ item.price }}</GradientButton>
+        <GradientButton>{{$t('labels.appliancePrice')}}: {{ item.price }}</GradientButton>
       </div>
     </div>
   </div>
@@ -16,6 +16,7 @@
 
 <script>
 import GradientButton from '@/components/core/GradientButton'
+import { mapGetters } from 'vuex';
 export default {
   components: {
     GradientButton
@@ -25,7 +26,8 @@ export default {
       type: Object,
       required: true
     }
-  }
+  },
+  computed: mapGetters(['locale'])
 }
 </script>
 

@@ -13,8 +13,8 @@
         <div v-for="(item, index) in items" :key="item.id" class="desc_item">
           <Description
             v-if="index == activeItem"
-            :title="item.name"
-            :text="item.description"
+            :title="item.name.hasOwnProperty(locale) ? item.name[locale] : ''"
+            :text="item.description.hasOwnProperty(locale) ? item.description[locale] : ''"
           />
         </div>
       </div>
@@ -26,6 +26,7 @@
 import Description from '@/components/core/Description'
 import Slider from '@/components/core/Slider'
 import GradientButton from '@/components/core/GradientButton'
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -44,7 +45,9 @@ export default {
       activeItem: 0
     }
   },
-
+  computed: {
+    ...mapGetters(['locale'])
+  },
   methods: {
     messageFromSlider(count) {
       this.activeItem = count

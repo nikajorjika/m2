@@ -35,7 +35,8 @@
     "bedroom": "Bedroom",
     "flat": "Flat",
     "balcony": "Balcony",
-    "m2": "m²"
+    "m2": "m²",
+    "appliancePrice": "Appliance price"
   },
   "titles": {
     "FlatPageTitle": "Renovation Displayed On Replication",
@@ -44,6 +45,11 @@
   },
   "rooms": {
     "Hall": "Hall",
-    "Bedroom": "Bedroom"
+    "Bedroom": "Bedroom",
+    "living_room": "Living Room",
+    "bedroom": "Bedroom",
+    "hall": "Hall",
+    "kitchen": "Kitchen",
+    "bathroom": "Bathroom"
   }
 }
