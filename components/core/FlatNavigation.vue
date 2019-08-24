@@ -25,7 +25,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import ArrowIcon from '@/components/icons/ArrowRight'
 import FlatIcon from '@/components/icons/Appartament'
 import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
@@ -35,7 +34,6 @@ import { isSamePath } from '@/utils/Route'
 
 export default {
   components: {
-    ArrowIcon,
     FlatIcon,
     RenovationIcon,
     FurnitureIcon,

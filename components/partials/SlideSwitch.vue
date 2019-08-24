@@ -13,20 +13,14 @@
         :class="{ active: value === values[1].value }"
       />
       <div
+        v-for="(val, index) in values" 
+        :key="index"
         class="switch__inner__item"
         :style="{
-          color: value === values[0].value ? activeColor : inactiveColor
+          color: value === val.value ? activeColor : inactiveColor
         }"
       >
-        {{ values[0].label }}
-      </div>
-      <div
-        class="switch__inner__item"
-        :style="{
-          color: value === values[1].value ? activeColor : inactiveColor
-        }"
-      >
-        {{ values[1].label }}
+        {{ val.hasOwnProperty('label') ? val.label : '' }}
       </div>
     </div>
   </div>
@@ -38,13 +32,11 @@ export default {
       type: [Array],
       default: () => [
         {
-          label: 'one',
-          value: 'one'
+          value: false
         },
         {
-          label: 'two',
-          value: 'two'
-        }
+          value: true
+        } 
       ]
     },
     bgColor: {

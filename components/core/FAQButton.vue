@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import ButtonMainOrange from '../partials/ButtonMainOrange'
+import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import ArrowIcon from '@/components/icons/ArrowRight'
 
 export default {

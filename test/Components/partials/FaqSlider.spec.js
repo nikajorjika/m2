@@ -9,7 +9,7 @@ const mockState = () => ({
   questionList: [
     {
       answer:
-      'Voluptatem laboriosam alias omnis sed velit voluptatem. Consequatur velit placeat modi excepturi est sed. Dolorum aut et recusandae maiores quas quia illo enim. Beatae repellat odio laboriosam.',
+        'Voluptatem laboriosam alias omnis sed velit voluptatem. Consequatur velit placeat modi excepturi est sed. Dolorum aut et recusandae maiores quas quia illo enim. Beatae repellat odio laboriosam.',
       application_type: 'ThpQGxmtgeOkwxwq',
       created_at: '2019-08-22 09:00:44',
       id: 1,
