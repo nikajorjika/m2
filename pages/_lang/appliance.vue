@@ -21,6 +21,7 @@
 <script>
 import TechnicCard from '@/components/core/TechnicCard'
 import TitleWithBorder from '@/components/partials/TitleWithLine'
+import { mapGetters } from 'vuex';
 export default {
   components: {
     TechnicCard,
@@ -37,17 +38,16 @@ export default {
           el: '.swiper-pagination',
           watchOverflow: true
         },
-        on: {
-          slideChange() {},
-          tap() {
-            console.log('onTap', this)
-          }
-        }
+        on: {}
       }
     }
   },
 
   computed: {
+    ...mapGetters('Flats', ['flat']),
+    items() {
+      return this.flat.appliance.appliance_info
+    },
     itemsData() {
       const arr = []
       for (let i = 0; i < this.items.length; i = i + 3) {
@@ -58,12 +58,6 @@ export default {
 
     disableBullet() {
       return this.items.length <= 3
-    }
-  },
-
-  asyncData({ store }) {
-    return {
-      items: store.getters['Flats/flat'].appliance.appliance_info
     }
   }
 }

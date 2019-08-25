@@ -42,7 +42,7 @@ export const actions = {
         .catch((e) => reject(e))
     })
   },
-  choseFlatFromFlats({ commit }, data) {
+  chooseFlatFromFlats({ commit }, data) {
     commit('SET_FLAT_DATA', data)
   }
 }

@@ -31,10 +31,4 @@ describe('FlatView.vue', () => {
     const wrapper = factory()
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
-
-  test('Is Prop item.image set as background', () => {
-    const wrapper = factory()
-    console.log(wrapper.find('.card__image').style)
-    expect(wrapper.isVueInstance()).toBeTruthy()
-  })
 })
