@@ -61,12 +61,7 @@ export default {
         slidesPerView: 'auto',
         centeredSlides: true,
         spaceBetween: 30,
-        on: {
-          slideChange() {},
-          tap() {
-            console.log('onTap', this)
-          }
-        }
+        on: {}
       }
     }
   },

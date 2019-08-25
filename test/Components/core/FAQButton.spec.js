@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import FAQButton from '@/components/core/FAQButton.vue'
 describe('FAQButton.vue', () => {
   const factory = () => {
-    return mount(FAQButton, {
+    return shallowMount(FAQButton, {
       mocks: {
         $t: jest.fn()
       }

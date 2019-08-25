@@ -8,8 +8,9 @@ module.exports = {
   transform: {
     '^.+\\.js$': 'babel-jest',
     '.*\\.(vue)$': 'vue-jest',
-    '^.+\\.svg$': '<rootDir>/utils/SvgTransformer.js',
-    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    // '^.+\\.svg$': '<rootDir>/utils/SvgTransformer.js'
+    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub'
   },
   collectCoverage: true,
   collectCoverageFrom: [

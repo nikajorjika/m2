@@ -20,9 +20,6 @@ export default {
   methods: {
     toggleLanguage() {
       const { params, name } = this.$route
-      // this.$store.commit('SET_LANG', this.opositeLocale)
-      // this.$i18n.locale = this.opositeLocale
-      // console.log(this.locale, this.$i18n.locale)
       this.$router.push({
         name,
         params: { ...params, lang: this.opositeLocale }
