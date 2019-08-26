@@ -46,8 +46,18 @@
     "bedrooms": "საძინებლები",
     "bedroom": "საძინებელი",
     "balcony": "ვერანდა",
+    "decoration": "დეკორი",
+    "price": "ფასი",
     "m2": "მ²",
-    "appliancePrice": "ტექნიკის ფასი"
+    "appliancePrice": "ტექნიკის ფასი",
+    "total_area": "სრული ფართი",
+    "flat_area": "ბინის ფართი",
+    "balcony_area": "ვერანდა",
+    "flat_price": "ბინის ფასი",
+    "furniture_price": "ავეჯის ფასი",
+    "decoration_price": "დეკორის ფასი",
+    "appliances_price": "ტექნიკა ფასი"
+
   },
   "titles": {
     "FlatPageTitle": "რეპლიკაზე წარმოდგენილი რემონტი",
@@ -57,10 +67,12 @@
   "rooms": {
     "Hall": "ჰოლი",
     "Bedroom": "საძინებელი",
-    "living_room": "მისაღები ოთახი",
     "bedroom": "საძინებელი",
+    "living_room": "მისაღები ოთახი",
     "hall": "ჰოლი",
+    "balcony": "ჰოლი",
     "kitchen": "სამზარეულო",
-    "bathroom": "სააბაზანო"
+    "bathroom": "სააბაზანო",
+    "wc": "სააბაზანო"
   }
 }

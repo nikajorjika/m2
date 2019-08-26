@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SliderDesc :items="items" />
+    <SliderDesc :items="items" :price="price"/>
   </div>
 </template>
 
@@ -15,6 +15,12 @@ export default {
     ...mapGetters('Flats', ['flat']),
     items(){
       return this.flat.decoration.decoration_info
+    },
+    price() {
+      const flat = this.flat.renovation_flat_properties.find((item) => {
+        return item.type === 'area' && item.name === 'flat'
+      })
+      return this.flat.decoration.price * flat.number
     }
   },
   methods: {}

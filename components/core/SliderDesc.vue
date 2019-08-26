@@ -5,7 +5,7 @@
         <Slider :items="items" @messageFromSlider="messageFromSlider" />
       </div>
       <div class="price-button">
-        <GradientButton>ფასი: 58.000 $</GradientButton>
+        <GradientButton v-if="price">{{ `${$t('labels.price')}: ${price}` }} $</GradientButton>
       </div>
     </div>
     <div class="right-content">
@@ -38,6 +38,10 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    price: {
+      type: Number,
+      default: 0
     }
   },
   data() {

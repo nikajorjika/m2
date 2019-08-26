@@ -34,9 +34,17 @@
     "bedrooms": "Bedrooms",
     "bedroom": "Bedroom",
     "flat": "Flat",
+    "price": "Price",
     "balcony": "Balcony",
     "m2": "m²",
-    "appliancePrice": "Appliance price"
+    "appliancePrice": "Appliance price",
+    "total_area": "Total Area",
+    "flat_area": "Flat Area",
+    "balcony_area": "Balcony",
+    "flat_price": "Flat Price",
+    "furniture_price": "Furniture Price",
+    "decoration_price": "Decoration Price",
+    "appliances_price": "Appliance Price"
   },
   "titles": {
     "FlatPageTitle": "Renovation Displayed On Replication",
@@ -46,10 +54,12 @@
   "rooms": {
     "Hall": "Hall",
     "Bedroom": "Bedroom",
-    "living_room": "Living Room",
     "bedroom": "Bedroom",
+    "living_room": "Living Room",
     "hall": "Hall",
     "kitchen": "Kitchen",
-    "bathroom": "Bathroom"
+    "bathroom": "Bathroom",
+    "balcony": "Balcony",
+    "wc": "Bathroom"
   }
 }
