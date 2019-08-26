@@ -6,7 +6,7 @@ describe('decoration.vue', () => {
   const localVue = createLocalVue()
   localVue.use(Vuex)
   localVue.directive('swiper', () => {})
-  const store = new Vuex.Store({
+  let store = new Vuex.Store({
     modules: {
       Flats: {
         namespaced: true,
@@ -14,8 +14,16 @@ describe('decoration.vue', () => {
           flat: () => {
             return {
               decoration: {
+                price: 15,
                 decoration_info: []
-              }
+              },
+              renovation_flat_properties: [
+                {
+                  type: 'area',
+                  name: 'flat',
+                  number: 12
+                }
+              ]
             }
           }
         }
@@ -32,5 +40,31 @@ describe('decoration.vue', () => {
   test('Is vue instance', () => {
     const wrapper = factory()
     expect(wrapper.isVueInstance()).toBeTruthy()
+  })
+  test('price is set correctly', () => {
+    const wrapper = factory()
+    expect(wrapper.vm.price).toBe(180)
+  })
+  test('Price is set to 0 if no info', () => {
+    store = new Vuex.Store({
+      modules: {
+        Flats: {
+          namespaced: true,
+          getters: {
+            flat: () => {
+              return {
+                decoration: {
+                  price: 15,
+                  decoration_info: []
+                },
+                renovation_flat_properties: []
+              }
+            }
+          }
+        }
+      }
+    })
+    const wrapper = factory()
+    expect(wrapper.vm.price).toBe(0)
   })
 })
