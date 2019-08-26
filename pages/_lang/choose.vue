@@ -1,7 +1,7 @@
 <template>
   <div class="choose-flat">
     <div
-      v-for="(item, index) in $store.getters['Flats/flatsData']"
+      v-for="(item, index) in flatsData"
       :key="index"
       class="choose-flat__item"
     >
@@ -18,25 +18,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  data() {
-    return {}
-  },
   mounted() {
-    if (!this.$store.getters['Flats/flatsData'].length) {
-      this.$store
-        .dispatch('Flats/fetchFlatData')
-        .then(({ data }) => {
-          console.log(data)
-        })
-        .catch((e) => console.error(e))
+    if (!this.flatsData.length) {
+      this.fetchFlatData().catch((e) => console.error(e))
     }
   },
-  computed: mapGetters(['locale']),
+  computed: {
+    ...mapGetters({
+      locale: 'locale',
+      flatsData: 'Flats/flatsData'
+    }),
+  },
   methods: {
+    ...mapActions('Flats', ['chooseFlatFromFlats', 'fetchFlatData']),
     chooseFlat(item) {
-      this.$store.dispatch('Flats/choseFlatFromFlats', item)
+      this.chooseFlatFromFlats(item)
       this.$router.push({ path: `/${this.locale}/` })
     }
   }

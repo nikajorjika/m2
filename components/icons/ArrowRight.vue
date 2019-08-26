@@ -4,7 +4,6 @@
 <script>
 import ArrowIcon from '@/assets/icons/arrow-pointing-to-right.svg'
 export default {
-  name: 'RightArrowIcon',
   components: { ArrowIcon },
   props: {
     width: {

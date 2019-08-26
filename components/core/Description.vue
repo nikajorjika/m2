@@ -44,14 +44,14 @@ export default {
   },
   computed: {
     // a computed getter
-    firstTitle: function() {
+    firstTitle() {
       let str = this.title
-      var lastIndex = str.lastIndexOf(' ')
+      const lastIndex = str.lastIndexOf(' ')
       str = str.substring(0, lastIndex)
       return str
     },
-    lastTitle: function() {
-      var n = this.title.split(' ')
+    lastTitle() {
+      const n = this.title.split(' ')
       return n[n.length - 1]
     }
   }

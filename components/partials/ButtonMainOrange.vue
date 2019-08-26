@@ -14,16 +14,6 @@ export default {
       type: String,
       default: 'შემდეგი'
     }
-  },
-  data() {
-    return {
-      inactiveStyles: {
-        backgroundImage:
-          'linear-gradient(0,rgba(255,255,255, 1),rgba(255,255,255, 1) 100%)',
-        width: '9px',
-        height: '13px'
-      }
-    }
   }
 }
 </script>

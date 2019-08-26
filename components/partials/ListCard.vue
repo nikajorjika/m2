@@ -7,7 +7,7 @@
       :class="`list-card__item--${listStyle}`"
     >
       <div class="list-card__item__label">
-        {{ $t(item.label) }}
+        {{ item.label }}
       </div>
       <div
         class="list-card__item__value"
@@ -22,11 +22,11 @@
 export default {
   props: {
     items: {
-      type: [Array],
+      type: Array,
       default: () => []
     },
     listStyle: {
-      type: [String],
+      type: String,
       default: 'white'
     }
   }
@@ -74,7 +74,7 @@ export default {
       padding: 16px 23px 16px 25px;
     }
     &--gradient {
-      padding: 19px 37px 20px 37px;
+      padding: 19px 9px 20px 37px;
       &:last-child {
         border-bottom: none;
       }

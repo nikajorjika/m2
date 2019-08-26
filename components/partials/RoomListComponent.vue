@@ -13,10 +13,10 @@
                 {{ turnToLeadingZero(index * 9 + (key + 1)) }}
               </div>
               <div class="list-slider__list__item__label">
-                {{ $t(option.label) }}
+                {{ option.label }}
               </div>
               <div class="list-slider__list__item__value">
-                {{ option.area }}
+                {{`${option.value}`}}
               </div>
             </div>
           </div>
@@ -27,10 +27,16 @@
   </div>
 </template>
 <script>
+import { turnToLeadingZero, sliceUpArray } from '@/utils/Mixed'
 export default {
+  props: {
+    roomList: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
-      list: this.$store.getters['Flats/roomsList'],
       swiperOption: {
         spaceBetween: 30,
         pagination: {
@@ -41,27 +47,11 @@ export default {
   },
   computed: {
     items() {
-      const items = []
-      const raw = this.$store.getters['Flats/roomsList']
-      let length = raw.length
-      if (raw.length % 9 !== 0) {
-        length = (parseInt(raw.length / 9) + 1) * 9
-      }
-
-      for (let i = 9; i <= length; i += 9) {
-        if (raw.lenght < i + 9) {
-          items.push(raw.slice(i - 9, -1))
-        } else {
-          items.push(raw.slice(i - 9, i))
-        }
-      }
-      return items
+      return this.roomList.length ? sliceUpArray(this.roomList, 9) : []
     }
   },
   methods: {
-    turnToLeadingZero(number) {
-      return number > 9 ? number : '0'.concat(number)
-    }
+    turnToLeadingZero
   }
 }
 </script>

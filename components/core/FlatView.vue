@@ -1,6 +1,6 @@
 <template>
   <div class="flat-view">
-    <language-switcher class="flat-view__switcher"/>
+    <language-switcher class="flat-view__switcher" />
     <flat-navigation class="flat-view__navigation" />
     <slot />
     <div class="faq-container">
@@ -10,10 +10,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import FlatNavigation from './FlatNavigation'
 import FaqButton from './FAQButton'
 import LanguageSwitcher from '@/components/core/LanguageSwitcher'
-import { mapGetters } from 'vuex';
 export default {
   components: { FlatNavigation, FaqButton, LanguageSwitcher },
   computed: mapGetters(['locale']),

@@ -6,23 +6,32 @@
     @slideChange="sendMessageToParent()"
   >
     <div class="swiper__pagination">
-      <div class="swiper__pagination__button swiper__pagination__button--prev" @click="prevSlide">
+      <div
+        class="swiper__pagination__button swiper__pagination__button--prev"
+        @click="prevSlide"
+      >
         <ArrowRight icon-color="#f0bda2" />
       </div>
-      <div class="swiper__pagination__button swiper__pagination__button--next" @click="nextSlide">
+      <div
+        class="swiper__pagination__button swiper__pagination__button--next"
+        @click="nextSlide"
+      >
         <ArrowRight icon-color="#f0bda2" />
       </div>
     </div>
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(item, index) in items" :key="item.key">
+      <div v-for="(item, index) in items" :key="item.key" class="swiper-slide">
         <div class="swiper__content">
           <div class="swiper__content__title">
-            <span>{{ "0" + (index+1) }}</span>
+            <span>{{ '0' + (index + 1) }}</span>
             <span>/</span>
-            <span>{{ "0" + items.length }}</span>
+            <span>{{ '0' + items.length }}</span>
           </div>
         </div>
-        <div :style="{ backgroundImage: `url(${item.image.url})` }" class="swiper__image"></div>
+        <div
+          :style="{ backgroundImage: `url(${item.image.url})` }"
+          class="swiper__image"
+        ></div>
         <div class="swiper__maximaze-item">
           <maximize-image
             :image="item.image.url"
@@ -41,23 +50,18 @@
 import ArrowRight from '@/components/icons/ArrowRight'
 import MaximizeImage from '@/components/partials/MaximizingImage'
 export default {
-  props: ['items'],
   components: {
     ArrowRight,
     MaximizeImage
   },
+  props: ['items'],
   data() {
     return {
       swiperOption: {
         slidesPerView: 'auto',
         centeredSlides: true,
         spaceBetween: 30,
-        on: {
-          slideChange() {},
-          tap() {
-            console.log('onTap', this)
-          }
-        }
+        on: {}
       }
     }
   },
@@ -76,7 +80,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 .swiper__container {

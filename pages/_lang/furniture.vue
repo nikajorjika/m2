@@ -1,18 +1,26 @@
 <template>
   <div class="container">
-    <SliderDesc :items="items" />
+    <SliderDesc :items="items" :price="price"/>
   </div>
 </template>
 
 <script>
 import SliderDesc from '@/components/core/SliderDesc'
+import { mapGetters } from 'vuex';
 export default {
   components: {
     SliderDesc
   },
-  asyncData({ store }) {
-    return {
-      items: store.getters['Flats/flat'].furniture.furniture_info
+  computed: {
+    ...mapGetters('Flats', ['flat']),
+    items() {
+      return this.flat.furniture.furniture_info
+    },
+    price() {
+      const flat = this.flat.renovation_flat_properties.find((item) => {
+        return item.type === 'area' && item.name === 'flat'
+      })
+      return this.flat.furniture.price * flat.number
     }
   },
 

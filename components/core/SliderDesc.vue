@@ -5,13 +5,17 @@
         <Slider :items="items" @messageFromSlider="messageFromSlider" />
       </div>
       <div class="price-button">
-        <GradientButton>ფასი: 58.000 $</GradientButton>
+        <GradientButton v-if="price">{{ `${$t('labels.price')}: ${price}` }} $</GradientButton>
       </div>
     </div>
     <div class="right-content">
       <div class="desc-wrapper">
         <div v-for="(item, index) in items" :key="item.id" class="desc_item">
-          <Description v-if="index == activeItem" :title="item.name" :text="item.description" />
+          <Description
+            v-if="index == activeItem"
+            :title="item.name.hasOwnProperty(locale) ? item.name[locale] : ''"
+            :text="item.description.hasOwnProperty(locale) ? item.description[locale] : ''"
+          />
         </div>
       </div>
     </div>
@@ -22,6 +26,7 @@
 import Description from '@/components/core/Description'
 import Slider from '@/components/core/Slider'
 import GradientButton from '@/components/core/GradientButton'
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -33,6 +38,10 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    price: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -40,7 +49,9 @@ export default {
       activeItem: 0
     }
   },
-
+  computed: {
+    ...mapGetters(['locale'])
+  },
   methods: {
     messageFromSlider(count) {
       this.activeItem = count

@@ -65,13 +65,9 @@ export default {
   },
   methods: {
     handleClick() {
-      this.updateOverlay(this.image, true)
-    },
-
-    updateOverlay(image, open) {
-      const overlay = { image, open }
+      const overlay = { image: this.image, open: true }
       this.$store.commit('setOverlay', overlay)
-    }
+    },
   }
 }
 </script>
