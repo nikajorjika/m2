@@ -9,29 +9,27 @@ describe('Choose.vue', () => {
   const push = jest.fn()
   const chooseFlatFromFlatsAction = jest.fn()
   const fetchFlatData = jest.fn()
-  beforeEach(() => {
-    store = new Vuex.Store({
-      getters: {
-        locale: () => 'en'
-      },
-      modules: {
-        Flats: {
-          namespaced: true,
-          state: {
-            flats: []
-          },
-          getters: {
-            flatsData: (state) => state.flats
-          },
-          actions: {
-            chooseFlatFromFlats: chooseFlatFromFlatsAction,
-            fetchFlatData
-          }
+  store = new Vuex.Store({
+    getters: {
+      locale: () => 'en'
+    },
+    modules: {
+      Flats: {
+        namespaced: true,
+        state: {
+          flats: []
+        },
+        getters: {
+          flatsData: (state) => state.flats
+        },
+        actions: {
+          chooseFlatFromFlats: chooseFlatFromFlatsAction,
+          fetchFlatData
         }
       }
-    })
+    }
   })
-  const factory = (customStore) => {
+  const factory = () => {
     return shallowMount(Choose, {
       mocks: {
         $router: {
@@ -39,7 +37,7 @@ describe('Choose.vue', () => {
         }
       },
       localVue,
-      store: customStore || store
+      store
     })
   }
   test('Is Vue instance', () => {
@@ -49,7 +47,7 @@ describe('Choose.vue', () => {
   })
 
   test('Is Calling choose Flat on flat click', () => {
-    const customStore = new Vuex.Store({
+    store = new Vuex.Store({
       getters: {
         locale: () => 'en'
       },
@@ -71,7 +69,7 @@ describe('Choose.vue', () => {
         }
       }
     })
-    const wrapper = factory(customStore)
+    const wrapper = factory()
     wrapper.setMethods({ chooseFlat: jest.fn() })
     wrapper.find('.choose-flat__item__wrapper').trigger('click')
     expect(wrapper.vm.chooseFlat).toHaveBeenCalledTimes(1)
