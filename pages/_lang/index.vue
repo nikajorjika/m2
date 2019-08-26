@@ -31,7 +31,7 @@ import { mapGetters } from 'vuex';
 export default {
   components: { ListBlock, TitleWithBorder, RenderViewer, RoomListComponent },
   computed: {
-    ...mapGetters('Flats', ['flat', 'rooms']),
+    ...mapGetters('Flats', ['flat']),
     numberOfBedrooms() {
       return this.flat.renovation_flat_properties.filter(
         (item) => item.type === 'room' && item.name === 'bedroom'

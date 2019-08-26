@@ -6,16 +6,17 @@
 
 <script>
 import SliderDesc from '@/components/core/SliderDesc'
+import { mapGetters } from 'vuex';
 export default {
   components: {
     SliderDesc
   },
-  asyncData({ store }) {
-    return {
-      items: store.getters['Flats/flat'].decoration.decoration_info
+  computed: {
+    ...mapGetters('Flats', ['flat']),
+    items(){
+      return this.flat.decoration.decoration_info
     }
   },
-
   methods: {}
 }
 </script>
