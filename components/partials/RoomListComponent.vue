@@ -13,10 +13,10 @@
                 {{ turnToLeadingZero(index * 9 + (key + 1)) }}
               </div>
               <div class="list-slider__list__item__label">
-                {{ option.name_label && option.name_label.hasOwnProperty(locale) ? option.name_label[locale] : $t(`rooms.${option.name}`) }}
+                {{ option.label }}
               </div>
               <div class="list-slider__list__item__value">
-                {{`${option.number} ${$t('labels.m2')}`}}
+                {{`${option.value}`}}
               </div>
             </div>
           </div>

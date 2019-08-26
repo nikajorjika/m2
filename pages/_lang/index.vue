@@ -59,6 +59,17 @@ export default {
           value: `${item.number}${this.$t('labels.m2')}`
         }
       })
+    },
+    rooms() {
+      const arr = this.flat.renovation_flat_properties.filter(
+        (item) => item.type === 'room'
+      )
+      return arr.map((item) => {
+        return {
+          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? items.name_label[this.locale] : this.$t(`rooms.${item.name}`),
+          value: `${item.number}${this.$t('labels.m2')}`
+        }
+      })
     }
   }
 }
