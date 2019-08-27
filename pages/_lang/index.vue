@@ -31,23 +31,32 @@ import { mapGetters } from 'vuex';
 export default {
   components: { ListBlock, TitleWithBorder, RenderViewer, RoomListComponent },
   computed: {
-    ...mapGetters('Flats', ['flat']),
+    ...mapGetters({
+      locale: 'locale',
+      flat: 'Flats/flat'
+    }),
     numberOfBedrooms() {
       return this.flat.renovation_flat_properties.filter(
         (item) => item.type === 'room' && item.name === 'bedroom'
       ).length
     },
     prices() {
-
       const arr = this.flat.renovation_flat_properties.filter(
         (item) => item.type === 'price'
       )
-      return arr.map((item) => {
+      let fullPrice = 0;
+      const prices = arr.map((item) => {
+        fullPrice += item.number
         return {
           label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? items.name_label[this.locale] : this.$t(`labels.${item.name}`),
           value: `${formatPrice(item.number)}$`
         }
       })
+      const fullPriceObject = {
+        label: this.$t(`labels.full_price`),
+        value: `${formatPrice(fullPrice)}$`
+      }
+      return [fullPriceObject, ...prices]
     },
     areas() {
       const arr = this.flat.renovation_flat_properties.filter(

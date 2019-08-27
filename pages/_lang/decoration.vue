@@ -22,7 +22,6 @@ export default {
       })
       return flat ? this.flat.decoration.price * flat.number : 0
     }
-  },
-  methods: {}
+  }
 }
 </script>

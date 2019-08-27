@@ -44,7 +44,8 @@
     "flat_price": "Flat Price",
     "furniture_price": "Furniture Price",
     "decoration_price": "Decoration Price",
-    "appliances_price": "Appliance Price"
+    "appliances_price": "Appliance Price",
+    "full_price": "Full Price"
   },
   "titles": {
     "FlatPageTitle": "Renovation Displayed On Replication",

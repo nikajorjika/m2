@@ -70,9 +70,9 @@ describe('decoration.vue', () => {
     expect(wrapper.vm.numberOfBedrooms).toBe(1)
   })
 
-  test('Is Prices array is correct length', () => {
+  test('Is Prices array is correct length + additional 1 item for calculated full price', () => {
     const wrapper = factory()
-    expect(wrapper.vm.prices.length).toBe(2)
+    expect(wrapper.vm.prices.length).toBe(3)
   })
   test('Is Area array is correct length', () => {
     const wrapper = factory()

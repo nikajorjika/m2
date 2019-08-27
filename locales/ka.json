@@ -56,7 +56,8 @@
     "flat_price": "ბინის ფასი",
     "furniture_price": "ავეჯის ფასი",
     "decoration_price": "დეკორის ფასი",
-    "appliances_price": "ტექნიკა ფასი"
+    "appliances_price": "ტექნიკა ფასი",
+    "full_price": "სრული ფასი"
 
   },
   "titles": {
