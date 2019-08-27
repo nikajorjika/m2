@@ -20,7 +20,7 @@ export default {
       const flat = this.flat.renovation_flat_properties.find((item) => {
         return item.type === 'area' && item.name === 'flat'
       })
-      return flat ? this.flat.furniture.price * flat.number : 0
+      return flat ? parseInt(this.flat.furniture.price) * parseInt(flat.number) : 0
     }
   }
 }
