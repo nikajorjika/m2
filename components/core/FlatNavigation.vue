@@ -115,6 +115,9 @@ export default {
     margin: auto;
     width: 112px;
     letter-spacing: 1px;
+    &:focus, &:active {
+      color: inherit;
+    }
     &__text {
       margin-top: 10px;
       font-size: 10px;
