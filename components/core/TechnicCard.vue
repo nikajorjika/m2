@@ -12,7 +12,7 @@
     </div>
     <div class="card__maximaze-item">
       <maximize-image
-        :image="item.image.url"
+        :image="imageUrl"
         width="47px"
         height="47px"
         icon-color="#fff"
@@ -40,7 +40,7 @@ export default {
   computed: {
     ...mapGetters(['locale']),
     imageUrl() {
-      return this.item.image ? this.item.image.url : ''
+      return !!this.item.image ? this.item.image.url : ''
     }
   }
 }

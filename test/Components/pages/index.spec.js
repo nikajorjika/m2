@@ -12,6 +12,7 @@ describe('decoration.vue', () => {
         getters: {
           flat: () => {
             return {
+              image_label: 'renderLabel',
               renovation_flat_properties: [
                 {
                   type: 'area',
@@ -65,9 +66,9 @@ describe('decoration.vue', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 
-  test('Is Number of bedrooms Correct', () => {
+  test('Is renderLabel computed set correctly', () => {
     const wrapper = factory()
-    expect(wrapper.vm.numberOfBedrooms).toBe(1)
+    expect(wrapper.vm.renderLabel).toBe('renderLabel')
   })
 
   test('Is Prices array is correct length + additional 1 item for calculated full price', () => {
@@ -75,6 +76,10 @@ describe('decoration.vue', () => {
     expect(wrapper.vm.prices.length).toBe(5)
   })
   test('Is Area array is correct length', () => {
+    const wrapper = factory()
+    expect(wrapper.vm.areas.length).toBe(2)
+  })
+  test('Is decorationPrice is correct', () => {
     const wrapper = factory()
     expect(wrapper.vm.areas.length).toBe(2)
   })

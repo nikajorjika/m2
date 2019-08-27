@@ -12,7 +12,7 @@
     <div class="flat-render">
       <render-viewer
         class="flat-viewer"
-        :gradient-text="numberOfBedrooms"
+        :gradient-text="renderLabel"
         :render-image="flat.render_url"
         :plan-image="flat.blueprint_url"
       />
@@ -35,7 +35,7 @@ export default {
       locale: 'locale',
       flat: 'Flats/flat'
     }),
-    numberOfBedrooms() {
+    renderLabel() {
       return this.flat.image_label
     },
     priceArray() {

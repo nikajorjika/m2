@@ -16,9 +16,9 @@
               <span class="faq-slider__swiper-slide__numeration">{{
                 turnToLeadingZero(index * 4 + (i + 1))
               }}</span>
-              <span>{{ question.title.hasOwnProperty(locale) ? question.title[locale] : question.title }}</span>
+              <span>{{ question.question.hasOwnProperty(locale) ? question.question[locale] : question.question }}</span>
             </h3>
-            <p>{{ question.content.hasOwnProperty(locale) ? question.content[locale] : question.content }}</p>
+            <p>{{ question.answer.hasOwnProperty(locale) ? question.answer[locale] : question.answer }}</p>
           </div>
         </div>
       </div>

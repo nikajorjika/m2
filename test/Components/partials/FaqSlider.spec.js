@@ -34,6 +34,9 @@ describe('FaqSlider.vue', () => {
     localVue.directive('swiper', () => {})
 
     emptyStore = new Vuex.Store({
+      getters: {
+        locale: () => 'en'
+      },
       modules: {
         FAQ: {
           namespaced: true,
@@ -50,6 +53,9 @@ describe('FaqSlider.vue', () => {
     })
 
     popStore = new Vuex.Store({
+      getters: {
+        locale: () => 'en'
+      },
       modules: {
         FAQ: {
           namespaced: true,
