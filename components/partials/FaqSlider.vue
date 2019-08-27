@@ -16,9 +16,9 @@
               <span class="faq-slider__swiper-slide__numeration">{{
                 turnToLeadingZero(index * 4 + (i + 1))
               }}</span>
-              <span>{{ question.title }}</span>
+              <span>{{ question.title.hasOwnProperty(locale) ? question.title[locale] : question.title }}</span>
             </h3>
-            <p>{{ question.content }}</p>
+            <p>{{ question.content.hasOwnProperty(locale) ? question.content[locale] : question.content }}</p>
           </div>
         </div>
       </div>
@@ -42,7 +42,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('FAQ', ['questionList']),
+    ...mapGetters({
+      locale: 'locale',
+      questionList: 'FAQ/questionList'
+    }),
     items() {
       return sliceUpArray(this.questionList, 4)
     }
