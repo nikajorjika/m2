@@ -13,6 +13,12 @@ const factory = () => {
       $t: () => {},
       $store: store
     },
+    propsData: {
+      gradientText: {
+        en: 'Title',
+        ka: 'სათაური'
+      }
+    },
     localVue
   })
 }

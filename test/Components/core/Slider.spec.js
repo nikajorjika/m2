@@ -13,6 +13,9 @@ describe('FlatView.vue', () => {
           activeIndex: 0
         }
       },
+      propsData: {
+        items: []
+      },
       localVue
     })
   }

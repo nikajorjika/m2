@@ -31,7 +31,7 @@ export default {
       type: String
     },
     gradientText: {
-      type: String
+      type: [Object, String]
     }
   },
   data() {

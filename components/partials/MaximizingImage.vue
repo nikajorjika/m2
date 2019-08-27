@@ -47,11 +47,11 @@ export default {
     },
     iconColor: {
       type: String,
-      default: '#fff'
+      default: '#f9b89d'
     },
     opacity: {
       type: String,
-      default: '0.5'
+      default: '1'
     },
     isActive: {
       type: Boolean,
