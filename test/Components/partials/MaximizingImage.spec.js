@@ -54,10 +54,10 @@ describe('Description.vue', () => {
     expect(props.iconHeight.default).toBe(18)
 
     expect(props.iconColor.type).toBe(String)
-    expect(props.iconColor.default).toBe('#fff')
+    expect(props.iconColor.default).toBe('#f9b89d')
 
     expect(props.opacity.type).toBe(String)
-    expect(props.opacity.default).toBe('0.5')
+    expect(props.opacity.default).toBe('1')
 
     expect(props.isActive.type).toBe(Boolean)
     expect(props.isActive.default).toBe(false)
