@@ -61,6 +61,13 @@ export default {
         value: `${this.totalArea ? formatPrice(parseInt(this.flat.decoration.price) * parseInt(this.totalArea.number)) : 0}$`
       }
     },
+    flatPrice() {
+      const price = this.flat.renovation_flat_properties.find((item) => (item.type === 'price' && item.name ==='flat_price') )
+      return {
+        label: this.$t(`labels.flat_price`),
+        value: `${price ? formatPrice(price.number) : 0}$`
+      }
+    },
     furniturePrice() {
       return {
         label: this.$t(`labels.furniture`),
@@ -69,10 +76,10 @@ export default {
     },
     appliancePrice() {
       let sum = 0
-      this.flat.appliance.appliance_info.map((item) => sum += item.price )
+      this.flat.appliance.appliance_info.map((item) => sum += parseInt(item.price) )
       return {
         label: this.$t(`labels.appliance`),
-        value: `${sum}$`
+        value: `${formatPrice(sum)}$`
       }
     },
     fullPriceObject() {
@@ -82,7 +89,7 @@ export default {
       }
     },
     prices() {
-      return [this.flatPrice, this.furniturePrice, this.decorationPrice, this.fullPriceObject]
+      return [this.flatPrice, this.furniturePrice, this.decorationPrice, this.appliancePrice, this.fullPriceObject]
     },
     areas() {
       const arr = this.flat.renovation_flat_properties.filter(
