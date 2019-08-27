@@ -40,23 +40,49 @@ export default {
         (item) => item.type === 'room' && item.name === 'bedroom'
       ).length
     },
-    prices() {
-      const arr = this.flat.renovation_flat_properties.filter(
+    priceArray() {
+      return this.flat.renovation_flat_properties.filter(
         (item) => item.type === 'price'
       )
-      let fullPrice = 0;
-      const prices = arr.map((item) => {
-        fullPrice += item.number
-        return {
-          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? item.name_label[this.locale] : this.$t(`labels.${item.name}`),
-          value: `${formatPrice(item.number)}$`
-        }
+    },
+    totalArea() { 
+      return this.flat.renovation_flat_properties.find((item) => {
+        return item.type === 'area' && item.name === 'total_area'
       })
-      const fullPriceObject = {
-        label: this.$t(`labels.full_price`),
-        value: `${formatPrice(fullPrice)}$`
+    },
+    fullPrice() {
+      let fullPrice = 0;
+      this.priceArray.map((item) => fullPrice += item.number )
+      return fullPrice
+    },
+    decorationPrice() {
+      return {
+        label: this.$t(`labels.decoration`),
+        value: `${this.totalArea ? formatPrice(parseInt(this.flat.decoration.price) * parseInt(this.totalArea.number)) : 0}$`
       }
-      return [fullPriceObject, ...prices]
+    },
+    furniturePrice() {
+      return {
+        label: this.$t(`labels.furniture`),
+        value: `${this.totalArea ? formatPrice(parseInt(this.flat.furniture.price) * parseInt(this.totalArea.number)) : 0}$`
+      }
+    },
+    appliancePrice() {
+      let sum = 0
+      this.flat.appliance.appliance_info.map((item) => sum += item.price )
+      return {
+        label: this.$t(`labels.appliance`),
+        value: `${sum}$`
+      }
+    },
+    fullPriceObject() {
+      return {
+        label: this.$t(`labels.full_price`),
+        value: `${formatPrice(this.fullPrice)}$`
+      }
+    },
+    prices() {
+      return [this.flatPrice, this.furniturePrice, this.decorationPrice, this.fullPriceObject]
     },
     areas() {
       const arr = this.flat.renovation_flat_properties.filter(

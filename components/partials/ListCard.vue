@@ -1,7 +1,7 @@
 <template>
   <div class="list-card" :class="`list-card--${listStyle}`">
     <div
-      v-for="(item, index) in items"
+      v-for="(item, index) in filteredItems"
       :key="index"
       class="list-card__item"
       :class="`list-card__item--${listStyle}`"
@@ -28,6 +28,11 @@ export default {
     listStyle: {
       type: String,
       default: 'white'
+    }
+  },
+  computed: {
+    filteredItems: function () {
+      return this.items.filter(item => !!item) 
     }
   }
 }
