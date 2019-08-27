@@ -12,8 +12,11 @@
 .description {
   max-width: 400px;
   &__title {
+    display: inline;
     font-size: 20px;
     font-family: $font-caps;
+    line-height: 27px;
+    box-shadow: inset 0px -8px 0px 0px #f2cab1;
     color: #494949;
     &--red {
       color: #f26529;
@@ -23,7 +26,7 @@
   &__text {
     font-size: 15px;
     font-family: $font;
-    line-height: 25px;
+    line-height: 18px;
     margin-top: 40px;
     color: #494949;
   }

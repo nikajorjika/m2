@@ -56,11 +56,11 @@ export default {
     padding-top: 72%;
     background-size: contain;
     background-repeat: no-repeat;
-    background-color: #f9f1e9;
-    // background-position: center center;
+    background-color: #ffffff;
+    background-position: center center;
   }
   &__content {
-    padding: 20px 25px;
+    padding: 15px 25px;
     background: #f9f1e9;
   }
 

@@ -10,7 +10,7 @@ export default {}
 
 <style lang="scss" scoped>
 .button {
-  font-family: $font-caps;
+  font-family: $font;
   font-size: 11px;
   color: #ffffff;
   border-radius: 8px;
