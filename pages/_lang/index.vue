@@ -48,7 +48,7 @@ export default {
       const prices = arr.map((item) => {
         fullPrice += item.number
         return {
-          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? items.name_label[this.locale] : this.$t(`labels.${item.name}`),
+          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? item.name_label[this.locale] : this.$t(`labels.${item.name}`),
           value: `${formatPrice(item.number)}$`
         }
       })
@@ -64,7 +64,7 @@ export default {
       )
       return arr.map((item) => {
         return {
-          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? items.name_label[this.locale] : this.$t(`labels.${item.name}`),
+          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? item.name_label[this.locale] : this.$t(`labels.${item.name}`),
           value: `${item.number}${this.$t('labels.m2')}`
         }
       })
@@ -75,7 +75,7 @@ export default {
       )
       return arr.map((item) => {
         return {
-          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? items.name_label[this.locale] : this.$t(`rooms.${item.name}`),
+          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? item.name_label[this.locale] : this.$t(`rooms.${item.name}`),
           value: `${item.number}${this.$t('labels.m2')}`
         }
       })
