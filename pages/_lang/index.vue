@@ -12,7 +12,7 @@
     <div class="flat-render">
       <render-viewer
         class="flat-viewer"
-        :bedroom-count="numberOfBedrooms"
+        :gradient-text="numberOfBedrooms"
         :render-image="flat.render_url"
         :plan-image="flat.blueprint_url"
       />
@@ -36,9 +36,7 @@ export default {
       flat: 'Flats/flat'
     }),
     numberOfBedrooms() {
-      return this.flat.renovation_flat_properties.filter(
-        (item) => item.type === 'room' && item.name === 'bedroom'
-      ).length
+      return this.flat.image_label
     },
     priceArray() {
       return this.flat.renovation_flat_properties.filter(

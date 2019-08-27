@@ -24,13 +24,13 @@ import { mapGetters } from 'vuex'
 export default {
   components: { gradientLabel, SlideSwitch, MaximizeImage },
   props: {
-    bedroomCount: {
-      type: [Number, String]
-    },
     renderImage: {
       type: String
     },
     planImage: {
+      type: String
+    },
+    gradientText: {
       type: String
     }
   },
@@ -52,7 +52,7 @@ export default {
   computed: {
     ...mapGetters(['locale']),
     bedroomCountLabel: function() {
-      return `${this.bedroomCount} ${this.locale === 'ka' || parseInt(this.bedroomCount) === 1 ? this.$t('labels.bedroom') : this.$t('labels.bedrooms') }`
+      return this.gradientText.hasOwnProperty(this.locale) ? this.gradientText[this.locale] : this.gradientText
     },
     imageToMaximize() {
       return !this.switchValue ? this.renderImage : this.planImage
