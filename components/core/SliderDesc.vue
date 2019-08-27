@@ -5,7 +5,7 @@
         <Slider :items="items" @messageFromSlider="messageFromSlider" />
       </div>
       <div class="price-button">
-        <GradientButton v-if="price">{{ `${$t('labels.price')}: ${price}` }} $</GradientButton>
+        <GradientButton v-if="price">{{ `${$t('labels.price')}: ${formatPrice(price)}` }} $</GradientButton>
       </div>
     </div>
     <div class="right-content">
@@ -26,6 +26,7 @@
 import Description from '@/components/core/Description'
 import Slider from '@/components/core/Slider'
 import GradientButton from '@/components/core/GradientButton'
+import { formatPrice } from '@/utils/Mixed'
 import { mapGetters } from 'vuex';
 
 export default {
@@ -55,7 +56,8 @@ export default {
   methods: {
     messageFromSlider(count) {
       this.activeItem = count
-    }
+    },
+    formatPrice
   }
 }
 </script>
