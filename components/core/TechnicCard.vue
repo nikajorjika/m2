@@ -2,7 +2,7 @@
   <div class="card">
     <div
       class="card__image"
-      :style="{ backgroundImage: 'url(' + item.image.url + ')' }"
+      :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
     ></div>
     <div class="card__content">
       <div class="card__title card__title--red">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
@@ -27,7 +27,12 @@ export default {
       required: true
     }
   },
-  computed: mapGetters(['locale'])
+  computed: {
+    ...mapGetters(['locale']),
+    imageUrl() {
+      return this.item.image ? this.item.image.url : ''
+    }
+  }
 }
 </script>
 

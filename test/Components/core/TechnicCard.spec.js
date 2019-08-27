@@ -10,13 +10,13 @@ describe('FlatView.vue', () => {
       locale: () => 'en'
     }
   })
-  const factory = () => {
+  const factory = (image) => {
     return shallowMount(TechnicCard, {
       propsData: {
         item: {
           name: 'something',
           description: 'something',
-          image: 'test-image.png'
+          image
         }
       },
       mocks: {
@@ -30,5 +30,15 @@ describe('FlatView.vue', () => {
   test('Is vue instance', () => {
     const wrapper = factory()
     expect(wrapper.isVueInstance()).toBeTruthy()
+  })
+
+  test('Is image url valid if image is supplied', () => {
+    const wrapper = factory({ url: 'imageUrl.png' })
+    expect(wrapper.vm.imageUrl).toBe('imageUrl.png')
+  })
+
+  test('Is image url empty if no image supplied', () => {
+    const wrapper = factory(null)
+    expect(wrapper.vm.imageUrl).toBe('')
   })
 })
