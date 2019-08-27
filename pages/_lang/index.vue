@@ -76,7 +76,7 @@ export default {
     },
     appliancePrice() {
       let sum = 0
-      this.flat.appliance.appliance_info.map((item) => sum += parseInt(item.price) )
+      this.flat.appliance ? this.flat.appliance.appliance_info.map((item) => sum += parseInt(item.price) ) : 0
       return {
         label: this.$t(`labels.appliance`),
         value: `${formatPrice(sum)}$`

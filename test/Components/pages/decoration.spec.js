@@ -20,7 +20,7 @@ describe('decoration.vue', () => {
               renovation_flat_properties: [
                 {
                   type: 'area',
-                  name: 'flat',
+                  name: 'total_area',
                   number: 12
                 }
               ]
