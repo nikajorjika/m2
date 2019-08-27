@@ -1,25 +1,35 @@
 <template>
   <div class="card">
-    <div
-      class="card__image"
-      :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
-    ></div>
+    <div class="card__image" :style="{ backgroundImage: 'url(' + imageUrl + ')' }"></div>
     <div class="card__content">
-      <div class="card__title card__title--red">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
+      <div
+        class="card__title card__title--red"
+      >{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
       <div class="card__text">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
       <div class="card__button">
         <GradientButton>{{$t('labels.appliancePrice')}}: {{ item.price }}</GradientButton>
       </div>
+    </div>
+    <div class="card__maximaze-item">
+      <maximize-image
+        :image="item.image.url"
+        width="47px"
+        height="47px"
+        icon-color="#fff"
+        bg-color="#f16529"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import GradientButton from '@/components/core/GradientButton'
-import { mapGetters } from 'vuex';
+import MaximizeImage from '@/components/partials/MaximizingImage'
+import { mapGetters } from 'vuex'
 export default {
   components: {
-    GradientButton
+    GradientButton,
+    MaximizeImage
   },
   props: {
     item: {
@@ -38,12 +48,16 @@ export default {
 
 <style lang="scss" scoped>
 .card {
+  position: relative;
   border-radius: 30px 0;
   overflow: hidden;
   &__image {
     width: 100%;
     padding-top: 72%;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #f9f1e9;
+    // background-position: center center;
   }
   &__content {
     padding: 20px 25px;
@@ -68,6 +82,12 @@ export default {
     color: #595959;
     height: 100px;
     overflow: hidden;
+  }
+
+  &__maximaze-item {
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 }
 </style>
