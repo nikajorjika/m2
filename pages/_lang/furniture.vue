@@ -18,7 +18,7 @@ export default {
     },
     price() {
       const flat = this.flat.renovation_flat_properties.find((item) => {
-        return item.type === 'area' && item.name === 'flat'
+        return item.type === 'area' && item.name === 'total_area'
       })
       return flat ? parseInt(this.flat.furniture.price) * parseInt(flat.number) : 0
     }
