@@ -10,13 +10,13 @@
         class="swiper__pagination__button swiper__pagination__button--prev"
         @click="prevSlide"
       >
-        <ArrowRight icon-color="#f0bda2" />
+        <ArrowRight :icon-color="activeIndex === 0 ? '#f0bda2' : '#ec7547'" />
       </div>
       <div
         class="swiper__pagination__button swiper__pagination__button--next"
         @click="nextSlide"
       >
-        <ArrowRight icon-color="#f0bda2" />
+        <ArrowRight :icon-color="activeIndex === items.length - 1 ? '#f0bda2' : '#ec7547'" />
       </div>
     </div>
     <div class="swiper-wrapper">
@@ -62,16 +62,19 @@ export default {
         centeredSlides: true,
         spaceBetween: 30,
         on: {}
-      }
+      },
+      activeIndex: 0
     }
   },
   methods: {
     nextSlide() {
       this.mySwiper.slideNext()
+      this.activeIndex = this.mySwiper.activeIndex
     },
 
     prevSlide() {
       this.mySwiper.slidePrev()
+      this.activeIndex = this.mySwiper.activeIndex
     },
 
     sendMessageToParent(event) {

@@ -85,16 +85,19 @@ export default {
         color: #4b3f99;
         font-size: 9px;
         line-height: 1;
+        letter-spacing: 1px;
       }
       &__value {
         margin-left: auto;
         font-family: $font;
         font-size: 13px;
         color: #4b3f99;
+        letter-spacing: 0.6px;
       }
       &__label {
         font-family: $font;
         font-size: 13px;
+        letter-spacing: 1px;
         color: #494949;
       }
     }

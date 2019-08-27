@@ -56,20 +56,20 @@ export default {
     decorationPrice() {
       return {
         label: this.$t(`labels.decoration`),
-        value: `${this.totalArea ? formatPrice(parseInt(this.flat.decoration.price) * parseInt(this.totalArea.number)) : 0}$`
+        value: `${this.totalArea ? formatPrice(parseInt(this.flat.decoration.price) * parseInt(this.totalArea.number)) : 0} $`
       }
     },
     flatPrice() {
       const price = this.flat.renovation_flat_properties.find((item) => (item.type === 'price' && item.name ==='flat_price') )
       return {
         label: this.$t(`labels.flat_price`),
-        value: `${price ? formatPrice(price.number) : 0}$`
+        value: `${price ? formatPrice(price.number) : 0} $`
       }
     },
     furniturePrice() {
       return {
         label: this.$t(`labels.furniture`),
-        value: `${this.totalArea ? formatPrice(parseInt(this.flat.furniture.price) * parseInt(this.totalArea.number)) : 0}$`
+        value: `${this.totalArea ? formatPrice(parseInt(this.flat.furniture.price) * parseInt(this.totalArea.number)) : 0} $`
       }
     },
     appliancePrice() {
@@ -77,13 +77,13 @@ export default {
       this.flat.appliance ? this.flat.appliance.appliance_info.map((item) => sum += parseInt(item.price) ) : 0
       return {
         label: this.$t(`labels.appliance`),
-        value: `${formatPrice(sum)}$`
+        value: `${formatPrice(sum)} $`
       }
     },
     fullPriceObject() {
       return {
         label: this.$t(`labels.full_price`),
-        value: `${formatPrice(this.fullPrice)}$`
+        value: `${formatPrice(this.fullPrice)} $`
       }
     },
     prices() {
@@ -96,7 +96,7 @@ export default {
       return arr.map((item) => {
         return {
           label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? item.name_label[this.locale] : this.$t(`labels.${item.name}`),
-          value: `${item.number}${this.$t('labels.m2')}`
+          value: `${item.number} ${this.$t('labels.m2')}`
         }
       })
     },
@@ -107,7 +107,7 @@ export default {
       return arr.map((item) => {
         return {
           label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? item.name_label[this.locale] : this.$t(`rooms.${item.name}`),
-          value: `${item.number}${this.$t('labels.m2')}`
+          value: `${item.number} ${this.$t('labels.m2')}`
         }
       })
     }
