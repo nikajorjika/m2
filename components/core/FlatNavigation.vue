@@ -115,7 +115,7 @@ export default {
     margin: auto;
     width: 112px;
     letter-spacing: 1px;
-    &:focus, &:active {
+    &.nuxt-link-exact-active {
       color: inherit;
     }
     &__text {

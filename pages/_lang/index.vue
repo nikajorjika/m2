@@ -111,6 +111,17 @@ export default {
         }
       })
     }
+  },
+  mounted() {
+    let timeout
+    let refresh = () => {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        this.$router.push({ path: `/${this.locale}` })
+      }, 3 * 60 * 1000)
+    }
+    refresh()
+    document.addEventListener('click', refresh)
   }
 }
 </script>
