@@ -49,4 +49,10 @@ describe('FlatRenderViewer.vue', () => {
     wrapper.setData({ switchValue: false })
     expect(wrapper.vm.imageToMaximize).toBe(renderImage)
   })
+  test('BedroomCount Computed property is correctly set in both branches', () => {
+    const wrapper = factory()
+    expect(wrapper.vm.bedroomCountLabel).toBe('Title')
+    wrapper.setProps({ gradientText: 'text 2' })
+    expect(wrapper.vm.bedroomCountLabel).toBe('text 2')
+  })
 })

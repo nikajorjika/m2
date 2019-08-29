@@ -22,7 +22,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   mounted() {
     if (!this.flatsData.length) {
-      this.fetchFlatData().catch((e) => console.error(e))
+      this.fetchFlatData()
     }
   },
   computed: {

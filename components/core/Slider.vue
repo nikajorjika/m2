@@ -98,6 +98,7 @@ export default {
       width: 100%;
       padding-top: 56%;
       background-size: cover;
+      background-position: center center;
     }
     .swiper__content {
       position: absolute;
