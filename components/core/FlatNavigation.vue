@@ -25,60 +25,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FlatIcon from '@/components/icons/Appartament'
-import RenovationIcon from '@/components/icons/Makeover'
-import FurnitureIcon from '@/components/icons/Furniture'
-import SupplyIcon from '@/components/icons/Technic'
-import DecorationIcon from '@/components/icons/Decor'
 import { isSamePath } from '@/utils/Route'
 
 export default {
-  components: {
-    FlatIcon,
-    RenovationIcon,
-    FurnitureIcon,
-    SupplyIcon,
-    DecorationIcon
-  },
-  data() {
-    return {}
+  props: {
+    navData: {
+      type: Array,
+      default: []
+    }
   },
   computed: {
-    ...mapGetters(['locale']),
-    navData() {
-      return [
-        {
-          icon: 'appartament',
-          route: `/${this.locale}`,
-          title: 'navigation.flat',
-          component: FlatIcon
-        },
-        {
-          icon: 'makeover',
-          route: `/${this.locale}/makeover`,
-          title: 'navigation.renovation',
-          component: RenovationIcon
-        },
-        {
-          icon: 'furniture',
-          route: `/${this.locale}/furniture`,
-          title: 'navigation.furniture',
-          component: FurnitureIcon
-        },
-        {
-          icon: 'decor',
-          route: `/${this.locale}/decoration`,
-          title: 'navigation.decoration',
-          component: DecorationIcon
-        },
-        {
-          icon: 'technick',
-          route: `/${this.locale}/appliance`,
-          title: 'navigation.appliance',
-          component: SupplyIcon
-        }
-      ]
-    }
+    ...mapGetters(['locale'])
   },
   methods: {
     isSamePath: (a, b) => isSamePath(a, b)
