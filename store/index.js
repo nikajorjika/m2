@@ -1,6 +1,9 @@
+import nuxtStorage from 'nuxt-storage'
 export const state = () => ({
   locales: [`en`, 'ka'],
   locale: 'ka',
+  apps: ['sales', 'renovations', 'model'],
+  app: '',
   overlay: {
     image: '',
     open: false
@@ -16,6 +19,9 @@ export const getters = {
   },
   allLocales: (state) => {
     return state.locales
+  },
+  app: (state) => {
+    return nuxtStorage.localStorage.getData('app')
   }
 }
 
@@ -27,5 +33,10 @@ export const mutations = {
   },
   setOverlay(state, overlay) {
     state.overlay = overlay
+  },
+  SET_APP(state, appName) {
+    if (state.apps.includes(appName)) {
+      nuxtStorage.localStorage.setData('app', appName, 60000, 'd')
+    }
   }
 }

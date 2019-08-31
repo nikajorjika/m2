@@ -11,6 +11,8 @@ export default {
   components: {
     SliderDesc
   },
+  layout: 'RenovationsLayout',
+  middleware: 'chosenFlat',
   computed: {
     ...mapGetters('Flats', ['flat']),
     items() {

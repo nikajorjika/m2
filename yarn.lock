@@ -8150,6 +8150,11 @@ nuxt-start@^2.9.1:
     vue-router "~3.0.7"
     vuex "^3.1.1"
 
+nuxt-storage@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/nuxt-storage/-/nuxt-storage-1.2.2.tgz#f3282948bac8cdc3fb7d0655972d1d1963045ca4"
+  integrity sha512-quJbZ87NO7QRCSp7YZolot6VwktciSLuTS/sRl8NPz5rAWA84U5Py0y9FmAsbKTiaqJtFcCKSaJGzky948jA3w==
+
 nuxt-svg-loader@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/nuxt-svg-loader/-/nuxt-svg-loader-1.0.1.tgz#4565f4a390be7c81b1f39197c7a69ea105da1912"

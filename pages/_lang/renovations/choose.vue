@@ -20,6 +20,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  layout: 'RenovationsLayout',
+  middleware: 'chosenFlat',
   mounted() {
     if (!this.flatsData.length) {
       this.fetchFlatData()
@@ -35,7 +37,7 @@ export default {
     ...mapActions('Flats', ['chooseFlatFromFlats', 'fetchFlatData']),
     chooseFlat(item) {
       this.chooseFlatFromFlats(item)
-      this.$router.push({ path: `/${this.locale}/` })
+      this.$router.push({ path: `/${this.locale}/renovations` })
     }
   }
 }

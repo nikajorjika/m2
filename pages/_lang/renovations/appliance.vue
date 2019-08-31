@@ -27,7 +27,8 @@ export default {
     TechnicCard,
     TitleWithBorder
   },
-
+  layout: 'RenovationsLayout',
+  middleware: 'chosenFlat',
   data() {
     return {
       swiperOption: {

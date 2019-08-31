@@ -1,4 +1,8 @@
 {
+  "apps": {
+    "renovation": "Replications App",
+    "model": "Model App"
+  },
   "languages": {
     "ka": "ქარ",
     "en": "ENG"

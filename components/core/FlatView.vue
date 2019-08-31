@@ -36,31 +36,31 @@ export default {
       return [
         {
           icon: 'appartament',
-          route: `/${this.locale}`,
+          route: `/${this.locale}/renovations`,
           title: 'navigation.flat',
           component: FlatIcon
         },
         {
           icon: 'makeover',
-          route: `/${this.locale}/makeover`,
+          route: `/${this.locale}/renovations/makeover`,
           title: 'navigation.renovation',
           component: RenovationIcon
         },
         {
           icon: 'furniture',
-          route: `/${this.locale}/furniture`,
+          route: `/${this.locale}/renovations/furniture`,
           title: 'navigation.furniture',
           component: FurnitureIcon
         },
         {
           icon: 'decor',
-          route: `/${this.locale}/decoration`,
+          route: `/${this.locale}/renovations/decoration`,
           title: 'navigation.decoration',
           component: DecorationIcon
         },
         {
           icon: 'technick',
-          route: `/${this.locale}/appliance`,
+          route: `/${this.locale}/renovations/appliance`,
           title: 'navigation.appliance',
           component: SupplyIcon
         }

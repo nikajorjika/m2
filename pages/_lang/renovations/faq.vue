@@ -8,6 +8,7 @@ import FaqSlider from '@/components/partials/FaqSlider'
 
 export default {
   layout: 'Faq',
+  middleware: 'chosenFlat',
   components: { FaqSlider }
 }
 </script>
