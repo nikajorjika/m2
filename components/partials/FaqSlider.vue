@@ -83,6 +83,7 @@ export default {
       font-size: 9px;
       padding: 7px 6px;
       border-radius: 6px;
+      align-self: baseline;
     }
     h3 {
       color: #ed7c4d;

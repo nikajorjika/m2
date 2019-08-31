@@ -88,6 +88,7 @@ export default {
       color: inherit;
       font-family: inherit;
       font-size: inherit;
+      letter-spacing: 1px;
     }
     &__value {
       &--white {

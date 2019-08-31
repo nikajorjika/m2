@@ -37,6 +37,7 @@ export default {
   &__item {
     height: 38px;
     width: 38px;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
