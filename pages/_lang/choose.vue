@@ -10,7 +10,7 @@
           <img :src="item.render_url" alt="Flat render" />
         </div>
         <div class="choose-flat__item__label">
-          {{ item.name }}
+          {{ item.name.hasOwnProperty(locale) ? item.name[locale] : item.name }}
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   mounted() {
     if (!this.flatsData.length) {
-      this.fetchFlatData().catch((e) => console.error(e))
+      this.fetchFlatData()
     }
   },
   computed: {

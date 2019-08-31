@@ -7,7 +7,7 @@
       >{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
       <div class="card__text">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
       <div class="card__button">
-        <GradientButton>{{$t('labels.appliancePrice')}}: {{ item.price }}</GradientButton>
+        <GradientButton>{{$t('labels.appliancePrice')}}: {{ item.price }} $</GradientButton>
       </div>
     </div>
     <div class="card__maximaze-item">

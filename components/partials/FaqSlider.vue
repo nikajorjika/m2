@@ -16,9 +16,9 @@
               <span class="faq-slider__swiper-slide__numeration">{{
                 turnToLeadingZero(index * 4 + (i + 1))
               }}</span>
-              <span>{{ question.title.hasOwnProperty(locale) ? question.title[locale] : question.title }}</span>
+              <span>{{ labelOrLocaledLabel(question, 'title') }}</span>
             </h3>
-            <p>{{ question.content.hasOwnProperty(locale) ? question.content[locale] : question.content }}</p>
+            <p>{{ labelOrLocaledLabel(question, 'content') }}</p>
           </div>
         </div>
       </div>
@@ -54,12 +54,14 @@ export default {
     if (!this.questionList.length) {
       this
       .fetchFAQ()
-      .catch((e) => console.error(e))
     }
   },
   methods: {
     ...mapActions('FAQ', ['fetchFAQ']),
-    turnToLeadingZero
+    turnToLeadingZero,
+    labelOrLocaledLabel(item, label) {
+      return item[label].hasOwnProperty(this.locale) ? item[label][this.locale] : item[label]
+    }
   }
 }
 </script>

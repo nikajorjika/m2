@@ -24,6 +24,66 @@ describe('FaqSlider.vue', () => {
           en: 'Consequatur velit placeat modi excepturi est sed.',
           ka: 'Consequatur velit placeat modi excepturi est sed.'
         }
+      },
+      {
+        title: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        },
+        content: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        }
+      },
+      {
+        title: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        },
+        content: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        }
+      },
+      {
+        title: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        },
+        content: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        }
+      },
+      {
+        title: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        },
+        content: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        }
+      },
+      {
+        title: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        },
+        content: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        }
+      },
+      {
+        title: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        },
+        content: {
+          en: 'Consequatur velit placeat modi excepturi est sed.',
+          ka: 'Consequatur velit placeat modi excepturi est sed.'
+        }
       }
     ]
   })
@@ -82,5 +142,29 @@ describe('FaqSlider.vue', () => {
   test('Check if mounted doesnt call for fetch if there is already data in store', () => {
     factory(popStore)
     expect(shouleNotBeCalled).not.toHaveBeenCalled()
+  })
+  test('Check if items are populated correctly', () => {
+    const wrapper = factory(popStore)
+    expect(wrapper.vm.items.length).toBe(2)
+  })
+  test('Check labelOrLocaledLabel is working properly', () => {
+    const wrapper = factory(popStore)
+    const objectWithLocales = {
+      title: {
+        en: 'en title',
+        ka: 'ka title'
+      }
+    }
+    const objectWithoutLocales = { title: 'just title' }
+    const valueWithLocales = wrapper.vm.labelOrLocaledLabel(
+      objectWithLocales,
+      'title'
+    )
+    const valueWithoutLocales = wrapper.vm.labelOrLocaledLabel(
+      objectWithoutLocales,
+      'title'
+    )
+    expect(valueWithLocales).toBe('en title')
+    expect(valueWithoutLocales).toBe('just title')
   })
 })

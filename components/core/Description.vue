@@ -16,6 +16,7 @@
     font-size: 20px;
     font-family: $font-caps;
     line-height: 27px;
+    letter-spacing: 1px;
     box-shadow: inset 0px -8px 0px 0px #f2cab1;
     color: #494949;
     &--red {
@@ -26,6 +27,7 @@
   &__text {
     font-size: 15px;
     font-family: $font;
+    letter-spacing: 0.6px;
     line-height: 18px;
     margin-top: 40px;
     color: #494949;

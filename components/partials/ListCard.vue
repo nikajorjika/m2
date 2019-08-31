@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     filteredItems: function () {
-      return this.items.filter(item => !!item) 
+      return this.items.filter(item => !!item)
     }
   }
 }
