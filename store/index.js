@@ -1,4 +1,3 @@
-import nuxtStorage from 'nuxt-storage'
 export const state = () => ({
   locales: [`en`, 'ka'],
   locale: 'ka',
@@ -21,7 +20,7 @@ export const getters = {
     return state.locales
   },
   app: (state) => {
-    return nuxtStorage.localStorage.getData('app')
+    return this.$cookies.get('paveleon-app')
   }
 }
 
@@ -36,7 +35,10 @@ export const mutations = {
   },
   SET_APP(state, appName) {
     if (state.apps.includes(appName)) {
-      nuxtStorage.localStorage.setData('app', appName, 60000, 'd')
+      this.$cookies.set('paveleon-app', appName, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 6000
+      })
     }
   }
 }

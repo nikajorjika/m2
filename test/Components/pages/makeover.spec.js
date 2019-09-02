@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Makeover from '@/pages/_lang/makeover.vue'
+import Makeover from '@/pages/_lang/renovations/makeover.vue'
 
 describe('decoration.vue', () => {
   const localVue = createLocalVue()

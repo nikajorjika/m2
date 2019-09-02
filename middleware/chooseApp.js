@@ -1,7 +1,5 @@
-import { getData } from 'nuxt-storage/local-storage'
-export default function({ store, route, redirect }) {
-  console.log(getData('app'))
-  if (getData('app') && getData('app') !== '') {
-    redirect(`/${route.params.lang}/${getData('app')}`)
+export default function({ app, store, route, redirect }) {
+  if (app.$cookies.get('paveleon-app')) {
+    redirect(`/${route.params.lang}/${app.$cookies.get('paveleon-app')}`)
   }
 }

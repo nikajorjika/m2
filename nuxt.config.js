@@ -53,6 +53,7 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
+    'cookie-universal-nuxt',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     'nuxt-svg-loader'

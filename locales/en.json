@@ -12,7 +12,11 @@
     "renovation": "Renovation",
     "furniture": "Furniture",
     "decoration": "Decoration",
-    "appliance": "Appliance"
+    "appliance": "Appliance",
+    "block": "Block",
+    "price": "Price",
+    "floor": "Floor",
+    "view": "View"
   },
   "sidebar": {
     "logo_meta": "m2 Some text"

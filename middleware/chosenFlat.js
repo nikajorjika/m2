@@ -1,9 +1,13 @@
-import { isObjectEqual } from '~/utils/Mixed'
-export default function({ store, route, redirect }) {
+export default async function({ app, store, route, redirect }) {
   if (
     route.name !== 'lang-renovations-choose' &&
-    isObjectEqual(store.getters['Flats/flat'], {})
+    !app.$cookies.get('paveleon-flat')
   ) {
     redirect(`/${route.params.lang}/renovations/choose`)
+  } else if (
+    Object.entries(store.getters['Flats/flat']).length === 0 &&
+    app.$cookies.get('paveleon-flat')
+  ) {
+    await store.dispatch('Flats/fetchFlat')
   }
 }

@@ -18,18 +18,18 @@
       </linearGradient>
     </svg>
     <sidebar />
-    <flat-view>
+    <model-view>
       <div class="app">
         <nuxt />
       </div>
-    </flat-view>
+    </model-view>
   </div>
 </template>
 <script>
 import Sidebar from '@/components/core/Sidebar'
-import FlatView from '@/components/core/FlatView'
+import ModelView from '@/components/core/ModelView'
 export default {
-  components: { Sidebar, FlatView },
+  components: { Sidebar, ModelView },
   props: {
     image: {
       type: String,

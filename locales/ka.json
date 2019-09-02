@@ -12,7 +12,11 @@
     "renovation": "რემონტი",
     "furniture": "ავეჯი",
     "decoration": "დეკორი",
-    "appliance": "ტექნიკა"
+    "appliance": "ტექნიკა",
+    "block": "ბლოკი",
+    "price": "ფასი",
+    "floor": "სართულები",
+    "view": "ხედი"
   },
   "sidebar": {
     "logo_meta": "m2 Some text"

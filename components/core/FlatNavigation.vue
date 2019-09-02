@@ -31,7 +31,7 @@ export default {
   props: {
     navData: {
       type: Array,
-      default: []
+      default: () => []
     }
   },
   computed: {

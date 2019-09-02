@@ -9,7 +9,7 @@
   />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/Floor1.svg'
+import ArrowIcon from '@/assets/icons/Compass1.svg'
 export default {
   components: { ArrowIcon },
   props: {
@@ -28,4 +28,3 @@ export default {
   }
 }
 </script>
- }.cls-2{fill:#fff;

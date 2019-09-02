@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Choose from '@/pages/_lang/choose.vue'
+import Choose from '@/pages/_lang/renovations/choose.vue'
 
 describe('Choose.vue', () => {
   const localVue = createLocalVue()

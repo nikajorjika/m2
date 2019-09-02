@@ -1,5 +1,12 @@
 <template>
-  <arrow-icon :fill="iconColor" :width="width" :height="height" />
+  <arrow-icon 
+    :stroke="`${iconColor}`" 
+    :width="width" 
+    :height="height" 
+    fill='none'
+    stroke-miterlimit='10' 
+    stroke-width='1.5px'
+  />
 </template>
 <script>
 import ArrowIcon from '@/assets/icons/Cost1.svg'

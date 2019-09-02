@@ -28,9 +28,25 @@ describe('FlatNavigation.vue', () => {
       }
     })
   }
-
   test('Is vue instance', () => {
     const wrapper = factory()
     expect(wrapper.isVueInstance()).toBeTruthy()
+  })
+  test('Is same route check is done', () => {
+    const wrapper = factory()
+    wrapper.setMethods({ isSamePath: jest.fn() })
+    wrapper.setProps({
+      navData: [
+        {
+          path: '/route',
+          title: 'title'
+        },
+        {
+          path: '/route-2',
+          title: 'title2'
+        }
+      ]
+    })
+    expect(wrapper.vm.isSamePath).toHaveBeenCalled()
   })
 })

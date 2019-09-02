@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import FAQPage from '@/pages/_lang/faq.vue'
+import FAQPage from '@/pages/_lang/renovations/faq.vue'
 
 describe('decoration.vue', () => {
   const factory = () => {

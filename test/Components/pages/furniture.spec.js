@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Furniture from '@/pages/_lang/furniture.vue'
+import Furniture from '@/pages/_lang/renovations/furniture.vue'
 
 describe('furniture.vue', () => {
   const localVue = createLocalVue()

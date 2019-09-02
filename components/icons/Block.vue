@@ -1,10 +1,10 @@
 <template>
-  <arrow-icon :fill="iconColor" :width="width" :height="height" />
+  <svg-icon :stroke="iconColor" :width="width" :height="height" fill='none' stroke-linecap='round' stroke-miterlimit='10' stroke-width='1.5px' />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/Block1.svg'
+import SvgIcon from '@/assets/icons/Block1.svg'
 export default {
-  components: { ArrowIcon },
+  components: { SvgIcon },
   props: {
     width: {
       type: [Number, String],
