@@ -1,6 +1,6 @@
 <template>
-  <div class="model-landing">
-    
+  <div class="model-page">
+
   </div>
 </template>
 

@@ -11,7 +11,6 @@
 <script>
 import Sidebar from '@/components/core/Sidebar'
 import ModelView from '@/components/core/ModelView'
-import { mapGetters, mapActions } from 'vuex';
 export default {
   components: { Sidebar, ModelView }
 }
