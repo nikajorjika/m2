@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  layout: 'ModelLayout'
+  layout: 'ModelIndexLayout'
 }
 </script>
