@@ -18,7 +18,7 @@
       </linearGradient>
     </svg>
     <sidebar />
-    <model-view :navigationData="navigationData">
+    <model-view :navigationData="navigation">
       <div class="app">
         <nuxt />
       </div>
@@ -57,25 +57,25 @@ export default {
       navigation: [
         {
           icon: 'block',
-          route: `/model`,
+          route: `/model/filter`,
           title: 'navigation.block',
           component: BlockIcon
         },
         {
           icon: 'cost',
-          route: `/model/price`,
+          route: `/model/filter/price`,
           title: 'navigation.price',
           component: CostIcon
         },
         {
           icon: 'floor',
-          route: `/model/floor`,
+          route: `/model/filter/floor`,
           title: 'navigation.floor',
           component: FloorIcon
         },
         {
           icon: 'compass',
-          route: `/model/views`,
+          route: `/model/filter/views`,
           title: 'navigation.view',
           component: CompassIcon
         }
@@ -83,10 +83,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({locale: 'locale', subApp: 'settings/subApp'}),
-    navigationData() {
-      return this.subApp === 'filters' ? this.navigation : []
-    }
+    ...mapGetters({locale: 'locale'}),
   },
   methods: {
     handleClose() {
