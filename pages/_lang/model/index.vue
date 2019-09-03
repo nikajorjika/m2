@@ -1,15 +1,11 @@
 <template>
-  <div>
-
+  <div class="model-landing">
+    
   </div>
 </template>
 
 <script>
-  export default {
-    layout: 'ModelLayout'
-  }
+export default {
+  layout: 'ModelLayout'
+}
 </script>
-
-<style lang="scss" scoped>
-
-</style>

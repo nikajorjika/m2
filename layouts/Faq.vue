@@ -59,6 +59,7 @@ body {
     background: $bg-color-2;
     box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
     padding: 18.09px 368px 28px 117px;
+    margin-left: auto;
     &__header {
       display: flex;
       align-items: center;

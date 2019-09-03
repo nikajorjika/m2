@@ -18,7 +18,7 @@
       </linearGradient>
     </svg>
     <sidebar />
-    <model-view>
+    <model-view :navigationData="navigationData">
       <div class="app">
         <nuxt />
       </div>
@@ -28,8 +28,20 @@
 <script>
 import Sidebar from '@/components/core/Sidebar'
 import ModelView from '@/components/core/ModelView'
+import BlockIcon from '@/components/icons/Block'
+import CostIcon from '@/components/icons/Cost'
+import FloorIcon from '@/components/icons/Floor'
+import CompassIcon from '@/components/icons/Compass'
+import { mapGetters, mapActions } from 'vuex';
 export default {
-  components: { Sidebar, ModelView },
+  components: { 
+    Sidebar, 
+    ModelView,
+    BlockIcon,
+    CostIcon,
+    FloorIcon,
+    CompassIcon 
+  },
   props: {
     image: {
       type: String,
@@ -38,6 +50,42 @@ export default {
     open: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      navigation: [
+        {
+          icon: 'block',
+          route: `/model`,
+          title: 'navigation.block',
+          component: BlockIcon
+        },
+        {
+          icon: 'cost',
+          route: `/model/price`,
+          title: 'navigation.price',
+          component: CostIcon
+        },
+        {
+          icon: 'floor',
+          route: `/model/floor`,
+          title: 'navigation.floor',
+          component: FloorIcon
+        },
+        {
+          icon: 'compass',
+          route: `/model/views`,
+          title: 'navigation.view',
+          component: CompassIcon
+        }
+      ]
+    }
+  },
+  computed: {
+    ...mapGetters({locale: 'locale', subApp: 'settings/subApp'}),
+    navigationData() {
+      return this.subApp === 'filters' ? this.navigation : []
     }
   },
   methods: {

@@ -36,31 +36,31 @@ export default {
       return [
         {
           icon: 'appartament',
-          route: `/${this.locale}/renovations`,
+          route: `/renovations`,
           title: 'navigation.flat',
           component: FlatIcon
         },
         {
           icon: 'makeover',
-          route: `/${this.locale}/renovations/makeover`,
+          route: `/renovations/makeover`,
           title: 'navigation.renovation',
           component: RenovationIcon
         },
         {
           icon: 'furniture',
-          route: `/${this.locale}/renovations/furniture`,
+          route: `/renovations/furniture`,
           title: 'navigation.furniture',
           component: FurnitureIcon
         },
         {
           icon: 'decor',
-          route: `/${this.locale}/renovations/decoration`,
+          route: `/renovations/decoration`,
           title: 'navigation.decoration',
           component: DecorationIcon
         },
         {
           icon: 'technick',
-          route: `/${this.locale}/renovations/appliance`,
+          route: `/renovations/appliance`,
           title: 'navigation.appliance',
           component: SupplyIcon
         }
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     goToFaq() {
-      this.$router.push({ path: `/${this.locale}/faq` })
+      this.$router.push({ path: `/${this.locale}/renovations/faq` })
     }
   }
 }
