@@ -35,7 +35,8 @@
   "buttons": {
     "next": "შემდეგი",
     "faq": "ხშირად დასმული კითხვები",
-    "CLOSE": "დახურვა"
+    "CLOSE": "დახურვა",
+    "see": "ნახე"
   },
   "labels": {
     "FullArea": "სრული ფართი",
@@ -66,8 +67,9 @@
     "decoration_price": "დეკორის ფასი",
     "appliances_price": "ტექნიკა ფასი",
     "appliance": "ტექნიკა",
-    "full_price": "სრული ფასი"
-
+    "full_price": "სრული ფასი",
+    "min": "მინ.",
+    "max": "მაქს."
   },
   "titles": {
     "FlatPageTitle": "რეპლიკაზე წარმოდგენილი რემონტი",

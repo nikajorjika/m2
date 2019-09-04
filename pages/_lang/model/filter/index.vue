@@ -19,7 +19,7 @@
       <gradient-progress class="filter-render__aside__progress" label="გაყიდული ბინების რაოდენობა:" :min="0" :max="350" :value="58" />
     </div>
     <div class="filter-render__render">
-      main
+      <filter-render />
     </div>
   </div>
 </template>
@@ -28,9 +28,10 @@
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import GradientBlock from '@/components/partials/GradientBlock'
 import GradientProgress from '@/components/partials/GradientProgress'
+import FilterRender from '@/components/partials/FilterRender'
 
 export default {
-  components: { TitleWithLine, GradientBlock, GradientProgress },
+  components: { TitleWithLine, GradientBlock, GradientProgress, FilterRender },
   layout: 'ModelLayout'
 }
 </script>
@@ -39,8 +40,8 @@ export default {
 .filter-render {
   display: grid;
   grid-template-areas: 
-    'header header-right header-right header-right header-right'
-    'aside main main main main';
+    'header header-right'
+    'aside main';
   height: 100%;
   padding: 50px 61px;
   grid-row-gap: 46px;
@@ -98,6 +99,9 @@ export default {
   }
   &__render {
     grid-area: main;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
   }
 }
 </style>
