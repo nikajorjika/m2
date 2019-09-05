@@ -17,7 +17,7 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar />
+    <sidebar-with-items :items="items" />
     <model-view :navigationData="navigation">
       <div class="app">
         <nuxt />
@@ -26,18 +26,22 @@
   </div>
 </template>
 <script>
-import Sidebar from '@/components/core/Sidebar'
+import SidebarWithItems from '@/components/core/SidebarWithItems'
 import ModelView from '@/components/core/ModelView'
 import BlockIcon from '@/components/icons/Block'
 import CostIcon from '@/components/icons/Cost'
 import FloorIcon from '@/components/icons/Floor'
 import CompassIcon from '@/components/icons/Compass'
+import QuestionsIcon from '@/components/icons/Questions'
+import MainIcon from '@/components/icons/Main'
 import { mapGetters, mapActions } from 'vuex';
 export default {
   components: { 
-    Sidebar, 
+    SidebarWithItems, 
     ModelView,
     BlockIcon,
+    MainIcon,
+    QuestionsIcon,
     CostIcon,
     FloorIcon,
     CompassIcon 
@@ -84,6 +88,26 @@ export default {
   },
   computed: {
     ...mapGetters({locale: 'locale'}),
+    items() {
+      return [
+        {
+          title: {
+            en: 'MAIN',
+            ka: 'მთავარი'
+          },
+          path: `/${this.locale}/model`,
+          component: MainIcon
+        },
+        {
+          title: {
+            en: 'QUESTIONS',
+            ka: 'კითხვები'
+          },
+          path: `/${this.locale}/filter/`,
+          component: QuestionsIcon
+        }
+      ]
+    }
   },
   methods: {
     handleClose() {

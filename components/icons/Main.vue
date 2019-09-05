@@ -1,8 +1,8 @@
 <template>
-  <arrow-icon :fill="iconColor" :width="width" :height="height" />
+  <arrow-icon :stroke="iconColor" :width="width" :height="height" />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/Main1.svg'
+import ArrowIcon from '@/assets/icons/MainNew.svg'
 export default {
   components: { ArrowIcon },
   props: {
