@@ -1,22 +1,23 @@
 <template>
   <div class="filter-render">
     <div class="filter-render__project-name">
-      <div class="filter-render__project-name__inner">პროექტი:</div>
-      <div class="filter-render__project-name__inner--red">მ3 გელოვანი</div>
+      <div class="filter-render__project-name__inner">{{$t('labels.project')}}:</div>
+      <div class="filter-render__project-name__inner--red">{{$t('addresses.m3_gelovani')}}</div>
     </div>
     <div class="filter-render__title">
       <div class="filter-render__title__wrapper">
-        <title-with-line title="მონიშნე სასურველი ბლოკი და გაანათე" />
+        <title-with-line :title="$t('labels.select_flat_and_lit_it-up')" />
       </div>
-      <small>მონიშნე მხოლოდ ერთი</small>
+      <small>{{$t('labels.select_only_one')}}</small>
     </div>
     <div class="filter-render__aside">
       <gradient-block>
         <p>
-          <span>მისამართი:</span><span>მარშალ გელოვანის გამზირი </span><span>#832</span>
+          <span>{{$t('labels.address')}}:</span><span>{{$t('addresses.marshal_gelovani')}} </span><span>#832</span>
         </p> 
       </gradient-block>
-      <gradient-progress class="filter-render__aside__progress" label="გაყიდული ბინების რაოდენობა:" :min="0" :max="350" :value="58" />
+      <gradient-progress class="filter-render__aside__progress" :label="$t('labels.sold_flat_count')" :min="0" :max="350" :value="58" />
+      <gradient-progress class="filter-render__aside__progress" :label="$t('labels.building_progress')" :min="0" :max="100" :value="58" suffix="%" />
     </div>
     <div class="filter-render__render">
       <filter-render />

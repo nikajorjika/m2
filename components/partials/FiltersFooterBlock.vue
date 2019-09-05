@@ -1,19 +1,33 @@
 <template>
   <div class="filter-footer">
     <div class="filter-footer__flats">
-      <div class="filter-footer__see"></div>
-      <div class="filter-footer__label">
-        <span>{{ $t('label.flats_based_on_filters') }}</span>
-        <gradient-label :title="88" />
-        <span>{{ $t('label.flat') }}</span>
+      <div class="filter-footer__flats__see">
+        <button-main-orange :button-text="$t('buttons.see')">
+          <template v-slot:icon>  
+            <arrow-right width="13" height="9" icon-color="#fff" />
+          </template>
+        </button-main-orange>
+      </div>
+      <div class="filter-footer__flats__label">
+        <span>{{ $t('labels.flats_based_on_filters') }}</span>
+        <gradient-label class="filter-footer__flats__label__gradient" text="88" />
+        <span>{{ $t('labels.flat') }}</span>
       </div>
     </div>
     <div class="filter-footer__controls">
-      <div class="filter-footer__controls__skip">{{ $t('buttons.skip') }}</div>
+      <div class="filter-footer__controls__skip">
+        <span class="filter-footer__controls__skip__text"> 
+          {{ $t('buttons.skip') }} 
+        </span>
+        <span class="filter-footer__controls__skip__icon">
+          <caret-right width="10" height="12" icon-color="#432272" />
+          <caret-right width="10" height="12" icon-color="#432272" />
+        </span>
+      </div>
       <div class="filter-footer__controls__next">
         <button-main-orange :button-text="$t('buttons.next')">
-          <template v-slot:icon>
-            <arrow-right width="13" height="9" icon-color="#fff" />
+          <template v-slot:icon>  
+            <caret-right width="14" height="16" icon-color="#fff" />
           </template>
         </button-main-orange>
       </div>
@@ -23,19 +37,58 @@
 
 <script>
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
+import GradientLabel from '@/components/partials/GradientLabel'
 import ArrowRight from '@/components/icons/ArrowRight'
+import CaretRight from '@/components/icons/CaretRight'
 export default {
-  components: { ButtonMainOrange, ArrowRight }
+  components: { ButtonMainOrange, ArrowRight, CaretRight, GradientLabel }
 }
 </script>
 
 <style lang="scss" scoped>
 .filter-footer {
-  margin-top: auto;
   display: flex;
+  &__flats {
+    display: flex;
+    align-items: center;
+    background: #f2d0ba;
+    padding: 12px 21px;
+    border-radius: 20px;
+    &__see {
+      margin-right: 15px;
+    }
+    &__label {
+      display: flex;
+      align-items: center;
+      font-family: $font;
+      font-size: 11px;
+      color: #494949;
+      &__gradient {
+        margin: 0 15px;
+      }
+    }
+  }
   &__controls {
     display: flex;
     margin-left: auto;
+    width: 264px;
+    justify-content: space-between;
+    align-items: center;
+    &__skip {
+      color: #432272;
+      font-size: 10px;
+      font-size: $font;
+      display: flex;
+      align-items: center;
+      &__icon {
+        display: flex;
+        svg {
+          &:last-child {
+            margin-left: -6px;
+          }
+        }
+      }
+    }
   }
 }
 </style>

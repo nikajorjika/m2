@@ -2,9 +2,9 @@
   <div class="filter-price">
     <div class="filter-price__title">
       <div class="filter-price__title__wrapper">
-        <title-with-line title="რა ფასად ეძებთ ბინას?" />
+        <title-with-line :title="$t('labels.for_what_price')" />
       </div>
-      <small>აირჩიე რეინჯი</small>
+      <small>{{$t('labels.pick_range')}}</small>
     </div>
     <div class="filter-price__range-selector">
       <select-range class="filter-price__range-selector__component"/>
@@ -29,6 +29,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   &__title {
     display: flex;
     flex-direction: column;
