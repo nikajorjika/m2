@@ -1,6 +1,12 @@
 <template>
   <div class="model-index-app-layout">
-    <sidebar />
+    <svg width="0" height="0">
+      <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e26479" />
+        <stop offset="100%" stop-color="#684f78" />
+      </linearGradient>
+    </svg>
+    <sidebar-with-items :items="items" />
     <model-view>
       <div class="model-landing">
         <nuxt />
@@ -9,10 +15,36 @@
   </div>
 </template>
 <script>
-import Sidebar from '@/components/core/Sidebar'
+import SidebarWithItems from '@/components/core/SidebarWithItems'
 import ModelView from '@/components/core/ModelView'
+import QuestionsIcon from '@/components/icons/Questions'
+import MainIcon from '@/components/icons/Main'
+import { mapGetters } from 'vuex';
 export default {
-  components: { Sidebar, ModelView }
+  components: { SidebarWithItems, ModelView, MainIcon },
+  computed: {
+    ...mapGetters(['locale']),
+    items() {
+      return [
+        {
+          title: {
+            en: 'MAIN',
+            ka: 'მთავარი'
+          },
+          path: `/${this.locale}/model/`,
+          component: MainIcon
+        },
+        {
+          title: {
+            en: 'QUESTIONS',
+            ka: 'კითხვები'
+          },
+          path: `/${this.locale}/model/filter`,
+          component: QuestionsIcon
+        }
+      ]
+    }
+  }
 }
 </script>
 

@@ -2,7 +2,7 @@
   <arrow-icon :stroke="iconColor" :width="width" :height="height" />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/Questions1.svg'
+import ArrowIcon from '@/assets/icons/ChatBubble.svg'
 export default {
   components: { ArrowIcon },
   props: {

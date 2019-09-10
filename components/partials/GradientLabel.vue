@@ -13,7 +13,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .gradient-label {
   color: #ffffff;
   position: relative;

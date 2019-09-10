@@ -35,7 +35,9 @@
   "buttons": {
     "next": "შემდეგი",
     "faq": "ხშირად დასმული კითხვები",
-    "CLOSE": "დახურვა"
+    "CLOSE": "დახურვა",
+    "see": "ნახე",
+    "skip": "გამოტოვება"
   },
   "labels": {
     "FullArea": "სრული ფართი",
@@ -51,6 +53,9 @@
     "appliances": "ტექნიკა",
     "furniture": "ავეჯი",
     "flat": "ბინა",
+    "flats_based_on_filters": "შენი პასუხების მიხედვით შერჩეული",
+    "sold_flat_count": "გაყიდული ბინების რაოდენობა:",
+    "building_progress": "მშენებლობის სტატუსი:",
     "bedrooms": "საძინებლები",
     "bedroom": "საძინებელი",
     "balcony": "ვერანდა",
@@ -66,8 +71,9 @@
     "decoration_price": "დეკორის ფასი",
     "appliances_price": "ტექნიკა ფასი",
     "appliance": "ტექნიკა",
-    "full_price": "სრული ფასი"
-
+    "full_price": "სრული ფასი",
+    "min": "მინ.",
+    "max": "მაქს."
   },
   "titles": {
     "FlatPageTitle": "რეპლიკაზე წარმოდგენილი რემონტი",

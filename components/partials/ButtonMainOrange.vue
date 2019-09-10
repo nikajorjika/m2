@@ -1,7 +1,7 @@
 <template>
   <div class="btn btn-standard btn-standard--orange btn-standard--large">
-    <span class="btn-standard__text">{{ buttonText }}</span>
-    <span class="btn-standard__icon">
+    <span class="btn-standard__text" :style="{ fontSize: fontSize }">{{ buttonText }}</span>
+    <span class="btn-standard__icon" :style="{ width: iconWidth, height: iconHeight }">
       <slot name="icon" />
     </span>
   </div>
@@ -13,6 +13,18 @@ export default {
     buttonText: {
       type: String,
       default: 'შემდეგი'
+    },
+    iconWidth: {
+      type: String,
+      default: '28px'
+    },
+    iconHeight: {
+      type: String,
+      default: '28px'
+    },
+    fontSize: {
+      type: String,
+      default: '12px'
     }
   }
 }
@@ -38,8 +50,6 @@ export default {
     padding-left: 32px;
   }
   &__icon {
-    width: 28px;
-    height: 28px;
     margin: auto 22px;
     border-radius: 50%;
     border: 1px #fff dashed;

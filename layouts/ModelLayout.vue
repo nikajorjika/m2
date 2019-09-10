@@ -17,8 +17,8 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar />
-    <model-view :navigationData="navigationData">
+    <sidebar-with-items :items="items" />
+    <model-view :navigationData="navigation">
       <div class="app">
         <nuxt />
       </div>
@@ -26,18 +26,22 @@
   </div>
 </template>
 <script>
-import Sidebar from '@/components/core/Sidebar'
+import SidebarWithItems from '@/components/core/SidebarWithItems'
 import ModelView from '@/components/core/ModelView'
 import BlockIcon from '@/components/icons/Block'
 import CostIcon from '@/components/icons/Cost'
 import FloorIcon from '@/components/icons/Floor'
 import CompassIcon from '@/components/icons/Compass'
+import QuestionsIcon from '@/components/icons/Questions'
+import MainIcon from '@/components/icons/Main'
 import { mapGetters, mapActions } from 'vuex';
 export default {
   components: { 
-    Sidebar, 
+    SidebarWithItems, 
     ModelView,
     BlockIcon,
+    MainIcon,
+    QuestionsIcon,
     CostIcon,
     FloorIcon,
     CompassIcon 
@@ -57,25 +61,25 @@ export default {
       navigation: [
         {
           icon: 'block',
-          route: `/model`,
+          route: `/model/filter`,
           title: 'navigation.block',
           component: BlockIcon
         },
         {
           icon: 'cost',
-          route: `/model/price`,
+          route: `/model/filter/price`,
           title: 'navigation.price',
           component: CostIcon
         },
         {
           icon: 'floor',
-          route: `/model/floor`,
+          route: `/model/filter/floor`,
           title: 'navigation.floor',
           component: FloorIcon
         },
         {
           icon: 'compass',
-          route: `/model/views`,
+          route: `/model/filter/views`,
           title: 'navigation.view',
           component: CompassIcon
         }
@@ -83,9 +87,26 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({locale: 'locale', subApp: 'settings/subApp'}),
-    navigationData() {
-      return this.subApp === 'filters' ? this.navigation : []
+    ...mapGetters({locale: 'locale'}),
+    items() {
+      return [
+        {
+          title: {
+            en: 'MAIN',
+            ka: 'მთავარი'
+          },
+          path: `/${this.locale}/model`,
+          component: MainIcon
+        },
+        {
+          title: {
+            en: 'QUESTIONS',
+            ka: 'კითხვები'
+          },
+          path: `/${this.locale}/filter/`,
+          component: QuestionsIcon
+        }
+      ]
     }
   },
   methods: {

@@ -1,10 +1,17 @@
 <template>
-  <arrow-icon :stroke="iconColor" :width="width" :height="height" />
+  <svg-icon 
+    :stroke="`${iconColor}`" 
+    :width="width" 
+    :height="height" 
+    fill='none'
+    stroke-miterlimit='10' 
+    stroke-width='1.5px' 
+  />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/MainNew.svg'
+import SvgIcon from '@/assets/icons/Check1.svg'
 export default {
-  components: { ArrowIcon },
+  components: { SvgIcon },
   props: {
     width: {
       type: [Number, String],
