@@ -33,7 +33,7 @@ import FilterRender from '@/components/partials/FilterRender'
 
 export default {
   components: { TitleWithLine, GradientBlock, GradientProgress, FilterRender },
-  layout: 'ModelLayout'
+  layout: 'ModelFilterLayout'
 }
 </script>
 
