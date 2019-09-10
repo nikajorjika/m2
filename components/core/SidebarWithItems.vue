@@ -56,6 +56,11 @@ export default {
       margin: 20px 0;
       display: flex;
       flex-direction: column;
+      text-decoration: none;
+      color: #3c2270;
+      &:visited {
+        color: #3c2270;
+      }
       &__icon {
         background: #f7f6f9;
         border-radius: 16px;
@@ -63,7 +68,6 @@ export default {
         padding: 6px 20px;
       }
       &__label {
-        color: #3c2270;
         font-size: 9px;
         font-family: $font;
         margin-top: 15px;
