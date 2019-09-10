@@ -19,7 +19,7 @@ import SelectRange from '@/components/partials/SelectRange'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
 export default {
   components: { TitleWithLine, SelectRange, FiltersFooterBlock },
-  layout: 'ModelLayout'
+  layout: 'ModelFilterLayout'
 }
 </script>
 

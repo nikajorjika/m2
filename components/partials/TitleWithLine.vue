@@ -25,16 +25,7 @@ export default {
   .text {
     position: relative;
     z-index: 1;
-  }
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
-    background: #f2cab1;
-    height: 10px;
-    width: 100%;
+    box-shadow: inset 0px -8px 0px 0px #f2cab1;
   }
 }
 </style>

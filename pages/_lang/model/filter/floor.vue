@@ -19,7 +19,7 @@ import RangePicker from '@/components/partials/RangePicker'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
 export default {
   components: { TitleWithLine, RangePicker, FiltersFooterBlock },
-  layout: 'ModelLayout',
+  layout: 'ModelFilterLayout',
   data() {
     return {
       ranges: [

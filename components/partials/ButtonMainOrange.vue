@@ -1,5 +1,5 @@
 <template>
-  <div class="btn btn-standard btn-standard--orange btn-standard--large">
+  <div class="btn btn-standard btn-standard--orange btn-standard--large" :class="{ 'btn-standard--disabled': disabled }" @click="handleClick">
     <span class="btn-standard__text" :style="{ fontSize: fontSize }">{{ buttonText }}</span>
     <span class="btn-standard__icon" :style="{ width: iconWidth, height: iconHeight }">
       <slot name="icon" />
@@ -25,6 +25,15 @@ export default {
     fontSize: {
       type: String,
       default: '12px'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    handleClick: function () {
+      this.$emit('click')
     }
   }
 }
@@ -57,6 +66,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  &--disabled {
+    opacity: 0.5;
   }
 }
 </style>

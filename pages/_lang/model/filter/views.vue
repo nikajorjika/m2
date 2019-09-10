@@ -19,7 +19,7 @@ import ViewsPicker from '@/components/partials/ViewsPicker'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
 export default {
   components: { TitleWithLine, ViewsPicker, FiltersFooterBlock },
-  layout: 'ModelLayout',
+  layout: 'ModelFilterLayout',
   data() {
     return {
       views: [

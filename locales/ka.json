@@ -37,7 +37,8 @@
     "faq": "ხშირად დასმული კითხვები",
     "CLOSE": "დახურვა",
     "see": "ნახე",
-    "skip": "გამოტოვება"
+    "skip": "გამოტოვება",
+    "search": "ძებნა"
   },
   "labels": {
     "FullArea": "სრული ფართი",
@@ -88,6 +89,8 @@
   "titles": {
     "FlatPageTitle": "რეპლიკაზე წარმოდგენილი რემონტი",
     "SupplyPageTitle": "რეპლიკაზე წარმოდგენილი რემონტი",
+    "SearchByFlatNumber": "ბინის ნომრით ძებნა",
+    "SearchByFlatNumberSubTitle": "ჩაწერეთ თქვენს მიერ შერჩეული ბინის ნომერი",
     "FrequentlyAskedQuestions": "ხშირად დასმული კითხვები"
   },
   "rooms": {

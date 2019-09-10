@@ -17,19 +17,38 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar />
-    <flat-view>
+    <sidebar-with-items :items="items" />
+    <model-view>
       <div class="app">
+        <div class="gradient-line">
+
+        </div>
         <nuxt />
       </div>
-    </flat-view>
+    </model-view>
   </div>
 </template>
 <script>
-import Sidebar from '@/components/core/Sidebar'
-import FlatView from '@/components/core/FlatView'
+import SidebarWithItems from '@/components/core/SidebarWithItems'
+import ModelView from '@/components/core/ModelView'
+import BlockIcon from '@/components/icons/Block'
+import CostIcon from '@/components/icons/Cost'
+import FloorIcon from '@/components/icons/Floor'
+import CompassIcon from '@/components/icons/Compass'
+import QuestionsIcon from '@/components/icons/Questions'
+import MainIcon from '@/components/icons/Main'
+import { mapGetters, mapActions } from 'vuex';
 export default {
-  components: { Sidebar, FlatView },
+  components: { 
+    SidebarWithItems, 
+    ModelView,
+    BlockIcon,
+    MainIcon,
+    QuestionsIcon,
+    CostIcon,
+    FloorIcon,
+    CompassIcon 
+  },
   props: {
     image: {
       type: String,
@@ -40,8 +59,32 @@ export default {
       default: false
     }
   },
-  mounted() {
-    if (!this.$store.getters['settings/tabletType'].length) {
+  data() {
+    return {
+      navigation: []
+    }
+  },
+  computed: {
+    ...mapGetters({locale: 'locale'}),
+    items() {
+      return [
+        {
+          title: {
+            en: 'MAIN',
+            ka: 'მთავარი'
+          },
+          path: `/${this.locale}/model`,
+          component: MainIcon
+        },
+        {
+          title: {
+            en: 'QUESTIONS',
+            ka: 'კითხვები'
+          },
+          path: `/${this.locale}/filter/`,
+          component: QuestionsIcon
+        }
+      ]
     }
   },
   methods: {
@@ -55,6 +98,10 @@ export default {
 <style lang="scss" scoped>
 body {
   background: #fff;
+  .gradient-line {
+    height: 6px;
+    background: linear-gradient(45deg, #f26529 0%,#f6a646 100%);;
+  }
   .default-app-layout {
     min-height: 100vh;
     background: $bg-color-1;
@@ -84,6 +131,9 @@ body {
   .app {
     height: calc(100% - 221px);
     background: $bg-color-2;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    overflow: hidden;
     box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
   @keyframes scaleUp {
