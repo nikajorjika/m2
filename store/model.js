@@ -8,11 +8,13 @@ const getters = {
 
 const actions = {
   fetchModel({ commit }) {
+    const id = 2 // TMP
+
     return new Promise((resolve, reject) => {
       this.$axios
-        .get('/projects')
+        .get(`/projects/${id}`)
         .then(({ data }) => {
-          commit('setModel', data.data[0])
+          commit('setModel', data.data)
           resolve(data.data)
         })
         .catch((e) => reject(e))
