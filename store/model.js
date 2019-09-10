@@ -10,7 +10,7 @@ const actions = {
   fetchModel({ commit }) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .get('/api/projects')
+        .get('/projects')
         .then(({ data }) => {
           commit('setModel', data.data[0])
           resolve(data.data)
