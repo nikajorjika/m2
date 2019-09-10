@@ -44,7 +44,17 @@
     "FlatArea": "ბინის ფართი",
     "BalconyArea": "აივნის ფართი",
     "FullPrice": "სრული ფასი",
+    "address": "მისამართი",
     "Renovation": "რემონტი",
+    "projects": "პროექტები",
+    "pick_range": "აირჩიეთ რეინჯი",
+    "project": "პროექტი",
+    "select_flat_and_lit_it_up": "აირჩიე პროექტი და გაანათე",
+    "select_only_one": "აირჩიე მხოლოდ ერთი",
+    "choose_flat_view": "აირჩიეთ ბინის ხედი",
+    "pick_multiple": "აირჩიეთ რამდენიმე",
+    "what_floor_are_you_looking_for": "რომელ სართულზე ეძებთ ბინას",
+    "for_what_price": "რა ფასად ეძებთ ბინას",
     "Furniture": "ავეჯი",
     "Decor": "დეკორ",
     "Supply": "ტექნიკა",
@@ -90,5 +100,9 @@
     "kitchen": "სამზარეულო",
     "bathroom": "სააბაზანო",
     "wc": "სააბაზანო"
+  },
+  "addresses": {
+    "marshal_gelovani": "მარშალ გელოვანი",
+    "m3_gelovani": "მ3 გელოვანი"
   }
 }

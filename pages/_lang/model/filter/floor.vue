@@ -2,9 +2,9 @@
   <div class="filter-floor">
     <div class="filter-floor__title">
       <div class="filter-floor__title__wrapper">
-        <title-with-line :title="$t('labels.what_floor_are_you_looging_for')" />
+        <title-with-line :title="$t('labels.what_floor_are_you_looking_for')" />
       </div>
-      <small>{{$t('labels.pick_range')}}</small>
+      <small>{{$t('labels.pick_multiple')}}</small>
     </div>
     <div class="filter-floor__range-selector">
       <range-picker :ranges="ranges" />

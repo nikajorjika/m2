@@ -6,7 +6,7 @@
     </div>
     <div class="filter-render__title">
       <div class="filter-render__title__wrapper">
-        <title-with-line :title="$t('labels.select_flat_and_lit_it-up')" />
+        <title-with-line :title="$t('labels.select_flat_and_lit_it_up')" />
       </div>
       <small>{{$t('labels.select_only_one')}}</small>
     </div>
