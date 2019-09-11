@@ -16,7 +16,7 @@
                 {{ option.label }}
               </div>
               <div class="list-slider__list__item__value">
-                {{`${option.value}`}}
+                {{ `${option.value}` }}
               </div>
             </div>
           </div>
@@ -106,22 +106,24 @@ export default {
 </style>
 
 <style lang="scss">
-.swiper-container {
-  height: 100%;
-}
-.swiper-pagination {
-  display: flex;
-  span {
-    width: 10px;
-    height: 10px;
+.list-slider {
+  .swiper-container {
+    height: 100%;
   }
-  .swiper-pagination-bullet {
-    background: #4b3f99;
-    opacity: 0.15;
-    margin-right: 6px;
-    &.swiper-pagination-bullet-active {
+  .swiper-pagination {
+    display: flex;
+    span {
+      width: 10px;
+      height: 10px;
+    }
+    .swiper-pagination-bullet {
       background: #4b3f99;
-      opacity: 0.5;
+      opacity: 0.15;
+      margin-right: 6px;
+      &.swiper-pagination-bullet-active {
+        background: #4b3f99;
+        opacity: 0.5;
+      }
     }
   }
 }

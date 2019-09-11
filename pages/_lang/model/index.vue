@@ -52,7 +52,7 @@ export default {
 
   .name {
     max-width: fit(804); /* 804px */
-    margin: fit(92) 0 0 fit(70, fitRaw(24)); /* 92px 0 0 70px */
+    margin: fit(92, fitRaw(24)) 0 0 fit(70, fitRaw(24)); /* 92px 0 0 70px */
     font-family: $font-caps;
     font-size: fit(24); /* 24px */
     line-height: fit(30, fitRaw(24)); /* 30px */

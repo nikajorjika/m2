@@ -62,7 +62,11 @@ export default {
     object-fit: cover;
     object-position: center;
   }
+}
+</style>
 
+<style lang="scss">
+.swiper-image-slider {
   .swiper-pagination {
     position: absolute;
     bottom: fit(42); /* 42px */
@@ -70,11 +74,7 @@ export default {
     z-index: 10;
     transform: translate3d(-50%, 0, 0);
   }
-}
-</style>
 
-<style lang="scss">
-.swiper-image-slider {
   .swiper-pagination-bullet {
     width: fit(18); /* 18px */
     height: fit(18); /* 18px */
