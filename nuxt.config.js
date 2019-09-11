@@ -52,12 +52,27 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     'nuxt-svg-loader'
   ],
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/user/auth', method: 'post', propertyName: 'token' },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
+        }
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+      }
+    }
+  },
 
   icon: {
     iconSrc: '~static/icon.png'
