@@ -1,3 +1,10 @@
 $desktop:1920; //650
 $tablet:1280;
 
+@function fit($number, $font-size: 16) {
+  @return ($number * 0.6666 * (1 / $font-size)) + em;
+}
+
+@function fitRaw($number) {
+  @return $number * 0.6666;
+}

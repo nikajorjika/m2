@@ -37,8 +37,9 @@ export default {
 
 <style lang="scss" scoped>
 .swiper-image-slider {
-  width: 92.29%; /* 1648px */
-  height: 42.59vh; /* 460px */
+  width: 100%; /* 1648px */
+  height: fit(460); /* 460px */
+  border-top-left-radius: fit(70); /* 70px */
 
   .swiper-slide::after {
     content: '';
@@ -47,7 +48,6 @@ export default {
     z-index: 1;
     width: 100%;
     height: 100%;
-    border-top-left-radius: 70px;
     background: rgb(207, 69, 9);
     background: linear-gradient(
       60deg,
@@ -59,25 +59,34 @@ export default {
   img {
     width: 100%;
     height: 100%;
-    border-top-left-radius: 70px;
     object-fit: cover;
     object-position: center;
   }
 
-  /* Bullets */
-
   .swiper-pagination {
     position: absolute;
-    bottom: 0;
+    bottom: fit(42); /* 42px */
     left: 50%;
     z-index: 10;
     transform: translate3d(-50%, 0, 0);
   }
+}
+</style>
 
-  /*.swiper-pagination-bullet-style {*/
-  /*  width: 18px;*/
-  /*  height: 18px;*/
-  /*  background-color: #ffffff;*/
-  /*}*/
+<style lang="scss">
+.swiper-image-slider {
+  .swiper-pagination-bullet {
+    width: fit(18); /* 18px */
+    height: fit(18); /* 18px */
+    margin: 0 fit(13); /* 0 13px */
+    background: #ffffff;
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #ffffff;
+    opacity: 1;
+  }
 }
 </style>

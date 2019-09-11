@@ -48,14 +48,14 @@ export default {
 
 <style lang="scss" scoped>
 .model-page {
-  width: 93vw; /* 1785.6px */
+  width: 100%;
 
   .name {
-    max-width: 804px; /* 804px */
-    margin: 8.51vh 0 0 70px; /* 92px 0 0 70px */
+    max-width: fit(804); /* 804px */
+    margin: fit(92) 0 0 fit(70, fitRaw(24)); /* 92px 0 0 70px */
     font-family: $font-caps;
-    font-size: 24px;
-    line-height: 30px;
+    font-size: fit(24); /* 24px */
+    line-height: fit(30, fitRaw(24)); /* 30px */
     letter-spacing: 1px;
     color: $font-color;
 
@@ -67,22 +67,22 @@ export default {
       &::before {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: 2px;
         left: 0;
         z-index: -1;
         width: 100%;
-        height: 12px;
+        height: 10px;
         background-color: rgba(242, 101, 41, 0.2);
       }
     }
   }
 
   .description {
-    max-width: 804px; /* 804px */
-    margin: 4.62vh 0 0 70px; /* 50px  0 0 70px */
+    max-width: fit(804); /* 804px */
+    margin: fit(50) 0 0 fit(70, fitRaw(16)); /* 50px  0 0 70px */
     font-family: $font;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: fit(16); /* 16px */
+    line-height: fit(25, fitRaw(16)); /* 25px */
     color: $font-color;
   }
 }

@@ -35,6 +35,7 @@ export default {
 <style lang="scss" scoped>
 .flat-view {
   flex: 1;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
   &__switcher {
