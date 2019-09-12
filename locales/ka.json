@@ -94,6 +94,7 @@
     "SupplyPageTitle": "რეპლიკაზე წარმოდგენილი რემონტი",
     "SearchByFlatNumber": "ბინის ნომრით ძებნა",
     "SearchByFlatNumberSubTitle": "ჩაწერეთ თქვენს მიერ შერჩეული ბინის ნომერი",
+    "flat-list-result-title": "თქვენს მიერ არჩეული კრიტერიუმების მიხედვით მოიძებნა %s ბინა",
     "FrequentlyAskedQuestions": "ხშირად დასმული კითხვები",
     "ModelIndexPage": "რაღაც სათაური იქნება აქ"
   },
