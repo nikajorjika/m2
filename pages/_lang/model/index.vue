@@ -19,9 +19,17 @@
             params: { lang: locale }
           }"
         >
-          <template v-slot:illustration></template>
+          <template v-slot:illustration>
+            <search-by-flat-number-illustration
+              :width="'50px'"
+              :height="'auto'"
+              :margin="'0 0 0 -12px'"
+            ></search-by-flat-number-illustration>
+          </template>
 
-          <template v-slot:icon></template>
+          <template v-slot:icon>
+            <search-by-flat-number></search-by-flat-number>
+          </template>
         </illustrated-button>
       </div>
     </article>
@@ -32,9 +40,16 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import ImageSlider from '@/components/core/ImageSlider'
 import IllustratedButton from '@/components/partials/IllustratedButton'
+import SearchByFlatNumber from '@/components/icons/SearchByFlatNumber'
+import SearchByFlatNumberIllustration from '@/components/icons/SearchByFlatNumberIllustration'
 
 export default {
-  components: { ImageSlider, IllustratedButton },
+  components: {
+    ImageSlider,
+    IllustratedButton,
+    SearchByFlatNumber,
+    SearchByFlatNumberIllustration
+  },
   layout: 'ModelIndexLayout',
   data() {
     return {
@@ -44,7 +59,7 @@ export default {
         byFilterLabel: this.$t('labels.ByFilter')
       },
       name: this.$t('titles.ModelIndexPage'),
-      description: this.$t('descriptions.ModelIndexPage')
+      description: this.$t('descriptions.ModelIndexPage'),
     }
   },
   computed: {

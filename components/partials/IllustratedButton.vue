@@ -5,7 +5,9 @@
 
       <span class="label">{{ label }}</span>
 
-      <slot name="icon"></slot>
+      <div class="svg-container">
+        <slot name="icon"></slot>
+      </div>
     </div>
   </nuxt-link>
 </template>
@@ -39,11 +41,22 @@ export default {
   border-radius: 28px;
 
   .label {
-    margin-left: fit(100, fitRaw(16)); /* 100px */
+    margin-left: fit(35, fitRaw(16)); /* 100px */
     font-family: $font;
     font-size: fit(16); /* 16px */
     line-height: fit(25, fitRaw(16)); /* 25px */
     color: $font-color;
+  }
+
+  .svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit(40); /* 40px */
+    height: fit(40); /* 40px */
+    margin: 0 fit(30) 0 auto; /* 30px */
+    border-radius: 50%;
+    background-color: $action-primary-color;
   }
 }
 </style>
