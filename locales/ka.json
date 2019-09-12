@@ -84,7 +84,10 @@
     "appliance": "ტექნიკა",
     "full_price": "სრული ფასი",
     "min": "მინ.",
-    "max": "მაქს."
+    "max": "მაქს.",
+    "ByPhoneNumber": "ავტორიზაცია ტელეფონის ნომრით",
+    "ByFlatNumber": "ბინის ნომრით ძებნა",
+    "ByFilter": "ფილტრით ძებნა"
   },
   "titles": {
     "FlatPageTitle": "რეპლიკაზე წარმოდგენილი რემონტი",
@@ -92,7 +95,8 @@
     "SearchByFlatNumber": "ბინის ნომრით ძებნა",
     "SearchByFlatNumberSubTitle": "ჩაწერეთ თქვენს მიერ შერჩეული ბინის ნომერი",
     "flat-list-result-title": "თქვენს მიერ არჩეული კრიტერიუმების მიხედვით მოიძებნა %s ბინა",
-    "FrequentlyAskedQuestions": "ხშირად დასმული კითხვები"
+    "FrequentlyAskedQuestions": "ხშირად დასმული კითხვები",
+    "ModelIndexPage": "რაღაც სათაური იქნება აქ"
   },
   "rooms": {
     "Hall": "ჰოლი",
@@ -108,5 +112,8 @@
   "addresses": {
     "marshal_gelovani": "მარშალ გელოვანი",
     "m3_gelovani": "მ3 გელოვანი"
+  },
+  "descriptions": {
+    "ModelIndexPage": "რაღაც გრძელი ტექსტი იქნება აქ"
   }
 }

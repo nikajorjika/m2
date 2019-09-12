@@ -55,12 +55,16 @@
     "decoration_price": "Decoration Price",
     "appliances_price": "Appliance Price",
     "appliance": "Appliance",
-    "full_price": "Full Price"
+    "full_price": "Full Price",
+    "ByPhoneNumber": "Authorisation by phone number",
+    "ByFlatNumber": "Search by flat number",
+    "ByFilter": "Search by filter"
   },
   "titles": {
     "FlatPageTitle": "Renovation Displayed On Replication",
     "SupplyPageTitle": "Appliances Displayed On Replication",
-    "FrequentlyAskedQuestions": "Frequently Asked Question"
+    "FrequentlyAskedQuestions": "Frequently Asked Question",
+    "ModelIndexPage": "Some title goes here"
   },
   "rooms": {
     "Hall": "Hall",
@@ -72,5 +76,8 @@
     "bathroom": "Bathroom",
     "balcony": "Balcony",
     "wc": "Bathroom"
+  },
+  "descriptions": {
+    "ModelIndexPage": "Some long text goes here"
   }
 }
