@@ -1,10 +1,14 @@
 <template>
-  <button class="btn" @click="handleClick">
-    <div class="btn__prefix"></div>
-    <div class="btn__lab">
+  <button class="btn" :class="customClasses" @click="handleClick">
+    <div class="btn__prefix">
+      <slot name="iconLeft"/>
+    </div>
+    <div class="btn__label">
       {{ label }}
     </div>
-    <div class="btn__postfix"></div>
+    <div class="btn__suffix">
+      <slot name="icon"/>
+    </div>
   </button>
 </template>
 
@@ -14,6 +18,20 @@ export default {
     label: {
       type: String,
       required: true
+    },
+    buttonColor: {
+      type: String,
+      default: 'purple'
+    },
+    buttonSize: {
+      type: String,
+      default: 'medium'
+    }
+  },
+  computed: {
+    customClasses: function (){
+      const sizeClasses = ""
+      return `btn--${this.buttonColor} btn--${this.buttonSize}`
     }
   },
   methods: {
@@ -26,14 +44,30 @@ export default {
 
 <style lang="scss" scoped>
 .btn {
-  background: #7e73ae;
   color: #fff;
   display: flex;
-  padding: 8px 22px; 
   border: none;
   border-radius: 16px;
+  font-family: $font-caps;
+  font-size: 10px;
+  align-items: center;
   &:focus {
     outline: none;
-  } 
+  }
+  &--purple {
+    background: #7e73ae;
+  }
+  &--orange {
+    background: #f26529;
+  }
+  &--medium {
+    padding: 8px 22px; 
+  }
+  &--small {
+    padding: 8px 22px; 
+  }
+  &--large {
+    padding: 8px 22px; 
+  }
 }
 </style>

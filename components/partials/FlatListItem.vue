@@ -1,11 +1,11 @@
 <template>
   <ul class="flat-list-item">
-    <li class="flat-list-item__li">{{ item.floor }}</li>
-    <li class="flat-list-item__li">{{ item.flatNumber }}</li>
-    <li class="flat-list-item__li">{{ item.status }}</li>
-    <li class="flat-list-item__li">{{ item.view }}</li>
-    <li class="flat-list-item__li">{{ item.area }}</li>
-    <li class="flat-list-item__li">{{ item.price }}</li>
+    <li class="flat-list-item__li medium">{{ item.floor }}</li>
+    <li class="flat-list-item__li medium">{{ item.flatNumber }}</li>
+    <li class="flat-list-item__li large">{{ item.status }}</li>
+    <li class="flat-list-item__li large">{{ item.view }}</li>
+    <li class="flat-list-item__li medium">{{ item.area }}</li>
+    <li class="flat-list-item__li xs">{{ item.price }}</li>
   </ul>
 </template>
 
@@ -28,13 +28,24 @@ export default {
   padding: 0;
   justify-content: space-between;
   align-items: center;
+  padding-left: 36px;
+  padding-right: 40px;
   height: 46px;
   border-radius: 11px;
+  width: 100%;
   &__li {
     color: #fff;
     font-family: $font;
     font-size: 12px;
-    padding: 0 46px;
+    &.medium {
+      width: 104px;
+    }
+    &.large {
+      width: 136px;
+    }
+    &.xs {
+      width: 86px;
+    }
   }
 }
 </style>

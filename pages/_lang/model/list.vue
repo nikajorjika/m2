@@ -24,6 +24,30 @@ export default {
           view: 'სკოლის',
           area: 'ფართი',
           price: '77.000$'
+        },
+        {
+          floor: 9,
+          flatNumber: 145,
+          status: 'დასრულებული',
+          view: 'სკოლის',
+          area: 'ფართი',
+          price: '77.000$'
+        },
+        {
+          floor: 9,
+          flatNumber: 145,
+          status: 'დასრულებული',
+          view: 'სკოლის',
+          area: 'ფართი',
+          price: '77.000$'
+        },
+        {
+          floor: 9,
+          flatNumber: 145,
+          status: 'დასრულებული',
+          view: 'სკოლის',
+          area: 'ფართი',
+          price: '77.000$'
         }
       ]
     }
