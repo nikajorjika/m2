@@ -10,6 +10,20 @@
       <div class="description">
         <p>{{ description }}</p>
       </div>
+
+      <div class="buttons">
+        <illustrated-button
+          :label="buttonLabels.byFlatNumberLabel"
+          :to-route="{
+            name: 'lang-model-by-flat-number',
+            params: { lang: locale }
+          }"
+        >
+          <template v-slot:illustration></template>
+
+          <template v-slot:icon></template>
+        </illustrated-button>
+      </div>
     </article>
   </div>
 </template>
@@ -17,17 +31,20 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import ImageSlider from '@/components/core/ImageSlider'
+import IllustratedButton from '@/components/partials/IllustratedButton'
 
 export default {
-  components: { ImageSlider },
+  components: { ImageSlider, IllustratedButton },
   layout: 'ModelIndexLayout',
   data() {
     return {
-      name: 'მონიშნე ფილტრები და განათე სასურველი ბინა',
-      description:
-        'შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და ტიპოგრაფიული ნაწარმის შემქმნელებს, ' +
-        'რეალურთან მაქსიმალურად მიახლოებული შაბლონი წარუდგინონ შემფასებელს. ხშირადაა შემთხვევა, როდესაც დიზაინის ' +
-        'შესრულებისას საჩვენებელია, თუ როგორი იქნება ტექსტის ბლოკი. სწორედ ასეთ დროს არის მოსახერხებელი'
+      buttonLabels: {
+        byPhoneNumberLabel: this.$t('labels.ByPhoneNumber'),
+        byFlatNumberLabel: this.$t('labels.ByFlatNumber'),
+        byFilterLabel: this.$t('labels.ByFilter')
+      },
+      name: this.$t('titles.ModelIndexPage'),
+      description: this.$t('descriptions.ModelIndexPage')
     }
   },
   computed: {
@@ -84,6 +101,10 @@ export default {
     font-size: fit(16); /* 16px */
     line-height: fit(25, fitRaw(16)); /* 25px */
     color: $font-color;
+  }
+
+  .buttons {
+    margin: fit(110) 0 0 fit(70); /* 110px 0 0 70px */
   }
 }
 </style>
