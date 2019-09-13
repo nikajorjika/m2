@@ -7,9 +7,9 @@
       <small>{{$t('labels.pick_range')}}</small>
     </div>
     <div class="filter-price__range-selector">
-      <select-range class="filter-price__range-selector__component"/>
+      <select-range class="filter-price__range-selector__component" :min-value="price.min" :max-value="price.max" @change="handleRangeChange" />
     </div>
-    <filters-footer-block />
+    <filters-footer-block :next-url="nextUrl"/>
   </div>
 </template>
 
@@ -17,9 +17,32 @@
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
+import { mapGetters } from 'vuex'
 export default {
   components: { TitleWithLine, SelectRange, FiltersFooterBlock },
-  layout: 'ModelFilterLayout'
+  layout: 'ModelFilterLayout',
+  data() {
+    return {
+      price: {
+        min: 40000,
+        max: 140000
+      }
+    }
+  },
+  mounted() {
+    this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'price', value: this.price })
+  },
+  computed: {
+    ...mapGetters(['locale']),
+    nextUrl() {
+      return `/${this.locale}/model/filter/floor`
+    }
+  },
+  methods: {
+    handleRangeChange(data) {
+      this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'price', value: data })
+    }
+  }
 }
 </script>
 

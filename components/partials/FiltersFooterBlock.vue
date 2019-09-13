@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="filter-footer__controls">
-      <div class="filter-footer__controls__skip">
+      <div class="filter-footer__controls__skip" @click="handleNext">
         <span class="filter-footer__controls__skip__text"> 
           {{ $t('buttons.skip') }} 
         </span>
@@ -25,7 +25,7 @@
         </span>
       </div>
       <div class="filter-footer__controls__next">
-        <button-main-orange :button-text="$t('buttons.next')">
+        <button-main-orange :button-text="$t('buttons.next')" @click="handleNext">
           <template v-slot:icon>  
             <caret-right width="14" height="16" icon-color="#fff" />
           </template>
@@ -41,7 +41,18 @@ import GradientLabel from '@/components/partials/GradientLabel'
 import ArrowRight from '@/components/icons/ArrowRight'
 import CaretRight from '@/components/icons/CaretRight'
 export default {
-  components: { ButtonMainOrange, ArrowRight, CaretRight, GradientLabel }
+  components: { ButtonMainOrange, ArrowRight, CaretRight, GradientLabel },
+  props: {
+    nextUrl: {
+      type: [String, Object],
+      required: true
+    }
+  },
+  methods: {
+    handleNext: function() {
+      this.$router.push(this.nextUrl)
+    }
+  }
 }
 </script>
 

@@ -17,6 +17,7 @@
           icon-width="20px"
           icon-height="20px"
           font-size="10px"
+          @click="handleClick"
         >
           <template v-slot:icon>
             <arrow-right width="13" height="9" icon-color="#fff" />
@@ -32,7 +33,12 @@ import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import GradientBlock from '@/components/partials/GradientBlock'
 import ArrowRight from '@/components/icons/ArrowRight'
 export default {
-  components: { GradientBlock, ButtonMainOrange, ArrowRight }
+  components: { GradientBlock, ButtonMainOrange, ArrowRight },
+  methods: {
+    handleClick() {
+      this.$emit('click')
+    }
+  }
 }
 </script>
 

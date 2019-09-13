@@ -9,7 +9,7 @@
     <div class="filter-floor__range-selector">
       <range-picker :ranges="ranges" />
     </div>
-    <filters-footer-block />
+    <filters-footer-block :next-url="nextUrl"/>
   </div>
 </template>
 
@@ -17,6 +17,7 @@
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RangePicker from '@/components/partials/RangePicker'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
+import { mapGetters } from 'vuex'
 export default {
   components: { TitleWithLine, RangePicker, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
@@ -31,7 +32,13 @@ export default {
         '25+',
       ]
     }
-  }
+  },
+  computed: {
+    ...mapGetters(['locale']),
+    nextUrl() {
+      return `/${this.locale}/model/filter/views`
+    }
+  },
 }
 </script>
 

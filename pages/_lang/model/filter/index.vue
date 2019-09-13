@@ -20,7 +20,7 @@
       <gradient-progress class="filter-render__aside__progress" :label="$t('labels.building_progress')" :min="0" :max="100" :value="58" suffix="%" />
     </div>
     <div class="filter-render__render">
-      <filter-render />
+      <filter-render @seleted="handleBlockSelect" />
     </div>
   </div>
 </template>
@@ -30,10 +30,23 @@ import TitleWithLine from '@/components/partials/TitleWithLine'
 import GradientBlock from '@/components/partials/GradientBlock'
 import GradientProgress from '@/components/partials/GradientProgress'
 import FilterRender from '@/components/partials/FilterRender'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: { TitleWithLine, GradientBlock, GradientProgress, FilterRender },
-  layout: 'ModelFilterLayout'
+  layout: 'ModelFilterLayout',
+  computed: {
+    ...mapGetters(['locale'])
+  },
+  methods: {
+    ...mapActions({
+      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+    }),
+    handleBlockSelect (data) {
+      this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'block', value: data})
+      this.$router.push({ name: 'lang-model-filter-price', params: { lang: this.locale } })
+    }
+  }
 }
 </script>
 

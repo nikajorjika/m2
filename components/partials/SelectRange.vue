@@ -76,6 +76,7 @@ export default {
     updateMinMax(data) {
       this.selectedMin = data[0].split('.')[0]
       this.selectedMax = data[1].split('.')[0]
+      this.$emit('change',{ min: this.selectedMin, max: this.selectedMax })
     }
   }
 }
