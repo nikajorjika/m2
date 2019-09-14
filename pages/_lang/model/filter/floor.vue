@@ -7,7 +7,7 @@
       <small>{{$t('labels.pick_multiple')}}</small>
     </div>
     <div class="filter-floor__range-selector">
-      <range-picker :ranges="ranges" />
+      <range-picker :ranges="ranges" :preselected="ranges" />
     </div>
     <filters-footer-block :next-url="nextUrl"/>
   </div>
@@ -29,7 +29,7 @@ export default {
         '10 - 15',
         '15 - 20',
         '20 - 25',
-        '25+',
+        '25+'
       ]
     }
   },

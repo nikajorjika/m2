@@ -19,11 +19,15 @@ export default {
     ranges: {
       type: Array,
       default: () => []
+    },
+    preselected: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
     return {
-      selected: []
+      selected: this.preselected
     }
   },
   methods: {

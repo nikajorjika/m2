@@ -54,7 +54,6 @@ export default {
   methods: {
     handleRangeChange(data) {
       this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'price', value: data })
-      console.log(this.filters)
     }
   }
 }

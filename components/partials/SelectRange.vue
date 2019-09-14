@@ -39,7 +39,7 @@ export default {
       type: [Number, String],
       default: null
     },
-    presetMin: {
+    presetMax: {
       type: [Number, String],
       default: null
     }

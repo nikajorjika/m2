@@ -8,7 +8,7 @@ export const state = () => ({
     },
     price: {
       min: 20000,
-      max: 100000
+      max: 150000
     },
     view: []
   }
