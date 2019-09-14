@@ -24,11 +24,31 @@
               :width="'50px'"
               :height="'auto'"
               :margin="'0 0 0 -12px'"
-            ></search-by-flat-number-illustration>
+            />
           </template>
 
           <template v-slot:icon>
-            <search-by-flat-number></search-by-flat-number>
+            <search-by-flat-number width="18px" height="9px" />
+          </template>
+        </illustrated-button>
+        <illustrated-button
+          :label="buttonLabels.byFlatNumberLabel"
+          :to-route="{
+            name: 'lang-model-filter',
+            params: { lang: locale }
+          }"
+          class="filter-icon"
+        >
+          <template v-slot:illustration>
+            <filter-icon-illustration
+              class="filter-illustation-icon"
+              :width="'50px'"
+              :height="'auto'"
+            />
+          </template>
+
+          <template v-slot:icon>
+            <filter-search iconColor="#fff" width="18px" height="9px" />
           </template>
         </illustrated-button>
       </div>
@@ -41,12 +61,16 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 import ImageSlider from '@/components/core/ImageSlider'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import SearchByFlatNumber from '@/components/icons/SearchByFlatNumber'
+import FilterSearch from '@/components/icons/FilterSearch'
 import SearchByFlatNumberIllustration from '@/components/icons/SearchByFlatNumberIllustration'
+import FilterIconIllustration from '@/components/icons/FilterIllustration'
 
 export default {
   components: {
     ImageSlider,
     IllustratedButton,
+    FilterIconIllustration,
+    FilterSearch,
     SearchByFlatNumber,
     SearchByFlatNumberIllustration
   },
@@ -120,6 +144,13 @@ export default {
 
   .buttons {
     margin: fit(110) 0 0 fit(70); /* 110px 0 0 70px */
+    display: flex;
+    .filter-icon {
+      margin-left: 20.46px;
+    }
+  }
+  .filter-illustation-icon {
+    margin: 0 0 0 -12px;
   }
 }
 </style>
