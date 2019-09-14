@@ -24,16 +24,24 @@ import noUiSlider from 'nouislider'
 export default {
   props: {
     minValue: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     maxValue: {
-      type: Number,
+      type: [Number, String],
       default: 100000
     },
     suffix: {
       type: String,
       default: '$'
+    },
+    presetMin: {
+      type: [Number, String],
+      default: null
+    },
+    presetMin: {
+      type: [Number, String],
+      default: null
     }
   },
   mounted() {
@@ -44,7 +52,7 @@ export default {
         'max': this.maxValue
       },
       connect: true,
-      start: [this.minValue, this.maxValue],
+      start: [this.presetMin || this.minValue, this.presetMax || this.maxValue],
     })
     this.sliderObject.on('update', this.updateMinMax)
   },
@@ -60,7 +68,6 @@ export default {
     chosenMin() {
       return `${this.formatPrice(this.selectedMin, '.')} ${this.suffix}`
     },
-    
     chosenMax() {
       return `${this.formatPrice(this.selectedMax, '.')} ${this.suffix}`
     },

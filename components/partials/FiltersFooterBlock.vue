@@ -2,7 +2,7 @@
   <div class="filter-footer">
     <div class="filter-footer__flats">
       <div class="filter-footer__flats__see">
-        <button-main-orange :button-text="$t('buttons.see')">
+        <button-main-orange :button-text="$t('buttons.see')" @click="handleFilter">
           <template v-slot:icon>  
             <arrow-right width="13" height="9" icon-color="#fff" />
           </template>
@@ -40,6 +40,7 @@ import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import GradientLabel from '@/components/partials/GradientLabel'
 import ArrowRight from '@/components/icons/ArrowRight'
 import CaretRight from '@/components/icons/CaretRight'
+import { mapGetters } from 'vuex';
 export default {
   components: { ButtonMainOrange, ArrowRight, CaretRight, GradientLabel },
   props: {
@@ -48,9 +49,15 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapGetters(['locale'])
+  },
   methods: {
-    handleNext: function() {
+    handleNext() {
       this.$router.push(this.nextUrl)
+    },
+    handleFilter() {
+      this.$router.push({ name: 'lang-model-list', params: { lang: locale } })
     }
   }
 }

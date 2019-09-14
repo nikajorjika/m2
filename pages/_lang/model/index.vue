@@ -21,8 +21,8 @@
         >
           <template v-slot:illustration>
             <search-by-flat-number-illustration
-              :width="'50px'"
-              :height="'auto'"
+              width="50px"
+              height="100%"
               :margin="'0 0 0 -12px'"
             />
           </template>
@@ -42,8 +42,8 @@
           <template v-slot:illustration>
             <filter-icon-illustration
               class="filter-illustation-icon"
-              :width="'50px'"
-              :height="'auto'"
+              width="50px"
+              height="100%"
             />
           </template>
 

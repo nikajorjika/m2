@@ -7,8 +7,8 @@ export const state = () => ({
       max: null
     },
     price: {
-      min: null,
-      max: null
+      min: 20000,
+      max: 100000
     },
     view: []
   }

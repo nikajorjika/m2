@@ -9,7 +9,7 @@
     <div class="filter-floor__range-selector">
       <views-picker :views="views" />
     </div>
-    <filters-footer-block />
+    <filters-footer-block :next-url="{ name: 'lang-model-list', params: { lang: locale } }" @filter="handleFilter" />
   </div>
 </template>
 
@@ -17,9 +17,13 @@
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import ViewsPicker from '@/components/partials/ViewsPicker'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
+import { mapGetters } from 'vuex';
 export default {
   components: { TitleWithLine, ViewsPicker, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
+  computed: {
+    ...mapGetters(['locale'])
+  },
   data() {
     return {
       views: [
@@ -28,6 +32,11 @@ export default {
         'მესამე ხედით',
         'მეოთხე ხედით'
       ]
+    }
+  },
+  methods: {
+    handleFilter() {
+      
     }
   }
 }

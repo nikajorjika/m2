@@ -7,7 +7,14 @@
       <small>{{$t('labels.pick_range')}}</small>
     </div>
     <div class="filter-price__range-selector">
-      <select-range class="filter-price__range-selector__component" :min-value="price.min" :max-value="price.max" @change="handleRangeChange" />
+      <select-range
+        class="filter-price__range-selector__component" 
+        :min-value="price.min"
+        :max-value="price.max"
+        :preset-min="filterPrice.min"
+        :preset-max="filterPrice.max"
+        @change="handleRangeChange"
+      />
     </div>
     <filters-footer-block :next-url="nextUrl"/>
   </div>
@@ -21,11 +28,11 @@ import { mapGetters } from 'vuex'
 export default {
   components: { TitleWithLine, SelectRange, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
-  data() {
+  data () {
     return {
       price: {
-        min: 40000,
-        max: 140000
+        min: 30000,
+        max: 150000
       }
     }
   },
@@ -33,7 +40,13 @@ export default {
     this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'price', value: this.price })
   },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters({
+      locale: 'locale',
+      filters: 'Filter/filters'
+    }),
+    filterPrice() {
+      return this.filters.price
+    },
     nextUrl() {
       return `/${this.locale}/model/filter/floor`
     }
@@ -41,6 +54,7 @@ export default {
   methods: {
     handleRangeChange(data) {
       this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'price', value: data })
+      console.log(this.filters)
     }
   }
 }

@@ -9,11 +9,11 @@
 export default {
   props: {
     width: {
-      type: [String],
+      type: String,
       default: '80px'
     },
     height: {
-      type: [String],
+      type: String,
       default: '70px'
     },
     margin: {
