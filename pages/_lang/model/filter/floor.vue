@@ -7,7 +7,7 @@
       <small>{{$t('labels.pick_multiple')}}</small>
     </div>
     <div class="filter-floor__range-selector">
-      <range-picker :ranges="ranges" :preselected="ranges" />
+      <range-picker :ranges="ranges" :preselected="preselectedRanges" @change="handleChange" />
     </div>
     <filters-footer-block :next-url="nextUrl"/>
   </div>
@@ -17,7 +17,7 @@
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RangePicker from '@/components/partials/RangePicker'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   components: { TitleWithLine, RangePicker, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
@@ -34,11 +34,25 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters({
+      locale: 'locale',
+      filters: 'Filter/filters'
+    }),
     nextUrl() {
       return `/${this.locale}/model/filter/views`
+    },
+    preselectedRanges() {
+      return [...this.filters.floors]
     }
   },
+  methods: {
+    ...mapMutations({
+      setFilterItem: 'Filter/SET_FILTER_ITEM'
+    }),
+    handleChange(data) {
+      this.setFilterItem({ key: 'floors', value: data })
+    }
+  }
 }
 </script>
 

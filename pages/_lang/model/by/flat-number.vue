@@ -5,7 +5,30 @@
       <small>{{ $t('titles.SearchByFlatNumberSubTitle') }}</small>
     </div>
     <div class="page-flat-number__form">
-      <search-form />
+      <search-form @submit="handleSearch" />
+    </div>
+    <div class="page-flat-number__buttons">
+      <small>{{ $t('titles.ByFlatNumberButtonsTitle') }}</small>
+        <illustrated-button
+          :label="$t('labels.ByFilter')"
+          :to-route="{
+            name: 'lang-model-filter',
+            params: { lang: locale }
+          }"
+          class="filter-icon"
+        >
+          <template v-slot:illustration>
+            <filter-icon-illustration
+              class="filter-illustation-icon"
+              width="50px"
+              height="100%"
+            />
+          </template>
+
+          <template v-slot:icon>
+            <filter-search iconColor="#fff" width="18px" height="9px" />
+          </template>
+        </illustrated-button>
     </div>
   </div>
 </template>
@@ -13,15 +36,39 @@
 <script>
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SearchForm from '@/components/partials/SearchForm'
+import IllustratedButton from '@/components/partials/IllustratedButton'
+import FilterSearch from '@/components/icons/FilterSearch'
+import FilterIconIllustration from '@/components/icons/FilterIllustration'
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  components: { TitleWithLine, SearchForm },
-  layout: 'WithoutNavigation'
+  components: { 
+    TitleWithLine,
+    SearchForm,
+    FilterSearch,
+    IllustratedButton,
+    FilterIconIllustration
+  },
+  layout: 'WithoutNavigation',
+  computed: {
+    ...mapGetters({
+      locale: 'locale'
+    })
+  },
+  methods: {
+    ...mapActions(['Filter/fetchFilteredFlats']),
+    handleSearch() {
+      this.fetchFilteredFlats();
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .page-flat-number {
   margin: 124px 60px;
+  height: calc(100% - 248px);
+  display: flex;
+  flex-direction: column;
   &__title {
     display: inline-block;
   }
@@ -38,6 +85,20 @@ export default {
   }
   &__form {
     margin-top: 62px;
+  }
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    small {
+      font-size: 10px;
+      color: #424242;
+      font-family: $font;
+      margin-bottom: 42px;
+    }
+    .filter-illustation-icon {
+      margin: 0 0 0 -12px;
+    }
   }
 }
 </style>

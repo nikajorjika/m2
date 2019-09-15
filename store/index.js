@@ -18,9 +18,6 @@ export const getters = {
   },
   allLocales: (state) => {
     return state.locales
-  },
-  app: (state) => {
-    return this.$cookies.get('paveleon-app')
   }
 }
 

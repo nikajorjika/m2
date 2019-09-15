@@ -7,9 +7,9 @@
       <small>{{$t('labels.pick_multiple')}}</small>
     </div>
     <div class="filter-floor__range-selector">
-      <views-picker :views="views" />
+      <views-picker :views="views" :preselected="viewFilterFromStore" @change="handleChange" />
     </div>
-    <filters-footer-block :next-url="{ name: 'lang-model-list', params: { lang: locale } }" @filter="handleFilter" />
+    <filters-footer-block :next-url="{ name: 'lang-model-list', params: { lang: locale } }" />
   </div>
 </template>
 
@@ -17,12 +17,18 @@
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import ViewsPicker from '@/components/partials/ViewsPicker'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   components: { TitleWithLine, ViewsPicker, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
   computed: {
-    ...mapGetters(['locale'])
+    ...mapGetters({
+      locale: 'locale',
+      filters: 'Filter/filters'
+    }),
+    viewFilterFromStore() {
+      return [...this.filters.view]
+    }
   },
   data() {
     return {
@@ -35,8 +41,11 @@ export default {
     }
   },
   methods: {
-    handleFilter() {
-      
+    ...mapMutations({
+      setFilterItem: 'Filter/SET_FILTER_ITEM'
+    }),
+    handleChange(data) {
+      this.setFilterItem({ key: 'view', value: data })
     }
   }
 }

@@ -35,8 +35,9 @@ export default {
       if(this.isActive(item)) {
         this.selected = this.selected.filter((i)=> i !== item)
       } else {
-        this.selected.push(item)
+        this.selected = [...this.selected, item]
       }
+      this.$emit('change', this.selected)  
     },
     isActive(item) {
       return this.selected.includes(item)

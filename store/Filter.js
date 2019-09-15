@@ -2,10 +2,7 @@ export const state = () => ({
   flats: [],
   filters: {
     block: null,
-    floors: {
-      min: null,
-      max: null
-    },
+    floors: [],
     price: {
       min: 20000,
       max: 150000
@@ -16,7 +13,8 @@ export const state = () => ({
 
 export const getters = {
   flats: (state) => state.flats,
-  filters: (state) => state.filters
+  filters: (state) => state.filters,
+  view: (state) => state.filters.view
 }
 
 export const mutations = {
@@ -34,10 +32,10 @@ export const actions = {
   fetchFilteredFlats(context) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .get('/flats')
+        .get('/flats', { params: context.getters.filters })
         .then(({ data }) => {
-          context.commit('SET_FLATS_DATA', data)
-          resolve(data)
+          context.commit('SET_FLATS_DATA', data.data)
+          resolve(data.data)
         })
         .catch((e) => reject(e))
     })

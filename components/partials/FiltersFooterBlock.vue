@@ -40,7 +40,7 @@ import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import GradientLabel from '@/components/partials/GradientLabel'
 import ArrowRight from '@/components/icons/ArrowRight'
 import CaretRight from '@/components/icons/CaretRight'
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 export default {
   components: { ButtonMainOrange, ArrowRight, CaretRight, GradientLabel },
   props: {
@@ -53,11 +53,16 @@ export default {
     ...mapGetters(['locale'])
   },
   methods: {
+    ...mapActions({
+      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+    }),
+    handleFilter() {
+      this.fetchFilteredFlats().then(() => {
+      this.$router.push({ name: 'lang-model-list', params: { lang: this.locale } })
+      })
+    },
     handleNext() {
       this.$router.push(this.nextUrl)
-    },
-    handleFilter() {
-      this.$router.push({ name: 'lang-model-list', params: { lang: locale } })
     }
   }
 }

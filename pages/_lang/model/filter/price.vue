@@ -36,9 +36,6 @@ export default {
       }
     }
   },
-  mounted() {
-    this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'price', value: this.price })
-  },
   computed: {
     ...mapGetters({
       locale: 'locale',

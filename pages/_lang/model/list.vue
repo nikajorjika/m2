@@ -11,48 +11,14 @@
 <script>
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import FlatListTable from '@/components/partials/FlatListTable'
+import { mapGetters } from 'vuex'
 export default {
   layout: 'FullHeightWithoutNavigation',
   components: { TitleWithLine, FlatListTable },
-  data() {
-    return {
-      flats: [
-        {
-          floor: 9,
-          flatNumber: 145,
-          status: 'დასრულებული',
-          view: 'სკოლის',
-          area: 'ფართი',
-          price: '77.000$'
-        },
-        {
-          floor: 9,
-          flatNumber: 145,
-          status: 'დასრულებული',
-          view: 'სკოლის',
-          area: 'ფართი',
-          price: '77.000$'
-        },
-        {
-          floor: 9,
-          flatNumber: 145,
-          status: 'დასრულებული',
-          view: 'სკოლის',
-          area: 'ფართი',
-          price: '77.000$'
-        },
-        {
-          floor: 9,
-          flatNumber: 145,
-          status: 'დასრულებული',
-          view: 'სკოლის',
-          area: 'ფართი',
-          price: '77.000$'
-        }
-      ]
-    }
-  },
   computed: {
+    ...mapGetters({
+      flats: 'Filter/flats'
+    }),
     cTitle: function() {
       return this.$t('titles.flat-list-result-title').replace('%s', this.flats.length)
     }
