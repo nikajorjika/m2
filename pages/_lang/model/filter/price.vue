@@ -24,16 +24,18 @@
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   components: { TitleWithLine, SelectRange, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
+  middleware: 'RedirectIfNoModel',
   data () {
     return {
       price: {
         min: 30000,
         max: 150000
-      }
+      },
+      timeout: null
     }
   },
   computed: {
@@ -49,8 +51,18 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+    }),
     handleRangeChange(data) {
       this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'price', value: data })
+      this.fetchFreshData()
+    },
+    fetchFreshData() {
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.fetchFilteredFlats()
+      }, 300)
     }
   }
 }

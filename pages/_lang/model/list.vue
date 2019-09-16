@@ -40,8 +40,8 @@ export default {
     }
   }
   &__table {
-    margin-top: 47px;
-    height: 100%;
+    margin-top: 47px; 
+    height: 80%;
   }
 }
 </style>

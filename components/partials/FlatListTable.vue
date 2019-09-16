@@ -51,6 +51,17 @@ export default {
   flex-direction: column;
   background: #f6ece1;
   border-top-left-radius: 26px; 
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom:0;
+    top: 80%;
+    right: 0;
+    left: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255,255,255,0)  0%, rgba(242,227,211,0.7) 100%)
+  }
   .ma {
     margin: auto;
   }
@@ -79,6 +90,8 @@ export default {
     }
   }
   &__body {
+    overflow-y: auto;
+    max-height: 100%;
     &__item {
       border-top: 1px solid #faf4ed;
       padding: 13px 58px 13px 47px;
@@ -86,7 +99,7 @@ export default {
       background: #f4e7d9;
       &__component {
         margin-right: 35px;
-        width: 78.8%;
+        max-height: 61%;
       }
       &__button {
         width: 166px;

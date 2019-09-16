@@ -32,7 +32,7 @@
           </template>
         </illustrated-button>
         <illustrated-button
-          :label="buttonLabels.byFlatNumberLabel"
+          :label="buttonLabels.byFilterLabel"
           :to-route="{
             name: 'lang-model-filter',
             params: { lang: locale }

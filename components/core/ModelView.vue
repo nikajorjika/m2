@@ -38,6 +38,8 @@ export default {
   max-width: 90%;
   display: flex;
   flex-direction: column;
+  max-height: 100vh;
+  
   &__switcher {
     margin-right: 67px;
   }

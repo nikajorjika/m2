@@ -9,7 +9,7 @@
     <div class="filter-floor__range-selector">
       <views-picker :views="views" :preselected="viewFilterFromStore" @change="handleChange" />
     </div>
-    <filters-footer-block :next-url="{ name: 'lang-model-list', params: { lang: locale } }" />
+    <filters-footer-block @next="handleNext" />
   </div>
 </template>
 
@@ -17,10 +17,11 @@
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import ViewsPicker from '@/components/partials/ViewsPicker'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   components: { TitleWithLine, ViewsPicker, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
+  middleware: 'RedirectIfNoModel',
   computed: {
     ...mapGetters({
       locale: 'locale',
@@ -44,8 +45,16 @@ export default {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM'
     }),
+    ...mapActions({
+      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+    }),
     handleChange(data) {
       this.setFilterItem({ key: 'view', value: data })
+    },
+    handleNext() {
+      this.fetchFilteredFlats().then(() => {
+        this.$router.push({ name: 'lang-model-list', params: { lang: this.locale } })
+      })
     }
   }
 }

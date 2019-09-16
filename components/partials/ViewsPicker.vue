@@ -2,22 +2,23 @@
   <div class="views-picker">
     <div v-for="(item, index) in views" :key="index" class="views-picker__item" :class="{ active: isActive(item) }" @click="checkItem(item)">
       <div class="views-picker__item__direction">
-        <check-icons icon-color="#fff" height="11px" width="9px" />
+        <compass-icon class="compass-icon" icon-color="#fff" height="14px" width="14px" />
       </div>
       <div class="views-picker__item__label">
         {{item}}
       </div>
       <div class="views-picker__item__checked" v-show="isActive(item)">
-        <check-icons icon-color="#f26529" height="11px" width="9px" />
+        <check-icon icon-color="#f26529" height="11px" width="9px" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CheckIcons from '@/components/icons/Check'
+import CompassIcon from '@/components/icons/CompassDirectional'
+import CheckIcon from '@/components/icons/Check'
 export default {
-  components: { CheckIcons },
+  components: { CheckIcon, CompassIcon },
   props: {
     views: {
       type: Array,
@@ -68,6 +69,26 @@ export default {
     transition: transform 200ms;
     overflow: hidden;
     height: 100%;
+    &:nth-child(4n+1) {
+      .compass-icon {
+        transform: rotate(45deg);
+      }
+    }
+    &:nth-child(4n+2) {
+      .compass-icon {
+        transform: rotate(135deg);
+      }
+    }
+    &:nth-child(4n+3) {
+      .compass-icon {
+        transform: rotate(-45deg);
+      }
+    }
+    &:nth-child(4n+4) {
+      .compass-icon {
+        transform: rotate(-135deg);
+      }
+    }
     &__direction {
       background: linear-gradient(45deg, #684f78 1%,#e26479 100%); 
       width: 52px;
@@ -75,6 +96,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;  
+      
     }
     &__label {   
       padding: 17px 11px 18px 33px;

@@ -10,7 +10,7 @@
       </div>
       <div class="filter-footer__flats__label">
         <span>{{ $t('labels.flats_based_on_filters') }}</span>
-        <gradient-label class="filter-footer__flats__label__gradient" text="88" />
+        <gradient-label class="filter-footer__flats__label__gradient" :text="totalCount" />
         <span>{{ $t('labels.flat') }}</span>
       </div>
     </div>
@@ -46,11 +46,16 @@ export default {
   props: {
     nextUrl: {
       type: [String, Object],
-      required: true
+      required: false,
+      default: null
     }
   },
   computed: {
-    ...mapGetters(['locale'])
+    ...mapGetters({
+      locale: 'locale',
+      totalCount: 'Filter/totalCount',
+      loading: 'Filter/filterLoading'
+    })
   },
   methods: {
     ...mapActions({
@@ -58,11 +63,14 @@ export default {
     }),
     handleFilter() {
       this.fetchFilteredFlats().then(() => {
-      this.$router.push({ name: 'lang-model-list', params: { lang: this.locale } })
+        this.$router.push({ name: 'lang-model-list', params: { lang: this.locale } })
       })
     },
     handleNext() {
-      this.$router.push(this.nextUrl)
+      if(this.nextUrl) {
+        this.$router.push(this.nextUrl)
+      }
+      this.$emit('next')
     }
   }
 }

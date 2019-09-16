@@ -1,5 +1,5 @@
 const state = () => ({
-  model: {}
+  model: null
 })
 
 const getters = {

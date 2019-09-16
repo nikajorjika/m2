@@ -55,9 +55,13 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['Filter/fetchFilteredFlats']),
-    handleSearch() {
-      this.fetchFilteredFlats();
+    ...mapActions({
+      fetchByFlatNumber: 'Filter/fetchByFlatNumber'
+    }),
+    handleSearch(searchBy) {
+      this.fetchByFlatNumber(searchBy).then((data) => {
+        this.$router.push({ name: 'lang-model-list', params: { lang: this.locale } })
+      })
     }
   }
 }

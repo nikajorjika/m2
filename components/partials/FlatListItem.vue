@@ -1,10 +1,10 @@
 <template>
   <ul class="flat-list-item">
-    <li class="flat-list-item__li medium">{{ item.floor }}</li>
-    <li class="flat-list-item__li medium">{{ item.flatNumber }}</li>
+    <li class="flat-list-item__li medium">{{ item.floor.number }}</li>
+    <li class="flat-list-item__li medium">{{ item.flat_number }}</li>
     <li class="flat-list-item__li large">{{ item.status }}</li>
     <li class="flat-list-item__li large">{{ item.view }}</li>
-    <li class="flat-list-item__li medium">{{ item.area }}</li>
+    <li class="flat-list-item__li medium">{{ item.living_area }}</li>
     <li class="flat-list-item__li xs">{{ item.price }}</li>
   </ul>
 </template>

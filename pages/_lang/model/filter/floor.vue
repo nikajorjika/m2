@@ -7,7 +7,16 @@
       <small>{{$t('labels.pick_multiple')}}</small>
     </div>
     <div class="filter-floor__range-selector">
-      <range-picker :ranges="ranges" :preselected="preselectedRanges" @change="handleChange" />
+      <select-range
+        class="filter-price__range-selector__component" 
+        :min-value="floors.min"
+        :max-value="floors.max"
+        :preset-min="preselectedFloors.min"
+        :preset-max="preselectedFloors.max"
+        :suffix="$t('labels.floorShort')"
+        @change="handleChange"
+      />
+      <!-- <range-picker :ranges="ranges" :preselected="preselectedRanges" @change="handleChange" /> -->
     </div>
     <filters-footer-block :next-url="nextUrl"/>
   </div>
@@ -16,21 +25,19 @@
 <script>
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RangePicker from '@/components/partials/RangePicker'
+import SelectRange from '@/components/partials/SelectRange'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
-  components: { TitleWithLine, RangePicker, FiltersFooterBlock },
+  components: { TitleWithLine, SelectRange, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
+  middleware: 'RedirectIfNoModel',
   data() {
     return {
-      ranges: [
-        '1 - 5',
-        '5 - 10',
-        '10 - 15',
-        '15 - 20',
-        '20 - 25',
-        '25+'
-      ]
+      floors: {
+        min: 1,
+        max: 25
+      }
     }
   },
   computed: {
@@ -41,16 +48,26 @@ export default {
     nextUrl() {
       return `/${this.locale}/model/filter/views`
     },
-    preselectedRanges() {
-      return [...this.filters.floors]
+    preselectedFloors() {
+      return {...this.filters.floors}
     }
   },
   methods: {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM'
     }),
+    ...mapActions({
+      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+    }),
     handleChange(data) {
       this.setFilterItem({ key: 'floors', value: data })
+      this.fetchFreshData()
+    },
+    fetchFreshData() {
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.fetchFilteredFlats()
+      }, 300)
     }
   }
 }
