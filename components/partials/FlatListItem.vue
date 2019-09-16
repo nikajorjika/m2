@@ -1,6 +1,6 @@
 <template>
   <ul class="flat-list-item">
-    <li class="flat-list-item__li medium">{{ item.floor.number }}</li>
+    <li class="flat-list-item__li medium">{{ item.floor }}</li>
     <li class="flat-list-item__li medium">{{ item.flat_number }}</li>
     <li class="flat-list-item__li large">{{ item.status }}</li>
     <li class="flat-list-item__li large">{{ item.view }}</li>
@@ -15,6 +15,11 @@ export default {
     item: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    floor() {
+      return this.item.floor.hasOwnProperty('number') ? this.item.floor.number : this.item.floor
     }
   }
 }
