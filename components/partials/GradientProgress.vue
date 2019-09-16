@@ -3,45 +3,54 @@
     <div class="progress__label">{{ label }}</div>
     <div class="progress__values">
       <div class="progress__values__min">{{ min }}</div>
-      <div class="progress__values__value" :style="{ left: `${percentage}%` }">{{ `${value}${suffix}` }}</div>
+      <div
+        v-if="percentage !== 0 && percentage !== 100"
+        class="progress__values__value"
+        :style="{ left: `${percentage}%` }"
+      >
+        {{ `${value}${suffix}` }}
+      </div>
       <div class="progress__values__max">{{ max }}</div>
     </div>
     <div class="progress__bar">
-      <div class="progress__bar__progress" :style="{ width: `${percentage}%` }"></div>
+      <div
+        class="progress__bar__progress"
+        :style="{ width: `${percentage}%` }"
+      ></div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      min: {
-        type: Number,
-        default: 0
-      },
-      max: {
-        type: Number,
-        default: 100
-      },
-      value: {
-        type: Number,
-        default: 50
-      },
-      suffix: {
-        type: String,
-        default: ''
-      },
-      label: {
-        type: String,
-        default: ''
-      }
+export default {
+  props: {
+    min: {
+      type: Number,
+      default: 0
     },
-    computed: {
-      percentage: function() {
-        return this.value / (this.max - this.min) * 100;
-      }
+    max: {
+      type: Number,
+      default: 100
+    },
+    value: {
+      type: Number,
+      default: 50
+    },
+    suffix: {
+      type: String,
+      default: ''
+    },
+    label: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    percentage() {
+      return (this.value / (this.max - this.min)) * 100
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

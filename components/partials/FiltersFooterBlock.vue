@@ -2,22 +2,28 @@
   <div class="filter-footer">
     <div class="filter-footer__flats">
       <div class="filter-footer__flats__see">
-        <button-main-orange :button-text="$t('buttons.see')" @click="handleFilter">
-          <template v-slot:icon>  
+        <button-main-orange
+          :button-text="$t('buttons.see')"
+          @click="handleFilter"
+        >
+          <template v-slot:icon>
             <arrow-right width="13" height="9" icon-color="#fff" />
           </template>
         </button-main-orange>
       </div>
       <div class="filter-footer__flats__label">
         <span>{{ $t('labels.flats_based_on_filters') }}</span>
-        <gradient-label class="filter-footer__flats__label__gradient" :text="totalCount" />
+        <gradient-label
+          class="filter-footer__flats__label__gradient"
+          :text="totalCount"
+        />
         <span>{{ $t('labels.flat') }}</span>
       </div>
     </div>
     <div class="filter-footer__controls">
       <div class="filter-footer__controls__skip" @click="handleNext">
-        <span class="filter-footer__controls__skip__text"> 
-          {{ $t('buttons.skip') }} 
+        <span class="filter-footer__controls__skip__text">
+          {{ $t('buttons.skip') }}
         </span>
         <span class="filter-footer__controls__skip__icon">
           <caret-right width="10" height="12" icon-color="#432272" />
@@ -25,8 +31,11 @@
         </span>
       </div>
       <div class="filter-footer__controls__next">
-        <button-main-orange :button-text="$t('buttons.next')" @click="handleNext">
-          <template v-slot:icon>  
+        <button-main-orange
+          :button-text="$t('buttons.next')"
+          @click="handleNext"
+        >
+          <template v-slot:icon>
             <caret-right width="14" height="16" icon-color="#fff" />
           </template>
         </button-main-orange>
@@ -36,11 +45,11 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import GradientLabel from '@/components/partials/GradientLabel'
 import ArrowRight from '@/components/icons/ArrowRight'
 import CaretRight from '@/components/icons/CaretRight'
-import { mapGetters, mapActions } from 'vuex'
 export default {
   components: { ButtonMainOrange, ArrowRight, CaretRight, GradientLabel },
   props: {
@@ -63,11 +72,14 @@ export default {
     }),
     handleFilter() {
       this.fetchFilteredFlats().then(() => {
-        this.$router.push({ name: 'lang-model-list', params: { lang: this.locale } })
+        this.$router.push({
+          name: 'lang-model-list',
+          params: { lang: this.locale }
+        })
       })
     },
     handleNext() {
-      if(this.nextUrl) {
+      if (this.nextUrl) {
         this.$router.push(this.nextUrl)
       }
       this.$emit('next')

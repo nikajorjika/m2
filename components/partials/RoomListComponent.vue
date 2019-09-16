@@ -8,11 +8,12 @@
               v-for="(option, key) in item"
               :key="key"
               class="list-slider__list__item"
+              :class="styleType"
             >
-              <div class="list-slider__list__item__number">
+              <div class="list-slider__list__item__number" :class="styleType">
                 {{ turnToLeadingZero(index * 9 + (key + 1)) }}
               </div>
-              <div class="list-slider__list__item__label">
+              <div class="list-slider__list__item__label" :class="styleType">
                 {{ option.label }}
               </div>
               <div class="list-slider__list__item__value">
@@ -33,6 +34,10 @@ export default {
     roomList: {
       type: Array,
       default: () => []
+    },
+    styleType: {
+      type: String,
+      default: 'normal'
     }
   },
   data() {
@@ -77,6 +82,12 @@ export default {
       display: flex;
       margin: 9px 0;
       align-items: center;
+      &.small {
+        margin: 20px 0;
+        &:first-child {
+          margin-top: 10px;
+        }
+      }
       &__number {
         background: #fff;
         border-radius: 10px;
@@ -86,6 +97,10 @@ export default {
         font-size: 9px;
         line-height: 1;
         letter-spacing: 1px;
+        &.small {
+          margin-right: 11px;
+          padding: 6px;
+        }
       }
       &__value {
         margin-left: auto;

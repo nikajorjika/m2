@@ -48,7 +48,7 @@
           </template>
 
           <template v-slot:icon>
-            <filter-search iconColor="#fff" width="18px" height="9px" />
+            <filter-search icon-color="#fff" width="18px" height="9px" />
           </template>
         </illustrated-button>
       </div>
@@ -83,7 +83,7 @@ export default {
         byFilterLabel: this.$t('labels.ByFilter')
       },
       name: this.$t('titles.ModelIndexPage'),
-      description: this.$t('descriptions.ModelIndexPage'),
+      description: this.$t('descriptions.ModelIndexPage')
     }
   },
   computed: {

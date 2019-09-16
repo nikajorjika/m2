@@ -4,11 +4,11 @@
       <div class="filter-price__title__wrapper">
         <title-with-line :title="$t('labels.for_what_price')" />
       </div>
-      <small>{{$t('labels.pick_range')}}</small>
+      <small>{{ $t('labels.pick_range') }}</small>
     </div>
     <div class="filter-price__range-selector">
       <select-range
-        class="filter-price__range-selector__component" 
+        class="filter-price__range-selector__component"
         :min-value="price.min"
         :max-value="price.max"
         :preset-min="filterPrice.min"
@@ -16,20 +16,20 @@
         @change="handleRangeChange"
       />
     </div>
-    <filters-footer-block :next-url="nextUrl"/>
+    <filters-footer-block :next-url="nextUrl" />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
-import { mapGetters, mapActions } from 'vuex'
 export default {
   components: { TitleWithLine, SelectRange, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
   middleware: 'RedirectIfNoModel',
-  data () {
+  data() {
     return {
       price: {
         min: 30000,
@@ -55,7 +55,10 @@ export default {
       fetchFilteredFlats: 'Filter/fetchFilteredFlats'
     }),
     handleRangeChange(data) {
-      this.$store.commit('Filter/SET_FILTER_ITEM', { key: 'price', value: data })
+      this.$store.commit('Filter/SET_FILTER_ITEM', {
+        key: 'price',
+        value: data
+      })
       this.fetchFreshData()
     },
     fetchFreshData() {
@@ -70,7 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 .filter-price {
-  padding: 50px 61px;    
+  padding: 50px 61px;
   height: 100%;
   display: flex;
   flex-direction: column;

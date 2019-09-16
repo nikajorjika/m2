@@ -1,13 +1,13 @@
 <template>
   <button class="btn" :class="customClasses" @click="handleClick">
     <div class="btn__prefix">
-      <slot name="iconLeft"/>
+      <slot name="iconLeft" />
     </div>
     <div class="btn__label">
       {{ label }}
     </div>
     <div class="btn__suffix">
-      <slot name="icon"/>
+      <slot name="icon" />
     </div>
   </button>
 </template>
@@ -29,13 +29,13 @@ export default {
     }
   },
   computed: {
-    customClasses: function (){
-      const sizeClasses = ""
+    customClasses() {
+      const sizeClasses = ''
       return `btn--${this.buttonColor} btn--${this.buttonSize}`
     }
   },
   methods: {
-    handleClick: function (){
+    handleClick() {
       this.$emit('click')
     }
   }
@@ -61,13 +61,13 @@ export default {
     background: #f26529;
   }
   &--medium {
-    padding: 8px 22px; 
+    padding: 8px 22px;
   }
   &--small {
-    padding: 8px 22px; 
+    padding: 8px 22px;
   }
   &--large {
-    padding: 8px 22px; 
+    padding: 8px 22px;
   }
 }
 </style>

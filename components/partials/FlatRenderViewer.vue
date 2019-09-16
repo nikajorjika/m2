@@ -16,10 +16,10 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import gradientLabel from '@/components/partials/GradientLabel'
 import SlideSwitch from '@/components/partials/SlideSwitch'
 import MaximizeImage from '@/components/partials/MaximizingImage'
-import { mapGetters } from 'vuex'
 
 export default {
   components: { gradientLabel, SlideSwitch, MaximizeImage },
@@ -51,8 +51,10 @@ export default {
   },
   computed: {
     ...mapGetters(['locale']),
-    bedroomCountLabel: function() {
-      return this.gradientText.hasOwnProperty(this.locale) ? this.gradientText[this.locale] : this.gradientText
+    bedroomCountLabel() {
+      return this.gradientText.hasOwnProperty(this.locale)
+        ? this.gradientText[this.locale]
+        : this.gradientText
     },
     imageToMaximize() {
       return !this.switchValue ? this.renderImage : this.planImage

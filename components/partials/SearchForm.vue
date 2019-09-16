@@ -1,12 +1,21 @@
 <template>
   <form class="search-form">
     <div class="search-form__input">
-      <input type="text" v-model="searchBy" :placeholder="placeholderText" />
+      <input v-model="searchBy" type="text" :placeholder="placeholderText" />
     </div>
     <div class="search-form__button">
-      <button-main-orange :disabled="disabled" :button-text="buttonText" @click="handleSubmit">
+      <button-main-orange
+        :disabled="disabled"
+        :button-text="buttonText"
+        @click="handleSubmit"
+      >
         <template v-slot:icon>
-          <exit-session-icon class="search-form__button__icon" width="13" height="9" icon-color="#fff" />
+          <exit-session-icon
+            class="search-form__button__icon"
+            width="13"
+            height="9"
+            icon-color="#fff"
+          />
         </template>
       </button-main-orange>
     </div>
@@ -21,16 +30,13 @@ export default {
   props: {
     buttonText: {
       type: String,
-      default: function() { return this.$t('buttons.search') }
+      default() {
+        return this.$t('buttons.search')
+      }
     },
     placeholderText: {
       type: String,
       default: () => 'XXXXXXXX'
-    }
-  },
-  computed: {
-    disabled: function () {
-      return !this.searchBy.length
     }
   },
   data() {
@@ -38,9 +44,14 @@ export default {
       searchBy: ''
     }
   },
+  computed: {
+    disabled() {
+      return !this.searchBy.length
+    }
+  },
   methods: {
-    handleSubmit: function (){
-      if(this.disabled){
+    handleSubmit() {
+      if (this.disabled) {
         return
       }
       this.$emit('submit', this.searchBy)

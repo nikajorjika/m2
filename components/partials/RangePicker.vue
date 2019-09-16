@@ -1,10 +1,16 @@
 <template>
   <div class="range-picker">
-    <div v-for="(item, index) in ranges" :key="index" class="range-picker__item" :class="{ active: isActive(item) }" @click="checkItem(item)">
+    <div
+      v-for="(item, index) in ranges"
+      :key="index"
+      class="range-picker__item"
+      :class="{ active: isActive(item) }"
+      @click="checkItem(item)"
+    >
       <div class="range-picker__item__label">
-        {{item}}
+        {{ item }}
       </div>
-      <div class="range-picker__item__checked" v-show="isActive(item)">
+      <div v-show="isActive(item)" class="range-picker__item__checked">
         <check-icons icon-color="#f26529" height="11px" width="9px" />
       </div>
     </div>
@@ -32,12 +38,12 @@ export default {
   },
   methods: {
     checkItem(item) {
-      if(this.isActive(item)) {
-        this.selected = this.selected.filter((i)=> i !== item)
+      if (this.isActive(item)) {
+        this.selected = this.selected.filter((i) => i !== item)
       } else {
         this.selected = [...this.selected, item]
       }
-      this.$emit('change', this.selected)  
+      this.$emit('change', this.selected)
     },
     isActive(item) {
       return this.selected.includes(item)

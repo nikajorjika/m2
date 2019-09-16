@@ -69,7 +69,7 @@ export default {
   &__flats {
     margin-bottom: 21px;
   }
-  &__button{
+  &__button {
     width: 83%;
     margin: 0 auto;
     .button {

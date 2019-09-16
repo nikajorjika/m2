@@ -18,7 +18,7 @@
       </linearGradient>
     </svg>
     <sidebar-with-items :items="items" />
-    <model-view :navigationData="navigation">
+    <model-view :navigation-data="navigation">
       <div class="app">
         <nuxt />
       </div>
@@ -26,6 +26,7 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import SidebarWithItems from '@/components/core/SidebarWithItems'
 import ModelView from '@/components/core/ModelView'
 import BlockIcon from '@/components/icons/Block'
@@ -34,17 +35,16 @@ import FloorIcon from '@/components/icons/Floor'
 import CompassIcon from '@/components/icons/Compass'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
-import { mapGetters, mapActions } from 'vuex';
 export default {
-  components: { 
-    SidebarWithItems, 
+  components: {
+    SidebarWithItems,
     ModelView,
     BlockIcon,
     MainIcon,
     QuestionsIcon,
     CostIcon,
     FloorIcon,
-    CompassIcon 
+    CompassIcon
   },
   props: {
     image: {
@@ -87,7 +87,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({locale: 'locale'}),
+    ...mapGetters({ locale: 'locale' }),
     items() {
       return [
         {

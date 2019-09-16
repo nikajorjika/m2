@@ -15,11 +15,11 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import SidebarWithItems from '@/components/core/SidebarWithItems'
 import ModelView from '@/components/core/ModelView'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
-import { mapGetters } from 'vuex';
 export default {
   components: { SidebarWithItems, ModelView, MainIcon },
   computed: {

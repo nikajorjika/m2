@@ -1,9 +1,5 @@
 <template>
-  <arrow-icon 
-    :fill="iconColor" 
-    :width="width" 
-    :height="height" 
-  />
+  <arrow-icon :fill="iconColor" :width="width" :height="height" />
 </template>
 <script>
 import ArrowIcon from '@/assets/icons/Compass2.svg'

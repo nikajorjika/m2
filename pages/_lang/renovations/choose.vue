@@ -22,16 +22,16 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   layout: 'RenovationsLayout',
   middleware: 'chosenFlat',
-  mounted() {
-    if (!this.flatsData.length) {
-      this.fetchFlatData()
-    }
-  },
   computed: {
     ...mapGetters({
       locale: 'locale',
       flatsData: 'Flats/flatsData'
-    }),
+    })
+  },
+  mounted() {
+    if (!this.flatsData.length) {
+      this.fetchFlatData()
+    }
   },
   methods: {
     ...mapActions('Flats', ['chooseFlatFromFlats', 'fetchFlatData']),

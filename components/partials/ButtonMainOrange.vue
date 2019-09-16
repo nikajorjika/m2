@@ -1,7 +1,16 @@
 <template>
-  <div class="btn btn-standard btn-standard--orange btn-standard--large" :class="{ 'btn-standard--disabled': disabled }" @click="handleClick">
-    <span class="btn-standard__text" :style="{ fontSize: fontSize }">{{ buttonText }}</span>
-    <span class="btn-standard__icon" :style="{ width: iconWidth, height: iconHeight }">
+  <div
+    class="btn btn-standard btn-standard--orange btn-standard--large"
+    :class="{ 'btn-standard--disabled': disabled }"
+    @click="handleClick"
+  >
+    <span class="btn-standard__text" :style="{ fontSize: fontSize }">{{
+      buttonText
+    }}</span>
+    <span
+      class="btn-standard__icon"
+      :style="{ width: iconWidth, height: iconHeight }"
+    >
       <slot name="icon" />
     </span>
   </div>
@@ -32,7 +41,7 @@ export default {
     }
   },
   methods: {
-    handleClick: function () {
+    handleClick() {
       this.$emit('click')
     }
   }

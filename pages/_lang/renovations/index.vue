@@ -22,12 +22,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ListBlock from '@/components/partials/ListCard'
 import TitleWithBorder from '@/components/partials/TitleWithLine'
 import RenderViewer from '@/components/partials/FlatRenderViewer'
 import RoomListComponent from '@/components/partials/RoomListComponent'
 import { formatPrice } from '@/utils/Mixed'
-import { mapGetters } from 'vuex';
 export default {
   components: { ListBlock, TitleWithBorder, RenderViewer, RoomListComponent },
   layout: 'RenovationsLayout',
@@ -45,24 +45,33 @@ export default {
         (item) => item.type === 'price'
       )
     },
-    totalArea() { 
+    totalArea() {
       return this.flat.renovation_flat_properties.find((item) => {
         return item.type === 'area' && item.name === 'total_area'
       })
     },
     fullPrice() {
-      let fullPrice = 0;
-      this.priceArray.map((item) => fullPrice += item.number )
+      let fullPrice = 0
+      this.priceArray.map((item) => (fullPrice += item.number))
       return fullPrice
     },
     decorationPrice() {
       return {
         label: this.$t(`labels.decoration`),
-        value: `${this.totalArea ? formatPrice(parseInt(this.flat.decoration.price) * parseInt(this.totalArea.number)) : 0} $`
+        value: `${
+          this.totalArea
+            ? formatPrice(
+                parseInt(this.flat.decoration.price) *
+                  parseInt(this.totalArea.number)
+              )
+            : 0
+        } $`
       }
     },
     flatPrice() {
-      const price = this.flat.renovation_flat_properties.find((item) => (item.type === 'price' && item.name ==='flat_price') )
+      const price = this.flat.renovation_flat_properties.find(
+        (item) => item.type === 'price' && item.name === 'flat_price'
+      )
       return {
         label: this.$t(`labels.flat_price`),
         value: `${price ? formatPrice(price.number) : 0} $`
@@ -71,12 +80,23 @@ export default {
     furniturePrice() {
       return {
         label: this.$t(`labels.furniture`),
-        value: `${this.totalArea ? formatPrice(parseInt(this.flat.furniture.price) * parseInt(this.totalArea.number)) : 0} $`
+        value: `${
+          this.totalArea
+            ? formatPrice(
+                parseInt(this.flat.furniture.price) *
+                  parseInt(this.totalArea.number)
+              )
+            : 0
+        } $`
       }
     },
     appliancePrice() {
       let sum = 0
-      this.flat.appliance ? this.flat.appliance.appliance_info.map((item) => sum += parseInt(item.price) ) : 0
+      this.flat.appliance
+        ? this.flat.appliance.appliance_info.map(
+            (item) => (sum += parseInt(item.price))
+          )
+        : 0
       return {
         label: this.$t(`labels.appliance`),
         value: `${formatPrice(sum)} $`
@@ -89,7 +109,13 @@ export default {
       }
     },
     prices() {
-      return [this.flatPrice, this.furniturePrice, this.decorationPrice, this.appliancePrice, this.fullPriceObject]
+      return [
+        this.flatPrice,
+        this.furniturePrice,
+        this.decorationPrice,
+        this.appliancePrice,
+        this.fullPriceObject
+      ]
     },
     areas() {
       const arr = this.flat.renovation_flat_properties.filter(
@@ -97,7 +123,10 @@ export default {
       )
       return arr.map((item) => {
         return {
-          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? item.name_label[this.locale] : this.$t(`labels.${item.name}`),
+          label:
+            item.name_label && item.name_label.hasOwnProperty(this.locale)
+              ? item.name_label[this.locale]
+              : this.$t(`labels.${item.name}`),
           value: `${item.number} ${this.$t('labels.m2')}`
         }
       })
@@ -108,7 +137,10 @@ export default {
       )
       return arr.map((item) => {
         return {
-          label: item.name_label && item.name_label.hasOwnProperty(this.locale) ? item.name_label[this.locale] : this.$t(`rooms.${item.name}`),
+          label:
+            item.name_label && item.name_label.hasOwnProperty(this.locale)
+              ? item.name_label[this.locale]
+              : this.$t(`rooms.${item.name}`),
           value: `${item.number} ${this.$t('labels.m2')}`
         }
       })
@@ -116,7 +148,7 @@ export default {
   },
   mounted() {
     let timeout
-    let refresh = () => {
+    const refresh = () => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {
         this.$router.push({ path: `/${this.locale}` })

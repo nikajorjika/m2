@@ -4,11 +4,11 @@
       <div class="filter-floor__title__wrapper">
         <title-with-line :title="$t('labels.what_floor_are_you_looking_for')" />
       </div>
-      <small>{{$t('labels.pick_multiple')}}</small>
+      <small>{{ $t('labels.pick_multiple') }}</small>
     </div>
     <div class="filter-floor__range-selector">
       <select-range
-        class="filter-price__range-selector__component" 
+        class="filter-price__range-selector__component"
         :min-value="floors.min"
         :max-value="floors.max"
         :preset-min="preselectedFloors.min"
@@ -18,16 +18,16 @@
       />
       <!-- <range-picker :ranges="ranges" :preselected="preselectedRanges" @change="handleChange" /> -->
     </div>
-    <filters-footer-block :next-url="nextUrl"/>
+    <filters-footer-block :next-url="nextUrl" />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RangePicker from '@/components/partials/RangePicker'
 import SelectRange from '@/components/partials/SelectRange'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
-import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   components: { TitleWithLine, SelectRange, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
@@ -49,7 +49,7 @@ export default {
       return `/${this.locale}/model/filter/views`
     },
     preselectedFloors() {
-      return {...this.filters.floors}
+      return { ...this.filters.floors }
     }
   },
   methods: {
@@ -75,7 +75,7 @@ export default {
 
 <style lang="scss" scoped>
 .filter-floor {
-  padding: 50px 61px;    
+  padding: 50px 61px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -91,7 +91,7 @@ export default {
     }
   }
   &__range-selector {
-      width: 63%;
+    width: 63%;
   }
 }
 </style>

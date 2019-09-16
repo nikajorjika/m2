@@ -39,7 +39,7 @@ export default {
   display: flex;
   flex-direction: column;
   max-height: 100vh;
-  
+
   &__switcher {
     margin-right: 67px;
   }

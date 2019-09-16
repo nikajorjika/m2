@@ -5,8 +5,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SliderDesc from '@/components/core/SliderDesc'
-import { mapGetters } from 'vuex';
 export default {
   components: {
     SliderDesc
@@ -15,7 +15,7 @@ export default {
   middleware: 'chosenFlat',
   computed: {
     ...mapGetters('Flats', ['flat']),
-    items(){
+    items() {
       return this.flat.renovation.renovation_info
     }
   }

@@ -5,7 +5,10 @@
       <div class="select-range__selected__max">{{ chosenMax }}</div>
     </div>
     <div class="select-range__slider">
-      <div id="select-range__noUiSlider" class="select-range__slider__inner"></div>
+      <div
+        id="select-range__noUiSlider"
+        class="select-range__slider__inner"
+      ></div>
     </div>
     <div class="select-range__preset">
       <div class="select-range__preset__min">
@@ -19,8 +22,8 @@
 </template>
 
 <script>
-import { formatPrice } from '@/utils/Mixed'
 import noUiSlider from 'nouislider'
+import { formatPrice } from '@/utils/Mixed'
 export default {
   props: {
     minValue: {
@@ -44,18 +47,6 @@ export default {
       default: null
     }
   },
-  mounted() {
-    this.slider = document.getElementById('select-range__noUiSlider')
-    this.sliderObject = noUiSlider.create(this.slider,{
-      range: {
-        'min': this.minValue,
-        'max': this.maxValue
-      },
-      connect: true,
-      start: [this.presetMin || this.minValue, this.presetMax || this.maxValue],
-    })
-    this.sliderObject.on('update', this.updateMinMax)
-  },
   data() {
     return {
       selectedMin: this.minValue,
@@ -72,18 +63,34 @@ export default {
       return `${this.formatPrice(this.selectedMax, '.')} ${this.suffix}`
     },
     minLabel() {
-      return `${this.$t('labels.min')} ${this.formatPrice(this.minValue)} ${this.suffix}`
+      return `${this.$t('labels.min')} ${this.formatPrice(this.minValue)} ${
+        this.suffix
+      }`
     },
     maxLabel() {
-      return `${this.$t('labels.max')} ${this.formatPrice(this.maxValue)} ${this.suffix}`
+      return `${this.$t('labels.max')} ${this.formatPrice(this.maxValue)} ${
+        this.suffix
+      }`
     }
+  },
+  mounted() {
+    this.slider = document.getElementById('select-range__noUiSlider')
+    this.sliderObject = noUiSlider.create(this.slider, {
+      range: {
+        min: this.minValue,
+        max: this.maxValue
+      },
+      connect: true,
+      start: [this.presetMin || this.minValue, this.presetMax || this.maxValue]
+    })
+    this.sliderObject.on('update', this.updateMinMax)
   },
   methods: {
     formatPrice,
     updateMinMax(data) {
       this.selectedMin = data[0].split('.')[0]
       this.selectedMax = data[1].split('.')[0]
-      this.$emit('change',{ min: this.selectedMin, max: this.selectedMax })
+      this.$emit('change', { min: this.selectedMin, max: this.selectedMax })
     }
   }
 }
@@ -118,7 +125,6 @@ export default {
     &__inner {
       height: 7px;
       border: none;
-
     }
   }
   &__preset {
@@ -133,14 +139,14 @@ export default {
 <style lang="scss">
 .select-range__slider {
   .noUi-connect {
-    background:  linear-gradient(60deg, #684f78 0%, #e26479 100%);
+    background: linear-gradient(60deg, #684f78 0%, #e26479 100%);
     opacity: 0.7;
   }
   .noUi-horizontal {
     .noUi-base {
       .noUi-handle {
-          right: -7px;
-          top: -4px;
+        right: -7px;
+        top: -4px;
       }
     }
   }

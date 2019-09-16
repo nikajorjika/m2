@@ -4,20 +4,24 @@
       <div class="filter-floor__title__wrapper">
         <title-with-line :title="$t('labels.choose_flat_view')" />
       </div>
-      <small>{{$t('labels.pick_multiple')}}</small>
+      <small>{{ $t('labels.pick_multiple') }}</small>
     </div>
     <div class="filter-floor__range-selector">
-      <views-picker :views="views" :preselected="viewFilterFromStore" @change="handleChange" />
+      <views-picker
+        :views="views"
+        :preselected="viewFilterFromStore"
+        @change="handleChange"
+      />
     </div>
     <filters-footer-block @next="handleNext" />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import ViewsPicker from '@/components/partials/ViewsPicker'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
-import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   components: { TitleWithLine, ViewsPicker, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
@@ -33,12 +37,7 @@ export default {
   },
   data() {
     return {
-      views: [
-        'პირველი ხედი',
-        'მეორე ხედით',
-        'მესამე ხედით',
-        'მეოთხე ხედით'
-      ]
+      views: ['პირველი ხედი', 'მეორე ხედით', 'მესამე ხედით', 'მეოთხე ხედით']
     }
   },
   methods: {
@@ -53,7 +52,10 @@ export default {
     },
     handleNext() {
       this.fetchFilteredFlats().then(() => {
-        this.$router.push({ name: 'lang-model-list', params: { lang: this.locale } })
+        this.$router.push({
+          name: 'lang-model-list',
+          params: { lang: this.locale }
+        })
       })
     }
   }
@@ -62,7 +64,7 @@ export default {
 
 <style lang="scss" scoped>
 .filter-floor {
-  padding: 50px 61px;    
+  padding: 50px 61px;
   height: 100%;
   display: flex;
   flex-direction: column;

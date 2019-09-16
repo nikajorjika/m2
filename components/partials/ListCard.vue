@@ -31,8 +31,8 @@ export default {
     }
   },
   computed: {
-    filteredItems: function () {
-      return this.items.filter(item => !!item)
+    filteredItems() {
+      return this.items.filter((item) => !!item)
     }
   }
 }

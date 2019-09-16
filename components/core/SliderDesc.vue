@@ -5,7 +5,12 @@
         <Slider :items="items" @messageFromSlider="messageFromSlider" />
       </div>
       <div class="price-button">
-        <GradientButton v-if="price">{{ `${$t('labels.price')}: ${formatPrice(price)}` }} $</GradientButton>
+        <GradientButton v-if="price"
+          >{{
+            `${$t('labels.price')}: ${formatPrice(price)}`
+          }}
+          $</GradientButton
+        >
       </div>
     </div>
     <div class="right-content">
@@ -14,7 +19,11 @@
           <Description
             v-if="index == activeItem"
             :title="item.name.hasOwnProperty(locale) ? item.name[locale] : ''"
-            :text="item.description.hasOwnProperty(locale) ? item.description[locale] : ''"
+            :text="
+              item.description.hasOwnProperty(locale)
+                ? item.description[locale]
+                : ''
+            "
           />
         </div>
       </div>
@@ -23,11 +32,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Description from '@/components/core/Description'
 import Slider from '@/components/core/Slider'
 import GradientButton from '@/components/core/GradientButton'
 import { formatPrice } from '@/utils/Mixed'
-import { mapGetters } from 'vuex';
 
 export default {
   components: {

@@ -14,7 +14,8 @@ export const state = () => ({
   },
   flatNumber: '',
   filterLoading: false,
-  filteredTotalCount: 0
+  filteredTotalCount: 0,
+  customColor: ''
 })
 
 export const getters = {
@@ -78,6 +79,27 @@ export const actions = {
           resolve(data.data)
         })
         .catch((e) => reject(e))
+    })
+  },
+  lightUpFlat(context, flatNumber) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post('http://10.200.22.30/LocalServices/api/selected')
+        .then((response) => {
+          setTimeout(() => {
+            context.dispatch('inactivityReset')
+            resolve(response)
+          }, 3000)
+        })
+    })
+  },
+  inactivityReset(context) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post('http://10.200.22.30/LocalServices/api/noAction')
+        .then((response) => {
+          resolve(response)
+        })
     })
   }
 }

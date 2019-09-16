@@ -1,7 +1,7 @@
 <template>
   <div class="render">
-    <img src="@/static/images/render.png" alt="Render">
-    <block-hover-info class="block-hover-info" @click="handleChoosingBlock"/>
+    <img src="@/static/images/render.png" alt="Render" />
+    <block-hover-info class="block-hover-info" @click="handleChoosingBlock" />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   components: { BlockHoverInfo },
   data() {
     return {
-      activeBlockId: 1 //needs to be changed to dynamic on real server
+      activeBlockId: 1 // needs to be changed to dynamic on real server
     }
   },
   methods: {

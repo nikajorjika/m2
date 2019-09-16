@@ -1,11 +1,11 @@
 <template>
-  <svg-icon 
-    :stroke="`${iconColor}`" 
-    :width="width" 
-    :height="height" 
-    fill='none'
-    stroke-miterlimit='10' 
-    stroke-width='1.5px' 
+  <svg-icon
+    :stroke="`${iconColor}`"
+    :width="width"
+    :height="height"
+    fill="none"
+    stroke-miterlimit="10"
+    stroke-width="1.5px"
   />
 </template>
 <script>

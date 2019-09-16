@@ -6,11 +6,16 @@
         :key="index"
         class="flat-navigation__list__item"
       >
-        <nuxt-link :to="`/${locale}${item.route}`" class="flat-navigation__link">
+        <nuxt-link
+          :to="`/${locale}${item.route}`"
+          class="flat-navigation__link"
+        >
           <component
             :is="item.component"
             :icon-color="
-              isSamePath($route.path, `/${locale}${item.route}`) ? 'url(#gradient)' : '#fff'
+              isSamePath($route.path, `/${locale}${item.route}`)
+                ? 'url(#gradient)'
+                : '#fff'
             "
             width="16"
             height="16"

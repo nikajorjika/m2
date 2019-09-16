@@ -1,27 +1,57 @@
 <template>
   <div class="flat-list-table">
     <div class="flat-list-table__header">
-      <div class="flat-list-table__header__title medium">{{$t('labels.floor')}}</div>
-      <div class="flat-list-table__header__title medium">{{$t('labels.number')}}</div>
-      <div class="flat-list-table__header__title large">{{$t('labels.status')}}</div>
-      <div class="flat-list-table__header__title large">{{$t('labels.view')}}</div>
-      <div class="flat-list-table__header__title medium">{{$t('labels.area')}}</div>
-      <div class="flat-list-table__header__title medium">{{$t('labels.price')}}</div>
+      <div class="flat-list-table__header__title medium">
+        {{ $t('labels.floor') }}
+      </div>
+      <div class="flat-list-table__header__title medium">
+        {{ $t('labels.number') }}
+      </div>
+      <div class="flat-list-table__header__title large">
+        {{ $t('labels.status') }}
+      </div>
+      <div class="flat-list-table__header__title large">
+        {{ $t('labels.view') }}
+      </div>
+      <div class="flat-list-table__header__title medium">
+        {{ $t('labels.area') }}
+      </div>
+      <div class="flat-list-table__header__title medium">
+        {{ $t('labels.price') }}
+      </div>
       <div class="flat-list-table__header__button">
         <custom-button :label="$t('labels.LitUpAll')">
           <template v-slot:icon>
-            <light-icon class="flat-list-table__header__button__icon" iconColor="#fff"/>
+            <light-icon
+              class="flat-list-table__header__button__icon"
+              icon-color="#fff"
+            />
           </template>
         </custom-button>
       </div>
     </div>
     <div class="flat-list-table__body">
-      <div v-for="(item, index) in list" :key="index" class="flat-list-table__body__item">
-        <flat-list-item :item="item" class="flat-list-table__body__item__component"/>
+      <div
+        v-for="(item, index) in list"
+        :key="index"
+        class="flat-list-table__body__item"
+      >
+        <flat-list-item
+          :item="item"
+          class="flat-list-table__body__item__component"
+        />
         <div class="flat-list-table__body__item__button">
-          <custom-button :label="$t('labels.LitIt')" buttonColor="orange" class="ma">
+          <custom-button
+            :label="$t('labels.LitIt')"
+            button-color="orange"
+            class="ma"
+            @click="litCurrentItem(item)"
+          >
             <template v-slot:icon>
-              <light-icon class="flat-list-table__header__button__icon" iconColor="#fff"/>
+              <light-icon
+                class="flat-list-table__header__button__icon"
+                icon-color="#fff"
+              />
             </template>
           </custom-button>
         </div>
@@ -41,6 +71,11 @@ export default {
       type: Array,
       default: []
     }
+  },
+  methods: {
+    litCurrentItem(item) {
+      console.log(item)
+    }
   }
 }
 </script>
@@ -50,17 +85,21 @@ export default {
   display: flex;
   flex-direction: column;
   background: #f6ece1;
-  border-top-left-radius: 26px; 
+  border-top-left-radius: 26px;
   position: relative;
   &:after {
     content: '';
     position: absolute;
-    bottom:0;
+    bottom: 0;
     top: 80%;
     right: 0;
     left: 0;
     pointer-events: none;
-    background: linear-gradient(to bottom, rgba(255,255,255,0)  0%, rgba(242,227,211,0.7) 100%)
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(242, 227, 211, 0.7) 100%
+    );
   }
   .ma {
     margin: auto;

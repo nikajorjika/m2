@@ -19,9 +19,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import TechnicCard from '@/components/core/TechnicCard'
 import TitleWithBorder from '@/components/partials/TitleWithLine'
-import { mapGetters } from 'vuex';
 export default {
   components: {
     TechnicCard,

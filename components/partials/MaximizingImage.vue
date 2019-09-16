@@ -67,7 +67,7 @@ export default {
     handleClick() {
       const overlay = { image: this.image, open: true }
       this.$store.commit('setOverlay', overlay)
-    },
+    }
   }
 }
 </script>

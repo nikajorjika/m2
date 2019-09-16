@@ -13,7 +13,7 @@
         :class="{ active: value === values[1].value }"
       />
       <div
-        v-for="(val, index) in values" 
+        v-for="(val, index) in values"
         :key="index"
         class="switch__inner__item"
         :style="{
@@ -36,7 +36,7 @@ export default {
         },
         {
           value: true
-        } 
+        }
       ]
     },
     bgColor: {

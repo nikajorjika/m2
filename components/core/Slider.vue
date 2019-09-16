@@ -6,11 +6,19 @@
     @slideChange="sendMessageToParent()"
   >
     <div class="swiper__pagination">
-      <div class="swiper__pagination__button swiper__pagination__button--prev" @click="prevSlide">
+      <div
+        class="swiper__pagination__button swiper__pagination__button--prev"
+        @click="prevSlide"
+      >
         <ArrowRight :icon-color="activeIndex === 0 ? '#f0bda2' : '#ec7547'" />
       </div>
-      <div class="swiper__pagination__button swiper__pagination__button--next" @click="nextSlide">
-        <ArrowRight :icon-color="activeIndex === items.length - 1 ? '#f0bda2' : '#ec7547'" />
+      <div
+        class="swiper__pagination__button swiper__pagination__button--next"
+        @click="nextSlide"
+      >
+        <ArrowRight
+          :icon-color="activeIndex === items.length - 1 ? '#f0bda2' : '#ec7547'"
+        />
       </div>
     </div>
     <div class="swiper-wrapper">
@@ -22,7 +30,10 @@
             <span>{{ '0' + items.length }}</span>
           </div>
         </div>
-        <div :style="{ backgroundImage: `url(${item.image.url})` }" class="swiper__image"></div>
+        <div
+          :style="{ backgroundImage: `url(${item.image.url})` }"
+          class="swiper__image"
+        ></div>
         <div class="swiper__maximaze-item">
           <maximize-image
             :image="item.image.url"

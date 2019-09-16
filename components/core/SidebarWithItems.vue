@@ -2,12 +2,22 @@
   <div class="sidebar">
     <logo class="sidebar__logo" />
     <div class="sidebar__list">
-      <nuxt-link v-for="(item, index) in items" :key="index" :to="item.path"   class="sidebar__list__item">
+      <nuxt-link
+        v-for="(item, index) in items"
+        :key="index"
+        :to="item.path"
+        class="sidebar__list__item"
+      >
         <div class="sidebar__list__item__icon">
-          <component :is="item.component" iconColor="url(#gradient)" width="12px" height="12px" />
+          <component
+            :is="item.component"
+            icon-color="url(#gradient)"
+            width="12px"
+            height="12px"
+          />
         </div>
         <div class="sidebar__list__item__label">
-          {{item.title[locale]}}
+          {{ item.title[locale] }}
         </div>
       </nuxt-link>
     </div>
@@ -15,8 +25,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Logo from './Logo'
-import { mapGetters } from 'vuex';
 export default {
   components: { Logo },
   props: {
@@ -64,7 +74,7 @@ export default {
       &__icon {
         background: #f7f6f9;
         border-radius: 16px;
-        margin: 0 auto;    
+        margin: 0 auto;
         padding: 6px 20px;
       }
       &__label {

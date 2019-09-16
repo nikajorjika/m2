@@ -1,13 +1,20 @@
 <template>
   <div class="card">
-    <div class="card__image" :style="{ backgroundImage: 'url(' + imageUrl + ')' }"></div>
+    <div
+      class="card__image"
+      :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
+    ></div>
     <div class="card__content">
-      <div
-        class="card__title card__title--red"
-      >{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
-      <div class="card__text">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}</div>
+      <div class="card__title card__title--red">
+        {{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}
+      </div>
+      <div class="card__text">
+        {{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}
+      </div>
       <div class="card__button">
-        <GradientButton>{{$t('labels.appliancePrice')}}: {{ item.price }} $</GradientButton>
+        <GradientButton
+          >{{ $t('labels.appliancePrice') }}: {{ item.price }} $</GradientButton
+        >
       </div>
     </div>
     <div class="card__maximaze-item">
@@ -23,9 +30,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import GradientButton from '@/components/core/GradientButton'
 import MaximizeImage from '@/components/partials/MaximizingImage'
-import { mapGetters } from 'vuex'
 export default {
   components: {
     GradientButton,
@@ -40,7 +47,7 @@ export default {
   computed: {
     ...mapGetters(['locale']),
     imageUrl() {
-      return !!this.item.image ? this.item.image.url : ''
+      return this.item.image ? this.item.image.url : ''
     }
   }
 }

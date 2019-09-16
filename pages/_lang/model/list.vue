@@ -2,16 +2,16 @@
   <div class="flat-list">
     <div class="flat-list__title">
       <title-with-line :title="cTitle" />
-      <small>{{$t('titles.YouCanSelectMultipe')}}</small>
+      <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
     </div>
     <flat-list-table class="flat-list__table" :list="flats" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import FlatListTable from '@/components/partials/FlatListTable'
-import { mapGetters } from 'vuex'
 export default {
   layout: 'FullHeightWithoutNavigation',
   components: { TitleWithLine, FlatListTable },
@@ -19,8 +19,11 @@ export default {
     ...mapGetters({
       flats: 'Filter/flats'
     }),
-    cTitle: function() {
-      return this.$t('titles.flat-list-result-title').replace('%s', this.flats.length)
+    cTitle() {
+      return this.$t('titles.flat-list-result-title').replace(
+        '%s',
+        this.flats.length
+      )
     }
   }
 }
@@ -40,7 +43,7 @@ export default {
     }
   }
   &__table {
-    margin-top: 47px; 
+    margin-top: 47px;
     height: 80%;
   }
 }

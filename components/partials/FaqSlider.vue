@@ -52,15 +52,16 @@ export default {
   },
   mounted() {
     if (!this.questionList.length) {
-      this
-      .fetchFAQ()
+      this.fetchFAQ()
     }
   },
   methods: {
     ...mapActions('FAQ', ['fetchFAQ']),
     turnToLeadingZero,
     labelOrLocaledLabel(item, label) {
-      return item[label].hasOwnProperty(this.locale) ? item[label][this.locale] : item[label]
+      return item[label].hasOwnProperty(this.locale)
+        ? item[label][this.locale]
+        : item[label]
     }
   }
 }

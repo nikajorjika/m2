@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <SliderDesc :items="items" :price="price"/>
+    <SliderDesc :items="items" :price="price" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SliderDesc from '@/components/core/SliderDesc'
-import { mapGetters } from 'vuex';
 export default {
   components: {
     SliderDesc
@@ -22,7 +22,9 @@ export default {
       const flat = this.flat.renovation_flat_properties.find((item) => {
         return item.type === 'area' && item.name === 'total_area'
       })
-      return flat ? parseInt(this.flat.furniture.price) * parseInt(flat.number) : 0
+      return flat
+        ? parseInt(this.flat.furniture.price) * parseInt(flat.number)
+        : 0
     }
   }
 }

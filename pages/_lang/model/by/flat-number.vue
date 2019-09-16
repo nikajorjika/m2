@@ -1,7 +1,10 @@
 <template>
   <div class="page-flat-number">
     <div class="page-flat-number__title-container">
-      <title-with-line class="page-flat-number__title" :title="$t('titles.SearchByFlatNumber')" />
+      <title-with-line
+        class="page-flat-number__title"
+        :title="$t('titles.SearchByFlatNumber')"
+      />
       <small>{{ $t('titles.SearchByFlatNumberSubTitle') }}</small>
     </div>
     <div class="page-flat-number__form">
@@ -9,39 +12,39 @@
     </div>
     <div class="page-flat-number__buttons">
       <small>{{ $t('titles.ByFlatNumberButtonsTitle') }}</small>
-        <illustrated-button
-          :label="$t('labels.ByFilter')"
-          :to-route="{
-            name: 'lang-model-filter',
-            params: { lang: locale }
-          }"
-          class="filter-icon"
-        >
-          <template v-slot:illustration>
-            <filter-icon-illustration
-              class="filter-illustation-icon"
-              width="50px"
-              height="100%"
-            />
-          </template>
+      <illustrated-button
+        :label="$t('labels.ByFilter')"
+        :to-route="{
+          name: 'lang-model-filter',
+          params: { lang: locale }
+        }"
+        class="filter-icon"
+      >
+        <template v-slot:illustration>
+          <filter-icon-illustration
+            class="filter-illustation-icon"
+            width="50px"
+            height="100%"
+          />
+        </template>
 
-          <template v-slot:icon>
-            <filter-search iconColor="#fff" width="18px" height="9px" />
-          </template>
-        </illustrated-button>
+        <template v-slot:icon>
+          <filter-search icon-color="#fff" width="18px" height="9px" />
+        </template>
+      </illustrated-button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SearchForm from '@/components/partials/SearchForm'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import FilterSearch from '@/components/icons/FilterSearch'
 import FilterIconIllustration from '@/components/icons/FilterIllustration'
-import { mapGetters, mapActions } from 'vuex'
 export default {
-  components: { 
+  components: {
     TitleWithLine,
     SearchForm,
     FilterSearch,
@@ -60,7 +63,10 @@ export default {
     }),
     handleSearch(searchBy) {
       this.fetchByFlatNumber(searchBy).then((data) => {
-        this.$router.push({ name: 'lang-model-list', params: { lang: this.locale } })
+        this.$router.push({
+          name: 'lang-model-list',
+          params: { lang: this.locale }
+        })
       })
     }
   }
@@ -85,7 +91,7 @@ export default {
       font-family: $font;
       color: #424242;
       margin-top: 13px;
-    }  
+    }
   }
   &__form {
     margin-top: 62px;

@@ -1,13 +1,24 @@
 <template>
   <div class="views-picker">
-    <div v-for="(item, index) in views" :key="index" class="views-picker__item" :class="{ active: isActive(item) }" @click="checkItem(item)">
+    <div
+      v-for="(item, index) in views"
+      :key="index"
+      class="views-picker__item"
+      :class="{ active: isActive(item) }"
+      @click="checkItem(item)"
+    >
       <div class="views-picker__item__direction">
-        <compass-icon class="compass-icon" icon-color="#fff" height="14px" width="14px" />
+        <compass-icon
+          class="compass-icon"
+          icon-color="#fff"
+          height="14px"
+          width="14px"
+        />
       </div>
       <div class="views-picker__item__label">
-        {{item}}
+        {{ item }}
       </div>
-      <div class="views-picker__item__checked" v-show="isActive(item)">
+      <div v-show="isActive(item)" class="views-picker__item__checked">
         <check-icon icon-color="#f26529" height="11px" width="9px" />
       </div>
     </div>
@@ -36,8 +47,8 @@ export default {
   },
   methods: {
     checkItem(item) {
-      if(this.isActive(item)) {
-        this.selected = this.selected.filter((i)=> i !== item)
+      if (this.isActive(item)) {
+        this.selected = this.selected.filter((i) => i !== item)
       } else {
         this.selected = [...this.selected, item]
       }
@@ -69,36 +80,35 @@ export default {
     transition: transform 200ms;
     overflow: hidden;
     height: 100%;
-    &:nth-child(4n+1) {
+    &:nth-child(4n + 1) {
       .compass-icon {
         transform: rotate(45deg);
       }
     }
-    &:nth-child(4n+2) {
+    &:nth-child(4n + 2) {
       .compass-icon {
         transform: rotate(135deg);
       }
     }
-    &:nth-child(4n+3) {
+    &:nth-child(4n + 3) {
       .compass-icon {
         transform: rotate(-45deg);
       }
     }
-    &:nth-child(4n+4) {
+    &:nth-child(4n + 4) {
       .compass-icon {
         transform: rotate(-135deg);
       }
     }
     &__direction {
-      background: linear-gradient(45deg, #684f78 1%,#e26479 100%); 
+      background: linear-gradient(45deg, #684f78 1%, #e26479 100%);
       width: 52px;
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;  
-      
+      justify-content: center;
     }
-    &__label {   
+    &__label {
       padding: 17px 11px 18px 33px;
     }
     &.active {

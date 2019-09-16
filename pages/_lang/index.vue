@@ -33,7 +33,7 @@ export default {
     ...mapGetters({
       locale: 'locale',
       m2AppName: 'app'
-    }),
+    })
   },
   methods: {
     setApp(app) {
@@ -50,7 +50,7 @@ export default {
 .app-init {
   padding-top: 50px;
   padding-left: 50px;
-  display: flex; 
+  display: flex;
   justify-content: space-evenly;
 }
 </style>

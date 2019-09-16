@@ -1,11 +1,11 @@
 <template>
-  <arrow-icon 
-    :stroke="`${iconColor}`" 
-    :width="width" 
-    :height="height" 
-    fill='none'
-    stroke-miterlimit='10' 
-    stroke-width='1.5px' 
+  <arrow-icon
+    :stroke="`${iconColor}`"
+    :width="width"
+    :height="height"
+    fill="none"
+    stroke-miterlimit="10"
+    stroke-width="1.5px"
   />
 </template>
 <script>
@@ -28,4 +28,4 @@ export default {
   }
 }
 </script>
- }.cls-2{fill:#fff;
+}.cls-2{fill:#fff;

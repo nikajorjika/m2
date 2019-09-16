@@ -12,12 +12,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import FlatNavigation from './FlatNavigation'
+import FaqButton from './FAQButton'
 import FlatIcon from '@/components/icons/Appartament'
 import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
 import SupplyIcon from '@/components/icons/Technic'
 import DecorationIcon from '@/components/icons/Decor'
-import FaqButton from './FAQButton'
 import LanguageSwitcher from '@/components/core/LanguageSwitcher'
 export default {
   components: {
