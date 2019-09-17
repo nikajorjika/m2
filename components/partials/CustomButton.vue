@@ -26,17 +26,23 @@ export default {
     buttonSize: {
       type: String,
       default: 'medium'
+    },
+    disabled: {
+      type: Boolean,
+      default: false  
     }
   },
   computed: {
     customClasses() {
-      const sizeClasses = ''
-      return `btn--${this.buttonColor} btn--${this.buttonSize}`
+      const disabledClass = this.disabled ? 'btn--disabled' : ''
+      return `btn--${this.buttonColor} btn--${this.buttonSize} ${disabledClass}`
     }
   },
   methods: {
     handleClick() {
-      this.$emit('click')
+      if (!this.disabled) {
+        this.$emit('click')
+      }
     }
   }
 }
@@ -53,6 +59,9 @@ export default {
   align-items: center;
   &:focus {
     outline: none;
+  }
+  &--disabled {
+    opacity: 0.5;
   }
   &--purple {
     background: #7e73ae;

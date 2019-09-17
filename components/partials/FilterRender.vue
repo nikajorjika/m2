@@ -48,9 +48,9 @@ export default {
   position: relative;
   &__info {
     position: absolute;
-    opacity: 0.99;
-    top: 30%;
-    left: 30%;
+    opacity: 0.99;    
+    top: 19%;
+    left: 68%;
   }
   img {
     width: 100%;

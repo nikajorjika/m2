@@ -51,7 +51,7 @@ export default {
   position: relative;
   margin-right: 3%;
   border-top-right-radius: 80px;
-  box-shadow: 2px 3px 21.759999999999998px 10.24px rgba(67, 34, 114, 0.07);
+  box-shadow: 2px 3px 21.76px 10.24px rgba(67, 34, 114, 0.07);
   &__logo {
     width: 43%;
     margin: 89px auto 0;
@@ -78,7 +78,7 @@ export default {
         padding: 6px 20px;
       }
       &__label {
-        font-size: 9px;
+        font-size: 11px;
         font-family: $font;
         margin-top: 15px;
         text-align: center;

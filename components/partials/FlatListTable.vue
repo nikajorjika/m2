@@ -38,13 +38,17 @@
       >
         <flat-list-item
           :item="item"
-          class="flat-list-table__body__item__component"
+          class="flat-list-table__body__item__component" 
         />
+        <div class="flat-list-table__body__item__color-mark" :style="{backgroundColor: `#${item.planshet.color}`}">
+          <span :style="{backgroundColor: `#${item.planshet.color}`}"></span>
+        </div>
         <div class="flat-list-table__body__item__button">
           <custom-button
             :label="$t('labels.LitIt')"
             button-color="orange"
             class="ma"
+            :disabled="item.planshet.id !== chosenPlanshet"
             @click="litCurrentItem(item)"
           >
             <template v-slot:icon>
@@ -70,6 +74,11 @@ export default {
     list: {
       type: Array,
       default: []
+    }
+  },
+  computed: {
+    chosenPlanshet() {
+      return parseInt(this.$cookies.get('paveleon-planshet'))
     }
   },
   methods: {
@@ -135,7 +144,24 @@ export default {
       border-top: 1px solid #faf4ed;
       padding: 13px 58px 13px 47px;
       display: flex;
+      align-items: center;
       background: #f4e7d9;
+      &__color-mark {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        position: relative;
+        span {
+          display: block;
+          position: absolute;
+          width: 22px;
+          height: 22px;
+          opacity: 0.25;
+          top: -3.5px;
+          left: -3.5px;
+          border-radius: 50%;
+        }
+      }
       &__component {
         margin-right: 35px;
         max-height: 61%;

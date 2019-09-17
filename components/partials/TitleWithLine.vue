@@ -20,7 +20,7 @@ export default {
   font-size: 16px;
   display: inline-block;
   font-family: $font-caps;
-  font-weight: 500;
+  font-weight: 800;
   letter-spacing: 0.6px;
   .text {
     position: relative;
