@@ -1,14 +1,16 @@
 <template>
-  <ul class="flat-list-item">
-    <li class="flat-list-item__li medium">{{ floor }}</li>
-    <li class="flat-list-item__li medium">
-      <span class="bordered">{{ item.flat_number }}</span>
-    </li>
-    <li class="flat-list-item__li large">{{ status }}</li>
-    <li class="flat-list-item__li large">{{ views }}</li>
-    <li class="flat-list-item__li medium">{{ area }}</li>
-    <li class="flat-list-item__li xs">{{ price }} $</li>
-  </ul>
+  <nuxt-link class="flat-list-link" :to="redirectRoute">
+    <ul class="flat-list-item">
+      <li class="flat-list-item__li medium">{{ floor }}</li>
+      <li class="flat-list-item__li medium">
+        <span class="bordered">{{ item.flat_number }}</span>
+      </li>
+      <li class="flat-list-item__li large">{{ status }}</li>
+      <li class="flat-list-item__li large">{{ views }}</li>
+      <li class="flat-list-item__li medium">{{ area }}</li>
+      <li class="flat-list-item__li xs">{{ price }} $</li>
+    </ul>
+  </nuxt-link>
 </template>
 
 <script>
@@ -25,6 +27,9 @@ export default {
     ...mapGetters({
       locale: 'locale'
     }),
+    redirectRoute() {
+      return `/${this.locale}/model/flat/${this.item.id}`
+    },
     floor() {
       return this.item.floor.hasOwnProperty('number')
         ? this.item.floor.number
@@ -59,6 +64,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.flat-list-link {
+  text-decoration: none;
+}
 .flat-list-item {
   background: linear-gradient(85deg, #ae9ba8 0%, #eba5a9 100%);
   display: flex;

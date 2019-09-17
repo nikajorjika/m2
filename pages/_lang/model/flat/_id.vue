@@ -117,7 +117,7 @@ export default {
     },
     price() {
       if (!this.flat) return 0
-      return `${formatPrice(this.flat.price)} $`
+      return `${formatPrice(parseInt(this.flat.price))} $`
     },
     builingStatus() {
       if (!this.flat) return 0
