@@ -8,6 +8,7 @@
     </div>
     <div class="filter-price__range-selector">
       <select-range
+        v-if="price"
         class="filter-price__range-selector__component"
         :min-value="price.min"
         :max-value="price.max"
@@ -31,28 +32,31 @@ export default {
   middleware: 'RedirectIfNoModel',
   data() {
     return {
-      price: {
-        min: 30000,
-        max: 150000
-      },
       timeout: null
     }
   },
   computed: {
     ...mapGetters({
       locale: 'locale',
-      filters: 'Filter/filters'
+      filters: 'Filter/filters',
+      filterDefaults: 'Filter/filterDefaults'
     }),
     filterPrice() {
       return this.filters.price
     },
     nextUrl() {
       return `/${this.locale}/model/filter/floor`
+    },
+    price() {
+      return {
+        min: parseInt(this.filterDefaults.min_price),
+        max: parseInt(this.filterDefaults.max_price)
+      }
     }
   },
   methods: {
     ...mapActions({
-      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+      fetchFilteredFlats: 'Filter/fetchFilteredDataCount'
     }),
     handleRangeChange(data) {
       this.$store.commit('Filter/SET_FILTER_ITEM', {

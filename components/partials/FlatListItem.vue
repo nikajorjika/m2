@@ -42,7 +42,7 @@ export default {
       return viewsLabels.length ? viewsLabels.join(', ') : ''
     },
     price() {
-      return formatPrice(this.item.price, '.')
+      return formatPrice(parseInt(this.item.price))
     },
     area() {
       let area

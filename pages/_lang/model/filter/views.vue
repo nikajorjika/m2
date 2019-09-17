@@ -29,26 +29,33 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      filters: 'Filter/filters'
+      filters: 'Filter/filters',
+      filterDefaults: 'Filter/filterDefaults'
     }),
     viewFilterFromStore() {
       return [...this.filters.view]
-    }
-  },
-  data() {
-    return {
-      views: ['პირველი ხედი', 'მეორე ხედით', 'მესამე ხედით', 'მეოთხე ხედით']
+    },
+    views() {
+      const views = this.filterDefaults.views.map(item => {
+        return {
+          name: item.name[this.locale],
+          value: item.id
+        }
+      })
+      return views
     }
   },
   methods: {
     ...mapMutations({
-      setFilterItem: 'Filter/SET_FILTER_ITEM'
+      setFilterItem: 'Filter/SET_FILTER_VIEWS'
     }),
     ...mapActions({
-      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+      fetchFilteredDataCount: 'Filter/fetchFilteredDataCount',
+      fetchFilteredFlats: 'Filter/fetchFilteredFlats',
     }),
     handleChange(data) {
-      this.setFilterItem({ key: 'view', value: data })
+      this.setFilterItem(data)
+      this.fetchFilteredDataCount()
     },
     handleNext() {
       this.fetchFilteredFlats().then(() => {

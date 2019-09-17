@@ -113,7 +113,6 @@ export default {
     font-size: 12px;
     font-family: $font-caps;
     color: #7e73ae;
-    justify-content: space-between;
     &__title {
       &.medium {
         width: 104px;
@@ -123,6 +122,7 @@ export default {
       }
     }
     &__button {
+      margin: auto;
       &__icon {
         margin-left: 22px;
       }

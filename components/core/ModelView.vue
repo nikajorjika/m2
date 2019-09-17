@@ -56,7 +56,7 @@ export default {
   &__back-button {
     color: #3c2270;
     font-family: $font;
-    font-size: 10px;
+    font-size: 10px; 
   }
   &__top-block {
     display:flex;

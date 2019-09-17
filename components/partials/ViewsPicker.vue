@@ -16,7 +16,7 @@
         />
       </div>
       <div class="views-picker__item__label">
-        {{ item }}
+        {{ item.name }}
       </div>
       <div v-show="isActive(item)" class="views-picker__item__checked">
         <check-icon icon-color="#f26529" height="11px" width="9px" />
@@ -48,14 +48,14 @@ export default {
   methods: {
     checkItem(item) {
       if (this.isActive(item)) {
-        this.selected = this.selected.filter((i) => i !== item)
+        this.selected = this.selected.filter((i) => i.value !== item.value)
       } else {
         this.selected = [...this.selected, item]
       }
       this.$emit('change', this.selected)
     },
     isActive(item) {
-      return this.selected.includes(item)
+      return this.selected.find(i => i.value === item.value)
     }
   }
 }
@@ -64,9 +64,9 @@ export default {
 <style lang="scss" scoped>
 .views-picker {
   display: grid;
-  grid-template-columns: repeat(2, 251px);
-  grid-column-gap: 116px;
-  grid-row-gap: 74px;
+  grid-template-columns: repeat(3, 251px);
+  grid-column-gap: 47px;
+  grid-row-gap: 44px;
   &__item {
     background: #fbf7f2;
     border-top-left-radius: 22px;

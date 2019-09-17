@@ -94,6 +94,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('model/fetchModel')
+    this.$store.dispatch('Filter/fetchFilterDefaults')
   },
   methods: {
     ...mapActions(['model/fetchModel']),

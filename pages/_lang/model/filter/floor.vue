@@ -32,19 +32,18 @@ export default {
   components: { TitleWithLine, SelectRange, FiltersFooterBlock },
   layout: 'ModelFilterLayout',
   middleware: 'RedirectIfNoModel',
-  data() {
-    return {
-      floors: {
-        min: 1,
-        max: 25
-      }
-    }
-  },
   computed: {
     ...mapGetters({
       locale: 'locale',
-      filters: 'Filter/filters'
+      filters: 'Filter/filters',
+      filterDefaults: 'Filter/filterDefaults'
     }),
+    floors() {
+      return {
+        min: this.filterDefaults.min_floor,
+        max: this.filterDefaults.max_floor
+      }
+    },
     nextUrl() {
       return `/${this.locale}/model/filter/views`
     },
@@ -57,7 +56,7 @@ export default {
       setFilterItem: 'Filter/SET_FILTER_ITEM'
     }),
     ...mapActions({
-      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+      fetchFilteredFlats: 'Filter/fetchFilteredDataCount'
     }),
     handleChange(data) {
       this.setFilterItem({ key: 'floors', value: data })

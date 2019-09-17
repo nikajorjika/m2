@@ -1,13 +1,13 @@
 <template>
-  <gradient-block>
+  <gradient-block >
     <div class="block-info">
       <div class="block-info__number">
-        <div class="block-info__number__label">ბლოკი</div>
-        <div class="block-info__number__value">11</div>
+        <div class="block-info__number__label">{{$t('labels.block')}}</div>
+        <div class="block-info__number__value">{{blockNumber}}</div>
       </div>
       <div class="block-info__flats">
-        <div>ამ ბლოკში დარჩენილია</div>
-        <div>14 ბინა</div>
+        <div>{{$t('labels.FlatsLeftInThisBlock')}}</div>
+        <div>{{flatsLeft}}</div>
       </div>
       <div class="block-info__button">
         <button-main-orange
@@ -34,6 +34,21 @@ import GradientBlock from '@/components/partials/GradientBlock'
 import ArrowRight from '@/components/icons/ArrowRight'
 export default {
   components: { GradientBlock, ButtonMainOrange, ArrowRight },
+  props: {
+    blockNumber: {
+      type: [String, Number],
+      required: true
+    },
+    flatsCount: {
+      type: [String, Number],
+      required: true
+    }
+  },
+  computed: {
+    flatsLeft() {
+      return `${this.flatsCount} ${this.$t('labels.flat')}`
+    }
+  },
   methods: {
     handleClick() {
       this.$emit('click')
@@ -60,7 +75,11 @@ export default {
       padding: 20px 0 20px 8px;
     }
     &__value {
-      padding: 11px;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border: 1px solid #fff;
       border-radius: 50%;
       margin: auto;
