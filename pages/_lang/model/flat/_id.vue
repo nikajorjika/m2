@@ -23,7 +23,7 @@
           :plan-image="blueprintUrl"
           gradient-text="2 საძინებელი"
         />
-        <room-list-component class="room-list-slider" style-type="small" :room-list="rooms" />
+        <room-list-component v-if="rooms.length" class="room-list-slider" style-type="small" :room-list="rooms" />
       </div>
     </div>
     <div class="filter-flat__footer">
