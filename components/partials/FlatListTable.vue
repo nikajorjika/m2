@@ -68,6 +68,7 @@
 import FlatListItem from '@/components/partials/FlatListItem'
 import CustomButton from '@/components/partials/CustomButton'
 import LightIcon from '@/components/icons/Light'
+import { mapActions } from 'vuex'
 export default {
   components: { FlatListItem, CustomButton, LightIcon },
   props: {
@@ -85,9 +86,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      lightUpFlat: 'Filter/lightUpFlat'
+    }),
     litCurrentItem(item) {
       if(item.planshet.id !== this.chosenPlanshet) {
         this.$emit('showPrompt', item.planshet)
+      }else {
+        this.lightUpFlat([item])
       }
     }
   }

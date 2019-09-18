@@ -133,13 +133,36 @@ export const actions = {
         .catch((e) => reject(e))
     })
   },
-  lightUpFlat(context, flatNumber) {
+  lightUpFlat(context, flats) {
     return new Promise((resolve, reject) => {
+      let stateMock = [
+        {
+          BlockId: 'A',
+          BlockIdNumeric: 1,
+          Apartments: []
+        },
+        {
+          BlockId: 'B',
+          BlockIdNumeric: 1,
+          Apartments: []
+        },
+        {
+          BlockId: 'C',
+          BlockIdNumeric: 1,
+          Apartments: []
+        }
+      ]
+      flats.map((item) => {
+        stateMock[parseInt(item.block) - 1].Apartments.push({
+          ApartmentId: item.flat_number
+        })
+      })
       this.$axios
-        .post('http://10.200.22.30/LocalServices/api/selected')
+        .post('http://10.200.22.28/LocalServices/api/selected', stateMock)
         .then((response) => {
           setTimeout(() => {
-            context.dispatch('inactivityReset')
+            // context.dispatch('inactivityReset')
+            console.log(response)
             resolve(response)
           }, 3000)
         })
@@ -147,11 +170,11 @@ export const actions = {
   },
   inactivityReset(context) {
     return new Promise((resolve, reject) => {
-      this.$axios
-        .post('http://10.200.22.30/LocalServices/api/noAction')
-        .then((response) => {
-          resolve(response)
-        })
+      // this.$axios
+      //   .post('http://10.200.22.28/LocalServices/api/noAction')
+      //   .then((response) => {
+      //     resolve(response)
+      //   })
     })
   }
 }
