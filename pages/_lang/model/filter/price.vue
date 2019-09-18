@@ -43,15 +43,20 @@ export default {
       filterDefaults: 'Filter/filterDefaults'
     }),
     filterPrice() {
-      return this.filters.price
+      return {
+        min: this.filters.price.min,
+        max: this.filters.price.max
+      }
     },
     nextUrl() {
       return `/${this.locale}/model/filter/floor`
     },
     price() {
+      let min = parseInt(this.filterDefaults.min_price)
+      let max = parseInt(this.filterDefaults.max_price)
       return {
-        min: parseInt(this.filterDefaults.min_price),
-        max: parseInt(this.filterDefaults.max_price)
+        min: min,
+        max: max
       }
     }
   },
