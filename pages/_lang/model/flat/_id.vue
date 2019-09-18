@@ -109,18 +109,18 @@ export default {
     },
     price() {
       if (!this.flat) return 0
-      return `${formatPrice(parseInt(this.flat.price))} $`
+      return `${this.flat.price} $`
     },
     builingStatus() {
       if (!this.flat) return 0
-      return this.flat.building_status
+      return parseInt(this.flat.building_status)
     },
     listCardData() {
       if (!this.flat) return
-      const flatArea = this.flat.total_area - this.flat.balcony_area - this.flat.terrace_area
+      const flatArea = (this.flat.total_area - this.flat.balcony_area - this.flat.terrace_area).toFixed(2)
       return [
         {
-          value: `${parseInt(this.flat.total_area)} ${this.$t('labels.m2')}`,
+          value: `${this.flat.total_area} ${this.$t('labels.m2')}`,
           label: this.$t('labels.total_area')
         },
         {
@@ -128,7 +128,7 @@ export default {
           label: this.$t('labels.flat_area')
         },
         {
-          value: `${this.flat.terrace_area} ${this.$t('labels.m2')}`,
+          value: `${this.flat.balcony_area} ${this.$t('labels.m2')}`,
           label: this.$t('labels.balcony_area_slash_terrace')
         }
       ]

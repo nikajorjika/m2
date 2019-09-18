@@ -78,7 +78,7 @@ export default {
     height: 100%;
     box-sizing: border-box;
     &__container {
-      width: 82%;
+      width: 78%;
       overflow: hidden;
     }
     &__item {

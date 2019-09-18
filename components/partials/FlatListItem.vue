@@ -42,7 +42,7 @@ export default {
       return viewsLabels.length ? viewsLabels.join(', ') : ''
     },
     price() {
-      return formatPrice(parseInt(this.item.price))
+      return this.item.price
     },
     area() {
       return `${this.item.total_area} ${this.$t('labels.m2')}`
