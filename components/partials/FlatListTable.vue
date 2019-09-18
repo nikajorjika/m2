@@ -19,7 +19,7 @@
       <div class="flat-list-table__header__title medium">
         {{ $t('labels.price') }}
       </div>
-      <div class="flat-list-table__header__button">
+      <div v-if="showLightAllButton" class="flat-list-table__header__button">
         <custom-button :label="$t('labels.LitUpAll')">
           <template v-slot:icon>
             <light-icon
@@ -79,6 +79,9 @@ export default {
   computed: {
     chosenPlanshet() {
       return parseInt(this.$cookies.get('paveleon-planshet'))
+    },
+    showLightAllButton() {
+      return this.$cookies.get('paveleon-planshet') ? true : false
     }
   },
   methods: {
@@ -149,15 +152,15 @@ export default {
       align-items: center;
       background: #f4e7d9;
       &__color-mark {
-        width: 14px;
-        height: 14px;
+        width: 13px;
+        height: 13px;
         border-radius: 50%;
         position: relative;
         span {
           display: block;
           position: absolute;
-          width: 23px;
-          height: 23px;
+          width: 21px;
+          height: 20px;
           opacity: 0.25;
           top: -3.5px;
           left: -3.5px;

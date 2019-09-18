@@ -92,7 +92,7 @@ export default {
       return [
         {
           title: {
-            en: 'MAIN',
+            en: 'Main',
             ka: 'მთავარი'
           },
           path: `/${this.locale}/model`,
@@ -100,7 +100,7 @@ export default {
         },
         {
           title: {
-            en: 'QUESTIONS',
+            en: 'FAQ',
             ka: 'კითხვები'
           },
           path: `/${this.locale}/renovations/faq`,
@@ -147,7 +147,7 @@ body {
     }
   }
   .app {
-    height: calc(100% - 221px);
+    height: 580px;
     background: $bg-color-2;
     box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }

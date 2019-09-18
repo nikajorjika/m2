@@ -90,6 +90,8 @@ export default {
       width: 46px;
       display: block;
       text-align: center;
+      height: 26px;
+      line-height: 14px;
     }
     &.medium {
       width: 104px;

@@ -4,9 +4,9 @@
     :class="{ 'btn-standard--disabled': disabled }"
     @click="handleClick"
   >
-    <span class="btn-standard__text" :style="{ fontSize: fontSize }">{{
-      buttonText
-    }}</span>
+    <span class="btn-standard__text" :style="{ fontSize: fontSize }">
+      <span class="center-font">{{ buttonText }}</span>
+    </span>
     <span
       class="btn-standard__icon"
       :style="{ width: iconWidth, height: iconHeight }"

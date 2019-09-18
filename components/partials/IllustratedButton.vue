@@ -43,7 +43,7 @@ export default {
   .label {
     margin-left: fit(35, fitRaw(16)); /* 100px */
     font-family: $font;
-    font-size: fit(16); /* 16px */
+    font-size: fit(18); /* 16px */
     line-height: fit(25, fitRaw(16)); /* 25px */
     color: $font-color;
   }
