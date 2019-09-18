@@ -4,8 +4,9 @@
       <ImageSlider :images="model && model.images ? model.images : []" />
 
       <title-with-line class="name" :title="name" />
+
       <div class="description">
-        <p>{{ description }}</p>
+        <p v-html="description"></p>
       </div>
 
       <div class="buttons">
@@ -92,7 +93,7 @@ export default {
       model: 'model/model'
     }),
     hasColor() {
-      return this.$cookies.get('paveleon-planshet') ? true : false
+      return !!this.$cookies.get('paveleon-planshet')
     }
   },
   mounted() {
