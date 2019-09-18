@@ -28,7 +28,6 @@ export default {
     font-size: 16px;
     line-height: 19px;
     box-shadow: inset 0px -8px 0px 0px #f2cab1;
-    display: inline-block;
   }
   .color-orange {
     color: #f26529;

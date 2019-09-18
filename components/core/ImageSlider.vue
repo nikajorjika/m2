@@ -5,8 +5,7 @@
         <img :src="image.url" />
       </div>
     </div>
-
-    <div class="swiper-pagination"></div>
+    <div v-if="slidesNumber > 1" class="swiper-pagination"></div>
   </div>
 </template>
 
@@ -29,8 +28,12 @@ export default {
           type: 'bullets',
           clickable: true
         }
-      }
+      },
+      slidesNumber: 0
     }
+  },
+  mounted() {
+    this.slidesNumber = this.$el.getElementsByClassName('swiper-slide').length
   }
 }
 </script>

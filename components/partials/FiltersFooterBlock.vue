@@ -17,7 +17,7 @@
           class="filter-footer__flats__label__gradient"
           :text="totalCount"
         />
-        <span>{{ $t('labels.flat') }}</span>
+        <span>{{ $t('labels.FlatEnglishPlural') }}</span>
       </div>
     </div>
     <div class="filter-footer__controls">
@@ -130,7 +130,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     &__next {
-      margin-left: auto;
+      margin-left: 13px;
     }
     &__skip {
       color: #432272;
@@ -138,6 +138,8 @@ export default {
       font-size: $font;
       display: flex;
       align-items: center;
+      margin-left: auto;
+      letter-spacing: 1px;
       &__icon {
         display: flex;
         svg {
