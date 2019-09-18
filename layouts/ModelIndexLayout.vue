@@ -46,6 +46,11 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    handleClose() {
+      this.$store.commit('setOverlay', { image: '', open: false })
+    }
   }
 }
 </script>

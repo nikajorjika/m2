@@ -16,9 +16,8 @@
         :suffix="$t('labels.floorShort')"
         @change="handleChange"
       />
-      <!-- <range-picker :ranges="ranges" :preselected="preselectedRanges" @change="handleChange" /> -->
     </div>
-    <filters-footer-block :next-url="nextUrl" />
+    <filters-footer-block :next-url="nextUrl" @skip="skipPrice" />
   </div>
 </template>
 
@@ -67,6 +66,13 @@ export default {
       this.timeout = setTimeout(() => {
         this.fetchFilteredFlats()
       }, 300)
+    },
+    skipPrice() {
+        this.setFilterItem({
+          key: 'floors',
+          value: this.floors
+        })
+        this.fetchFreshData()
     }
   }
 }

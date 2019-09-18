@@ -17,9 +17,17 @@ export default {
       return this.allLocales.filter((item) => item !== this.locale)[0]
     }
   },
+  created() {
+    if(process.client) {
+      const html = document.documentElement
+      html.setAttribute('lang', this.locale)
+    }
+  },
   methods: {
     toggleLanguage() {
       const { params, name } = this.$route
+      const html = document.documentElement
+      html.setAttribute('lang', this.opositeLocale)
       this.$router.push({
         name,
         params: { ...params, lang: this.opositeLocale }

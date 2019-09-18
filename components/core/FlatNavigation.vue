@@ -84,6 +84,7 @@ export default {
       margin-top: 10px;
       font-size: 12px;
       font-weight: 900;
+      text-transform: uppercase;
     }
     &__icon {
       z-index: 1;

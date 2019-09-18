@@ -18,7 +18,7 @@
         @change="handleRangeChange"
       />
     </div>
-    <filters-footer-block :next-url="nextUrl" />
+    <filters-footer-block :next-url="nextUrl" @skip="skipPrice"/>
   </div>
 </template>
 
@@ -71,6 +71,13 @@ export default {
       this.timeout = setTimeout(() => {
         this.fetchFilteredFlats()
       }, 300)
+    },
+    skipPrice() {
+       this.$store.commit('Filter/SET_FILTER_ITEM', {
+        key: 'price',
+        value: this.price
+      })
+      this.fetchFreshData()
     }
   }
 }

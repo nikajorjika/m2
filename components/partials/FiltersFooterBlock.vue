@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="filter-footer__controls">
-      <div class="filter-footer__controls__skip" @click="handleNext">
+      <div v-if="!noSkip" class="filter-footer__controls__skip" @click="handleSkip">
         <span class="filter-footer__controls__skip__text">
           {{ $t('buttons.skip') }}
         </span>
@@ -57,6 +57,10 @@ export default {
       type: [String, Object],
       required: false,
       default: null
+    },
+    noSkip: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -83,6 +87,12 @@ export default {
         this.$router.push(this.nextUrl)
       }
       this.$emit('next')
+    },
+    handleSkip() {
+      if (this.nextUrl) {
+        this.$router.push(this.nextUrl)
+      }
+      this.$emit('skip')
     }
   }
 }
@@ -119,6 +129,9 @@ export default {
     width: 264px;
     justify-content: space-between;
     align-items: center;
+    &__next {
+      margin-left: auto;
+    }
     &__skip {
       color: #432272;
       font-size: 10px;

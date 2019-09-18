@@ -7,7 +7,7 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar />
+    <sidebar :homepage="homepage" />
     <flat-view>
       <div class="app">
         <nuxt />
@@ -29,6 +29,11 @@ export default {
     open: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    homepage() {
+      return `/${this.locale}/renovations`
     }
   },
   mounted() {

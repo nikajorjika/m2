@@ -13,7 +13,7 @@
         @change="handleChange"
       />
     </div>
-    <filters-footer-block @next="handleNext" />
+    <filters-footer-block :no-skip="true" @next="handleNext" />
   </div>
 </template>
 

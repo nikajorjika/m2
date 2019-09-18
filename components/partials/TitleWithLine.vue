@@ -13,21 +13,22 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .bordered-title {
   color: #494949;
   position: relative;
-  font-size: 16px;
   display: inline-block;
   font-family: $font-caps;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   .text {
     position: relative;
     z-index: 1;
-    line-height: 21px;
+    font-size: 16px;
+    line-height: 19px;
     box-shadow: inset 0px -8px 0px 0px #f2cab1;
+    display: inline-block;
   }
   .color-orange {
     color: #f26529;

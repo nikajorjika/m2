@@ -1,6 +1,8 @@
 <template>
   <div class="sidebar">
-    <logo class="sidebar__logo" />
+    <nuxt-link class="link" :to="homepage">
+      <logo class="sidebar__logo" />
+    </nuxt-link>
     <div class="sidebar__list">
       <nuxt-link
         v-for="(item, index) in items"
@@ -33,6 +35,10 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    homepage: {
+      type: [String, Object],
+      default: ''
     }
   },
   computed: {
@@ -52,6 +58,9 @@ export default {
   margin-right: 3%;
   border-top-right-radius: 80px;
   box-shadow: 2px 3px 21.76px 10.24px rgba(67, 34, 114, 0.07);
+  .link {
+    display: inherit;
+  }
   &__logo {
     width: 43%;
     margin: 89px auto 0;
@@ -81,9 +90,15 @@ export default {
         font-size: 12px;
         font-family: $font;
         margin-top: 15px;
+        font-weight: 500;
         text-align: center;
       }
     }
   }
+}
+</style>
+<style>
+[lang="en"] .sidebar__list__item__label {
+  font-weight: 800;
 }
 </style>

@@ -24,6 +24,7 @@
   "buttons": {
     "next": "NEXT",
     "see": "SEE",
+    "search": "SEARCH",
     "skip": "skip",
     "faq": "Frequently asked question",
     "CLOSE": "CLOSE"
@@ -32,7 +33,17 @@
     "FullArea": "Full Area",
     "FlatArea": "Flat Area",
     "address": "Address",
+    "ongoing": "Ongoing",
     "BalconyArea": "Balcony Area",
+    "min": "Min:",
+    "max": "Max:",
+    "floorShort": "Floors",
+    "LitUpAll": "LIGHT ALL UP",
+    "pick_multiple": "Pick Multiple Options",
+    "pick_range": "Pick Range",
+    "for_what_price": "For What Price",
+    "what_floor_are_you_looking_for": "On what floor",
+    "choose_flat_view": "Choose Flat View",
     "FullPrice": "Full Price",
     "Renovation": "Renovation",
     "balcony_area_slash_terrace": "Balcony/Terrace",    
@@ -107,5 +118,17 @@
   },
   "descriptions": {
     "ModelIndexPage": "Some long text goes here"
+  },
+  "alerts": {
+    "planshetColorAlert": "To light up this flat please proceed to %s area"
+  },
+  "colors": {
+    "orange": "orange",
+    "purple": "purple",
+    "blue": "blue",
+    "green": "green",
+    "red": "red",
+    "yellow": "yellow",
+    "pink": "pink"
   }
 }

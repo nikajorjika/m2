@@ -3,10 +3,7 @@
     <article>
       <ImageSlider :images="model && model.images ? model.images : []" />
 
-      <h3 class="name">
-        <span>{{ name }}</span>
-      </h3>
-
+      <title-with-line class="name" :title="name" />
       <div class="description">
         <p>{{ description }}</p>
       </div>
@@ -60,6 +57,7 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import ImageSlider from '@/components/core/ImageSlider'
 import IllustratedButton from '@/components/partials/IllustratedButton'
+import TitleWithLine from '@/components/partials/TitleWithLine'
 import SearchByFlatNumber from '@/components/icons/SearchByFlatNumber'
 import FilterSearch from '@/components/icons/FilterSearch'
 import SearchByFlatNumberIllustration from '@/components/icons/SearchByFlatNumberIllustration'
@@ -70,6 +68,7 @@ export default {
     ImageSlider,
     IllustratedButton,
     FilterIconIllustration,
+    TitleWithLine,
     FilterSearch,
     SearchByFlatNumber,
     SearchByFlatNumberIllustration

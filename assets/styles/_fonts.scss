@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'BPG WEB 001 Caps';
+  font-family: 'CapsFont';
   src: url('~assets/fonts/bpg-web-001-caps-webfont.eot'); /* IE9 Compat Modes */
   src: url('~assets/fonts/bpg-web-001-caps-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
        url('~assets/fonts/bpg-web-001-caps-webfont.woff2') format('woff2'), /* Super Modern Browsers */
@@ -17,9 +17,13 @@
        url('~assets/fonts/bpg-web-001-webfont.svg#bpg_web_001regular') format('svg'); /* Legacy iOS */
 }
 
-$font-caps: 'CAPS FONT';
-// $font-caps: 'BPG WEB 001 Caps';
-$font: 'BPG WEB 001';
+@font-face {
+  font-family: 'Heebo';
+  src: url('~assets/fonts/Heebo/Heebo-Light.ttf');
+}
+
+$font-caps: 'BPG Nino Mtavruli', sans-serif;
+$font: 'BPG WEB 001', sans-serif;
 
 %buttons-main {
   font-family: $font-caps;
@@ -27,4 +31,7 @@ $font: 'BPG WEB 001';
   font-size: 12px;
   letter-spacing: 1px;
   font-weight: 200;
+}
+[lang=en] *{
+  font-family: 'Heebo', sans-serif !important;
 }

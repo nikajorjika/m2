@@ -151,7 +151,7 @@ export default {
     const refresh = () => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {
-        this.$router.push({ path: `/${this.locale}` })
+        this.$router.push({ path: `/${this.locale}/renovations/makeover` })
       }, 3 * 60 * 1000)
     }
     refresh()
