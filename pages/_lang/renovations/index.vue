@@ -16,7 +16,7 @@
         :render-image="flat.render_url"
         :plan-image="flat.blueprint_url"
       />
-      <room-list-component class="room-list-slider" :room-list="rooms" />
+      <room-list-component v-if="rooms.length" class="room-list-slider" :room-list="rooms" />
     </div>
   </div>
 </template>
