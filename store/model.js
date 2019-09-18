@@ -8,7 +8,7 @@ const getters = {
 
 const actions = {
   fetchModel({ commit }) {
-    const id = 2 // TMP
+    const id = 13 // TMP
 
     return new Promise((resolve, reject) => {
       this.$axios
