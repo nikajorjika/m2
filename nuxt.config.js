@@ -81,7 +81,15 @@ module.exports = {
   manifest: {
     theme_color: '#f26529'
   },
-
+  pwa: {
+    manifest: {
+      name: 'Paveleon App',
+      lang: 'ka',
+      start_url: '/ka',
+      display: 'fullscreen',
+      orientation: 'landscape'
+    }
+  },
   styleResources: {
     sass: '~assets/styles/app.scss'
   },
