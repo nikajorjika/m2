@@ -66,6 +66,8 @@ export default {
     align-items: center;
     margin: auto;
     padding-left: 32px;
+    font-weight: 900;
+    letter-spacing: 2px;
   }
   &__icon {
     margin: auto 22px;

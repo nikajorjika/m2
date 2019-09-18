@@ -110,7 +110,7 @@
     "ByFlatNumberButtonsTitle": "ან გააგრძელე ძებნა შემდეგი მეთოდებით",
     "YouCanSelectMultipe": "შეგიძლიათ აანთოთ რამოდენიმე",
     "SearchByFlatNumberSubTitle": "ჩაწერეთ თქვენს მიერ შერჩეული ბინის ნომერი",
-    "flat-list-result-title": "თქვენს მიერ არჩეული კრიტერიუმების მიხედვით მოიძებნა %s ბინა",
+    "flat-list-result-title": "თქვენს მიერ არჩეული კრიტერიუმების მიხედვით <br><span class=\"color-orange\">მოიძებნა %s ბინა</span>",
     "FrequentlyAskedQuestions": "ხშირად დასმული კითხვები",
     "ModelIndexPage": "რაღაც სათაური იქნება აქ"
   },
@@ -131,5 +131,17 @@
   },
   "descriptions": {
     "ModelIndexPage": "რაღაც გრძელი ტექსტი იქნება აქ"
+  },
+  "alerts": {
+    "planshetColorAlert": "ამ ბლოკის სანახავად  მიბრძანდით %s ფერის სივრცეში მეხუთე პლანშეტთან"
+  },
+  "colors": {
+    "orange": "ნარინჯისფერი",
+    "purple": "იასამნისფერი",
+    "blue": "ლურჯი",
+    "green": "მწვანე",
+    "red": "წითელი",
+    "yellow": "ყვითელი",
+    "pink": "ვარდისფერი"
   }
 }

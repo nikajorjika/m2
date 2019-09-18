@@ -23,6 +23,8 @@
   },
   "buttons": {
     "next": "NEXT",
+    "see": "SEE",
+    "skip": "skip",
     "faq": "Frequently asked question",
     "CLOSE": "CLOSE"
   },
@@ -33,6 +35,18 @@
     "FullPrice": "Full Price",
     "Renovation": "Renovation",
     "Furniture": "Furniture",
+    "building_progress": "Building progress",
+    "LitIt": "LIGHT UP",
+    "floor": "Floor",
+    "select_flat_and_lit_it_up": "Select flat and lit it up",
+    "select_only_one": "Select only one",
+    "number": "Number",
+    "status": "Status",
+    "view": "View",
+    "area": "Area",
+    "project": "Project",
+    "back": "Back",
+    "block": "Block",
     "Decor": "Decoration",
     "decoration": "Decoration",
     "Supply": "Supply",
@@ -56,7 +70,9 @@
     "appliances_price": "Appliance Price",
     "appliance": "Appliance",
     "full_price": "Full Price",
+    "sold_flat_count": "Flats sold",
     "ByPhoneNumber": "Authorisation by phone number",
+    "FlatsLeftInThisBlock": "Flats left in this block",
     "ByFlatNumber": "Search by flat number",
     "ByFilter": "Search by filter"
   },
@@ -64,7 +80,17 @@
     "FlatPageTitle": "Renovation Displayed On Replication",
     "SupplyPageTitle": "Appliances Displayed On Replication",
     "FrequentlyAskedQuestions": "Frequently Asked Question",
-    "ModelIndexPage": "Some title goes here"
+    "SearchByFlatNumber": "Search by flat number",
+    "SearchByFlatNumberSubTitle": "Fill in your chosen flat number",
+    "ByFlatNumberButtonsTitle": "Or continue with following options",
+    "flat-list-result-title": "Flats filtered by your criterea <br><span class=\"color-orange\">Found %s Flats</span>",
+    "ModelIndexPage": "Some title goes here",
+    "YouCanSelectMultipe": "You can select multiple",
+    "YourChosenFlat": "Your chosen flat"
+  },
+  "addresses": {
+    "marshal_gelovani": "Marshal Gelovani",
+    "m3_gelovani": "m3 Gelovani"
   },
   "rooms": {
     "Hall": "Hall",

@@ -30,19 +30,11 @@
       <div class="footer-items">
         <gradient-label :text="price" class="price-label" />
         <div class="footer-items__controls">
-          <div class="footer-items__controls__skip" @click="handleNext">
-            <span class="footer-items__controls__skip__text">
-              {{ $t('buttons.skip') }}
-            </span>
-            <span class="footer-items__controls__skip__icon">
-              <caret-right width="10" height="12" icon-color="#432272" />
-              <caret-right width="10" height="12" icon-color="#432272" />
-            </span>
-          </div>
+          <div class="footer-items__controls__skip"></div>
           <div class="footer-items__controls__next">
             <button-main-orange
               :button-text="$t('labels.LitIt')"
-              @click="handleNext"
+              @click="handleLightUp"
             >
               <template v-slot:icon>
                 <light-icon
@@ -166,7 +158,7 @@ export default {
     })
   },
   methods: {
-    handleNext() {}
+    handleLightUp() {}
   }
 }
 </script>

@@ -48,6 +48,7 @@ export default {
     background: #fff;
     font-family: $font-caps;
     font-size: 10px;
+    font-weight: 900;
     box-shadow: 4px 6px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
   &--gradient {

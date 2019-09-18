@@ -79,7 +79,7 @@ export default {
             en: 'QUESTIONS',
             ka: 'კითხვები'
           },
-          path: `/${this.locale}/filter/`,
+          path: `/${this.locale}/renovations/faq`,
           component: QuestionsIcon
         }
       ]

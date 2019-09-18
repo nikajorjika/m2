@@ -84,6 +84,8 @@ export default {
     position: relative;
     &__item {
       font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
       padding: 14px 37px;
       border-radius: 38px;
       position: relative;

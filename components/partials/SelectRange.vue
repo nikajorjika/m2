@@ -45,6 +45,10 @@ export default {
     presetMax: {
       type: [Number, String],
       default: null
+    },
+    step: {
+      type: [Number, String],
+      default: 1
     }
   },
   data() {
@@ -80,6 +84,7 @@ export default {
         min: this.minValue,
         max: this.maxValue
       },
+      step: this.step,
       connect: true,
       start: [this.presetMin || this.minValue, this.presetMax || this.maxValue]
     })

@@ -40,9 +40,7 @@ export default {
   },
   methods: {
     handleClick() {
-      if (!this.disabled) {
-        this.$emit('click')
-      }
+      this.$emit('click')
     }
   }
 }

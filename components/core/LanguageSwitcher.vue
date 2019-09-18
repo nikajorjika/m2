@@ -46,6 +46,7 @@ export default {
     border-radius: 15px;
     text-align: center;
     font-size: 10px;
+    font-weight: 900;
     font-family: $font-caps;
   }
 }

@@ -14,6 +14,7 @@
         :max-value="price.max"
         :preset-min="filterPrice.min"
         :preset-max="filterPrice.max"
+        :step="1000"
         @change="handleRangeChange"
       />
     </div>

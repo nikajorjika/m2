@@ -98,6 +98,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-items: center;
+    font-weight: 800;
     &__inner {
       font-family: inherit;
       font-size: inherit;

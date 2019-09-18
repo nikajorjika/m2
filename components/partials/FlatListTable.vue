@@ -83,7 +83,9 @@ export default {
   },
   methods: {
     litCurrentItem(item) {
-      console.log(item)
+      if(item.planshet.id !== this.chosenPlanshet) {
+        this.$emit('showPrompt', item.planshet)
+      }
     }
   }
 }
@@ -154,8 +156,8 @@ export default {
         span {
           display: block;
           position: absolute;
-          width: 22px;
-          height: 22px;
+          width: 23px;
+          height: 23px;
           opacity: 0.25;
           top: -3.5px;
           left: -3.5px;

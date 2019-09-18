@@ -1,9 +1,11 @@
 <template>
   <div class="render">
     <filter-render-svg @click="handleBlockChosing"/>
-    <div v-if="activeBlockNumber && blockInfo" ref="infoBlock" class="render__info">
-      <block-hover-info :flats-count="blockInfo.sellableFlats" :block-number="blockInfo.number" @click="handleChoosingBlock" />
-    </div>
+    <transition name="fade">
+      <div v-if="activeBlockNumber && blockInfo" ref="infoBlock" class="render__info">
+        <block-hover-info :flats-count="blockInfo.sellableFlats" :block-number="blockInfo.number" @click="handleChoosingBlock" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -26,6 +28,8 @@ export default {
     },
     handleBlockChosing(number) {
       if(!event.target) return
+      this.blockInfo = null
+      this.activeBlockNumber = null
       this.fetchBlockData(number)
     },
     fetchBlockData(number) {
@@ -56,6 +60,12 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 }
 </style>
