@@ -2,7 +2,7 @@
   <div class="progress">
     <div class="progress__label">{{ label }}</div>
     <div class="progress__values">
-      <div class="progress__values__min">{{ min }}</div>
+      <div v-if="percentage >= 7" class="progress__values__min">{{ min }}</div>
       <div
         v-if="percentage !== 0 && percentage !== 100"
         class="progress__values__value"

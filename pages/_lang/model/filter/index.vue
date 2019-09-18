@@ -25,17 +25,19 @@
         class="filter-render__aside__progress"
         :label="$t('labels.sold_flat_count')"
         :min="0"
-        :max="350"
-        :value="project.flats_quantity"
+        :max="391"
+        :value="175"
       />
+      <!-- project.flats_quantity -->
       <gradient-progress
         class="filter-render__aside__progress"
         :label="$t('labels.building_progress')"
         :min="0"
         :max="100"
-        :value="project.building_status"
+        :value="3"
         suffix="%"
       />
+      <!-- project.building_status -->
     </div>
     <div class="filter-render__render">
       <filter-render @seleted="handleBlockSelect" />
