@@ -99,7 +99,7 @@
     "SearchByFlatNumberSubTitle": "Fill in your chosen flat number",
     "ByFlatNumberButtonsTitle": "Or continue with following options",
     "flat-list-result-title": "Flats filtered by your criterea <br><span class=\"color-orange\">Found %s Flats</span>",
-    "ModelIndexPage": "Some title goes here",
+    "ModelIndexPage": "ბინის შერჩევა იწყება აქ! შენთვის სასურველი ბინის შესარჩევად მიჰყევი აპლიკაციის ნავიგაციას",
     "YouCanSelectMultipe": "You can select multiple",
     "YourChosenFlat": "Your chosen flat"
   },
@@ -119,7 +119,7 @@
     "wc": "Bathroom"
   },
   "descriptions": {
-    "ModelIndexPage": "Some long text goes here"
+    "ModelIndexPage": "თქვენს წინაშეა m2-ის ახალი უბანი m3 საბურთალო. ბინის შერჩევის პროცესის გასამარტივებლად, ფილტრების გამოყენებით თქვენ შეძლებთ სასურველი ბინის შერჩევას.\nშერჩეული ბინა და უბნის სრული კონცეფცია შეგიძლიათ იხილოთ მაკეტზე"
   },
   "alerts": {
     "planshetColorAlert": "To light up this flat please proceed to %s area"
