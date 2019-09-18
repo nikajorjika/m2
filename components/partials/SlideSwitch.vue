@@ -86,7 +86,7 @@ export default {
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 2px;
-      padding: 14px 37px;
+      padding: 16px 37px 12px;
       border-radius: 38px;
       position: relative;
       z-index: 1;

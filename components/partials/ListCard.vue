@@ -78,7 +78,7 @@ export default {
     display: flex;
     z-index: 1;
     &--white {
-      padding: 16px 23px 16px 25px;
+      padding: 18px 23px 14px 25px;
     }
     &--gradient {
       padding: 19px 9px 20px 37px;
@@ -87,6 +87,7 @@ export default {
       }
     }
     &__label {
+      padding-top: 2px;
       color: inherit;
       font-family: inherit;
       font-size: inherit;

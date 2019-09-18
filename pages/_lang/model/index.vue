@@ -22,7 +22,7 @@
           <template v-slot:illustration>
             <search-by-flat-number-illustration
               width="50px"
-              height="100%"
+              height="auto"
               :margin="'0 0 0 -12px'"
             />
           </template>

@@ -86,9 +86,9 @@ export default {
       margin: 9px 0;
       align-items: center;
       &.small {
-        margin: 20px 0;
+        margin: 18px 0;
         &:first-child {
-          margin-top: 10px;
+          margin-top: 5px;
         }
       }
       &__number {

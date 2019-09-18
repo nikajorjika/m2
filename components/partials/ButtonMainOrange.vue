@@ -65,7 +65,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin: auto;
-    padding-top: 4px;
+    padding-top: 2px;
     padding-left: 32px;
     font-weight: 900;
     letter-spacing: 2px;

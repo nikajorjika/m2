@@ -20,7 +20,7 @@ export default {
   display: inline-block;
   font-family: $font;
   font-size: 14px;
-  padding: 12px 24px;
+  padding: 14px 24px 12px;
   opacity: 0.6;
   border-radius: 14px;
   overflow: hidden;

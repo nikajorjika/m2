@@ -29,7 +29,7 @@ export default {
     },
     disabled: {
       type: Boolean,
-      default: false  
+      default: false
     }
   },
   computed: {
@@ -75,6 +75,9 @@ export default {
   }
   &--large {
     padding: 8px 22px;
+  }
+  &__label {
+    padding-top: 4px;
   }
 }
 </style>
