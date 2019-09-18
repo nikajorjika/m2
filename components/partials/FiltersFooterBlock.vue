@@ -130,7 +130,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     &__next {
-      margin-left: 13px;
+      margin-left: auto;
     }
     &__skip {
       color: #432272;

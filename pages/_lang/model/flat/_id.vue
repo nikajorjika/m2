@@ -21,7 +21,7 @@
           class="flat-viewer"
           :render-image="renderUrl"
           :plan-image="blueprintUrl"
-          gradient-text="2 საძინებელი"
+          :gradient-text="imageLabel"
         />
         <room-list-component v-if="rooms.length" class="room-list-slider" style-type="small" :room-list="rooms" />
       </div>
@@ -97,6 +97,16 @@ export default {
     blueprintUrl() {
       if (!this.flat || !this.flat.blueprint_url) return 'https://placehold.it/245x245'
       return this.flat.blueprint_url
+    },
+    imageLabel() {
+       if (!this.flat) return {
+          ka: `საძინებელი`,
+          en: `bedrooms`
+        }
+        return {
+          ka: `${this.flat.bedrooms_count} საძინებელი`,
+          en: `${this.flat.bedrooms_count} bedrooms`
+        }
     },
     rooms() {
       if (!this.flat) return []
