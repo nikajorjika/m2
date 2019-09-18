@@ -1,5 +1,6 @@
 <template>
   <div class="model-index-app-layout">
+    <popover-image :open="$store.getters.overlay.open" :image="$store.getters.overlay.image" @close="handleClose" />
     <svg width="0" height="0">
       <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#e26479" />
@@ -19,9 +20,10 @@ import { mapGetters } from 'vuex'
 import SidebarWithItems from '@/components/core/SidebarWithItems'
 import ModelView from '@/components/core/ModelView'
 import QuestionsIcon from '@/components/icons/Questions'
+import PopoverImage from '@/components/partials/PopoverImage'
 import MainIcon from '@/components/icons/Main'
 export default {
-  components: { SidebarWithItems, ModelView, MainIcon },
+  components: { SidebarWithItems, ModelView,PopoverImage, MainIcon },
   computed: {
     ...mapGetters(['locale']),
     items() {

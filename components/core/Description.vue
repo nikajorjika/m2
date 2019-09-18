@@ -17,6 +17,7 @@
     font-family: $font-caps;
     line-height: 27px;
     letter-spacing: 1px;
+    font-weight: 800;
     box-shadow: inset 0px -8px 0px 0px #f2cab1;
     color: #494949;
     &--red {

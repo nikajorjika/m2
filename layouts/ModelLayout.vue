@@ -1,16 +1,6 @@
 <template>
   <div class="default-app-layout">
-    <div
-      class="maximize__popover"
-      :class="{ open: $store.getters.overlay.open }"
-      @click="handleClose"
-    >
-      <img
-        :src="$store.getters.overlay.image"
-        alt="Maximized Image"
-        @click.stop
-      />
-    </div>
+    <popover-image :open="$store.getters.overlay.open" :image="$store.getters.overlay.image" @close="handleClose" />
     <svg width="0" height="0">
       <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#e26479" />
@@ -34,6 +24,7 @@ import CostIcon from '@/components/icons/Cost'
 import FloorIcon from '@/components/icons/Floor'
 import CompassIcon from '@/components/icons/Compass'
 import QuestionsIcon from '@/components/icons/Questions'
+import PopoverImage from '@/components/partials/PopoverImage'
 import MainIcon from '@/components/icons/Main'
 export default {
   components: {
@@ -41,6 +32,7 @@ export default {
     ModelView,
     BlockIcon,
     MainIcon,
+    PopoverImage,
     QuestionsIcon,
     CostIcon,
     FloorIcon,
@@ -124,27 +116,6 @@ body {
     min-height: 100vh;
     background: $bg-color-1;
     display: flex;
-    .maximize__popover {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
-      background: rgba(0, 0, 0, 0.3);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      img {
-        max-width: 70%;
-        max-height: 80%;
-      }
-      &.open {
-        display: flex;
-        animation: scaleUp 0.2s;
-      }
-    }
   }
   .app {
     height: calc(100% - 221px);

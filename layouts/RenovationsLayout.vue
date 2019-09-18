@@ -1,16 +1,6 @@
 <template>
   <div class="default-app-layout">
-    <div
-      class="maximize__popover"
-      :class="{ open: $store.getters.overlay.open }"
-      @click="handleClose"
-    >
-      <img
-        :src="$store.getters.overlay.image"
-        alt="Maximized Image"
-        @click.stop
-      />
-    </div>
+    <popover-image :open="$store.getters.overlay.open" :image="$store.getters.overlay.image" @close="handleClose" />
     <svg width="0" height="0">
       <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#e26479" />
@@ -28,8 +18,9 @@
 <script>
 import Sidebar from '@/components/core/Sidebar'
 import FlatView from '@/components/core/FlatView'
+import PopoverImage from '@/components/partials/PopoverImage'
 export default {
-  components: { Sidebar, FlatView },
+  components: { Sidebar, FlatView, PopoverImage },
   props: {
     image: {
       type: String,

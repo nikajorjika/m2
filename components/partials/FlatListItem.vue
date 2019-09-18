@@ -45,14 +45,7 @@ export default {
       return formatPrice(parseInt(this.item.price))
     },
     area() {
-      let area
-      if (this.item.living_area && this.item.non_living_area) {
-        area =
-          parseInt(this.item.living_area) + parseInt(this.item.non_living_area)
-      } else {
-        area = 0
-      }
-      return `${area} ${this.$t('labels.m2')}`
+      return `${this.item.total_area} ${this.$t('labels.m2')}`
     },
     status() {
       return this.item.status.hasOwnProperty(this.locale)

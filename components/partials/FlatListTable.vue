@@ -127,6 +127,7 @@ export default {
     font-size: 12px;
     font-family: $font-caps;
     color: #7e73ae;
+    font-weight: 800;
     &__title {
       &.medium {
         width: 104px;
