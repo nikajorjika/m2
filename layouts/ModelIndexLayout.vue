@@ -41,7 +41,7 @@ export default {
             en: 'FAQ',
             ka: 'კითხვები'
           },
-          path: `/${this.locale}/renovations/faq`,
+          path: `/${this.locale}/model/faq`,
           component: QuestionsIcon
         }
       ]

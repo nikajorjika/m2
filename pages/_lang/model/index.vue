@@ -10,6 +10,7 @@
 
       <div class="buttons">
         <illustrated-button
+          v-if="hasColor"
           :label="buttonLabels.byFlatNumberLabel"
           :to-route="{
             name: 'lang-model-by-flat-number',
@@ -89,7 +90,10 @@ export default {
     ...mapGetters({
       locale: 'locale',
       model: 'model/model'
-    })
+    }),
+    hasColor() {
+      return this.$cookies.get('paveleon-planshet') ? true : false
+    }
   },
   mounted() {
     this.$store.dispatch('model/fetchModel')
