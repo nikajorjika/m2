@@ -78,7 +78,7 @@ export default {
         padding: 6px 20px;
       }
       &__label {
-        font-size: 11px;
+        font-size: 12px;
         font-family: $font;
         margin-top: 15px;
         text-align: center;

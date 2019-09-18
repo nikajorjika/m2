@@ -52,7 +52,7 @@ export default {
 .st1 {
   opacity: 0;
   &.active {
-    opacity: 1;
+    opacity: 0.85;
   }
 }
 </style>

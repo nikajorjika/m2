@@ -29,6 +29,7 @@ export default {
   padding: 8px 15px;
   margin: auto; 
   margin-right: 0;
+  margin-top: 0;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   &__color {

@@ -31,9 +31,11 @@
   "labels": {
     "FullArea": "Full Area",
     "FlatArea": "Flat Area",
+    "address": "Address",
     "BalconyArea": "Balcony Area",
     "FullPrice": "Full Price",
     "Renovation": "Renovation",
+    "balcony_area_slash_terrace": "Balcony/Terrace",    
     "Furniture": "Furniture",
     "building_progress": "Building progress",
     "LitIt": "LIGHT UP",

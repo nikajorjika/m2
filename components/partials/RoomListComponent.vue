@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="swiper-pagination"></div>
+      <div v-if="length" class="swiper-pagination"></div>
     </div>
   </div>
 </template>
@@ -51,6 +51,9 @@ export default {
     }
   },
   computed: {
+    length() {
+      return this.roomList.length > 9 ? true : false
+    },
     items() {
       return this.roomList.length ? sliceUpArray(this.roomList, 9) : []
     }

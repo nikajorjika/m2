@@ -108,6 +108,8 @@ export default {
       color: #494949;
       &__gradient {
         margin: 0 15px;
+        min-width: 75px;
+        text-align: center;
       }
     }
   }

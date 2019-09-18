@@ -68,7 +68,7 @@ export default {
       return [
         {
           title: {
-            en: 'MAIN',
+            en: 'Main',
             ka: 'მთავარი'
           },
           path: `/${this.locale}/model`,
@@ -76,7 +76,7 @@ export default {
         },
         {
           title: {
-            en: 'QUESTIONS',
+            en: 'FAQ',
             ka: 'კითხვები'
           },
           path: `/${this.locale}/renovations/faq`,

@@ -23,7 +23,7 @@
           :plan-image="blueprintUrl"
           gradient-text="2 საძინებელი"
         />
-        <room-list-component class="room-list-slider" style-type="small" :room-list="rooms" />
+        <room-list-component v-if="rooms.length" class="room-list-slider" style-type="small" :room-list="rooms" />
       </div>
     </div>
     <div class="filter-flat__footer">
@@ -117,19 +117,19 @@ export default {
     },
     listCardData() {
       if (!this.flat) return
+      const flatArea = this.flat.total_area - this.flat.balcony_area - this.flat.terrace_area
       return [
         {
-          value: `${parseInt(this.flat.living_area) +
-            parseInt(this.flat.terrace_area)} ${this.$t('labels.m2')}`,
+          value: `${parseInt(this.flat.total_area)} ${this.$t('labels.m2')}`,
           label: this.$t('labels.total_area')
         },
         {
-          value: `${this.flat.living_area} ${this.$t('labels.m2')}`,
+          value: `${flatArea} ${this.$t('labels.m2')}`,
           label: this.$t('labels.flat_area')
         },
         {
           value: `${this.flat.terrace_area} ${this.$t('labels.m2')}`,
-          label: this.$t('labels.balcony_area')
+          label: this.$t('labels.balcony_area_slash_terrace')
         }
       ]
     },
