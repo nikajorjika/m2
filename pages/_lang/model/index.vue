@@ -6,7 +6,7 @@
       <title-with-line class="name" :title="name" />
 
       <div class="description">
-        <p v-html="description"></p>
+        <p v-html="hasColor ? description : mainDescription"></p>
       </div>
 
       <div class="buttons">
@@ -84,7 +84,8 @@ export default {
         byFilterLabel: this.$t('labels.ByFilter')
       },
       name: this.$t('titles.ModelIndexPage'),
-      description: this.$t('descriptions.ModelIndexPage')
+      description: this.$t('descriptions.ModelIndexPage'),
+      mainDescription: this.$t('descriptions.ModelMainIndexPage')
     }
   },
   computed: {
