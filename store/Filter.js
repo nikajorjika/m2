@@ -12,6 +12,23 @@ export const state = () => ({
     },
     view: []
   },
+  modelApiData: {
+    TabletId: null,
+    block: [
+      {
+        BlockId: 'A',
+        Apartments: []
+      },
+      {
+        BlockId: 'B',
+        Apartments: []
+      },
+      {
+        BlockId: 'C',
+        Apartments: []
+      }
+    ]
+  },
   filterDefaults: {
     min_floor: 1,
     max_floor: 24,
@@ -31,7 +48,8 @@ export const getters = {
   view: (state) => state.filters.view,
   totalCount: (state) => state.filteredTotalCount,
   filterDefaults: (state) => state.filterDefaults,
-  filterLoading: (state) => state.filterLoading
+  filterLoading: (state) => state.filterLoading,
+  modelApiData: (state) => state.modelApiData
 }
 
 export const mutations = {
@@ -50,6 +68,34 @@ export const mutations = {
     state.filters.floors.max = data.max_floor
     state.filters.price.max = data.max_price
     state.filters.price.min = data.min_price
+  },
+  // eslint-disable-next-line object-shorthand
+  SET_MODEL_API_DATA: function(state, flats) {
+    state.modelApiData.TabletId = this.$cookies.get('paveleon-planshet')
+    flats.map((item) => {
+      state.modelApiData.block[parseInt(item.block) - 1].Apartments.push({
+        ApartmentId: item.flat_number
+      })
+    })
+  },
+  RESET_MODEL_API_DATA: (state) => {
+    state.modelApiData = {
+      TabletId: null,
+      block: [
+        {
+          BlockId: 'A',
+          Apartments: []
+        },
+        {
+          BlockId: 'B',
+          Apartments: []
+        },
+        {
+          BlockId: 'C',
+          Apartments: []
+        }
+      ]
+    }
   },
   SET_FILTER_ITEM: (state, { key, value }) => {
     if (state.filters.hasOwnProperty(key)) {
@@ -135,46 +181,31 @@ export const actions = {
   },
   lightUpFlat(context, flats) {
     return new Promise((resolve, reject) => {
-      let stateMock = [
-        {
-          BlockId: 'A',
-          BlockIdNumeric: 1,
-          Apartments: []
-        },
-        {
-          BlockId: 'B',
-          BlockIdNumeric: 1,
-          Apartments: []
-        },
-        {
-          BlockId: 'C',
-          BlockIdNumeric: 1,
-          Apartments: []
-        }
-      ]
-      flats.map((item) => {
-        stateMock[parseInt(item.block) - 1].Apartments.push({
-          ApartmentId: item.flat_number
-        })
-      })
+      context.commit('SET_MODEL_API_DATA', flats)
       this.$axios
-        .post('http://10.200.22.28/LocalServices/api/selected', stateMock)
+        .post(
+          'http://10.200.22.28/LocalServices/api/selected',
+          context.getters.modelApiData
+        )
         .then((response) => {
           setTimeout(() => {
-            // context.dispatch('inactivityReset')
-            console.log(response)
+            context.dispatch('inactivityReset')
             resolve(response)
-          }, 3000)
+          }, 20000)
         })
     })
   },
   inactivityReset(context) {
     return new Promise((resolve, reject) => {
-      // this.$axios
-      //   .post('http://10.200.22.28/LocalServices/api/noAction')
-      //   .then((response) => {
-      //     resolve(response)
-      //   })
+      this.$axios
+        .post(
+          'http://10.200.22.28/LocalServices/api/chamaqre',
+          context.getters.modelApiData
+        )
+        .then((response) => {
+          context.commit('RESET_MODEL_API_DATA')
+          resolve(response)
+        })
     })
   }
 }
