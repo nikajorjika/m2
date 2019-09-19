@@ -48,7 +48,7 @@ export default {
       questionList: 'FAQ/questionList'
     }),
     items() {
-      return sliceUpArray(this.questionList, 4)
+      return sliceUpArray(this.questionList, 3)
     }
   },
   mounted() {
@@ -85,30 +85,32 @@ export default {
     &__numeration {
       margin-right: 20px;
       background: #fff;
-      font-size: 9px;
-      padding: 7px 6px;
+      padding: 7px 6px 4px;
       border-radius: 6px;
       align-self: baseline;
+      font-size: 13px;
     }
     h3 {
       color: #ed7c4d;
-      display: flex;
       font-family: $font-caps;
-      font-size: 12px;
+      font-size: 14px;
       letter-spacing: 0.3px;
       word-spacing: 1px;
-      font-weight: 500;
+      font-weight: bold;
       line-height: 1.5;
       display: flex;
       align-items: center;
       span {
         line-height: 1;
       }
+      span:last-child {
+        padding-top: 3px;
+      }
     }
     p {
       color: #494949;
       font-family: $font;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 1px;
       word-spacing: 4px;
       line-height: 1.5;

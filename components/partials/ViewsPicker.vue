@@ -110,6 +110,7 @@ export default {
     }
     &__label {
       padding: 17px 11px 18px 33px;
+      font-size: 13px;
     }
     &.active {
       transform: scale(1.1);

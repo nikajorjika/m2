@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     length() {
-      return this.roomList.length > 9 ? true : false
+      return this.roomList.length > 9
     },
     items() {
       return this.roomList.length ? sliceUpArray(this.roomList, 9) : []
@@ -94,10 +94,11 @@ export default {
       &__number {
         background: #fff;
         border-radius: 10px;
-        padding: 10px;
+        padding: 11px 10px 9px;
         margin-right: 45px;
         color: #4b3f99;
-        font-size: 9px;
+        font-size: 11px;
+        font-weight: bold;
         line-height: 1;
         letter-spacing: 1px;
         &.small {
@@ -108,13 +109,13 @@ export default {
       &__value {
         margin-left: auto;
         font-family: $font;
-        font-size: 13px;
+        font-size: 14px;
         color: #4b3f99;
         letter-spacing: 0.6px;
       }
       &__label {
         font-family: $font;
-        font-size: 13px;
+        font-size: 14px;
         letter-spacing: 1px;
         color: #494949;
       }

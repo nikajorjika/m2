@@ -57,7 +57,7 @@ export default {
 .progress {
   background: #f7ede2;
   border-radius: 11px;
-  font-size: 10px;
+  font-size: 12px;
   padding: 12px;
   color: #4b3f99;
   font-family: $font;

@@ -9,14 +9,18 @@
     <div class="price-list-container">
       <list-block class="list" list-style="gradient" :items="prices" />
     </div>
-    <div class="flat-render">
+    <div class="flat-render flat-render-renovation">
       <render-viewer
         class="flat-viewer"
         :gradient-text="renderLabel"
         :render-image="flat.render_url"
         :plan-image="flat.blueprint_url"
       />
-      <room-list-component v-if="rooms.length" class="room-list-slider" :room-list="rooms" />
+      <room-list-component
+        v-if="rooms.length"
+        class="room-list-slider"
+        :room-list="rooms"
+      />
     </div>
   </div>
 </template>
@@ -169,7 +173,7 @@ export default {
     'sidetop main main main main'
     'sidebottom main main main main';
   grid-template-columns: 216px 1fr 1fr 1fr 1fr;
-  grid-template-rows: 65px 166px 261px;
+  grid-template-rows: 65px 160px 261px;
   grid-column-gap: 41px;
   .list {
     width: 100%;
@@ -196,6 +200,14 @@ export default {
     .flat-viewer {
       flex: 1;
     }
+  }
+}
+</style>
+
+<style lang="scss">
+.flat-render-renovation {
+  .flat-view__image {
+    height: 245px;
   }
 }
 </style>
