@@ -22,7 +22,7 @@
             <search-by-flat-number-illustration
               width="50px"
               height="auto"
-              :margin="'0 0 0 -12px'"
+              :margin="'0 0 0 -21px'"
             />
           </template>
 

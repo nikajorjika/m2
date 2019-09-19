@@ -1,12 +1,11 @@
 <template>
-  <img
-    src="@/assets/illustrations/illustration-room.png"
-    :style="customStyles"
-  />
+  <svg-icon :width="width" :height="width" :style="{margin}"/>
 </template>
 
 <script>
+import SvgIcon from '@/assets/icons/FilterSearch.svg'
 export default {
+  components: { SvgIcon },
   props: {
     width: {
       type: [String],

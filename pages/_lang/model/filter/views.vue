@@ -45,6 +45,9 @@ export default {
       return views
     }
   },
+  mounted() {
+      this.fetchFilteredDataCount()
+  },
   methods: {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_VIEWS'

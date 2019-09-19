@@ -175,18 +175,18 @@ export default {
       align-items: center;
       background: #f4e7d9;
       &__color-mark {
-        width: 13px;
-        height: 13px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
         position: relative;
         span {
           display: block;
           position: absolute;
-          width: 21px;
-          height: 20px;
+          height: 22px;
+          width: 22px;
+          top: -4px;
+          left: -4px;
           opacity: 0.25;
-          top: -3.5px;
-          left: -3.5px;
           border-radius: 50%;
         }
       }
