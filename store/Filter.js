@@ -40,7 +40,8 @@ export const state = () => ({
     max_floor: 24,
     max_price: 20000,
     min_price: 150000,
-    view: []
+    view: [],
+    flat_number: null
   },
   flatNumber: null,
   filterLoading: false,
@@ -85,6 +86,7 @@ export const mutations = {
     state.filters.floors.max = data.max_floor
     state.filters.price.max = data.max_price
     state.filters.price.min = data.min_price
+    state.filters.view = []
   },
   // eslint-disable-next-line object-shorthand
   SET_MODEL_API_DATA: function(state, flats) {

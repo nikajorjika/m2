@@ -77,6 +77,9 @@ export default {
       flex-direction: column;
       text-decoration: none;
       color: #3c2270;
+      &:last-child {
+        display: none;
+      }
       &:visited {
         color: #3c2270;
       }
