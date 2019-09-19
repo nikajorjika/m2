@@ -34,6 +34,7 @@
           <div class="footer-items__controls__next">
             <button-main-orange
               :button-text="$t('labels.LitIt')"
+              :disabled="buttonDisabled"
               @click="handleLightUp"
             >
               <template v-slot:icon>
@@ -63,7 +64,7 @@ import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
 import CaretRight from '@/components/icons/CaretRight'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   layout: 'WithoutNavigation',
@@ -86,9 +87,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters({
+      locale: 'locale',
+      showPrompt: 'Filter/showPrompt'
+    }),
     cTitle() {
       return this.$t('titles.YourChosenFlat')
+    },
+    buttonDisabled() {
+      if(!this.flat) return true
+      return this.flat.planshet.id !== this.$cookies.get('paveleon-planshet')
     },
     renderUrl() {
       if (!this.flat || !this.flat.render_url) return 'https://placehold.it/245x245'
@@ -165,10 +173,48 @@ export default {
   mounted() {
     this.$axios.get(`/flats/${this.$route.params.id}`).then((response) => {
       this.flat = response.data.data
+      if(this.$cookies.get('paveleon-planshet') !== this.flat.planshet.id) {
+        this.setAlertData({
+          show: true,
+          text: this.generateTextBasedOnColor(this.flat.planshet.id),
+          color: `#${this.flat.planshet.color}`
+        })
+      }
+    })
+  },
+  beforeDestroy() {
+    this.setAlertData({
+      show: false,
+      text: null,
+      color: null
     })
   },
   methods: {
-    handleLightUp() {}
+    ...mapMutations({
+      setAlertData: 'Filter/SET_PROMPT_DATA'
+    }),
+    handleLightUp() {},
+    generateTextBasedOnColor(id) {
+      const planshetsObject = {
+        1: this.$t('colors.orange'),
+        2: this.$t('colors.purple'),
+        3: this.$t('colors.blue'),
+        4: this.$t('colors.green'),
+        5: this.$t('colors.red'),
+        6: this.$t('colors.yellow'),
+        7: this.$t('colors.pink')
+      }
+      const planshetNumbers = {
+        1: this.$t('colors.first'),
+        2: this.$t('colors.second'),
+        3: this.$t('colors.third'),
+        4: this.$t('colors.fourth'),
+        5: this.$t('colors.fifth'),
+        6: this.$t('colors.sixth'),
+        7: this.$t('colors.seventh')
+      }
+      return this.$t('alerts.planshetColorAlert').replace('%s', planshetsObject[id]).replace('%n', planshetNumbers[id])
+    },
   }
 }
 </script>

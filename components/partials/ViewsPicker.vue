@@ -80,25 +80,8 @@ export default {
     transition: transform 200ms;
     overflow: hidden;
     height: 100%;
-    &:nth-child(4n + 1) {
-      .compass-icon {
-        transform: rotate(45deg);
-      }
-    }
-    &:nth-child(4n + 2) {
-      .compass-icon {
-        transform: rotate(135deg);
-      }
-    }
-    &:nth-child(4n + 3) {
-      .compass-icon {
-        transform: rotate(-45deg);
-      }
-    }
-    &:nth-child(4n + 4) {
-      .compass-icon {
-        transform: rotate(-135deg);
-      }
+    .compass-icon {
+      transform: rotate(-45deg);
     }
     &__direction {
       background: linear-gradient(45deg, #684f78 1%, #e26479 100%);
