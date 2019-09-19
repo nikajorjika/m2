@@ -20,7 +20,7 @@
         {{ $t('labels.price') }}
       </div>
       <div v-if="showLightAllButton" class="flat-list-table__header__button">
-        <custom-button :label="$t('labels.LitUpAll')">
+        <custom-button :label="$t('labels.LitUpAll')" @click="handleLightAllButton">
           <template v-slot:icon>
             <light-icon
               class="flat-list-table__header__button__icon"
@@ -69,12 +69,18 @@ import FlatListItem from '@/components/partials/FlatListItem'
 import CustomButton from '@/components/partials/CustomButton'
 import LightIcon from '@/components/icons/Light'
 import { mapActions } from 'vuex'
+import { timeout } from 'q'
 export default {
   components: { FlatListItem, CustomButton, LightIcon },
   props: {
     list: {
       type: Array,
       default: []
+    }
+  },
+  data() {
+    return {
+      timeout: null
     }
   },
   computed: {
@@ -89,11 +95,21 @@ export default {
     ...mapActions({
       lightUpFlat: 'Filter/lightUpFlat'
     }),
+    handleLightAllButton() {
+      const planshetFlats = this.list.filter(item => item.planshet.id === this.chosenPlanshet)
+      if(this.timeout) clearTimeout(this.timeout)
+      this.lightUpFlat(planshetFlats).then((timeout) => {
+        this.timeout = timeout
+      })
+    },
     litCurrentItem(item) {
       if(item.planshet.id !== this.chosenPlanshet) {
         this.$emit('showPrompt', item.planshet)
       }else {
-        this.lightUpFlat([item])
+        if(this.timeout) clearTimeout(this.timeout)
+        this.lightUpFlat([item]).then((timeout) => {
+          this.timeout = timeout
+        })
       }
     }
   }
