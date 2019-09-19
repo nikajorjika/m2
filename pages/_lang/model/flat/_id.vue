@@ -64,7 +64,7 @@ import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
 import CaretRight from '@/components/icons/CaretRight'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   layout: 'WithoutNavigation',
@@ -193,7 +193,12 @@ export default {
     ...mapMutations({
       setAlertData: 'Filter/SET_PROMPT_DATA'
     }),
-    handleLightUp() {},
+    ...mapActions({
+      lightUpFlat: 'Filter/lightUpFlat'
+    }),
+    handleLightUp() {
+      this.lightUpFlat([this.flat])
+    },
     generateTextBasedOnColor(id) {
       const planshetsObject = {
         1: this.$t('colors.orange'),
