@@ -45,6 +45,7 @@
         </div>
         <div class="flat-list-table__body__item__button">
           <custom-button
+            v-if="showLightAllButton"
             :label="$t('labels.LitIt')"
             button-color="orange"
             class="ma"
