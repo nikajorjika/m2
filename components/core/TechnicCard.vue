@@ -9,7 +9,7 @@
         {{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}
       </div>
       <div class="card__text">
-        {{ item.name.hasOwnProperty(locale) ? item.name[locale] : '' }}
+        {{ item.description.hasOwnProperty(locale) ? item.description[locale] : '' }}
       </div>
       <div class="card__button">
         <GradientButton
