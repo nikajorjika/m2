@@ -18,7 +18,7 @@
       <gradient-block>
         <p>
           <span>{{ $t('labels.address') }}:</span
-          ><span>{{ $t('addresses.marshal_gelovani') }} </span><span>#832</span>
+          ><span>{{ $t('addresses.marshal_gelovani') }} </span>
         </p>
       </gradient-block>
       <gradient-progress
@@ -138,7 +138,7 @@ export default {
     p {
       display: flex;
       flex-direction: column;
-      font-size: 10px;
+      font-size: 12px;
       font-family: $font;
       span {
         margin-bottom: 8px;

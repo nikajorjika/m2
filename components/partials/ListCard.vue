@@ -47,7 +47,7 @@ export default {
     color: #494949;
     background: #fff;
     font-family: $font-caps;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 1px;
     font-weight: 900;
     box-shadow: 4px 6px 34.56px 1.44px rgba(242, 101, 41, 0.16);
@@ -57,7 +57,7 @@ export default {
     position: relative;
     opacity: 0.6;
     font-family: $font;
-    font-size: 12px;
+    font-size: 13px;
     &:before {
       content: '';
       left: 0;
@@ -81,13 +81,12 @@ export default {
       padding: 18px 23px 14px 25px;
     }
     &--gradient {
-      padding: 19px 9px 20px 37px;
+      padding: 19px 9px 19px 37px;
       &:last-child {
         border-bottom: none;
       }
     }
     &__label {
-      padding-top: 2px;
       color: inherit;
       font-family: inherit;
       font-size: inherit;

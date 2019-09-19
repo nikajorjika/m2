@@ -26,8 +26,7 @@
         <div class="swiper__content">
           <div class="swiper__content__title">
             <span>{{ '0' + (index + 1) }}</span>
-            <span>/</span>
-            <span>{{ '0' + items.length }}</span>
+            <span>/ {{ '0' + items.length }}</span>
           </div>
         </div>
         <div
@@ -119,6 +118,10 @@ export default {
       border-top-right-radius: 10px;
       padding: 25px 40px;
       &__title {
+        color: #3c2270;
+        opacity: 0.8;
+        font-size: 20px;
+        font-weight: bold;
         span:last-child {
           opacity: 0.2;
         }

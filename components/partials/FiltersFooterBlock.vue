@@ -21,7 +21,11 @@
       </div>
     </div>
     <div class="filter-footer__controls">
-      <div v-if="!noSkip" class="filter-footer__controls__skip" @click="handleSkip">
+      <div
+        v-if="!noSkip"
+        class="filter-footer__controls__skip"
+        @click="handleSkip"
+      >
         <span class="filter-footer__controls__skip__text">
           {{ $t('buttons.skip') }}
         </span>
@@ -114,7 +118,7 @@ export default {
       display: flex;
       align-items: center;
       font-family: $font;
-      font-size: 11px;
+      font-size: 13px;
       color: #494949;
       &__gradient {
         margin: 0 15px;
@@ -134,8 +138,8 @@ export default {
     }
     &__skip {
       color: #432272;
-      font-size: 10px;
-      font-size: $font;
+      font-size: 12px;
+      font-family: $font;
       display: flex;
       align-items: center;
       margin-left: auto;

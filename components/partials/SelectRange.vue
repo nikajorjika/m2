@@ -137,7 +137,7 @@ export default {
     justify-content: space-between;
     margin-top: 20px;
     color: #605e5c;
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 </style>
