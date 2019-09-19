@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="swiper-pagination"></div>
+      <div v-if="questionsNumber > 1" class="swiper-pagination"></div>
     </div>
   </div>
 </template>
@@ -38,7 +38,8 @@ export default {
         pagination: {
           el: '.swiper-pagination'
         }
-      }
+      },
+      questionsNumber: 0
     }
   },
   computed: {
@@ -53,6 +54,7 @@ export default {
   mounted() {
     if (!this.questionList.length) {
       this.fetchFAQ()
+      this.questionsNumber = this.questionList.length
     }
   },
   methods: {

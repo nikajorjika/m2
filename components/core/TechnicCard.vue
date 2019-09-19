@@ -60,22 +60,24 @@ export default {
   overflow: hidden;
   &__image {
     width: 100%;
-    padding-top: 72%;
+    padding-top: 69.69%;
     background-size: contain;
     background-repeat: no-repeat;
     background-color: #ffffff;
     background-position: center center;
   }
   &__content {
-    padding: 15px 25px;
+    padding: fit(40) 25px fit(30);
     background: #f9f1e9;
   }
 
   &__title {
     font-family: $font-caps;
     font-size: 18px;
-    margin-bottom: 15px;
-    height: 36px;
+    font-weight: bold;
+    margin-bottom: fit(30, 18);
+    max-height: 34px;
+    padding-top: 2px;
     overflow: hidden;
     &--red {
       color: #f49b73;
@@ -87,7 +89,7 @@ export default {
     line-height: 20px;
     margin-bottom: 15px;
     color: #595959;
-    height: 100px;
+    height: 80px;
     overflow: hidden;
   }
 
@@ -95,6 +97,15 @@ export default {
     position: absolute;
     right: 10px;
     top: 10px;
+  }
+
+  .card__button {
+    .button {
+      height: 40px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
   }
 }
 </style>
