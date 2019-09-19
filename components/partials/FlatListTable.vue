@@ -208,6 +208,29 @@ export default {
   &__body {
     overflow-y: auto;
     max-height: 100%;
+        
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f2cab1; 
+      border-radius: 10px;
+      width:7px;
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background:#f2a27b;
+      width: 2px; 
+      border-radius: 4px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #f26529; 
+    }
     &__item {
       border-top: 1px solid #faf4ed;
       padding: 13px 58px 13px 47px;
