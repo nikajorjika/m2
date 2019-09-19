@@ -14,6 +14,7 @@
         <nuxt />
       </div>
     </model-view>
+    <prompt-alert v-if="promptData.show" :text="promptData.text" :color="promptData.color" class="prompt-component"/>
   </div>
 </template>
 <script>
@@ -26,10 +27,12 @@ import FloorIcon from '@/components/icons/Floor'
 import CompassIcon from '@/components/icons/Compass'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
+import PromptAlert from '@/components/partials/PromptAlert'
 import PopoverImage from '@/components/partials/PopoverImage'
 export default {
   components: {
     SidebarWithItems,
+    PromptAlert,
     ModelView,
     PopoverImage,
     BlockIcon,
@@ -55,7 +58,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ locale: 'locale' }),
+    ...mapGetters({ locale: 'locale' , promptData: 'Filter/showPrompt' }),
     items() {
       return [
         {
@@ -88,6 +91,11 @@ export default {
 <style lang="scss" scoped>
 body {
   background: #fff;
+  .prompt-component {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+  }
   .gradient-line {
     height: 6px;
     background: linear-gradient(45deg, #f26529 0%, #f6a646 100%);

@@ -1,5 +1,3 @@
-import { timeout } from "q"
-
 export const state = () => ({
   flats: [],
   filters: {
@@ -31,6 +29,11 @@ export const state = () => ({
       }
     ]
   },
+  showPrompt: {
+    show: false,
+    text: null,
+    color: null
+  },
   filterDefaults: {
     min_floor: 1,
     max_floor: 24,
@@ -51,12 +54,16 @@ export const getters = {
   totalCount: (state) => state.filteredTotalCount,
   filterDefaults: (state) => state.filterDefaults,
   filterLoading: (state) => state.filterLoading,
-  modelApiData: (state) => state.modelApiData
+  modelApiData: (state) => state.modelApiData,
+  showPrompt: (state) => state.showPrompt
 }
 
 export const mutations = {
   SET_FLATS_DATA: (state, data) => {
     state.flats = data
+  },
+  SET_PROMPT_DATA: (state, { text, color, show }) => {
+    state.showPrompt = { text, color, show }
   },
   SET_TOTAL_COUNT: (state, data) => {
     state.filteredTotalCount = data
