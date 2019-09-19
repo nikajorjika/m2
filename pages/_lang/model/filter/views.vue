@@ -53,19 +53,16 @@ export default {
       setFilterItem: 'Filter/SET_FILTER_VIEWS'
     }),
     ...mapActions({
-      fetchFilteredDataCount: 'Filter/fetchFilteredDataCount',
-      fetchFilteredFlats: 'Filter/fetchFilteredFlats',
+      fetchFilteredDataCount: 'Filter/fetchFilteredDataCount'
     }),
     handleChange(data) {
       this.setFilterItem(data)
       this.fetchFilteredDataCount()
     },
     handleNext() {
-      this.fetchFilteredFlats().then(() => {
-        this.$router.push({
-          name: 'lang-model-list',
-          params: { lang: this.locale }
-        })
+      this.$router.push({
+        name: 'lang-model-list',
+        params: { lang: this.locale }
       })
     }
   }

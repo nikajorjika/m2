@@ -22,16 +22,14 @@ export default {
   computed: {
     ...mapGetters({
       flats: 'Filter/flats',
-      locale: 'locale'
+      locale: 'locale',
+      totalFlatCount: 'Filter/totalCount'
     }),
     cTitle() {
       return this.$t('titles.flat-list-result-title').replace(
         '%s',
-        this.flats.length
+        this.totalFlatCount
       )
-    },
-    promptText() {
-
     }
   },
   data() {
@@ -41,23 +39,10 @@ export default {
       color: null
     }
   },
-  mounted() {
-    if(!this.flats.length) {
-      this.fetchData()
-    }
-  },
   methods: {
     ...mapActions({
       fetchFilteredFlats: 'Filter/fetchFilteredFlats'
     }),
-    fetchData() {
-      this.fetchFilteredFlats().then(() => {
-        this.$router.push({
-          name: 'lang-model-list',
-          params: { lang: this.locale }
-        })
-      })
-    },
     generateTextBasedOnColor(id) {
       const planshetsObject = {
         1: this.$t('colors.orange'),

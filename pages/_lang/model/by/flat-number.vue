@@ -62,11 +62,10 @@ export default {
       fetchByFlatNumber: 'Filter/fetchByFlatNumber'
     }),
     handleSearch(searchBy) {
-      this.fetchByFlatNumber(searchBy).then((data) => {
-        this.$router.push({
-          name: 'lang-model-list',
-          params: { lang: this.locale }
-        })
+      this.$store.commit('Filter/SET_FLAT_NUMBER', searchBy)
+      this.$router.push({
+        name: 'lang-model-list',
+        params: { lang: this.locale }
       })
     }
   }

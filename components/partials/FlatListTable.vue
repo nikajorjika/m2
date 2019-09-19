@@ -45,6 +45,7 @@
         </div>
         <div class="flat-list-table__body__item__button">
           <custom-button
+            v-if="showLightAllButton"
             :label="$t('labels.LitIt')"
             button-color="orange"
             class="ma"
@@ -60,6 +61,7 @@
           </custom-button>
         </div>
       </div>
+      <div v-if="!done" ref="Loading" class="center">Loading...</div>
     </div>
   </div>
 </template>
@@ -68,7 +70,7 @@
 import FlatListItem from '@/components/partials/FlatListItem'
 import CustomButton from '@/components/partials/CustomButton'
 import LightIcon from '@/components/icons/Light'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { timeout } from 'q'
 export default {
   components: { FlatListItem, CustomButton, LightIcon },
@@ -80,10 +82,21 @@ export default {
   },
   data() {
     return {
-      timeout: null
+      timeout: null,
+      page: 1,
+      observer: null,
+      done: false,
+      options: {
+        root: null,
+        threshold: 0
+      }
     }
   },
   computed: {
+    ...mapGetters({
+      totalFlatCount: 'Filter/totalCount',
+      flatNumber: 'Filter/flatNumber'
+    }),
     chosenPlanshet() {
       return parseInt(this.$cookies.get('paveleon-planshet'))
     },
@@ -91,10 +104,35 @@ export default {
       return this.$cookies.get('paveleon-planshet') ? true : false
     }
   },
+  beforeDestroy() {
+    this.$store.commit('Filter/SET_FLATS_DATA', [])
+    this.$store.commit('Filter/SET_FLAT_NUMBER', null)
+  },
+  mounted() {
+    if(this.totalFlatCount === 0) {
+      this.fetchFilteredDataCount()
+    }
+    this.observer = new IntersectionObserver(this.callback, this.options);
+    this.observer.observe(this.$refs.Loading);
+  },
   methods: {
     ...mapActions({
-      lightUpFlat: 'Filter/lightUpFlat'
+      lightUpFlat: 'Filter/lightUpFlat',
+      fetchFlats: 'Filter/fetchFilteredFlats',
+      fetchFilteredDataCount: 'Filter/fetchFilteredDataCount'
     }),
+    callback(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.done) {
+          this.fetchFlats({ page:this.page }).then((response) => {
+            this.page++
+            if(response.length < 10){
+              this.done = true
+            }
+          })
+        }
+      });
+    }, 
     handleLightAllButton() {
       const planshetFlats = this.list.filter(item => item.planshet.id === this.chosenPlanshet)
       if(this.timeout) clearTimeout(this.timeout)
@@ -123,6 +161,9 @@ export default {
   background: #f6ece1;
   border-top-left-radius: 26px;
   position: relative;
+  .center {
+    text-align: center;
+  }
   &:after {
     content: '';
     position: absolute;
@@ -168,6 +209,29 @@ export default {
   &__body {
     overflow-y: auto;
     max-height: 100%;
+        
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f2cab1; 
+      border-radius: 10px;
+      width:7px;
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background:#f2a27b;
+      width: 2px; 
+      border-radius: 4px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #f26529; 
+    }
     &__item {
       border-top: 1px solid #faf4ed;
       padding: 13px 58px 13px 47px;

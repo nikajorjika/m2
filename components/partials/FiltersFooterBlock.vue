@@ -79,11 +79,9 @@ export default {
       fetchFilteredFlats: 'Filter/fetchFilteredFlats'
     }),
     handleFilter() {
-      this.fetchFilteredFlats().then(() => {
-        this.$router.push({
-          name: 'lang-model-list',
-          params: { lang: this.locale }
-        })
+      this.$router.push({
+        name: 'lang-model-list',
+        params: { lang: this.locale }
       })
     },
     handleNext() {
