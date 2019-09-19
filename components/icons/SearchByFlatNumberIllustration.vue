@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import SvgIcon from '@/assets/icons/FilterSearch.svg'
+import SvgIcon from '@/assets/icons/FilterByFlatNumberIllustration.svg'
 export default {
   components: { SvgIcon },
   props: {
