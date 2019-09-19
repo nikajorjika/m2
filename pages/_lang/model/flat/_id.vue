@@ -33,6 +33,7 @@
           <div class="footer-items__controls__skip"></div>
           <div class="footer-items__controls__next">
             <button-main-orange
+              v-if="planshetColor"
               :button-text="$t('labels.LitIt')"
               :disabled="buttonDisabled"
               @click="handleLightUp"
@@ -91,6 +92,9 @@ export default {
       locale: 'locale',
       showPrompt: 'Filter/showPrompt'
     }),
+    planshetColor() {
+      return this.$cookies.get('paveleon-planshet') ? true : false
+    },
     cTitle() {
       return this.$t('titles.YourChosenFlat')
     },
