@@ -109,13 +109,13 @@ export default {
       &__value {
         margin-left: auto;
         font-family: $font;
-        font-size: 14px;
+        font-size: 13px;
         color: #4b3f99;
         letter-spacing: 0.6px;
       }
       &__label {
         font-family: $font;
-        font-size: 14px;
+        font-size: 13px;
         letter-spacing: 1px;
         color: #494949;
       }
