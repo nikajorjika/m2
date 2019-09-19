@@ -10,7 +10,8 @@ export const state = () => ({
       min: 20000,
       max: 150000
     },
-    view: []
+    view: [],
+    flat_number: null
   },
   modelApiData: {
     TabletId: null,
@@ -41,7 +42,7 @@ export const state = () => ({
     min_price: 150000,
     view: []
   },
-  flatNumber: '',
+  flatNumber: null,
   filterLoading: false,
   filteredTotalCount: 0,
   customColor: ''
@@ -54,6 +55,7 @@ export const getters = {
   totalCount: (state) => state.filteredTotalCount,
   filterDefaults: (state) => state.filterDefaults,
   filterLoading: (state) => state.filterLoading,
+  flatNumber: (state) => state.filterLoading,
   modelApiData: (state) => state.modelApiData,
   showPrompt: (state) => state.showPrompt
 }
@@ -61,6 +63,9 @@ export const getters = {
 export const mutations = {
   SET_FLATS_DATA: (state, data) => {
     state.flats = data
+  },
+  UPPEND_FLATS_DATA: (state, data) => {
+    state.flats = [...state.flats, ...data]
   },
   SET_PROMPT_DATA: (state, { text, color, show }) => {
     state.showPrompt = { text, color, show }
@@ -70,6 +75,9 @@ export const mutations = {
   },
   SET_FILTER_LOADER: (state, status) => {
     state.filterLoading = status
+  },
+  SET_FLAT_NUMBER: (state, flatNumber) => {
+    state.filters.flat_number = flatNumber
   },
   SET_FILTER_DEFAULTS: (state, data) => {
     state.filterDefaults = data
@@ -134,17 +142,20 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchFilteredFlats({ commit, getters }) {
+  fetchFilteredFlats({ commit, getters }, { page }) {
     commit('SET_FILTER_LOADER', true)
     return new Promise((resolve, reject) => {
-      const { block, floors, price } = getters.filters
+      // eslint-disable-next-line camelcase
+      const { block, floors, price, flat_number } = getters.filters
       const views = getters.filters.view.map((item) => item.value)
       const params = {
         block_id: block,
         max_price: price.max,
         min_price: price.min,
         max_floor: floors.max,
-        min_floor: floors.min
+        min_floor: floors.min,
+        flat_number,
+        page
       }
       if (views) {
         params.view_ides = views
@@ -152,7 +163,7 @@ export const actions = {
       this.$axios
         .get('/flats', { params })
         .then(({ data }) => {
-          commit('SET_FLATS_DATA', data.data)
+          commit('UPPEND_FLATS_DATA', data.data)
           resolve(data.data)
           commit('SET_FILTER_LOADER', false)
         })
@@ -161,14 +172,15 @@ export const actions = {
   },
 
   fetchFilteredDataCount({ commit, getters }) {
-    const { block, floors, price } = getters.filters
+    const { block, floors, price, flat_number } = getters.filters
     const views = getters.filters.view.map((item) => item.value)
     const params = {
       block_id: block,
       max_price: price.max,
       min_price: price.min,
       max_floor: floors.max,
-      min_floor: floors.min
+      min_floor: floors.min,
+      flat_number
     }
     if (views) {
       params.view_ides = views
@@ -189,6 +201,7 @@ export const actions = {
         })
         .then(({ data }) => {
           context.commit('SET_FLATS_DATA', data.data)
+          context.commit('SET_FLAT_NUMBER', flatNumber)
           resolve(data.data)
         })
         .catch((e) => reject(e))
