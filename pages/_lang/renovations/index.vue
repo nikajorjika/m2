@@ -55,21 +55,19 @@ export default {
       })
     },
     fullPrice() {
-      let fullPrice = 0
-      this.priceArray.map((item) => (fullPrice += item.number))
-      return fullPrice
+      return {
+        label: this.$t(`labels.full_price`),
+        value: this.flat.total_price
+      }
     },
     decorationPrice() {
+      const decorationPrice = this.flat.renovation_flat_properties.find(
+        (item) => item.type === 'price' && item.name === 'decoration_price'
+      )
+
       return {
         label: this.$t(`labels.decoration`),
-        value: `${
-          this.totalArea
-            ? formatPrice(
-                parseInt(this.flat.decoration.price) *
-                  parseInt(this.totalArea.number)
-              )
-            : 0
-        } $`
+        value: `${decorationPrice ? decorationPrice.number : 0} $`
       }
     },
     flatPrice() {
@@ -78,38 +76,27 @@ export default {
       )
       return {
         label: this.$t(`labels.flat_price`),
-        value: `${price ? formatPrice(price.number) : 0} $`
+        value: `${price ? price.number : 0} $`
       }
     },
     furniturePrice() {
+      const furniturePrice = this.flat.renovation_flat_properties.find(
+        (item) => item.type === 'price' && item.name === 'furniture_price'
+      )
+
       return {
         label: this.$t(`labels.furniture`),
-        value: `${
-          this.totalArea
-            ? formatPrice(
-                parseInt(this.flat.furniture.price) *
-                  parseInt(this.totalArea.number)
-              )
-            : 0
-        } $`
+        value: `${furniturePrice ? furniturePrice.number : 0} $`
       }
     },
     appliancePrice() {
-      let sum = 0
-      this.flat.appliance
-        ? this.flat.appliance.appliance_info.map(
-            (item) => (sum += parseInt(item.price))
-          )
-        : 0
+      const appliancesPrice = this.flat.renovation_flat_properties.find(
+        (item) => item.type === 'price' && item.name === 'appliances_price'
+      )
+
       return {
         label: this.$t(`labels.appliance`),
-        value: `${formatPrice(sum)} $`
-      }
-    },
-    fullPriceObject() {
-      return {
-        label: this.$t(`labels.full_price`),
-        value: `${formatPrice(this.fullPrice)} $`
+        value: `${appliancesPrice ? appliancesPrice.number : 0} $`
       }
     },
     prices() {
@@ -118,7 +105,7 @@ export default {
         this.furniturePrice,
         this.decorationPrice,
         this.appliancePrice,
-        this.fullPriceObject
+        this.fullPrice
       ]
     },
     areas() {
