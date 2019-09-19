@@ -67,10 +67,9 @@ export default {
 <style lang="scss" scoped>
 .container {
   padding-top: 53px;
-  padding-bottom: 50px;
 }
 .swiper__container {
-  padding-bottom: 30px;
+  padding-bottom: fit(30);
   .swiper-pagination {
     justify-content: center;
     &.disabled {
@@ -88,7 +87,7 @@ export default {
   justify-content: flex-start;
   flex-flow: wrap;
   .item {
-    width: 300px;
+    width: fit(429);
     margin: 0 auto;
   }
 }
