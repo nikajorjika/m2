@@ -68,7 +68,16 @@ export default {
         6: this.$t('colors.yellow'),
         7: this.$t('colors.pink')
       }
-      return this.$t('alerts.planshetColorAlert').replace('%s', planshetsObject[id])
+      const planshetNumbers = {
+        1: this.$t('colors.first'),
+        2: this.$t('colors.second'),
+        3: this.$t('colors.third'),
+        4: this.$t('colors.fourth'),
+        5: this.$t('colors.fifth'),
+        6: this.$t('colors.sixth'),
+        7: this.$t('colors.seventh')
+      }
+      return this.$t('alerts.planshetColorAlert').replace('%s', planshetsObject[id]).replace('%n', planshetNumbers[id])
     },
     handlePrompt({color, id}) {
       this.showPrompt = true
