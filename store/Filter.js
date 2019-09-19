@@ -182,17 +182,17 @@ export const actions = {
   lightUpFlat(context, flats) {
     return new Promise((resolve, reject) => {
       context.commit('SET_MODEL_API_DATA', flats)
-      this.$axios
-        .post(
-          'http://10.200.22.28/LocalServices/api/selected',
-          context.getters.modelApiData
-        )
-        .then((response) => {
-          setTimeout(() => {
-            context.dispatch('inactivityReset')
-            resolve(response)
-          }, 20000)
-        })
+      this.$axios({
+        method: 'post',
+        url: 'http://10.200.22.28/LocalServices/api/selected',
+        headers: {},
+        data: [context.getters.modelApiData]
+      }).then((response) => {
+        setTimeout(() => {
+          context.dispatch('inactivityReset')
+          resolve(response)
+        }, 20000)
+      })
     })
   },
   inactivityReset(context) {
