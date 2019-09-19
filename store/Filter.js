@@ -80,6 +80,23 @@ export const mutations = {
   },
   // eslint-disable-next-line object-shorthand
   SET_MODEL_API_DATA: function(state, flats) {
+    state.modelApiData = {
+      TabletId: null,
+      block: [
+        {
+          BlockId: 'A',
+          Apartments: []
+        },
+        {
+          BlockId: 'B',
+          Apartments: []
+        },
+        {
+          BlockId: 'C',
+          Apartments: []
+        }
+      ]
+    }
     state.modelApiData.TabletId = this.$cookies.get('paveleon-planshet')
     flats.map((item) => {
       state.modelApiData.block[parseInt(item.block) - 1].Apartments.push({
