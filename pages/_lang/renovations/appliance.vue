@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="title">
-      <title-with-border :title="$t('titles.SupplyPageTitle')" />
+      <title-with-border :title="$t('')" />
     </div>
     <div v-swiper:mySwiper="swiperOption" class="swiper__container">
       <div class="swiper-wrapper">

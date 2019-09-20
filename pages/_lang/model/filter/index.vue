@@ -26,7 +26,7 @@
         :label="$t('labels.sold_flat_count')"
         :min="0"
         :max="391"
-        :value="175"
+        :value="179"
       />
       <!-- project.flats_quantity -->
       <gradient-progress

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <title-with-border :title="$t('titles.FlatPageTitle')" />
+      <title-with-border :title="title" />
     </div>
     <div class="area-list-container">
       <list-block class="list" :items="areas" />
@@ -135,6 +135,17 @@ export default {
           value: `${item.number} ${this.$t('labels.m2')}`
         }
       })
+    },
+    title() {
+      const titles = {
+        11: this.$t('titles.FlatPageTitleGinger'),
+        3: this.$t('titles.FlatPageTitleCinnamon'),
+        9: this.$t('titles.FlatPageTitleMuscat'),
+        8: this.$t('titles.FlatPageTitle'),
+        10: this.$t('titles.FlatPageTitle')
+      }
+
+      return titles[this.flat.id]
     }
   },
   mounted() {

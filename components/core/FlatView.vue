@@ -3,7 +3,7 @@
     <language-switcher class="flat-view__switcher" />
     <flat-navigation class="flat-view__navigation" :nav-data="navData" />
     <slot />
-    <div class="faq-container">
+    <div class="faq-container" style="visibility: hidden">
       <faq-button @click="goToFaq" />
     </div>
   </div>
