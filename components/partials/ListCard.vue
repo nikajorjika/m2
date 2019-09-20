@@ -76,12 +76,13 @@ export default {
   &__item {
     border-bottom: 1px solid #f3ede7;
     display: flex;
+    justify-content: space-between;
     z-index: 1;
     &--white {
-      padding: 18px 23px 14px 25px;
+      padding: 19px 23px 14px 25px;
     }
     &--gradient {
-      padding: 19px 9px 19px 37px;
+      padding: 19px 9px 19px 25px;
       &:last-child {
         border-bottom: none;
       }
@@ -99,7 +100,6 @@ export default {
       }
       &--gradient {
         color: #fff;
-        margin-left: 13px;
       }
     }
   }

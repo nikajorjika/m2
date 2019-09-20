@@ -57,7 +57,7 @@ export default {
     fullPrice() {
       return {
         label: this.$t(`labels.full_price`),
-        value: this.flat.total_price
+        value: `${this.flat.total_price} $`
       }
     },
     decorationPrice() {
@@ -141,8 +141,8 @@ export default {
         11: this.$t('titles.FlatPageTitleGinger'),
         3: this.$t('titles.FlatPageTitleCinnamon'),
         9: this.$t('titles.FlatPageTitleMuscat'),
-        8: this.$t('titles.FlatPageTitle'),
-        10: this.$t('titles.FlatPageTitle')
+        8: this.$t('titles.FlatPageTitleVanilla'),
+        10: this.$t('titles.FlatPageTitleUlumbo')
       }
 
       return titles[this.flat.id]
