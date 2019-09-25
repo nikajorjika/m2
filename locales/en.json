@@ -7,6 +7,11 @@
     "ka": "ქარ",
     "en": "ENG"
   },
+  "errors": {
+    "NameFieldIsRequired": "Name field is required",
+    "PhoneFieldIsRequired": "Phone Number field is required and must be numeric value",
+    "emailIsNotValid": "Email field is required and must be correct format"
+  },
   "navigation": {
     "flat": "Flat",
     "renovation": "Renovation",
@@ -25,6 +30,7 @@
     "next": "NEXT",
     "see": "SEE",
     "search": "SEARCH",
+    "register": "register",
     "skip": "skip",
     "faq": "Frequently asked question",
     "CLOSE": "CLOSE"
@@ -33,6 +39,9 @@
     "FullArea": "Full Area",
     "FlatArea": "Flat Area",
     "address": "Address",
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "email": "E-mail",
     "ongoing": "Ongoing",
     "BalconyArea": "Balcony Area",
     "min": "Min:",
@@ -97,6 +106,7 @@
     "FlatPageTitleMuscat": "Design muscat",
     "FlatPageTitleVanilla": "Design vanilla",
     "FlatPageTitleUlumbo": "Design ulumbo",
+    "FillPrivateInformation": "Fill in private info",
     "FrequentlyAskedQuestions": "Frequently Asked Question",
     "SearchByFlatNumber": "Search by flat number",
     "SearchByFlatNumberSubTitle": "Fill in your chosen flat number",
