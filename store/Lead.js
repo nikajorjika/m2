@@ -5,7 +5,6 @@ const getters = {}
 const actions = {
   saveLead(context, data) {
     return new Promise((resolve, reject) => {
-      console.log(data)
       this.$axios
         .post(`/leads`, data)
         .then(() => {
