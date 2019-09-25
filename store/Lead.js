@@ -7,7 +7,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       console.log(data)
       this.$axios
-        .post(`/lead/leads`, data)
+        .post(`/leads`, data)
         .then(() => {
           resolve()
         })

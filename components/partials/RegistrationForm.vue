@@ -80,7 +80,7 @@ export default {
       if(!this.name.length) {
         this.errors.name = this.$t('errors.NameFieldIsRequired')
       }
-      if(!this.phone.length || isNaN(this.phone)) {
+      if(!this.phone.length || isNaN(this.phone) || !this.validatePhone(this.phone)) {
         this.errors.phone = this.$t('errors.PhoneFieldIsRequired')
       }
       if(!this.email.length || !this.validateEmail(this.email)) {
@@ -91,6 +91,10 @@ export default {
     validateEmail(email) {
       const emailValidationRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return emailValidationRegex.test(String(email).toLowerCase());
+    },
+    validatePhone(phone) {
+      const phoneValidationRegex = /^[0-9+]{9,}$/;
+      return phoneValidationRegex.test(phone);
     }
   }
 }
