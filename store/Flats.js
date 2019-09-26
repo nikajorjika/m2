@@ -3,7 +3,7 @@ import { isObjectEqual } from '@/utils/Mixed'
 export const state = function() {
   return {
     flatsData: [],
-    flat: []
+    flat: {}
   }
 }
 
@@ -54,8 +54,11 @@ export const actions = {
   fetchFlat({ commit }) {
     const id = this.$cookies.get('paveleon-flat')
     return new Promise((resolve, reject) => {
+      const httpProtocol = process.env.PREFIX
+      const url = `${httpProtocol}:${process.env.SERVER_IP}/renovation-flats/${id}`
+      console.log(url)
       this.$axios
-        .get(`/renovation-flats/${id}`)
+        .get(url)
         .then(({ data }) => {
           commit('SET_FLAT_STATE', data.data)
           resolve(data.data)

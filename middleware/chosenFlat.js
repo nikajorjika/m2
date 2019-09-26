@@ -1,4 +1,4 @@
-export default function({ app, store, route, redirect }) {
+export default async function({ app, store, route, redirect }) {
   if (
     route.name !== 'lang-renovations-choose' &&
     !app.$cookies.get('paveleon-flat')
@@ -8,6 +8,6 @@ export default function({ app, store, route, redirect }) {
     Object.entries(store.getters['Flats/flat']).length === 0 &&
     app.$cookies.get('paveleon-flat')
   ) {
-    store.dispatch('Flats/fetchFlat')
+    await store.dispatch('Flats/fetchFlat')
   }
 }
