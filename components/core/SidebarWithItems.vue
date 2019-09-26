@@ -9,7 +9,7 @@
         :key="index"
         :to="item.path"
         class="sidebar__list__item"
-        :class="{ hide: isSales }"
+        :class="{ hide: !isSales && item.path === `/${locale}/sales/registration` }"
       >
         <div class="sidebar__list__item__icon">
           <component
@@ -45,7 +45,7 @@ export default {
   computed: {
     ...mapGetters(['locale']),
     isSales() {
-      return this.$cookies.get('paveleon-app') ? false : true
+      return this.$cookies.get('paveleon-planshet') ? false : true
     }
   }
 }
