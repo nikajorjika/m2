@@ -35,6 +35,7 @@ module.exports = {
   plugins: [
     '~/plugins/i18n.js',
     '~/plugins/axiosLogger.js',
+    '~/plugins/AxiosInterceptor.js',
     {
       src: '~/plugins/nuxt-swiper.js',
       ssr: false
