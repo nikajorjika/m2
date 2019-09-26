@@ -1,5 +1,5 @@
 import { isObjectEqual } from '@/utils/Mixed'
-
+require('url')
 export const state = function() {
   return {
     flatsData: [],
@@ -54,7 +54,10 @@ export const actions = {
   fetchFlat({ commit }) {
     const id = this.$cookies.get('paveleon-flat')
     return new Promise((resolve, reject) => {
-      const url = `http:${process.env.SERVER_IP}/renovation-flats/${id}`
+      const url = new URL(
+        `/renovation-flats/${id}`,
+        `http:${process.env.SERVER_IP}`
+      )
       console.log(url)
       this.$axios
         .get(url)
