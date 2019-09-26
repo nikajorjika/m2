@@ -54,10 +54,7 @@ export const actions = {
   fetchFlat({ commit }) {
     const id = this.$cookies.get('paveleon-flat')
     return new Promise((resolve, reject) => {
-      const url = new URL(
-        `/renovation-flats/${id}`,
-        `http:${process.env.SERVER_IP}`
-      )
+      const url = `http:${process.env.SERVER_IP}renovation-flats/${id}`
       console.log(url)
       this.$axios
         .get(url)
