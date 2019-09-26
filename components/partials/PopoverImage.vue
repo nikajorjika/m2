@@ -62,6 +62,8 @@ export default {
   }
 }
 .image-container {
+  max-width: 70%;
+  max-height: 80%;
   padding: 68px 68px;
   position: relative;
   display: flex;

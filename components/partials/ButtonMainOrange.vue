@@ -1,5 +1,5 @@
 <template>
-  <div
+  <button
     class="btn btn-standard btn-standard--orange btn-standard--large"
     :class="{ 'btn-standard--disabled': disabled }"
     @click="handleClick"
@@ -13,7 +13,7 @@
     >
       <slot name="icon" />
     </span>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -56,6 +56,7 @@ export default {
   height: 47px;
   width: auto;
   display: flex;
+  border: none;
 }
 .btn-standard {
   border-radius: 35px;
