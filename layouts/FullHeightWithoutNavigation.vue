@@ -73,7 +73,7 @@ export default {
             en: 'REGISTER',
             ka: 'რეგისტრაცია'
           },
-          path: `/${this.locale}/sales/register`,
+          path: `/${this.locale}/sales/registration`,
           component: Registration
         },
         {
