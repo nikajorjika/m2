@@ -35,6 +35,7 @@ module.exports = {
    */
   plugins: [
     '~/plugins/i18n.js',
+    '~/plugins/axiosLogger.js',
     {
       src: '~/plugins/nuxt-swiper.js',
       ssr: false
@@ -52,6 +53,7 @@ module.exports = {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/axios',
     '@nuxtjs/axios',
     // '@nuxtjs/auth',
     '@nuxtjs/style-resources',
