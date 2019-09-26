@@ -102,8 +102,8 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.SERVER_IP,
-    prefix: process.env.API_PREFIX
+    // baseURL: process.env.SERVER_IP,
+    // prefix: process.env.API_PREFIX
   },
   /*
    ** Build configuration
