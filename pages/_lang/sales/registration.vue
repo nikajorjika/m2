@@ -9,29 +9,6 @@
     <div class="page-flat-number__form">
       <registration-form @register="handleRegistration" />
     </div>
-    <div class="page-flat-number__buttons">
-      <small>{{ $t('titles.ByFlatNumberButtonsTitle') }}</small>
-      <illustrated-button
-        :label="$t('labels.ByFilter')"
-        :to-route="{
-          name: 'lang-model-filter',
-          params: { lang: locale }
-        }"
-        class="filter-icon"
-      >
-        <template v-slot:illustration>
-          <filter-icon-illustration
-            class="filter-illustation-icon"
-            width="50px"
-            height="100%"
-          />
-        </template>
-
-        <template v-slot:icon>
-          <filter-search icon-color="#fff" width="18px" height="9px" />
-        </template>
-      </illustrated-button>
-    </div>
   </div>
 </template>
 
