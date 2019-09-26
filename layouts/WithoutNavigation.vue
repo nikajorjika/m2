@@ -27,6 +27,7 @@ import FloorIcon from '@/components/icons/Floor'
 import CompassIcon from '@/components/icons/Compass'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
+import Registration from '@/components/icons/Registration'
 import PromptAlert from '@/components/partials/PromptAlert'
 import PopoverImage from '@/components/partials/PopoverImage'
 export default {
@@ -37,6 +38,7 @@ export default {
     PopoverImage,
     BlockIcon,
     MainIcon,
+    Registration,
     QuestionsIcon,
     CostIcon,
     FloorIcon,
@@ -68,6 +70,14 @@ export default {
           },
           path: `/${this.locale}/model`,
           component: MainIcon
+        },
+        {
+          title: {
+            en: 'REGISTER',
+            ka: 'რეგისტრაცია'
+          },
+          path: `/${this.locale}/sales/registration`,
+          component: Registration
         },
         {
           title: {

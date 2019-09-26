@@ -20,6 +20,7 @@ import { mapGetters } from 'vuex'
 import SidebarWithItems from '@/components/core/SidebarWithItems'
 import ModelView from '@/components/core/ModelView'
 import QuestionsIcon from '@/components/icons/Questions'
+import Registration from '@/components/icons/Registration'
 import PopoverImage from '@/components/partials/PopoverImage'
 import MainIcon from '@/components/icons/Main'
 export default {
@@ -35,6 +36,14 @@ export default {
           },
           path: `/${this.locale}/model/`,
           component: MainIcon
+        },
+        {
+          title: {
+            en: 'REGISTER',
+            ka: 'რეგისტრაცია'
+          },
+          path: `/${this.locale}/sales/registration`,
+          component: Registration
         },
         {
           title: {

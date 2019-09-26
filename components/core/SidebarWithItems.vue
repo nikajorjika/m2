@@ -9,6 +9,7 @@
         :key="index"
         :to="item.path"
         class="sidebar__list__item"
+        :class="{ hide: isSales }"
       >
         <div class="sidebar__list__item__icon">
           <component
@@ -42,7 +43,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['locale'])
+    ...mapGetters(['locale']),
+    isSales() {
+      return this.$cookies.get('paveleon-app') ? false : true
+    }
   }
 }
 </script>
@@ -67,16 +71,20 @@ export default {
   }
   &__list {
     position: absolute;
-    left: 20%;
+    left: 50%;
     top: 39%;
     display: flex;
     flex-direction: column;
+    transform: translateX(-50%);
     &__item {
       margin: 20px 0;
       display: flex;
       flex-direction: column;
       text-decoration: none;
       color: #3c2270;
+      &.hide {
+        display: none;
+      }
       &:last-child {
         display: none;
       }
@@ -91,9 +99,9 @@ export default {
       }
       &__label {
         font-size: 12px;
-        font-family: $font;
+        font-family: $font-caps;
         margin-top: 15px;
-        font-weight: 500;
+        font-weight: 600;
         text-align: center;
       }
     }
