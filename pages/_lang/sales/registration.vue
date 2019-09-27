@@ -1,13 +1,15 @@
 <template>
-  <div class="page-flat-number">
-    <div class="page-flat-number__title-container">
-      <title-with-line
-        class="page-flat-number__title"
-        :title="$t('titles.FillPrivateInformation')"
-      />
-    </div>
-    <div class="page-flat-number__form">
-      <registration-form @register="handleRegistration" />
+  <div class="page-flat-container">
+    <div class="page-flat-number">
+      <div class="page-flat-number__title-container">
+        <title-with-line
+          class="page-flat-number__title"
+          :title="$t('titles.FillPrivateInformation')"
+        />
+      </div>
+      <div class="page-flat-number__form">
+        <registration-form @register="handleRegistration" />
+      </div>
     </div>
   </div>
 </template>
@@ -47,9 +49,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-flat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .page-flat-number {
-  margin: 124px 60px;
-  height: calc(100% - 248px);
+  margin: auto 60px;
   display: flex;
   flex-direction: column;
   &__title {
