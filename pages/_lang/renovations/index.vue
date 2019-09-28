@@ -6,9 +6,9 @@
     <div class="area-list-container">
       <list-block class="list" :items="areas" />
     </div>
-    <div class="price-list-container">
+    <!-- <div class="price-list-container">
       <list-block class="list" list-style="gradient" :items="prices" />
-    </div>
+    </div> -->
     <div class="flat-render flat-render-renovation">
       <render-viewer
         class="flat-viewer"
