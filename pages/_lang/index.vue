@@ -30,6 +30,10 @@ export default {
         {
           title: this.$t('apps.model'),
           name: 'model'
+        },
+        {
+          title: this.$t('apps.sales'),
+          name: 'sales'
         }
       ]
     }

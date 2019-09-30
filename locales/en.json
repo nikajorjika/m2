@@ -1,6 +1,7 @@
 {
   "apps": {
     "renovation": "Replications App",
+    "sales": "Sales App",
     "model": "Model App"
   },
   "languages": {
