@@ -52,7 +52,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // '@nuxtjs/auth',
+    '@nuxtjs/auth',
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
     '@nuxtjs/pwa',
