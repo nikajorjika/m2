@@ -30,6 +30,7 @@ export default {
     FilterIconIllustration
   },
   layout: 'WithoutNavigation',
+  auth: 'guest',
   computed: {
     ...mapGetters({
       locale: 'locale'
