@@ -6,9 +6,13 @@
           class="page-flat-number__title"
           :title="$t('titles.FillPrivateInformation')"
         />
+        <small v-html="subtitle"></small>
       </div>
-      <div class="page-flat-number__form">
+      <div v-if="!codeSent" class="page-flat-number__form">
         <registration-form @register="handleRegistration" />
+      </div>
+      <div v-else class="page-flat-number__confirm">
+        <confirm-phone-form @submit="handelVerification" @resend="sendVerifyPhoneRequest"/>
       </div>
     </div>
   </div>
@@ -19,31 +23,51 @@ import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RegistrationForm from '@/components/partials/RegistrationForm'
 import IllustratedButton from '@/components/partials/IllustratedButton'
+import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
 import FilterSearch from '@/components/icons/FilterSearch'
 import FilterIconIllustration from '@/components/icons/FilterIllustration'
 export default {
   components: {
     TitleWithLine,
     RegistrationForm,
+    ConfirmPhoneForm,
     FilterSearch,
     IllustratedButton,
     FilterIconIllustration
   },
   layout: 'WithoutNavigation',
   auth: 'guest',
+  data() {
+    return {
+      codeSent: false,
+      formData: null
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale'
-    })
+    }),
+    subtitle() {
+      return !this.codeSent ? this.$t('titles.YouWillRecieveCode') : this.$t('titles.CodeWasSentTo').replace('%s', this.formData.phone)
+    }
   },
   methods: {
     ...mapActions({
-      saveLead: 'Lead/saveLead'
+      sendVerificationCode: 'Sales/sendVerificationCode',
+      verifyPhone: 'Sales/verifyPhone'
     }),
-    handleRegistration(data) {
-      this.saveLead(data).then(() => {
-        this.$router.push({name: 'lang-model', params: {lang: this.locale}})
+    sendVerifyPhoneRequest() {
+      this.sendVerificationCode(this.formData).then(() => {
+        this.codeSent = true
       })
+    },
+    handleRegistration(data) {
+      this.formData = data
+      this.sendVerifyPhoneRequest()
+    },
+    handelVerification({ code }) {
+      this.formData = data
+      this.verifyPhone({formData: this.formData, code})
     }
   }
 }
@@ -56,7 +80,7 @@ export default {
   height: 100%;
 }
 .page-flat-number {
-  margin: auto 60px;
+  margin: 60px;
   display: flex;
   flex-direction: column;
   &__title {
@@ -73,6 +97,7 @@ export default {
       margin-top: 13px;
     }
   }
+  &__confirm,
   &__form {
     margin-top: 62px;
   }

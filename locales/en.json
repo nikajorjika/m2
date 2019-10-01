@@ -11,7 +11,8 @@
   "errors": {
     "NameFieldIsRequired": "Name field is required",
     "PhoneFieldIsRequired": "Phone Number field is required and must be numeric value",
-    "emailIsNotValid": "Email field is required and must be correct format"
+    "emailIsNotValid": "Email field is required and must be correct format",
+    "CodeFieldIsRequired": "Code field is required"
   },
   "navigation": {
     "flat": "Flat",
@@ -42,6 +43,7 @@
     "address": "Address",
     "name": "Full Name",
     "phone": "Phone Number",
+    "SendCodeAgain": "Send again",
     "email": "E-mail",
     "ongoing": "Ongoing",
     "BalconyArea": "Balcony Area",
@@ -107,6 +109,8 @@
     "FlatPageTitleMuscat": "Design muscat",
     "FlatPageTitleVanilla": "Design vanilla",
     "FlatPageTitleUlumbo": "Design ulumbo",
+    "YouWillRecieveCode": "You will receive code on your phone",
+    "CodeWasSentTo": "Code was sent to: <span class=\"color-orange\">%s</span>",
     "FillPrivateInformation": "Fill in private info",
     "FrequentlyAskedQuestions": "Frequently Asked Question",
     "SearchByFlatNumber": "Search by flat number",
