@@ -10,6 +10,9 @@ html {
   box-sizing: border-box;
 }
 
+input, p{
+  font-family: $font;
+}
 *,
 *:before,
 *:after {

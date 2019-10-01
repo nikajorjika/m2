@@ -31,7 +31,10 @@
   "buttons": {
     "next": "NEXT",
     "see": "SEE",
+    "GetCode": "Get Code",
+    "authorize": "Authorize",
     "search": "SEARCH",
+    "EndSession": "End Session",
     "register": "register",
     "skip": "skip",
     "faq": "Frequently asked question",
@@ -106,6 +109,8 @@
   "titles": {
     "FlatPageTitleGinger": "Design ginger",
     "FlatPageTitleCinnamon": "Design cinnamon",
+    "FillInPhoneNumber": "Fill in phone number",
+    "FillInPhoneNumberSubTitle": "Fill in phone number with already registered phone",
     "FlatPageTitleMuscat": "Design muscat",
     "FlatPageTitleVanilla": "Design vanilla",
     "FlatPageTitleUlumbo": "Design ulumbo",

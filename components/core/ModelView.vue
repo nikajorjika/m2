@@ -8,6 +8,9 @@
         </span>
         <span>{{$t('labels.back')}}</span>
       </div>
+      <div class="flat-view__top-block__session">
+        <slot name="sessionStatus" />
+      </div>
       <language-switcher class="flat-view__switcher" />
     </div>
     <flat-navigation class="flat-view__navigation" :nav-data="navigationData" />
@@ -62,6 +65,10 @@ export default {
     display:flex;
     justify-content: space-between;
     align-items: center;
+    &__session {
+      margin-left: auto;
+      margin-right: 20px;
+    }
   }
   &__switcher {
     margin-right: 67px;

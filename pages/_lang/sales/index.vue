@@ -29,7 +29,7 @@ export default {
     IllustratedButton,
     FilterIconIllustration
   },
-  layout: 'WithoutNavigation',
+  layout: 'SalesWithoutNavigation',
   auth: 'guest',
   computed: {
     ...mapGetters({

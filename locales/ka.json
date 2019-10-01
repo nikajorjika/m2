@@ -41,6 +41,9 @@
   },
   "buttons": {
     "next": "შემდეგი",
+    "GetCode": "კოდის მიღება",
+    "EndSession": "სესიის დასრულება",
+    "authorize": "ავტორიზაცია",
     "faq": "ხშირად დასმული კითხვები",
     "CLOSE": "დახურვა",
     "register": "რეგისტრაცია",
@@ -120,6 +123,8 @@
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",
     "FlatPageTitleCinnamon": "რემონტი დარიჩინი",
+    "FillInPhoneNumber": "მიუთითე ტელეფონის ნომერი",
+    "FillInPhoneNumberSubTitle": "მიუთითე ნომერი, რომელიც უკვე რეგისტრირებულია",
     "FlatPageTitleMuscat": "რემონტი მუსკატი",
     "YouWillRecieveCode": "კოდს მიიღებთ ტელეფონის ნომერზე",
     "CodeWasSentTo": "კოდი გამოგზავნილია ნომერზე: <span class=\"color-orange\">%s</span>",

@@ -4,12 +4,12 @@
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
-          :title="$t('titles.FillPrivateInformation')"
+          :title="$t('titles.FillInPhoneNumber')"
         />
-        <small v-html="subtitle"></small>
+        <small>{{$t('titles.FillInPhoneNumberSubTitle')}}</small>
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
-        <registration-form @register="handleRegistration" />
+        <login-form @register="handleRegistration" />
       </div>
       <div v-else class="page-flat-number__confirm">
         <confirm-phone-form @submit="handelVerification" @resend="sendVerifyPhoneRequest"/>
@@ -21,7 +21,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import RegistrationForm from '@/components/partials/RegistrationForm'
+import LoginForm from '@/components/partials/LoginForm'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
 import FilterSearch from '@/components/icons/FilterSearch'
@@ -29,7 +29,7 @@ import FilterIconIllustration from '@/components/icons/FilterIllustration'
 export default {
   components: {
     TitleWithLine,
-    RegistrationForm,
+    LoginForm,
     ConfirmPhoneForm,
     FilterSearch,
     IllustratedButton,
@@ -46,10 +46,7 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale'
-    }),
-    subtitle() {
-      return !this.codeSent ? this.$t('titles.YouWillRecieveCode') : this.$t('titles.CodeWasSentTo').replace('%s', this.formData.phone)
-    }
+    })
   },
   methods: {
     ...mapActions({
