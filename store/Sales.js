@@ -3,26 +3,26 @@ const state = () => ({})
 const getters = {}
 
 const actions = {
-  sendVerificationCode(context, data) {
+  registerUser(context, data) {
     return new Promise((resolve, reject) => {
       resolve()
-      // this.$axios
-      //   .post(`/user/verify`, data)
-      //   .then(() => {
-      //     resolve()
-      //   })
-      //   .catch((e) => reject(e))
+      this.$axios
+        .post(`/user/register`, data)
+        .then(() => {
+          resolve()
+        })
+        .catch((e) => reject(e))
     })
   },
-  verifyPhone(context, { code, formData }) {
+  loginUser(context, data) {
     return new Promise((resolve, reject) => {
       resolve()
-      // this.$axios
-      //   .post(`/user/verify`, {code, formData})
-      //   .then(() => {
-      //     resolve()
-      //   })
-      //   .catch((e) => reject(e))
+      this.$axios
+        .post(`/user/verify`, data)
+        .then(() => {
+          resolve()
+        })
+        .catch((e) => reject(e))
     })
   }
 }

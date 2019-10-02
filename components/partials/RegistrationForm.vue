@@ -67,7 +67,7 @@ export default {
     },
     handleSubmit() {
       if(this.validateForm()){
-        this.$emit('register', {name: this.name, phone: this.phone, email: this.email })
+        this.$emit('register', {name: this.name, phone_number: this.phone, email: this.email })
       }
       this.showErrors = true
     },

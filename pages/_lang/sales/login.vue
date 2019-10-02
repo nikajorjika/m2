@@ -9,10 +9,10 @@
         <small>{{$t('titles.FillInPhoneNumberSubTitle')}}</small>
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
-        <login-form @register="handleRegistration" />
+        <login-form @submit="handleLoginStageOne" />
       </div>
       <div v-else class="page-flat-number__confirm">
-        <confirm-phone-form @submit="handelVerification" @resend="sendVerifyPhoneRequest"/>
+        <confirm-phone-form @submit="handleLoginStageTwo" @resend="handleResend"/>
       </div>
     </div>
   </div>
@@ -50,21 +50,22 @@ export default {
   },
   methods: {
     ...mapActions({
-      sendVerificationCode: 'Sales/sendVerificationCode',
-      verifyPhone: 'Sales/verifyPhone'
+      loginUser: 'Sales/loginUser'
     }),
-    sendVerifyPhoneRequest() {
-      this.sendVerificationCode(this.formData).then(() => {
+    handleLoginStageOne(data) {
+      this.formData = {...data}
+      this.loginUser(this.formData).then((response) => {
         this.codeSent = true
       })
     },
-    handleRegistration(data) {
-      this.formData = data
-      this.sendVerifyPhoneRequest()
+    handleLoginStageTwo(code) {
+      this.formData = {...code, ...this.formData}
+      this.loginUser(this.formData)
     },
-    handelVerification({ code }) {
-      this.formData = data
-      this.verifyPhone({formData: this.formData, code})
+    handleResend() {
+      this.loginUser(this.formData).then((response) => {
+        this.codeSent = true
+      })
     }
   }
 }

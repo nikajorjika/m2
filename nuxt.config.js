@@ -64,9 +64,9 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/user/auth', method: 'post', propertyName: 'token' },
+          login: { url: '/user/verify', method: 'post', propertyName: 'token' },
           logout: { url: '/auth/logout', method: 'post' },
-          user: { url: '/auth/user', method: 'get', propertyName: 'user' }
+          user: { url: '/auth/me', method: 'get', propertyName: 'user' }
         },
         tokenRequired: true,
         tokenType: 'bearer'

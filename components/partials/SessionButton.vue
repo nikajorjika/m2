@@ -17,10 +17,8 @@ export default {
   methods: {
     handleClick() {
       if(this.$auth.loggedIn) {
-        this.$router.logout({name: 'lang-sales-login'})
+        this.$auth.logout()
       }
-      this.$auth.login()
-      .then(() => this.$toast.success('Logged In!'))
       this.$router.push({name: 'lang-sales-login'})
     }
   }

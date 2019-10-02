@@ -20,8 +20,8 @@
         </template>
       </button-main-orange>
     </div>
-    <a class="confirm-form__resend">
-        <small>{{$t('labels.SendCodeAgain')}}</small>
+    <a class="confirm-form__resend" @click.prevent="handleResend">
+        <small><paper-plane-icon icon-color="#f26529" width="10" height="12" /> <span>{{$t('labels.SendCodeAgain')}}</span></small>
     </a>
   </form>
 </template>
@@ -29,8 +29,9 @@
 <script>
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import ExitSessionIcon from '@/components/icons/ExitSession'
+import PaperPlaneIcon from '@/components/icons/PaperPlane'
 export default {
-  components: { ButtonMainOrange, ExitSessionIcon },
+  components: { ButtonMainOrange, ExitSessionIcon, PaperPlaneIcon },
   props: {
     buttonText: {
       type: String,
@@ -111,8 +112,15 @@ export default {
   }
   &__resend {
     color: $orange;
-    font-size: 11px;
+    font-size: 12px;
     margin-left: 18px;
+    small {
+      display: flex;
+      align-items: center;
+      span {
+        margin-left: 13px;
+      }
+    }
   }
   &__button {
     margin-right: auto;

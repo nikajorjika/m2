@@ -12,7 +12,7 @@
         <registration-form @register="handleRegistration" />
       </div>
       <div v-else class="page-flat-number__confirm">
-        <confirm-phone-form @submit="handelVerification" @resend="sendVerifyPhoneRequest"/>
+        <confirm-phone-form @submit="handleSendVerifyPhoneRequest" @resend="handleResendVerifyPhoneRequest"/>
       </div>
     </div>
   </div>
@@ -48,26 +48,29 @@ export default {
       locale: 'locale'
     }),
     subtitle() {
-      return !this.codeSent ? this.$t('titles.YouWillRecieveCode') : this.$t('titles.CodeWasSentTo').replace('%s', this.formData.phone)
+      return !this.codeSent ? this.$t('titles.YouWillRecieveCode') : this.$t('titles.CodeWasSentTo').replace('%s', this.formData.phone_number)
     }
   },
   methods: {
     ...mapActions({
-      sendVerificationCode: 'Sales/sendVerificationCode',
-      verifyPhone: 'Sales/verifyPhone'
+      registerUser: 'Sales/registerUser',
     }),
     sendVerifyPhoneRequest() {
-      this.sendVerificationCode(this.formData).then(() => {
+      this.registerUser(this.formData).then(() => {
         this.codeSent = true
       })
+    },
+    handleResendVerifyPhoneRequest(code) {
+      this.formData = { resend: true, ...this.formData }
+      this.sendVerifyPhoneRequest()
+    },
+    handleSendVerifyPhoneRequest(code) {
+      this.formData = { ...code, ...this.formData }
+      this.sendVerifyPhoneRequest()
     },
     handleRegistration(data) {
       this.formData = data
       this.sendVerifyPhoneRequest()
-    },
-    handelVerification({ code }) {
-      this.formData = data
-      this.verifyPhone({formData: this.formData, code})
     }
   }
 }

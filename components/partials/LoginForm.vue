@@ -1,9 +1,9 @@
 <template>
   <form class="confirm-form" @submit.prevent="handleSubmit">
     <div class="confirm-form__input">
-      <input v-model="code" type="text" :placeholder="$t('labels.phone')" @input="handleInput" />
-      <div v-if="errors.code.length && showErrors" class="error">
-        {{ errors.code }}
+      <input v-model="phone" type="text" :placeholder="$t('labels.phone')" @input="handleInput" />
+      <div v-if="errors.phone.length && showErrors" class="error">
+        {{ errors.phone }}
       </div>
     </div>
     <div class="confirm-form__button">
@@ -38,9 +38,9 @@ export default {
   },
   data() {
     return {
-      code: '',
+      phone: '',
       errors: {
-        code: '',
+        phone: '',
       },
       showErrors: false
     }
@@ -51,21 +51,18 @@ export default {
     },
     handleSubmit() {
       if(this.validateForm()){
-        this.$emit('submit', { code: this.code })
+        this.$emit('submit', { phone_number: this.phone })
       }
       this.showErrors = true
     },
-    handleResend() {
-      this.$emit('resend')
-    },
     validateForm() {
       this.errors = {
-        code: ''
+        phone: ''
       }
-      if(!this.code.length) {
-        this.errors.code = this.$t('errors.CodeFieldIsRequired')
+      if(!this.phone.length) {
+        this.errors.phone = this.$t('errors.CodeFieldIsRequired')
       }
-      return !this.errors.code.length
+      return !this.errors.phone.length
     },
     validatePhone(phone) {
       const phoneValidationRegex = /^[0-9+]{9,}$/;
@@ -105,11 +102,6 @@ export default {
         outline: none;
       }
     }
-  }
-  &__resend {
-    color: $orange;
-    font-size: 11px;
-    margin-left: 18px;
   }
   &__button {
     margin-right: auto;
