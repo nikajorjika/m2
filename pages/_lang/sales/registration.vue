@@ -56,8 +56,11 @@ export default {
       registerUser: 'Sales/registerUser',
     }),
     sendVerifyPhoneRequest() {
-      this.registerUser(this.formData).then(() => {
+      this.registerUser(this.formData).then(({data}) => {
         this.codeSent = true
+        if(data.hasOwnProperty('access_token')) {
+          this.$auth.setUserToken(data.access_token)
+        }
       })
     },
     handleResendVerifyPhoneRequest(code) {

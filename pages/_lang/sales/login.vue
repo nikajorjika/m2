@@ -60,7 +60,11 @@ export default {
     },
     handleLoginStageTwo(code) {
       this.formData = {...code, ...this.formData}
-      this.loginUser(this.formData)
+      this.loginUser(this.formData).then(({data}) => {
+        if(data.hasOwnProperty('access_token')) {
+          this.$auth.setUserToken(data.access_token)
+        }
+      })
     },
     handleResend() {
       this.loginUser(this.formData).then((response) => {

@@ -5,22 +5,25 @@ const getters = {}
 const actions = {
   registerUser(context, data) {
     return new Promise((resolve, reject) => {
-      resolve()
       this.$axios
         .post(`/user/register`, data)
-        .then(() => {
-          resolve()
+        .then((response) => {
+          resolve(response)
+          if (response.status === 200) {
+            resolve(response)
+          }
         })
         .catch((e) => reject(e))
     })
   },
   loginUser(context, data) {
     return new Promise((resolve, reject) => {
-      resolve()
       this.$axios
         .post(`/user/verify`, data)
-        .then(() => {
-          resolve()
+        .then((response) => {
+          if (response.status === 200) {
+            resolve(response)
+          }
         })
         .catch((e) => reject(e))
     })
