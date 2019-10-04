@@ -20,7 +20,10 @@
         {{ $t('labels.price') }}
       </div>
       <div v-if="showLightAllButton" class="flat-list-table__header__button">
-        <custom-button :label="$t('labels.LitUpAll')" @click="handleLightAllButton">
+        <custom-button
+          :label="$t('labels.LitUpAll')"
+          @click="handleLightAllButton"
+        >
           <template v-slot:icon>
             <light-icon
               class="flat-list-table__header__button__icon"
@@ -38,10 +41,13 @@
       >
         <flat-list-item
           :item="item"
-          class="flat-list-table__body__item__component" 
+          class="flat-list-table__body__item__component"
         />
-        <div class="flat-list-table__body__item__color-mark" :style="{backgroundColor: `#${item.planshet.color}`}">
-          <span :style="{backgroundColor: `#${item.planshet.color}`}"></span>
+        <div
+          class="flat-list-table__body__item__color-mark"
+          :style="{ backgroundColor: `#${item.planshet.color}` }"
+        >
+          <span :style="{ backgroundColor: `#${item.planshet.color}` }"></span>
         </div>
         <div class="flat-list-table__body__item__button">
           <custom-button
@@ -67,11 +73,11 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import { timeout } from 'q'
 import FlatListItem from '@/components/partials/FlatListItem'
 import CustomButton from '@/components/partials/CustomButton'
 import LightIcon from '@/components/icons/Light'
-import { mapActions, mapGetters } from 'vuex'
-import { timeout } from 'q'
 export default {
   components: { FlatListItem, CustomButton, LightIcon },
   props: {
@@ -101,7 +107,7 @@ export default {
       return parseInt(this.$cookies.get('paveleon-planshet'))
     },
     showLightAllButton() {
-      return this.$cookies.get('paveleon-planshet') ? true : false
+      return !!this.$cookies.get('paveleon-planshet')
     }
   },
   beforeDestroy() {
@@ -109,11 +115,11 @@ export default {
     this.$store.commit('Filter/SET_FLAT_NUMBER', null)
   },
   mounted() {
-    if(this.totalFlatCount === 0) {
+    if (this.totalFlatCount === 0) {
       this.fetchFilteredDataCount()
     }
-    this.observer = new IntersectionObserver(this.callback, this.options);
-    this.observer.observe(this.$refs.Loading);
+    this.observer = new IntersectionObserver(this.callback, this.options)
+    this.observer.observe(this.$refs.Loading)
   },
   methods: {
     ...mapActions({
@@ -122,29 +128,31 @@ export default {
       fetchFilteredDataCount: 'Filter/fetchFilteredDataCount'
     }),
     callback(entries, observer) {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting && !this.done) {
-          this.fetchFlats({ page:this.page }).then((response) => {
+          this.fetchFlats({ page: this.page }).then((response) => {
             this.page++
-            if(response.length < 10){
+            if (response.length < 10) {
               this.done = true
             }
           })
         }
-      });
-    }, 
+      })
+    },
     handleLightAllButton() {
-      const planshetFlats = this.list.filter(item => item.planshet.id === this.chosenPlanshet)
-      if(this.timeout) clearTimeout(this.timeout)
+      const planshetFlats = this.list.filter(
+        (item) => item.planshet.id === this.chosenPlanshet
+      )
+      if (this.timeout) clearTimeout(this.timeout)
       this.lightUpFlat(planshetFlats).then((timeout) => {
         this.timeout = timeout
       })
     },
     litCurrentItem(item) {
-      if(item.planshet.id !== this.chosenPlanshet) {
+      if (item.planshet.id !== this.chosenPlanshet) {
         this.$emit('showPrompt', item.planshet)
-      }else {
-        if(this.timeout) clearTimeout(this.timeout)
+      } else {
+        if (this.timeout) clearTimeout(this.timeout)
         this.lightUpFlat([item]).then((timeout) => {
           this.timeout = timeout
         })
@@ -209,28 +217,28 @@ export default {
   &__body {
     overflow-y: auto;
     max-height: 100%;
-        
+
     &::-webkit-scrollbar {
       width: 14px;
     }
 
     /* Track */
     &::-webkit-scrollbar-track {
-      background: #f2cab1; 
+      background: #f2cab1;
       border-radius: 10px;
-      width:7px;
+      width: 7px;
     }
-    
+
     /* Handle */
     &::-webkit-scrollbar-thumb {
-      background:#f2a27b;
-      width: 2px; 
+      background: #f2a27b;
+      width: 2px;
       border-radius: 4px;
     }
 
     /* Handle on hover */
     &::-webkit-scrollbar-thumb:hover {
-      background: #f26529; 
+      background: #f26529;
     }
     &__item {
       border-top: 1px solid #faf4ed;

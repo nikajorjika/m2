@@ -1,7 +1,7 @@
 <template>
   <button class="session" @click="handleClick">
-    <span>{{buttonText}}</span>
-    <login-icon :width="12" icon-color="#3c2270"/>
+    <span>{{ buttonText }}</span>
+    <login-icon :width="12" icon-color="#3c2270" />
   </button>
 </template>
 
@@ -11,22 +11,24 @@ export default {
   components: { LoginIcon },
   computed: {
     buttonText() {
-      return this.$auth.loggedIn ? this.$t('buttons.EndSession') :this.$t('buttons.authorize')
+      return this.$auth.loggedIn
+        ? this.$t('buttons.EndSession')
+        : this.$t('buttons.authorize')
     }
   },
   methods: {
     handleClick() {
-      if(this.$auth.loggedIn) {
+      if (this.$auth.loggedIn) {
         this.$auth.logout()
       }
-      this.$router.push({name: 'lang-sales-login'})
+      this.$router.push({ name: 'lang-sales-login' })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.session { 
+.session {
   outline: none;
   border-radius: 18px;
   color: $purple;

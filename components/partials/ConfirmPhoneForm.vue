@@ -1,15 +1,18 @@
 <template>
   <form class="confirm-form" @submit.prevent="handleSubmit">
     <div class="confirm-form__input">
-      <input v-model="code" type="text" placeholder="XXXX" @input="handleInput" />
+      <input
+        v-model="code"
+        type="text"
+        placeholder="XXXX"
+        @input="handleInput"
+      />
       <div v-if="errors.code.length && showErrors" class="error">
         {{ errors.code }}
       </div>
     </div>
     <div class="confirm-form__button">
-      <button-main-orange
-        :button-text="buttonText"
-      >
+      <button-main-orange :button-text="buttonText">
         <template v-slot:icon>
           <exit-session-icon
             class="search-form__button__icon"
@@ -21,7 +24,10 @@
       </button-main-orange>
     </div>
     <a class="confirm-form__resend" @click.prevent="handleResend">
-        <small><paper-plane-icon icon-color="#f26529" width="10" height="12" /> <span>{{$t('labels.SendCodeAgain')}}</span></small>
+      <small
+        ><paper-plane-icon icon-color="#f26529" width="10" height="12" />
+        <span>{{ $t('labels.SendCodeAgain') }}</span></small
+      >
     </a>
   </form>
 </template>
@@ -44,7 +50,7 @@ export default {
     return {
       code: '',
       errors: {
-        code: '',
+        code: ''
       },
       showErrors: false
     }
@@ -54,7 +60,7 @@ export default {
       this.validateForm()
     },
     handleSubmit() {
-      if(this.validateForm()){
+      if (this.validateForm()) {
         this.$emit('submit', { code: this.code })
       }
       this.showErrors = true
@@ -66,14 +72,14 @@ export default {
       this.errors = {
         code: ''
       }
-      if(!this.code.length) {
+      if (!this.code.length) {
         this.errors.code = this.$t('errors.CodeFieldIsRequired')
       }
       return !this.errors.code.length
     },
     validatePhone(phone) {
-      const phoneValidationRegex = /^[0-9+]{9,}$/;
-      return phoneValidationRegex.test(phone);
+      const phoneValidationRegex = /^[0-9+]{9,}$/
+      return phoneValidationRegex.test(phone)
     }
   }
 }

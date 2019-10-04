@@ -38,8 +38,8 @@ export default {
     IllustratedButton,
     FilterIconIllustration
   },
-  layout: 'SalesWithoutNavigation',
-  auth: 'guest',
+  layout: 'SalesFilterLayout',
+  auth: 'auth',
   data() {
     return {
       codeSent: false,

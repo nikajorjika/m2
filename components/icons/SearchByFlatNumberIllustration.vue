@@ -1,5 +1,5 @@
 <template>
-  <svg-icon :width="width" :height="width" :style="{margin}"/>
+  <svg-icon :width="width" :height="width" :style="{ margin }" />
 </template>
 
 <script>

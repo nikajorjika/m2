@@ -1,12 +1,12 @@
 <template>
   <div class="flat-view">
     <div class="flat-view__top-block">
-      <div class="flat-view__back-button" @click="handleBack"> 
+      <div class="flat-view__back-button" @click="handleBack">
         <span class="flat-view__back-button__icon">
           <caret-right width="10" height="12" icon-color="#432272" />
           <caret-right width="10" height="12" icon-color="#432272" />
         </span>
-        <span>{{$t('labels.back')}}</span>
+        <span>{{ $t('labels.back') }}</span>
       </div>
       <div class="flat-view__top-block__session">
         <slot name="sessionStatus" />
@@ -59,10 +59,10 @@ export default {
   &__back-button {
     color: #3c2270;
     font-family: $font;
-    font-size: 10px; 
+    font-size: 10px;
   }
   &__top-block {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     &__session {
@@ -84,7 +84,7 @@ export default {
         &:last-child {
           margin-left: -9px;
         }
-      }  
+      }
     }
   }
 }

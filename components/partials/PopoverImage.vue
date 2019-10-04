@@ -8,10 +8,7 @@
       <button class="close-button" @click="handleClose">
         <close-icon icon-color="#fff" :width="11" :height="11" />
       </button>
-      <img
-        :src="$store.getters.overlay.image"
-        alt="Maximized Image"
-      />
+      <img :src="$store.getters.overlay.image" alt="Maximized Image" />
     </div>
   </div>
 </template>
@@ -19,7 +16,7 @@
 <script>
 import CloseIcon from '@/components/icons/Close'
 export default {
-  components: {CloseIcon},
+  components: { CloseIcon },
   props: {
     open: {
       type: Boolean,
@@ -39,7 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .maximize__popover {
   display: none;
   position: fixed;

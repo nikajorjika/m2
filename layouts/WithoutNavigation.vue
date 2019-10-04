@@ -1,6 +1,10 @@
 <template>
   <div class="default-app-layout">
-    <popover-image :open="$store.getters.overlay.open" :image="$store.getters.overlay.image" @close="handleClose" />
+    <popover-image
+      :open="$store.getters.overlay.open"
+      :image="$store.getters.overlay.image"
+      @close="handleClose"
+    />
     <svg width="0" height="0">
       <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#e26479" />
@@ -14,7 +18,12 @@
         <nuxt />
       </div>
     </model-view>
-    <prompt-alert v-if="promptData.show" :text="promptData.text" :color="promptData.color" class="prompt-component"/>
+    <prompt-alert
+      v-if="promptData.show"
+      :text="promptData.text"
+      :color="promptData.color"
+      class="prompt-component"
+    />
   </div>
 </template>
 <script>
@@ -60,7 +69,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ locale: 'locale' , promptData: 'Filter/showPrompt' }),
+    ...mapGetters({ locale: 'locale', promptData: 'Filter/showPrompt' }),
     items() {
       return [
         {

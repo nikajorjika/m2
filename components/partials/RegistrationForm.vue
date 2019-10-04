@@ -1,27 +1,40 @@
 <template>
   <form class="registration-form" @submit.prevent="handleSubmit">
     <div class="registration-form__input">
-      <input v-model="name" type="text" :placeholder="$t('labels.name')" @input="handleInput" />
+      <input
+        v-model="name"
+        type="text"
+        :placeholder="$t('labels.name')"
+        @input="handleInput"
+      />
       <div v-if="errors.name.length && showErrors" class="error">
         {{ errors.name }}
       </div>
     </div>
     <div class="registration-form__input">
-      <input v-model="phone" type="text" :placeholder="$t('labels.phone')" @input="handleInput" />
+      <input
+        v-model="phone"
+        type="text"
+        :placeholder="$t('labels.phone')"
+        @input="handleInput"
+      />
       <div v-if="errors.phone.length && showErrors" class="error">
         {{ errors.phone }}
       </div>
     </div>
     <div class="registration-form__input">
-      <input v-model="email" type="text" :placeholder="$t('labels.email')" @input="handleInput" />
+      <input
+        v-model="email"
+        type="text"
+        :placeholder="$t('labels.email')"
+        @input="handleInput"
+      />
       <div v-if="errors.email.length && showErrors" class="error">
         {{ errors.email }}
       </div>
     </div>
     <div class="registration-form__button">
-      <button-main-orange
-        :button-text="buttonText"
-      >
+      <button-main-orange :button-text="buttonText">
         <template v-slot:icon>
           <exit-session-icon
             class="search-form__button__icon"
@@ -66,8 +79,12 @@ export default {
       this.validateForm()
     },
     handleSubmit() {
-      if(this.validateForm()){
-        this.$emit('register', {name: this.name, phone_number: this.phone, email: this.email })
+      if (this.validateForm()) {
+        this.$emit('register', {
+          name: this.name,
+          phone_number: this.phone,
+          email: this.email
+        })
       }
       this.showErrors = true
     },
@@ -77,24 +94,32 @@ export default {
         phone: '',
         email: ''
       }
-      if(!this.name.length) {
+      if (!this.name.length) {
         this.errors.name = this.$t('errors.NameFieldIsRequired')
       }
-      if(!this.phone.length || isNaN(this.phone) || !this.validatePhone(this.phone)) {
+      if (
+        !this.phone.length ||
+        isNaN(this.phone) ||
+        !this.validatePhone(this.phone)
+      ) {
         this.errors.phone = this.$t('errors.PhoneFieldIsRequired')
       }
-      if(!this.email.length || !this.validateEmail(this.email)) {
+      if (!this.email.length || !this.validateEmail(this.email)) {
         this.errors.email = this.$t('errors.emailIsNotValid')
       }
-      return !this.errors.name.length && !this.errors.phone.length && !this.errors.email.length
+      return (
+        !this.errors.name.length &&
+        !this.errors.phone.length &&
+        !this.errors.email.length
+      )
     },
     validateEmail(email) {
-      const emailValidationRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return emailValidationRegex.test(String(email).toLowerCase());
+      const emailValidationRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return emailValidationRegex.test(String(email).toLowerCase())
     },
     validatePhone(phone) {
-      const phoneValidationRegex = /^[0-9+]{9,}$/;
-      return phoneValidationRegex.test(phone);
+      const phoneValidationRegex = /^[0-9+]{9,}$/
+      return phoneValidationRegex.test(phone)
     }
   }
 }

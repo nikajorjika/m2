@@ -68,11 +68,11 @@ export default {
       }, 300)
     },
     skipPrice() {
-        this.setFilterItem({
-          key: 'floors',
-          value: this.floors
-        })
-        this.fetchFreshData()
+      this.setFilterItem({
+        key: 'floors',
+        value: this.floors
+      })
+      this.fetchFreshData()
     }
   }
 }

@@ -45,9 +45,9 @@ export default {
     })
   },
   mounted() {
-    if(this.$cookies.get('paveleon-app')){
-      this.$router.push(`/${this.locale}/${this.$cookies.get('paveleon-app')}`)  
-    }else {
+    if (this.$cookies.get('paveleon-app')) {
+      this.$router.push(`/${this.locale}/${this.$cookies.get('paveleon-app')}`)
+    } else {
       this.loading = false
     }
   },
@@ -68,7 +68,7 @@ export default {
   padding-left: 50px;
   display: flex;
   justify-content: space-evenly;
-  .loading { 
+  .loading {
     position: fixed;
     top: 0;
     left: 0;

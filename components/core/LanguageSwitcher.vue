@@ -18,7 +18,7 @@ export default {
     }
   },
   created() {
-    if(process.client) {
+    if (process.client) {
       const html = document.documentElement
       html.setAttribute('lang', this.locale)
     }

@@ -36,7 +36,7 @@ export default {
       return [...this.filters.view]
     },
     views() {
-      const views = this.filterDefaults.views.map(item => {
+      const views = this.filterDefaults.views.map((item) => {
         return {
           name: item.name[this.locale],
           value: item.id
@@ -46,7 +46,7 @@ export default {
     }
   },
   mounted() {
-      this.fetchFilteredDataCount()
+    this.fetchFilteredDataCount()
   },
   methods: {
     ...mapMutations({

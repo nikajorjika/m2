@@ -4,10 +4,19 @@
       <title-with-line :title="cTitle" />
       <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
       <transition name="fade-up">
-        <prompt-alert v-if="showPrompt" class="prompt" :color="color" :text="text" />
+        <prompt-alert
+          v-if="showPrompt"
+          class="prompt"
+          :color="color"
+          :text="text"
+        />
       </transition>
     </div>
-    <flat-list-table class="flat-list__table" :list="flats" @showPrompt="handlePrompt" />
+    <flat-list-table
+      class="flat-list__table"
+      :list="flats"
+      @showPrompt="handlePrompt"
+    />
   </div>
 </template>
 
@@ -62,9 +71,11 @@ export default {
         6: this.$t('colors.sixth'),
         7: this.$t('colors.seventh')
       }
-      return this.$t('alerts.planshetColorAlert').replace('%s', planshetsObject[id]).replace('%n', planshetNumbers[id])
+      return this.$t('alerts.planshetColorAlert')
+        .replace('%s', planshetsObject[id])
+        .replace('%n', planshetNumbers[id])
     },
-    handlePrompt({color, id}) {
+    handlePrompt({ color, id }) {
       this.showPrompt = true
       this.color = `#${color}`
       this.text = this.generateTextBasedOnColor(id)
@@ -95,11 +106,13 @@ export default {
     margin-top: 47px;
     height: 80%;
   }
-  
-  .fade-up-enter-active, .fade-ups-leave-active {
-    transition: opacity .5s;
+
+  .fade-up-enter-active,
+  .fade-ups-leave-active {
+    transition: opacity 0.5s;
   }
-  .fade-up-enter, .fade-up-leave-to {
+  .fade-up-enter,
+  .fade-up-leave-to {
     opacity: 0;
   }
 }

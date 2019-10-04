@@ -1,8 +1,8 @@
 <template>
   <div class="prompt" :style="{ backgroundColor: `${color}40` }">
-    <div class="prompt__color" :style="{backgroundColor: color}" />
+    <div class="prompt__color" :style="{ backgroundColor: color }" />
     <div class="prompt__text">
-      {{text}}
+      {{ text }}
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 8px 15px;
-  margin: auto; 
+  margin: auto;
   margin-right: 0;
   margin-top: 0;
   border-top-left-radius: 12px;

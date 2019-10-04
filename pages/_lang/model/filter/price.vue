@@ -18,7 +18,7 @@
         @change="handleRangeChange"
       />
     </div>
-    <filters-footer-block :next-url="nextUrl" @skip="skipPrice"/>
+    <filters-footer-block :next-url="nextUrl" @skip="skipPrice" />
   </div>
 </template>
 
@@ -52,11 +52,11 @@ export default {
       return `/${this.locale}/model/filter/floor`
     },
     price() {
-      let min = parseInt(this.filterDefaults.min_price)
-      let max = parseInt(this.filterDefaults.max_price)
+      const min = parseInt(this.filterDefaults.min_price)
+      const max = parseInt(this.filterDefaults.max_price)
       return {
-        min: min,
-        max: max
+        min,
+        max
       }
     }
   },
@@ -78,7 +78,7 @@ export default {
       }, 300)
     },
     skipPrice() {
-       this.$store.commit('Filter/SET_FILTER_ITEM', {
+      this.$store.commit('Filter/SET_FILTER_ITEM', {
         key: 'price',
         value: this.price
       })

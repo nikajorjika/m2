@@ -12,19 +12,19 @@
       </linearGradient>
     </svg>
     <sidebar />
-    <flat-view>
+    <sale-filter-view>
       <div class="app">
         <nuxt />
       </div>
-    </flat-view>
+    </sale-filter-view>
   </div>
 </template>
 <script>
 import Sidebar from '@/components/core/Sidebar'
-import FlatView from '@/components/core/FlatView'
+import SaleFilterView from '@/components/core/SaleFilterView'
 import PopoverImage from '@/components/partials/PopoverImage'
 export default {
-  components: { Sidebar, FlatView, PopoverImage },
+  components: { Sidebar, SaleFilterView, PopoverImage },
   props: {
     image: {
       type: String,

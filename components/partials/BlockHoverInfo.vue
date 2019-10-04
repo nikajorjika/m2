@@ -1,13 +1,13 @@
 <template>
-  <gradient-block >
+  <gradient-block>
     <div class="block-info">
       <div class="block-info__number">
-        <div class="block-info__number__label">{{$t('labels.block')}}</div>
-        <div class="block-info__number__value">{{blockNumber}}</div>
+        <div class="block-info__number__label">{{ $t('labels.block') }}</div>
+        <div class="block-info__number__value">{{ blockNumber }}</div>
       </div>
       <div class="block-info__flats">
-        <div>{{$t('labels.FlatsLeftInThisBlock')}}</div>
-        <div>{{flatsLeft}}</div>
+        <div>{{ $t('labels.FlatsLeftInThisBlock') }}</div>
+        <div>{{ flatsLeft }}</div>
       </div>
       <div class="block-info__button">
         <button-main-orange

@@ -12,7 +12,10 @@
         <registration-form @register="handleRegistration" />
       </div>
       <div v-else class="page-flat-number__confirm">
-        <confirm-phone-form @submit="handleSendVerifyPhoneRequest" @resend="handleResendVerifyPhoneRequest"/>
+        <confirm-phone-form
+          @submit="handleSendVerifyPhoneRequest"
+          @resend="handleResendVerifyPhoneRequest"
+        />
       </div>
     </div>
   </div>
@@ -48,17 +51,22 @@ export default {
       locale: 'locale'
     }),
     subtitle() {
-      return !this.codeSent ? this.$t('titles.YouWillRecieveCode') : this.$t('titles.CodeWasSentTo').replace('%s', this.formData.phone_number)
+      return !this.codeSent
+        ? this.$t('titles.YouWillRecieveCode')
+        : this.$t('titles.CodeWasSentTo').replace(
+            '%s',
+            this.formData.phone_number
+          )
     }
   },
   methods: {
     ...mapActions({
-      registerUser: 'Sales/registerUser',
+      registerUser: 'Sales/registerUser'
     }),
     sendVerifyPhoneRequest() {
-      this.registerUser(this.formData).then(({data}) => {
+      this.registerUser(this.formData).then(({ data }) => {
         this.codeSent = true
-        if(data.hasOwnProperty('access_token')) {
+        if (data.hasOwnProperty('access_token')) {
           this.$auth.setUserToken(data.access_token)
         }
       })

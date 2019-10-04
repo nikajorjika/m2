@@ -23,7 +23,12 @@
           :plan-image="blueprintUrl"
           :gradient-text="imageLabel"
         />
-        <room-list-component v-if="rooms.length" class="room-list-slider" style-type="small" :room-list="rooms" />
+        <room-list-component
+          v-if="rooms.length"
+          class="room-list-slider"
+          style-type="small"
+          :room-list="rooms"
+        />
       </div>
     </div>
     <div class="filter-flat__footer">
@@ -43,7 +48,7 @@
                   class="flat-list-table__header__button__icon"
                   icon-color="#fff"
                   height="12px"
-                />  
+                />
               </template>
             </button-main-orange>
           </div>
@@ -54,6 +59,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RenderViewer from '@/components/partials/FlatRenderViewer'
 import RoomListComponent from '@/components/partials/RoomListComponent'
@@ -65,7 +71,6 @@ import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
 import CaretRight from '@/components/icons/CaretRight'
-import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   layout: 'WithoutNavigation',
@@ -93,36 +98,39 @@ export default {
       showPrompt: 'Filter/showPrompt'
     }),
     planshetColor() {
-      return this.$cookies.get('paveleon-planshet') ? true : false
+      return !!this.$cookies.get('paveleon-planshet')
     },
     cTitle() {
       return this.$t('titles.YourChosenFlat')
     },
     buttonDisabled() {
-      if(!this.flat) return true
+      if (!this.flat) return true
       return this.flat.planshet.id !== this.$cookies.get('paveleon-planshet')
     },
     renderUrl() {
-      if (!this.flat || !this.flat.render_url) return 'https://placehold.it/245x245'
+      if (!this.flat || !this.flat.render_url)
+        return 'https://placehold.it/245x245'
       return this.flat.render_url
     },
     blueprintUrl() {
-      if (!this.flat || !this.flat.blueprint_url) return 'https://placehold.it/245x245'
+      if (!this.flat || !this.flat.blueprint_url)
+        return 'https://placehold.it/245x245'
       return this.flat.blueprint_url
     },
     imageLabel() {
-       if (!this.flat) return {
+      if (!this.flat)
+        return {
           ka: `საძინებელი`,
           en: `bedrooms`
         }
-        return {
-          ka: `${this.flat.bedrooms_count} საძინებელი`,
-          en: `${this.flat.bedrooms_count} bedrooms`
-        }
+      return {
+        ka: `${this.flat.bedrooms_count} საძინებელი`,
+        en: `${this.flat.bedrooms_count} bedrooms`
+      }
     },
     rooms() {
       if (!this.flat) return []
-      return this.flat.rooms.map(item => {
+      return this.flat.rooms.map((item) => {
         return {
           label: item.name[this.locale],
           value: `${item.area} ${this.$t('labels.m2')}`
@@ -139,7 +147,11 @@ export default {
     },
     listCardData() {
       if (!this.flat) return
-      const flatArea = (this.flat.total_area - this.flat.balcony_area - this.flat.terrace_area).toFixed(2)
+      const flatArea = (
+        this.flat.total_area -
+        this.flat.balcony_area -
+        this.flat.terrace_area
+      ).toFixed(2)
       return [
         {
           value: `${this.flat.total_area} ${this.$t('labels.m2')}`,
@@ -177,7 +189,7 @@ export default {
   mounted() {
     this.$axios.get(`/flats/${this.$route.params.id}`).then((response) => {
       this.flat = response.data.data
-      if(this.$cookies.get('paveleon-planshet') !== this.flat.planshet.id) {
+      if (this.$cookies.get('paveleon-planshet') !== this.flat.planshet.id) {
         this.setAlertData({
           show: true,
           text: this.generateTextBasedOnColor(this.flat.planshet.id),
@@ -222,8 +234,10 @@ export default {
         6: this.$t('colors.sixth'),
         7: this.$t('colors.seventh')
       }
-      return this.$t('alerts.planshetColorAlert').replace('%s', planshetsObject[id]).replace('%n', planshetNumbers[id])
-    },
+      return this.$t('alerts.planshetColorAlert')
+        .replace('%s', planshetsObject[id])
+        .replace('%n', planshetNumbers[id])
+    }
   }
 }
 </script>
@@ -271,7 +285,7 @@ export default {
     .footer-items {
       margin-top: auto;
       display: flex;
-      justify-content: space-between;    
+      justify-content: space-between;
       width: 100%;
       .price-label {
         margin: auto 0;

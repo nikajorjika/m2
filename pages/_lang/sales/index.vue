@@ -42,7 +42,7 @@ export default {
     }),
     handleRegistration(data) {
       this.saveLead(data).then(() => {
-        this.$router.push({name: 'lang-model', params: {lang: this.locale}})
+        this.$router.push({ name: 'lang-model', params: { lang: this.locale } })
       })
     }
   }

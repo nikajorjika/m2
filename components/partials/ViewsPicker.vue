@@ -55,7 +55,7 @@ export default {
       this.$emit('change', this.selected)
     },
     isActive(item) {
-      return this.selected.find(i => i.value === item.value)
+      return this.selected.find((i) => i.value === item.value)
     }
   }
 }

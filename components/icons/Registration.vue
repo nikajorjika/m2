@@ -1,5 +1,10 @@
 <template>
-  <svg-icon :fill="iconColor" :stroke="iconColor" :width="width" :height="height" />
+  <svg-icon
+    :fill="iconColor"
+    :stroke="iconColor"
+    :width="width"
+    :height="height"
+  />
 </template>
 <script>
 import SvgIcon from '@/assets/icons/Register.svg'

@@ -1,15 +1,18 @@
 <template>
   <form class="confirm-form" @submit.prevent="handleSubmit">
     <div class="confirm-form__input">
-      <input v-model="phone" type="text" :placeholder="$t('labels.phone')" @input="handleInput" />
+      <input
+        v-model="phone"
+        type="text"
+        :placeholder="$t('labels.phone')"
+        @input="handleInput"
+      />
       <div v-if="errors.phone.length && showErrors" class="error">
         {{ errors.phone }}
       </div>
     </div>
     <div class="confirm-form__button">
-      <button-main-orange
-        :button-text="buttonText"
-      >
+      <button-main-orange :button-text="buttonText">
         <template v-slot:icon>
           <exit-session-icon
             class="search-form__button__icon"
@@ -40,7 +43,7 @@ export default {
     return {
       phone: '',
       errors: {
-        phone: '',
+        phone: ''
       },
       showErrors: false
     }
@@ -50,7 +53,7 @@ export default {
       this.validateForm()
     },
     handleSubmit() {
-      if(this.validateForm()){
+      if (this.validateForm()) {
         this.$emit('submit', { phone_number: this.phone })
       }
       this.showErrors = true
@@ -59,14 +62,14 @@ export default {
       this.errors = {
         phone: ''
       }
-      if(!this.phone.length) {
+      if (!this.phone.length) {
         this.errors.phone = this.$t('errors.CodeFieldIsRequired')
       }
       return !this.errors.phone.length
     },
     validatePhone(phone) {
-      const phoneValidationRegex = /^[0-9+]{9,}$/;
-      return phoneValidationRegex.test(phone);
+      const phoneValidationRegex = /^[0-9+]{9,}$/
+      return phoneValidationRegex.test(phone)
     }
   }
 }
