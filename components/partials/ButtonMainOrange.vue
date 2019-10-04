@@ -4,7 +4,7 @@
     :class="{ 'btn-standard--disabled': disabled }"
     @click="handleClick"
   >
-    <span class="btn-standard__text" :style="{ fontSize: fontSize }">
+    <span class="btn-standard__text" :style="{ fontSize: fontSize, padding: textPadding }">
       <span class="center-font">{{ buttonText }}</span>
     </span>
     <span
@@ -38,6 +38,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    textPadding: {
+      type: String,
+      default: '0 0 0 32px'
     }
   },
   methods: {
@@ -66,7 +70,6 @@ export default {
     justify-content: center;
     align-items: center;
     margin: auto;
-    padding-left: 32px;
     font-weight: 900;
     letter-spacing: 2px;
   }

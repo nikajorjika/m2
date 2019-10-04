@@ -23,7 +23,11 @@
     "block": "ბლოკი",
     "price": "ფასი",
     "floor": "სართულები",
-    "view": "ხედი"
+    "view": "ხედი",
+    "IAmLookingFor": "მე ვეძებ",
+    "bedrooms": "საძინებლები",
+    "project": "პროექტი",
+    "BuildingStatus": "მშენებლობის სტატუსი"
   },
   "sidebar": {
     "logo_meta": "m² Some text"
@@ -59,6 +63,7 @@
     "phone": "ტელეფონის ნომერი",
     "SendCodeAgain": "ახლიდან გაგზავნა",
     "email": "ელ-ფოსტა",
+    "flat_count_chosen_by_you": "თქვენს მიერ შერჩეული ბინების რაოდენობა",
     "BalconyArea": "აივნის ფართი",
     "FullPrice": "სრული ფასი",
     "LitIt": "გაანათე",
@@ -122,6 +127,7 @@
   },
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",
+    "IAmLookingFor": "მე ვეძებ ბინას",
     "FlatPageTitleCinnamon": "რემონტი დარიჩინი",
     "FillInPhoneNumber": "მიუთითე ტელეფონის ნომერი",
     "FillInPhoneNumberSubTitle": "მიუთითე ნომერი, რომელიც უკვე რეგისტრირებულია",

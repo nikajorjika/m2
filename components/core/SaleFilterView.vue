@@ -1,11 +1,11 @@
 <template>
   <div class="flat-view">
-    <language-switcher class="flat-view__switcher" />
+    <div class="flat-view__header">
+      <session-button class="sales-session-button"/>
+      <language-switcher class="flat-view__switcher" />
+    </div>
     <sales-navigation class="flat-view__navigation" :nav-data="navData" />
     <slot />
-    <div class="faq-container" style="visibility: hidden">
-      <faq-button @click="goToFaq" />
-    </div>
   </div>
 </template>
 
@@ -18,12 +18,14 @@ import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
 import SupplyIcon from '@/components/icons/Technic'
 import DecorationIcon from '@/components/icons/Decor'
+import SessionButton from '@/components/partials/SessionButton'
 import LanguageSwitcher from '@/components/core/LanguageSwitcher'
 export default {
   components: {
     SalesNavigation,
     FaqButton,
     LanguageSwitcher,
+    SessionButton,
     FlatIcon,
     RenovationIcon,
     FurnitureIcon,
@@ -34,61 +36,63 @@ export default {
     ...mapGetters(['locale']),
     navData() {
       return {
-            customize: [
-            {
-              icon: 'appartament',
-              route: `/sales/filter`,
-              title: 'navigation.flat',
-              component: FlatIcon
-            },
-            {
-              icon: 'makeover',
-              route: `/renovations/makeover`,
-              title: 'navigation.renovation',
-              component: RenovationIcon
-            },
-            {
-              icon: 'furniture',
-              route: `/renovations/furniture`,
-              title: 'navigation.furniture',
-              component: FurnitureIcon
-            },
-            {
-              icon: 'decor',
-              route: `/renovations/decoration`,
-              title: 'navigation.decoration',
-              component: DecorationIcon
-            }
+          customize:
+          [
+              {
+                route: `/sales/customize`,
+                title: 'navigation.flat',
+                component: FlatIcon
+              },
+              {
+                route: `/sales/customize/makeover`,
+                title: 'navigation.renovation',
+                component: RenovationIcon
+              },
+              {
+                route: `/sales/customize/furniture`,
+                title: 'navigation.furniture',
+                component: FurnitureIcon
+              },
+              {
+                route: `/sales/customize/decoration`,
+                title: 'navigation.decoration',
+                component: DecorationIcon
+              },
+              {
+                route: `/sales/customize/appliance`,
+                title: 'navigation.appliance',
+                component: SupplyIcon
+              }
           ],
           filter: [
             {
-              icon: 'appartament',
-              route: `/sales/customize`,
-              title: 'navigation.flat',
+              route: `/sales/filter`,
+              title: 'navigation.IAmLookingFor',
               component: FlatIcon
             },
             {
-              icon: 'makeover',
-              route: `/renovations/makeover`,
-              title: 'navigation.renovation',
+              route: `/sales/filter/price`,
+              title: 'navigation.price',
               component: RenovationIcon
             },
             {
-              icon: 'furniture',
-              route: `/renovations/furniture`,
-              title: 'navigation.furniture',
+              route: `/sales/filter/building-status`,
+              title: 'navigation.BuildingStatus',
               component: FurnitureIcon
             },
             {
-              icon: 'decor',
-              route: `/renovations/decoration`,
-              title: 'navigation.decoration',
+              route: `/renovations/bedrooms`,
+              title: 'navigation.bedrooms',
               component: DecorationIcon
             },
             {
-              icon: 'technick',
-              route: `/renovations/appliance`,
-              title: 'navigation.appliance',
+              route: `/renovations/project`,
+              title: 'navigation.project',
+              component: SupplyIcon
+            },
+            {
+              route: `/renovations/floor`,
+              title: 'navigation.floor',
               component: SupplyIcon
             }
           ]
@@ -108,8 +112,15 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
+  .sales-session-button {
+    margin: auto 12px auto auto;
+  }
   &__switcher {
     margin-right: 67px;
+  }
+  &__header {
+    display: flex;
+
   }
   .faq-container {
     margin: auto 0;

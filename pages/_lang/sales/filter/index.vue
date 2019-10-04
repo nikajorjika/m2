@@ -4,19 +4,11 @@
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
-          :title="$t('titles.FillInPhoneNumber')"
-        />
-        <small>{{ $t('titles.FillInPhoneNumberSubTitle') }}</small>
-      </div>
-      <div v-if="!codeSent" class="page-flat-number__form">
-        <login-form @submit="handleLoginStageOne" />
-      </div>
-      <div v-else class="page-flat-number__confirm">
-        <confirm-phone-form
-          @submit="handleLoginStageTwo"
-          @resend="handleResend"
+          :title="$t('titles.IAmLookingFor')"
         />
       </div>
+      <picker-with-gradient-label :items="presets"/>
+      <sale-filter-footer />
     </div>
   </div>
 </template>
@@ -25,15 +17,19 @@
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import LoginForm from '@/components/partials/LoginForm'
+import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
 import FilterSearch from '@/components/icons/FilterSearch'
+import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
 import FilterIconIllustration from '@/components/icons/FilterIllustration'
 export default {
   components: {
     TitleWithLine,
     LoginForm,
+    SaleFilterFooter,
     ConfirmPhoneForm,
+    PickerWithGradientLabel,
     FilterSearch,
     IllustratedButton,
     FilterIconIllustration
@@ -43,7 +39,14 @@ export default {
   data() {
     return {
       codeSent: false,
-      formData: null
+      formData: null,
+      presets: [
+        {
+          name: 'მშობლისთვის',
+          component: FilterSearch,
+          value: 'for-parent'
+        } 
+      ]
     }
   },
   computed: {
@@ -87,7 +90,9 @@ export default {
 .page-flat-number {
   margin: 60px;
   display: flex;
+  height: 100%;
   flex-direction: column;
+  justify-content: space-between;
   &__title {
     display: inline-block;
   }

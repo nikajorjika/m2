@@ -11,7 +11,7 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar />
+    <sidebar-with-items :items="items" />
     <sale-filter-view>
       <div class="app">
         <nuxt />
@@ -22,9 +22,14 @@
 <script>
 import Sidebar from '@/components/core/Sidebar'
 import SaleFilterView from '@/components/core/SaleFilterView'
+import SidebarWithItems from '@/components/core/SidebarWithItems'
 import PopoverImage from '@/components/partials/PopoverImage'
+import Registration from '@/components/icons/Registration'
+import QuestionsIcon from '@/components/icons/Questions'
+import MainIcon from '@/components/icons/Main'
+import { mapGetters } from 'vuex'
 export default {
-  components: { Sidebar, SaleFilterView, PopoverImage },
+  components: { SidebarWithItems, SaleFilterView, PopoverImage },
   props: {
     image: {
       type: String,
@@ -33,6 +38,37 @@ export default {
     open: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    ...mapGetters(['locale']),
+    items() {
+      return [
+        {
+          title: {
+            en: 'Main',
+            ka: 'მთავარი'
+          },
+          path: `/${this.locale}/sales`,
+          component: MainIcon
+        },
+        {
+          title: {
+            en: 'REGISTER',
+            ka: 'რეგისტრაცია'
+          },
+          path: `/${this.locale}/sales/registration`,
+          component: Registration
+        },
+        {
+          title: {
+            en: 'FAQ',
+            ka: 'კითხვები'
+          },
+          path: `/${this.locale}/model/faq`,
+          component: QuestionsIcon
+        }
+      ]
     }
   },
   methods: {

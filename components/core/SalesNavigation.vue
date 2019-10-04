@@ -1,6 +1,6 @@
 <template>
   <div class="flat-navigation">
-    <ul class="flat-navigation__list" :class="{inactive: !isFilter}">
+    <ul class="flat-navigation__list" :class="{inactive: !isFilter}" @click="openInactive('filter')">
       <li
         v-for="(item, index) in navData.filter"
         :key="index"
@@ -25,7 +25,11 @@
         </nuxt-link>
       </li>
     </ul>
-    <ul class="flat-navigation__list" :class="{inactive: !isCustomize}">
+    <ul 
+      class="flat-navigation__list" 
+      :class="{inactive: !isCustomize}" 
+      @click="openInactive('customize')"
+    >
       <li
         v-for="(item, index) in navData.customize"
         :key="index"
@@ -75,6 +79,11 @@ export default {
   },
   methods: {
     isSamePath: (a, b) => isSamePath(a, b),
+    openInactive(module) {
+      if(!this.isThisRoute(module)) {
+        this.$router.push({name: `lang-sales-${module}`, params: {lang: this.locale}})
+      }
+    },
     isThisRoute(module) {
       const regex = module === 'filter' ? /^\/((?:[^\/]+?))\/sales\/filter(?:\/(?=$))?$/i : /^\/((?:[^\/]+?))\/sales\/customize(?:\/(?=$))?$/i
       const match = this.$route.fullPath.match(regex)
@@ -187,18 +196,19 @@ export default {
     color: #fff;
     height: 100%;
     font-family: $font-caps;
-    padding: 0 44px;
+    padding: 0 5px;
     margin: auto;
     width: 112px;
     letter-spacing: 1px;
     transition: width 0.7s opacity 0.2s;
     opacity: 1;
+    white-space: nowrap;
     &.nuxt-link-exact-active {
       color: inherit;
     }
     &__text {
       margin-top: 10px;
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 900;
       text-transform: uppercase;
     }
