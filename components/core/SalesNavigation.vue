@@ -85,9 +85,13 @@ export default {
       }
     },
     isThisRoute(module) {
-      const regex = module === 'filter' ? /^\/((?:[^\/]+?))\/sales\/filter(?:\/(?=$))?$/i : /^\/((?:[^\/]+?))\/sales\/customize(?:\/(?=$))?$/i
-      const match = this.$route.fullPath.match(regex)
-      return match && match.length
+      const regex = new RegExp(`^\\/\\w*\\/sales\\/${module}\\/?(.*)$`, 'i')
+      const str = this.$route.fullPath
+      let m;
+      if ((m = regex.exec(str)) !== null) {
+        console.log(m)
+        return true
+      }
     }
   }
 }

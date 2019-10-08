@@ -4,12 +4,11 @@
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
-          :title="$t('titles.ChooseSearchOption')"
+          :title="$t('titles.IAmLookingFor')"
         />
       </div>
-      <nuxt-link v-for="(item, index) in appList" :key="index" :to="item.link">
-        {{item.name}}
-      </nuxt-link>
+      <select-range class="range-picker" />
+      <sale-filter-footer />
     </div>
   </div>
 </template>
@@ -17,46 +16,21 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import RegistrationForm from '@/components/partials/RegistrationForm'
-import IllustratedButton from '@/components/partials/IllustratedButton'
-import FilterSearch from '@/components/icons/FilterSearch'
-import FilterIconIllustration from '@/components/icons/FilterIllustration'
+import SelectRange from '@/components/partials/SelectRange'
+import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
+
 export default {
   components: {
+    SelectRange,
+    SaleFilterFooter,
     TitleWithLine,
-    RegistrationForm,
-    FilterSearch,
-    IllustratedButton,
-    FilterIconIllustration
   },
-  layout: 'SalesWithoutNavigation',
-  auth: 'guest',
+  layout: 'SalesFilterLayout',
   computed: {
     ...mapGetters({
-      locale: 'locale'
-    }),
-    appList() {
-      return [
-        {
-          name: 'Filter',
-          link: `/${this.locale}/sales/filter`
-        },
-        {
-          name: 'Render',
-          link: `/${this.locale}/sales/render`
-        }
-      ]
-    }
-  },
-  methods: {
-    ...mapActions({
-      saveLead: 'Lead/saveLead'
-    }),
-    handleRegistration(data) {
-      this.saveLead(data).then(() => {
-        this.$router.push({ name: 'lang-model', params: { lang: this.locale } })
-      })
-    }
+      locale: 'locale',
+      filters: 'Sales/filters'
+    })
   }
 }
 </script>
@@ -67,10 +41,15 @@ export default {
   flex-direction: column;
   height: 100%;
 }
+.range-picker {
+  max-width: 686px;
+}
 .page-flat-number {
-  margin: auto 60px;
+  margin: 60px;
   display: flex;
+  height: 100%;
   flex-direction: column;
+  justify-content: space-between;
   &__title {
     display: inline-block;
   }
@@ -85,6 +64,7 @@ export default {
       margin-top: 13px;
     }
   }
+  &__confirm,
   &__form {
     margin-top: 62px;
   }

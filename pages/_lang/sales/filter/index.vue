@@ -7,7 +7,7 @@
           :title="$t('titles.IAmLookingFor')"
         />
       </div>
-      <picker-with-gradient-label :items="presets"/>
+      <picker-with-gradient-label :items="normalizePresets"/>
       <sale-filter-footer />
     </div>
   </div>
@@ -16,65 +16,26 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import LoginForm from '@/components/partials/LoginForm'
 import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
-import IllustratedButton from '@/components/partials/IllustratedButton'
-import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
-import FilterSearch from '@/components/icons/FilterSearch'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
-import FilterIconIllustration from '@/components/icons/FilterIllustration'
 export default {
   components: {
     TitleWithLine,
-    LoginForm,
-    SaleFilterFooter,
-    ConfirmPhoneForm,
     PickerWithGradientLabel,
-    FilterSearch,
-    IllustratedButton,
-    FilterIconIllustration
+    SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
-  auth: 'auth',
-  data() {
-    return {
-      codeSent: false,
-      formData: null,
-      presets: [
-        {
-          name: 'მშობლისთვის',
-          component: FilterSearch,
-          value: 'for-parent'
-        } 
-      ]
-    }
-  },
   computed: {
     ...mapGetters({
-      locale: 'locale'
-    })
-  },
-  methods: {
-    ...mapActions({
-      loginUser: 'Sales/loginUser'
+      locale: 'locale',
+      presets: 'Sales/presets'
     }),
-    handleLoginStageOne(data) {
-      this.formData = { ...data }
-      this.loginUser(this.formData).then((response) => {
-        this.codeSent = true
-      })
-    },
-    handleLoginStageTwo(code) {
-      this.formData = { ...code, ...this.formData }
-      this.loginUser(this.formData).then(({ data }) => {
-        if (data.hasOwnProperty('access_token')) {
-          this.$auth.setUserToken(data.access_token)
+    normalizePresets() {
+      return this.presets.map((item) => {
+        return {
+          name: item.name,
+          value: item.id
         }
-      })
-    },
-    handleResend() {
-      this.loginUser(this.formData).then((response) => {
-        this.codeSent = true
       })
     }
   }

@@ -50,30 +50,6 @@ export default {
     ...mapGetters({
       locale: 'locale'
     })
-  },
-  methods: {
-    ...mapActions({
-      loginUser: 'Sales/loginUser'
-    }),
-    handleLoginStageOne(data) {
-      this.formData = { ...data }
-      this.loginUser(this.formData).then((response) => {
-        this.codeSent = true
-      })
-    },
-    handleLoginStageTwo(code) {
-      this.formData = { ...code, ...this.formData }
-      this.loginUser(this.formData).then(({ data }) => {
-        if (data.hasOwnProperty('access_token')) {
-          this.$auth.setUserToken(data.access_token)
-        }
-      })
-    },
-    handleResend() {
-      this.loginUser(this.formData).then((response) => {
-        this.codeSent = true
-      })
-    }
   }
 }
 </script>

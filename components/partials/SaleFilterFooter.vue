@@ -6,7 +6,7 @@
       </div>
       <div class="filter-footer__flats__see">
         <button-main-orange
-          :button-text="107"
+          button-text="107"
           class="custom-count-button"
           icon-width="20px"
           icon-height="20px"

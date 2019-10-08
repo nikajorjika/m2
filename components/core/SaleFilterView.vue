@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import SalesNavigation from './SalesNavigation'
 import FaqButton from './FAQButton'
 import FlatIcon from '@/components/icons/Appartament'
@@ -31,6 +31,16 @@ export default {
     FurnitureIcon,
     SupplyIcon,
     DecorationIcon
+  },
+  mounted() {
+    this.fetchPresets()
+    .then(data => {
+      console.log(data)
+    })
+    this.fetchFilterDefaults()
+    .then(data => {
+      console.log(data)
+    })
   },
   computed: {
     ...mapGetters(['locale']),
@@ -100,6 +110,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      fetchPresets: 'Sales/fetchFilterPresets',
+      fetchFilterDefaults: 'Filter/fetchFilterDefaults'
+    }),
     goToFaq() {
       this.$router.push({ path: `/${this.locale}/renovations/faq` })
     }
