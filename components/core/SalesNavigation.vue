@@ -89,7 +89,6 @@ export default {
       const str = this.$route.fullPath
       let m;
       if ((m = regex.exec(str)) !== null) {
-        console.log(m)
         return true
       }
     }

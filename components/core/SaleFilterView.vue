@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import SalesNavigation from './SalesNavigation'
 import FaqButton from './FAQButton'
 import FlatIcon from '@/components/icons/Appartament'
@@ -34,13 +34,15 @@ export default {
   },
   mounted() {
     this.fetchPresets()
-    .then(data => {
-      console.log(data)
-    })
+      .then(data => {
+        // console.log(data)
+      })
+      .catch(err => console.log(err))
     this.fetchFilterDefaults()
-    .then(data => {
-      console.log(data)
-    })
+      .then(data => {
+        // console.log(data)
+      })
+      .catch(err => console.log(err))
   },
   computed: {
     ...mapGetters(['locale']),
@@ -111,7 +113,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchPresets: 'Sales/fetchFilterPresets',
+      fetchPresets: 'Filter/fetchFilterPresets',
       fetchFilterDefaults: 'Filter/fetchFilterDefaults'
     }),
     goToFaq() {

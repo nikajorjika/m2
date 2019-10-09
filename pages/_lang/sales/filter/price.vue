@@ -7,14 +7,23 @@
           :title="$t('titles.IAmLookingFor')"
         />
       </div>
-      <select-range class="range-picker" />
-      <sale-filter-footer />
+      <select-range 
+        class="range-picker"
+        v-if="minPrice && maxPrice"
+        :min-value="minPrice"
+        :max-value="maxPrice"
+        :preset-min="filterPrice.min"
+        :preset-max="filterPrice.max"
+        :step="1000"
+        @change="handleChange"
+        />
+      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -29,8 +38,43 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      filters: 'Sales/filters'
-    })
+      filterDefaults: 'Filter/filterDefaults',
+      filters: 'Filter/filters'
+    }),
+    filterPrice() {
+      return this.filters.price
+    },
+    minPrice() {
+      return this.filterDefaults.min_price
+    },
+    maxPrice() {
+      return this.filterDefaults.max_price
+    },
+    nextUrl() {
+      return `/${this.locale}/sales/filter/building-status`
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setFilter: 'Filter/SET_FILTER_ITEM',
+      setLoader: 'Filter/SET_FILTER_LOADER'
+    }),
+    handleChange(data) {
+      clearTimeout(this.timeout)
+      this.setLoader(true)
+      this.timeout = setTimeout(() => {
+        this.setFilter({
+          key: 'price',
+          value: data
+        })
+      }, 500)
+    },
+    skipPrice() {
+      this.setFilter({
+        key: 'price',
+        value: this.price
+      })
+    }
   }
 }
 </script>

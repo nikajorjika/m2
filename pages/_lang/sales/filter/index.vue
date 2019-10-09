@@ -8,7 +8,7 @@
         />
       </div>
       <picker-with-gradient-label :items="normalizePresets"/>
-      <sale-filter-footer />
+      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
@@ -28,8 +28,11 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      presets: 'Sales/presets'
+      presets: 'Filter/presets'
     }),
+    nextUrl() {
+      return `/${this.locale}/sales/filter/price`
+    },
     normalizePresets() {
       return this.presets.map((item) => {
         return {
@@ -37,6 +40,11 @@ export default {
           value: item.id
         }
       })
+    }
+  },
+  methods: {
+    skipPrice() {
+      this.$router.push(this.nextUrl)
     }
   }
 }
