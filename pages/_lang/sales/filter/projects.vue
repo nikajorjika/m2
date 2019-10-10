@@ -7,24 +7,29 @@
           :title="$t('titles.ChooseProjects')"
         />
       </div>
-      <picker-with-gradient-label :items="pickerData"/>
-      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
+      <!-- <picker-with-gradient-label :items="pickerData"/> -->
+      <div class="page-flat-number__render">
+        <filter-render @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
+      </div>
+      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice"/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
 import CompletedIcon from '@/components/icons/Completed'
 import PlannedIcon from '@/components/icons/Planned'
 import InProgressIcon from '@/components/icons/InProgress'
+import FilterRender from '@/components/partials/FilterRender'
 export default {
   components: {
     TitleWithLine,
     PickerWithGradientLabel,
+    FilterRender,
     SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
@@ -54,10 +59,31 @@ export default {
       locale: 'locale'
     }),
     nextUrl() {
-      return `/${this.locale}/sales/filter/price`
+      return `/${this.locale}/sales/filter/floor`
     }
   },
   methods: {
+    ...mapMutations({
+      setloader: 'Filter/SET_FILTER_LOADER',
+      setFilter: 'Filter/SET_FILTER_ITEM'
+    }),
+    handleBlockSelect(value) {
+      this.setFilter({
+        key: 'block',
+        value
+      })
+      this.$router.push(this.nextUrl)
+    },
+    handleBeforeChange(value) {
+      console.log(value)
+      this.setloader(true)
+    },
+    handleBlockChange(value) {
+      this.setFilter({
+        key: 'block',
+        value
+      })
+    },
     skipPrice() {
       this.$router.push(this.nextUrl)
     }
@@ -79,6 +105,11 @@ export default {
   justify-content: space-between;
   &__title {
     display: inline-block;
+  }
+  &__render {
+    max-height: 356px;
+    margin: 17px 324px 17px 0;
+    box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
   &__title-container {
     display: flex;

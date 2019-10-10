@@ -36,6 +36,7 @@ export default {
     },
     handleBlockChosing(number) {
       if (!event.target) return
+      this.$emit('beforeChange')
       this.blockInfo = null
       this.activeBlockNumber = null
       this.fetchBlockData(number)
@@ -46,6 +47,7 @@ export default {
         .then((response) => {
           this.activeBlockNumber = number
           this.blockInfo = response.data
+          this.$emit('change', this.blockInfo.id)
         })
         .catch((e) => console.error(e))
     }
