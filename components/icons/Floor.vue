@@ -1,5 +1,5 @@
 <template>
-  <arrow-icon
+  <svg-icon
     :stroke="`${iconColor}`"
     :width="width"
     :height="height"
@@ -9,9 +9,9 @@
   />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/Floor1.svg'
+import SvgIcon from '@/assets/icons/Floor1.svg'
 export default {
-  components: { ArrowIcon },
+  components: { SvgIcon },
   props: {
     width: {
       type: [Number, String],

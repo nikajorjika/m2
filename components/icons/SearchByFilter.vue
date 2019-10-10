@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import FilterIcon from '~/assets/icons/Filter_Search1svg'
+import FilterIcon from '~/assets/icons/Filter_Search1.svg'
 
 export default {
   components: { FilterIcon },

@@ -4,10 +4,10 @@
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
-          :title="$t('titles.IAmLookingFor')"
+          :title="$t('titles.ChooseProjects')"
         />
       </div>
-      <picker-with-gradient-label :items="normalizePresets" class="caps" />
+      <picker-with-gradient-label :items="pickerData"/>
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
@@ -18,6 +18,9 @@ import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
+import CompletedIcon from '@/components/icons/Completed'
+import PlannedIcon from '@/components/icons/Planned'
+import InProgressIcon from '@/components/icons/InProgress'
 export default {
   components: {
     TitleWithLine,
@@ -25,43 +28,33 @@ export default {
     SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
+  data() {
+    return {
+      pickerData: [
+        {
+          icon: CompletedIcon,
+          name: this.$t('status.finished'),
+          value: 'finished'
+        },
+        {
+          icon: PlannedIcon,
+          name: this.$t('status.planned'),
+          value: 'planned'
+        },
+        {
+          icon: InProgressIcon,
+          name: this.$t('status.ongoing'),
+          value: 'ongoing'
+        },
+      ]
+    }
+  },
   computed: {
     ...mapGetters({
-      locale: 'locale',
-      presets: 'Filter/presets'
+      locale: 'locale'
     }),
     nextUrl() {
       return `/${this.locale}/sales/filter/price`
-    },
-    icons() {
-      return {
-        Children: () => import(`@/components/icons/Children.vue`),
-        Imigrent: () => import(`@/components/icons/Imigrent.vue`),
-        Investment: () => import(`@/components/icons/Investment.vue`),
-        Parents: () => import(`@/components/icons/Parents.vue`),
-        Alone: () => import(`@/components/icons/Alone.vue`),
-        Land: () => import(`@/components/icons/Land.vue`)
-      }
-    },
-    normalizePresets() {
-      const iconKeys = [
-        'Children',
-        'Imigrent',
-        'Investment',
-        'Parents',
-        'Alone',
-        'Land',
-      ]
-      let i = 0
-      return this.presets.map((item) => {
-        const icon =  this.icons[iconKeys[i]]
-        i++
-        return {
-          icon: icon,
-          name: item.name,
-          value: item.id
-        }
-      })
     }
   },
   methods: {

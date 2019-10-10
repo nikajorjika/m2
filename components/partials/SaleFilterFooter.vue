@@ -104,7 +104,6 @@ export default {
     fetchFlatsCount() {
       this.flatsCount()
       .then((response) => {
-        console.log(response)
         this.setLoader(false)
       })
       .catch(err => console.log(err))

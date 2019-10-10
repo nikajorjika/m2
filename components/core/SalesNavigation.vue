@@ -111,6 +111,7 @@ export default {
     &__item {
       flex: 1;
       width: 42px;
+      display: flex;
       align-items: center;
       height: 60px;
     }
@@ -130,7 +131,7 @@ export default {
     &.inactive &{
       &__item {
         background: white;
-        min-width: 100%;
+        min-width: 0;
         max-width: 100%;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -139,6 +140,7 @@ export default {
         .flat-navigation__link {
           width: 0;
           overflow: hidden;
+          min-width: 0;
           padding: 0;
           transition: width 0.3s opacity 0.2s;
           opacity: 0;
@@ -201,7 +203,8 @@ export default {
     font-family: $font-caps;
     padding: 0 5px;
     margin: auto;
-    width: 112px;
+    width: auto;
+    min-width: 112px;
     letter-spacing: 1px;
     transition: width 0.7s opacity 0.2s;
     opacity: 1;

@@ -2,7 +2,7 @@
   <svg-icon :stroke="iconColor" :width="width" :height="height" />
 </template>
 <script>
-import SvgIcon from '@/assets/icons/Status1.svg'
+import SvgIcon from '@/assets/icons/Completed.svg'
 export default {
   components: { SvgIcon },
   props: {
@@ -16,7 +16,7 @@ export default {
     },
     iconColor: {
       type: String,
-      default: '#000'
+      default: '#fff'
     }
   }
 }

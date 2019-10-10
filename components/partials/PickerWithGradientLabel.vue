@@ -61,6 +61,11 @@ export default {
   grid-template-columns: repeat(3, 251px);
   grid-column-gap: 47px;
   grid-row-gap: 44px;
+  &.caps & {
+    &__item {
+      font-family: $font-caps;
+    }
+  }
   &__item {
     background: #fbf7f2;
     border-top-left-radius: 22px;
