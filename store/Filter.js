@@ -12,7 +12,10 @@ export const state = () => ({
       max: 150000
     },
     view: [],
-    flat_number: null
+    flat_number: null,
+    building_progress: [],
+    bedroom_count: [],
+    type: null
   },
   modelApiData: {
     TabletId: null,
@@ -92,6 +95,9 @@ export const mutations = {
     state.filters.price.max = data.max_price
     state.filters.price.min = data.min_price
     state.filters.view = []
+    state.filters.building_progress = []
+    state.filters.bedroom_count = []
+    state.filters.type = null
   },
   // eslint-disable-next-line object-shorthand
   SET_MODEL_API_DATA: function(state, flats) {
@@ -180,14 +186,30 @@ export const actions = {
 
   fetchFilteredDataCount({ commit, getters }) {
     // eslint-disable-next-line camelcase
-    const { block, floors, price, flat_number } = getters.filters
+    const {
+      block,
+      floors,
+      price,
+      // eslint-disable-next-line camelcase
+      flat_number,
+      // eslint-disable-next-line camelcase
+      bedroom_count,
+      type,
+      // eslint-disable-next-line camelcase
+      building_progress
+    } = getters.filters
     const views = getters.filters.view.map((item) => item.value)
+    const bedroomCount = bedroom_count.map((item) => item.value)
+    const buildingProgress = building_progress.map((item) => item.value)
     const params = {
       block_id: block,
       max_price: price.max,
       min_price: price.min,
       max_floor: floors.max,
       min_floor: floors.min,
+      bedroom_count: bedroomCount,
+      type,
+      building_progress: buildingProgress,
       flat_number
     }
     if (views) {

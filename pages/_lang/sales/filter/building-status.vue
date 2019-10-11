@@ -7,14 +7,14 @@
           :title="$t('titles.BuildingProgress')" 
         />
       </div>
-      <picker-with-gradient-label :items="pickerData"/>
+      <picker-with-gradient-label :items="pickerData" @change="handleChange" />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -58,8 +58,22 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setFilter: 'Filter/SET_FILTER_ITEM',
+      setLoader: 'Filter/SET_FILTER_LOADER'
+    }),
     skipPrice() {
       this.$router.push(this.nextUrl)
+    },
+    handleChange(data) {
+      this.setLoader(true)
+      const progress = data.map(item => {
+        return item.value
+      })
+      this.setFilter({
+        key: 'building_progress',
+        value: progress
+       })
     }
   }
 }

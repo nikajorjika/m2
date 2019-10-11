@@ -8,7 +8,7 @@
         />
         <small>{{$t('titles.YouCanSelectMultipe')}}</small>
       </div>
-      <range-picker :ranges="bedroomsPickerData"/>
+      <range-picker :ranges="bedroomsPickerData" @change="handleBedroomsChange"/>
       <div class="border-line"></div>
       <div class="page-flat-number__title-container">
         <title-with-line
@@ -17,14 +17,14 @@
         />
         <small>{{$t('titles.YouCanSelectOnlyOne')}}</small>
       </div>
-      <range-picker :ranges="flatTypes" :multiple="false" />
+      <range-picker :ranges="flatTypes" :multiple="false" @change="handleTypesChange" />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RangePicker from '@/components/partials/RangePicker'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -94,6 +94,24 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setFilter: 'Filter/SET_FILTER_ITEM',
+      setLoader: 'Filter/SET_FILTER_LOADER'
+    }),
+    handleTypesChange(data) {
+      this.setLoader(true)
+      this.setFilter({
+        key: 'type',
+        value: data
+       })
+    },
+    handleBedroomsChange(data) {
+      this.setLoader(true)
+      this.setFilter({
+        key: 'bedroom_count',
+        value: data
+       })
+    },
     skipPrice() {
       this.$router.push(this.nextUrl)
     }
