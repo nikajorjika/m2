@@ -75,12 +75,12 @@ export default {
         {
           icon: KitchenDetached,
           name: this.$t('rooms.KitchenDetached'),
-          value: 0
+          value: 'normal'
         },
         {
           icon: Studio,
           name: this.$t('rooms.Studio'),
-          value: 1
+          value: 'studio'
         }
       ]
     }

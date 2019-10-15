@@ -7,14 +7,19 @@
           :title="$t('titles.IAmLookingFor')"
         />
       </div>
-      <picker-with-gradient-label :items="normalizePresets" class="caps" />
+      <picker-with-gradient-label 
+        :items="normalizePresets"
+        :multiselect="false"
+        class="caps"
+        @change="handleChange"
+      />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -25,6 +30,11 @@ export default {
     SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
+  data() {
+    return {
+      chosenPresetArray: []
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale',
@@ -42,6 +52,20 @@ export default {
         Alone: () => import(`@/components/icons/Alone.vue`),
         Land: () => import(`@/components/icons/Land.vue`)
       }
+    },
+    chosenPreset() {
+      if(!this.chosenPresetArray.length) return null
+      return this.presets.find(item => this.chosenPresetArray[0].value === item.id)
+    },
+    bedroomCount() {
+      if(!this.chosenPreset) return null
+      const bedroomsArray =  this.chosenPreset.preset.bedrooms.split(', ')
+      return bedroomsArray.map(item => {
+        return {
+          name: `# of Bedrooms ${item}`,
+          value: parseInt(item)
+        }
+      })
     },
     normalizePresets() {
       const iconKeys = [
@@ -65,6 +89,17 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setFilterItem: 'Filter/SET_FILTER_ITEM'
+    }),
+    handleChange(data) {
+      this.chosenPresetArray = data
+      const preset = this.chosenPreset.preset
+      this.setFilterItem({
+        key: 'bedroom_count',
+        value: this.bedroomCount
+      })
+    },
     skipPrice() {
       this.$router.push(this.nextUrl)
     }
