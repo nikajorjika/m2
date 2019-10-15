@@ -2,7 +2,7 @@
   <arrow-icon :fill="iconColor" :width="width" :height="height" />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/In_Progress1.svg'
+import ArrowIcon from '@/assets/icons/In_progress1.svg'
 export default {
   components: { ArrowIcon },
   props: {

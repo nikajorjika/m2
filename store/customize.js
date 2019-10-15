@@ -1,5 +1,5 @@
 const state = () => ({
-  flat: [],
+  flat: {},
   renovations: [],
   furniture: [],
   decorations: [],
@@ -33,8 +33,8 @@ const mutations = {
 }
 
 const actions = {
-  async fetchFlat({ commit }) {
-    const response = await this.$axios.get(`/flats/${5756}`)
+  async fetchFlat({ commit }, id) {
+    const response = await this.$axios.get(`/flats/${id}`)
 
     commit('setFlat', response.data)
   },

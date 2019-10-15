@@ -124,7 +124,8 @@
     "flat-list-result-title": "Flats filtered by your criterea <br><span class=\"color-orange\">Found %s Flats</span>",
     "ModelIndexPage": "Find your new home here!",
     "YouCanSelectMultipe": "You can select multiple",
-    "YourChosenFlat": "Your chosen flat"
+    "YourChosenFlat": "Your chosen flat",
+    "FlatPagesTitle": "Choose your desire %s"
   },
   "addresses": {
     "marshal_gelovani": "Marshal Gelovani Avenue",

@@ -159,7 +159,8 @@
     "SearchByFlatNumberSubTitle": "ჩაწერეთ თქვენს მიერ შერჩეული ბინის ნომერი",
     "flat-list-result-title": "თქვენს მიერ არჩეული კრიტერიუმების მიხედვით <br><span class=\"color-orange\">მოიძებნა %s ბინა</span>",
     "FrequentlyAskedQuestions": "ხშირად დასმული კითხვები",
-    "ModelIndexPage": "ბინის შერჩევა იწყება აქ!"
+    "ModelIndexPage": "ბინის შერჩევა იწყება აქ!",
+    "FlatPagesTitle": "აირჩიე შენთვის სასურველი %s"
   },
   "rooms": {
     "Hall": "ჰოლი",

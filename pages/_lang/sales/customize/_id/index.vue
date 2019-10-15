@@ -25,18 +25,13 @@
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import LoginForm from '@/components/partials/LoginForm'
-import IllustratedButton from '@/components/partials/IllustratedButton'
 import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
-import FilterSearch from '@/components/icons/FilterSearch'
-import FilterIconIllustration from '@/components/icons/FilterIllustration'
+
 export default {
   components: {
     TitleWithLine,
     LoginForm,
-    ConfirmPhoneForm,
-    FilterSearch,
-    IllustratedButton,
-    FilterIconIllustration
+    ConfirmPhoneForm
   },
   layout: 'SalesFilterLayout',
   auth: 'auth',
@@ -51,17 +46,16 @@ export default {
       locale: 'locale'
     })
   },
-  created() {
-    this.$store.dispatch('customize/fetchFlat')
-  },
   mounted() {
-    this.$store.dispatch('customize/fetchRenovations')
-    this.$store.dispatch('customize/fetchFurniture')
-    this.$store.dispatch('customize/fetchDecorations')
-    this.$store.dispatch('customize/fetchAppliances')
+    this.fetchFlat(this.$route.params.id)
+    this.fetchRenovations()
+    this.fetchFurniture()
+    this.fetchDecorations()
+    this.fetchAppliances()
   },
   methods: {
     ...mapActions('customize', [
+      'fetchFlat',
       'fetchRenovations',
       'fetchFurniture',
       'fetchDecorations',

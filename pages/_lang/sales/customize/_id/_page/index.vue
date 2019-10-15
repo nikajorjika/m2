@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="flat-pages-container">
+    <title-with-line class="flat-pages-title" :title="title" />
+
     <flat-pages-slider
       :items="items(renovations)"
       :item-price="itemPrice(renovations)"
-      :price="123"
+      :price="price"
     >
       <template v-slot:slider-right-content>
         <slider-thumbnails
@@ -19,9 +21,10 @@
 import { mapGetters, mapActions } from 'vuex'
 import FlatPagesSlider from '@/components/core/FlatPagesSlider'
 import SliderThumbnails from '@/components/partials/SliderThumbnails'
+import TitleWithLine from '@/components/partials/TitleWithLine'
 
 export default {
-  components: { FlatPagesSlider, SliderThumbnails },
+  components: { FlatPagesSlider, SliderThumbnails, TitleWithLine },
   layout: 'SalesFilterLayout',
   data() {
     return {
@@ -31,25 +34,46 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
+      flat: 'customize/flat',
       renovations: 'customize/renovations',
       furniture: 'customize/furniture',
       decorations: 'customize/decorations'
-    })
+    }),
+    title() {
+      const key =
+        this.$route.params.page === 'makeover'
+          ? 'renovation'
+          : this.$route.params.page
+
+      return this.$t('titles.FlatPagesTitle').replace(
+        '%s',
+        this.$t('navigation.' + key)
+      )
+    },
+    price() {
+      return this.flat.price
+    }
   },
   created() {
-    if (this.renovations === undefined || !this.renovations.length) {
-      this.$store.dispatch('customize/fetchRenovations')
+    if (this.flat === undefined || !this.flat.length) {
+      this.fetchFlat(this.$route.params.id)
     }
+
+    if (this.renovations === undefined || !this.renovations.length) {
+      this.fetchRenovations()
+    }
+
     if (this.furniture === undefined || !this.furniture.length) {
-      this.$store.dispatch('customize/fetchFurniture')
+      this.fetchFurniture()
     }
 
     if (this.decorations === undefined || !this.decorations.length) {
-      this.$store.dispatch('customize/fetchDecorations')
+      this.fetchDecorations()
     }
   },
   methods: {
     ...mapActions('customize', [
+      'fetchFlat',
       'fetchRenovations',
       'fetchFurniture',
       'fetchDecorations'
@@ -88,3 +112,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.flat-pages-container {
+  margin: 60px;
+}
+</style>

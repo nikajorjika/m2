@@ -1,7 +1,7 @@
 <template>
   <div class="flat-view">
     <div class="flat-view__header">
-      <session-button class="sales-session-button"/>
+      <session-button class="sales-session-button" />
       <language-switcher class="flat-view__switcher" />
     </div>
     <sales-navigation class="flat-view__navigation" :nav-data="navData" />
@@ -10,9 +10,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import SalesNavigation from './SalesNavigation'
-import FaqButton from './FAQButton'
 import ToFind from '@/components/icons/ToFind'
 import CostIcon from '@/components/icons/Cost'
 import StatusIcon from '@/components/icons/Status'
@@ -28,97 +27,88 @@ import LanguageSwitcher from '@/components/core/LanguageSwitcher'
 export default {
   components: {
     SalesNavigation,
-    FaqButton,
     LanguageSwitcher,
-    SessionButton,
-    ToFind,
-    FloorIcon,
-    SleepingRoom,
-    StatusIcon,
-    ProjectIcon,
-    CostIcon,
-    RenovationIcon,
-    FurnitureIcon,
-    SupplyIcon,
-    DecorationIcon
+    SessionButton
   },
   mounted() {
     this.fetchPresets()
-      .then(data => {
+      .then((data) => {
         // console.log(data)
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err))
     this.fetchFilterDefaults()
-      .then(data => {
+      .then((data) => {
         // console.log(data)
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err))
   },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters({
+      locale: 'locale',
+      flat: 'customize/flat'
+    }),
     navData() {
       return {
-          customize:
-          [
-              {
-                route: `/sales/customize`,
-                title: 'navigation.flat',
-                component: RenovationIcon
-              },
-              {
-                route: `/sales/customize/makeover`,
-                title: 'navigation.renovation',
-                component: RenovationIcon
-              },
-              {
-                route: `/sales/customize/furniture`,
-                title: 'navigation.furniture',
-                component: FurnitureIcon
-              },
-              {
-                route: `/sales/customize/decoration`,
-                title: 'navigation.decoration',
-                component: DecorationIcon
-              },
-              {
-                route: `/sales/customize/appliance`,
-                title: 'navigation.appliance',
-                component: SupplyIcon
-              }
-          ],
-          filter: [
-            {
-              route: `/sales/filter`,
-              title: 'navigation.IAmLookingFor',
-              component: ToFind
-            },
-            {
-              route: `/sales/filter/price`,
-              title: 'navigation.price',
-              component: CostIcon
-            },
-            {
-              route: `/sales/filter/building-status`,
-              title: 'navigation.BuildingStatus',
-              component: StatusIcon
-            },
-            {
-              route: `/sales/filter/bedrooms`,
-              title: 'navigation.bedrooms',
-              component: SleepingRoom
-            },
-            {
-              route: `/sales/filter/projects`,
-              title: 'navigation.projects',
-              component: ProjectIcon
-            },
-            {
-              route: `/sales/filter/floor`,
-              title: 'navigation.floor',
-              component: FloorIcon
-            }
-          ]
-        }
+        customize: [
+          {
+            route: `/sales/customize/${this.$route.params.id}`,
+            title: 'navigation.flat',
+            component: RenovationIcon
+          },
+          {
+            route: `/sales/customize/${this.$route.params.id}/makeover`,
+            title: 'navigation.renovation',
+            component: RenovationIcon
+          },
+          {
+            route: `/sales/customize/${this.$route.params.id}/furniture`,
+            title: 'navigation.furniture',
+            component: FurnitureIcon
+          },
+          {
+            route: `/sales/customize/${this.$route.params.id}/decoration`,
+            title: 'navigation.decoration',
+            component: DecorationIcon
+          },
+          {
+            route: `/sales/customize/${this.$route.params.id}/appliance`,
+            title: 'navigation.appliance',
+            component: SupplyIcon
+          }
+        ],
+        filter: [
+          {
+            route: `/sales/filter`,
+            title: 'navigation.IAmLookingFor',
+            component: ToFind
+          },
+          {
+            route: `/sales/filter/price`,
+            title: 'navigation.price',
+            component: CostIcon
+          },
+          {
+            route: `/sales/filter/building-status`,
+            title: 'navigation.BuildingStatus',
+            component: StatusIcon
+          },
+          {
+            route: `/sales/filter/bedrooms`,
+            title: 'navigation.bedrooms',
+            component: SleepingRoom
+          },
+          {
+            route: `/sales/filter/projects`,
+            title: 'navigation.projects',
+            component: ProjectIcon
+          },
+          {
+            route: `/sales/filter/floor`,
+            title: 'navigation.floor',
+            component: FloorIcon
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -145,7 +135,7 @@ export default {
     margin-right: 67px;
   }
   &__header {
-    display: flex;    
+    display: flex;
     margin-bottom: 12px;
   }
   .faq-container {

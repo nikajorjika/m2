@@ -74,10 +74,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  padding: 50px 20px;
-}
-
 .left-content,
 .right-content {
   display: inline-block;
