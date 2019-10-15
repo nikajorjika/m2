@@ -32,6 +32,10 @@ export default {
     preselected: {
       type: Array,
       default: () => []
+    },
+    multiselect: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -41,10 +45,15 @@ export default {
   },
   methods: {
     checkItem(item) {
-      if (this.isActive(item)) {
-        this.selected = this.selected.filter((i) => i.value !== item.value)
-      } else {
-        this.selected = [...this.selected, item]
+      if(this.multiselect){
+        if (this.isActive(item)) {
+          this.selected = this.selected.filter((i) => i.value !== item.value)
+        } else {
+          this.selected = [...this.selected, item]
+        }
+      }
+      else {
+        this.selected = [item]
       }
       this.$emit('change', this.selected)
     },

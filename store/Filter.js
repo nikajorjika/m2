@@ -15,6 +15,11 @@ export const state = () => ({
     flat_number: null,
     building_progress: [],
     bedroom_count: [],
+    wc: [],
+    area: {
+      min: null,
+      max: null
+    },
     type: null
   },
   modelApiData: {
