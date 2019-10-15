@@ -50,6 +50,23 @@ export default {
     ...mapGetters({
       locale: 'locale'
     })
+  },
+  created() {
+    this.$store.dispatch('customize/fetchFlat')
+  },
+  mounted() {
+    this.$store.dispatch('customize/fetchRenovations')
+    this.$store.dispatch('customize/fetchFurniture')
+    this.$store.dispatch('customize/fetchDecorations')
+    this.$store.dispatch('customize/fetchAppliances')
+  },
+  methods: {
+    ...mapActions('customize', [
+      'fetchRenovations',
+      'fetchFurniture',
+      'fetchDecorations',
+      'fetchAppliances'
+    ])
   }
 }
 </script>

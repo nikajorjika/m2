@@ -63,19 +63,21 @@ export default {
         centeredSlides: true,
         spaceBetween: 30,
         on: {}
-      },
-      activeIndex: 0
+      }
+    }
+  },
+  computed: {
+    activeIndex() {
+      return this.mySwiper !== undefined ? this.mySwiper.activeIndex : 0
     }
   },
   methods: {
     nextSlide() {
       this.mySwiper.slideNext()
-      this.activeIndex = this.mySwiper.activeIndex
     },
 
     prevSlide() {
       this.mySwiper.slidePrev()
-      this.activeIndex = this.mySwiper.activeIndex
     },
 
     sendMessageToParent(event) {
