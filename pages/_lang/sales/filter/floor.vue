@@ -4,20 +4,21 @@
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
-          :title="$t('titles.PickPriceRange')"
+          :title="$t('titles.PickFloorRange')"
         />
       </div>
       <select-range 
         class="range-picker"
-        v-if="minPrice && maxPrice"
-        :min-value="minPrice"
-        :max-value="maxPrice"
-        :preset-min="filterPrice.min"
-        :preset-max="filterPrice.max"
-        :step="1000"
+        v-if="minFloor >= 0 && maxFloor"
+        :min-value="minFloor"
+        :max-value="maxFloor"
+        :preset-min="filterFloor.min"
+        :preset-max="filterFloor.max"
+        :step="1"
+        :suffix="$t('labels.floorShort')"
         @change="handleChange"
         />
-      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
+      <sale-filter-footer :next-url="nextUrl" @skip="skipFloor" />
     </div>
   </div>
 </template>
@@ -41,14 +42,14 @@ export default {
       filterDefaults: 'Filter/filterDefaults',
       filters: 'Filter/filters'
     }),
-    filterPrice() {
-      return this.filters.price
+    filterFloor() {
+      return this.filters.floors
     },
-    minPrice() {
-      return this.filterDefaults.min_price
+    minFloor() {
+      return this.filterDefaults.min_floor
     },
-    maxPrice() {
-      return this.filterDefaults.max_price
+    maxFloor() {
+      return this.filterDefaults.max_floor
     },
     nextUrl() {
       return `/${this.locale}/sales/filter/building-status`
@@ -64,15 +65,15 @@ export default {
       this.setLoader(true)
       this.timeout = setTimeout(() => {
         this.setFilter({
-          key: 'price',
+          key: 'floors',
           value: data
         })
       }, 500)
     },
-    skipPrice() {
+    skipFloor() {
       this.setFilter({
-        key: 'price',
-        value: this.price
+        key: 'floors',
+        value: this.filterFloor
       })
     }
   }

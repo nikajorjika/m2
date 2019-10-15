@@ -1,10 +1,10 @@
 <template>
-  <arrow-icon :fill="iconColor" :width="width" :height="height" />
+  <svg-icon :stroke="iconColor" :width="width" :height="height" />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/ToFind1.svg'
+import SvgIcon from '@/assets/icons/To_Find1.svg'
 export default {
-  components: { ArrowIcon },
+  components: { SvgIcon },
   props: {
     width: {
       type: [Number, String],

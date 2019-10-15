@@ -4,6 +4,12 @@
  */
 export default function({ isHMR, app, store, route, params, error, redirect }) {
   if (error()) return
+
+  // Check if router exists
+  const resolve = app.router.resolve(route.fullPath)
+  if (!resolve.route.name && resolve.route.path !== '/') {
+    return error({ statusCode: 404, message: 'Page Not Found' })
+  }
   if (isHMR) {
     // ignore if called from hot module replacement
     return

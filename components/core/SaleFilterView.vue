@@ -10,12 +10,17 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import SalesNavigation from './SalesNavigation'
 import FaqButton from './FAQButton'
-import FlatIcon from '@/components/icons/Appartament'
+import ToFind from '@/components/icons/ToFind'
+import CostIcon from '@/components/icons/Cost'
+import StatusIcon from '@/components/icons/Status'
+import SleepingRoom from '@/components/icons/SleepingRoom'
+import ProjectIcon from '@/components/icons/Project'
 import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
+import FloorIcon from '@/components/icons/Floor'
 import SupplyIcon from '@/components/icons/Technic'
 import DecorationIcon from '@/components/icons/Decor'
 import SessionButton from '@/components/partials/SessionButton'
@@ -26,7 +31,12 @@ export default {
     FaqButton,
     LanguageSwitcher,
     SessionButton,
-    FlatIcon,
+    ToFind,
+    FloorIcon,
+    SleepingRoom,
+    StatusIcon,
+    ProjectIcon,
+    CostIcon,
     RenovationIcon,
     FurnitureIcon,
     SupplyIcon,
@@ -34,13 +44,15 @@ export default {
   },
   mounted() {
     this.fetchPresets()
-    .then(data => {
-      console.log(data)
-    })
+      .then(data => {
+        // console.log(data)
+      })
+      .catch(err => console.log(err))
     this.fetchFilterDefaults()
-    .then(data => {
-      console.log(data)
-    })
+      .then(data => {
+        // console.log(data)
+      })
+      .catch(err => console.log(err))
   },
   computed: {
     ...mapGetters(['locale']),
@@ -51,7 +63,7 @@ export default {
               {
                 route: `/sales/customize`,
                 title: 'navigation.flat',
-                component: FlatIcon
+                component: RenovationIcon
               },
               {
                 route: `/sales/customize/makeover`,
@@ -78,32 +90,32 @@ export default {
             {
               route: `/sales/filter`,
               title: 'navigation.IAmLookingFor',
-              component: FlatIcon
+              component: ToFind
             },
             {
               route: `/sales/filter/price`,
               title: 'navigation.price',
-              component: RenovationIcon
+              component: CostIcon
             },
             {
               route: `/sales/filter/building-status`,
               title: 'navigation.BuildingStatus',
-              component: FurnitureIcon
+              component: StatusIcon
             },
             {
-              route: `/renovations/bedrooms`,
+              route: `/sales/filter/bedrooms`,
               title: 'navigation.bedrooms',
-              component: DecorationIcon
+              component: SleepingRoom
             },
             {
-              route: `/renovations/project`,
-              title: 'navigation.project',
-              component: SupplyIcon
+              route: `/sales/filter/projects`,
+              title: 'navigation.projects',
+              component: ProjectIcon
             },
             {
-              route: `/renovations/floor`,
+              route: `/sales/filter/floor`,
               title: 'navigation.floor',
-              component: SupplyIcon
+              component: FloorIcon
             }
           ]
         }
@@ -111,7 +123,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchPresets: 'Sales/fetchFilterPresets',
+      fetchPresets: 'Filter/fetchFilterPresets',
       fetchFilterDefaults: 'Filter/fetchFilterDefaults'
     }),
     goToFaq() {
@@ -133,8 +145,8 @@ export default {
     margin-right: 67px;
   }
   &__header {
-    display: flex;
-
+    display: flex;    
+    margin-bottom: 12px;
   }
   .faq-container {
     margin: auto 0;

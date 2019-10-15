@@ -1,15 +1,18 @@
 <template>
   <button
     class="btn btn-standard btn-standard--orange btn-standard--large"
-    :class="{ 'btn-standard--disabled': disabled }"
+    :class="{ 'btn-standard--disabled': disabled || loading }"
     @click="handleClick"
   >
-    <span class="btn-standard__text" :style="{ fontSize: fontSize, padding: textPadding }">
+    <div v-if="loading" class="loading" :style="textCustomStyles" >
+      <div class=" lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+    <span v-else class="btn-standard__text" :style="textCustomStyles">
       <span class="center-font">{{ buttonText }}</span>
     </span>
     <span
       class="btn-standard__icon"
-      :style="{ width: iconWidth, height: iconHeight }"
+      :style="iconCustomStyles"
     >
       <slot name="icon" />
     </span>
@@ -20,7 +23,7 @@
 export default {
   props: {
     buttonText: {
-      type: String,
+      type: [String, Number],
       default: 'შემდეგი'
     },
     iconWidth: {
@@ -31,9 +34,21 @@ export default {
       type: String,
       default: '28px'
     },
+    iconStyles: {
+      type: Object,
+      default: () => ({})
+    },
+    textStyles: {
+      type: Object,
+      default: () => ({})
+    },
     fontSize: {
       type: String,
       default: '12px'
+    },
+    loading: {
+      type: Boolean,
+      default: false
     },
     disabled: {
       type: Boolean,
@@ -44,9 +59,19 @@ export default {
       default: '0 0 0 32px'
     }
   },
+  computed: {
+    textCustomStyles () {
+      return { fontSize: this.fontSize, padding: this.textPadding, ...this.textStyles }
+    },
+    iconCustomStyles () {
+      return { width: this.iconWidth, height: this.iconHeight, ...this.iconStyles }
+    }
+  },
   methods: {
     handleClick() {
-      this.$emit('click')
+      if(!this.loading || this.disabled) {
+        this.$emit('click')
+      }
     }
   }
 }
@@ -86,4 +111,60 @@ export default {
     opacity: 0.5;
   }
 }
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 23px;
+  height: 23px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 4px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 5px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 17px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 27px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(10px, 0);
+  }
+}
+
 </style>

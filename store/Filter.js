@@ -1,5 +1,6 @@
 export const state = () => ({
   flats: [],
+  presets: [],
   filters: {
     block: null,
     floors: {
@@ -11,7 +12,10 @@ export const state = () => ({
       max: 150000
     },
     view: [],
-    flat_number: null
+    flat_number: null,
+    building_progress: [],
+    bedroom_count: [],
+    type: null
   },
   modelApiData: {
     TabletId: null,
@@ -36,10 +40,10 @@ export const state = () => ({
     color: null
   },
   filterDefaults: {
-    min_floor: 1,
-    max_floor: 24,
-    max_price: 20000,
-    min_price: 150000,
+    min_floor: null,
+    max_floor: null,
+    max_price: null,
+    min_price: null,
     view: [],
     flat_number: null
   },
@@ -52,6 +56,7 @@ export const state = () => ({
 export const getters = {
   flats: (state) => state.flats,
   filters: (state) => state.filters,
+  presets: (state) => state.presets,
   view: (state) => state.filters.view,
   totalCount: (state) => state.filteredTotalCount,
   filterDefaults: (state) => state.filterDefaults,
@@ -64,6 +69,9 @@ export const getters = {
 export const mutations = {
   SET_FLATS_DATA: (state, data) => {
     state.flats = data
+  },
+  SET_FILTER_PRESETS: (state, payload) => {
+    state.presets = payload
   },
   UPPEND_FLATS_DATA: (state, data) => {
     state.flats = [...state.flats, ...data]
@@ -87,6 +95,9 @@ export const mutations = {
     state.filters.price.max = data.max_price
     state.filters.price.min = data.min_price
     state.filters.view = []
+    state.filters.building_progress = []
+    state.filters.bedroom_count = []
+    state.filters.type = null
   },
   // eslint-disable-next-line object-shorthand
   SET_MODEL_API_DATA: function(state, flats) {
@@ -174,14 +185,31 @@ export const actions = {
   },
 
   fetchFilteredDataCount({ commit, getters }) {
-    const { block, floors, price, flat_number } = getters.filters
+    // eslint-disable-next-line camelcase
+    const {
+      block,
+      floors,
+      price,
+      // eslint-disable-next-line camelcase
+      flat_number,
+      // eslint-disable-next-line camelcase
+      bedroom_count,
+      type,
+      // eslint-disable-next-line camelcase
+      building_progress
+    } = getters.filters
     const views = getters.filters.view.map((item) => item.value)
+    const bedroomCount = bedroom_count.map((item) => item.value)
+    const buildingProgress = building_progress.map((item) => item.value)
     const params = {
       block_id: block,
       max_price: price.max,
       min_price: price.min,
       max_floor: floors.max,
       min_floor: floors.min,
+      bedroom_count: bedroomCount,
+      type,
+      building_progress: buildingProgress,
       flat_number
     }
     if (views) {
@@ -192,6 +220,18 @@ export const actions = {
         commit('SET_TOTAL_COUNT', data.count)
         resolve(data)
       })
+    })
+  },
+
+  fetchFilterPresets({ commit }) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get('filter-presets')
+        .then(({ data }) => {
+          commit('SET_FILTER_PRESETS', data.data)
+          resolve(data.data)
+        })
+        .catch((error) => console.error(error))
     })
   },
 
@@ -215,7 +255,7 @@ export const actions = {
         .get('/flats/info')
         .then(({ data }) => {
           context.commit('SET_FILTER_DEFAULTS', data)
-          resolve(data.data)
+          resolve(data)
         })
         .catch((e) => reject(e))
     })

@@ -6,12 +6,15 @@
       </div>
       <div class="filter-footer__flats__see">
         <button-main-orange
-          button-text="107"
+          :button-text="totalCount"
+          :loading="filterLoading"
           class="custom-count-button"
           icon-width="20px"
           icon-height="20px"
           padding="20px"
           text-padding="0 0 0 12px"
+          :icon-styles="{ margin: 'auto 5px auto 12px' }"
+          :text-styles="{ width: '49px' }"
           @click="handleFilter"
         >
           <template v-slot:icon>
@@ -49,7 +52,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import GradientLabel from '@/components/partials/GradientLabel'
 import ArrowRight from '@/components/icons/ArrowRight'
@@ -67,22 +70,43 @@ export default {
       default: false
     }
   },
+  watch: {
+    computedFilters: {
+      handler: 'fetchFlatsCount',
+      immediate: true
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale',
       totalCount: 'Filter/totalCount',
-      loading: 'Filter/filterLoading'
-    })
+      filters: 'Filter/filters',
+      loading: 'Filter/filterLoading',
+      filterLoading: 'Filter/filterLoading'
+    }),
+    computedFilters() {
+      return {...this.filters}
+    }
   },
   methods: {
+    ...mapMutations({
+      setLoader: 'Filter/SET_FILTER_LOADER',
+    }),
     ...mapActions({
-      fetchFilteredFlats: 'Filter/fetchFilteredFlats'
+      flatsCount: 'Filter/fetchFilteredDataCount',
     }),
     handleFilter() {
       this.$router.push({
         name: 'lang-model-list',
         params: { lang: this.locale }
       })
+    },
+    fetchFlatsCount() {
+      this.flatsCount()
+      .then((response) => {
+        this.setLoader(false)
+      })
+      .catch(err => console.log(err))
     },
     handleNext() {
       if (this.nextUrl) {
@@ -116,6 +140,7 @@ export default {
     border-radius: 20px;
     &__see {
       margin-right: 15px;
+      margin-left: 15px;
     }
     &__label {
       display: flex;

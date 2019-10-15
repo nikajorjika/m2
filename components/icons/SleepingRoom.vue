@@ -1,8 +1,8 @@
 <template>
-  <arrow-icon :fill="iconColor" :width="width" :height="height" />
+  <arrow-icon :stroke="iconColor" :width="width" :height="height" />
 </template>
 <script>
-import ArrowIcon from '@/assets/icons/Sleeping_room.svg'
+import ArrowIcon from '@/assets/icons/Sleeping_room1.svg'
 export default {
   components: { ArrowIcon },
   props: {
