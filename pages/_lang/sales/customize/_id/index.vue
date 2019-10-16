@@ -1,50 +1,223 @@
 <template>
-  <div class="page-flat-container">
-    <div class="page-flat-number">
-      <div class="page-flat-number__title-container">
-        <title-with-line
-          class="page-flat-number__title"
-          :title="$t('titles.FillInPhoneNumber')"
+  <div class="filter-flat">
+    <div class="filter-flat__title">
+      <title-with-line :title="cTitle" />
+    </div>
+
+    <div class="filter-flat__content">
+      <div class="filter-flat__content__info">
+        <flat-gradient-info :info="flatLocationInfo" />
+
+        <list-card :items="listCardData" />
+
+        <gradient-progress
+          class="filter-render__aside__progress"
+          :label="$t('labels.building_progress')"
+          :min="0"
+          :max="100"
+          :value="builingStatus"
+          suffix="%"
         />
-        <small>{{ $t('titles.FillInPhoneNumberSubTitle') }}</small>
       </div>
-      <div v-if="!codeSent" class="page-flat-number__form">
-        <login-form @submit="handleLoginStageOne" />
-      </div>
-      <div v-else class="page-flat-number__confirm">
-        <confirm-phone-form
-          @submit="handleLoginStageTwo"
-          @resend="handleResend"
+
+      <div class="filter-flat__content__render">
+        <render-viewer
+          class="flat-viewer"
+          :render-image="renderUrl"
+          :plan-image="blueprintUrl"
+          :floor-image="floorUrl"
+          :gradient-text="imageLabel"
         />
+
+        <room-list-component
+          v-if="rooms.length"
+          class="room-list-slider"
+          style-type="small"
+          :room-list="rooms"
+        />
+      </div>
+    </div>
+
+    <div class="filter-flat__footer">
+      <div class="footer-items">
+        <gradient-label :text="price" class="price-label" />
+
+        <div class="footer-items__controls">
+          <div class="footer-items__controls__skip"></div>
+
+          <div class="footer-items__controls__next">
+            <button-main-orange
+              v-if="planshetColor"
+              :button-text="$t('labels.LitIt')"
+              :disabled="buttonDisabled"
+              @click="handleLightUp"
+            >
+              <template v-slot:icon>
+                <light-icon
+                  class="flat-list-table__header__button__icon"
+                  icon-color="#fff"
+                  height="12px"
+                />
+              </template>
+            </button-main-orange>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import LoginForm from '@/components/partials/LoginForm'
-import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
+import RenderViewer from '@/components/partials/FlatRenderViewer'
+import RoomListComponent from '@/components/partials/RoomListComponent'
+import ListCard from '@/components/partials/ListCard'
+import GradientProgress from '@/components/partials/GradientProgress'
+import GradientLabel from '@/components/partials/GradientLabel'
+import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
+import { formatPrice } from '@/utils/Mixed'
+import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
+import LightIcon from '@/components/icons/Light'
+import CaretRight from '@/components/icons/CaretRight'
 
 export default {
-  components: {
-    TitleWithLine,
-    LoginForm,
-    ConfirmPhoneForm
-  },
   layout: 'SalesFilterLayout',
   auth: 'auth',
-  data() {
-    return {
-      codeSent: false,
-      formData: null
-    }
+  components: {
+    TitleWithLine,
+    RenderViewer,
+    RoomListComponent,
+    FlatGradientInfo,
+    ListCard,
+    GradientProgress,
+    GradientLabel,
+    ButtonMainOrange,
+    LightIcon,
+    CaretRight,
+    GradientLabel
   },
   computed: {
     ...mapGetters({
-      locale: 'locale'
-    })
+      locale: 'locale',
+      flat: 'customize/flat',
+      renovations: 'customize/renovations',
+      furniture: 'customize/furniture',
+      decorations: 'customize/decorations',
+      showPrompt: 'Filter/showPrompt'
+    }),
+    flatExists() {
+      return !!this.flat && Object.keys(this.flat).length
+    },
+    planshetColor() {
+      return !!this.$cookies.get('paveleon-planshet')
+    },
+    cTitle() {
+      let projectName = ''
+
+      if (
+        this.flatExists &&
+        this.flat.project_name &&
+        this.flat.project_name[this.locale]
+      ) {
+        projectName = ` <span class="color-orange">"${
+          this.flat.project_name[this.locale]
+        }"</span>`
+      }
+
+      return this.$t('titles.YourChosenFlat') + projectName
+    },
+    buttonDisabled() {
+      if (!this.flatExists) return true
+      return this.flat.planshet.id !== this.$cookies.get('paveleon-planshet')
+    },
+    renderUrl() {
+      if (!this.flatExists || !this.flat.render_url)
+        return 'https://placehold.it/245x245'
+      return this.flat.render_url
+    },
+    blueprintUrl() {
+      if (!this.flatExists || !this.flat.blueprint_url)
+        return 'https://placehold.it/245x245'
+      return this.flat.blueprint_url
+    },
+    floorUrl() {
+      return !this.flatExists || !this.flat.floor || !this.flat.floor.render_url
+        ? 'https://placehold.it/245x245'
+        : this.flat.floor.render_url
+    },
+    imageLabel() {
+      if (!this.flatExists)
+        return {
+          ka: `საძინებელი`,
+          en: `bedrooms`
+        }
+      return {
+        ka: `${this.flat.bedrooms_count} საძინებელი`,
+        en: `${this.flat.bedrooms_count} bedrooms`
+      }
+    },
+    rooms() {
+      if (!this.flatExists) return []
+      return this.flat.rooms.map((item) => {
+        return {
+          label: item.name[this.locale],
+          value: `${item.area} ${this.$t('labels.m2')}`
+        }
+      })
+    },
+    price() {
+      if (!this.flatExists) return 0
+      return `${this.flat.price} $`
+    },
+    builingStatus() {
+      if (!this.flatExists) return 0
+      return parseInt(this.flat.building_status)
+    },
+    listCardData() {
+      if (!this.flatExists) return
+
+      const flatArea = (
+        this.flat.total_area -
+        this.flat.balcony_area -
+        this.flat.terrace_area
+      ).toFixed(2)
+
+      return [
+        {
+          value: `${this.flat.total_area} ${this.$t('labels.m2')}`,
+          label: this.$t('labels.total_area')
+        },
+        {
+          value: `${flatArea} ${this.$t('labels.m2')}`,
+          label: this.$t('labels.flat_area')
+        },
+        {
+          value: `${this.flat.balcony_area} ${this.$t('labels.m2')}`,
+          label: this.$t('labels.balcony_area_slash_terrace')
+        }
+      ]
+    },
+    flatLocationInfo() {
+      if (!this.flatExists) return null
+
+      const infoArray = [
+        {
+          label: this.$t('labels.block'),
+          value: this.flat.block
+        },
+        {
+          label: this.$t('labels.floor'),
+          value: this.flat.floor.number
+        },
+        {
+          label: this.$t('labels.flat'),
+          value: this.flat.flat_number
+        }
+      ]
+
+      return infoArray
+    }
   },
   mounted() {
     this.fetchFlat(this.$route.params.id)
@@ -60,52 +233,136 @@ export default {
       'fetchFurniture',
       'fetchDecorations',
       'fetchAppliances'
-    ])
+    ]),
+    handleLightUp() {
+      this.lightUpFlat([this.flat])
+    },
+    generateTextBasedOnColor(id) {
+      const planshetsObject = {
+        1: this.$t('colors.orange'),
+        2: this.$t('colors.purple'),
+        3: this.$t('colors.blue'),
+        4: this.$t('colors.green'),
+        5: this.$t('colors.red'),
+        6: this.$t('colors.yellow'),
+        7: this.$t('colors.pink')
+      }
+      const planshetNumbers = {
+        1: this.$t('colors.first'),
+        2: this.$t('colors.second'),
+        3: this.$t('colors.third'),
+        4: this.$t('colors.fourth'),
+        5: this.$t('colors.fifth'),
+        6: this.$t('colors.sixth'),
+        7: this.$t('colors.seventh')
+      }
+      return this.$t('alerts.planshetColorAlert')
+        .replace('%s', planshetsObject[id])
+        .replace('%n', planshetNumbers[id])
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.page-flat-container {
-  display: flex;
-  flex-direction: column;
+.filter-flat {
   height: 100%;
-}
-.page-flat-number {
-  margin: 60px;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  padding: 49px 60px 38px 46px;
+  display: grid;
+  grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
+  grid-template-rows: 12% 75% 13%;
   &__title {
-    display: inline-block;
+    grid-area: header;
   }
-  &__title-container {
+  &__content {
+    grid-area: content;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    &__info {
+      width: 199px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    &__render {
+      width: 724px;
+      margin-left: auto;
+      display: flex;
+      .room-list-slider {
+        width: 305px;
+        background: #f7ede2;
+        border-top-right-radius: 17px;
+        border-bottom-right-radius: 17px;
+      }
+      .flat-viewer {
+        width: fit(635);
+      }
+    }
+  }
+  &__footer {
+    grid-area: footer;
+    display: flex;
+    .footer-items {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      .price-label {
+        margin: auto 0;
+      }
+      &__controls {
+        display: flex;
+        margin-left: auto;
+        width: 264px;
+        justify-content: space-between;
+        align-items: center;
+        &__skip {
+          color: #432272;
+          font-size: 10px;
+          font-size: $font;
+          display: flex;
+          align-items: center;
+          &__icon {
+            display: flex;
+            svg {
+              &:last-child {
+                margin-left: -6px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
 
-    small {
-      font-size: 10px;
-      font-family: $font;
-      color: #424242;
-      margin-top: 13px;
-    }
+<style lang="scss">
+.filter-flat {
+  .switch {
+    width: 100%;
+    height: 55px;
   }
-  &__confirm,
-  &__form {
-    margin-top: 62px;
+
+  .switch__inner {
+    width: 100%;
+    position: relative;
   }
-  &__buttons {
+
+  .switch__inner__toggle {
+    width: 33.33%;
+    height: calc(100% - 16px);
+  }
+
+  .switch__inner__item {
     display: flex;
-    flex-direction: column;
-    margin-top: auto;
-    small {
-      font-size: 10px;
-      color: #424242;
-      font-family: $font;
-      margin-bottom: 42px;
-    }
-    .filter-illustation-icon {
-      margin: 0 0 0 -12px;
-    }
+    justify-content: center;
+    align-items: center;
+    width: 33.33%;
+    height: 100%;
+    padding: 4px 0 0;
   }
 }
 </style>

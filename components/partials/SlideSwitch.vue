@@ -1,6 +1,6 @@
 <template>
   <div class="switch">
-    <input v-model="value" type="checbox" />
+    <input v-model="value" type="checkbox" />
     <div
       class="switch__inner"
       :class="{ active: value === values[1].value }"
