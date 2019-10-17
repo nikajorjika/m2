@@ -23,9 +23,7 @@
       <div class="filter-flat__content__render">
         <render-viewer
           class="flat-viewer"
-          :render-image="renderUrl"
-          :plan-image="blueprintUrl"
-          :floor-image="floorUrl"
+          :images="images"
           :gradient-text="imageLabel"
         />
 
@@ -68,18 +66,16 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import RenderViewer from '@/components/partials/FlatRenderViewer'
+import RenderViewer from '@/components/partials/FlatRenderViewerExtended'
 import RoomListComponent from '@/components/partials/RoomListComponent'
 import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
 import GradientLabel from '@/components/partials/GradientLabel'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
-import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
-import CaretRight from '@/components/icons/CaretRight'
 
 export default {
   layout: 'SalesFilterLayout',
@@ -93,9 +89,7 @@ export default {
     GradientProgress,
     GradientLabel,
     ButtonMainOrange,
-    LightIcon,
-    CaretRight,
-    GradientLabel
+    LightIcon
   },
   computed: {
     ...mapGetters({
@@ -131,20 +125,21 @@ export default {
       if (!this.flatExists) return true
       return this.flat.planshet.id !== this.$cookies.get('paveleon-planshet')
     },
-    renderUrl() {
-      if (!this.flatExists || !this.flat.render_url)
-        return 'https://placehold.it/245x245'
-      return this.flat.render_url
-    },
-    blueprintUrl() {
-      if (!this.flatExists || !this.flat.blueprint_url)
-        return 'https://placehold.it/245x245'
-      return this.flat.blueprint_url
-    },
-    floorUrl() {
-      return !this.flatExists || !this.flat.floor || !this.flat.floor.render_url
-        ? 'https://placehold.it/245x245'
-        : this.flat.floor.render_url
+    images() {
+      const images = []
+      const image = 'https://placehold.it/245x245'
+
+      if (this.flatExists) {
+        images.push(this.flat.render_url ? this.flat.render_url : image)
+        images.push(this.flat.blueprint_url ? this.flat.blueprint_url : image)
+        images.push(
+          this.flat.floor && this.flat.floor.render_url
+            ? this.flat.floor.render_url
+            : image
+        )
+      }
+
+      return images
     },
     imageLabel() {
       if (!this.flatExists)
@@ -152,6 +147,7 @@ export default {
           ka: `საძინებელი`,
           en: `bedrooms`
         }
+
       return {
         ka: `${this.flat.bedrooms_count} საძინებელი`,
         en: `${this.flat.bedrooms_count} bedrooms`
@@ -335,34 +331,6 @@ export default {
         }
       }
     }
-  }
-}
-</style>
-
-<style lang="scss">
-.filter-flat {
-  .switch {
-    width: 100%;
-    height: 55px;
-  }
-
-  .switch__inner {
-    width: 100%;
-    position: relative;
-  }
-
-  .switch__inner__toggle {
-    width: 33.33%;
-    height: calc(100% - 16px);
-  }
-
-  .switch__inner__item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 33.33%;
-    height: 100%;
-    padding: 4px 0 0;
   }
 }
 </style>
