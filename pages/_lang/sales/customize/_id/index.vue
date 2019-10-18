@@ -264,7 +264,7 @@ export default {
 .filter-flat {
   height: 100%;
   width: 100%;
-  padding: 49px 60px 38px 46px;
+  padding: fit(49) fit(60) fit(38) fit(46);
   display: grid;
   grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
   grid-template-rows: 12% 75% 13%;

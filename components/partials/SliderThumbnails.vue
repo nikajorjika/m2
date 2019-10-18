@@ -10,7 +10,7 @@
         <span class="index" v-text="normalizeIndex(index)"></span>
 
         <figure>
-          <img :src="image(item)" class="image" alt="Thumbnail" />
+          <img :src="image(item, index)" class="image" alt="Thumbnail" />
 
           <figcaption class="caption">{{ item.name }}</figcaption>
 
@@ -42,8 +42,12 @@ export default {
 
       return `0${index}`.slice(-2)
     },
-    image(item) {
-      return item.images && item.images[0] ? item.images[0].url : null
+    image(item, index) {
+      return item.images && item.images[0]
+        ? item.images[0].full_url
+        : index !== 4
+        ? 'https://placehold.it/150x75'
+        : require('../../assets/icons/custom-renovation.png')
     },
     selectItem(event) {
       // Remove old active class
@@ -78,11 +82,14 @@ export default {
 }
 
 .slider-thumbnails {
+  display: flex;
+  height: 49.1vh; /* 530px */
+  flex-wrap: wrap;
+  align-content: space-between;
 }
 
 .slider-thumbnail {
   display: flex;
-  margin-bottom: fit(40);
 
   .index {
     display: flex;
@@ -105,19 +112,31 @@ export default {
     border-bottom-right-radius: 25px;
     background-color: #ffffff;
     overflow: hidden;
+    transition: all 200ms ease;
   }
 
   .image {
     width: fit(142);
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   figcaption {
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: flex-end;
     width: fit(210);
+  }
+
+  &:last-child figcaption::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -1px;
+    width: 1px;
+    height: 200%;
+    background-color: #cfc8dd;
   }
 
   .caption {
@@ -158,19 +177,13 @@ export default {
 
   &.active {
     .index {
-      margin-right: 22px;
-      font-size: 24px;
       color: rgba(60, 34, 112, 1);
+      transform: scale(1.5);
     }
 
     figure {
-      width: fit(421);
-      height: fit(90);
       box-shadow: 0 4px 32px rgba(242, 101, 41, 0.1);
-    }
-
-    .image {
-      width: fit(151);
+      transform: scale(1.06, 1.05);
     }
 
     .checkbox {

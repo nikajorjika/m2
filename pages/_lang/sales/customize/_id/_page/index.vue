@@ -85,7 +85,7 @@ export default {
         renovations.forEach((renovation, index) => {
           if (this.activeThumbnail === index && renovation.images) {
             renovation.images.forEach((img) => {
-              images.push({ image: { url: img.url } })
+              images.push({ image: { url: img.full_url } })
             })
           }
         })
@@ -115,6 +115,6 @@ export default {
 
 <style lang="scss" scoped>
 .flat-pages-container {
-  margin: 60px;
+  padding: fit(49) fit(60) fit(38) fit(46);
 }
 </style>
