@@ -41,7 +41,9 @@
         <gradient-label :text="price" class="price-label" />
 
         <div class="footer-items__controls">
-          <div class="footer-items__controls__skip"></div>
+          <div class="footer-items__controls__skip">
+            <skip-button :url="nextPageUrl" />
+          </div>
 
           <div class="footer-items__controls__next">
             <button-main-orange
@@ -76,6 +78,7 @@ import GradientLabel from '@/components/partials/GradientLabel'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
+import SkipButton from '@/components/partials/SkipButton'
 
 export default {
   layout: 'SalesFilterLayout',
@@ -89,7 +92,8 @@ export default {
     GradientProgress,
     GradientLabel,
     ButtonMainOrange,
-    LightIcon
+    LightIcon,
+    SkipButton
   },
   computed: {
     ...mapGetters({
@@ -197,7 +201,7 @@ export default {
     flatLocationInfo() {
       if (!this.flatExists) return null
 
-      const infoArray = [
+      return [
         {
           label: this.$t('labels.block'),
           value: this.flat.block
@@ -211,8 +215,9 @@ export default {
           value: this.flat.flat_number
         }
       ]
-
-      return infoArray
+    },
+    nextPageUrl() {
+      return `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
     }
   },
   mounted() {
@@ -314,21 +319,6 @@ export default {
         width: 264px;
         justify-content: space-between;
         align-items: center;
-        &__skip {
-          color: #432272;
-          font-size: 10px;
-          font-size: $font;
-          display: flex;
-          align-items: center;
-          &__icon {
-            display: flex;
-            svg {
-              &:last-child {
-                margin-left: -6px;
-              }
-            }
-          }
-        }
       }
     }
   }
