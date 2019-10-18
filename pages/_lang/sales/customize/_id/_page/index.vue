@@ -2,14 +2,10 @@
   <div class="flat-pages-container">
     <title-with-line class="flat-pages-title" :title="title" />
 
-    <flat-pages-slider
-      :items="items(renovations)"
-      :item-price="itemPrice(renovations)"
-      :price="price"
-    >
+    <flat-pages-slider :items="images" :item-price="itemPrice" :price="price">
       <template v-slot:slider-right-content>
         <slider-thumbnails
-          :items="renovations"
+          :items="items"
           @thumbnailChanged="thumbnailChanged"
         />
       </template>
@@ -52,9 +48,42 @@ export default {
     },
     price() {
       return this.flat.price
+    },
+    items() {
+      return this.getItems()
+    },
+    images() {
+      const images = []
+      const items = this.getItems()
+
+      if (items) {
+        items.forEach((item, index) => {
+          if (this.activeThumbnail === index && item.images) {
+            item.images.forEach((img) => {
+              images.push({ image: { url: img.full_url } })
+            })
+          }
+        })
+      }
+
+      return images
+    },
+    itemPrice() {
+      let price = 0
+      const items = this.getItems()
+
+      if (items) {
+        items.forEach((item, index) => {
+          if (this.activeThumbnail === index && item.price) {
+            price = item.price
+          }
+        })
+      }
+
+      return price
     }
   },
-  created() {
+  mounted() {
     if (this.flat === undefined || !this.flat.length) {
       this.fetchFlat(this.$route.params.id)
     }
@@ -78,33 +107,17 @@ export default {
       'fetchFurniture',
       'fetchDecorations'
     ]),
-    items(renovations) {
-      const images = []
-
-      if (renovations) {
-        renovations.forEach((renovation, index) => {
-          if (this.activeThumbnail === index && renovation.images) {
-            renovation.images.forEach((img) => {
-              images.push({ image: { url: img.full_url } })
-            })
-          }
-        })
+    getItems() {
+      switch (this.$route.params.page) {
+        case 'makeover':
+          return this.renovations
+        case 'furniture':
+          return this.furniture
+        case 'decoration':
+          return this.decorations
+        default:
+          return undefined
       }
-
-      return images
-    },
-    itemPrice(renovations) {
-      let price = 0
-
-      if (renovations) {
-        renovations.forEach((renovation, index) => {
-          if (this.activeThumbnail === index && renovation.price) {
-            price = renovation.price
-          }
-        })
-      }
-
-      return price
     },
     thumbnailChanged(activeThumbnail) {
       this.activeThumbnail = activeThumbnail

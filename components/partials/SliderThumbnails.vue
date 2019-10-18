@@ -82,10 +82,8 @@ export default {
 }
 
 .slider-thumbnails {
-  display: flex;
-  height: 49.1vh; /* 530px */
-  flex-wrap: wrap;
-  align-content: space-between;
+  display: grid;
+  grid-gap: 28px;
 }
 
 .slider-thumbnail {
