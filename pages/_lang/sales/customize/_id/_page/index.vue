@@ -2,7 +2,12 @@
   <div class="flat-pages-container">
     <title-with-line class="flat-pages-title" :title="title" />
 
-    <flat-pages-slider :items="images" :item-price="itemPrice" :price="price">
+    <flat-pages-slider
+      :items="images"
+      :item-price="itemPrice"
+      :price="price"
+      class="flat-pages-content"
+    >
       <template v-slot:slider-right-content>
         <slider-thumbnails
           :items="items"
@@ -10,6 +15,18 @@
         />
       </template>
     </flat-pages-slider>
+
+    <div class="flat-pages-footer">
+      <div class="price-button">
+        <GradientButton v-if="price">
+          {{ `${$t('labels.price')}: ${formatPrice(price)}` }} $
+        </GradientButton>
+
+        <GradientButton v-if="itemPrice">
+          + {{ `${formatPrice(itemPrice)}` }} $
+        </GradientButton>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,9 +35,16 @@ import { mapGetters, mapActions } from 'vuex'
 import FlatPagesSlider from '@/components/core/FlatPagesSlider'
 import SliderThumbnails from '@/components/partials/SliderThumbnails'
 import TitleWithLine from '@/components/partials/TitleWithLine'
+import GradientButton from '@/components/core/GradientButton'
+import { formatPrice } from '@/utils/Mixed'
 
 export default {
-  components: { FlatPagesSlider, SliderThumbnails, TitleWithLine },
+  components: {
+    FlatPagesSlider,
+    SliderThumbnails,
+    TitleWithLine,
+    GradientButton
+  },
   layout: 'SalesFilterLayout',
   data() {
     return {
@@ -107,6 +131,7 @@ export default {
       'fetchFurniture',
       'fetchDecorations'
     ]),
+    formatPrice,
     getItems() {
       switch (this.$route.params.page) {
         case 'makeover':
@@ -128,6 +153,31 @@ export default {
 
 <style lang="scss" scoped>
 .flat-pages-container {
+  width: 100%;
+  height: 100%;
   padding: fit(49) fit(60) fit(38) fit(46);
+  display: grid;
+  grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
+  grid-template-rows: 5% 87% 8%;
+
+  .flat-pages-title {
+    grid-area: header;
+  }
+
+  .flat-pages-content {
+    grid-area: content;
+  }
+
+  .flat-pages-footer {
+    grid-area: footer;
+
+    .price-button {
+      margin-top: 20px;
+
+      button {
+        font-size: 13px;
+      }
+    }
+  }
 }
 </style>

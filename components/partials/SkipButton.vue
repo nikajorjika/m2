@@ -33,7 +33,7 @@ export default {
   methods: {
     skipPage() {
       if (this.url) {
-        this.$router.push(this.url)
+        this.$router.push(this.url) // Go to next page
       }
     }
   }

@@ -4,16 +4,6 @@
       <div class="slider-wrapper">
         <Slider :items="items" @messageFromSlider="messageFromSlider" />
       </div>
-
-      <div class="price-button">
-        <GradientButton v-if="price">
-          {{ `${$t('labels.price')}: ${formatPrice(price)}` }} $
-        </GradientButton>
-
-        <GradientButton v-if="itemPrice">
-          + {{ `${formatPrice(itemPrice)}` }} $
-        </GradientButton>
-      </div>
     </div>
 
     <div class="right-content">
@@ -28,22 +18,15 @@
 <script>
 import { mapGetters } from 'vuex'
 import Slider from '@/components/core/Slider'
-import GradientButton from '@/components/core/GradientButton'
-import { formatPrice } from '@/utils/Mixed'
 
 export default {
   components: {
-    Slider,
-    GradientButton
+    Slider
   },
   props: {
     items: {
       type: Array,
       required: true
-    },
-    price: {
-      type: Number,
-      default: 0
     },
     itemPrice: {
       type: Number,
@@ -67,8 +50,7 @@ export default {
       this.activeThumbnail = activeThumbnail
 
       this.$emit('thumbnailChanged', this.activeThumbnail)
-    },
-    formatPrice
+    }
   }
 }
 </script>
@@ -81,18 +63,11 @@ export default {
 }
 
 .left-content {
-  width: 680px;
+  width: 660px;
   margin-right: 4%;
 }
 
 .right-content {
-  width: calc(100% - 5% - 680px);
-}
-
-.price-button {
-  margin-top: 20px;
-  button {
-    font-size: 13px;
-  }
+  width: calc(100% - 5% - 660px);
 }
 </style>

@@ -105,7 +105,7 @@ export default {
     display: flex;
     align-items: center;
     width: fit(396);
-    height: fit(80);
+    height: fit(77);
     border-top-left-radius: 25px;
     border-bottom-right-radius: 25px;
     background-color: #ffffff;
