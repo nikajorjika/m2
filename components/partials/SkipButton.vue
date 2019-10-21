@@ -35,6 +35,8 @@ export default {
       if (this.url) {
         this.$router.push(this.url) // Go to next page
       }
+
+      this.$emit('skip')
     }
   }
 }

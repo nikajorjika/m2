@@ -27,10 +27,6 @@ export default {
     items: {
       type: Array,
       required: true
-    },
-    itemPrice: {
-      type: Number,
-      required: true
     }
   },
   data() {
@@ -63,11 +59,20 @@ export default {
 }
 
 .left-content {
-  width: 660px;
+  width: 670px;
   margin-right: 4%;
 }
 
 .right-content {
-  width: calc(100% - 5% - 660px);
+  width: calc(100% - 5% - 670px);
+}
+</style>
+
+<style lang="scss">
+.flat-pages-container {
+  .swiper__image {
+    height: 44.5vh;
+    padding-top: 0 !important;
+  }
 }
 </style>

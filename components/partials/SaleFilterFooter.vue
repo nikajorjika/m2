@@ -54,11 +54,10 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import GradientLabel from '@/components/partials/GradientLabel'
 import ArrowRight from '@/components/icons/ArrowRight'
 import CaretRight from '@/components/icons/CaretRight'
 export default {
-  components: { ButtonMainOrange, ArrowRight, CaretRight, GradientLabel },
+  components: { ButtonMainOrange, ArrowRight, CaretRight },
   props: {
     nextUrl: {
       type: [String, Object],
@@ -70,12 +69,6 @@ export default {
       default: false
     }
   },
-  watch: {
-    computedFilters: {
-      handler: 'fetchFlatsCount',
-      immediate: true
-    }
-  },
   computed: {
     ...mapGetters({
       locale: 'locale',
@@ -85,15 +78,21 @@ export default {
       filterLoading: 'Filter/filterLoading'
     }),
     computedFilters() {
-      return {...this.filters}
+      return { ...this.filters }
+    }
+  },
+  watch: {
+    computedFilters: {
+      handler: 'fetchFlatsCount',
+      immediate: true
     }
   },
   methods: {
     ...mapMutations({
-      setLoader: 'Filter/SET_FILTER_LOADER',
+      setLoader: 'Filter/SET_FILTER_LOADER'
     }),
     ...mapActions({
-      flatsCount: 'Filter/fetchFilteredDataCount',
+      flatsCount: 'Filter/fetchFilteredDataCount'
     }),
     handleFilter() {
       this.$router.push({
@@ -103,10 +102,10 @@ export default {
     },
     fetchFlatsCount() {
       this.flatsCount()
-      .then((response) => {
-        this.setLoader(false)
-      })
-      .catch(err => console.log(err))
+        .then((response) => {
+          this.setLoader(false)
+        })
+        .catch((err) => console.log(err))
     },
     handleNext() {
       if (this.nextUrl) {

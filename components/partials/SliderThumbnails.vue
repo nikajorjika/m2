@@ -83,7 +83,7 @@ export default {
 
 .slider-thumbnails {
   display: grid;
-  grid-gap: 28px;
+  grid-gap: 21px;
 }
 
 .slider-thumbnail {

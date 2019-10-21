@@ -15,7 +15,7 @@
           :label="$t('labels.building_progress')"
           :min="0"
           :max="100"
-          :value="builingStatus"
+          :value="buildingStatus"
           suffix="%"
         />
       </div>
@@ -42,22 +42,16 @@
 
         <div class="footer-items__controls">
           <div class="footer-items__controls__skip">
-            <skip-button :url="nextPageUrl" />
+            <skip-button :url="skipBtnUrl" />
           </div>
 
           <div class="footer-items__controls__next">
             <button-main-orange
-              v-if="planshetColor"
-              :button-text="$t('labels.LitIt')"
-              :disabled="buttonDisabled"
-              @click="handleLightUp"
+              :button-text="$t('buttons.next')"
+              @click="nextBtnClickHandler"
             >
               <template v-slot:icon>
-                <light-icon
-                  class="flat-list-table__header__button__icon"
-                  icon-color="#fff"
-                  height="12px"
-                />
+                <caret-right width="14" height="16" icon-color="#fff" />
               </template>
             </button-main-orange>
           </div>
@@ -77,8 +71,8 @@ import GradientProgress from '@/components/partials/GradientProgress'
 import GradientLabel from '@/components/partials/GradientLabel'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import LightIcon from '@/components/icons/Light'
 import SkipButton from '@/components/partials/SkipButton'
+import CaretRight from '@/components/icons/CaretRight'
 
 export default {
   layout: 'SalesFilterLayout',
@@ -92,8 +86,8 @@ export default {
     GradientProgress,
     GradientLabel,
     ButtonMainOrange,
-    LightIcon,
-    SkipButton
+    SkipButton,
+    CaretRight
   },
   computed: {
     ...mapGetters({
@@ -106,9 +100,6 @@ export default {
     }),
     flatExists() {
       return !!this.flat && Object.keys(this.flat).length
-    },
-    planshetColor() {
-      return !!this.$cookies.get('paveleon-planshet')
     },
     cTitle() {
       let projectName = ''
@@ -124,10 +115,6 @@ export default {
       }
 
       return this.$t('titles.YourChosenFlat') + projectName
-    },
-    buttonDisabled() {
-      if (!this.flatExists) return true
-      return this.flat.planshet.id !== this.$cookies.get('paveleon-planshet')
     },
     images() {
       const images = []
@@ -170,7 +157,7 @@ export default {
       if (!this.flatExists) return 0
       return `${this.flat.price} $`
     },
-    builingStatus() {
+    buildingStatus() {
       if (!this.flatExists) return 0
       return parseInt(this.flat.building_status)
     },
@@ -216,7 +203,7 @@ export default {
         }
       ]
     },
-    nextPageUrl() {
+    skipBtnUrl() {
       return `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
     }
   },
@@ -235,9 +222,6 @@ export default {
       'fetchDecorations',
       'fetchAppliances'
     ]),
-    handleLightUp() {
-      this.lightUpFlat([this.flat])
-    },
     generateTextBasedOnColor(id) {
       const planshetsObject = {
         1: this.$t('colors.orange'),
@@ -260,6 +244,13 @@ export default {
       return this.$t('alerts.planshetColorAlert')
         .replace('%s', planshetsObject[id])
         .replace('%n', planshetNumbers[id])
+    },
+    nextBtnClickHandler() {
+      this.$emit('next')
+
+      this.$router.push(
+        `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
+      )
     }
   }
 }

@@ -4,7 +4,6 @@
 
     <flat-pages-slider
       :items="images"
-      :item-price="itemPrice"
       :price="price"
       class="flat-pages-content"
     >
@@ -18,32 +17,30 @@
 
     <div class="flat-pages-footer">
       <div class="footer-items">
-        <GradientButton v-if="price">
-          {{ `${$t('labels.price')}: ${formatPrice(price)}` }} $
-        </GradientButton>
+        <gradient-label
+          v-if="price"
+          :text="formattedPrice"
+          class="price-label"
+        />
 
-        <GradientButton v-if="itemPrice">
-          + {{ `${formatPrice(itemPrice)}` }} $
-        </GradientButton>
+        <gradient-label
+          v-if="itemPrice"
+          :text="formattedItemPrice"
+          class="price-label"
+        />
 
         <div class="footer-items__controls">
           <div class="footer-items__controls__skip">
-            <skip-button :url="nextPageUrl" />
+            <skip-button :url="skipBtnUrl" />
           </div>
 
           <div class="footer-items__controls__next">
             <button-main-orange
-              v-if="planshetColor"
-              :button-text="$t('labels.LitIt')"
-              :disabled="buttonDisabled"
-              @click="handleLightUp"
+              :button-text="$t('buttons.next')"
+              @click="nextBtnClickHandler"
             >
               <template v-slot:icon>
-                <light-icon
-                  class="flat-list-table__header__button__icon"
-                  icon-color="#fff"
-                  height="12px"
-                />
+                <caret-right width="14" height="16" icon-color="#fff" />
               </template>
             </button-main-orange>
           </div>
@@ -58,17 +55,21 @@ import { mapGetters, mapActions } from 'vuex'
 import FlatPagesSlider from '@/components/core/FlatPagesSlider'
 import SliderThumbnails from '@/components/partials/SliderThumbnails'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import GradientButton from '@/components/core/GradientButton'
+import GradientLabel from '@/components/partials/GradientLabel'
 import { formatPrice } from '@/utils/Mixed'
+import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import SkipButton from '@/components/partials/SkipButton'
+import CaretRight from '@/components/icons/CaretRight'
 
 export default {
   components: {
     FlatPagesSlider,
     SliderThumbnails,
     TitleWithLine,
-    GradientButton,
-    SkipButton
+    GradientLabel,
+    ButtonMainOrange,
+    SkipButton,
+    CaretRight
   },
   layout: 'SalesFilterLayout',
   data() {
@@ -97,6 +98,9 @@ export default {
     },
     price() {
       return this.flat.price
+    },
+    formattedPrice() {
+      return `${this.$t('labels.price')} ${this.price} $`
     },
     items() {
       return this.getItems()
@@ -129,31 +133,35 @@ export default {
         })
       }
 
-      return parseFloat(price)
+      return price
     },
-    nextPageUrl() {
+    formattedItemPrice() {
+      return `+ ${this.itemPrice} $`
+    },
+    getCurrentPage() {
       let page = ''
 
-      switch (this.$route.params.page) {
-        case 'makeover':
-          page = 'furniture'
-          break
-        case 'furniture':
-          page = 'decoration'
-          break
-        case 'decoration':
-          page = 'appliance'
-          break
+      if (this.$route.params.page) {
+        switch (this.$route.params.page) {
+          case 'makeover':
+            page = 'furniture'
+            break
+          case 'furniture':
+            page = 'decoration'
+            break
+          case 'decoration':
+            page = 'appliance'
+            break
+        }
       }
 
-      return `/${this.locale}/sales/customize/${this.$route.params.id}/${page}`
+      return page
     },
-    planshetColor() {
-      return !!this.$cookies.get('paveleon-planshet')
+    skipBtnUrl() {
+      return `/${this.locale}/sales/customize/${this.$route.params.id}/${this.getCurrentPage}`
     },
-    buttonDisabled() {
-      if (!this.flatExists) return true
-      return this.flat.planshet.id !== this.$cookies.get('paveleon-planshet')
+    nextBtnUrl() {
+      return `/${this.locale}/sales/customize/${this.$route.params.id}/${this.getCurrentPage}`
     }
   },
   mounted() {
@@ -196,8 +204,10 @@ export default {
     thumbnailChanged(activeThumbnail) {
       this.activeThumbnail = activeThumbnail
     },
-    handleLightUp() {
-      this.lightUpFlat([this.flat])
+    nextBtnClickHandler() {
+      this.$emit('next')
+
+      this.$router.push(this.nextBtnUrl)
     }
   }
 }
@@ -210,7 +220,7 @@ export default {
   padding: fit(49) fit(60) fit(38) fit(46);
   display: grid;
   grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
-  grid-template-rows: 5% 87% 8%;
+  grid-template-rows: 5% 82% 13%;
 
   .flat-pages-title {
     grid-area: header;
@@ -231,7 +241,7 @@ export default {
       width: 100%;
 
       & > :first-child {
-        margin-right: 20px;
+        margin-right: 15px !important;
       }
 
       .price-label {
