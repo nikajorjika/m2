@@ -28,7 +28,8 @@ export const state = () => ({
         BlockId: 'C',
         Apartments: []
       }
-    ]
+    ],
+    Animate:true
   },
   showPrompt: {
     show: false,
@@ -132,7 +133,8 @@ export const mutations = {
           BlockId: 'C',
           Apartments: []
         }
-      ]
+      ],
+      Animate:true
     }
   },
   SET_FILTER_ITEM: (state, { key, value }) => {
