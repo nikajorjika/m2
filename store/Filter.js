@@ -105,8 +105,10 @@ export const mutations = {
           BlockId: 'C',
           Apartments: []
         }
-      ]
+      ],
+      Animate:true
     }
+  
     state.modelApiData.TabletId = this.$cookies.get('paveleon-planshet')
     flats.map((item) => {
       state.modelApiData.block[parseInt(item.block) - 1].Apartments.push({
