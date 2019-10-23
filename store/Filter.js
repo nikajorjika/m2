@@ -267,28 +267,36 @@ export const actions = {
   },
   lightUpFlat(context, flats) {
     return new Promise((resolve, reject) => {
-      context.commit('SET_MODEL_API_DATA', flats)
+      // context.commit('SET_MODEL_API_DATA', flats)
+      const tabletId = this.$cookies.get('paveleon-planshet')
+      const formattedFlats = flats.map((item) => {
+        return {
+          block: item.block,
+          id: item.id
+        }
+      })
       this.$axios
-        .post('http://10.200.22.28/LocalServices/api/selected', [
-          context.getters.modelApiData
-        ])
+        .post('model/light/on', {
+          tabletId: tabletId,
+          flats: formattedFlats
+        })
         .then((response) => {
-          const timeout = setTimeout(() => {
-            context.dispatch('inactivityReset')
+          setTimeout(() => {
+            context.dispatch('inactivityReset', formattedFlats)
             resolve(response)
           }, 10000)
-          resolve(timeout)
+          resolve(true)
         })
     })
   },
-  inactivityReset(context) {
+  inactivityReset(context, flats) {
+    const data = {
+      flats
+    }
     return new Promise((resolve, reject) => {
       this.$axios
-        .post('http://10.200.22.28/LocalServices/api/chamaqre', [
-          context.getters.modelApiData
-        ])
+        .post('model/light/off', data)
         .then((response) => {
-          context.commit('RESET_MODEL_API_DATA')
           resolve(response)
         })
     })
