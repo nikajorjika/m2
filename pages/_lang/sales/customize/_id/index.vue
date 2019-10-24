@@ -1,63 +1,75 @@
 <template>
-  <div class="filter-flat">
-    <div class="filter-flat__title">
-      <title-with-line :title="cTitle" />
-    </div>
-
-    <div class="filter-flat__content">
-      <div class="filter-flat__content__info">
-        <flat-gradient-info :info="flatLocationInfo" />
-
-        <list-card :items="listCardData" />
-
-        <gradient-progress
-          class="filter-render__aside__progress"
-          :label="$t('labels.building_progress')"
-          :min="0"
-          :max="100"
-          :value="buildingStatus"
-          suffix="%"
-        />
+  <div class="app-content">
+    <div class="filter-flat">
+      <div class="filter-flat__title">
+        <title-with-line :title="cTitle" />
       </div>
 
-      <div class="filter-flat__content__render">
-        <render-viewer
-          class="flat-viewer"
-          :images="images"
-          :gradient-text="imageLabel"
-        />
+      <div class="filter-flat__content">
+        <div class="filter-flat__content__info">
+          <flat-gradient-info :info="flatLocationInfo" />
 
-        <room-list-component
-          v-if="rooms.length"
-          class="room-list-slider"
-          style-type="small"
-          :room-list="rooms"
-        />
+          <list-card :items="listCardData" />
+
+          <gradient-progress
+            class="filter-render__aside__progress"
+            :label="$t('labels.building_progress')"
+            :min="0"
+            :max="100"
+            :value="buildingStatus"
+            suffix="%"
+          />
+        </div>
+
+        <div class="filter-flat__content__render">
+          <render-viewer
+            class="flat-viewer"
+            :images="images"
+            :gradient-text="imageLabel"
+          />
+
+          <room-list-component
+            v-if="rooms.length"
+            class="room-list-slider"
+            style-type="small"
+            :room-list="rooms"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="filter-flat__footer">
-      <div class="footer-items">
-        <gradient-label :text="price" class="price-label" />
+      <div class="filter-flat__footer">
+        <div class="footer-items">
+          <gradient-label :text="price" class="price-label" />
 
-        <div class="footer-items__controls">
-          <div class="footer-items__controls__skip">
-            <skip-button :url="skipBtnUrl" />
-          </div>
+          <div class="footer-items__controls">
+            <div class="footer-items__controls__skip">
+              <skip-button :url="skipBtnUrl" />
+            </div>
 
-          <div class="footer-items__controls__next">
-            <button-main-orange
-              :button-text="$t('buttons.next')"
-              @click="nextBtnClickHandler"
-            >
-              <template v-slot:icon>
-                <caret-right width="14" height="16" icon-color="#fff" />
-              </template>
-            </button-main-orange>
+            <div class="footer-items__controls__next">
+              <button-main-orange
+                :button-text="$t('buttons.next')"
+                @click="nextBtnClickHandler"
+              >
+                <template v-slot:icon>
+                  <caret-right width="14" height="16" icon-color="#fff" />
+                </template>
+              </button-main-orange>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <app-footer>
+      <template>
+        <prompt-alert
+          v-if="flatExists"
+          :color="promptColor"
+          :text="promptText"
+        />
+      </template>
+    </app-footer>
   </div>
 </template>
 
@@ -73,9 +85,11 @@ import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInf
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import SkipButton from '@/components/partials/SkipButton'
 import CaretRight from '@/components/icons/CaretRight'
+import AppFooter from '@/components/partials/AppFooter'
+import PromptAlert from '@/components/partials/PromptAlert'
 
 export default {
-  layout: 'SalesFilterLayout',
+  layout: 'SalesFlatLayout',
   auth: 'auth',
   components: {
     TitleWithLine,
@@ -87,7 +101,9 @@ export default {
     GradientLabel,
     ButtonMainOrange,
     SkipButton,
-    CaretRight
+    CaretRight,
+    AppFooter,
+    PromptAlert
   },
   computed: {
     ...mapGetters({
@@ -205,6 +221,14 @@ export default {
     },
     skipBtnUrl() {
       return `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
+    },
+    promptColor() {
+      return this.flatExists ? '#' + this.flat.planshet.color : ''
+    },
+    promptText() {
+      return this.flatExists
+        ? this.generateTextBasedOnColor(this.flat.planshet.id)
+        : ''
     }
   },
   mounted() {
@@ -258,52 +282,64 @@ export default {
 
 <style lang="scss" scoped>
 .filter-flat {
-  height: 100%;
+  height: calc(100% - #{fit(165)});
   width: 100%;
   padding: fit(49) fit(60) fit(38) fit(46);
   display: grid;
   grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
   grid-template-rows: 12% 75% 13%;
+  background: $bg-color-2;
+  box-shadow: 0 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
+
   &__title {
     grid-area: header;
   }
+
   &__content {
     grid-area: content;
     height: 100%;
     display: flex;
     width: 100%;
+
     &__info {
       width: 199px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
+
     &__render {
       width: 724px;
       margin-left: auto;
       display: flex;
+
       .room-list-slider {
         width: 305px;
         background: #f7ede2;
         border-top-right-radius: 17px;
         border-bottom-right-radius: 17px;
       }
+
       .flat-viewer {
         width: fit(635);
       }
     }
   }
+
   &__footer {
     grid-area: footer;
     display: flex;
+
     .footer-items {
       margin-top: auto;
       display: flex;
       justify-content: space-between;
       width: 100%;
+
       .price-label {
         margin: auto 0;
       }
+
       &__controls {
         display: flex;
         margin-left: auto;
@@ -312,6 +348,17 @@ export default {
         align-items: center;
       }
     }
+  }
+}
+</style>
+
+<style lang="scss">
+.app-content {
+  width: 100%;
+  height: 100%;
+
+  .prompt {
+    margin-top: auto;
   }
 }
 </style>

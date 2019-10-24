@@ -130,7 +130,8 @@
     "max": "მაქს.",
     "ByPhoneNumber": "ავტორიზაცია ტელეფონის ნომრით",
     "ByFlatNumber": "ბინის ნომრით ძებნა",
-    "ByFilter": "ფილტრით ძებნა"
+    "ByFilter": "ფილტრით ძებნა",
+    "callSaleManager": "გამოიძახე გაყიდვების მენეჯერი და დაჯავშნე ეს ბინა"
   },
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",

@@ -17,6 +17,7 @@ import CostIcon from '@/components/icons/Cost'
 import StatusIcon from '@/components/icons/Status'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import ProjectIcon from '@/components/icons/Project'
+import FlatIcon from '@/components/icons/Complited'
 import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
 import FloorIcon from '@/components/icons/Floor'
@@ -53,7 +54,7 @@ export default {
           {
             route: `/sales/customize/${this.$route.params.id}`,
             title: 'navigation.flat',
-            component: RenovationIcon
+            component: FlatIcon
           },
           {
             route: `/sales/customize/${this.$route.params.id}/makeover`,
