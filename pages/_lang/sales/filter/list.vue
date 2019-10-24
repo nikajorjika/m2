@@ -1,0 +1,79 @@
+<template>
+  <div class="filter-list-page">
+      <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
+      <div class="flat-list">
+        <div v-for="(item, index) in flats" :key="index" class="flat-card">
+            <flat-card 
+                :title="item.title"
+                :sub-title="item.subTitle"
+                :price="item.price"
+                :image="item.image"
+                :url="item.url"
+            />
+        </div>
+      </div>
+  </div>
+</template>
+
+<script>
+import FlatCard from '@/components/partials/FlatCard'
+import TitleWithLine from '@/components/partials/TitleWithLine'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+export default {
+    components: {
+        FlatCard,
+        TitleWithLine
+    },
+    watch: {
+        computedFilters: {
+            handler: 'fetchFlats',
+            immediate: true
+        }
+    },
+    layout: 'WithInlineFilters',
+    computed: {
+        ...mapMutations({
+            setLoader: 'Filter/SET_FILTER_LOADER'
+        }),
+        ...mapGetters({
+            locale: 'locale',
+            filters: 'Filter/filters',
+            flatsState: 'Filter/flats'
+        }),
+        computedFilters() {
+            return { ...this.filters }
+        },
+        flats() {
+            return this.flatsState.map((item) => {
+                return {
+                    title: item.project_name[this.locale],
+                    price: `${item.price} $`,
+                    image: item.render_url,
+                    subTitle: this.$t('titles.FlatCardSubTitle').replace('%s',item.total_area)
+                }
+            })
+        }
+    },
+    methods: {
+        ...mapActions({
+            fetchFlats: 'Filter/fetchFilteredFlats'
+        })
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.filter-list-page {
+    margin: 0 40px;
+}
+.page-title {
+    margin: 50px 0;
+}
+.flat-list {
+    display: grid;
+    grid-template-columns: repeat(4, 214px);
+    width: 100%;
+    grid-column-gap: 72px;
+    grid-row-gap: 46px;
+}
+</style>

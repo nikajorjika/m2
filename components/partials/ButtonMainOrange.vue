@@ -2,6 +2,7 @@
   <button
     class="btn btn-standard btn-standard--orange btn-standard--large"
     :class="{ 'btn-standard--disabled': disabled || loading }"
+    :style="buttonCustomStyles"
     @click="handleClick"
   >
     <div v-if="loading" class="loading" :style="textCustomStyles" >
@@ -33,6 +34,10 @@ export default {
     iconHeight: {
       type: String,
       default: '28px'
+    },
+    buttonCustomStyles: {
+      type: Object,
+      default: () => ({})
     },
     iconStyles: {
       type: Object,

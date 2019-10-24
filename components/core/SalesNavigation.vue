@@ -1,6 +1,9 @@
 <template>
   <div class="flat-navigation">
-    <ul class="flat-navigation__list" :class="{inactive: !isFilter}" @click="openInactive('filter')">
+    <ul 
+      class="flat-navigation__list" 
+      :class="{inactive: !isFilter}"
+      >
       <li
         v-for="(item, index) in navData.filter"
         :key="index"
@@ -28,7 +31,6 @@
     <ul 
       class="flat-navigation__list" 
       :class="{inactive: !isCustomize}" 
-      @click="openInactive('customize')"
     >
       <li
         v-for="(item, index) in navData.customize"
