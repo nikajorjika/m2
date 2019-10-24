@@ -52,7 +52,7 @@ export default {
       return this.filterDefaults.max_floor
     },
     nextUrl() {
-      return `/${this.locale}/sales/filter/building-status`
+      return `/${this.locale}/sales/filter/list`
     }
   },
   methods: {

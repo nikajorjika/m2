@@ -72,7 +72,7 @@ export default {
     skipPrice() {
       this.setFilter({
         key: 'price',
-        value: this.price
+        value: this.filterPrice
       })
     }
   }

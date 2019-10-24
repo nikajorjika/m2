@@ -90,7 +90,7 @@ export default {
       locale: 'locale'
     }),
     nextUrl() {
-      return `/${this.locale}/sales/filter/price`
+      return `/${this.locale}/sales/filter/projects`
     }
   },
   methods: {
