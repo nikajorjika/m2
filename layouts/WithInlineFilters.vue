@@ -138,7 +138,6 @@ body {
     background: $bg-color-2;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    overflow: hidden;
     box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
   @keyframes scaleUp {

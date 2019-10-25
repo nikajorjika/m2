@@ -7,7 +7,7 @@
         v-for="(item, index) in navigation"
         :key="index"
         class="flat-navigation__list__item to-left"
-        @click="activeItem = item"
+        @click.stop="handleFilterToggle(item)"
       >
         <div class="flat-navigation__link" :class="{active: activeItem === item}">
           <component
@@ -26,22 +26,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import CostIcon from '@/components/icons/Cost'
 import FloorIcon from '@/components/icons/Floor'
 import StatusIcon from '@/components/icons/Status'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import ProjectIcon from '@/components/icons/Project'
 import PriceFilter from '@/components/partials/filters/PriceFilter'
+import FloorFilter from '@/components/partials/filters/FloorFilter'
+import BedroomsFilter from '@/components/partials/filters/Bedrooms'
+import BuildingStatusFilter from '@/components/partials/filters/BuildingStatus'
 
 export default {
     mounted() {
-        const {min_floor, max_floor, min_price, max_price} = this.filterDefaults
-        if(min_floor === null || max_floor === null  || min_price === null  || max_price === null ) {
-            this.$router.push({ name: 'lang-sales-filter', params: {
-                lang: this.locale
-            }})
-        }
+      this.fetchFilterDefaults()
+      document.addEventListener('click', this.handleDocumentClick);
+    },
+    beforeDestroy() {
+      document.removeEventListener('click', this.handleDocumentClick);
     },
     data() {
       return {
@@ -55,10 +57,12 @@ export default {
           {
             title: 'navigation.BuildingStatus',
             component: StatusIcon,
+            filter: BuildingStatusFilter,
           },
           {
             title: 'navigation.bedrooms',
             component: SleepingRoom,
+            filter: BedroomsFilter,
           },
           {
             title: 'navigation.projects',
@@ -67,6 +71,7 @@ export default {
           {
             title: 'navigation.floor',
             component: FloorIcon,
+            filter: FloorFilter,
           }
         ]
       }
@@ -76,6 +81,17 @@ export default {
           locale: 'locale',
           filterDefaults: 'Filter/filterDefaults'
         })
+    },
+    methods: {
+      ...mapActions({
+        fetchFilterDefaults: 'Filter/fetchFilterDefaults'
+      }),
+      handleDocumentClick(e) {
+        this.activeItem = null
+      },
+      handleFilterToggle(item) {
+        this.activeItem = item
+      }
     }
 }
 </script>
@@ -88,6 +104,7 @@ export default {
     left: 0;
     width: 100%;
     z-index: 3;
+    min-height: 172px;
 }
 .flat-navigation {
   background: $gradient-2;

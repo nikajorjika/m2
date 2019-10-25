@@ -106,7 +106,7 @@ export default {
   background: transparent;
   border-radius: 17px;
   overflow: hidden;
-  padding: 47px 57px;
+  padding: 47px 7px;
   font-family: $font;
   &__selected {
     display: flex;
