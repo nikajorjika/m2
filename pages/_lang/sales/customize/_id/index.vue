@@ -233,10 +233,13 @@ export default {
   },
   mounted() {
     this.fetchFlat(this.$route.params.id)
-    this.fetchRenovations()
-    this.fetchFurniture()
-    this.fetchDecorations()
-    this.fetchAppliances()
+
+    this.$nextTick(function() {
+      this.fetchRenovations()
+      this.fetchFurniture()
+      this.fetchDecorations()
+      this.fetchAppliances()
+    })
   },
   methods: {
     ...mapActions('customize', [

@@ -5,7 +5,7 @@
         v-for="(item, index) in items"
         :key="item.id"
         :class="['slider-thumbnail', activeElIndex === index ? 'active' : '']"
-        @click="selectItem"
+        @click="selectItem(item, index, $event)"
       >
         <span class="index" v-text="normalizeIndex(index)"></span>
 
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     items: {
@@ -34,6 +36,14 @@ export default {
   data() {
     return {
       activeElIndex: 0
+    }
+  },
+  computed: {
+    ...mapGetters('customize', ['renovationId', 'furnitureId', 'decorationId'])
+  },
+  mounted() {
+    if (this.storeMutationIsRequired()) {
+      this.mutateStore(this.items[0].id)
     }
   },
   methods: {
@@ -49,7 +59,7 @@ export default {
         ? 'https://placehold.it/150x75'
         : require('../../assets/icons/custom-renovation.png')
     },
-    selectItem(event) {
+    selectItem(item, index, event) {
       // Remove old active class
 
       this.$el
@@ -62,15 +72,38 @@ export default {
 
       // Set active element index
 
-      this.$el.querySelectorAll('.slider-thumbnail').forEach((el, index) => {
-        if (el.classList.contains('active')) {
-          this.activeElIndex = index
-        }
-      })
+      this.activeElIndex = index
+
+      // Mutate store value
+
+      this.mutateStore(item.id)
 
       // Emit custom event
 
       this.$emit('thumbnailChanged', this.activeElIndex)
+    },
+    mutateStore(id) {
+      switch (this.$route.params.page) {
+        case 'makeover':
+          this.$store.commit('customize/SET_RENOVATION_ID', id)
+          break
+        case 'furniture':
+          this.$store.commit('customize/SET_FURNITURE_ID', id)
+          break
+        case 'decoration':
+          this.$store.commit('customize/SET_DECORATION_ID', id)
+          break
+      }
+    },
+    storeMutationIsRequired() {
+      switch (this.$route.params.page) {
+        case 'makeover':
+          return !!this.renovationId
+        case 'furniture':
+          return !!this.furnitureId
+        case 'decoration':
+          return !!this.decorationId
+      }
     }
   }
 }
@@ -78,7 +111,7 @@ export default {
 
 <style lang="scss" scoped>
 .slider-thumbnails-container {
-  margin-top: 62px;
+  margin-top: 34px;
 }
 
 .slider-thumbnails {

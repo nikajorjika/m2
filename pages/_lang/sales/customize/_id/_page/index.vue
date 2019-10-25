@@ -1,7 +1,21 @@
 <template>
   <div class="app-content">
     <div class="flat-pages-container">
-      <title-with-line class="flat-pages-title" :title="title" />
+      <div class="flat-pages-header">
+        <title-with-line class="flat-pages-title" :title="title" />
+
+        <save-button
+          :height="'40px'"
+          :padding="'0 21px'"
+          :label="$t('labels.saveFlat')"
+          :icon-margin-left="'21px'"
+          @regularBtnClick="saveFlat"
+        >
+          <template>
+            <save-icon :width="'17px'" :height="'17px'" />
+          </template>
+        </save-button>
+      </div>
 
       <flat-pages-slider
         :items="images"
@@ -95,7 +109,9 @@ import AppFooter from '@/components/partials/AppFooter'
 import PromptAlert from '@/components/partials/PromptAlert'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import ManagerIcon from '@/assets/icons/Manager1.svg'
-import SalesIcon from '@/assets/icons/Alone1.svg'
+import SalesIcon from '@/components/icons/Alone'
+import SaveButton from '@/components/partials/RegularButton'
+import SaveIcon from '@/components/icons/SaveIcon'
 
 export default {
   components: {
@@ -110,7 +126,9 @@ export default {
     PromptAlert,
     IllustratedButton,
     ManagerIcon,
-    SalesIcon
+    SalesIcon,
+    SaveButton,
+    SaveIcon
   },
   layout: 'SalesFlatLayout',
   data() {
@@ -124,7 +142,11 @@ export default {
       flat: 'customize/flat',
       renovations: 'customize/renovations',
       furniture: 'customize/furniture',
-      decorations: 'customize/decorations'
+      decorations: 'customize/decorations',
+      renovationId: 'customize/renovationId',
+      furnitureId: 'customize/furnitureId',
+      decorationId: 'customize/decorationId',
+      appliancesIds: 'customize/appliancesIds'
     }),
     title() {
       const key =
@@ -144,7 +166,13 @@ export default {
       return `${this.$t('labels.price')} ${this.price} $`
     },
     items() {
-      return this.getItems()
+      const items = this.getItems()
+
+      if (items.length) {
+        this.mutateStore(items[0].id)
+      }
+
+      return items
     },
     images() {
       const images = []
@@ -305,6 +333,39 @@ export default {
             reject(e)
           })
       })
+    },
+    saveFlat() {
+      return new Promise((resolve, reject) => {
+        this.$axios
+          .post('user/save-flat', {
+            flat_id: this.flat.id,
+            renovation_id: this.renovationId,
+            furniture_id: this.furnitureId,
+            decoration_id: this.decorationId,
+            appliances_ids: this.appliancesIds
+          })
+          .then((response) => {
+            if (response.status === 200 && response.success) {
+              resolve(response)
+            }
+          })
+          .catch((e) => {
+            reject(e)
+          })
+      })
+    },
+    mutateStore(id) {
+      switch (this.$route.params.page) {
+        case 'makeover':
+          this.$store.commit('customize/SET_RENOVATION_ID', id)
+          break
+        case 'furniture':
+          this.$store.commit('customize/SET_FURNITURE_ID', id)
+          break
+        case 'decoration':
+          this.$store.commit('customize/SET_DECORATION_ID', id)
+          break
+      }
     }
   }
 }
@@ -317,16 +378,21 @@ export default {
   padding: fit(49) fit(60) fit(38) fit(46);
   display: grid;
   grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
-  grid-template-rows: 5% 82% 13%;
+  grid-template-rows: 50px auto 50px;
   background: $bg-color-2;
   box-shadow: 0 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
 
-  .flat-pages-title {
+  .flat-pages-header {
     grid-area: header;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .flat-pages-content {
     grid-area: content;
+    margin-top: 6px;
   }
 
   .flat-pages-footer {
@@ -373,6 +439,23 @@ export default {
       .label {
         margin: auto fit(28) auto fit(14);
       }
+    }
+  }
+}
+
+.flat-pages-container {
+  .swiper__container {
+    .swiper__pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .swiper__pagination__button {
+      display: inline-flex;
+      padding: 0;
+      float: none;
     }
   }
 }

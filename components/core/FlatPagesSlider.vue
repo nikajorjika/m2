@@ -71,7 +71,7 @@ export default {
 <style lang="scss">
 .flat-pages-container {
   .swiper__image {
-    height: 44.5vh;
+    height: 340px;
     padding-top: 0 !important;
   }
 }

@@ -3,7 +3,11 @@ const state = () => ({
   renovations: [],
   furniture: [],
   decorations: [],
-  appliances: []
+  appliances: [],
+  renovationId: null,
+  furnitureId: null,
+  decorationId: null,
+  appliancesIds: []
 })
 
 const getters = {
@@ -11,7 +15,11 @@ const getters = {
   renovations: (state) => state.renovations,
   furniture: (state) => state.furniture,
   decorations: (state) => state.decorations,
-  appliances: (state) => state.appliances
+  appliances: (state) => state.appliances,
+  renovationId: (state) => state.renovationId,
+  furnitureId: (state) => state.furnitureId,
+  decorationId: (state) => state.decorationId,
+  appliancesIds: (state) => state.appliancesIds
 }
 
 const mutations = {
@@ -29,6 +37,18 @@ const mutations = {
   },
   setAppliances(state, payload) {
     state.appliances = payload.data
+  },
+  SET_RENOVATION_ID(state, id) {
+    state.renovationId = id
+  },
+  SET_FURNITURE_ID(state, id) {
+    state.furnitureId = id
+  },
+  SET_DECORATION_ID(state, id) {
+    state.decorationId = id
+  },
+  SET_APPLIANCES_IDS(state, ids) {
+    state.appliancesIds = ids
   }
 }
 
