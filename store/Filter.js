@@ -94,6 +94,7 @@ export const mutations = {
     state.filters.flat_number = flatNumber
   },
   SET_FILTER_DEFAULTS: (state, data) => {
+    console.log('SET_FILTER_DEFAULTS')
     state.filterDefaults = data
     state.filters.floors.min = data.min_floor
     state.filters.floors.max = data.max_floor

@@ -23,7 +23,7 @@
 import CheckboxComponent from '@/components/partials/filters/partials/checkbox'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import CaretRight from '@/components/icons/CaretRight'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
     components: {
         CaretRight,
@@ -58,6 +58,9 @@ export default {
         this.activeItems = this.checkData.filter(item  => this.filters.building_progress.includes(item.value))
     },
     methods: {
+        ...mapMutations({
+            setFilter: 'Filter/SET_FILTER_ITEM'
+        }),
         handleCheck(data) {
             if(this.activeItems.includes(data)) {
                 this.activeItems = this.activeItems.filter(item => {
@@ -68,7 +71,10 @@ export default {
             }
         },
         handleFilter() {
-
+            this.setFilter({
+                key: 'building_progress',
+                value: this.activeItems
+            })
         },
         isActive(item) {
             return this.activeItems.includes(item)

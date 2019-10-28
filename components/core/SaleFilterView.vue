@@ -37,16 +37,21 @@ export default {
         // console.log(data)
       })
       .catch((err) => console.log(err))
-    this.fetchFilterDefaults()
-      .then((data) => {
-        // console.log(data)
-      })
-      .catch((err) => console.log(err))
+      console.log(this.filters)
+    if(this.filterDefaults.min_floor === null || this.filterDefaults.max_floor === null) {
+      this.fetchFilterDefaults()
+        .then((data) => {
+          // console.log(data)
+        })
+        .catch((err) => console.log(err))
+    }
   },
   computed: {
     ...mapGetters({
       locale: 'locale',
-      flat: 'customize/flat'
+      flat: 'customize/flat',
+      filters: 'Filter/filters',
+      filterDefaults: 'Filter/filterDefaults'
     }),
     navData() {
       return {

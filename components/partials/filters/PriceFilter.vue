@@ -72,7 +72,7 @@ export default {
     handleFilter() {
         this.setFilter({
           key: 'price',
-          value: data
+          value: this.selected
         })
     }
   }

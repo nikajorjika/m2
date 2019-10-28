@@ -64,16 +64,15 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setFilter: 'Filter/SET_FILTER_ITEM',
-      setLoader: 'Filter/SET_FILTER_LOADER'
+      setFilter: 'Filter/SET_FILTER_ITEM'
     }),
     handleChange(data) {
         this.selected = { ...data }
     },
     handleFilter() {
         this.setFilter({
-          key: 'floor',
-          value: data
+          key: 'floors',
+          value: this.selected
         })
     }
   }

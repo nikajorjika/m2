@@ -40,7 +40,14 @@ import BuildingStatusFilter from '@/components/partials/filters/BuildingStatus'
 
 export default {
     mounted() {
-      this.fetchFilterDefaults()
+      if(
+        this.filters.min_price === null || 
+        this.filters.max_price === null || 
+        this.filters.min_floor === null || 
+        this.filters.max_floor === null
+        ){
+        this.fetchFilterDefaults()
+      }
       document.addEventListener('click', this.handleDocumentClick);
     },
     beforeDestroy() {
@@ -81,7 +88,8 @@ export default {
     computed: {
         ...mapGetters({
           locale: 'locale',
-          filterDefaults: 'Filter/filterDefaults'
+          filterDefaults: 'Filter/filterDefaults',
+          filters: 'Filter/filterDefaults'
         })
     },
     methods: {

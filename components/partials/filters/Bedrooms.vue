@@ -23,7 +23,7 @@
 import CheckboxComponent from '@/components/partials/filters/partials/checkbox'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import CaretRight from '@/components/icons/CaretRight'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
     components: {
         CaretRight,
@@ -67,6 +67,9 @@ export default {
         this.activeItems = this.checkData.filter(item  => activeBedroomsArray.includes(item.value))
     },
     methods: {
+        ...mapMutations({
+            setFilterItem: 'Filter/SET_FILTER_ITEM'
+        }),
         handleCheck(data) {
             if(this.activeItems.includes(data)) {
                 this.activeItems = this.activeItems.filter(item => {
@@ -77,7 +80,10 @@ export default {
             }
         },
         handleFilter() {
-
+            this.setFilterItem({
+                key: 'bedroom_count',
+                value: [...this.activeItems]
+            })
         },
         isActive(item) {
             return this.activeItems.includes(item)
