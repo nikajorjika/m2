@@ -24,6 +24,7 @@
       >
         <template v-slot:slider-right-content>
           <slider-thumbnails
+            v-if="items && items.length"
             :items="items"
             @thumbnailChanged="thumbnailChanged"
           />
