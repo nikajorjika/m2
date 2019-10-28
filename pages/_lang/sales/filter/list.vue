@@ -1,7 +1,7 @@
 <template>
   <div class="filter-list-page">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
-      <!-- <div class="flat-list">
+      <div v-if="flats.length" class="flat-list">
         <div v-for="(item, index) in flats" :key="index" class="flat-card">
             <flat-card 
                 :title="item.title"
@@ -11,12 +11,9 @@
                 :url="item.url"
             />
         </div>
-      </div> -->
-      <div class="flat-list">
-        <div class="flat-card">
-            <flat-card :loading="true"/>
-        </div>
-        <div class="flat-card">
+      </div>
+      <div class="flat-list" v-else>
+        <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
             <flat-card :loading="true"/>
         </div>
       </div>
@@ -39,6 +36,11 @@ export default {
         }
     },
     layout: 'WithInlineFilters',
+    data() {
+        return {
+            loadingItems: [1,1,1,1,1,1,1,1]
+        }
+    },
     computed: {
         ...mapMutations({
             setLoader: 'Filter/SET_FILTER_LOADER'
