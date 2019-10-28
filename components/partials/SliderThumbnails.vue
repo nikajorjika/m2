@@ -98,11 +98,11 @@ export default {
     storeMutationIsRequired() {
       switch (this.$route.params.page) {
         case 'makeover':
-          return !!this.renovationId
+          return !this.renovationId
         case 'furniture':
-          return !!this.furnitureId
+          return !this.furnitureId
         case 'decoration':
-          return !!this.decorationId
+          return !this.decorationId
       }
     }
   }
