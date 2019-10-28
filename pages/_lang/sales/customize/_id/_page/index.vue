@@ -47,7 +47,7 @@
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
-              <skip-button :url="skipBtnUrl" />
+              <skip-button :url="skipBtnUrl" @skip="skipBtnClickHandler" />
             </div>
 
             <div class="footer-items__controls__next">
@@ -367,6 +367,9 @@ export default {
           this.$store.commit('customize/SET_DECORATION_ID', id)
           break
       }
+    },
+    skipBtnClickHandler() {
+      this.mutateStore(null)
     }
   }
 }
