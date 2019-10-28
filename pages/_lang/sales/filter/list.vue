@@ -1,7 +1,7 @@
 <template>
   <div class="filter-list-page">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
-      <div class="flat-list">
+      <!-- <div class="flat-list">
         <div v-for="(item, index) in flats" :key="index" class="flat-card">
             <flat-card 
                 :title="item.title"
@@ -10,6 +10,14 @@
                 :image="item.image"
                 :url="item.url"
             />
+        </div>
+      </div> -->
+      <div class="flat-list">
+        <div class="flat-card">
+            <flat-card :loading="true"/>
+        </div>
+        <div class="flat-card">
+            <flat-card :loading="true"/>
         </div>
       </div>
   </div>
@@ -65,6 +73,10 @@ export default {
 <style lang="scss" scoped>
 .filter-list-page {
     margin: 0 40px;
+    max-height: calc(100% - 60px);
+    display: flex;
+    padding-bottom: 12px;
+    flex-direction: column;
 }
 .page-title {
     margin: 50px 0;
@@ -75,5 +87,6 @@ export default {
     width: 100%;
     grid-column-gap: 72px;
     grid-row-gap: 46px;
+    overflow-y: auto;
 }
 </style>

@@ -1,19 +1,24 @@
 <template>
   <div class="flat">
       <div class="flat__image">
-          <img :src="image" :alt="title">
+          <div v-if="loading" class="loading"> </div>
+          <img v-else :src="image" :alt="title">
       </div>
       <div class="flat__title">
-          <h2>{{ title }}</h2>
+          <div v-if="loading" class="loading"> </div>
+          <h2 v-else>{{ title }}</h2>
       </div>
       <div class="flat__sub-title">
-          <h4>{{ subTitle }}</h4>
+          <div v-if="loading" class="loading"> </div>
+          <h4 v-else>{{ subTitle }}</h4>
       </div>
       <div class="flat__price">
-          <gradient-label :text="price" class="price-label" />
+          <div v-if="loading" class="loading"> </div>
+          <gradient-label v-else :text="price" class="price-label" />
       </div>
       <div class="flat__see">
-          <button class="btn btn-orange">
+          <div v-if="loading" class="loading"> </div>
+          <button v-else class="btn btn-orange">
                 <span>{{$t('buttons.see')}}</span>
                 <div class="icon-wrapper">
                     <arrow-right class="icon" width="13px" height="9px" icon-color="#fff" />
@@ -37,6 +42,10 @@ export default {
         image: {
             type: String,
             default: ''
+        },
+        loading: {
+            type: Boolean,
+            default: false
         },
         title: {
             type: String,
@@ -62,13 +71,20 @@ export default {
 .flat {
     display: grid;
     grid-template-areas: 'image image' 'title title' 'subtitle subtitle' 'price button';
+    .loading {
+        background: #c7c7c7;
+        width: 100%;
+    }
     &__image {
         grid-area: image;
         img {
             width: 100%;
         }
+        .loading {
+            height: 112px;
+        }
     }
-    &__title{
+    &__title {
         grid-area: title;
         color: #f26529;
         font-family: $font-caps;
@@ -78,6 +94,10 @@ export default {
         h2 {
             font-size: inherit;
 
+        }
+        .loading {
+            height: 9px;
+            width: 79px;
         }
     }
     &__sub-title {
@@ -89,6 +109,10 @@ export default {
         h4 {
             font-size: inherit;
         }
+        .loading {
+            height: 9px;
+            width: 153px;
+        }
     }
     &__price {
         grid-area: price;
@@ -97,6 +121,19 @@ export default {
             margin: auto auto auto 0;
             font-size: 11px;
             padding: 10px 13px;
+        }
+        .loading {
+            height: 33px;
+            width: 66px;
+            border-radius: 13px;
+        }
+    }
+    &__see {
+        .loading {
+            height: 33px;
+            width: 99px;
+            border-radius: 13px;
+            margin-left: auto;
         }
     }
     &__button {
@@ -131,5 +168,4 @@ export default {
         }
     }
 }
-
 </style>

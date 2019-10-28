@@ -34,6 +34,7 @@ import SleepingRoom from '@/components/icons/SleepingRoom'
 import ProjectIcon from '@/components/icons/Project'
 import PriceFilter from '@/components/partials/filters/PriceFilter'
 import FloorFilter from '@/components/partials/filters/FloorFilter'
+import ProjectsFilter from '@/components/partials/filters/ProjectsFilter'
 import BedroomsFilter from '@/components/partials/filters/Bedrooms'
 import BuildingStatusFilter from '@/components/partials/filters/BuildingStatus'
 
@@ -67,6 +68,7 @@ export default {
           {
             title: 'navigation.projects',
             component: ProjectIcon,
+            filter: ProjectsFilter
           },
           {
             title: 'navigation.floor',

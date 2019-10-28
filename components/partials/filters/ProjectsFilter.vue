@@ -2,7 +2,7 @@
   <div class="building-status">
     <div class="checkboxes">
         <div v-for="(item, index) in checkData" :key="index" class="custom-checkbox">
-            <checkbox-component :value="item" :checked="isActive(item)" :label="item.name" @check="handleCheck"/>
+            <checkbox-component :value="item" :checked="true" :label="item.name" @check="handleCheck"/>
         </div>
     </div>
     <div class="submit-filter">
@@ -35,25 +35,9 @@ export default {
             activeItems: [],
             checkData: [
                 {
-                    name: this.$t('rooms.NoBedroom'),
+                    name: this.$t('addresses.m3_gelovani'),
                     value: 0
-                },
-                {
-                    name: this.$t('rooms.OneBedroom'),
-                    value: 1
-                },
-                {
-                    name: this.$t('rooms.TwoBedrooms'),
-                    value: 2
-                },
-                {
-                    name: this.$t('rooms.ThreeBedrooms'),
-                    value: 3
-                },
-                {
-                    name: this.$t('rooms.FourBedrooms'),
-                    value: 4
-                },
+                }
             ],
         }
     },
@@ -63,8 +47,8 @@ export default {
         })
     },
     mounted() {
-        const activeBedroomsArray = this.filters.bedroom_count.map(item => item.value)
-        this.activeItems = this.checkData.filter(item  => activeBedroomsArray.includes(item.value))
+        console.log(this.filters)
+        this.activeItems = this.checkData.filter(item  => this.filters.bedroom_count.includes(item.value))
     },
     methods: {
         handleCheck(data) {
