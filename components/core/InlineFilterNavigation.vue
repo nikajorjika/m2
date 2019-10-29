@@ -19,7 +19,9 @@
           />
           <span class="flat-navigation__link__text">{{ $t(item.title) }}</span>
         </div>
-        <component v-if="activeItem === item" :is="item.filter" class="filter-block" />
+        <div class="filter" @click.stop>
+          <component v-if="activeItem === item" :is="item.filter" class="filter-block" />
+        </div>
       </li>
     </ul>
   </div>
@@ -100,7 +102,7 @@ export default {
         this.activeItem = null
       },
       handleFilterToggle(item) {
-        this.activeItem = item
+        this.activeItem = this.activeItem === item ? null : item
       }
     }
 }

@@ -92,6 +92,7 @@ export default {
   methods: {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM',
+      setFilterLoader: 'Filter/SET_FILTER_LOADER',
       setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
     handleChange(data) {
@@ -102,6 +103,7 @@ export default {
         min: preset.floors_from,
         max: preset.floors_to
       }
+      this.setFilterLoader(true)
       this.setFilterItem({
         key: 'floors',
         value: floor

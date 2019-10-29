@@ -75,10 +75,10 @@ export default {
       this.$router.push(this.nextUrl)
     },
     handleBeforeChange(value) {
-      console.log(value)
       this.setloader(true)
     },
     handleBlockChange(value) {
+      this.setloader(true)
       this.setFilter({
         key: 'block',
         value

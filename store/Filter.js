@@ -164,16 +164,31 @@ export const actions = {
     commit('SET_FILTER_LOADER', true)
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line camelcase
-      const { block, floors, price, flat_number } = getters.filters
+      const {
+        block,
+        floors,
+        price,
+        // eslint-disable-next-line camelcase
+        flat_number,
+        // eslint-disable-next-line camelcase
+        bedroom_count,
+        type,
+        // eslint-disable-next-line camelcase
+        building_progress
+      } = getters.filters
       const views = getters.filters.view.map((item) => item.value)
+      const bedroomCount = bedroom_count.map((item) => item.value)
+      const buildingProgress = building_progress.map((item) => item.value)
       const params = {
         block_id: block,
         max_price: price.max,
         min_price: price.min,
         max_floor: floors.max,
         min_floor: floors.min,
-        flat_number,
-        page
+        bedroom_count: bedroomCount,
+        type,
+        building_progress: buildingProgress,
+        flat_number
       }
       if (views) {
         params.view_ides = views
