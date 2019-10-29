@@ -7,7 +7,7 @@
           :title="$t('titles.BuildingProgress')" 
         />
       </div>
-      <picker-with-gradient-label :items="pickerData" @change="handleChange" />
+      <picker-with-gradient-label :items="pickerData" :preselected="preselectedData" @change="handleChange" />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
@@ -51,8 +51,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      locale: 'locale'
+      locale: 'locale',
+      filters: 'Filter/filters'
     }),
+    preselectedData() {
+      return this.pickerData.filter(item => this.filters.building_progress.includes(item.value))
+    },
     nextUrl() {
       return `/${this.locale}/sales/filter/bedrooms`
     }

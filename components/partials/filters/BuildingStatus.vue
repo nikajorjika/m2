@@ -73,7 +73,7 @@ export default {
         handleFilter() {
             this.setFilter({
                 key: 'building_progress',
-                value: this.activeItems
+                value: this.activeItems.map(item => item.value)
             })
         },
         isActive(item) {

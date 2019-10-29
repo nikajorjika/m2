@@ -38,7 +38,8 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      presets: 'Filter/presets'
+      presets: 'Filter/presets',
+      defaultFilters: 'Filter/filterDefaults'
     }),
     nextUrl() {
       return `/${this.locale}/sales/filter/price`
@@ -90,14 +91,20 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setFilterItem: 'Filter/SET_FILTER_ITEM'
+      setFilterItem: 'Filter/SET_FILTER_ITEM',
+      setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
     handleChange(data) {
+      this.setFilterDefaults(this.defaultFilters)
       this.chosenPresetArray = data
       const preset = this.chosenPreset.preset
+      const floor = {
+        min: preset.floors_from,
+        max: preset.floors_to
+      }
       this.setFilterItem({
-        key: 'bedroom_count',
-        value: this.bedroomCount
+        key: 'floors',
+        value: floor
       })
     },
     skipPrice() {
