@@ -208,7 +208,7 @@ export default {
     formattedItemPrice() {
       return `+ ${this.itemPrice} $`
     },
-    getCurrentPage() {
+    getNextPage() {
       let page = ''
 
       if (this.$route.params.page) {
@@ -228,10 +228,10 @@ export default {
       return page
     },
     skipBtnUrl() {
-      return `/${this.locale}/sales/customize/${this.$route.params.id}/${this.getCurrentPage}`
+      return `/${this.locale}/sales/customize/${this.$route.params.id}/${this.getNextPage}`
     },
     nextBtnUrl() {
-      return `/${this.locale}/sales/customize/${this.$route.params.id}/${this.getCurrentPage}`
+      return `/${this.locale}/sales/customize/${this.$route.params.id}/${this.getNextPage}`
     },
     flatExists() {
       return !!this.flat && Object.keys(this.flat).length
@@ -257,13 +257,15 @@ export default {
       this.fetchRenovations()
     }
 
-    if (this.furniture === undefined || !this.furniture.length) {
-      this.fetchFurniture()
-    }
+    this.$nextTick(function() {
+      if (this.furniture === undefined || !this.furniture.length) {
+        this.fetchFurniture()
+      }
 
-    if (this.decorations === undefined || !this.decorations.length) {
-      this.fetchDecorations()
-    }
+      if (this.decorations === undefined || !this.decorations.length) {
+        this.fetchDecorations()
+      }
+    })
   },
   methods: {
     ...mapActions('customize', [
