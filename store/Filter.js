@@ -101,8 +101,9 @@ export const mutations = {
     state.filters.price.min = data.min_price
     state.filters.view = []
     state.filters.building_progress = []
-    state.filters.bedroom_count = []
+    state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
     state.filters.type = null
+
   },
   // eslint-disable-next-line object-shorthand
   SET_MODEL_API_DATA: function(state, flats) {
@@ -178,7 +179,6 @@ export const actions = {
       } = getters.filters
       const views = getters.filters.view.map((item) => item.value)
       const bedroomCount = bedroom_count.map((item) => item.value)
-      const buildingProgress = building_progress.map((item) => item.value)
       const params = {
         block_id: block,
         max_price: price.max,
@@ -187,7 +187,7 @@ export const actions = {
         min_floor: floors.min,
         bedroom_count: bedroomCount,
         type,
-        building_progress: buildingProgress,
+        building_progress,
         flat_number
       }
       if (views) {
@@ -219,7 +219,6 @@ export const actions = {
       building_progress
     } = getters.filters
     const views = getters.filters.view.map((item) => item.value)
-    const bedroomCount = bedroom_count.map((item) => item.value)
     const buildingProgress = building_progress.map((item) => item.value)
     const params = {
       block_id: block,
@@ -227,9 +226,9 @@ export const actions = {
       min_price: price.min,
       max_floor: floors.max,
       min_floor: floors.min,
-      bedroom_count: bedroomCount,
+      bedroom_count,
       type,
-      building_progress: buildingProgress,
+      building_progress,
       flat_number
     }
     if (views) {
