@@ -294,7 +294,7 @@ export default {
         ? item.images[0].full_url
         : index !== 4
         ? 'https://placehold.it/150x75'
-        : require('../../assets/icons/custom-renovation.png')
+        : require('@/assets/icons/custom-renovation.png')
     },
     selectItem(item, index, event) {
       // Remove old active class
