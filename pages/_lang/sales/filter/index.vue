@@ -99,15 +99,16 @@ export default {
       this.setFilterDefaults(this.defaultFilters)
       this.chosenPresetArray = data
       const preset = this.chosenPreset.preset
-      const floor = {
-        min: preset.floors_from,
-        max: preset.floors_to
+      const filterData = {
+        min_floor: preset.floors_from,
+        max_floor: preset.floors_to,
+        max_price: this.defaultFilters.price_max,
+        min_price: this.defaultFilters.price_min,
+        bedroom_count: preset.bedrooms.split(', '),
+        type: preset.flat_type
       }
+      this.setFilterDefaults(filterData)
       this.setFilterLoader(true)
-      this.setFilterItem({
-        key: 'floors',
-        value: floor
-      })
     },
     skipPrice() {
       this.$router.push(this.nextUrl)
