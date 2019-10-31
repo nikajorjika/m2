@@ -26,7 +26,7 @@
             @click="selectItem(item, index, $event)"
           >
             <figure>
-              <img :src="image(item, index)" class="image" alt="Thumbnail" />
+              <img :src="image(item)" class="image" alt="Thumbnail" />
             </figure>
 
             <div class="caption">{{ item.name[locale] }}</div>
@@ -284,10 +284,12 @@ export default {
       })
     },
     mutateStore(id) {
-      const ids = [...this.appliancesIds]
+      let ids = [...this.appliancesIds]
 
-      if (ids.includes(id)) {
-        ids.filter((val) => parseInt(val) === parseInt(id))
+      if (id === null) {
+        ids = []
+      } else if (ids.includes(id)) {
+        ids = ids.filter((val) => parseInt(val) !== parseInt(id))
       } else {
         ids.push(id)
       }
@@ -295,9 +297,9 @@ export default {
       this.$store.commit('customize/SET_APPLIANCES_IDS', ids)
     },
     skipBtnClickHandler() {
-      this.mutateStore([])
+      this.mutateStore(null)
     },
-    image(item, index) {
+    image(item) {
       return item.images && item.images[0]
         ? item.images[0].full_url
         : 'https://placehold.it/150x75'
@@ -305,10 +307,12 @@ export default {
     selectItem(item, index, event) {
       // Set active class
 
-      if (!event.target.classList.contains('active')) {
-        event.target.classList.add('active')
+      const parent = event.target.closest('.slider-thumbnail')
+
+      if (!parent.classList.contains('active')) {
+        parent.classList.add('active')
       } else {
-        event.target.classList.remove('active')
+        parent.classList.remove('active')
       }
 
       // Mutate store value
@@ -344,10 +348,10 @@ export default {
 
   .flat-pages-content {
     grid-area: content;
-    width: calc(100% + 20px);
+    width: calc(100% + 25px);
     height: fit(510);
-    margin: auto auto 20px;
-    padding-right: 20px;
+    margin: auto auto 20px -10px;
+    padding: 0 15px 0 10px;
     overflow: auto;
 
     &::-webkit-scrollbar {
