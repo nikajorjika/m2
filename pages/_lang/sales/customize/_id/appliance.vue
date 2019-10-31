@@ -27,13 +27,13 @@
           >
             <figure>
               <img :src="image(item, index)" class="image" alt="Thumbnail" />
-
-              <figcaption class="caption">{{ item.name }}</figcaption>
-
-              <div class="checkbox">
-                <span></span>
-              </div>
             </figure>
+
+            <div class="caption">{{ item.name[locale] }}</div>
+
+            <div class="checkbox">
+              <span></span>
+            </div>
           </li>
         </ul>
       </div>
@@ -283,7 +283,15 @@ export default {
           })
       })
     },
-    mutateStore(ids) {
+    mutateStore(id) {
+      const ids = [...this.appliancesIds]
+
+      if (ids.includes(id)) {
+        ids.filter((val) => parseInt(val) === parseInt(id))
+      } else {
+        ids.push(id)
+      }
+
       this.$store.commit('customize/SET_APPLIANCES_IDS', ids)
     },
     skipBtnClickHandler() {
@@ -292,24 +300,16 @@ export default {
     image(item, index) {
       return item.images && item.images[0]
         ? item.images[0].full_url
-        : index !== 4
-        ? 'https://placehold.it/150x75'
-        : require('@/assets/icons/custom-renovation.png')
+        : 'https://placehold.it/150x75'
     },
     selectItem(item, index, event) {
-      // Remove old active class
-
-      this.$el
-        .querySelector('.slider-thumbnail.active')
-        .classList.remove('active')
-
       // Set active class
 
-      event.target.closest('.slider-thumbnail').classList.add('active')
-
-      // Set active element index
-
-      this.activeElIndex = index
+      if (!event.target.classList.contains('active')) {
+        event.target.classList.add('active')
+      } else {
+        event.target.classList.remove('active')
+      }
 
       // Mutate store value
 
@@ -317,7 +317,7 @@ export default {
 
       // Emit custom event
 
-      this.$emit('thumbnailChanged', this.activeElIndex)
+      this.$emit('thumbnailChanged', index)
     }
   }
 }
@@ -344,7 +344,37 @@ export default {
 
   .flat-pages-content {
     grid-area: content;
-    margin-top: 6px;
+    width: calc(100% + 20px);
+    height: fit(510);
+    margin: auto auto 20px;
+    padding-right: 20px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    /* Track */
+
+    &::-webkit-scrollbar-track {
+      width: 8px;
+      border-radius: 10px;
+      background: #f2cab1;
+    }
+
+    /* Handle */
+
+    &::-webkit-scrollbar-thumb {
+      width: 2px;
+      border-radius: 4px;
+      background: #f2a27b;
+    }
+
+    /* Handle on hover */
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #f26529;
+    }
   }
 
   .flat-pages-footer {
@@ -378,49 +408,45 @@ export default {
 
 .slider-thumbnails {
   display: grid;
-  grid-gap: 21px;
+  grid-template-columns:
+    minmax(fit(400), 400px)
+    minmax(fit(400), 400px)
+    minmax(fit(400), 400px);
+  grid-gap: fit(60) fit(114);
+  padding: 0;
 }
 
 .slider-thumbnail {
   display: flex;
+  align-items: center;
+  height: fit(130);
+  border-top-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all 200ms ease;
 
   figure {
     display: flex;
-    align-items: center;
-    width: fit(396);
-    height: fit(77);
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    background-color: #ffffff;
-    overflow: hidden;
-    transition: all 200ms ease;
+    justify-content: center;
+    width: 37.5%;
+    height: 100%;
+    padding: 12px;
+    background-color: #f2cab1;
   }
 
   .image {
-    width: fit(142);
-    height: 100%;
-    object-fit: cover;
-  }
-
-  figcaption {
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: flex-end;
-    width: fit(210);
-  }
-
-  &:last-child figcaption::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -1px;
-    width: 1px;
-    height: 200%;
-    background-color: #cfc8dd;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   .caption {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 49.25%;
     font-size: 14px;
     line-height: 20px;
     text-align: right;
@@ -431,7 +457,7 @@ export default {
     visibility: hidden;
     display: flex;
     justify-content: center;
-    width: fit(71);
+    width: 14.25%;
 
     span {
       display: block;
@@ -457,14 +483,11 @@ export default {
   }
 
   &.active {
-    figure {
-      box-shadow: 0 4px 32px rgba(242, 101, 41, 0.1);
-      transform: scale(1.06, 1.05);
-    }
+    box-shadow: 0 4px 32px rgba(242, 101, 41, 0.1);
+    transform: scale(1.06, 1.05);
 
     .checkbox {
       visibility: visible;
-      width: fit(84);
     }
   }
 }
