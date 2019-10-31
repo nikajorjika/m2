@@ -1,5 +1,5 @@
 <template>
-  <div class="skip-btn" @click="skipPage">
+  <div class="skip-btn" @click.stop="skipPage">
     <span v-text="btnLabel"></span>
 
     <span class="skip-btn-icon">

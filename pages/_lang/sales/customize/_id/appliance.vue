@@ -318,10 +318,6 @@ export default {
       // Mutate store value
 
       this.mutateStore(item.id)
-
-      // Emit custom event
-
-      this.$emit('thumbnailChanged', index)
     }
   }
 }
