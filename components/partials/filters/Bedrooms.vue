@@ -63,7 +63,7 @@ export default {
         })
     },
     mounted() {
-        const activeBedroomsArray = this.filters.bedroom_count.map(item => item.value)
+        const activeBedroomsArray = this.filters.bedroom_count.map(item => item.hasOwnProperty('value') ? item.value : parseInt(item))
         this.activeItems = this.checkData.filter(item  => activeBedroomsArray.includes(item.value))
     },
     methods: {
@@ -80,9 +80,12 @@ export default {
             }
         },
         handleFilter() {
+            const activeItems = this.activeItems.map((item) => {
+                return item.value
+            })
             this.setFilterItem({
                 key: 'bedroom_count',
-                value: [...this.activeItems]
+                value: [...activeItems]
             })
         },
         isActive(item) {

@@ -15,7 +15,7 @@ export const state = () => ({
     flat_number: null,
     building_progress: [],
     bedroom_count: [],
-    wc: [],
+    wc: null,
     area: {
       min: null,
       max: null
@@ -102,8 +102,19 @@ export const mutations = {
     state.filters.view = []
     state.filters.building_progress = []
     state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
-    state.filters.type = null
-
+    state.filters.type = data.hasOwnProperty('type') && data.type ? data.type : null
+    state.filters.wc = data.hasOwnProperty('wc') && data.wc ? data.wc : null
+  },
+  SET_FILTERS_BULK: (state, data) => {
+    state.filters.floors.min = data.min_floor
+    state.filters.floors.max = data.max_floor
+    state.filters.price.max = data.max_price
+    state.filters.price.min = data.min_price
+    state.filters.view = []
+    state.filters.building_progress = []
+    state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
+    state.filters.type = data.hasOwnProperty('type') && data.type ? data.type : null
+    state.filters.wc = data.hasOwnProperty('wc') && data.wc ? data.wc : null
   },
   // eslint-disable-next-line object-shorthand
   SET_MODEL_API_DATA: function(state, flats) {
@@ -161,7 +172,7 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchFilteredFlats({ commit, getters }, { page }) {
+  fetchFilteredFlats({ commit, getters }, { page, fresh }) {
     commit('SET_FILTER_LOADER', true)
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line camelcase
@@ -174,11 +185,12 @@ export const actions = {
         // eslint-disable-next-line camelcase
         bedroom_count,
         type,
+        wc,
         // eslint-disable-next-line camelcase
         building_progress
       } = getters.filters
       const views = getters.filters.view.map((item) => item.value)
-      const bedroomCount = bedroom_count.map((item) => item.value)
+      const bedroomCount = bedroom_count.map((item) => item.hasOwnProperty('value') ? item.value : parseInt(item) )
       const params = {
         block_id: block,
         max_price: price.max,
@@ -187,6 +199,7 @@ export const actions = {
         min_floor: floors.min,
         bedroom_count: bedroomCount,
         type,
+        wc,
         building_progress,
         flat_number
       }
@@ -196,7 +209,11 @@ export const actions = {
       this.$axios
         .get('/flats', { params })
         .then(({ data }) => {
-          commit('UPPEND_FLATS_DATA', data.data)
+          if(fresh === undefined) {
+            commit('UPPEND_FLATS_DATA', data.data)
+          }else {
+            commit('SET_FLATS_DATA', data.data)
+          }
           resolve(data.data)
           commit('SET_FILTER_LOADER', false)
         })
@@ -215,11 +232,11 @@ export const actions = {
       // eslint-disable-next-line camelcase
       bedroom_count,
       type,
+      wc,
       // eslint-disable-next-line camelcase
       building_progress
     } = getters.filters
     const views = getters.filters.view.map((item) => item.value)
-    const buildingProgress = building_progress.map((item) => item.value)
     const params = {
       block_id: block,
       max_price: price.max,
@@ -228,6 +245,7 @@ export const actions = {
       min_floor: floors.min,
       bedroom_count,
       type,
+      wc,
       building_progress,
       flat_number
     }

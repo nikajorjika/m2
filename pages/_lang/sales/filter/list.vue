@@ -1,7 +1,7 @@
 <template>
   <div class="filter-list-page">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
-      <div v-if="flats.length" class="flat-list">
+      <div v-if="!loading" class="flat-list">
         <div v-for="(item, index) in flats" :key="index" class="flat-card">
             <flat-card 
                 :title="item.title"
@@ -31,14 +31,16 @@ export default {
     },
     watch: {
         computedFilters: {
-            handler: 'fetchFlats',
+            handler: 'fetchFreshFlatData',
             immediate: true
         }
     },
     layout: 'WithInlineFilters',
     data() {
         return {
-            loadingItems: [1,1,1,1,1,1,1,1]
+            loadingItems: [1,1,1,1,1,1,1,1],
+            page: 1,
+            loading: true
         }
     },
     computed: {
@@ -67,7 +69,11 @@ export default {
     methods: {
         ...mapActions({
             fetchFlats: 'Filter/fetchFilteredFlats'
-        })
+        }),
+        fetchFreshFlatData() {
+            this.loading = true
+            this.fetchFlats({page: this.page, fresh: true}).then(() => this.loading = false)
+        }
     }
 }
 </script>

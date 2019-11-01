@@ -93,7 +93,7 @@ export default {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM',
       setFilterLoader: 'Filter/SET_FILTER_LOADER',
-      setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
+      setFilterDefaults: 'Filter/SET_FILTERS_BULK'
     }),
     handleChange(data) {
       this.setFilterDefaults(this.defaultFilters)
@@ -102,10 +102,11 @@ export default {
       const filterData = {
         min_floor: preset.floors_from,
         max_floor: preset.floors_to,
-        max_price: this.defaultFilters.price_max,
-        min_price: this.defaultFilters.price_min,
+        max_price: this.defaultFilters.max_price,
+        min_price: this.defaultFilters.min_price,
         bedroom_count: preset.bedrooms.split(', '),
-        type: preset.flat_type
+        type: preset.flat_type,
+        wc: preset.wc
       }
       this.setFilterDefaults(filterData)
       this.setFilterLoader(true)

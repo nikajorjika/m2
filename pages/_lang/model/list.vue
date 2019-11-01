@@ -15,8 +15,12 @@
     <flat-list-table
       class="flat-list__table"
       :list="flats"
+      @showLightBulb="showAnimation"
       @showPrompt="handlePrompt"
     />
+    <div class="light-bulb-animation">
+      <light-icon  width="100%" height="100%" icon-color="#fff" />
+    </div>
   </div>
 </template>
 
@@ -25,9 +29,10 @@ import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import FlatListTable from '@/components/partials/FlatListTable'
 import PromptAlert from '@/components/partials/PromptAlert'
+import LightIcon from '@/components/icons/Light'
 export default {
   layout: 'FullHeightWithoutNavigation',
-  components: { TitleWithLine, FlatListTable, PromptAlert },
+  components: { TitleWithLine, FlatListTable, PromptAlert, LightIcon },
   computed: {
     ...mapGetters({
       flats: 'Filter/flats',
@@ -45,7 +50,8 @@ export default {
     return {
       showPrompt: false,
       text: null,
-      color: null
+      color: null,
+      animating: false
     }
   },
   methods: {
@@ -79,6 +85,12 @@ export default {
       this.showPrompt = true
       this.color = `#${color}`
       this.text = this.generateTextBasedOnColor(id)
+    },
+    showAnimation() {
+      this.animating = true;
+      setTimeout(() => {
+        this.animating = false
+      }, 300)
     }
   }
 }
@@ -113,6 +125,23 @@ export default {
   }
   .fade-up-enter,
   .fade-up-leave-to {
+    opacity: 0;
+  }
+}
+.light-bulb-animation {
+  position: fixed;
+  top: calc(50% - 35px);
+  left: calc(50% - 20px);
+  width: 40px;
+  height: 70px;
+  animation: lightScale 0.3s;
+}
+@keyframes lightScale {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(5);
     opacity: 0;
   }
 }

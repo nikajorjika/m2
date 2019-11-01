@@ -92,15 +92,24 @@ export default {
     }),
     preselectedBedrooms() {
       const filtersBedrooms = this.filters.bedroom_count.map((item) => {
-        return item.value
+        if(item.hasOwnProperty('value')) {
+          return item.value
+        }else {
+          return parseInt(item)
+        }
       })
+      console.log(filtersBedrooms)
       return this.bedroomsPickerData.filter(item => {
         return filtersBedrooms.includes(item.value)
       })
     },
     preselectedFlatType() {
       return this.flatTypes.filter(item => {
-        return item.value === this.filters.type
+        if(item.hasOwnProperty('value')) {
+          return item.value === this.filters.type
+        }else {
+          return item === this.filters.type
+        }
       })
     },
     nextUrl() {
