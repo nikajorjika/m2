@@ -22,6 +22,7 @@
           <li
             v-for="(item, index) in items"
             :key="item.id"
+            :data-id="item.id"
             :class="['slider-thumbnail', '' === index ? 'active' : '']"
             @click="selectItem(item, index, $event)"
           >
@@ -54,7 +55,7 @@
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
-              <skip-button :url="skipBtnUrl" @skip="skipBtnClickHandler" />
+              <skip-button :url="skipBtnUrl" @omit="skipBtnClickHandler" />
             </div>
 
             <div class="footer-items__controls__next">
@@ -212,6 +213,8 @@ export default {
     if (this.appliances === undefined || !this.appliances.length) {
       this.fetchAppliances()
     }
+
+    this.selectAppliances()
   },
   methods: {
     ...mapActions('customize', ['fetchFlat', 'fetchAppliances']),
@@ -318,6 +321,25 @@ export default {
       // Mutate store value
 
       this.mutateStore(item.id)
+    },
+    selectAppliances() {
+      // Select appliances which are stored in the state
+
+      if (this.appliancesIds !== undefined && this.appliancesIds.length) {
+        const items = document.querySelectorAll(
+          '.flat-pages-content .slider-thumbnail'
+        )
+
+        items.forEach((item) => {
+          if (
+            this.appliancesIds.includes(parseInt(item.getAttribute('data-id')))
+          ) {
+            item.classList.add('active')
+          } else {
+            item.classList.remove('active')
+          }
+        })
+      }
     }
   }
 }
