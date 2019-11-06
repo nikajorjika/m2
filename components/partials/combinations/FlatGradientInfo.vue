@@ -1,11 +1,12 @@
 <template>
   <div class="labels-combo">
-    <gradient-shape
-      v-for="(item, index) in info"
-      :key="index"
-      :value="item.value"
-      :label="item.label"
-    />
+    <div v-for="(item, index) in info" :key="index">
+      <gradient-shape
+        v-if="item.value !== null"
+        :value="item.value"
+        :label="item.label"
+      />
+    </div>
   </div>
 </template>
 

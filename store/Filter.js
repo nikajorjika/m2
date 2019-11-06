@@ -1,6 +1,7 @@
 export const state = () => ({
   flats: [],
   presets: [],
+  chosenBlockNumber: null,
   filters: {
     block: null,
     floors: {
@@ -65,6 +66,7 @@ export const getters = {
   view: (state) => state.filters.view,
   totalCount: (state) => state.filteredTotalCount,
   filterDefaults: (state) => state.filterDefaults,
+  chosenBlockNumber: (state) => state.chosenBlockNumber,
   filterLoading: (state) => state.filterLoading,
   flatNumber: (state) => state.filterLoading,
   modelApiData: (state) => state.modelApiData,
@@ -104,6 +106,9 @@ export const mutations = {
     state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
     state.filters.type = data.hasOwnProperty('type') && data.type ? data.type : null
     state.filters.wc = data.hasOwnProperty('wc') && data.wc ? data.wc : null
+  },
+  SET_CHOSEN_BLOCK: (state, data) => {
+    state.chosenBlockNumber = data
   },
   SET_FILTERS_BULK: (state, data) => {
     state.filters.floors.min = data.min_floor
@@ -162,6 +167,7 @@ export const mutations = {
     }
   },
   SET_FILTER_ITEM: (state, { key, value }) => {
+    console.log({key, value})
     if (state.filters.hasOwnProperty(key)) {
       state.filters[key] = value
     }

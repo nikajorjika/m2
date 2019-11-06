@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     handleChoosingBlock() {
+      this.$store.commit('Filter/SET_CHOSEN_BLOCK', this.activeBlockNumber)
       this.$emit('seleted', this.blockInfo.id)
     },
     handleBlockChosing(number) {

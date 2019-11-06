@@ -20,7 +20,11 @@
         />
       </div>
       <div class="filter-flat__content__render">
-        <filter-render @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
+        <floor-picker :block="block" 
+          @seleted="handleBlockSelect" 
+          @floorChosen="showFloor" 
+          @floorSelect="handleFloorSelect" 
+        />
       </div>
     </div>
   </div>
@@ -64,7 +68,7 @@ export default {
       flat: null,
       builingStatus: 70,
       listCardData: [],
-      floor: null,
+      floor: 0,
       flat_number: null,
       step: 1
     }
@@ -72,7 +76,6 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      filterDefaults: 'Filter/filterDefaults',
       block: 'Filter/chosenBlockNumber'
     }),
     cTitle() {
@@ -97,29 +100,53 @@ export default {
     }
   },
   mounted () {
-    this.setFilterDefaults(this.filterDefaults)
+    if(!this.block) {
+      this.$router.push({
+        name: 'lang-sales-render',
+        params: {
+          lang: this.locale
+        }
+      })
+    }
   },
   methods: {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM',
       setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
+    showFloor(floor) {
+      this.floor = floor
+    },
     handleBlockSelect(id) {
       this.setFilterItem({
         key: 'block',
         value: id
       })
+      this.step = 2
+    },
+    handleFloorSelect(floor) {
+      console.log({
+        key: 'floors',
+        value: {
+          min: floor,
+          max: floor
+        }
+      })
+      
+      this.setFilterItem({
+        key: 'floors',
+        value: {
+          min: floor,
+          max: floor
+        }
+      }),
       this.$router.push({
-        name: 'lang-sales-render-floor',
-        params: { lang: this.locale }
+        name: 'lang-sales-render-flat',
+        params: {
+          lang: this.locale
+        }
       })
     },
-    handleBlockChange(id) {
-
-    },
-    handleBeforeChange() {
-
-    }
   }
 }
 </script>

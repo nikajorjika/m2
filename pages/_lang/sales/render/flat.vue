@@ -20,7 +20,7 @@
         />
       </div>
       <div class="filter-flat__content__render">
-        <filter-render @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
+        <flat-picker :block="block" :floor="filters.floors.min"/>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@ import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
 import CaretRight from '@/components/icons/CaretRight'
 import FilterRender from '@/components/partials/FilterRender'
-import FloorPicker from '@/components/partials/FloorPicker'
+import FlatPicker from '@/components/partials/FlatPicker'
 
 export default {
   layout: 'RenderFilterLayout',
@@ -48,7 +48,7 @@ export default {
     TitleWithLine,
     RenderViewer,
     FilterRender,
-    FloorPicker,
+    FlatPicker,
     RoomListComponent,
     FlatGradientInfo,
     ListCard,
@@ -64,7 +64,6 @@ export default {
       flat: null,
       builingStatus: 70,
       listCardData: [],
-      floor: null,
       flat_number: null,
       step: 1
     }
@@ -73,7 +72,8 @@ export default {
     ...mapGetters({
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
-      block: 'Filter/chosenBlockNumber'
+      block: 'Filter/chosenBlockNumber',
+      filters: 'Filter/filters'
     }),
     cTitle() {
       return `${this.$t('labels.project')}: <span class="color-orange">${this.$t('projects.m3_gelovani')}</span>  `
@@ -97,29 +97,19 @@ export default {
     }
   },
   mounted () {
-    this.setFilterDefaults(this.filterDefaults)
+    if(!this.block) {
+      this.$router.push({
+        name: 'lang-sales-render',
+        params: {
+          lang: this.locale
+        }
+      })
+    }
   },
   methods: {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM',
-      setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
-    handleBlockSelect(id) {
-      this.setFilterItem({
-        key: 'block',
-        value: id
-      })
-      this.$router.push({
-        name: 'lang-sales-render-floor',
-        params: { lang: this.locale }
-      })
-    },
-    handleBlockChange(id) {
-
-    },
-    handleBeforeChange() {
-
-    }
   }
 }
 </script>
