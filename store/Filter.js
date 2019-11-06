@@ -167,7 +167,6 @@ export const mutations = {
     }
   },
   SET_FILTER_ITEM: (state, { key, value }) => {
-    console.log({key, value})
     if (state.filters.hasOwnProperty(key)) {
       state.filters[key] = value
     }

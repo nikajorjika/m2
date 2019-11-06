@@ -20,7 +20,7 @@
         />
       </div>
       <div class="filter-flat__content__render">
-        <flat-picker :block="block" :floor="filters.floors.min"/>
+        <flat-picker v-if="block" :block="block" :floor="filters.floors.min" @flatSelected="selectedFlat"/>
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@ export default {
         },
         {
           label: this.$t('labels.floor'),
-          value: this.floor
+          value: this.filters.floors.min
         },
         {
           label: this.$t('labels.flat'),
@@ -110,6 +110,9 @@ export default {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM',
     }),
+    selectedFlat(flatNumber) {
+      this.flat_number = flatNumber
+    }
   }
 }
 </script>

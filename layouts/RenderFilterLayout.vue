@@ -72,7 +72,7 @@ export default {
         {
           title: 'navigation.floorPlan',
           component: FloorIcon,
-          route: '/sales/render/plan'
+          route: '/sales/render/flat'
         }
       ]
     },

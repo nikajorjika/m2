@@ -17,7 +17,7 @@ import CostIcon from '@/components/icons/Cost'
 import StatusIcon from '@/components/icons/Status'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import ProjectIcon from '@/components/icons/Project'
-import FlatIcon from '@/components/icons/Complited'
+import FlatIcon from '@/components/icons/Completed'
 import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
 import FloorIcon from '@/components/icons/Floor'
@@ -37,7 +37,6 @@ export default {
         // console.log(data)
       })
       .catch((err) => console.log(err))
-      console.log(this.filters)
     if(this.filterDefaults.min_floor === null || this.filterDefaults.max_floor === null) {
       this.fetchFilterDefaults()
         .then((data) => {

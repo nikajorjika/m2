@@ -122,24 +122,15 @@ export default {
         key: 'block',
         value: id
       })
-      this.step = 2
     },
     handleFloorSelect(floor) {
-      console.log({
-        key: 'floors',
-        value: {
-          min: floor,
-          max: floor
-        }
-      })
-      
       this.setFilterItem({
         key: 'floors',
         value: {
           min: floor,
           max: floor
         }
-      }),
+      })
       this.$router.push({
         name: 'lang-sales-render-flat',
         params: {
