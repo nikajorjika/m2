@@ -47,7 +47,7 @@
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
-              <skip-button :url="skipBtnUrl" @skip="skipBtnClickHandler" />
+              <skip-button :url="skipBtnUrl" @omit="skipBtnClickHandler" />
             </div>
 
             <div class="footer-items__controls__next">
@@ -167,13 +167,7 @@ export default {
       return `${this.$t('labels.price')} ${this.price} $`
     },
     items() {
-      const items = this.getItems()
-
-      if (items.length) {
-        this.mutateStore(items[0].id)
-      }
-
-      return items
+      return this.getItems()
     },
     images() {
       const images = []
@@ -257,6 +251,8 @@ export default {
       this.fetchRenovations()
     }
 
+    this.selectItems()
+
     this.$nextTick(function() {
       if (this.furniture === undefined || !this.furniture.length) {
         this.fetchFurniture()
@@ -285,6 +281,16 @@ export default {
           return this.decorations
         default:
           return []
+      }
+    },
+    getSelectedItemId() {
+      switch (this.$route.params.page) {
+        case 'makeover':
+          return this.renovationId
+        case 'furniture':
+          return this.furnitureId
+        case 'decoration':
+          return this.decorationId
       }
     },
     thumbnailChanged(activeThumbnail) {
@@ -372,6 +378,25 @@ export default {
     },
     skipBtnClickHandler() {
       this.mutateStore(null)
+    },
+    selectItems() {
+      // Select appliances which are stored in the state
+
+      const id = this.getSelectedItemId()
+
+      if (id) {
+        const items = document.querySelectorAll(
+          '.flat-pages-content .slider-thumbnail'
+        )
+
+        items.forEach((item) => {
+          if (parseInt(id) === parseInt(item.getAttribute('data-id'))) {
+            item.classList.add('active')
+          } else {
+            item.classList.remove('active')
+          }
+        })
+      }
     }
   }
 }

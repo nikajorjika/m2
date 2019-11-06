@@ -4,6 +4,7 @@
       <li
         v-for="(item, index) in items"
         :key="item.id"
+        :data-id="item.id"
         :class="['slider-thumbnail', activeElIndex === index ? 'active' : '']"
         @click="selectItem(item, index, $event)"
       >

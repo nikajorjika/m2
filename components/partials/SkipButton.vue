@@ -1,5 +1,5 @@
 <template>
-  <div class="skip-btn" @click.stop="skipPage">
+  <div class="skip-btn" @click="skipPage">
     <span v-text="btnLabel"></span>
 
     <span class="skip-btn-icon">
@@ -31,12 +31,14 @@ export default {
     }
   },
   methods: {
-    skipPage() {
+    skipPage(e) {
+      e.stopImmediatePropagation()
+
       if (this.url) {
         this.$router.push(this.url) // Go to next page
       }
 
-      this.$emit('skip')
+      this.$emit('omit')
     }
   }
 }
@@ -49,6 +51,7 @@ export default {
   font: $font;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .skip-btn-icon {
