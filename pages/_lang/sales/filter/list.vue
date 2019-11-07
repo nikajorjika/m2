@@ -61,6 +61,7 @@ export default {
                     title: item.project_name[this.locale],
                     price: `${item.price} $`,
                     image: item.render_url,
+                    url: `/${this.locale}/sales/customize/${item.id}`,
                     subTitle: this.$t('titles.FlatCardSubTitle').replace('%s',item.total_area)
                 }
             })

@@ -18,7 +18,7 @@
       </div>
       <div class="flat__see">
           <div v-if="loading" class="loading"> </div>
-          <button v-else class="btn btn-orange">
+          <button v-else class="btn btn-orange" @click="goToFlat">
                 <span>{{$t('buttons.see')}}</span>
                 <div class="icon-wrapper">
                     <arrow-right class="icon" width="13px" height="9px" icon-color="#fff" />
@@ -63,7 +63,12 @@ export default {
             type: String,
             default: ''
         }
-    }
+    },
+    methods: {
+        goToFlat() {
+            this.$router.push(this.url)
+        }
+    },
 }
 </script>
 

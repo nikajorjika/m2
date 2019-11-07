@@ -9,7 +9,7 @@
       </div>
       <select-range 
         class="range-picker"
-        v-if="minPrice && maxPrice"
+        v-if="minPrice >= 0 && maxPrice"
         :min-value="minPrice"
         :max-value="maxPrice"
         :preset-min="filterPrice.min"

@@ -8,7 +8,7 @@
     </div>
     <div class="filter-price__range-selector">
       <select-range
-        v-if="price"
+        v-if="price.min >= 0 && price.max"
         class="filter-price__range-selector__component"
         :min-value="price.min"
         :max-value="price.max"
