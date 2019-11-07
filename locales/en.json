@@ -105,7 +105,9 @@
     "ByPhoneNumber": "Authorisation by phone number",
     "FlatsLeftInThisBlock": "Flats left in this block",
     "ByFlatNumber": "Search by flat number",
-    "ByFilter": "Search by filter"
+    "ByFilter": "Search by filter",
+    "callSaleManager": "Call the sales manager and book this flat",
+    "saveFlat": "Save this flat"
   },
   "titles": {
     "FlatPageTitleGinger": "Design ginger",

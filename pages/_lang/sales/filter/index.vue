@@ -38,7 +38,8 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      presets: 'Filter/presets'
+      presets: 'Filter/presets',
+      defaultFilters: 'Filter/filterDefaults'
     }),
     nextUrl() {
       return `/${this.locale}/sales/filter/price`
@@ -90,15 +91,25 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setFilterItem: 'Filter/SET_FILTER_ITEM'
+      setFilterItem: 'Filter/SET_FILTER_ITEM',
+      setFilterLoader: 'Filter/SET_FILTER_LOADER',
+      setFilterDefaults: 'Filter/SET_FILTERS_BULK'
     }),
     handleChange(data) {
+      this.setFilterDefaults(this.defaultFilters)
       this.chosenPresetArray = data
       const preset = this.chosenPreset.preset
-      this.setFilterItem({
-        key: 'bedroom_count',
-        value: this.bedroomCount
-      })
+      const filterData = {
+        min_floor: preset.floors_from,
+        max_floor: preset.floors_to,
+        max_price: this.defaultFilters.max_price,
+        min_price: this.defaultFilters.min_price,
+        bedroom_count: preset.bedrooms.split(', '),
+        type: preset.flat_type,
+        wc: preset.wc
+      }
+      this.setFilterDefaults(filterData)
+      this.setFilterLoader(true)
     },
     skipPrice() {
       this.$router.push(this.nextUrl)

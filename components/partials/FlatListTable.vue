@@ -156,6 +156,7 @@ export default {
         this.lightUpFlat([item]).then((timeout) => {
           this.timeout = timeout
         })
+        this.$emit('showLightBulb')
       }
     }
   }

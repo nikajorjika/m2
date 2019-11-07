@@ -1,88 +1,95 @@
 <template>
-  <div class="filter-flat">
-    <div class="filter-flat__title">
-      <title-with-line :title="cTitle" />
-    </div>
-
-    <div class="filter-flat__content">
-      <div class="filter-flat__content__info">
-        <flat-gradient-info :info="flatLocationInfo" />
-
-        <list-card :items="listCardData" />
-
-        <gradient-progress
-          class="filter-render__aside__progress"
-          :label="$t('labels.building_progress')"
-          :min="0"
-          :max="100"
-          :value="builingStatus"
-          suffix="%"
-        />
+  <div class="app-content">
+    <div class="filter-flat">
+      <div class="filter-flat__title">
+        <title-with-line :title="cTitle" />
       </div>
 
-      <div class="filter-flat__content__render">
-        <render-viewer
-          class="flat-viewer"
-          :render-image="renderUrl"
-          :plan-image="blueprintUrl"
-          :floor-image="floorUrl"
-          :gradient-text="imageLabel"
-        />
+      <div class="filter-flat__content">
+        <div class="filter-flat__content__info">
+          <flat-gradient-info :info="flatLocationInfo" />
 
-        <room-list-component
-          v-if="rooms.length"
-          class="room-list-slider"
-          style-type="small"
-          :room-list="rooms"
-        />
+          <list-card :items="listCardData" />
+
+          <gradient-progress
+            class="filter-render__aside__progress"
+            :label="$t('labels.building_progress')"
+            :min="0"
+            :max="100"
+            :value="buildingStatus"
+            suffix="%"
+          />
+        </div>
+
+        <div class="filter-flat__content__render">
+          <render-viewer
+            class="flat-viewer"
+            :images="images"
+            :gradient-text="imageLabel"
+          />
+
+          <room-list-component
+            v-if="rooms.length"
+            class="room-list-slider"
+            style-type="small"
+            :room-list="rooms"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="filter-flat__footer">
-      <div class="footer-items">
-        <gradient-label :text="price" class="price-label" />
+      <div class="filter-flat__footer">
+        <div class="footer-items">
+          <gradient-label :text="price" class="price-label" />
 
-        <div class="footer-items__controls">
-          <div class="footer-items__controls__skip"></div>
+          <div class="footer-items__controls">
+            <div class="footer-items__controls__skip">
+              <skip-button :url="skipBtnUrl" />
+            </div>
 
-          <div class="footer-items__controls__next">
-            <button-main-orange
-              v-if="planshetColor"
-              :button-text="$t('labels.LitIt')"
-              :disabled="buttonDisabled"
-              @click="handleLightUp"
-            >
-              <template v-slot:icon>
-                <light-icon
-                  class="flat-list-table__header__button__icon"
-                  icon-color="#fff"
-                  height="12px"
-                />
-              </template>
-            </button-main-orange>
+            <div class="footer-items__controls__next">
+              <button-main-orange
+                :button-text="$t('buttons.next')"
+                @click="nextBtnClickHandler"
+              >
+                <template v-slot:icon>
+                  <caret-right width="14" height="16" icon-color="#fff" />
+                </template>
+              </button-main-orange>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <app-footer>
+      <template>
+        <prompt-alert
+          v-if="flatExists"
+          :color="promptColor"
+          :text="promptText"
+        />
+      </template>
+    </app-footer>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import RenderViewer from '@/components/partials/FlatRenderViewer'
+import RenderViewer from '@/components/partials/FlatRenderViewerExtended'
 import RoomListComponent from '@/components/partials/RoomListComponent'
 import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
 import GradientLabel from '@/components/partials/GradientLabel'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
-import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import LightIcon from '@/components/icons/Light'
+import SkipButton from '@/components/partials/SkipButton'
 import CaretRight from '@/components/icons/CaretRight'
+import AppFooter from '@/components/partials/AppFooter'
+import PromptAlert from '@/components/partials/PromptAlert'
 
 export default {
-  layout: 'SalesFilterLayout',
+  layout: 'SalesFlatLayout',
   auth: 'auth',
   components: {
     TitleWithLine,
@@ -93,9 +100,10 @@ export default {
     GradientProgress,
     GradientLabel,
     ButtonMainOrange,
-    LightIcon,
+    SkipButton,
     CaretRight,
-    GradientLabel
+    AppFooter,
+    PromptAlert
   },
   computed: {
     ...mapGetters({
@@ -108,9 +116,6 @@ export default {
     }),
     flatExists() {
       return !!this.flat && Object.keys(this.flat).length
-    },
-    planshetColor() {
-      return !!this.$cookies.get('paveleon-planshet')
     },
     cTitle() {
       let projectName = ''
@@ -127,24 +132,21 @@ export default {
 
       return this.$t('titles.YourChosenFlat') + projectName
     },
-    buttonDisabled() {
-      if (!this.flatExists) return true
-      return this.flat.planshet.id !== this.$cookies.get('paveleon-planshet')
-    },
-    renderUrl() {
-      if (!this.flatExists || !this.flat.render_url)
-        return 'https://placehold.it/245x245'
-      return this.flat.render_url
-    },
-    blueprintUrl() {
-      if (!this.flatExists || !this.flat.blueprint_url)
-        return 'https://placehold.it/245x245'
-      return this.flat.blueprint_url
-    },
-    floorUrl() {
-      return !this.flatExists || !this.flat.floor || !this.flat.floor.render_url
-        ? 'https://placehold.it/245x245'
-        : this.flat.floor.render_url
+    images() {
+      const images = []
+      const image = 'https://placehold.it/245x245'
+
+      if (this.flatExists) {
+        images.push(this.flat.render_url ? this.flat.render_url : image)
+        images.push(this.flat.blueprint_url ? this.flat.blueprint_url : image)
+        images.push(
+          this.flat.floor && this.flat.floor.render_url
+            ? this.flat.floor.render_url
+            : image
+        )
+      }
+
+      return images
     },
     imageLabel() {
       if (!this.flatExists)
@@ -152,6 +154,7 @@ export default {
           ka: `საძინებელი`,
           en: `bedrooms`
         }
+
       return {
         ka: `${this.flat.bedrooms_count} საძინებელი`,
         en: `${this.flat.bedrooms_count} bedrooms`
@@ -170,7 +173,7 @@ export default {
       if (!this.flatExists) return 0
       return `${this.flat.price} $`
     },
-    builingStatus() {
+    buildingStatus() {
       if (!this.flatExists) return 0
       return parseInt(this.flat.building_status)
     },
@@ -201,7 +204,7 @@ export default {
     flatLocationInfo() {
       if (!this.flatExists) return null
 
-      const infoArray = [
+      return [
         {
           label: this.$t('labels.block'),
           value: this.flat.block
@@ -215,16 +218,28 @@ export default {
           value: this.flat.flat_number
         }
       ]
-
-      return infoArray
+    },
+    skipBtnUrl() {
+      return `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
+    },
+    promptColor() {
+      return this.flatExists ? '#' + this.flat.planshet.color : ''
+    },
+    promptText() {
+      return this.flatExists
+        ? this.generateTextBasedOnColor(this.flat.planshet.id)
+        : ''
     }
   },
   mounted() {
     this.fetchFlat(this.$route.params.id)
-    this.fetchRenovations()
-    this.fetchFurniture()
-    this.fetchDecorations()
-    this.fetchAppliances()
+
+    this.$nextTick(function() {
+      this.fetchRenovations()
+      this.fetchFurniture()
+      this.fetchDecorations()
+      this.fetchAppliances()
+    })
   },
   methods: {
     ...mapActions('customize', [
@@ -234,9 +249,6 @@ export default {
       'fetchDecorations',
       'fetchAppliances'
     ]),
-    handleLightUp() {
-      this.lightUpFlat([this.flat])
-    },
     generateTextBasedOnColor(id) {
       const planshetsObject = {
         1: this.$t('colors.orange'),
@@ -259,6 +271,13 @@ export default {
       return this.$t('alerts.planshetColorAlert')
         .replace('%s', planshetsObject[id])
         .replace('%n', planshetNumbers[id])
+    },
+    nextBtnClickHandler() {
+      this.$emit('next')
+
+      this.$router.push(
+        `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
+      )
     }
   }
 }
@@ -266,73 +285,70 @@ export default {
 
 <style lang="scss" scoped>
 .filter-flat {
-  height: 100%;
+  height: calc(100% - #{fit(165)});
   width: 100%;
-  padding: 49px 60px 38px 46px;
+  padding: fit(49) fit(60) fit(38) fit(46);
   display: grid;
   grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
   grid-template-rows: 12% 75% 13%;
+  background: $bg-color-2;
+  box-shadow: 0 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
+
   &__title {
     grid-area: header;
   }
+
   &__content {
     grid-area: content;
     height: 100%;
     display: flex;
     width: 100%;
+
     &__info {
       width: 199px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
+
     &__render {
       width: 724px;
       margin-left: auto;
       display: flex;
+
       .room-list-slider {
         width: 305px;
         background: #f7ede2;
         border-top-right-radius: 17px;
         border-bottom-right-radius: 17px;
       }
+
       .flat-viewer {
         width: fit(635);
       }
     }
   }
+
   &__footer {
     grid-area: footer;
     display: flex;
+
     .footer-items {
       margin-top: auto;
       display: flex;
       justify-content: space-between;
       width: 100%;
+
       .price-label {
         margin: auto 0;
       }
+
       &__controls {
         display: flex;
         margin-left: auto;
         width: 264px;
         justify-content: space-between;
         align-items: center;
-        &__skip {
-          color: #432272;
-          font-size: 10px;
-          font-size: $font;
-          display: flex;
-          align-items: center;
-          &__icon {
-            display: flex;
-            svg {
-              &:last-child {
-                margin-left: -6px;
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -340,29 +356,12 @@ export default {
 </style>
 
 <style lang="scss">
-.filter-flat {
-  .switch {
-    width: 100%;
-    height: 55px;
-  }
+.app-content {
+  width: 100%;
+  height: 100%;
 
-  .switch__inner {
-    width: 100%;
-    position: relative;
-  }
-
-  .switch__inner__toggle {
-    width: 33.33%;
-    height: calc(100% - 16px);
-  }
-
-  .switch__inner__item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 33.33%;
-    height: 100%;
-    padding: 4px 0 0;
+  .prompt {
+    margin-top: auto;
   }
 }
 </style>

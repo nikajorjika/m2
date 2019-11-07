@@ -17,6 +17,7 @@ import CostIcon from '@/components/icons/Cost'
 import StatusIcon from '@/components/icons/Status'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import ProjectIcon from '@/components/icons/Project'
+import FlatIcon from '@/components/icons/Completed'
 import RenovationIcon from '@/components/icons/Makeover'
 import FurnitureIcon from '@/components/icons/Furniture'
 import FloorIcon from '@/components/icons/Floor'
@@ -36,16 +37,20 @@ export default {
         // console.log(data)
       })
       .catch((err) => console.log(err))
-    this.fetchFilterDefaults()
-      .then((data) => {
-        // console.log(data)
-      })
-      .catch((err) => console.log(err))
+    if(this.filterDefaults.min_floor === null || this.filterDefaults.max_floor === null) {
+      this.fetchFilterDefaults()
+        .then((data) => {
+          // console.log(data)
+        })
+        .catch((err) => console.log(err))
+    }
   },
   computed: {
     ...mapGetters({
       locale: 'locale',
-      flat: 'customize/flat'
+      flat: 'customize/flat',
+      filters: 'Filter/filters',
+      filterDefaults: 'Filter/filterDefaults'
     }),
     navData() {
       return {
@@ -53,7 +58,7 @@ export default {
           {
             route: `/sales/customize/${this.$route.params.id}`,
             title: 'navigation.flat',
-            component: RenovationIcon
+            component: FlatIcon
           },
           {
             route: `/sales/customize/${this.$route.params.id}/makeover`,

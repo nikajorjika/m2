@@ -34,6 +34,7 @@ module.exports = {
    */
   plugins: [
     '~/plugins/i18n.js',
+    '~/plugins/hammer.js',
     {
       src: '~/plugins/nuxt-swiper.js',
       ssr: false

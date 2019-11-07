@@ -8,7 +8,7 @@
         />
         <small>{{$t('titles.YouCanSelectMultipe')}}</small>
       </div>
-      <range-picker :ranges="bedroomsPickerData" @change="handleBedroomsChange"/>
+      <range-picker :ranges="bedroomsPickerData" :preselected="preselectedBedrooms" @change="handleBedroomsChange"/>
       <div class="border-line"></div>
       <div class="page-flat-number__title-container">
         <title-with-line
@@ -17,7 +17,7 @@
         />
         <small>{{$t('titles.YouCanSelectOnlyOne')}}</small>
       </div>
-      <range-picker :ranges="flatTypes" :multiple="false" @change="handleTypesChange" />
+      <range-picker :ranges="flatTypes" :preselected="preselectedFlatType" :multiple="false" @change="handleTypesChange" />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
@@ -87,10 +87,33 @@ export default {
   },
   computed: {
     ...mapGetters({
-      locale: 'locale'
+      locale: 'locale',
+      filters: 'Filter/filters'
     }),
+    preselectedBedrooms() {
+      const filtersBedrooms = this.filters.bedroom_count.map((item) => {
+        if(item.hasOwnProperty('value')) {
+          return item.value
+        }else {
+          return parseInt(item)
+        }
+      })
+      console.log(filtersBedrooms)
+      return this.bedroomsPickerData.filter(item => {
+        return filtersBedrooms.includes(item.value)
+      })
+    },
+    preselectedFlatType() {
+      return this.flatTypes.filter(item => {
+        if(item.hasOwnProperty('value')) {
+          return item.value === this.filters.type
+        }else {
+          return item === this.filters.type
+        }
+      })
+    },
     nextUrl() {
-      return `/${this.locale}/sales/filter/price`
+      return `/${this.locale}/sales/filter/projects`
     }
   },
   methods: {
@@ -102,7 +125,7 @@ export default {
       this.setLoader(true)
       this.setFilter({
         key: 'type',
-        value: data
+        value: data[0].value
        })
     },
     handleBedroomsChange(data) {
