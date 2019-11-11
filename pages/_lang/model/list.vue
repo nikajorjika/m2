@@ -18,7 +18,7 @@
       @showLightBulb="showAnimation"
       @showPrompt="handlePrompt"
     />
-    <div class="light-bulb-animation">
+    <div v-if="animating" class="light-bulb-animation">
       <light-icon  width="100%" height="100%" icon-color="#fff" />
     </div>
   </div>

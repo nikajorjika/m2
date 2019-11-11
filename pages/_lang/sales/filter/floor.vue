@@ -35,6 +35,7 @@ export default {
     SaleFilterFooter,
     TitleWithLine,
   },
+  middleware: 'auth',
   layout: 'SalesFilterLayout',
   computed: {
     ...mapGetters({

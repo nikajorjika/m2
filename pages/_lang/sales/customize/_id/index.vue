@@ -91,6 +91,7 @@ import PromptAlert from '@/components/partials/PromptAlert'
 export default {
   layout: 'SalesFlatLayout',
   auth: 'auth',
+  middleware: 'auth',
   components: {
     TitleWithLine,
     RenderViewer,

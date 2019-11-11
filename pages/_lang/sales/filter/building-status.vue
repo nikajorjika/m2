@@ -6,8 +6,9 @@
           class="page-flat-number__title"
           :title="$t('titles.BuildingProgress')" 
         />
+        <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
       </div>
-      <picker-with-gradient-label :items="pickerData" :preselected="preselectedData" @change="handleChange" />
+      <picker-with-gradient-label class="caps" :items="pickerData" :preselected="preselectedData" @change="handleChange" />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
@@ -28,6 +29,7 @@ export default {
     SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
+  middleware: 'auth',
   data() {
     return {
       pickerData: [

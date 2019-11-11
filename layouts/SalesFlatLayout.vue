@@ -53,14 +53,6 @@ export default {
         },
         {
           title: {
-            en: 'REGISTER',
-            ka: 'რეგისტრაცია'
-          },
-          path: `/${this.locale}/sales/registration`,
-          component: Registration
-        },
-        {
-          title: {
             en: 'FAQ',
             ka: 'კითხვები'
           },

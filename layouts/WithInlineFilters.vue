@@ -13,6 +13,9 @@
     </svg>
     <sidebar-with-items :items="items" />
     <model-view>
+      <template v-slot:sessionStatus>
+        <session-button class="sales-session-button" />
+      </template>
       <div class="app">
         <inline-filter-navigation />
         <nuxt />
@@ -37,6 +40,7 @@ import SleepingRoom from '@/components/icons/SleepingRoom'
 import ProjectIcon from '@/components/icons/Project'
 import PopoverImage from '@/components/partials/PopoverImage'
 import MainIcon from '@/components/icons/Main'
+import SessionButton from '@/components/partials/SessionButton'
 export default {
   components: {
     SidebarWithItems,
@@ -48,6 +52,7 @@ export default {
     QuestionsIcon,
     CostIcon,
     Registration,
+    SessionButton,
     FloorIcon,
     CompassIcon
   },
@@ -70,16 +75,8 @@ export default {
             en: 'Main',
             ka: 'მთავარი'
           },
-          path: `/${this.locale}/model`,
+          path: `/${this.locale}/sales`,
           component: MainIcon
-        },
-        {
-          title: {
-            en: 'REGISTER',
-            ka: 'რეგისტრაცია'
-          },
-          path: `/${this.locale}/sales/registration`,
-          component: Registration
         },
         {
           title: {

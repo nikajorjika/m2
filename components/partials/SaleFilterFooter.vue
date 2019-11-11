@@ -25,7 +25,7 @@
     </div>
     <div class="filter-footer__controls">
       <div
-        v-if="!noSkip"
+        v-if="!noSkip && false"
         class="filter-footer__controls__skip"
         @click="handleSkip"
       >

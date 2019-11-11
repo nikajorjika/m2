@@ -35,6 +35,7 @@ export default {
     TitleWithLine,
   },
   layout: 'SalesFilterLayout',
+  middleware: 'auth',
   computed: {
     ...mapGetters({
       locale: 'locale',

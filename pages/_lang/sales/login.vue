@@ -10,6 +10,11 @@
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
         <login-form @submit="handleLoginStageOne" />
+        <nuxt-link :to="`/${this.locale}/sales/registration`">
+          <small class="color-orange">
+            {{$t('buttons.register')}}
+          </small>
+        </nuxt-link>
       </div>
       <div v-else class="page-flat-number__confirm">
         <confirm-phone-form
@@ -62,7 +67,7 @@ export default {
       })
     },
     handleLoginStageTwo(code) {
-      this.formData = { ...code, ...this.formData }
+      this.formData = { ...this.formData, ...code }
       this.loginUser(this.formData).then(({ data }) => {
         if (data.hasOwnProperty('access_token')) {
           this.$auth.setUserToken(data.access_token)
@@ -83,6 +88,9 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+a {
+  text-decoration: none;
 }
 .page-flat-number {
   margin: 60px;

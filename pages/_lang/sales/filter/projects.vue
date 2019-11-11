@@ -33,6 +33,7 @@ export default {
     SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
+  middleware: 'auth',
   data() {
     return {
       pickerData: [

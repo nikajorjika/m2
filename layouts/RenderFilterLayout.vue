@@ -83,16 +83,8 @@ export default {
             en: 'Main',
             ka: 'მთავარი'
           },
-          path: `/${this.locale}/model`,
+          path: `/${this.locale}/sales`,
           component: MainIcon
-        },
-        {
-          title: {
-            en: 'REGISTER',
-            ka: 'რეგისტრაცია'
-          },
-          path: `/${this.locale}/sales/registration`,
-          component: Registration
         },
         {
           title: {
