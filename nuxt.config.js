@@ -38,6 +38,10 @@ module.exports = {
     {
       src: '~/plugins/nuxt-swiper.js',
       ssr: false
+    },
+    {
+      src: '~/plugins/currency-converter.js',
+      mode: 'client'
     }
   ],
   /*
