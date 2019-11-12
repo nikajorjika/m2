@@ -243,6 +243,12 @@ export default {
     }
   },
   mounted() {
+    this.pusher.subscribe('confirmSaleUser', (channel) => {
+      channel.bind('App\\Events\\ConfirmSaleUser', (data) => {
+        // console.log(data)
+      })
+    })
+
     if (this.flat === undefined || !this.flat.length) {
       this.fetchFlat(this.$route.params.id)
     }
@@ -262,6 +268,9 @@ export default {
         this.fetchDecorations()
       }
     })
+  },
+  beforeDestroy() {
+    this.pusher.unsubscribe('confirmSaleUser')
   },
   methods: {
     ...mapActions('customize', [

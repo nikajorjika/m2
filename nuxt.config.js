@@ -42,6 +42,10 @@ module.exports = {
     {
       src: '~/plugins/currency-converter.js',
       mode: 'client'
+    },
+    {
+      src: '~/plugins/pusher.js',
+      mode: 'client'
     }
   ],
   /*
