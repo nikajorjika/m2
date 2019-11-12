@@ -22,6 +22,15 @@
   src: url('~assets/fonts/Heebo/Heebo-Light.woff');
 }
 
+@font-face {
+  font-family: 'lari-symbol-v2';
+  src: url('~assets/fonts/GEL/lari_symbol_v2.otf') format('opentype'),
+       url('~assets/fonts/GEL/lari_symbol_v2.woff2') format('woff2'),
+       url('~assets/fonts/GEL/lari_symbol_v2.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 $font-caps: 'BPG Nino Mtavruli', sans-serif;
 $font: 'BPG WEB 001', sans-serif;
 

@@ -19,7 +19,7 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   router: {
-    middleware: ['i18n']
+    middleware: ['i18n', 'currency']
   },
   /*
    ** Customize the progress-bar color
@@ -40,8 +40,7 @@ module.exports = {
       ssr: false
     },
     {
-      src: '~/plugins/currency-converter.js',
-      mode: 'client'
+      src: '~/plugins/currency-converter.js'
     },
     {
       src: '~/plugins/pusher.js',
