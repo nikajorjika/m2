@@ -20,7 +20,7 @@
         />
       </div>
       <div class="filter-flat__content__render">
-        <flat-picker v-if="block" :block="block" :floor="filters.floors.min" @flatSelected="selectedFlat"/>
+        <flat-picker :block="block" :floor="filters.floors.min" @flatSelected="selectedFlat"/>
       </div>
     </div>
   </div>
@@ -44,6 +44,7 @@ import FlatPicker from '@/components/partials/FlatPicker'
 
 export default {
   layout: 'RenderFilterLayout',
+  middleware: 'auth',
   components: {
     TitleWithLine,
     RenderViewer,
@@ -97,9 +98,10 @@ export default {
     }
   },
   mounted () {
-    if(!this.block) {
+    console.log(isNaN(this.filters.floors.min), this.filters.floors.min)
+    if(isNaN(this.filters.floors.min) || this.filters.floors.min === null) {
       this.$router.push({
-        name: 'lang-sales-render',
+        name: 'lang-sales-render-floor',
         params: {
           lang: this.locale
         }

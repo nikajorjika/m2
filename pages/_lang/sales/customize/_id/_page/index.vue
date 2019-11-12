@@ -132,6 +132,7 @@ export default {
     SaveIcon
   },
   layout: 'SalesFlatLayout',
+  middleware: 'auth',
   data() {
     return {
       activeThumbnail: 0

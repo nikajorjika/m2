@@ -42,6 +42,7 @@ export default {
     SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
+  middleware: 'auth',
   data() {
     return {
       bedroomsPickerData: [
@@ -98,7 +99,6 @@ export default {
           return parseInt(item)
         }
       })
-      console.log(filtersBedrooms)
       return this.bedroomsPickerData.filter(item => {
         return filtersBedrooms.includes(item.value)
       })
@@ -130,6 +130,7 @@ export default {
     },
     handleBedroomsChange(data) {
       this.setLoader(true)
+      data = data.map(item => item.value)
       this.setFilter({
         key: 'bedroom_count',
         value: data

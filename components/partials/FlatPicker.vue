@@ -3,7 +3,7 @@
     <component :is="render" class="render-svg"/>
     <transition name="fade">
       <div
-        v-if="block && blockInfo"
+        v-if="activeFlat"
         ref="infoBlock"
         class="render__info"
       >
@@ -14,6 +14,17 @@
         />
       </div>
     </transition>
+    <div class="legend">
+      <div class="sold legend-item">
+        {{$t('labels.sold')}}
+      </div>
+      <div class="available legend-item">
+        {{$t('labels.available')}}
+      </div>
+      <div class="reserved legend-item">
+        {{$t('labels.reserved')}}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -56,7 +67,7 @@ export default {
   data() {
     return {
       blockInfo: null,
-      activeFlat: 0,
+      activeFlat: null,
       distance: 0,
       isDragging: false,
       render: null,
@@ -125,6 +136,42 @@ export default {
   background: white;
   position: relative;
   font-family: $font;
+  .legend {
+    display: flex;
+    margin-left: 42px;
+    position: absolute;
+    bottom: 17px;
+    &-item {
+      display: flex;
+      align-items: center;
+      margin-left: 42px;
+      font-family: $font;
+      color: #494949;
+      font-size: 11px;
+      &::before {
+        content: '';
+        height: 6px;
+        width: 16px;
+        display: inline-block;
+        margin: auto 12px;
+      }
+    }
+    .sold {
+      &::before {
+        background: #8393ca;
+      }
+    }
+    .available {
+      &::before {
+        background: #f69679;
+      }
+    }
+    .reserved {
+      &::before {
+        background: #bd8cbf;
+      }
+    }
+  }
   .floor-slider {
     position: absolute;
     right: 25px;

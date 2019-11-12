@@ -77,22 +77,22 @@ export default {
           path: `/${this.locale}/sales`,
           component: MainIcon
         },
-        {
-          title: {
-            en: 'REGISTER',
-            ka: 'რეგისტრაცია'
-          },
-          path: `/${this.locale}/sales/registration`,
-          component: Registration
-        },
-        {
-          title: {
-            en: 'FAQ',
-            ka: 'კითხვები'
-          },
-          path: `/${this.locale}/model/faq`,
-          component: QuestionsIcon
-        }
+        // {
+        //   title: {
+        //     en: 'REGISTER',
+        //     ka: 'რეგისტრაცია'
+        //   },
+        //   path: `/${this.locale}/sales/registration`,
+        //   component: Registration
+        // },
+        // {
+        //   title: {
+        //     en: 'FAQ',
+        //     ka: 'კითხვები'
+        //   },
+        //   path: `/${this.locale}/model/faq`,
+        //   component: QuestionsIcon
+        // }
       ]
     }
   },

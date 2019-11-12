@@ -102,7 +102,8 @@ export default {
     &__checked {
       position: absolute;
       right: 19px;
-      top: 10px;
+      top: 50%;
+      transform: translateY(-50%);
       border: dashed 1px #f26529;
       border-radius: 7px;
       width: 24px;

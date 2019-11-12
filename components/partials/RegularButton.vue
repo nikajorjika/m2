@@ -87,6 +87,7 @@ export default {
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    font-family: $font-caps;
   }
 
   &__label,

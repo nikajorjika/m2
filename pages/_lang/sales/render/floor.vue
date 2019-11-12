@@ -48,6 +48,7 @@ import FloorPicker from '@/components/partials/FloorPicker'
 
 export default {
   layout: 'RenderFilterLayout',
+  middleware: 'auth',
   components: {
     TitleWithLine,
     RenderViewer,

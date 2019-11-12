@@ -6,6 +6,7 @@
           class="page-flat-number__title"
           :title="$t('titles.IAmLookingFor')"
         />
+      <small>{{ $t('titles.YouCanSelectOnlyOne') }}</small>
       </div>
       <picker-with-gradient-label 
         :items="normalizePresets"
@@ -30,6 +31,7 @@ export default {
     SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
+  middleware: 'auth',
   data() {
     return {
       chosenPresetArray: []

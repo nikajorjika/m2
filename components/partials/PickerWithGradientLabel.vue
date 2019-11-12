@@ -79,6 +79,7 @@ export default {
     background: #fbf7f2;
     border-top-left-radius: 22px;
     border-bottom-right-radius: 22px;
+    padding-right: 45px;
     font-family: $font;
     color: #676766;
     font-size: 11px;
@@ -100,8 +101,9 @@ export default {
       justify-content: center;
     }
     &__label {
-      padding: 17px 11px 18px 33px;
+      padding: 17px 0 18px 33px;
       font-size: 13px;
+      font-weight: bold;
     }
     &.active {
       transform: scale(1.1);
@@ -110,7 +112,8 @@ export default {
     &__checked {
       position: absolute;
       right: 19px;
-      top: 10px;
+      top: 44%;
+      transform: translateY(-50%);
       border: dashed 1px #f26529;
       border-radius: 7px;
       width: 24px;

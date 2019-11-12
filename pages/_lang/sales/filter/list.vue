@@ -29,6 +29,7 @@ export default {
         FlatCard,
         TitleWithLine
     },
+    middleware: 'auth',
     watch: {
         computedFilters: {
             handler: 'fetchFreshFlatData',
