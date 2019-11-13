@@ -1,40 +1,62 @@
 <template>
-  <div class="filter-flat">
-    <div class="filter-flat__title">
-      <title-with-line :title="cTitle" />
-    </div>
-    <div class="filter-flat__secondary-title">
-      <title-with-line :title="$t('titles.PleaseSelectBlockFromRender')" />
-      <small>{{$t('labels.select_only_one')}}</small>
-    </div>
-    <div class="filter-flat__content">
-      <div class="filter-flat__content__info">
-        <flat-gradient-info class="filter-flat__content__info__combo" :info="flatLocationInfo" />
-        <!-- <list-card :items="listCardData" /> -->
-        <gradient-block class="filter-flat__content__info__address"> 
-          <div class="address">
-            <h3>{{$t('labels.address')}}:</h3>
-            <p>{{$t('addresses.marshal_gelovani')}}</p>
-          </div>
-        </gradient-block>
-        <gradient-progress
-          class="filter-flat__content__info__progress"
-          :label="$t('labels.sold_flat_count')"
-          :min="0"
-          :max="350"
-          :value="58"
-        />
-        <gradient-progress
-          class="filter-flat__content__info__progress"
-          :label="$t('labels.building_progress')"
-          :min="0"
-          :max="100"
-          :value="builingStatus"
-          suffix="%"
-        />
+  <div class="render-page">
+    <tabs-navigation :tab-data="navigation" :active-tab-index="activeTab" @tabChange="handleTabChange"/>
+    <div class="filter-flat">
+      <div class="filter-flat__title">
+        <title-with-line :title="cTitle" />
       </div>
-      <div class="filter-flat__content__render">
-        <filter-render @seleted="handleBlockSelect" @changeNumber="handleBlockChange" @beforeChange="handleBeforeChange" />
+      <div class="filter-flat__secondary-title">
+        <title-with-line :title="$t('titles.PleaseSelectBlockFromRender')" />
+        <small>{{$t('labels.select_only_one')}}</small>
+      </div>
+      <div class="filter-flat__content">
+        <div class="filter-flat__content__info">
+          <flat-gradient-info class="filter-flat__content__info__combo" :info="flatLocationInfo" />
+          <!-- <list-card :items="listCardData" /> -->
+          <gradient-block class="filter-flat__content__info__address"> 
+            <div class="address">
+              <h3>{{$t('labels.address')}}:</h3>
+              <p>{{$t('addresses.marshal_gelovani')}}</p>
+            </div>
+          </gradient-block>
+          <gradient-progress
+            class="filter-flat__content__info__progress"
+            :label="$t('labels.sold_flat_count')"
+            :min="0"
+            :max="350"
+            :value="58"
+          />
+          <gradient-progress
+            class="filter-flat__content__info__progress"
+            :label="$t('labels.building_progress')"
+            :min="0"
+            :max="100"
+            :value="builingStatus"
+            suffix="%"
+          />
+        </div>
+        <div class="filter-flat__content__render">
+          <filter-render 
+            v-if="activeTab === 0" 
+            @seleted="handleBlockSelect" 
+            @changeNumber="handleBlockChange" 
+            @beforeChange="handleBeforeChange" 
+          />
+
+          <floor-picker
+            v-if="activeTab === 1" 
+            :block="activeBlock" 
+            @seleted="handleFloorSelect" 
+            @floorChosen="showFloor"
+            @floorSelect="handleFloorSelect" 
+          />
+          <flat-picker
+            v-if="activeTab === 2"
+            :block="activeBlock" 
+            :floor="filters.floors.min" 
+            @flatSelected="selectedFlat"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -55,7 +77,14 @@ import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
 import CaretRight from '@/components/icons/CaretRight'
 import FilterRender from '@/components/partials/FilterRender'
+import ProjectIcon from '@/components/icons/Project'
+import MainIcon from '@/components/icons/Main'
+import CompletedIcon from '@/components/icons/Completed'
+import FloorIcon from '@/components/icons/Floor'
+import BlockIcon from '@/components/icons/Block'
 import FloorPicker from '@/components/partials/FloorPicker'
+import TabsNavigation from '@/components/partials/TabsNavigation'
+import FlatPicker from '@/components/partials/FlatPicker'
 
 export default {
   layout: 'RenderFilterLayout',
@@ -67,6 +96,8 @@ export default {
     FloorPicker,
     RoomListComponent,
     FlatGradientInfo,
+    FlatPicker,
+    TabsNavigation,
     ListCard,
     GradientProgress,
     GradientLabel,
@@ -77,13 +108,13 @@ export default {
   },
   data() {
     return {
+      activeFloor: null,
+      flat_number: null,
+      activeBlock: null,
       flat: null,
       builingStatus: 70,
       listCardData: [],
-      floor: null,
-      flat_number: null,
-      activeBlock: null,
-      step: 1
+      activeTab: 0
     }
   },
   computed: {
@@ -92,6 +123,25 @@ export default {
       filterDefaults: 'Filter/filterDefaults',
       block: 'Filter/chosenBlockNumber'
     }),
+    navigation() {
+      return [
+        {
+          title: 'navigation.block',
+          component: BlockIcon,
+          route: '/sales/render'
+        },
+        {
+          title: 'navigation.floor',
+          component: FloorIcon,
+          route: '/sales/render/floor'
+        },
+        {
+          title: 'navigation.floorPlan',
+          component: FloorIcon,
+          route: '/sales/render/flat'
+        }
+      ]
+    },
     cTitle() {
       return `${this.$t('labels.project')}: <span class="color-orange">${this.$t('projects.m3_gelovani')}</span>  `
     },
@@ -100,11 +150,11 @@ export default {
       const infoArray = [
         {
           label: this.$t('labels.block'),
-          value: block
+          value: this.activeBlock
         },
         {
           label: this.$t('labels.floor'),
-          value: this.floor
+          value: this.activeFloor
         },
         {
           label: this.$t('labels.flat'),
@@ -122,21 +172,43 @@ export default {
       setFilterItem: 'Filter/SET_FILTER_ITEM',
       setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
+    handleFloorSelect(floor) {
+      this.setFilterItem({
+        key: 'floors',
+        value: {
+          min: floor,
+          max: floor
+        }
+      })
+      this.activeTab = ++this.activeTab
+    },
+    selectedFlat(flatNumber) {
+      this.setFilterItem({
+        key: 'flat_number',
+        value: flatNumber
+      })
+      this.activeTab = ++this.activeTab
+    },
     handleBlockSelect(id) {
       this.setFilterItem({
         key: 'block',
         value: id
       })
-      this.$router.push({
-        name: 'lang-sales-render-floor',
-        params: { lang: this.locale }
-      })
+      this.activeTab = ++this.activeTab
+    },
+    handleTabChange(index) {
+      if(index === 0) {
+        this.activeTab = index
+      }
+      if(index === 1 && this.activeBlock) {
+        this.activeTab = index
+      }
+      if(index === 2 && this.activeBlock && this.floor) {
+        this.activeTab = index
+      } 
     },
     handleBlockChange(id) {
       this.activeBlock = id
-    },
-    handleBeforeChange() {
-
     }
   }
 }

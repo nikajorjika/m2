@@ -132,13 +132,7 @@ export default {
     showFloor(floor) {
       this.floor = floor
     },
-    handleBlockSelect(id) {
-      this.setFilterItem({
-        key: 'block',
-        value: id
-      })
-    },
-    handleFloorSelect(floor) {
+    orSelect(floor) {
       this.setFilterItem({
         key: 'floors',
         value: {

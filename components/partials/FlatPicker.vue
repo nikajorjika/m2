@@ -135,7 +135,6 @@ export default {
         })
         .then(({ data }) => {
           target.classList.add('active')
-          console.log()
           if(data.data.length) {
             this.activeFlat = data.data[0]
             this.$emit('flatSelected', flatNumber)
