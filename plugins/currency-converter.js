@@ -1,10 +1,16 @@
-import Vue from 'vue'
 import axios from 'axios'
 
-Vue.prototype.$currencyConverter = async (amount, currency = 'USD') => {
-  const { data } = await axios.get(
-    process.env.SERVER_IP + '/currency?currency=' + currency
-  )
+export default ({ app }, inject) => {
+  inject('currencyConverter', async (amount, currencyFrom, currencyTo) => {
+    const currency = currencyFrom !== 'GEL' ? currencyFrom : currencyTo
+    const { data } = await axios.get(
+      process.env.SERVER_IP + '/currency?currency=' + currency
+    )
 
-  return `${amount * data} GEL`
+    const rate = parseFloat(data)
+    const price = parseFloat(amount.replace(',', ''))
+    const number = currency === 'GEL' ? price / rate : price * rate
+
+    return new Intl.NumberFormat('ka-GE').format(number.toFixed(2))
+  })
 }
