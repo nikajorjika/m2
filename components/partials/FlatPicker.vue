@@ -55,12 +55,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios
-        .get(`/block/21/${this.block}`)
-        .then((response) => {
-          this.blockInfo = response.data
-        })
-        .catch((e) => console.error(e))
+    this.fetchBlockInfo()
     this.floorRender()
     // this.renderSvgs()
   },
@@ -71,7 +66,8 @@ export default {
       distance: 0,
       isDragging: false,
       render: null,
-      renderList: null
+      renderList: null,
+      flat: null
     }
   },
   computed: {
@@ -85,6 +81,18 @@ export default {
     }
   },
   methods: {
+    fetchBlockInfo() {
+      return new Promise((resolve, reject) => {
+       this.$axios
+        .get(`/block/21/${this.block}`)
+        .then((response) => {
+          this.blockInfo = response.data
+          console.log(this.blockInfo)
+          resolve(response)
+        })
+        .catch((e) => reject(e))
+      })
+    },
     changeFloor(floor) {
       this.activeFloor = floor
       this.$emit('floorChosen', floor)
@@ -106,22 +114,41 @@ export default {
       }
     },
     chooseFlat(e) {
+      if(!this.blockInfo) {
+        this.fetchBlockInfo().then((response) => {
+          this.handleClickEvent(e)
+        })
+      }else {
+        this.handleClickEvent(e)
+      }
+    },
+    handleClickEvent(e){ 
       const selected = document.querySelector('g[data-flat].active')
       if(selected){
         selected.classList.remove('active')
       }
       let target = e.target.closest('[data-flat]')
       let flatNumber = target.getAttribute('data-flat')
-      target.classList.add('active')
-      this.activeFlat = flatNumber
-      this.$emit('flatSelected', flatNumber)
+      this.$axios
+        .get('/flats', {
+          params: { flat_number: flatNumber }
+        })
+        .then(({ data }) => {
+          target.classList.add('active')
+          if(data.data.length) {
+            this.activeFlat = data.data[0]
+            this.$emit('flatSelected', flatNumber)
+          }else {
+            this.activeFlat = null
+          }
+        })
     },
     selectFlat() {
       this.$router.push({
         name: 'lang-sales-customize-id',
         params: {
           lang: this.locale,
-          id: this.activeFlat
+          id: this.activeFlat.id
         }
       })
     }

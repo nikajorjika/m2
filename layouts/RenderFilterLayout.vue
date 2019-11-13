@@ -13,8 +13,11 @@
     </svg>
     <sidebar-with-items :items="items" />
     <model-view>
+      <template v-slot:sessionStatus>
+        <session-button />
+      </template>
       <div class="app">
-        <flat-navigation :nav-data="navigation"/>
+        <!-- <flat-navigation :nav-data="navigation"/> -->
         <nuxt />
       </div>
     </model-view>
@@ -30,13 +33,15 @@ import FloorIcon from '@/components/icons/Floor'
 import QuestionsIcon from '@/components/icons/Questions'
 import Registration from '@/components/icons/Registration'
 import ProjectIcon from '@/components/icons/Project'
+import MainIcon from '@/components/icons/Main'
 import CompletedIcon from '@/components/icons/Completed'
 import PopoverImage from '@/components/partials/PopoverImage'
-import MainIcon from '@/components/icons/Main'
+import SessionButton from '@/components/partials/SessionButton'
 export default {
   components: {
     SidebarWithItems,
     ModelView,
+    SessionButton,
     FlatNavigation,
     BlockIcon,
     PopoverImage,
@@ -57,25 +62,6 @@ export default {
   },
   computed: {
     ...mapGetters({ locale: 'locale' }),
-    navigation() {
-      return [
-        {
-          title: 'navigation.block',
-          component: BlockIcon,
-          route: '/sales/render'
-        },
-        {
-          title: 'navigation.floor',
-          component: FloorIcon,
-          route: '/sales/render/floor'
-        },
-        {
-          title: 'navigation.floorPlan',
-          component: FloorIcon,
-          route: '/sales/render/flat'
-        }
-      ]
-    },
     items() {
       return [
         {

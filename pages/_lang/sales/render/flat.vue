@@ -9,9 +9,21 @@
     <div class="filter-flat__content">
       <div class="filter-flat__content__info">
         <flat-gradient-info :info="flatLocationInfo" />
-        <list-card :items="listCardData" />
+        <gradient-block class="filter-flat__content__info__address"> 
+          <div class="address">
+            <h3>{{$t('labels.address')}}:</h3>
+            <p>{{$t('addresses.marshal_gelovani')}}</p>
+          </div>
+        </gradient-block>
         <gradient-progress
-          class="filter-render__aside__progress"
+          class="filter-flat__content__info__progress"
+          :label="$t('labels.sold_flat_count')"
+          :min="0"
+          :max="350"
+          :value="58"
+        />
+        <gradient-progress
+          class="filter-flat__content__info__progress"
           :label="$t('labels.building_progress')"
           :min="0"
           :max="100"
@@ -39,6 +51,7 @@ import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
 import CaretRight from '@/components/icons/CaretRight'
+import GradientBlock from '@/components/partials/GradientBlock'
 import FilterRender from '@/components/partials/FilterRender'
 import FlatPicker from '@/components/partials/FlatPicker'
 
@@ -49,6 +62,7 @@ export default {
     TitleWithLine,
     RenderViewer,
     FilterRender,
+    GradientBlock,
     FlatPicker,
     RoomListComponent,
     FlatGradientInfo,
@@ -98,7 +112,6 @@ export default {
     }
   },
   mounted () {
-    console.log(isNaN(this.filters.floors.min), this.filters.floors.min)
     if(isNaN(this.filters.floors.min) || this.filters.floors.min === null) {
       this.$router.push({
         name: 'lang-sales-render-floor',
@@ -129,6 +142,10 @@ export default {
   grid-template-rows: 79px 415px;
   grid-template-columns: 240px 805px;
   box-sizing: border-box;
+  .mt-auto {
+    margin-top: auto;
+    margin-bottom: 12px;
+  }
   &__title {
     grid-area: header;
   }
@@ -141,10 +158,29 @@ export default {
     display: flex;
     width: 100%;
     &__info {
-      width: 199px;
+      width: 215px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      // justify-content: space-between;
+      &__address {
+        margin-top: 12px;
+        h3 {
+          font-size: 12px;
+          font-family: $font;
+          margin: 0 0 10px;
+        }
+        p {
+          font-size: 11px;
+          font-family: $font;
+          margin: 10px 0 0;
+        }
+      }
+      &__combo {
+        min-height: 106px;
+      }
+      &__progress {
+        margin-top: 12px;
+      }
     }
     &__render {
       width: 804px;
