@@ -74,6 +74,7 @@ export default {
     border-top-left-radius: 22px;
     border-bottom-right-radius: 22px;
     font-family: $font-caps;
+    font-weight: bold;
     color: #676766;
     font-size: 11px;
     display: flex;

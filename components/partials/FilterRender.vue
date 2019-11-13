@@ -49,6 +49,7 @@ export default {
           this.activeBlockNumber = number
           this.blockInfo = response.data
           this.$emit('change', this.blockInfo.id)
+          this.$emit('changeNumber', number)
         })
         .catch((e) => console.error(e))
     }

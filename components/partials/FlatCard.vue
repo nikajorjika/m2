@@ -124,7 +124,7 @@ export default {
         display: flex;
         .price-label {
             margin: auto auto auto 0;
-            font-size: 11px;
+            font-size: 10px;
             padding: 10px 13px;
         }
         .loading {

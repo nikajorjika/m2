@@ -4,14 +4,28 @@
       <title-with-line :title="cTitle" />
     </div>
     <div class="filter-flat__secondary-title">
-      <title-with-line :title="cTitle" />
+      <title-with-line :title="$t('titles.PleaseSelectBlockFromRender')" />
+      <small>{{$t('labels.select_only_one')}}</small>
     </div>
     <div class="filter-flat__content">
       <div class="filter-flat__content__info">
-        <flat-gradient-info :info="flatLocationInfo" />
-        <list-card :items="listCardData" />
+        <flat-gradient-info class="filter-flat__content__info__combo" :info="flatLocationInfo" />
+        <!-- <list-card :items="listCardData" /> -->
+        <gradient-block class="filter-flat__content__info__address"> 
+          <div class="address">
+            <h3>{{$t('labels.address')}}:</h3>
+            <p>{{$t('addresses.marshal_gelovani')}}</p>
+          </div>
+        </gradient-block>
         <gradient-progress
-          class="filter-render__aside__progress"
+          class="filter-flat__content__info__progress"
+          :label="$t('labels.sold_flat_count')"
+          :min="0"
+          :max="350"
+          :value="58"
+        />
+        <gradient-progress
+          class="filter-flat__content__info__progress"
           :label="$t('labels.building_progress')"
           :min="0"
           :max="100"
@@ -20,7 +34,7 @@
         />
       </div>
       <div class="filter-flat__content__render">
-        <filter-render @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
+        <filter-render @seleted="handleBlockSelect" @changeNumber="handleBlockChange" @beforeChange="handleBeforeChange" />
       </div>
     </div>
   </div>
@@ -34,6 +48,7 @@ import RoomListComponent from '@/components/partials/RoomListComponent'
 import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
 import GradientLabel from '@/components/partials/GradientLabel'
+import GradientBlock from '@/components/partials/GradientBlock'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
 import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
@@ -55,10 +70,10 @@ export default {
     ListCard,
     GradientProgress,
     GradientLabel,
+    GradientBlock,
     ButtonMainOrange,
     LightIcon,
-    CaretRight,
-    GradientLabel
+    CaretRight
   },
   data() {
     return {
@@ -67,6 +82,7 @@ export default {
       listCardData: [],
       floor: null,
       flat_number: null,
+      activeBlock: null,
       step: 1
     }
   },
@@ -80,10 +96,11 @@ export default {
       return `${this.$t('labels.project')}: <span class="color-orange">${this.$t('projects.m3_gelovani')}</span>  `
     },
     flatLocationInfo() {
+      const block = this.block ? this.block : this.activeBlock
       const infoArray = [
         {
           label: this.$t('labels.block'),
-          value: this.block
+          value: block
         },
         {
           label: this.$t('labels.floor'),
@@ -116,7 +133,7 @@ export default {
       })
     },
     handleBlockChange(id) {
-
+      this.activeBlock = id
     },
     handleBeforeChange() {
 
@@ -135,11 +152,20 @@ export default {
   grid-template-rows: 79px 415px;
   grid-template-columns: 240px 805px;
   box-sizing: border-box;
+
   &__title {
     grid-area: header;
   }
   &__secondary-title {
     grid-area: second-header;
+    display: flex;
+    flex-direction: column;
+    small {
+      font-family: $font;
+      font-size: 10px;
+      color: #494949;
+      margin: 12px 0 0 0;
+    }
   }
   &__content {
     grid-area: content;
@@ -147,10 +173,29 @@ export default {
     display: flex;
     width: 100%;
     &__info {
-      width: 199px;
+      width: 215px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      // justify-content: space-between;
+      &__address {
+        margin-top: 12px;
+        h3 {
+          font-size: 12px;
+          font-family: $font;
+          margin: 0 0 10px;
+        }
+        p {
+          font-size: 11px;
+          font-family: $font;
+          margin: 10px 0 0;
+        }
+      }
+      &__combo {
+        min-height: 106px;
+      }
+      &__progress {
+        margin-top: 12px;
+      }
     }
     &__render {
       width: 804px;

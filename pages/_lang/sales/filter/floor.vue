@@ -7,6 +7,9 @@
           :title="$t('titles.PickFloorRange')"
         />
       </div>
+      <div class="warning" :class="{active: totalCount === 0}">
+        <p>{{$t('errors.NoFlatsInThisFloorRange')}}</p>
+      </div>
       <select-range 
         class="range-picker"
         v-if="minFloor >= 0 && maxFloor"
@@ -41,7 +44,8 @@ export default {
     ...mapGetters({
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
-      filters: 'Filter/filters'
+      filters: 'Filter/filters',
+      totalCount: 'Filter/totalCount'
     }),
     filterFloor() {
       return this.filters.floors
@@ -89,6 +93,14 @@ export default {
 }
 .range-picker {
   max-width: 686px;
+}
+.warning {
+  font-size: 12px;
+  color: $orange;
+  visibility: hidden;
+  &.active {
+    visibility: visible;
+  }
 }
 .page-flat-number {
   margin: 60px;

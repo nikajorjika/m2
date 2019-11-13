@@ -91,6 +91,7 @@ export default {
   width: auto;
   display: flex;
   border: none;
+  outline: none;
 }
 .btn-standard {
   border-radius: 35px;

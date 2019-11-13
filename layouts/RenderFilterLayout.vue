@@ -13,6 +13,9 @@
     </svg>
     <sidebar-with-items :items="items" />
     <model-view>
+      <template v-slot:sessionStatus>
+        <session-button />
+      </template>
       <div class="app">
         <flat-navigation :nav-data="navigation"/>
         <nuxt />

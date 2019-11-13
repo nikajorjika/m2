@@ -1,5 +1,5 @@
 <template>
-  <div class="floor-picker">
+  <div v-if="blockInfo" class="floor-picker">
       <block-one v-if="block === 1" :active-floor="activeFloor" @change="changeFloor"/>
       <block-two v-if="block === 2" :active-floor="activeFloor"  @change="changeFloor"/>
       <block-three v-if="block === 3" :active-floor="activeFloor"  @change="changeFloor"/>

@@ -7,6 +7,9 @@
           :title="$t('titles.PickPriceRange')"
         />
       </div>
+      <div class="warning" :class="{active: totalCount === 0}">
+        <p>{{$t('errors.NoFlatsInThisPriceRange')}}</p>
+      </div>
       <select-range 
         class="range-picker"
         v-if="minPrice >= 0 && maxPrice"
@@ -40,7 +43,8 @@ export default {
     ...mapGetters({
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
-      filters: 'Filter/filters'
+      filters: 'Filter/filters',
+      totalCount: 'Filter/totalCount'
     }),
     filterPrice() {
       return this.filters.price
@@ -88,6 +92,14 @@ export default {
 }
 .range-picker {
   max-width: 686px;
+}
+.warning {
+  font-size: 12px;
+  color: $orange;
+  visibility: hidden;
+  &.active {
+    visibility: visible;
+  }
 }
 .page-flat-number {
   margin: 60px;
