@@ -41,6 +41,8 @@
             class="price-label"
           />
 
+          <currency-switcher />
+
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
               <skip-button :url="skipBtnUrl" @omit="skipBtnClickHandler" />
@@ -110,6 +112,7 @@ import SalesIcon from '@/components/icons/Alone'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
 import Price from '@/components/partials/Price'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   components: {
@@ -127,7 +130,8 @@ export default {
     SalesIcon,
     SaveButton,
     SaveIcon,
-    Price
+    Price,
+    CurrencySwitcher
   },
   layout: 'SalesFlatLayout',
   middleware: 'auth',

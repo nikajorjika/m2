@@ -1,8 +1,7 @@
 <template>
   <div v-if="formattedPrice && currencySymbol" class="gradient-label">
     <span>
-      {{ formattedPrice
-      }}<i :class="classObject" :style="styleObject">{{ currencySymbol }}</i>
+      {{ formattedPrice }}<i :class="classObject">{{ currencySymbol }}</i>
     </span>
   </div>
 </template>
@@ -28,7 +27,8 @@ export default {
   data() {
     return {
       formattedPrice: '',
-      currencySymbol: ''
+      currencySymbol: '',
+      previousCurrency: ''
     }
   },
   computed: {
@@ -39,12 +39,7 @@ export default {
     classObject() {
       return {
         'gel-sign': this.currencySymbol === 'i',
-        left: this.currencySymbol === 'i'
-      }
-    },
-    styleObject() {
-      return {
-        'font-style': 'normal'
+        right: this.currencySymbol === 'i'
       }
     }
   },
@@ -53,9 +48,13 @@ export default {
   },
   methods: {
     formatPrice() {
+      if (this.previousCurrency === '') {
+        this.previousCurrency = this.defaultCurrency
+      }
+
       return this.$currencyConverter(
         this.price,
-        this.defaultCurrency,
+        this.previousCurrency,
         this.currency
       ).then((price) => {
         let textBeforePrice = this.textBeforePrice
@@ -66,6 +65,7 @@ export default {
 
         this.formattedPrice = `${textBeforePrice} ${price} ${this.textAfterPrice}`
         this.currencySymbol = this.getCurrencySymbol()
+        this.previousCurrency = this.currency
       })
     },
     getCurrencySymbol() {
@@ -117,7 +117,7 @@ export default {
 .gel-sign {
   font-family: 'lari-symbol-v2', Arial, 'Times New Roman', 'Bitstream Charter',
     Times, serif;
-  font-style: normal;
+  font-style: normal !important;
 }
 
 .gel-sign.left {
