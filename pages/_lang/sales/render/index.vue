@@ -40,14 +40,12 @@
             v-if="activeTab === 0" 
             @seleted="handleBlockSelect" 
             @changeNumber="handleBlockChange" 
-            @beforeChange="handleBeforeChange" 
           />
-
           <floor-picker
             v-if="activeTab === 1" 
             :block="activeBlock" 
             @seleted="handleFloorSelect" 
-            @floorChosen="showFloor"
+            @floorChosen="handleFloorChosen"
             @floorSelect="handleFloorSelect" 
           />
           <flat-picker
@@ -121,6 +119,7 @@ export default {
     ...mapGetters({
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
+      filters: 'Filter/filters',
       block: 'Filter/chosenBlockNumber'
     }),
     navigation() {
@@ -172,6 +171,15 @@ export default {
       setFilterItem: 'Filter/SET_FILTER_ITEM',
       setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
+    handleFloorChosen(floor) {
+      this.setFilterItem({
+        key: 'floors',
+        value: {
+          min: floor,
+          max: floor
+        }
+      })
+    },
     handleFloorSelect(floor) {
       this.setFilterItem({
         key: 'floors',
@@ -187,7 +195,6 @@ export default {
         key: 'flat_number',
         value: flatNumber
       })
-      this.activeTab = ++this.activeTab
     },
     handleBlockSelect(id) {
       this.setFilterItem({
