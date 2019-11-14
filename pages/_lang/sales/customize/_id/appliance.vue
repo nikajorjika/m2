@@ -41,17 +41,15 @@
 
       <div class="flat-pages-footer">
         <div class="footer-items">
-          <gradient-label
+          <price
             v-if="price"
-            :text="formattedPrice"
-            class="price-label"
+            :price="price"
+            :text-before-price="$t('labels.price')"
           />
 
-          <gradient-label
-            v-if="itemPrice"
-            :text="formattedItemPrice"
-            class="price-label"
-          />
+          <price v-if="itemPrice" :price="itemPrice" />
+
+          <currency-switcher />
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
@@ -107,7 +105,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import GradientLabel from '@/components/partials/GradientLabel'
 import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import SkipButton from '@/components/partials/SkipButton'
@@ -119,11 +116,12 @@ import ManagerIcon from '@/assets/icons/Manager1.svg'
 import SalesIcon from '@/components/icons/Alone'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
+import Price from '@/components/partials/Price'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   components: {
     TitleWithLine,
-    GradientLabel,
     ButtonMainOrange,
     SkipButton,
     CaretRight,
@@ -133,7 +131,9 @@ export default {
     ManagerIcon,
     SalesIcon,
     SaveButton,
-    SaveIcon
+    SaveIcon,
+    Price,
+    CurrencySwitcher
   },
   layout: 'SalesFlatLayout',
   middleware: 'auth',
@@ -409,14 +409,6 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-
-      & > :first-child {
-        margin-right: 15px !important;
-      }
-
-      .price-label {
-        margin: auto 0;
-      }
 
       &__controls {
         display: flex;

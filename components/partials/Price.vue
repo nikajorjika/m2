@@ -1,5 +1,8 @@
 <template>
-  <div v-if="formattedPrice && currencySymbol" class="gradient-label">
+  <div
+    v-if="formattedPrice && currencySymbol"
+    class="gradient-label price-label"
+  >
     <span>
       {{ formattedPrice
       }}<i :class="classObject" style="font-style: normal">{{
@@ -63,11 +66,7 @@ export default {
     currencyConverter(price, currencyFrom, currencyTo) {
       return this.$currencyConverter(price, currencyFrom, currencyTo).then(
         (price) => {
-          const textBeforePrice =
-            this.textBeforePrice === ''
-              ? this.$t('labels.price')
-              : this.textBeforePrice
-          this.formattedPrice = `${textBeforePrice} ${price} ${this.textAfterPrice}`
+          this.formattedPrice = `${this.textBeforePrice} ${price} ${this.textAfterPrice}`
           this.currencySymbol = this.getCurrencySymbol()
         }
       )
@@ -93,6 +92,7 @@ export default {
   display: flex;
   align-items: center;
   height: 42px;
+  margin: auto 15px auto 0;
   padding: 0 fit(30);
   font-family: $font;
   font-size: 14px;

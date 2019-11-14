@@ -1,13 +1,11 @@
 <template>
   <div
-    v-if="currency"
+    v-if="!loading && currency"
     :class="['currency-switcher', currency === 'GEL' ? 'on' : '']"
     :data-currency="currency"
     @click="toggle"
   >
-    <span :class="usdClassObject">
-      $
-    </span>
+    <span :class="usdClassObject">$</span>
 
     <span :class="gelClassObject">
       <i class="gel-sign right">i</i>
@@ -19,6 +17,11 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  data() {
+    return {
+      loading: true
+    }
+  },
   computed: {
     ...mapGetters({
       currency: 'GET_CURRENCY'
@@ -35,6 +38,11 @@ export default {
         active: this.currency === 'GEL'
       }
     }
+  },
+  mounted() {
+    this.$nextTick(function() {
+      this.loading = false
+    })
   },
   methods: {
     toggle(e) {

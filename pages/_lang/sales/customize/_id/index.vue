@@ -39,7 +39,13 @@
 
       <div class="filter-flat__footer">
         <div class="footer-items">
-          <gradient-label :text="price" class="price-label" />
+          <price
+            v-if="price"
+            :price="price"
+            :text-before-price="$t('labels.price')"
+          />
+
+          <currency-switcher />
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
@@ -80,13 +86,14 @@ import RenderViewer from '@/components/partials/FlatRenderViewerExtended'
 import RoomListComponent from '@/components/partials/RoomListComponent'
 import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
-import GradientLabel from '@/components/partials/GradientLabel'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import SkipButton from '@/components/partials/SkipButton'
 import CaretRight from '@/components/icons/CaretRight'
 import AppFooter from '@/components/partials/AppFooter'
 import PromptAlert from '@/components/partials/PromptAlert'
+import Price from '@/components/partials/Price'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   layout: 'SalesFlatLayout',
@@ -99,12 +106,13 @@ export default {
     FlatGradientInfo,
     ListCard,
     GradientProgress,
-    GradientLabel,
     ButtonMainOrange,
     SkipButton,
     CaretRight,
     AppFooter,
-    PromptAlert
+    PromptAlert,
+    Price,
+    CurrencySwitcher
   },
   computed: {
     ...mapGetters({
@@ -339,10 +347,6 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-
-      .price-label {
-        margin: auto 0;
-      }
 
       &__controls {
         display: flex;
