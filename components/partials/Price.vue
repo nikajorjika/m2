@@ -1,7 +1,10 @@
 <template>
   <div v-if="formattedPrice && currencySymbol" class="gradient-label">
     <span>
-      {{ formattedPrice }}<i :class="classObject">{{ currencySymbol }}</i>
+      {{ formattedPrice
+      }}<i :class="classObject" style="font-style: normal">{{
+        currencySymbol
+      }}</i>
     </span>
   </div>
 </template>
@@ -27,8 +30,7 @@ export default {
   data() {
     return {
       formattedPrice: '',
-      currencySymbol: '',
-      previousCurrency: ''
+      currencySymbol: ''
     }
   },
   computed: {
@@ -46,27 +48,29 @@ export default {
   mounted() {
     this.formatPrice()
   },
+  created() {
+    this.$store.watch(
+      (state, getters) => getters.GET_CURRENCY,
+      (newValue, oldValue) => {
+        this.currencyConverter(this.price, oldValue, newValue)
+      }
+    )
+  },
   methods: {
     formatPrice() {
-      if (this.previousCurrency === '') {
-        this.previousCurrency = this.defaultCurrency
-      }
-
-      return this.$currencyConverter(
-        this.price,
-        this.previousCurrency,
-        this.currency
-      ).then((price) => {
-        let textBeforePrice = this.textBeforePrice
-
-        if (textBeforePrice === '') {
-          textBeforePrice = this.$t('labels.price')
+      this.currencyConverter(this.price, this.defaultCurrency, this.currency)
+    },
+    currencyConverter(price, currencyFrom, currencyTo) {
+      return this.$currencyConverter(price, currencyFrom, currencyTo).then(
+        (price) => {
+          const textBeforePrice =
+            this.textBeforePrice === ''
+              ? this.$t('labels.price')
+              : this.textBeforePrice
+          this.formattedPrice = `${textBeforePrice} ${price} ${this.textAfterPrice}`
+          this.currencySymbol = this.getCurrencySymbol()
         }
-
-        this.formattedPrice = `${textBeforePrice} ${price} ${this.textAfterPrice}`
-        this.currencySymbol = this.getCurrencySymbol()
-        this.previousCurrency = this.currency
-      })
+      )
     },
     getCurrencySymbol() {
       switch (this.currency) {
@@ -86,14 +90,17 @@ export default {
 .gradient-label {
   color: #ffffff;
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 fit(30);
   font-family: $font;
   font-size: 14px;
-  padding: 14px 24px 12px;
   opacity: 0.6;
   border-radius: 14px;
   overflow: hidden;
   letter-spacing: 0.8px;
+  transition: width 200ms ease-in;
 
   span {
     position: relative;
@@ -117,7 +124,7 @@ export default {
 .gel-sign {
   font-family: 'lari-symbol-v2', Arial, 'Times New Roman', 'Bitstream Charter',
     Times, serif;
-  font-style: normal !important;
+  font-style: normal;
 }
 
 .gel-sign.left {

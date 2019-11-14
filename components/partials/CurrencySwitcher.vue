@@ -66,7 +66,7 @@ export default {
   position: relative;
   z-index: 1;
   width: calc(#{fit(80)} + 20px);
-  height: fit(60);
+  height: 42px;
   margin: auto 0;
   padding: 0 10px;
   cursor: pointer;
