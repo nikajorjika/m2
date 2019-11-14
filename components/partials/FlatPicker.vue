@@ -87,7 +87,6 @@ export default {
         .get(`/block/21/${this.block}`)
         .then((response) => {
           this.blockInfo = response.data
-          console.log(this.blockInfo)
           resolve(response)
         })
         .catch((e) => reject(e))
@@ -123,9 +122,11 @@ export default {
       }
     },
     handleClickEvent(e){ 
-      const selected = document.querySelector('g[data-flat].active')
-      if(selected){
-        selected.classList.remove('active')
+      const selected = document.querySelectorAll('g[data-flat].active')
+      if(selected.length){
+        selected.forEach(element => { 
+          element.classList.remove('active')
+        })
       }
       let target = e.target.closest('[data-flat]')
       let flatNumber = target.getAttribute('data-flat')
@@ -134,7 +135,6 @@ export default {
           params: { flat_number: flatNumber }
         })
         .then(({ data }) => {
-          target.classList.add('active')
           if(data.data.length) {
             this.activeFlat = data.data[0]
             this.$emit('flatSelected', flatNumber)
