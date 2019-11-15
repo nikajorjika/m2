@@ -113,7 +113,7 @@ export default {
   .usd,
   .gel {
     width: fit(40);
-    padding-top: 3px;
+    padding-top: 2px;
     text-align: center;
     transition: color 200ms ease-out;
   }

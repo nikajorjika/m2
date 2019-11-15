@@ -128,7 +128,8 @@
     "ModelIndexPage": "Find your new home here!",
     "YouCanSelectMultipe": "You can select multiple",
     "YourChosenFlat": "Your chosen flat",
-    "FlatPagesTitle": "Choose your desire %s"
+    "FlatPagesTitle": "Choose your desire %s",
+    "appliancesPageSubtitle": "Select by same color"
   },
   "addresses": {
     "marshal_gelovani": "Marshal Gelovani Avenue",

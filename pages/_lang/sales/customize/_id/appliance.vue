@@ -4,6 +4,8 @@
       <div class="flat-pages-header">
         <title-with-line class="flat-pages-title" :title="title" />
 
+        <h3 class="flat-pages-subtitle">{{ subtitle }}</h3>
+
         <save-button
           :height="'40px'"
           :padding="'0 21px'"
@@ -204,6 +206,9 @@ export default {
     },
     salesBtnLabel() {
       return this.$t('labels.callSaleManager')
+    },
+    subtitle() {
+      return this.$t('titles.appliancesPageSubtitle')
     }
   },
   mounted() {
@@ -363,13 +368,22 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+
+    .flat-pages-subtitle {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      font: 14px/1 $font;
+      color: #424242;
+    }
   }
 
   .flat-pages-content {
     grid-area: content;
     width: calc(100% + 25px);
-    height: fit(510);
-    margin: auto auto 20px -10px;
+    height: fit(460);
+    margin: fit(50) auto 20px -10px;
     padding: 0 15px 0 10px;
     overflow: auto;
 

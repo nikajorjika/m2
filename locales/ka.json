@@ -182,7 +182,8 @@
     "flat-list-result-title": "თქვენს მიერ არჩეული კრიტერიუმების მიხედვით <br><span class=\"color-orange\">მოიძებნა %s ბინა</span>",
     "FrequentlyAskedQuestions": "ხშირად დასმული კითხვები",
     "ModelIndexPage": "ბინის შერჩევა იწყება აქ!",
-    "FlatPagesTitle": "აირჩიე შენთვის სასურველი %s"
+    "FlatPagesTitle": "აირჩიე შენთვის სასურველი %s",
+    "appliancesPageSubtitle": "მონიშნე სასურველი ერთი ფერი"
   },
   "rooms": {
     "Hall": "ჰოლი",

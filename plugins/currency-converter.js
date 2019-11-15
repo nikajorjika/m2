@@ -16,7 +16,9 @@ export default ({ store }, inject) => {
       // Get currency rate
 
       const { data } = await axios.get(
-        process.env.SERVER_IP + '/currency?currency=' + currency
+        process.env.SERVER_IP.replace(/\/$/, '/') +
+          '/currency?currency=' +
+          currency
       )
 
       const rate = parseFloat(data)

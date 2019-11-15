@@ -11,7 +11,7 @@
               :class="styleType"
             >
               <div class="list-slider__list__item__number" :class="styleType">
-                {{ turnToLeadingZero(index * 9 + (key + 1)) }}
+                {{ turnToLeadingZero(index * 8 + (key + 1)) }}
               </div>
               <div class="list-slider__list__item__label" :class="styleType">
                 {{ option.label }}
@@ -52,10 +52,10 @@ export default {
   },
   computed: {
     length() {
-      return this.roomList.length > 9
+      return this.roomList.length > 8
     },
     items() {
-      return this.roomList.length ? sliceUpArray(this.roomList, 9) : []
+      return this.roomList.length ? sliceUpArray(this.roomList, 8) : []
     }
   },
   methods: {
@@ -74,7 +74,7 @@ export default {
     }
   }
   &__list {
-    padding: 30px 45px 40px 40px;
+    padding: 25px 35px 17px;
     height: 100%;
     box-sizing: border-box;
     &__container {
@@ -86,9 +86,9 @@ export default {
       margin: 9px 0;
       align-items: center;
       &.small {
-        margin: 18px 0;
+        margin: 17px 0;
         &:first-child {
-          margin-top: 5px;
+          margin-top: 0;
         }
       }
       &__number {
@@ -131,6 +131,7 @@ export default {
   }
   .swiper-pagination {
     display: flex;
+    bottom: 17px;
     span {
       width: 10px;
       height: 10px;
