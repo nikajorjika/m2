@@ -11,7 +11,7 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar-with-items :items="items" />
+    <sales-app-sidebar />
     <sale-filter-view>
       <div class="app">
         <nuxt />
@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import Sidebar from '@/components/core/Sidebar'
+import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import SaleFilterView from '@/components/core/SaleFilterView'
 import SidebarWithItems from '@/components/core/SidebarWithItems'
 import PopoverImage from '@/components/partials/PopoverImage'
@@ -29,7 +29,7 @@ import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
 import { mapGetters } from 'vuex'
 export default {
-  components: { SidebarWithItems, SaleFilterView, PopoverImage },
+  components: { SalesAppSidebar, SaleFilterView, PopoverImage },
   props: {
     image: {
       type: String,
