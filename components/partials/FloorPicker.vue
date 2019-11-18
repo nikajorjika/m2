@@ -93,8 +93,8 @@ export default {
   .render__info {
     position: absolute;
     opacity: 0.99;
-    top: 19%;
-    left: 68%;
+    top: 6%;
+    left: 62%;
   }
   .floor-slider {
     position: absolute;
