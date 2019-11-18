@@ -4,6 +4,8 @@
       <div class="flat-pages-header">
         <title-with-line class="flat-pages-title" :title="title" />
 
+        <h3 class="flat-pages-subtitle">{{ subtitle }}</h3>
+
         <save-button
           :height="'40px'"
           :padding="'0 21px'"
@@ -41,17 +43,15 @@
 
       <div class="flat-pages-footer">
         <div class="footer-items">
-          <gradient-label
+          <price
             v-if="price"
-            :text="formattedPrice"
-            class="price-label"
+            :price="price"
+            :text-before-price="$t('labels.price')"
           />
 
-          <gradient-label
-            v-if="itemPrice"
-            :text="formattedItemPrice"
-            class="price-label"
-          />
+          <price v-if="itemPrice" :price="itemPrice" />
+
+          <currency-switcher />
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
@@ -107,7 +107,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import GradientLabel from '@/components/partials/GradientLabel'
 import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import SkipButton from '@/components/partials/SkipButton'
@@ -119,11 +118,12 @@ import ManagerIcon from '@/assets/icons/Manager1.svg'
 import SalesIcon from '@/components/icons/Alone'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
+import Price from '@/components/partials/Price'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   components: {
     TitleWithLine,
-    GradientLabel,
     ButtonMainOrange,
     SkipButton,
     CaretRight,
@@ -133,7 +133,9 @@ export default {
     ManagerIcon,
     SalesIcon,
     SaveButton,
-    SaveIcon
+    SaveIcon,
+    Price,
+    CurrencySwitcher
   },
   layout: 'SalesFlatLayout',
   middleware: 'auth',
@@ -204,6 +206,9 @@ export default {
     },
     salesBtnLabel() {
       return this.$t('labels.callSaleManager')
+    },
+    subtitle() {
+      return this.$t('titles.appliancesPageSubtitle')
     }
   },
   mounted() {
@@ -363,13 +368,22 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+
+    .flat-pages-subtitle {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      font: 14px/1 $font;
+      color: #424242;
+    }
   }
 
   .flat-pages-content {
     grid-area: content;
     width: calc(100% + 25px);
-    height: fit(510);
-    margin: auto auto 20px -10px;
+    height: fit(460);
+    margin: fit(50) auto 20px -10px;
     padding: 0 15px 0 10px;
     overflow: auto;
 
@@ -409,14 +423,6 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-
-      & > :first-child {
-        margin-right: 15px !important;
-      }
-
-      .price-label {
-        margin: auto 0;
-      }
 
       &__controls {
         display: flex;

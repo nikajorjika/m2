@@ -33,13 +33,13 @@
 
       <div class="flat-pages-footer">
         <div class="footer-items">
-          <price v-if="price" :price="price" class="price-label"></price>
-
-          <gradient-label
-            v-if="itemPrice"
-            :text="formattedItemPrice"
-            class="price-label"
+          <price
+            v-if="price"
+            :price="price"
+            :text-before-price="$t('labels.price')"
           />
+
+          <price v-if="itemPrice" :price="itemPrice" />
 
           <currency-switcher />
 
@@ -99,7 +99,6 @@ import { mapGetters, mapActions } from 'vuex'
 import FlatPagesSlider from '@/components/core/FlatPagesSlider'
 import SliderThumbnails from '@/components/partials/SliderThumbnails'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import GradientLabel from '@/components/partials/GradientLabel'
 import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import SkipButton from '@/components/partials/SkipButton'
@@ -119,7 +118,6 @@ export default {
     FlatPagesSlider,
     SliderThumbnails,
     TitleWithLine,
-    GradientLabel,
     ButtonMainOrange,
     SkipButton,
     CaretRight,
@@ -447,14 +445,6 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-
-      & > :first-child {
-        margin-right: 15px !important;
-      }
-
-      .price-label {
-        margin: auto 0;
-      }
 
       &__controls {
         display: flex;

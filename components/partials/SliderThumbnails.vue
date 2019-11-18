@@ -117,7 +117,7 @@ export default {
 
 .slider-thumbnails {
   display: grid;
-  grid-gap: 21px;
+  grid-gap: 15px;
 }
 
 .slider-thumbnail {

@@ -121,7 +121,7 @@ export default {
   display: flex;
   flex-direction: column;
   background: #fff;
-  padding: 27px 17px 16px;
+  padding: 17px;
   height: 100%;
   border-top-left-radius: 17px;
   border-bottom-left-radius: 17px;
@@ -148,10 +148,10 @@ export default {
   }
 
   &__footer {
-    margin-top: 16px;
+    margin: 16px auto 0;
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: calc(100% - 16px);
   }
 }
 </style>
