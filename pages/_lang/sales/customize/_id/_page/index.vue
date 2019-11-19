@@ -250,6 +250,8 @@ export default {
       })
     })
 
+    this.$root.$on('saveFlat', this.saveFlat)
+
     if (this.flat === undefined || !this.flat.length) {
       this.fetchFlat(this.$route.params.id)
     }
@@ -272,6 +274,7 @@ export default {
   },
   beforeDestroy() {
     this.pusher.unsubscribe('confirmSaleUser')
+    this.$root.$off('saveFlat')
   },
   methods: {
     ...mapActions('customize', [

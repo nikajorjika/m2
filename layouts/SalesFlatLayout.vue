@@ -5,18 +5,38 @@
       :image="$store.getters.overlay.image"
       @close="handleClose"
     />
+
     <svg width="0" height="0">
       <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#e26479" />
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
+
     <sidebar-with-items :items="items" />
+
     <sale-filter-view>
       <div class="app">
         <nuxt />
       </div>
     </sale-filter-view>
+
+    <modal>
+      <template>
+        <save-button
+          :width="'200px'"
+          :height="'40px'"
+          :padding="'0 21px'"
+          :label="$t('labels.saveFlat')"
+          :icon-margin-left="'21px'"
+          @regularBtnClick="saveFlat"
+        >
+          <template>
+            <save-icon :width="'17px'" :height="'17px'" />
+          </template>
+        </save-button>
+      </template>
+    </modal>
   </div>
 </template>
 <script>
@@ -24,11 +44,21 @@ import { mapGetters } from 'vuex'
 import SaleFilterView from '@/components/core/SaleFilterView'
 import SidebarWithItems from '@/components/core/SidebarWithItems'
 import PopoverImage from '@/components/partials/PopoverImage'
-import Registration from '@/components/icons/Registration'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
+import Modal from '@/components/partials/Modal'
+import SaveButton from '@/components/partials/RegularButton'
+import SaveIcon from '@/components/icons/SaveIcon'
+
 export default {
-  components: { SidebarWithItems, SaleFilterView, PopoverImage },
+  components: {
+    SidebarWithItems,
+    SaleFilterView,
+    PopoverImage,
+    Modal,
+    SaveButton,
+    SaveIcon
+  },
   props: {
     image: {
       type: String,
@@ -65,6 +95,9 @@ export default {
   methods: {
     handleClose() {
       this.$store.commit('setOverlay', { image: '', open: false })
+    },
+    saveFlat() {
+      this.$root.$emit('saveFlat')
     }
   }
 }

@@ -212,6 +212,8 @@ export default {
     }
   },
   mounted() {
+    this.$root.$on('saveFlat', this.saveFlat)
+
     if (this.flat === undefined || !this.flat.length) {
       this.fetchFlat(this.$route.params.id)
     }
@@ -221,6 +223,9 @@ export default {
     }
 
     this.selectAppliances()
+  },
+  beforeDestroy() {
+    this.$root.$off('saveFlat')
   },
   methods: {
     ...mapActions('customize', ['fetchFlat', 'fetchAppliances']),

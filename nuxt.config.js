@@ -19,7 +19,7 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   router: {
-    middleware: ['i18n', 'currency']
+    middleware: ['i18n', 'currency', 'before-each']
   },
   /*
    ** Customize the progress-bar color
@@ -33,17 +33,22 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/i18n.js',
-    '~/plugins/hammer.js',
+    '~/plugins/i18n',
+    '~/plugins/hammer',
     {
-      src: '~/plugins/nuxt-swiper.js',
+      src: '~/plugins/nuxt-swiper',
       ssr: false
     },
     {
-      src: '~/plugins/currency-converter.js'
+      src: '~/plugins/currency-converter',
+      mode: 'client'
     },
     {
-      src: '~/plugins/pusher.js',
+      src: '~/plugins/pusher',
+      mode: 'client'
+    },
+    {
+      src: '~/plugins/event-bus',
       mode: 'client'
     }
   ],
