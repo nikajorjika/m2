@@ -7,9 +7,9 @@
       <div v-for="(item,index) in checkboxData" :key="index" class="checbox" @click="activate(item)">
         <div class="checkbox-container" :class="{active: activeItems.includes(item.value)}">
           <span class="label">{{ item.name[locale] }}</span>
-          <div class="checbox-icon-container" :class="{ active: activeItems.includes(item.value) }">
+          <div v-if="activeItems.includes(item.value)" class="checbox-icon-container">
             <check-icon 
-              class="checkbox-icon"
+              class="checbox-icon-container__icon"
               icon-color="#f26529"
               width="8px"
               height="7px"
@@ -153,20 +153,17 @@ import CheckIcon from '@/components/icons/Check'
       border-radius: 32px;
       transition: all 0.2s;
       &.active {
-        transform: scale(1.3);
+        transform: scale(1.2);
       }
     }
     .checbox-icon-container {
       display: flex;
-      visibility: hidden;
       border: 1px dashed $orange;
       border-radius: 7px;
       height: 19.8px;
       width: 19.8px;
-      &.active {
-        visibility: visible;
-      }
-      .checkbox-icon {
+      margin-left: 5px;
+      .checbox-icon-container__icon {
         margin: auto;
       }
     }

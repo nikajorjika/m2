@@ -11,7 +11,7 @@
       <div class="page-flat-number__render">
         <filter-render @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
       </div>
-      <!-- <sale-filter-footer :next-url="nextUrl" @skip="skipPrice"/> -->
+      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice"/>
     </div>
   </div>
 </template>

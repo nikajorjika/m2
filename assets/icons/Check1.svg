@@ -3,7 +3,7 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 23.3 19.8" style="enable-background:new 0 0 23.3 19.8;" xml:space="preserve">
 <style type="text/css">
-	.st0{clip-path:url(#SVGID_2_);fill:#4F453C;}
+	.checbox-class-0{clip-path:url(#SVGID_2_);fill:#4F453C;}
 </style>
 <g>
 	<defs>
@@ -12,7 +12,7 @@
 	<clipPath id="SVGID_2_">
 		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
 	</clipPath>
-	<path class="st0" d="M7.6,19.8c-0.3,0-0.5-0.1-0.7-0.3l-6.6-7c-0.4-0.4-0.4-1,0-1.4c0.4-0.4,1-0.4,1.4,0l5.8,6.1l13.9-17
+	<path class="checbox-class-0" d="M7.6,19.8c-0.3,0-0.5-0.1-0.7-0.3l-6.6-7c-0.4-0.4-0.4-1,0-1.4c0.4-0.4,1-0.4,1.4,0l5.8,6.1l13.9-17
 		c0.4-0.4,1-0.5,1.4-0.1c0.4,0.4,0.5,1,0.1,1.4L8.4,19.5C8.2,19.7,7.9,19.8,7.6,19.8L7.6,19.8z"/>
 </g>
 </svg>
