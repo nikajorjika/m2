@@ -172,6 +172,7 @@ export default {
       setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
     handleFloorChosen(floor) {
+      this.activeFloor = floor
       this.setFilterItem({
         key: 'floors',
         value: {
@@ -181,6 +182,7 @@ export default {
       })
     },
     handleFloorSelect(floor) {
+      this.activeFloor = floor
       this.setFilterItem({
         key: 'floors',
         value: {

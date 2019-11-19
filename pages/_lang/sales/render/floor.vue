@@ -33,8 +33,8 @@
       </div>
       <div class="filter-flat__content__render">
         <floor-picker :block="block" 
-          @seleted="handleBlockSelect" 
-          @floorChosen="showFloor" 
+          @seleted="handleBlockSelect"
+          @changeFloor="showFloor" 
           @floorSelect="handleFloorSelect" 
         />
       </div>

@@ -13,7 +13,7 @@
       </linearGradient>
     </svg>
 
-    <sidebar-with-items :items="items" />
+    <sales-app-sidebar />
 
     <sale-filter-view>
       <div class="app">
@@ -42,7 +42,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import SaleFilterView from '@/components/core/SaleFilterView'
-import SidebarWithItems from '@/components/core/SidebarWithItems'
+import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import PopoverImage from '@/components/partials/PopoverImage'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
@@ -52,7 +52,7 @@ import SaveIcon from '@/components/icons/SaveIcon'
 
 export default {
   components: {
-    SidebarWithItems,
+    SalesAppSidebar,
     SaleFilterView,
     PopoverImage,
     Modal,

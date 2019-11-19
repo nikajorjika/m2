@@ -11,25 +11,27 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar-with-items :items="items" />
+    <sales-app-sidebar />
     <sale-filter-view>
       <div class="app">
         <nuxt />
+        <sales-aside-filter class="sidebar-filter" />
       </div>
     </sale-filter-view>
   </div>
 </template>
 <script>
-import Sidebar from '@/components/core/Sidebar'
+import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import SaleFilterView from '@/components/core/SaleFilterView'
 import SidebarWithItems from '@/components/core/SidebarWithItems'
 import PopoverImage from '@/components/partials/PopoverImage'
+import SalesAsideFilter from '@/components/partials/SalesAsideFilter'
 import Registration from '@/components/icons/Registration'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
 import { mapGetters } from 'vuex'
 export default {
-  components: { SidebarWithItems, SaleFilterView, PopoverImage },
+  components: { SalesAppSidebar, SaleFilterView, PopoverImage, SalesAsideFilter },
   props: {
     image: {
       type: String,
@@ -111,6 +113,8 @@ body {
   .app {
     height: calc(100% - 221px);
     background: $bg-color-2;
+    position: relative;
+    overflow: hidden;
     box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
   }
   @keyframes scaleUp {
@@ -120,6 +124,11 @@ body {
     100% {
       transform: scale(1);
     }
+  }
+  .sidebar-filter {
+    position: absolute;
+    right: -318px;
+    top: 14px;
   }
 }
 </style>

@@ -2,7 +2,7 @@
   <svg-icon :stroke="iconColor" :width="width" :height="height" />
 </template>
 <script>
-import SvgIcon from '@/assets/icons/Favourite1.svg'
+import SvgIcon from '@/assets/icons/Sells1.svg'
 export default {
   components: { SvgIcon },
   props: {

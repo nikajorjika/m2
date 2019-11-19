@@ -11,7 +11,7 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar-with-items :items="items" />
+    <sales-app-sidebar />
     <model-view>
       <template v-slot:sessionStatus>
         <session-button />
@@ -25,26 +25,22 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import SidebarWithItems from '@/components/core/SidebarWithItems'
+import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import ModelView from '@/components/core/ModelView'
 import BlockIcon from '@/components/icons/Block'
 import CostIcon from '@/components/icons/Cost'
 import FloorIcon from '@/components/icons/Floor'
 import CompassIcon from '@/components/icons/Compass'
-import QuestionsIcon from '@/components/icons/Questions'
 import Registration from '@/components/icons/Registration'
 import PopoverImage from '@/components/partials/PopoverImage'
 import SessionButton from '@/components/partials/SessionButton'
-import MainIcon from '@/components/icons/Main'
 export default {
   components: {
-    SidebarWithItems,
+    SalesAppSidebar,
     ModelView,
     BlockIcon,
     PopoverImage,
-    MainIcon,
     SessionButton,
-    QuestionsIcon,
     CostIcon,
     Registration,
     FloorIcon,
@@ -66,35 +62,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ locale: 'locale' }),
-    items() {
-      return [
-        {
-          title: {
-            en: 'Main',
-            ka: 'მთავარი'
-          },
-          path: `/${this.locale}/sales`,
-          component: MainIcon
-        },
-        // {
-        //   title: {
-        //     en: 'REGISTER',
-        //     ka: 'რეგისტრაცია'
-        //   },
-        //   path: `/${this.locale}/sales/registration`,
-        //   component: Registration
-        // },
-        // {
-        //   title: {
-        //     en: 'FAQ',
-        //     ka: 'კითხვები'
-        //   },
-        //   path: `/${this.locale}/model/faq`,
-        //   component: QuestionsIcon
-        // }
-      ]
-    }
+    ...mapGetters({ locale: 'locale' })
   },
   methods: {
     handleClose() {

@@ -11,7 +11,7 @@
         <stop offset="100%" stop-color="#684f78" />
       </linearGradient>
     </svg>
-    <sidebar-with-items :items="items" />
+    <sales-app-sidebar />
     <model-view>
       <template v-slot:sessionStatus>
         <session-button class="sales-session-button" />
@@ -25,7 +25,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import SidebarWithItems from '@/components/core/SidebarWithItems'
+import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import ModelView from '@/components/core/ModelView'
 import InlineFilterNavigation from '@/components/core/InlineFilterNavigation'
 import BlockIcon from '@/components/icons/Block'
@@ -43,7 +43,7 @@ import MainIcon from '@/components/icons/Main'
 import SessionButton from '@/components/partials/SessionButton'
 export default {
   components: {
-    SidebarWithItems,
+    SalesAppSidebar,
     ModelView,
     InlineFilterNavigation,
     BlockIcon,

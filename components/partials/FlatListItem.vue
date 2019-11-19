@@ -21,6 +21,10 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    customRedirectRoute: {
+      type: String,
+      default: null
     }
   },
   computed: {
@@ -28,7 +32,7 @@ export default {
       locale: 'locale'
     }),
     redirectRoute() {
-      return `/${this.locale}/model/flat/${this.item.id}`
+      return this.customRedirectRoute === null ? `/${this.locale}/model/flat/${this.item.id}` : this.customRedirectRoute
     },
     floor() {
       return this.item.floor.hasOwnProperty('number')

@@ -96,7 +96,7 @@ export default {
     }),
     handleFilter() {
       this.$router.push({
-        name: 'lang-model-list',
+        name: 'lang-sales-list',
         params: { lang: this.locale }
       })
     },
