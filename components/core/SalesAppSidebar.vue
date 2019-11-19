@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <nuxt-link class="link" :to="homepage">
+    <nuxt-link class="link" :to="logoLink">
       <logo class="sidebar__logo" />
     </nuxt-link>
     <div class="sidebar__list">
@@ -60,6 +60,9 @@ export default {
     ...mapGetters(['locale']),
     isSales() {
       return !this.$cookies.get('paveleon-planshet')
+    },
+    logoLink() {
+      return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
     },
     items() {
       return [
