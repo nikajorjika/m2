@@ -57,7 +57,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      locale: 'locale'
+      locale: 'locale',
+      filters: 'Filter/filters'
     }),
     nextUrl() {
       return `/${this.locale}/sales/filter/floor`
@@ -79,7 +80,9 @@ export default {
       this.setloader(true)
     },
     handleBlockChange(value) {
-      this.setloader(true)
+      if(this.filters.block === value) { 
+        this.setloader(false)
+      }
       this.setFilter({
         key: 'block',
         value

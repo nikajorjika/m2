@@ -13,7 +13,11 @@
           @regularBtnClick="saveFlat"
         >
           <template>
-            <save-icon :width="'17px'" :height="'17px'" />
+            <save-icon 
+              width="17px"
+              height="17px"
+              color="#fff"
+             />
           </template>
         </save-button>
       </div>
