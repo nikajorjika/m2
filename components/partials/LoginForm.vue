@@ -3,6 +3,7 @@
     <div class="confirm-form__input">
       <input
         v-model="phone"
+        ref="phone"
         type="text"
         :placeholder="$t('labels.phone')"
         @input="handleInput"
@@ -47,6 +48,9 @@ export default {
       },
       showErrors: false
     }
+  },
+  mounted() {
+    this.$refs.phone.focus()
   },
   methods: {
     handleInput() {

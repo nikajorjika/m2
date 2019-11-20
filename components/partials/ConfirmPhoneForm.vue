@@ -3,6 +3,7 @@
     <div class="confirm-form__input">
       <input
         v-model="code"
+        ref="code"
         type="text"
         placeholder="XXXX"
         @input="handleInput"
@@ -54,6 +55,9 @@ export default {
       },
       showErrors: false
     }
+  },
+  mounted() {
+    this.$refs.code.focus()
   },
   methods: {
     handleInput() {
