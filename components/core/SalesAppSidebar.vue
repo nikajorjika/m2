@@ -79,7 +79,7 @@ export default {
             en: 'Favourites',
             ka: 'ფავორიტები'
           },
-          path: `/${this.locale}/sales`,
+          path: `/${this.locale}/sales/favourites`,
           component: Favourite
         },
         {
