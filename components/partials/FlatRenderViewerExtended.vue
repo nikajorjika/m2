@@ -154,9 +154,7 @@ export default {
     width: calc(100% - 16px);
   }
 }
-</style>
 
-<style lang="scss">
 .switch {
   display: flex;
   width: 100%;
