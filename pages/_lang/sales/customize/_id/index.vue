@@ -12,6 +12,7 @@
           <list-card :items="listCardData" />
 
           <gradient-progress
+            v-if="flatExists"
             class="filter-render__aside__progress"
             :label="$t('labels.building_progress')"
             :min="0"
@@ -23,13 +24,14 @@
 
         <div class="filter-flat__content__render">
           <render-viewer
+            v-if="flatExists"
             class="flat-viewer"
             :images="images"
             :gradient-text="imageLabel"
           />
 
           <room-list-component
-            v-if="rooms.length"
+            v-if="flatExists && rooms.length"
             class="room-list-slider"
             style-type="small"
             :room-list="rooms"
@@ -45,7 +47,7 @@
             :text-before-price="$t('labels.price')"
           />
 
-          <currency-switcher />
+          <currency-switcher v-if="flatExists" />
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">

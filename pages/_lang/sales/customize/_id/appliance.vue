@@ -7,6 +7,7 @@
         <h3 class="flat-pages-subtitle">{{ subtitle }}</h3>
 
         <save-button
+          v-if="flatExists"
           :height="'40px'"
           :padding="'0 21px'"
           :label="$t('labels.saveFlat')"
@@ -20,7 +21,10 @@
       </div>
 
       <div class="flat-pages-content">
-        <ul v-if="items && items.length" class="slider-thumbnails">
+        <ul
+          v-if="flatExists && items && items.length"
+          class="slider-thumbnails"
+        >
           <li
             v-for="(item, index) in items"
             :key="item.id"
@@ -49,9 +53,9 @@
             :text-before-price="$t('labels.price')"
           />
 
-          <price v-if="itemPrice" :price="itemPrice" />
+          <price v-if="flatExists && itemPrice" :price="itemPrice" />
 
-          <currency-switcher />
+          <currency-switcher v-if="flatExists" />
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
@@ -77,6 +81,7 @@
       <template>
         <div class="sales">
           <illustrated-button
+            v-if="flatExists"
             :label="salesBtnLabel"
             @click.native.prevent="summonSale"
           >

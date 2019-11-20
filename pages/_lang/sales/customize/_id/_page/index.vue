@@ -5,6 +5,7 @@
         <title-with-line class="flat-pages-title" :title="title" />
 
         <save-button
+          v-if="flatExists"
           :height="'40px'"
           :padding="'0 21px'"
           :label="$t('labels.saveFlat')"
@@ -18,6 +19,7 @@
       </div>
 
       <flat-pages-slider
+        v-if="flatExists"
         :items="images"
         :price="price"
         class="flat-pages-content"
@@ -39,9 +41,9 @@
             :text-before-price="$t('labels.price')"
           />
 
-          <price v-if="itemPrice" :price="itemPrice" />
+          <price v-if="flatExists && itemPrice" :price="itemPrice" />
 
-          <currency-switcher />
+          <currency-switcher v-if="flatExists" />
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
@@ -67,6 +69,7 @@
       <template>
         <div class="sales">
           <illustrated-button
+            v-if="flatExists"
             :label="salesBtnLabel"
             @click.native.prevent="summonSale"
           >
