@@ -13,11 +13,7 @@
           @regularBtnClick="saveFlat"
         >
           <template>
-            <save-icon 
-              width="17px"
-              height="17px"
-              color="#fff"
-             />
+            <save-icon width="17px" height="17px" color="#fff" />
           </template>
         </save-button>
       </div>
@@ -39,13 +35,13 @@
 
       <div class="flat-pages-footer">
         <div class="footer-items">
-          <price
+          <price-container
             v-if="price"
             :price="price"
             :text-before-price="$t('labels.price')"
           />
 
-          <price v-if="flatExists && itemPrice" :price="itemPrice" />
+          <price-container v-if="flatExists && itemPrice" :price="itemPrice" />
 
           <currency-switcher v-if="flatExists" />
 
@@ -117,7 +113,7 @@ import ManagerIcon from '@/assets/icons/Manager1.svg'
 import SalesIcon from '@/components/icons/Alone'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
-import Price from '@/components/partials/Price'
+import PriceContainer from '@/components/partials/Price'
 import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
@@ -135,7 +131,7 @@ export default {
     SalesIcon,
     SaveButton,
     SaveIcon,
-    Price,
+    PriceContainer,
     CurrencySwitcher
   },
   layout: 'SalesFlatLayout',
