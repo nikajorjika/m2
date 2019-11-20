@@ -1,5 +1,5 @@
 <template>
-  <Icon :width="width" :height="height" :fill="color"></Icon>
+  <Icon :width="width" :height="height" :stroke="color"></Icon>
 </template>
 
 <script>
