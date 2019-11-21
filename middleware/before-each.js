@@ -12,9 +12,11 @@ export default function({ app }) {
 
       if (pattern.test(from.fullPath)) {
         if (!pattern.test(to.fullPath)) {
-          app.$eventBus.$emit('openModal')
+          if (!to.query.redirect) {
+            app.$eventBus.$emit('openModal')
 
-          return next(false)
+            return next(false)
+          }
         }
       }
 

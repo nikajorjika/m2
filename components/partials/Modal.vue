@@ -28,6 +28,11 @@ export default {
     },
     closeModal() {
       this.$el.classList.remove('active')
+
+      this.$router.push({
+        path: this.$router.history.pending.fullPath,
+        query: { redirect: 1 }
+      })
     }
   }
 }

@@ -41,7 +41,7 @@
 
       <div class="filter-flat__footer">
         <div class="footer-items">
-          <price
+          <price-container
             v-if="price"
             :price="price"
             :text-before-price="$t('labels.price')"
@@ -94,7 +94,7 @@ import SkipButton from '@/components/partials/SkipButton'
 import CaretRight from '@/components/icons/CaretRight'
 import AppFooter from '@/components/partials/AppFooter'
 import PromptAlert from '@/components/partials/PromptAlert'
-import Price from '@/components/partials/Price'
+import PriceContainer from '@/components/partials/Price'
 import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
@@ -113,7 +113,7 @@ export default {
     CaretRight,
     AppFooter,
     PromptAlert,
-    Price,
+    PriceContainer,
     CurrencySwitcher
   },
   computed: {
