@@ -6,6 +6,7 @@ export default {
       locale: 'locale'
     })
   },
+  layout: 'SalesWithoutNavigation',
   mounted() {
     this.$router.push({
       name: 'lang-sales-login',

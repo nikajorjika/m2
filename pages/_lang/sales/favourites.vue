@@ -29,7 +29,7 @@ export default {
         FlatCard,
         TitleWithLine
     },
-    // middleware: 'auth',
+    middleware: 'auth',
     layout: 'SalesWithoutNavigation',
     data() {
         return {
