@@ -47,6 +47,7 @@ export const state = () => ({
     color: null
   },
   filterDefaults: {
+    block: null,
     min_floor: null,
     max_floor: null,
     max_price: null,
@@ -102,6 +103,7 @@ export const mutations = {
     state.filters.floors.max = data.max_floor
     state.filters.price.max = data.max_price
     state.filters.price.min = data.min_price
+    state.filters.block = null
     state.filters.view = []
     state.filters.building_progress = []
     state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
