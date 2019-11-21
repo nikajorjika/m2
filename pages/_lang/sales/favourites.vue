@@ -47,25 +47,22 @@ export default {
     computed: {
         ...mapGetters({
             locale: 'locale',
-        }),
-        flats() {
-            return this.flats.map((item) => {
-                return {
-                    title: item.project_name[this.locale],
-                    price: `${item.price} $`,
-                    image: item.render_url,
-                    url: `/${this.locale}/sales/customize/${item.id}`,
-                    subTitle: this.$t('titles.FlatCardSubTitle').replace('%s',item.total_area)
-                }
-            })
-        }
+        })
     },
     methods: {
         fetchFreshFlatData() {
             this.loading = true
             const userId = this.$auth.$state.user.id
-            this.$axios(`/user/${userId}/saved-flats`).then(repsonse => {
-              console.log(response)
+            this.$axios(`/user/${userId}/saved-flats`).then(({data}) => {
+              this.flats = data.map(item => {
+                return {
+                    title: item.flat.project_name[this.locale],
+                    price: `${item.flat.price} $`,
+                    image: item.flat.render_url,
+                    url: `/${this.locale}/sales/customize/${item.flat.id}`,
+                    subTitle: this.$t('titles.FlatCardSubTitle').replace('%s',item.flat.total_area)
+                }
+              })
             })
             this.loading = false
         }

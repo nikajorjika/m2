@@ -112,6 +112,9 @@ export default {
   }
   &__sales {
     margin: auto auto 36px;
+    @media screen and (max-height: 628px) {
+      display: none;
+    }
     &__button {
       background: $orange;
       border: none;    
