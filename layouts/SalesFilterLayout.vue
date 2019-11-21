@@ -29,7 +29,7 @@ import SalesAsideFilter from '@/components/partials/SalesAsideFilter'
 import Registration from '@/components/icons/Registration'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   components: { SalesAppSidebar, SaleFilterView, PopoverImage, SalesAsideFilter },
   props: {
@@ -42,8 +42,15 @@ export default {
       default: false
     }
   },
+  beforeDestroy () {
+    this.setFilterDefaults(this.filterDefaults)
+  },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters({
+      locale: 'locale',
+      filterDefaults: 'Filter/filterDefaults',
+      defaultFilters: 'Filter/defaultFilters'
+    }),
     items() {
       return [
         {
@@ -74,6 +81,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
+    }),
     handleClose() {
       this.$store.commit('setOverlay', { image: '', open: false })
     }

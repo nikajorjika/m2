@@ -1,6 +1,6 @@
 <template>
   <div class="flat">
-      <div class="flat__image">
+      <div class="flat__image" @click="goToFlat">
           <div v-if="loading" class="loading"> </div>
           <img v-else :src="image" :alt="title">
       </div>

@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import ModelView from '@/components/core/ModelView'
 import BlockIcon from '@/components/icons/Block'
@@ -60,8 +60,11 @@ export default {
       default: false
     }
   },
+  beforeDestroy () {
+    this.setFilterDefaults(this.filterDefaults)
+  },
   computed: {
-    ...mapGetters({ locale: 'locale' }),
+    ...mapGetters({ locale: 'locale', filterDefaults: 'Filter/filterDefaults' }),
     items() {
       return [
         {
@@ -84,6 +87,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
+    }),
     handleClose() {
       this.$store.commit('setOverlay', { image: '', open: false })
     }
