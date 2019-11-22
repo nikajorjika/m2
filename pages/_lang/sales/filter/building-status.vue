@@ -29,7 +29,7 @@ export default {
     SaleFilterFooter
   },
   layout: 'SalesFilterLayout',
-  middleware: 'auth',
+  middleware: 'isAuth',
   data() {
     return {
       pickerData: [

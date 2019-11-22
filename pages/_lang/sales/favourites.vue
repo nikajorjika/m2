@@ -29,7 +29,7 @@ export default {
         FlatCard,
         TitleWithLine
     },
-    middleware: 'auth',
+    middleware: 'isAuth',
     layout: 'SalesWithoutNavigation',
     data() {
         return {
@@ -63,8 +63,8 @@ export default {
                     subTitle: this.$t('titles.FlatCardSubTitle').replace('%s',item.flat.total_area)
                 }
               })
+              this.loading = false
             })
-            this.loading = false
         }
     }
 }

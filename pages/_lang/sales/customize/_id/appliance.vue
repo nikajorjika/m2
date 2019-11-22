@@ -143,7 +143,7 @@ export default {
     CurrencySwitcher
   },
   layout: 'SalesFlatLayout',
-  middleware: 'auth',
+  middleware: 'isAuth',
   data() {
     return {}
   },

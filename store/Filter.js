@@ -248,13 +248,14 @@ export const actions = {
       building_progress
     } = getters.filters
     const views = getters.filters.view.map((item) => item.value)
+    const bedroomCount = bedroom_count.map((item) => item.hasOwnProperty('value') ? item.value : parseInt(item) )
     const params = {
       block_id: block,
       max_price: price.max,
       min_price: price.min,
       max_floor: floors.max,
       min_floor: floors.min,
-      bedroom_count,
+      bedroom_count: bedroomCount,
       type,
       wc,
       building_progress,

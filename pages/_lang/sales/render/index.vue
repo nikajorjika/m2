@@ -86,7 +86,7 @@ import FlatPicker from '@/components/partials/FlatPicker'
 
 export default {
   layout: 'RenderFilterLayout',
-  middleware: 'auth',
+  middleware: 'isAuth',
   components: {
     TitleWithLine,
     RenderViewer,

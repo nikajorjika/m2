@@ -38,7 +38,7 @@ export default {
     SaleFilterFooter,
     TitleWithLine,
   },
-  middleware: 'auth',
+  middleware: 'isAuth',
   layout: 'SalesFilterLayout',
   computed: {
     ...mapGetters({
@@ -57,7 +57,16 @@ export default {
       return this.filterDefaults.max_floor
     },
     nextUrl() {
-      return `/${this.locale}/sales/filter/list`
+      const filterString = JSON.stringify(this.filters)
+      return {
+        name: 'lang-sales-filter-list',
+        params: {
+          lang: this.locale
+        },
+        query: {
+          filters: filterString
+        }
+      }
     }
   },
   methods: {

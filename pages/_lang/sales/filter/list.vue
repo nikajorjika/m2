@@ -29,11 +29,11 @@ export default {
         FlatCard,
         TitleWithLine
     },
-    middleware: 'auth',
+    middleware: 'isAuth',
     watch: {
         computedFilters: {
             handler: 'fetchFreshFlatData',
-            immediate: true
+            immediate: false
         }
     },
     layout: 'WithInlineFilters',
@@ -45,9 +45,6 @@ export default {
         }
     },
     computed: {
-        ...mapMutations({
-            setLoader: 'Filter/SET_FILTER_LOADER'
-        }),
         ...mapGetters({
             locale: 'locale',
             filters: 'Filter/filters',
@@ -68,7 +65,22 @@ export default {
             })
         }
     },
+    mounted() {
+        if(this.$route.query.hasOwnProperty('filters')){
+            const filters = JSON.parse(this.$route.query.filters)
+            filters.min_floor = filters.floors.min
+            filters.max_floor = filters.floors.max
+            filters.min_price = filters.price.min
+            filters.max_price = filters.price.max
+            this.setFilters(filters)
+        }
+        this.fetchFreshFlatData()
+    },
     methods: {
+        ...mapMutations({
+            setLoader: 'Filter/SET_FILTER_LOADER',
+            setFilters: 'Filter/SET_FILTERS_BULK'
+        }),
         ...mapActions({
             fetchFlats: 'Filter/fetchFilteredFlats'
         }),

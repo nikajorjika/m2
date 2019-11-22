@@ -38,7 +38,7 @@ export default {
     TitleWithLine,
   },
   layout: 'SalesFilterLayout',
-  middleware: 'auth',
+  middleware: 'isAuth',
   computed: {
     ...mapGetters({
       locale: 'locale',
