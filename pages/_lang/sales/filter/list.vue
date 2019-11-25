@@ -68,6 +68,7 @@ export default {
     mounted() {
         if(this.$route.query.hasOwnProperty('filters')){
             const filters = JSON.parse(this.$route.query.filters)
+            filters.block = filters.block
             filters.min_floor = filters.floors.min
             filters.max_floor = filters.floors.max
             filters.min_price = filters.price.min

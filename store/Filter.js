@@ -114,15 +114,22 @@ export const mutations = {
     state.chosenBlockNumber = data
   },
   SET_FILTERS_BULK: (state, data) => {
-    state.filters.floors.min = data.min_floor
-    state.filters.floors.max = data.max_floor
-    state.filters.price.max = data.max_price
-    state.filters.price.min = data.min_price
-    state.filters.view = []
-    state.filters.building_progress = []
-    state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
-    state.filters.type = data.hasOwnProperty('type') && data.type ? data.type : null
-    state.filters.wc = data.hasOwnProperty('wc') && data.wc ? data.wc : null
+    state.filters = {
+      block: data.hasOwnProperty('block') ? data.block : null,
+      floors: {
+        min: data.min_floor,
+        max: data.max_floor
+      },
+      price: {
+        min: data.min_price,
+        max: data.max_price
+      },
+      view: data.hasOwnProperty('view') ? data.view : null,
+      bedroom_count: data.hasOwnProperty('bedroom_count') ? data.bedroom_count : [],
+      building_progress: data.hasOwnProperty('building_progress') ? data.building_progress : [],
+      type: data.hasOwnProperty('type') && data.type ? data.type : null,
+      wc: data.hasOwnProperty('wc') && data.wc ? data.wc : null
+    }
   },
   // eslint-disable-next-line object-shorthand
   SET_MODEL_API_DATA: function(state, flats) {
