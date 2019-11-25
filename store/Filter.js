@@ -124,7 +124,7 @@ export const mutations = {
         min: data.min_price,
         max: data.max_price
       },
-      view: data.hasOwnProperty('view') ? data.view : null,
+      view: data.hasOwnProperty('view') ? data.view : [],
       bedroom_count: data.hasOwnProperty('bedroom_count') ? data.bedroom_count : [],
       building_progress: data.hasOwnProperty('building_progress') ? data.building_progress : [],
       type: data.hasOwnProperty('type') && data.type ? data.type : null,

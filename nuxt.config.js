@@ -88,6 +88,13 @@ module.exports = {
         tokenRequired: true,
         tokenType: 'bearer'
       }
+    },
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+        maxAge: 3600
+      },
     }
   },
 
