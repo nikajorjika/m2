@@ -18,9 +18,11 @@
 export default {
   mounted() {
     this.$eventBus.$on('openModal', this.openModal)
+    this.$eventBus.$on('closeModal', this.closeModal)
   },
   beforeDestroy() {
     this.$eventBus.$off('openModal')
+    this.$eventBus.$off('closeModal')
   },
   methods: {
     openModal() {

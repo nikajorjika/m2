@@ -233,9 +233,10 @@ export default {
     ...mapActions('customize', ['fetchFlat', 'fetchAppliances']),
     formatPrice,
     nextBtnClickHandler() {
-      this.$emit('next')
-
-      this.$router.push(this.nextBtnUrl)
+      this.$router.push({
+        path: this.nextBtnUrl,
+        query: { redirect: 0 }
+      })
     },
     generateTextBasedOnColor(id) {
       const planshetsObject = {
@@ -290,7 +291,9 @@ export default {
             appliances_ids: this.appliancesIds
           })
           .then((response) => {
-            if (response.status === 200 && response.success) {
+            if (response.status === 200 && response.data.success) {
+              this.$eventBus.$emit('closeModal')
+
               resolve(response)
             }
           })
