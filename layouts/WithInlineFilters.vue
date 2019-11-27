@@ -17,7 +17,7 @@
         <session-button class="sales-session-button" />
       </template>
       <div class="app">
-        <inline-filter-navigation @change="handleFiltersChange"/>
+        <inline-filter-navigation class="page-with-margin" @change="handleFiltersChange"/>
         <nuxt />
       </div>
     </model-view>
@@ -111,6 +111,9 @@ export default {
 <style lang="scss" scoped>
 body {
   background: #fff;
+  .page-with-margin {
+    margin-top: 16px;
+  }
   .gradient-line {
     height: 6px;
     background: linear-gradient(45deg, #f26529 0%, #f6a646 100%);
