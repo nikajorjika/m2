@@ -61,7 +61,7 @@ import FloorPicker from '@/components/partials/FloorPicker'
 
 export default {
   layout: 'RenderFilterLayout',
-  middleware: 'auth',
+  middleware: 'isAuth',
   components: {
     TitleWithLine,
     RenderViewer,
@@ -132,7 +132,7 @@ export default {
     showFloor(floor) {
       this.floor = floor
     },
-    orSelect(floor) {
+    handleFloorSelect(floor) {
       this.setFilterItem({
         key: 'floors',
         value: {

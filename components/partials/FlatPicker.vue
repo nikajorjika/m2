@@ -1,6 +1,6 @@
 <template>
   <div class="floor-picker">
-    <component :is="render" class="render-svg"/>
+    <component :is="render" class="flat-picker render-svg"/>
     <transition name="fade">
       <div
         v-if="activeFlat"
@@ -105,12 +105,24 @@ export default {
       if(this.renderList.length === 0) {
         setTimeout(() => {
           this.registerEvents()
+          this.fetchFlatStatuses()
         }, 200)
       }else {
         this.renderList.forEach(element => {
             element.addEventListener('click', this.chooseFlat)
         });
       }
+    },
+    fetchFlatStatuses() {
+      this.$axios.get(`get/floor/${this.block}/${this.floor}`)
+        .then(({data}) => {
+          data.map((item) => {
+            const domObject = document.querySelector(`g[data-flat="${item.flat_number}"]`)
+            if(domObject && item.status && item.status.hasOwnProperty('en')) {
+              domObject.classList.add(item.status.en)
+            }
+          })
+        })
     },
     chooseFlat(e) {
       if(!this.blockInfo) {
@@ -265,15 +277,36 @@ export default {
 }
 </style>
 <style lang="scss">
-g[data-flat],
-g[data-flat]
-polygon {
-  fill: grey !important;
-}
-g[data-flat].active,
-g[data-flat]:hover{ 
+.flat-picker  {
+  g[data-flat],
+  polygon,
+  g[data-flat]
   polygon {
+    fill: #8393ca !important;
+  }
+  g[data-flat].for_sale {
     fill: $orange !important;
+    polygon {
+      fill: $orange !important;
+    }
+  }
+  g[data-flat].sold {
+    fill: #8393ca !important;
+    polygon {
+      fill: #8393ca !important;
+    }
+  }
+  g[data-flat].reserved {
+    fill: #bd8cbf !important;
+    polygon {
+      fill: #bd8cbf !important;
+    }
+  }
+  g[data-flat].sold.active,
+  g[data-flat].sold:hover{ 
+    polygon {
+      fill: $orange !important;
+    }
   }
 }
 </style>

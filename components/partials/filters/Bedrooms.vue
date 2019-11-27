@@ -87,6 +87,7 @@ export default {
                 key: 'bedroom_count',
                 value: [...activeItems]
             })
+            this.$emit('change')
         },
         isActive(item) {
             return this.activeItems.includes(item)

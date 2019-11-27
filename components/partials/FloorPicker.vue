@@ -94,7 +94,7 @@ export default {
     position: absolute;
     opacity: 0.99;
     top: 6%;
-    left: 62%;
+    left: 55%;
   }
   .floor-slider {
     position: absolute;

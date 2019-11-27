@@ -27,7 +27,7 @@
       </nuxt-link>
     </div>
     <div class="sidebar__sales">
-      <button class="sidebar__sales__button">
+      <button class="sidebar__sales__button" @click="callForSales">
         <sells-icon 
             icon-color="white"
             width="12px"
@@ -54,6 +54,11 @@ export default {
     homepage: {
       type: [String, Object],
       default: ''
+    }
+  },
+  data() {
+    return {
+      planshetId: this.$cookies.get('paveleon-planshet')
     }
   },
   computed: {
@@ -92,7 +97,27 @@ export default {
         }
       ]
     }
-  }
+  },
+  methods: {
+    callForSales() {
+      this.$axios
+        .post('/user/summon-sale', {
+          flat_id: null,
+          planshet_id: this.planshetId
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            this.$router.push({
+              name: 'lang-sales-waiting',
+              params: { lang: this.locale }
+            })
+          }
+        })
+        .catch((e) => {
+          reject(e)
+        })
+    }
+  },
 }
 </script>
 
@@ -112,6 +137,9 @@ export default {
   }
   &__sales {
     margin: auto auto 36px;
+    @media screen and (max-height: 628px) {
+      display: none;
+    }
     &__button {
       background: $orange;
       border: none;    
@@ -124,6 +152,7 @@ export default {
       font-weight: bold;    
       font-size: 10px;
       letter-spacing: 0.6px;
+      outline: none;
       span {
         margin-top: 8px;
         display: block;

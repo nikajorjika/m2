@@ -13,6 +13,7 @@
       </div>
       <div v-else class="page-flat-number__confirm">
         <confirm-phone-form
+          :button-text="$t('buttons.register')"
           @submit="handleSendVerifyPhoneRequest"
           @resend="handleResendVerifyPhoneRequest"
         />

@@ -2,7 +2,7 @@
   <div class="building-status">
     <div class="checkboxes">
         <div v-for="(item, index) in checkData" :key="index" class="custom-checkbox">
-            <checkbox-component :value="item" :checked="true" :label="item.name" @check="handleCheck"/>
+            <checkbox-component :value="item" :checked="isActive(item)" :label="item.name" @check="handleCheck"/>
         </div>
     </div>
     <div class="submit-filter">
@@ -23,7 +23,7 @@
 import CheckboxComponent from '@/components/partials/filters/partials/checkbox'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import CaretRight from '@/components/icons/CaretRight'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
     components: {
         CaretRight,
@@ -32,11 +32,23 @@ export default {
     },
     data() {
         return {
-            activeItems: [],
+            activeItem: null,
             checkData: [
+                // {
+                //     name: this.$t('addresses.m3_gelovani'),
+                //     value: 0
+                // }
                 {
-                    name: this.$t('addresses.m3_gelovani'),
-                    value: 0
+                    name: `I ${this.$t('labels.block')}`,
+                    value: 45
+                },
+                {
+                    name: `II ${this.$t('labels.block')}`,
+                    value: 46
+                },
+                {
+                    name: `III ${this.$t('labels.block')}`,
+                    value: 47
                 }
             ],
         }
@@ -47,24 +59,24 @@ export default {
         })
     },
     mounted() {
-        console.log(this.filters)
-        this.activeItems = this.checkData.filter(item  => this.filters.bedroom_count.includes(item.value))
+        this.activeItem = this.checkData.find(item  => parseInt(this.filters.block) === parseInt(item.value))
     },
     methods: {
+        ...mapMutations({
+            setFilter: 'Filter/SET_FILTER_ITEM'
+        }),
         handleCheck(data) {
-            if(this.activeItems.includes(data)) {
-                this.activeItems = this.activeItems.filter(item => {
-                    return item.value !== data.value
-                })
-            }else {
-                this.activeItems.push(data)
-            }
+            this.activeItem = this.activeItem === data ? null : data
         },
         handleFilter() {
-
+          this.setFilter({
+            key: 'block',
+            value: this.activeItem.value
+          })
+          this.$emit('change')
         },
         isActive(item) {
-            return this.activeItems.includes(item)
+            return this.activeItem === item
         }
     }
 }

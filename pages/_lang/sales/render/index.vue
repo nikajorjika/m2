@@ -86,7 +86,7 @@ import FlatPicker from '@/components/partials/FlatPicker'
 
 export default {
   layout: 'RenderFilterLayout',
-  middleware: 'auth',
+  middleware: 'isAuth',
   components: {
     TitleWithLine,
     RenderViewer,
@@ -166,6 +166,9 @@ export default {
   mounted () {
     this.setFilterDefaults(this.filterDefaults)
   },
+  destroyed () {
+    this.setFilterDefaults(this.filterDefaults)
+  },
   methods: {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM',
@@ -224,6 +227,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.render-page {
+  margin-top: 16px; 
+}
 .filter-flat {
   height: 580px;
   width: 100%;

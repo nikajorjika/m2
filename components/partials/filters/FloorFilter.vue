@@ -74,6 +74,7 @@ export default {
           key: 'floors',
           value: this.selected
         })
+        this.$emit('change')
     }
   }
 }

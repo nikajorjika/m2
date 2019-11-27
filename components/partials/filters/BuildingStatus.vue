@@ -75,6 +75,7 @@ export default {
                 key: 'building_progress',
                 value: this.activeItems.map(item => item.value)
             })
+            this.$emit('change')
         },
         isActive(item) {
             return this.activeItems.includes(item)

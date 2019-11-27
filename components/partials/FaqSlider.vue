@@ -14,7 +14,7 @@
           >
             <h3>
               <span class="faq-slider__swiper-slide__numeration">{{
-                turnToLeadingZero(index * 4 + (i + 1))
+                turnToLeadingZero(index * 3 + (i + 1))
               }}</span>
               <span>{{ labelOrLocaledLabel(question, 'title') }}</span>
             </h3>
@@ -76,12 +76,12 @@ export default {
   .swiper-page {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
   }
   .swiper-wrapper {
     height: calc(100% - 36px);
   }
   &__swiper-slide {
+    margin-bottom: 10px;
     &__numeration {
       margin-right: 20px;
       background: #fff;
@@ -120,22 +120,24 @@ export default {
 }
 </style>
 <style lang="scss">
-.swiper-container {
-  height: 100%;
-}
-.swiper-pagination {
-  display: flex;
-  span {
-    width: 10px;
-    height: 10px;
+.faq-slider {
+  .swiper-container {
+    height: 100%;
   }
-  .swiper-pagination-bullet {
-    background: #4b3f99;
-    opacity: 0.15;
-    margin-right: 6px;
-    &.swiper-pagination-bullet-active {
+  .swiper-pagination {
+    display: flex;
+    span {
+      width: 10px;
+      height: 10px;
+    }
+    .swiper-pagination-bullet {
       background: #4b3f99;
-      opacity: 0.5;
+      opacity: 0.15;
+      margin-right: 6px;
+      &.swiper-pagination-bullet-active {
+        background: #4b3f99;
+        opacity: 0.5;
+      }
     }
   }
 }

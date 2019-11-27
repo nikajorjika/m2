@@ -67,10 +67,10 @@
     "register": "რეგისტრაცია",
     "see": "ნახე",
     "skip": "გამოტოვება",
-    "ConfirmPhone": "რეგისტრაცია",
-    "search": "ძებნა",
     "callSalesManager": "გამოიძახე გაყიდვები",
-    "reservationRequest": "ჯავშნის მოთხოვნა"
+    "reservationRequest": "ჯავშნის მოთხოვნა",
+    "ConfirmPhone": "ავტორიზაცია",
+    "search": "ძებნა"
   },
   "labels": {
     "FullArea": "სრული ფართი",
@@ -157,6 +157,7 @@
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",
     "IAmLookingFor": "მე ვეძებ ბინას",
+    "FavouriteFlats": "შერჩეული ბინები",
     "PleaseSelectBlockFromRender": "გთხოვთ აირჩიოთ სასურველი ბლოკი",
     "ChooseBedroomCount": "აირჩიეთ საძინებლების რაოდენობა",
     "ChooseFlatType": "აირჩიეთ ბინის ტიპი",

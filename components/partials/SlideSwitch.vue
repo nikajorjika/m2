@@ -70,7 +70,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .switch {
   display: flex;
   overflow: hidden;

@@ -97,7 +97,10 @@ export default {
     handleFilter() {
       this.$router.push({
         name: 'lang-sales-list',
-        params: { lang: this.locale }
+        params: { lang: this.locale },
+        query: {
+          filters: JSON.stringify(this.filters)
+        }
       })
     },
     fetchFlatsCount() {

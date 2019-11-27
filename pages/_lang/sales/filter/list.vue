@@ -29,25 +29,15 @@ export default {
         FlatCard,
         TitleWithLine
     },
-    middleware: 'auth',
-    watch: {
-        computedFilters: {
-            handler: 'fetchFreshFlatData',
-            immediate: true
-        }
-    },
+    middleware: 'isAuth',
     layout: 'WithInlineFilters',
     data() {
         return {
             loadingItems: [1,1,1,1,1,1,1,1],
-            page: 1,
-            loading: true
+            page: 1
         }
     },
     computed: {
-        ...mapMutations({
-            setLoader: 'Filter/SET_FILTER_LOADER'
-        }),
         ...mapGetters({
             locale: 'locale',
             filters: 'Filter/filters',
@@ -55,6 +45,9 @@ export default {
         }),
         computedFilters() {
             return { ...this.filters }
+        },
+        loading() {
+            return !this.flatsState.length
         },
         flats() {
             return this.flatsState.map((item) => {
@@ -68,13 +61,28 @@ export default {
             })
         }
     },
+    mounted() {
+        if(this.$route.query.hasOwnProperty('filters')){
+            const filters = JSON.parse(this.$route.query.filters)
+            filters.block = filters.block
+            filters.min_floor = filters.floors.min
+            filters.max_floor = filters.floors.max
+            filters.min_price = filters.price.min
+            filters.max_price = filters.price.max
+            this.setFilters(filters)
+        }
+        this.fetchFreshFlatData()
+    },
     methods: {
+        ...mapMutations({
+            setLoader: 'Filter/SET_FILTER_LOADER',
+            setFilters: 'Filter/SET_FILTERS_BULK'
+        }),
         ...mapActions({
             fetchFlats: 'Filter/fetchFilteredFlats'
         }),
         fetchFreshFlatData() {
-            this.loading = true
-            this.fetchFlats({page: this.page, fresh: true}).then(() => this.loading = false)
+            this.fetchFlats({page: this.page, fresh: true})
         }
     }
 }

@@ -47,6 +47,7 @@ export const state = () => ({
     color: null
   },
   filterDefaults: {
+    block: null,
     min_floor: null,
     max_floor: null,
     max_price: null,
@@ -102,7 +103,9 @@ export const mutations = {
     state.filters.floors.max = data.max_floor
     state.filters.price.max = data.max_price
     state.filters.price.min = data.min_price
+    state.filters.block = null
     state.filters.view = []
+    state.filters.flat_number = null
     state.filters.building_progress = []
     state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
     state.filters.type = data.hasOwnProperty('type') && data.type ? data.type : null
@@ -112,15 +115,22 @@ export const mutations = {
     state.chosenBlockNumber = data
   },
   SET_FILTERS_BULK: (state, data) => {
-    state.filters.floors.min = data.min_floor
-    state.filters.floors.max = data.max_floor
-    state.filters.price.max = data.max_price
-    state.filters.price.min = data.min_price
-    state.filters.view = []
-    state.filters.building_progress = []
-    state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
-    state.filters.type = data.hasOwnProperty('type') && data.type ? data.type : null
-    state.filters.wc = data.hasOwnProperty('wc') && data.wc ? data.wc : null
+    state.filters = {
+      block: data.hasOwnProperty('block') ? data.block : null,
+      floors: {
+        min: data.min_floor,
+        max: data.max_floor
+      },
+      price: {
+        min: data.min_price,
+        max: data.max_price
+      },
+      view: data.hasOwnProperty('view') ? data.view : [],
+      bedroom_count: data.hasOwnProperty('bedroom_count') ? data.bedroom_count : [],
+      building_progress: data.hasOwnProperty('building_progress') ? data.building_progress : [],
+      type: data.hasOwnProperty('type') && data.type ? data.type : null,
+      wc: data.hasOwnProperty('wc') && data.wc ? data.wc : null
+    }
   },
   // eslint-disable-next-line object-shorthand
   SET_MODEL_API_DATA: function(state, flats) {
@@ -183,6 +193,8 @@ export const mutations = {
 export const actions = {
   fetchFilteredFlats({ commit, getters }, { page, fresh }) {
     commit('SET_FILTER_LOADER', true)
+    fresh && commit('SET_FLATS_DATA', [])
+    
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line camelcase
       const {
@@ -246,13 +258,14 @@ export const actions = {
       building_progress
     } = getters.filters
     const views = getters.filters.view.map((item) => item.value)
+    const bedroomCount = bedroom_count.map((item) => item.hasOwnProperty('value') ? item.value : parseInt(item) )
     const params = {
       block_id: block,
       max_price: price.max,
       min_price: price.min,
       max_floor: floors.max,
       min_floor: floors.min,
-      bedroom_count,
+      bedroom_count: bedroomCount,
       type,
       wc,
       building_progress,

@@ -13,6 +13,7 @@
       </transition>
     </div>
     <flat-list-table
+      v-if="!loading"
       class="flat-list__table"
       :list="flats"
       @showLightBulb="showAnimation"
@@ -25,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import FlatListTable from '@/components/partials/filters/partials/FlatListTable'
 import PromptAlert from '@/components/partials/PromptAlert'
@@ -46,15 +47,30 @@ export default {
       )
     }
   },
+  mounted() {
+      if(this.$route.query.hasOwnProperty('filters')){
+          const filters = JSON.parse(this.$route.query.filters)
+          filters.min_floor = filters.floors.min
+          filters.max_floor = filters.floors.max
+          filters.min_price = filters.price.min
+          filters.max_price = filters.price.max
+          this.setFilters(filters)
+      }
+      this.loading = false
+  },
   data() {
     return {
       showPrompt: false,
       text: null,
       color: null,
+      loading: true,
       animating: false
     }
   },
   methods: {
+    ...mapMutations({
+      setFilters: 'Filter/SET_FILTERS_BULK'
+    }),
     ...mapActions({
       fetchFilteredFlats: 'Filter/fetchFilteredFlats'
     }),

@@ -97,9 +97,7 @@ export default {
     this.$store.commit('Filter/SET_FLAT_NUMBER', null)
   },
   mounted() {
-    if (this.totalFlatCount === 0) {
-      this.fetchFilteredDataCount()
-    }
+    this.fetchFilteredDataCount()
     this.observer = new IntersectionObserver(this.callback, this.options)
     this.observer.observe(this.$refs.Loading)
   },

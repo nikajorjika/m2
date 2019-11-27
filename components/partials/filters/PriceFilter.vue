@@ -2,7 +2,7 @@
     <div class="price-filters">
       <select-range 
         class="range-picker"
-        v-if="minPrice && maxPrice"
+        v-if="minPrice >= 0 && maxPrice"
         :min-value="minPrice"
         :max-value="maxPrice"
         :preset-min="filterPrice.min"
@@ -67,13 +67,14 @@ export default {
       setLoader: 'Filter/SET_FILTER_LOADER'
     }),
     handleChange(data) {
-        this.selected = { ...data }
+      this.selected = { ...data }
     },
     handleFilter() {
-        this.setFilter({
-          key: 'price',
-          value: this.selected
-        })
+      this.setFilter({
+        key: 'price',
+        value: this.selected
+      })
+      this.$emit('change')
     }
   }
 }
