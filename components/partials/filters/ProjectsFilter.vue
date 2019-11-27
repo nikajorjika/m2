@@ -69,10 +69,11 @@ export default {
             this.activeItem = this.activeItem === data ? null : data
         },
         handleFilter() {
-            this.setFilter({
-                key: 'block',
-                value: this.activeItem.value
-            })
+          this.setFilter({
+            key: 'block',
+            value: this.activeItem.value
+          })
+          this.$emit('change')
         },
         isActive(item) {
             return this.activeItem === item

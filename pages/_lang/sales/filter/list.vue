@@ -30,18 +30,11 @@ export default {
         TitleWithLine
     },
     middleware: 'isAuth',
-    watch: {
-        computedFilters: {
-            handler: 'fetchFreshFlatData',
-            immediate: false
-        }
-    },
     layout: 'WithInlineFilters',
     data() {
         return {
             loadingItems: [1,1,1,1,1,1,1,1],
-            page: 1,
-            loading: true
+            page: 1
         }
     },
     computed: {
@@ -52,6 +45,9 @@ export default {
         }),
         computedFilters() {
             return { ...this.filters }
+        },
+        loading() {
+            return !this.flatsState.length
         },
         flats() {
             return this.flatsState.map((item) => {
@@ -86,8 +82,7 @@ export default {
             fetchFlats: 'Filter/fetchFilteredFlats'
         }),
         fetchFreshFlatData() {
-            this.loading = true
-            this.fetchFlats({page: this.page, fresh: true}).then(() => this.loading = false)
+            this.fetchFlats({page: this.page, fresh: true})
         }
     }
 }

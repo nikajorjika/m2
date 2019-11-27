@@ -17,7 +17,7 @@
         <session-button class="sales-session-button" />
       </template>
       <div class="app">
-        <inline-filter-navigation />
+        <inline-filter-navigation @change="handleFiltersChange"/>
         <nuxt />
       </div>
     </model-view>
@@ -66,6 +66,11 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      page: 1
+    }
+  },
   computed: {
     ...mapGetters({ locale: 'locale' }),
     items() {
@@ -90,8 +95,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+        fetchFlats: 'Filter/fetchFilteredFlats'
+    }),
     handleClose() {
       this.$store.commit('setOverlay', { image: '', open: false })
+    },
+    handleFiltersChange() {
+      this.fetchFlats({page: this.page, fresh: true}).then(() => this.loading = false)
     }
   }
 }

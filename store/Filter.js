@@ -105,6 +105,7 @@ export const mutations = {
     state.filters.price.min = data.min_price
     state.filters.block = null
     state.filters.view = []
+    state.filters.flat_number = null
     state.filters.building_progress = []
     state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
     state.filters.type = data.hasOwnProperty('type') && data.type ? data.type : null
@@ -192,6 +193,8 @@ export const mutations = {
 export const actions = {
   fetchFilteredFlats({ commit, getters }, { page, fresh }) {
     commit('SET_FILTER_LOADER', true)
+    fresh && commit('SET_FLATS_DATA', [])
+    
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line camelcase
       const {

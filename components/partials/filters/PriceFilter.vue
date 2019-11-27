@@ -67,13 +67,14 @@ export default {
       setLoader: 'Filter/SET_FILTER_LOADER'
     }),
     handleChange(data) {
-        this.selected = { ...data }
+      this.selected = { ...data }
     },
     handleFilter() {
-        this.setFilter({
-          key: 'price',
-          value: this.selected
-        })
+      this.setFilter({
+        key: 'price',
+        value: this.selected
+      })
+      this.$emit('change')
     }
   }
 }

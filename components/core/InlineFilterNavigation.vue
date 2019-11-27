@@ -20,7 +20,7 @@
           <span class="flat-navigation__link__text">{{ $t(item.title) }}</span>
         </div>
         <div class="filter" @click.stop>
-          <component v-if="activeItem === item" :is="item.filter" class="filter-block" />
+          <component v-if="activeItem === item" :is="item.filter" class="filter-block" @change="$emit('change')" />
         </div>
       </li>
     </ul>
