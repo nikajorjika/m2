@@ -81,6 +81,7 @@ export default {
     border-bottom-right-radius: 22px;
     padding-right: 45px;
     font-family: $font;
+    min-height: 63px;
     color: #676766;
     font-size: 11px;
     display: flex;
