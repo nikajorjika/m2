@@ -1,4 +1,5 @@
 require('dotenv').config()
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   mode: 'universal',
@@ -28,7 +29,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: ['swiper/dist/css/swiper.css'],
+  css: ['swiper/dist/css/swiper.css', 'slick-carousel/slick/slick.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -133,7 +134,15 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      if (ctx.isServer) {
+        config.externals = [
+          nodeExternals({
+            whitelist: [/^vue-slick/]
+          })
+        ]
+      }
+    }
   },
   svgLoader: {
     svgoConfig: {

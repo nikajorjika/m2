@@ -67,6 +67,8 @@
     "register": "რეგისტრაცია",
     "see": "ნახე",
     "skip": "გამოტოვება",
+    "callSalesManager": "გამოიძახე გაყიდვები",
+    "reservationRequest": "ჯავშნის მოთხოვნა",
     "ConfirmPhone": "ავტორიზაცია",
     "search": "ძებნა"
   },
@@ -149,7 +151,8 @@
     "ByFlatNumber": "ბინის ნომრით ძებნა",
     "ByFilter": "ფილტრით ძებნა",
     "callSaleManager": "გამოიძახე გაყიდვების მენეჯერი და დაჯავშნე ეს ბინა",
-    "saveFlat": "შეინახე ეს ბინა"
+    "saveFlat": "შეინახე ეს ბინა",
+    "chosenAppliances": "შერჩეული ტექნიკა"
   },
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",

@@ -46,6 +46,8 @@
     "skip": "skip",
     "faq": "Frequently asked question",
     "CLOSE": "CLOSE",
+    "callSalesManager": "Call the sales",
+    "reservationRequest": "Request a reservation",
     "select": "select",
     "ConfirmPhone": "login"
   },
@@ -117,6 +119,7 @@
     "ByFilter": "Search by filter",
     "callSaleManager": "Call the sales manager and book this flat",
     "saveFlat": "Save this flat",
+    "chosenAppliances": "Chosen appliances",
     "sold": "sold",
     "available": "available",
     "reserved": "reserved",

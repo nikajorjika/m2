@@ -123,8 +123,8 @@ export default {
 
 .gel-sign {
   font-family: 'lari-symbol-v2', Arial, 'Times New Roman', 'Bitstream Charter',
-    Times, serif;
-  font-style: normal;
+    Times, serif !important;
+  font-style: normal !important;
 }
 
 .gel-sign.left {

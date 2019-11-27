@@ -11,7 +11,7 @@
               :class="styleType"
             >
               <div class="list-slider__list__item__number" :class="styleType">
-                {{ turnToLeadingZero(index * 8 + (key + 1)) }}
+                {{ turnToLeadingZero(index * visibleRoomsNumber + (key + 1)) }}
               </div>
               <div class="list-slider__list__item__label" :class="styleType">
                 {{ option.label }}
@@ -31,6 +31,10 @@
 import { turnToLeadingZero, sliceUpArray } from '@/utils/Mixed'
 export default {
   props: {
+    visibleRoomsNumber: {
+      type: Number,
+      default: 8
+    },
     roomList: {
       type: Array,
       default: () => []
@@ -52,10 +56,12 @@ export default {
   },
   computed: {
     length() {
-      return this.roomList.length > 8
+      return this.roomList.length > this.visibleRoomsNumber
     },
     items() {
-      return this.roomList.length ? sliceUpArray(this.roomList, 8) : []
+      return this.roomList.length
+        ? sliceUpArray(this.roomList, this.visibleRoomsNumber)
+        : []
     }
   },
   methods: {
