@@ -116,6 +116,11 @@ export default {
     PriceContainer,
     CurrencySwitcher
   },
+  data() {
+    return {
+      prevFlatId: null
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale',
@@ -243,6 +248,8 @@ export default {
     }
   },
   mounted() {
+    this.prevFlatId = this.flat.id
+
     this.fetchFlat(this.$route.params.id)
 
     this.$nextTick(function() {
@@ -251,6 +258,11 @@ export default {
       this.fetchDecorations()
       this.fetchAppliances()
     })
+  },
+  updated() {
+    if (this.prevFlatId && this.prevFlatId !== this.flat.id) {
+      this.mutateStore()
+    }
   },
   methods: {
     ...mapActions('customize', [
@@ -289,6 +301,12 @@ export default {
       this.$router.push(
         `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
       )
+    },
+    mutateStore() {
+      this.$store.commit('customize/SET_RENOVATION_ID', null)
+      this.$store.commit('customize/SET_FURNITURE_ID', null)
+      this.$store.commit('customize/SET_DECORATION_ID', null)
+      this.$store.commit('customize/SET_APPLIANCES_IDS', [])
     }
   }
 }
