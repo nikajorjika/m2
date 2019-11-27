@@ -189,14 +189,11 @@ export default {
     formattedItemPrice() {
       return `+ ${this.itemPrice} $`
     },
-    getNextPage() {
-      return ''
-    },
     skipBtnUrl() {
-      return `/${this.locale}/sales/customize/${this.$route.params.id}/${this.getNextPage}`
+      return `/${this.locale}/sales/chosen-flat/${this.$route.params.id}`
     },
     nextBtnUrl() {
-      return `/${this.locale}/sales/customize/${this.$route.params.id}/${this.getNextPage}`
+      return `/${this.locale}/sales/chosen-flat/${this.$route.params.id}`
     },
     flatExists() {
       return !!this.flat && Object.keys(this.flat).length

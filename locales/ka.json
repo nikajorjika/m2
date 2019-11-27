@@ -68,7 +68,9 @@
     "see": "ნახე",
     "skip": "გამოტოვება",
     "ConfirmPhone": "რეგისტრაცია",
-    "search": "ძებნა"
+    "search": "ძებნა",
+    "callSalesManager": "გამოიძახე გაყიდვები",
+    "reservationRequest": "ჯავშნის მოთხოვნა"
   },
   "labels": {
     "FullArea": "სრული ფართი",
@@ -149,7 +151,8 @@
     "ByFlatNumber": "ბინის ნომრით ძებნა",
     "ByFilter": "ფილტრით ძებნა",
     "callSaleManager": "გამოიძახე გაყიდვების მენეჯერი და დაჯავშნე ეს ბინა",
-    "saveFlat": "შეინახე ეს ბინა"
+    "saveFlat": "შეინახე ეს ბინა",
+    "chosenAppliances": "შერჩეული ტექნიკა"
   },
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",

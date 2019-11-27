@@ -5,16 +5,18 @@
     :style="buttonCustomStyles"
     @click="handleClick"
   >
-    <div v-if="loading" class="loading" :style="textCustomStyles" >
-      <div class=" lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    <div v-if="loading" class="loading" :style="textCustomStyles">
+      <div class=" lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
     <span v-else class="btn-standard__text" :style="textCustomStyles">
       <span class="center-font">{{ buttonText }}</span>
     </span>
-    <span
-      class="btn-standard__icon"
-      :style="iconCustomStyles"
-    >
+    <span class="btn-standard__icon" :style="iconCustomStyles">
       <slot name="icon" />
     </span>
   </button>
@@ -65,16 +67,24 @@ export default {
     }
   },
   computed: {
-    textCustomStyles () {
-      return { fontSize: this.fontSize, padding: this.textPadding, ...this.textStyles }
+    textCustomStyles() {
+      return {
+        fontSize: this.fontSize,
+        padding: this.textPadding,
+        ...this.textStyles
+      }
     },
-    iconCustomStyles () {
-      return { width: this.iconWidth, height: this.iconHeight, ...this.iconStyles }
+    iconCustomStyles() {
+      return {
+        width: this.iconWidth,
+        height: this.iconHeight,
+        ...this.iconStyles
+      }
     }
   },
   methods: {
     handleClick() {
-      if(!this.loading || this.disabled) {
+      if (!this.loading || this.disabled) {
         this.$emit('click')
       }
     }
@@ -85,7 +95,6 @@ export default {
 <style lang="scss" scoped>
 .btn {
   background-color: $action-primary-color;
-  display: inline-block;
   color: #fff;
   height: 47px;
   width: auto;
@@ -172,5 +181,4 @@ export default {
     transform: translate(10px, 0);
   }
 }
-
 </style>
