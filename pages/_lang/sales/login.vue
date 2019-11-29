@@ -9,7 +9,7 @@
         <small>{{ $t('titles.FillInPhoneNumberSubTitle') }}</small>
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
-        <login-form @submit="handleLoginStageOne" />
+        <login-form @submit="handleLoginStageOne" @discardParentErrorMessage="discardParentErrorMessage" :parentErrorMessage="parentErrorMessage" />
         <nuxt-link :to="`/${this.locale}/sales/registration`">
           <small class="color-orange">
             {{$t('buttons.register')}}
@@ -48,7 +48,8 @@ export default {
   data() {
     return {
       codeSent: false,
-      formData: null
+      formData: null,
+      parentErrorMessage: ''
     }
   },
   computed: {
@@ -64,7 +65,9 @@ export default {
       this.formData = { ...data }
       this.loginUser(this.formData).then((response) => {
         this.codeSent = true
-      })
+      }).catch(e =>
+        this.parentErrorMessage = e.response.data.msg.phone_number[0]
+      )
     },
     handleLoginStageTwo(code) {
       this.formData = { ...this.formData, ...code }
@@ -78,6 +81,9 @@ export default {
       this.loginUser(this.formData).then((response) => {
         this.codeSent = true
       })
+    },
+    discardParentErrorMessage() {
+      this.parentErrorMessage = '';
     }
   }
 }
