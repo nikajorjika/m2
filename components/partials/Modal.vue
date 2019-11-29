@@ -3,13 +3,41 @@
     <div class="layout-modal">
       <div class="close-button" @click="closeModal">x</div>
 
+      <div class="layout-modal-content">
+        <keep-alive>
+          <component :is="dynamicComponent" v-if="dynamicComponent"></component>
+        </keep-alive>
+      </div>
       <slot />
     </div>
   </div>
 </template>
 
 <script>
+import ModalContentSaveFlat from '@/components/partials/ModalContentSaveFlat'
+
 export default {
+  components: {
+    ModalContentSaveFlat
+  },
+  data() {
+    return {
+      dynamicComponent: null
+    }
+  },
+  watch: {
+    dynamicComponent(newValue) {
+      if (newValue) {
+        this.$nextTick(function() {
+          this.$el.classList.add('active')
+        })
+      } else {
+        this.$nextTick(function() {
+          this.$el.classList.remove('active')
+        })
+      }
+    }
+  },
   mounted() {
     this.$eventBus.$on('openModal', this.openModal)
     this.$eventBus.$on('closeModal', this.closeModal)
@@ -19,12 +47,10 @@ export default {
     this.$eventBus.$off('closeModal')
   },
   methods: {
-    openModal() {
-      this.$el.classList.add('active')
+    openModal(componentName) {
+      this.dynamicComponent = componentName
     },
     closeModal() {
-      this.$el.classList.remove('active')
-
       this.$router.push({
         path: this.$router.history.pending.fullPath,
         query: { redirect: 1 }
@@ -78,6 +104,11 @@ export default {
     margin: fit(30) fit(40) 0 0;
     padding: fit(10);
     color: #8178b7;
+  }
+
+  .layout-modal-content {
+    display: flex;
+    height: 100%;
   }
 }
 </style>

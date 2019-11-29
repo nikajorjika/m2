@@ -125,7 +125,7 @@ export default {
       this.setLoader(true)
       this.setFilter({
         key: 'type',
-        value: data[0].value
+        value: data.length > 0 ? data[0].value : null
        })
     },
     handleBedroomsChange(data) {

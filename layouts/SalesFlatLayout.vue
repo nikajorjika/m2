@@ -21,28 +21,7 @@
       </div>
     </sale-filter-view>
 
-    <modal>
-      <template>
-        <h1 class="title">{{ $t('titles.flatPagesModal') }}</h1>
-
-        <p class="description">{{ $t('descriptions.flatPagesModal') }}</p>
-
-        <div class="buttons">
-          <save-button
-            :width="'200px'"
-            :height="'40px'"
-            :padding="'0 21px'"
-            :label="$t('labels.saveFlat')"
-            :icon-margin-left="'21px'"
-            @regularBtnClick="saveFlat"
-          >
-            <template>
-              <save-icon :width="'17px'" :height="'17px'" />
-            </template>
-          </save-button>
-        </div>
-      </template>
-    </modal>
+    <modal />
   </div>
 </template>
 <script>
@@ -53,17 +32,13 @@ import PopoverImage from '@/components/partials/PopoverImage'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
 import Modal from '@/components/partials/Modal'
-import SaveButton from '@/components/partials/RegularButton'
-import SaveIcon from '@/components/icons/SaveIcon'
 
 export default {
   components: {
     SalesAppSidebar,
     SaleFilterView,
     PopoverImage,
-    Modal,
-    SaveButton,
-    SaveIcon
+    Modal
   },
   props: {
     image: {
@@ -101,9 +76,6 @@ export default {
   methods: {
     handleClose() {
       this.$store.commit('setOverlay', { image: '', open: false })
-    },
-    saveFlat() {
-      this.$root.$emit('saveFlat')
     }
   }
 }
@@ -139,27 +111,6 @@ body {
       &.open {
         display: flex;
         animation: scaleUp 0.2s;
-      }
-    }
-
-    .layout-modal {
-      .title {
-        font: 24px/1 $font-caps;
-        color: $font-color;
-      }
-
-      .description {
-        margin-top: fit(30);
-        font: 16px/1.4 $font;
-        color: $font-color;
-      }
-
-      .buttons {
-        display: flex;
-        justify-self: flex-start;
-        align-self: flex-end;
-        width: 100%;
-        margin-top: auto;
       }
     }
   }

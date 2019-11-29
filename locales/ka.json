@@ -151,6 +151,7 @@
     "ByPhoneNumber": "ავტორიზაცია ტელეფონის ნომრით",
     "ByFlatNumber": "ბინის ნომრით ძებნა",
     "ByFilter": "ფილტრით ძებნა",
+    "ByRender": "რენდერით ძებნა",
     "callSaleManager": "გამოიძახე გაყიდვების მენეჯერი და დაჯავშნე ეს ბინა",
     "saveFlat": "შეინახე ეს ბინა",
     "chosenAppliances": "შერჩეული ტექნიკა"
@@ -159,6 +160,7 @@
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",
     "IAmLookingFor": "მე ვეძებ ბინას",
     "FavouriteFlats": "შერჩეული ბინები",
+    "ChooseYouSearchingMethod": "აირჩიე სასურველი ძიების მეთოდი",
     "PleaseSelectBlockFromRender": "გთხოვთ აირჩიოთ სასურველი ბლოკი",
     "ChooseBedroomCount": "აირჩიეთ საძინებლების რაოდენობა",
     "ChooseFlatType": "აირჩიეთ ბინის ტიპი",

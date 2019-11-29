@@ -206,7 +206,7 @@ export const actions = {
         // eslint-disable-next-line camelcase
         bedroom_count,
         type,
-        wc,
+        // wc,
         // eslint-disable-next-line camelcase
         building_progress
       } = getters.filters
@@ -220,7 +220,7 @@ export const actions = {
         min_floor: floors.min,
         bedroom_count: bedroomCount,
         type,
-        wc,
+        // wc,
         building_progress,
         flat_number
       }
@@ -253,7 +253,7 @@ export const actions = {
       // eslint-disable-next-line camelcase
       bedroom_count,
       type,
-      wc,
+      // wc,
       // eslint-disable-next-line camelcase
       building_progress
     } = getters.filters
@@ -267,7 +267,7 @@ export const actions = {
       min_floor: floors.min,
       bedroom_count: bedroomCount,
       type,
-      wc,
+      // wc,
       building_progress,
       flat_number
     }

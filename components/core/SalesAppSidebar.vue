@@ -28,13 +28,9 @@
     </div>
     <div class="sidebar__sales">
       <button class="sidebar__sales__button" @click="callForSales">
-        <sells-icon 
-            icon-color="white"
-            width="12px"
-            height="12px"
-        />
+        <sells-icon icon-color="white" width="12px" height="12px" />
         <span>
-          {{$t('buttons.Sales')}}
+          {{ $t('buttons.Sales') }}
         </span>
       </button>
     </div>
@@ -114,10 +110,10 @@ export default {
           }
         })
         .catch((e) => {
-          reject(e)
+          // console.log(e)
         })
     }
-  },
+  }
 }
 </script>
 
@@ -142,14 +138,14 @@ export default {
     }
     &__button {
       background: $orange;
-      border: none;    
+      border: none;
       width: 65px;
       height: 65px;
       border-radius: 20px;
       color: white;
       text-align: center;
       font-family: $font-caps;
-      font-weight: bold;    
+      font-weight: bold;
       font-size: 10px;
       letter-spacing: 0.6px;
       outline: none;
