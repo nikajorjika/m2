@@ -23,18 +23,24 @@
 
     <modal>
       <template>
-        <save-button
-          :width="'200px'"
-          :height="'40px'"
-          :padding="'0 21px'"
-          :label="$t('labels.saveFlat')"
-          :icon-margin-left="'21px'"
-          @regularBtnClick="saveFlat"
-        >
-          <template>
-            <save-icon :width="'17px'" :height="'17px'" />
-          </template>
-        </save-button>
+        <h1 class="title">{{ $t('titles.flatPagesModal') }}</h1>
+
+        <p class="description">{{ $t('descriptions.flatPagesModal') }}</p>
+
+        <div class="buttons">
+          <save-button
+            :width="'200px'"
+            :height="'40px'"
+            :padding="'0 21px'"
+            :label="$t('labels.saveFlat')"
+            :icon-margin-left="'21px'"
+            @regularBtnClick="saveFlat"
+          >
+            <template>
+              <save-icon :width="'17px'" :height="'17px'" />
+            </template>
+          </save-button>
+        </div>
       </template>
     </modal>
   </div>
@@ -106,10 +112,12 @@ export default {
 <style lang="scss" scoped>
 body {
   background: #fff;
+
   .default-app-layout {
     min-height: 100vh;
     background: $bg-color-1;
     display: flex;
+
     .maximize__popover {
       display: none;
       position: fixed;
@@ -122,21 +130,46 @@ body {
       justify-content: center;
       align-items: center;
       z-index: 999;
+
       img {
         max-width: 70%;
         max-height: 80%;
       }
+
       &.open {
         display: flex;
         animation: scaleUp 0.2s;
       }
     }
+
+    .layout-modal {
+      .title {
+        font: 24px/1 $font-caps;
+        color: $font-color;
+      }
+
+      .description {
+        margin-top: fit(30);
+        font: 16px/1.4 $font;
+        color: $font-color;
+      }
+
+      .buttons {
+        display: flex;
+        justify-self: flex-start;
+        align-self: flex-end;
+        width: 100%;
+        margin-top: auto;
+      }
+    }
   }
+
   .app {
     height: 100%;
     background: transparent;
     box-shadow: initial;
   }
+
   @keyframes scaleUp {
     0% {
       transform: scale(0.3);

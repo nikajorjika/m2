@@ -3,13 +3,7 @@
     <div class="layout-modal">
       <div class="close-button" @click="closeModal">x</div>
 
-      <h1 class="title">{{ $t('titles.flatPagesModal') }}</h1>
-
-      <p class="description">{{ $t('descriptions.flatPagesModal') }}</p>
-
-      <div class="buttons">
-        <slot />
-      </div>
+      <slot />
     </div>
   </div>
 </template>
@@ -84,25 +78,6 @@ export default {
     margin: fit(30) fit(40) 0 0;
     padding: fit(10);
     color: #8178b7;
-  }
-
-  .title {
-    font: 24px/1 $font-caps;
-    color: $font-color;
-  }
-
-  .description {
-    margin-top: fit(30);
-    font: 16px/1.4 $font;
-    color: $font-color;
-  }
-
-  .buttons {
-    display: flex;
-    justify-self: flex-start;
-    align-self: flex-end;
-    width: 100%;
-    margin-top: auto;
   }
 }
 </style>
