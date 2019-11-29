@@ -66,6 +66,7 @@ export default {
   background: #fff;
   img {
     margin: auto;
+    max-height: 600px;
   }
 }
 .close-button {
