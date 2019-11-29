@@ -415,7 +415,7 @@ export default {
         `/user-flats/${this.flat.id}/send-pdf`
       )
 
-      if (response.success) {
+      if (response.data.success) {
         // console.log(response)
       }
     }

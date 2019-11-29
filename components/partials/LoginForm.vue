@@ -11,6 +11,10 @@
       <div v-if="errors.phone.length && showErrors" class="error">
         {{ errors.phone }}
       </div>
+
+      <div v-if="! (errors.phone.length && showErrors) && parentErrorMessage" class="error">
+        {{ parentErrorMessage }}
+      </div>
     </div>
     <div class="confirm-form__button">
       <button-main-orange :button-text="buttonText">
@@ -38,7 +42,8 @@ export default {
       default() {
         return this.$t('buttons.GetCode')
       }
-    }
+    },
+    parentErrorMessage: ''
   },
   data() {
     return {
@@ -68,6 +73,8 @@ export default {
       }
       if (!this.phone.length) {
         this.errors.phone = this.$t('errors.CodeFieldIsRequired')
+      } else {
+        this.$emit('discardParentErrorMessage')
       }
       return !this.errors.phone.length
     },

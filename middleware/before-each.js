@@ -13,7 +13,7 @@ export default function({ app }) {
       if (pattern.test(from.fullPath)) {
         if (!pattern.test(to.fullPath)) {
           if (!to.query.redirect) {
-            app.$eventBus.$emit('openModal')
+            app.$eventBus.$emit('openModal', 'modal-content-save-flat')
 
             return next(false)
           }

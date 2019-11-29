@@ -3,32 +3,54 @@
     <div class="layout-modal">
       <div class="close-button" @click="closeModal">x</div>
 
-      <h1 class="title">{{ $t('titles.flatPagesModal') }}</h1>
-
-      <p class="description">{{ $t('descriptions.flatPagesModal') }}</p>
-
-      <div class="buttons">
-        <slot />
+      <div class="layout-modal-content">
+        <keep-alive>
+          <component :is="dynamicComponent" v-if="dynamicComponent"></component>
+        </keep-alive>
       </div>
+      <slot />
     </div>
   </div>
 </template>
 
 <script>
+import ModalContentSaveFlat from '@/components/partials/ModalContentSaveFlat'
+
 export default {
+  components: {
+    ModalContentSaveFlat
+  },
+  data() {
+    return {
+      dynamicComponent: null
+    }
+  },
+  watch: {
+    dynamicComponent(newValue) {
+      if (newValue) {
+        this.$nextTick(function() {
+          this.$el.classList.add('active')
+        })
+      } else {
+        this.$nextTick(function() {
+          this.$el.classList.remove('active')
+        })
+      }
+    }
+  },
   mounted() {
     this.$eventBus.$on('openModal', this.openModal)
+    this.$eventBus.$on('closeModal', this.closeModal)
   },
   beforeDestroy() {
     this.$eventBus.$off('openModal')
+    this.$eventBus.$off('closeModal')
   },
   methods: {
-    openModal() {
-      this.$el.classList.add('active')
+    openModal(componentName) {
+      this.dynamicComponent = componentName
     },
     closeModal() {
-      this.$el.classList.remove('active')
-
       this.$router.push({
         path: this.$router.history.pending.fullPath,
         query: { redirect: 1 }
@@ -84,23 +106,9 @@ export default {
     color: #8178b7;
   }
 
-  .title {
-    font: 24px/1 $font-caps;
-    color: $font-color;
-  }
-
-  .description {
-    margin-top: fit(30);
-    font: 16px/1.4 $font;
-    color: $font-color;
-  }
-
-  .buttons {
+  .layout-modal-content {
     display: flex;
-    justify-self: flex-start;
-    align-self: flex-end;
-    width: 100%;
-    margin-top: auto;
+    height: 100%;
   }
 }
 </style>

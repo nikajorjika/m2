@@ -21,22 +21,7 @@
       </div>
     </sale-filter-view>
 
-    <modal>
-      <template>
-        <save-button
-          :width="'200px'"
-          :height="'40px'"
-          :padding="'0 21px'"
-          :label="$t('labels.saveFlat')"
-          :icon-margin-left="'21px'"
-          @regularBtnClick="saveFlat"
-        >
-          <template>
-            <save-icon :width="'17px'" :height="'17px'" />
-          </template>
-        </save-button>
-      </template>
-    </modal>
+    <modal />
   </div>
 </template>
 <script>
@@ -47,17 +32,13 @@ import PopoverImage from '@/components/partials/PopoverImage'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
 import Modal from '@/components/partials/Modal'
-import SaveButton from '@/components/partials/RegularButton'
-import SaveIcon from '@/components/icons/SaveIcon'
 
 export default {
   components: {
     SalesAppSidebar,
     SaleFilterView,
     PopoverImage,
-    Modal,
-    SaveButton,
-    SaveIcon
+    Modal
   },
   props: {
     image: {
@@ -95,9 +76,6 @@ export default {
   methods: {
     handleClose() {
       this.$store.commit('setOverlay', { image: '', open: false })
-    },
-    saveFlat() {
-      this.$root.$emit('saveFlat')
     }
   }
 }
@@ -106,10 +84,12 @@ export default {
 <style lang="scss" scoped>
 body {
   background: #fff;
+
   .default-app-layout {
     min-height: 100vh;
     background: $bg-color-1;
     display: flex;
+
     .maximize__popover {
       display: none;
       position: fixed;
@@ -122,21 +102,25 @@ body {
       justify-content: center;
       align-items: center;
       z-index: 999;
+
       img {
         max-width: 70%;
         max-height: 80%;
       }
+
       &.open {
         display: flex;
         animation: scaleUp 0.2s;
       }
     }
   }
+
   .app {
     height: 100%;
     background: transparent;
     box-shadow: initial;
   }
+
   @keyframes scaleUp {
     0% {
       transform: scale(0.3);
