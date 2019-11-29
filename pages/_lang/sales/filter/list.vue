@@ -9,12 +9,14 @@
                 :price="item.price"
                 :image="item.image"
                 :url="item.url"
+                :bedroom-count="item.bedrooms_count"
+                :flat-id="item.id"
             />
         </div>
       </div>
       <div class="flat-list" v-else>
         <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
-            <flat-card :loading="true"/>
+            <flat-card :loading="true" :flat-id="0"/>
         </div>
       </div>
   </div>
@@ -41,6 +43,7 @@ export default {
         ...mapGetters({
             locale: 'locale',
             filters: 'Filter/filters',
+            filterDefaults: 'Filter/filterDefaults',
             flatsState: 'Filter/flats'
         }),
         computedFilters() {
@@ -53,6 +56,8 @@ export default {
             return this.flatsState.map((item) => {
                 return {
                     title: item.project_name[this.locale],
+                    bedrooms_count: item.bedrooms_count,
+                    id: item.id,
                     price: `${item.price} $`,
                     image: item.render_url,
                     url: `/${this.locale}/sales/customize/${item.id}`,
@@ -73,10 +78,15 @@ export default {
         }
         this.fetchFreshFlatData()
     },
+    beforeDestroy () {
+        this.setFilterDefaults(this.filterDefaults)
+    },
     methods: {
         ...mapMutations({
             setLoader: 'Filter/SET_FILTER_LOADER',
-            setFilters: 'Filter/SET_FILTERS_BULK'
+            setFilters: 'Filter/SET_FILTERS_BULK',
+            setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS',
+
         }),
         ...mapActions({
             fetchFlats: 'Filter/fetchFilteredFlats'

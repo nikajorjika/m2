@@ -118,8 +118,8 @@ export default {
         .then(({data}) => {
           data.map((item) => {
             const domObject = document.querySelector(`g[data-flat="${item.flat_number}"]`)
-            if(domObject && item.status && item.status.hasOwnProperty('en')) {
-              domObject.classList.add(item.status.en)
+            if(domObject && item.status) {
+              domObject.classList.add(item.status)
             }
           })
         })

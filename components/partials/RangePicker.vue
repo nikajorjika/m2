@@ -52,7 +52,11 @@ export default {
           this.selected = [...this.selected, item]
         }
       }else {
-        this.selected = [item]
+        if(this.selected.filter((i) => i === item).length > 0) {
+          this.selected = []
+        } else {
+          this.selected = [ item ]
+        }
       }
       this.$emit('change', this.selected)
     },
