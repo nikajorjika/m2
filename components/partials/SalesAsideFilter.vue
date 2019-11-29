@@ -30,7 +30,7 @@ import CheckIcon from '@/components/icons/Check'
     },
     data() {
       return {
-        activeItems: [1]
+        activeItems: [2]
       }
     },
     computed: {
@@ -79,6 +79,7 @@ import CheckIcon from '@/components/icons/Check'
     },
     methods: {
       activate(item) {
+        return false
         if(this.activeItems.includes(item.value)){
           this.activeItems = this.activeItems.filter(id => item.value !== id)
         }else {
@@ -115,6 +116,7 @@ import CheckIcon from '@/components/icons/Check'
     height: 40px;
     width: 99px;
     display: flex;
+    filter: contrast(0.5) drop-shadow(1px 1px 1px black);;
     .label {
       width: 79px;
     }

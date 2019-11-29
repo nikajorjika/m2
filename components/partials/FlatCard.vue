@@ -3,6 +3,13 @@
       <div class="flat__image" @click="goToFlat">
           <div v-if="loading" class="loading"> </div>
           <img v-else :src="image" :alt="title">
+          <gradient-block v-if="!loading" class="flat__bedroom-count">
+              <span>{{ bedroomCount }}</span>
+              <sleeping-room icon-color="#fff" height="13px" width="13px" />
+          </gradient-block>
+          <div v-if="!loading" class="flat__save" :class="{ active: isFavourite }" @click.stop="saveFlat()">
+              <favourite-icon class="icon" icon-color="#fff" height="13px" width="13px" />
+          </div>
       </div>
       <div class="flat__title">
           <div v-if="loading" class="loading"> </div>
@@ -30,12 +37,18 @@
 
 <script>
 import GradientLabel from '@/components/partials/GradientLabel'
+import GradientBlock from '@/components/partials/GradientBlock'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import ArrowRight from '@/components/icons/ArrowRight'
+import SleepingRoom from '@/components/icons/SleepingRoom'
+import FavouriteIcon from '@/components/icons/Favourite'
 export default {
     components: {
         GradientLabel,
+        GradientBlock,
+        FavouriteIcon,
         ButtonMainOrange,
+        SleepingRoom,
         ArrowRight
     },
     props: {
@@ -59,14 +72,45 @@ export default {
             type: [String, Number],
             default: ''
         },
+        flatId: {
+            type: [String, Number],
+            required: true
+        },
+        bedroomCount: {
+            type: [String, Number],
+            default: 0
+        },
         url: {
             type: String,
             default: ''
         }
     },
+    data() {
+        return {
+            isFavourite: false
+        }
+    },
     methods: {
         goToFlat() {
             this.$router.push(this.url)
+        },
+        saveFlat() {
+            this.$axios
+                .post('user/save-flat', {
+                    flat_id: this.flatId,
+                    renovation_id: null,
+                    furniture_id: null,
+                    decoration_id: null,
+                    appliances_ids: null
+                })
+                .then((response) => {
+                    if (response.status === 200 && response.success) {
+                        this.isFavourite = true
+                    }
+                })
+                .catch((e) => {
+                    console.error(e)
+                })
         }
     },
 }
@@ -76,12 +120,39 @@ export default {
 .flat {
     display: grid;
     grid-template-areas: 'image image' 'title title' 'subtitle subtitle' 'price button';
+    &__bedroom-count {
+        position: absolute;
+        top: 9px;
+        left: 12px;
+        display: inline-block;
+        padding: 10px 13px;
+        outline: none;
+    }
+    &__save {
+        background: #7d70aa;
+        border-radius: 50%;
+        color: white;
+        position: absolute;
+        top: 9px;
+        right: 12px;
+        height: 33px;
+        width: 33px;
+        display: flex;
+        outline: none;
+        &.active  {
+            background: $orange; 
+        }
+        .icon {
+            margin: auto;
+        }
+    }
     .loading {
         background: #c7c7c7;
         width: 100%;
     }
     &__image {
         grid-area: image;
+        position: relative;
         img {
             width: 100%;
         }
@@ -156,6 +227,7 @@ export default {
     margin-right: 0;
     font-family: $font-caps;
     color: #fff;
+    outline: none;
     span {
         margin: auto 0;
         font-size: 11px;

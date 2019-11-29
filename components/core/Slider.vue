@@ -58,17 +58,13 @@ export default {
   props: ['items'],
   data() {
     return {
+      activeIndex: 0,
       swiperOption: {
         slidesPerView: 'auto',
         centeredSlides: true,
         spaceBetween: 30,
         on: {}
       }
-    }
-  },
-  computed: {
-    activeIndex() {
-      return this.mySwiper !== undefined ? this.mySwiper.activeIndex : 0
     }
   },
   methods: {
@@ -82,6 +78,7 @@ export default {
 
     sendMessageToParent(event) {
       this.$emit('messageFromSlider', this.mySwiper.activeIndex)
+      this.activeIndex = this.mySwiper.activeIndex
     }
   }
 }

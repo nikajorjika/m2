@@ -1,15 +1,80 @@
 <template>
-  <div class="page-flat-container">
-    <div class="page-flat-number">
-      <div class="page-flat-number__title-container">
+  <div class="page-sales">
+    <div class="page-sales__content">
+      <div class="page-sales__content__header">
+        <session-button class="page-sales__content__header__session" />
+        <language-switcher class="page-sales__content__header__language" />
+      </div>
+      <div class="page-sales__content__projects">
+          <div class="project">
+            <div class="project__image">
+              <img src="https://placehold.it/588x733" alt="">
+            </div>
+            <div class="project__content">
+              <h1>M2 გელოვანზე</h1>
+              <p>
+                შესაძლებლობა გაქვთ მოიძიოთ თქვენთვის  სასურველი ბინა, აირჩიე სასურველირენდერი ან მოძებნე დეტალურად შენი პრიორიტეტებისა და სურვილების  მოიძიოთ თქვენთვის  სასურველი ბინა, აირჩიე სასურველირენდერი ანმოძებნე 
+              </p>
+              <ul>
+                <li>აირჩიე სასურველირენდერი ან მოძებნე დეტალურად შენი პრიორიტეტებისა და სურვილების  </li>
+                <li>სასურველი რენდერი ან მოძებნე დეტალურად შენი  პრიორიტეტებისა დასურვილების დეტალურად შ</li>
+                <li>შესაძლებლობა გაქვთ მოიძიოთ თქვენთვის  სასურველი ბინა</li>
+              </ul>
+              <div class="project__content__sold-info">
+                <h4>{{ $t('labels.sold_flat_count') }}</h4>
+                <div class="project__content__sold-info__progress">
+                  <white-progress :min="0" :max="100" suffix="%" :value="70" />
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="page-sales__footer">
+      <div class="page-sales__footer__title-wrapper">
         <title-with-line
-          class="page-flat-number__title"
+          class="title"
           :title="$t('titles.ChooseSearchOption')"
         />
+        <small>{{ $t('titles.ChooseYouSearchingMethod') }}</small>
       </div>
-      <nuxt-link v-for="(item, index) in appList" :key="index" :to="item.link">
+      <div class="index-illustrated-button">
+        <illustrated-button 
+          :label="$t('labels.ByRender')" 
+          :to-route="`/${this.locale}/sales/render`"
+        > 
+          <template v-slot:illustration>
+            <render-illustration
+              class="index-illustation-icon"
+              width="50px"
+              height="100%"
+            />
+          </template>
+          <template v-slot:icon>
+            <render-icon icon-color="#fff" height="14px"  width="14px"/>
+          </template>
+        </illustrated-button>
+      </div>
+      <div class="index-illustrated-button">
+        <illustrated-button 
+          :label="$t('labels.ByFilter')" 
+          :to-route="`/${this.locale}/sales/filter`"
+        > 
+          <template v-slot:illustration>
+            <filter-illustration
+              class="index-illustation-icon"
+              width="50px"
+              height="100%"
+            />
+          </template>
+          <template v-slot:icon>
+            <filter-search icon-color="#fff" height="9px"  width="12px"/>
+          </template>
+        </illustrated-button>
+      </div>
+      <!-- <nuxt-link v-for="(item, index) in appList" :key="index" :to="item.link">
         {{item.name}}
-      </nuxt-link>
+      </nuxt-link> -->
     </div>
   </div>
 </template>
@@ -17,19 +82,27 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import RegistrationForm from '@/components/partials/RegistrationForm'
 import IllustratedButton from '@/components/partials/IllustratedButton'
+import LanguageSwitcher from '@/components/core/LanguageSwitcher'
+import SessionButton from '@/components/partials/SessionButton'
+import WhiteProgress from '@/components/partials/WhiteProgress'
+import FilterIllustration from '@/components/icons/FilterIllustration'
+import RenderIllustration from '@/components/icons/RenderIllustration'
 import FilterSearch from '@/components/icons/FilterSearch'
-import FilterIconIllustration from '@/components/icons/FilterIllustration'
+import RenderIcon from '@/components/icons/Render'
 export default {
   components: {
     TitleWithLine,
-    RegistrationForm,
-    FilterSearch,
     IllustratedButton,
-    FilterIconIllustration
+    SessionButton,
+    WhiteProgress,
+    FilterIllustration,
+    RenderIllustration,
+    RenderIcon,
+    FilterSearch,
+    LanguageSwitcher,
   },
-  layout: 'SalesWithoutNavigation',
+  layout: 'CleanLayout',
   auth: 'guest',
   computed: {
     ...mapGetters({
@@ -48,58 +121,119 @@ export default {
       ]
     }
   },
-  methods: {
-    ...mapActions({
-      saveLead: 'Lead/saveLead'
-    }),
-    handleRegistration(data) {
-      this.saveLead(data).then(() => {
-        this.$router.push({ name: 'lang-model', params: { lang: this.locale } })
-      })
-    }
-  }
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-.page-flat-container {
+.page-sales {
   display: flex;
   flex-direction: column;
-  height: 100%;
-}
-.page-flat-number {
-  margin: auto 60px;
-  display: flex;
-  flex-direction: column;
-  &__title {
-    display: inline-block;
-  }
-  &__title-container {
-    display: flex;
-    flex-direction: column;
-
-    small {
-      font-size: 10px;
-      font-family: $font;
-      color: #424242;
-      margin-top: 13px;
+  height: 100vh;
+  background: #f1ece6;
+  &__content {
+    height: calc(100% - 174px);
+    &__header {
+      display: flex;
+      padding: 0 45px;
+      &__session {
+        margin: auto 20px auto auto;
+      }
+    }
+    &__projects {
+      display: flex;
+      max-width: 1039px;
+      margin: 0 auto;
     }
   }
-  &__form {
-    margin-top: 62px;
-  }
-  &__buttons {
-    display: flex;
-    flex-direction: column;
+  &__footer {
+    height: 174px;
+    background: #f2e3d3;
     margin-top: auto;
-    small {
-      font-size: 10px;
-      color: #424242;
-      font-family: $font;
-      margin-bottom: 42px;
+    display: flex;
+    padding: 0 100px;
+    justify-content: space-between;
+    &__title-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin: auto 0;
     }
-    .filter-illustation-icon {
+    .index-illustrated-button {
+      margin: auto 0;
+    }
+    .index-illustation-icon {
       margin: 0 0 0 -12px;
+    }
+  }
+}
+.project {
+  display: flex;
+  &__image {
+    width: 388px;
+    margin-right: 126px;
+    overflow: hidden;
+    border-top-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    background-image: url('/assets/images/pattern-lines.svg');
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__content {
+    width: 468.6px;
+
+    h1 { 
+      color: $orange;
+      font-size: 23px;
+      font-family: $font-caps;
+      line-height: 34px;
+      font-weight: bold;
+      letter-spacing: 1.4px;
+    }
+    p {
+      font-size: 13.2px;
+      line-height: 1.9;
+      color: #494949;
+      letter-spacing: .7px;
+      margin: 46px 0;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      list-style:none;
+      padding-left: 33px;
+      li {
+        font-size: 13.2px;
+        line-height: 1.4;
+        color: #494949;
+        letter-spacing: .7px;
+        margin-bottom: 16px;
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 8px;
+          left: -33px;
+          height: 6px;
+          width: 12px;
+          background: $orange;
+        }
+      }
+    }
+    &__sold-info {
+      margin-top: 48px;
+      h4 {
+        color: $orange;
+        margin-bottom: 25px;
+        font-family: $font-caps;
+        font-size: 13px;
+        font-weight: bold;
+      }
+      &__progress {
+        width: 303px;
+      }
     }
   }
 }

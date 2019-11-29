@@ -8,7 +8,9 @@
                 :sub-title="item.subTitle"
                 :price="item.price"
                 :image="item.image"
+                :bedroom-count="item.bedrooms_count"
                 :url="item.url"
+                :flat-id="item.id"
             />
         </div>
       </div>
@@ -56,6 +58,8 @@ export default {
             this.$axios(`/user/${userId}/saved-flats`).then(({data}) => {
               this.flats = data.map(item => {
                 return {
+                    id: item.id,
+                    bedrooms_count: item.bedrooms_count,
                     title: item.flat.project_name[this.locale],
                     price: `${item.flat.price} $`,
                     image: item.flat.render_url,
