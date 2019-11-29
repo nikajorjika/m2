@@ -10,7 +10,9 @@
         :to="item.path"
         class="sidebar__list__item"
         :class="{
-          hide: !isSales && item.path === `/${locale}/sales/registration`
+          hide:
+            (!isSales && item.path === `/${locale}/sales/registration`) ||
+            ( ! isLoggedIn && item.requiresLoggin)
         }"
       >
         <div class="sidebar__list__item__icon">
@@ -54,7 +56,8 @@ export default {
   },
   data() {
     return {
-      planshetId: this.$cookies.get('paveleon-planshet')
+      planshetId: this.$cookies.get('paveleon-planshet'),
+      isLoggedIn: this.$auth.loggedIn
     }
   },
   computed: {
@@ -73,7 +76,8 @@ export default {
             ka: 'მთავარი'
           },
           path: `/${this.locale}/sales`,
-          component: MainIcon
+          component: MainIcon,
+          requiresLoggin: false
         },
         {
           title: {
@@ -81,7 +85,8 @@ export default {
             ka: 'ფავორიტები'
           },
           path: `/${this.locale}/sales/favourites`,
-          component: Favourite
+          component: Favourite,
+          requiresLoggin: true
         },
         {
           title: {
@@ -89,7 +94,8 @@ export default {
             ka: 'კითხვები'
           },
           path: `/${this.locale}/model/faq`,
-          component: QuestionsIcon
+          component: QuestionsIcon,
+          requiresLoggin: true
         }
       ]
     }
