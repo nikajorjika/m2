@@ -9,7 +9,11 @@
         <small>{{ $t('titles.FillInPhoneNumberSubTitle') }}</small>
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
-        <login-form @submit="handleLoginStageOne" @discardParentErrorMessage="discardParentErrorMessage" :parentErrorMessage="parentErrorMessage" />
+        <login-form
+          @submit="handleLoginStageOne"
+          @discardLoginErrorMessage="discardLoginErrorMessage"
+          :loginErrorMessage="loginErrorMessage"
+        />
         <nuxt-link :to="`/${this.locale}/sales/registration`">
           <small class="color-orange">
             {{$t('buttons.register')}}
@@ -20,6 +24,8 @@
         <confirm-phone-form
           @submit="handleLoginStageTwo"
           @resend="handleResend"
+          @discardInvalidCodeErrorMessage="discardInvalidCodeErrorMessage"
+          :invalidCodeErrorMessage="invalidCodeErrorMessage"
         />
       </div>
     </div>
@@ -49,7 +55,8 @@ export default {
     return {
       codeSent: false,
       formData: null,
-      parentErrorMessage: ''
+      loginErrorMessage: '',
+      invalidCodeErrorMessage: '',
     }
   },
   computed: {
@@ -66,7 +73,7 @@ export default {
       this.loginUser(this.formData).then((response) => {
         this.codeSent = true
       }).catch(e =>
-        this.parentErrorMessage = this.$t('errors.NoSuchUserWithSelectedPhoneNumber')
+        this.loginErrorMessage = this.$t('errors.NoSuchUserWithSelectedPhoneNumber')
       )
     },
     handleLoginStageTwo(code) {
@@ -75,15 +82,20 @@ export default {
         if (data.hasOwnProperty('access_token')) {
           this.$auth.setUserToken(data.access_token)
         }
-      })
+      }).catch(e =>
+        this.invalidCodeErrorMessage = this.$t('errors.InvalidCode')
+      )
     },
     handleResend() {
       this.loginUser(this.formData).then((response) => {
         this.codeSent = true
       })
     },
-    discardParentErrorMessage() {
-      this.parentErrorMessage = '';
+    discardLoginErrorMessage() {
+      this.loginErrorMessage = '';
+    },
+    discardInvalidCodeErrorMessage() {
+      this.invalidCodeErrorMessage = '';
     }
   }
 }

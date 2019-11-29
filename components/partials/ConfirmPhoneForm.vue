@@ -11,6 +11,10 @@
       <div v-if="errors.code.length && showErrors" class="error">
         {{ errors.code }}
       </div>
+
+      <div v-if="! (errors.code.length && showErrors) && invalidCodeErrorMessage" class="error">
+        {{ invalidCodeErrorMessage }}
+      </div>
     </div>
     <div class="confirm-form__button">
       <button-main-orange :button-text="buttonText">
@@ -45,7 +49,8 @@ export default {
       default() {
         return this.$t('buttons.ConfirmPhone')
       }
-    }
+    },
+    invalidCodeErrorMessage: ''
   },
   data() {
     return {
@@ -78,6 +83,8 @@ export default {
       }
       if (!this.code.length) {
         this.errors.code = this.$t('errors.CodeFieldIsRequired')
+      } else {
+        this.$emit('discardInvalidCodeErrorMessage')
       }
       return !this.errors.code.length
     },

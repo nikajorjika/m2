@@ -23,7 +23,8 @@
     "PhoneFieldIsRequired": "ტელეფონის ველი აუცილებელია და უნდა იყოს რიცხვები",
     "emailIsNotValid": "ელ-ფოსტის ველი აუცილებელია და უნდა იყოს სწორი ფორმატით",
     "CodeFieldIsRequired": "კოდის ველი აუცილებელია და უნდა იყოს სწორი ფორმატით",
-    "NoSuchUserWithSelectedPhoneNumber": "ასეთი ტელეფონის ნომრით მომხარებელი არ მოიძებნა"
+    "NoSuchUserWithSelectedPhoneNumber": "ასეთი ტელეფონის ნომრით მომხარებელი არ მოიძებნა",
+    "InvalidCode": "კოდი არასწორია"
   },
   "navigation": {
     "flat": "ბინა",
