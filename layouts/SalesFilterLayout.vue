@@ -18,6 +18,7 @@
         <sales-aside-filter class="sidebar-filter" />
       </div>
     </sale-filter-view>
+    <modal />
   </div>
 </template>
 <script>
@@ -30,8 +31,9 @@ import Registration from '@/components/icons/Registration'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
 import { mapGetters, mapMutations } from 'vuex'
+import Modal from '@/components/partials/Modal'
 export default {
-  components: { SalesAppSidebar, SaleFilterView, PopoverImage, SalesAsideFilter },
+  components: { SalesAppSidebar, SaleFilterView, PopoverImage, SalesAsideFilter, Modal },
   props: {
     image: {
       type: String,

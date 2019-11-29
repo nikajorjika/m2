@@ -49,7 +49,9 @@
     "callSalesManager": "Call the sales",
     "reservationRequest": "Request a reservation",
     "select": "select",
-    "ConfirmPhone": "login"
+    "ConfirmPhone": "login",
+    "continue": "Continue",
+    "cancelTheCall": "Cancel the call"
   },
   "labels": {
     "FullArea": "Full Area",
@@ -131,7 +133,8 @@
     "WaitForSalesOrRequestInfo": "Call for sales or ask for details on email",
     "flat_count_chosen_by_you": "Number of your chosen flats",
     "entrance": "entrance",
-    "projects": "projects"
+    "projects": "projects",
+    "callSalesQuestion": "Do you really want to call sales?"
   },
   "titles": {
     "FlatPageTitleGinger": "Design ginger",

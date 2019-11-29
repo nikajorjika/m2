@@ -20,6 +20,8 @@
         <nuxt />
       </div>
     </sales-chosen-flat-view>
+
+    <modal />
   </div>
 </template>
 
@@ -30,9 +32,11 @@ import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import PopoverImage from '@/components/partials/PopoverImage'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
+import Modal from "../components/partials/Modal";
 
 export default {
   components: {
+    Modal,
     SalesAppSidebar,
     SalesChosenFlatView,
     PopoverImage

@@ -54,7 +54,13 @@ export default {
   },
   data() {
     return {
-      planshetId: this.$cookies.get('paveleon-planshet')
+      planshetId: this.$cookies.get('paveleon-planshet'),
+      modalData: {
+        location: {
+          name: 'lang-sales-waiting',
+          params: { lang: this.locale }
+        }
+      }
     }
   },
   computed: {
@@ -96,22 +102,11 @@ export default {
   },
   methods: {
     callForSales() {
-      this.$axios
-        .post('/user/summon-sale', {
-          flat_id: null,
-          planshet_id: this.planshetId
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            this.$router.push({
-              name: 'lang-sales-waiting',
-              params: { lang: this.locale }
-            })
-          }
-        })
-        .catch((e) => {
-          // console.log(e)
-        })
+      this.$eventBus.$emit(
+        'openModal',
+        'modal-content-call-sales',
+        this.modalData
+      )
     }
   }
 }

@@ -5,28 +5,44 @@
 
       <div class="layout-modal-content">
         <keep-alive>
-          <component :is="dynamicComponent" v-if="dynamicComponent"></component>
+          <component :is="componentName" v-if="componentName"></component>
         </keep-alive>
       </div>
-      <slot />
     </div>
   </div>
 </template>
 
 <script>
 import ModalContentSaveFlat from '@/components/partials/ModalContentSaveFlat'
+import ModalContentCallSales from '@/components/partials/ModalContentCallSales'
 
 export default {
   components: {
-    ModalContentSaveFlat
+    ModalContentSaveFlat,
+    ModalContentCallSales
   },
   data() {
     return {
-      dynamicComponent: null
+      componentName: null,
+      componentData: null
+    }
+  },
+  computed: {
+    locationDescriptor() {
+      let locationDescriptor = {
+        path: this.$router.history.pending.fullPath,
+        query: { redirect: 1 }
+      }
+
+      if (this.componentData && this.componentData.hasOwnProperty('location')) {
+        locationDescriptor = this.componentData.location
+      }
+
+      return locationDescriptor
     }
   },
   watch: {
-    dynamicComponent(newValue) {
+    componentName(newValue) {
       if (newValue) {
         this.$nextTick(function() {
           this.$el.classList.add('active')
@@ -47,14 +63,12 @@ export default {
     this.$eventBus.$off('closeModal')
   },
   methods: {
-    openModal(componentName) {
-      this.dynamicComponent = componentName
+    openModal(componentName, componentData) {
+      this.componentName = componentName
+      this.componentData = componentData
     },
     closeModal() {
-      this.$router.push({
-        path: this.$router.history.pending.fullPath,
-        query: { redirect: 1 }
-      })
+      this.$router.push(this.locationDescriptor)
     }
   }
 }

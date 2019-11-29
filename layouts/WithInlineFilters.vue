@@ -21,6 +21,7 @@
         <nuxt />
       </div>
     </model-view>
+    <modal />
   </div>
 </template>
 <script>
@@ -41,6 +42,7 @@ import ProjectIcon from '@/components/icons/Project'
 import PopoverImage from '@/components/partials/PopoverImage'
 import MainIcon from '@/components/icons/Main'
 import SessionButton from '@/components/partials/SessionButton'
+import Modal from '@/components/partials/Modal'
 export default {
   components: {
     SalesAppSidebar,
@@ -54,7 +56,8 @@ export default {
     Registration,
     SessionButton,
     FloorIcon,
-    CompassIcon
+    CompassIcon,
+    Modal
   },
   props: {
     image: {

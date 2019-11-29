@@ -70,7 +70,9 @@
     "callSalesManager": "გამოიძახე გაყიდვები",
     "reservationRequest": "ჯავშნის მოთხოვნა",
     "ConfirmPhone": "ავტორიზაცია",
-    "search": "ძებნა"
+    "search": "ძებნა",
+    "continue": "გაგრძელება",
+    "cancelTheCall": "გამოძახების გაუქმება"
   },
   "labels": {
     "FullArea": "სრული ფართი",
@@ -152,7 +154,8 @@
     "ByFilter": "ფილტრით ძებნა",
     "callSaleManager": "გამოიძახე გაყიდვების მენეჯერი და დაჯავშნე ეს ბინა",
     "saveFlat": "შეინახე ეს ბინა",
-    "chosenAppliances": "შერჩეული ტექნიკა"
+    "chosenAppliances": "შერჩეული ტექნიკა",
+    "callSalesQuestion": "ნამდვილად გსურთ გაყიდვების გამოძახება?"
   },
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",
