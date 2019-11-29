@@ -72,7 +72,7 @@ export default {
         phone: ''
       }
       if (!this.phone.length) {
-        this.errors.phone = this.$t('errors.CodeFieldIsRequired')
+        this.errors.phone = this.$t('errors.PhoneFieldIsRequired')
       } else {
         this.$emit('discardParentErrorMessage')
       }

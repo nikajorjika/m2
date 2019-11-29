@@ -66,7 +66,7 @@ export default {
       this.loginUser(this.formData).then((response) => {
         this.codeSent = true
       }).catch(e =>
-        this.parentErrorMessage = e.response.data.msg.phone_number[0]
+        this.parentErrorMessage = this.$t('errors.NoSuchUserWithSelectedPhoneNumber')
       )
     },
     handleLoginStageTwo(code) {

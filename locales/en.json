@@ -12,7 +12,8 @@
     "NameFieldIsRequired": "Name field is required",
     "PhoneFieldIsRequired": "Phone Number field is required and must be numeric value",
     "emailIsNotValid": "Email field is required and must be correct format",
-    "CodeFieldIsRequired": "Code field is required"
+    "CodeFieldIsRequired": "Code field is required",
+    "NoSuchUserWithSelectedPhoneNumber": "No such user with selected phone number"
   },
   "navigation": {
     "flat": "Flat",
