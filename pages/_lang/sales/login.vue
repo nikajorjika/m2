@@ -87,6 +87,7 @@ export default {
       )
     },
     handleResend() {
+      delete this.formData.code
       this.loginUser(this.formData).then((response) => {
         this.codeSent = true
       })
