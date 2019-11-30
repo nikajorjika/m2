@@ -154,7 +154,11 @@ export default {
     align-items: center;
     &__icon {
       svg {
+        margin-top: 4px;
         transform: rotate(180deg);
+        &:lang(en) {
+          margin-top: 2px;
+        }
         &:last-child {
           margin-left: -9px;
         }
