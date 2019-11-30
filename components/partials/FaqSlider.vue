@@ -111,7 +111,7 @@ export default {
       color: #494949;
       font-family: $font;
       font-size: 13px;
-      letter-spacing: 1px;
+      letter-spacing: .2px;
       word-spacing: 4px;
       line-height: 1.5;
       margin-top: 20px;
