@@ -11,7 +11,9 @@
               :class="styleType"
             >
               <div class="list-slider__list__item__number" :class="styleType">
-                {{ turnToLeadingZero(index * visibleRoomsNumber + (key + 1)) }}
+                <span>
+                  {{ turnToLeadingZero(index * visibleRoomsNumber + (key + 1)) }}
+                </span>
               </div>
               <div class="list-slider__list__item__label" :class="styleType">
                 {{ option.label }}
@@ -109,7 +111,7 @@ export default {
         letter-spacing: 1px;
         &.small {
           margin-right: 11px;
-          padding: 6px;
+          padding: 5px 6px 7px 8px;
         }
       }
       &__value {

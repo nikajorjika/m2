@@ -2,6 +2,7 @@ export const state = () => ({
   flats: [],
   presets: [],
   chosenBlockNumber: null,
+  showFloorFooter: false,
   filters: {
     block: null,
     floors: {
@@ -56,7 +57,7 @@ export const state = () => ({
     flat_number: null
   },
   flatNumber: null,
-  filterLoading: false,
+  filterLoading: true,
   filteredTotalCount: 0,
   customColor: ''
 })
@@ -71,6 +72,7 @@ export const getters = {
   chosenBlockNumber: (state) => state.chosenBlockNumber,
   filterLoading: (state) => state.filterLoading,
   flatNumber: (state) => state.filterLoading,
+  showFloorFooter: (state) => state.showFloorFooter,
   modelApiData: (state) => state.modelApiData,
   showPrompt: (state) => state.showPrompt
 }
@@ -187,6 +189,9 @@ export const mutations = {
   },
   SET_FILTER_VIEWS: (state, views) => {
     state.filters.view = views
+  },
+  SET: (state, {key, value}) => {
+    state[key] = value
   }
 }
 
