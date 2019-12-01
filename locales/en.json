@@ -8,13 +8,20 @@
     "ka": "ქარ",
     "en": "ENG"
   },
+  "status": {
+    "finished": "Finished",
+    "ongoing": "Ongoing",
+    "planned": "Planneds"
+  },
   "errors": {
     "NameFieldIsRequired": "Name field is required",
     "PhoneFieldIsRequired": "Phone Number field is required and must be numeric value",
     "emailIsNotValid": "Email field is required and must be correct format",
     "CodeFieldIsRequired": "Code field is required",
     "NoSuchUserWithSelectedPhoneNumber": "No such user with selected phone number",
-    "InvalidCode": "Invalid code"
+    "InvalidCode": "Invalid code",
+    "NoFlatsInThisPriceRange": "There are no flats in this price range",
+    "NoFlatsInThisFloorRange": "There are no flats in this floor range"
   },
   "navigation": {
     "flat": "Flat",
@@ -120,7 +127,8 @@
     "ByPhoneNumber": "Authorisation by phone number",
     "FlatsLeftInThisBlock": "Flats left in this block",
     "ByFlatNumber": "Search by flat number",
-    "ByFilter": "Search by filter",
+    "ByFilter": "Search By Filter",
+    "ByRender": "Search By Render",
     "callSaleManager": "Call the sales manager and book this flat",
     "saveFlat": "Save this flat",
     "dontSaveFlat": "Don't save",
@@ -142,6 +150,7 @@
   "titles": {
     "FlatPageTitleGinger": "Design ginger",
     "FlatPageTitleCinnamon": "Design cinnamon",
+    "ChooseYourSearchingMethod": "Choose your searching method",
     "FillInPhoneNumber": "Fill in phone number",
     "IAmLookingFor": "I Am Looking For",
     "YouCanSelectOnlyOne": "You can select only one",
@@ -175,6 +184,9 @@
     "PickPriceRange": "Pick price range",
     "ChooseProject": "Choose project",
     "ChooseProjects": "Choose projects"
+  },
+  "projects": {
+    "m3_gelovani": "m³ Gelovani"
   },
   "addresses": {
     "marshal_gelovani": "Marshal Gelovani Avenue",

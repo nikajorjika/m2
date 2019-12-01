@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div v-if="questionsNumber > 1" class="swiper-pagination"></div>
+      <div v-if="items.length > 1" class="swiper-pagination"></div>
     </div>
   </div>
 </template>
@@ -106,6 +106,7 @@ export default {
       }
       span:last-child {
         padding-top: 3px;
+        line-height: 1.7;
       }
     }
     p {

@@ -28,7 +28,7 @@
         </div>
       </nuxt-link>
     </div>
-    <div class="sidebar__sales">
+    <div v-if="isLoggedIn" class="sidebar__sales">
       <button class="sidebar__sales__button" @click="callForSales">
         <sells-icon icon-color="white" width="12px" height="12px" />
         <span>
@@ -63,7 +63,7 @@ export default {
           params: { lang: this.locale }
         }
       },
-      isLoggedIn: this.$auth.loggedIn
+      isLoggedIn: !!this.$cookies.get('auth._token.local')
     }
   },
   computed: {
@@ -101,7 +101,7 @@ export default {
           },
           path: `/${this.locale}/model/faq`,
           component: QuestionsIcon,
-          requiresLoggin: true
+          requiresLoggin: false
         }
       ]
     }
@@ -191,6 +191,7 @@ export default {
         margin-top: 15px;
         font-weight: 600;
         text-align: center;
+        text-transform: uppercase;
       }
     }
   }

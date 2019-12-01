@@ -1,46 +1,64 @@
 <template>
-  <div class="default-faq-layout">
-    <svg width="0" height="0">
-      <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#e26479" />
-        <stop offset="100%" stop-color="#684f78" />
-      </linearGradient>
-    </svg>
-    <svg width="0" height="0">
-      <linearGradient id="gradient-reverse" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#684f78" />
-        <stop offset="100%" stop-color="#e26479" />
-      </linearGradient>
-    </svg>
-    <sidebar />
-    <faq-view>
-      <div class="faq">
-        <div class="faq__header">
-          <div class="faq__header__icon">
-            <question-icon
-              icon-color="url(#gradient-reverse)"
-              width="10"
-              height="9"
-            />
+  <no-ssr>
+    <div class="default-faq-layout">
+      <svg width="0" height="0">
+        <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e26479" />
+          <stop offset="100%" stop-color="#684f78" />
+        </linearGradient>
+      </svg>
+      <svg width="0" height="0">
+        <linearGradient id="gradient-reverse" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#684f78" />
+          <stop offset="100%" stop-color="#e26479" />
+        </linearGradient>
+      </svg>
+      <component :is="sidebarComponent" :homepage="homepage" />
+      <faq-view>
+        <div class="faq">
+          <div class="faq__header">
+            <div class="faq__header__icon">
+              <question-icon
+                icon-color="url(#gradient-reverse)"
+                width="10"
+                height="9"
+              />
+            </div>
+            <div class="faq__header__title">
+              <title-with-line :title="$t('titles.FrequentlyAskedQuestions')" />
+            </div>
           </div>
-          <div class="faq__header__title">
-            <title-with-line :title="$t('titles.FrequentlyAskedQuestions')" />
-          </div>
+          <nuxt />
         </div>
-        <nuxt />
-      </div>
-    </faq-view>
-  </div>
+      </faq-view>
+    </div>
+  </no-ssr>
 </template>
 <script>
 import Sidebar from '@/components/core/Sidebar'
 import FaqView from '@/components/core/FaqView'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import QuestionIcon from '@/components/icons/Questions'
+import SalesAppSidebar from '@/components/core/SalesAppSidebar'
+import { mapGetters } from 'vuex'
 
 export default {
-  components: { Sidebar, FaqView, QuestionIcon, TitleWithLine },
-  layout: 'Faq'
+  components: { FaqView, QuestionIcon, TitleWithLine },
+  layout: 'Faq',
+  data() {
+    return {
+      appName: this.$cookies.get('paveleon-app')
+    }
+  },
+  computed: {
+    ...mapGetters(['locale']),
+    homepage() {
+      return `/${this.locale}/${this.appName}`
+    },
+    sidebarComponent() {
+      return this.appName === 'sales' ? SalesAppSidebar : Sidebar
+    }
+  }
 }
 </script>
 
@@ -53,9 +71,8 @@ body {
     display: flex;
   }
   .faq {
-    margin-top: 63.65px;
     height: calc(100% - 156px);
-    max-width: 1150px;
+    width: 1150px;
     background: $bg-color-2;
     box-shadow: 0px 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
     padding: 18.09px 368px 28px 117px;
