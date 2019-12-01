@@ -1,7 +1,7 @@
 <template>
   <div class="sales-aside-filter">
     <div class="bg-block">
-      <img src="@/assets/images/sidebar-bg.png">
+      <div class="image"></div>
     </div>
     <div class="checboxes">
       <div v-for="(item,index) in checkboxData" :key="index" class="checbox" @click="activate(item)">
@@ -97,18 +97,13 @@ import CheckIcon from '@/components/icons/Check'
     overflow: hidden;
     display: inline-block;
     position: relative;
-    img {
-      height: 452px;
-      width:452px;
-    }
-    &:after {
-      position: absolute;
-      content: '';
-      background: rgba(242,101,41, .35);
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    height: 452px;
+    width:452px;
+    .image {
+      background: url('~@/assets/images/sidebar-bg.png');
+      background-size: 100%;
+      width: 100%;
+      height: 100%;
     }
   }
   .checbox {
