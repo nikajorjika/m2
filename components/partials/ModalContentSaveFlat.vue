@@ -6,12 +6,26 @@
 
     <div class="buttons">
       <save-button
-        :width="'200px'"
+        :width="'250px'"
         :height="'40px'"
         :padding="'0 21px'"
         :label="$t('labels.saveFlat')"
         :icon-margin-left="'21px'"
         @regularBtnClick="saveFlat"
+      >
+        <template>
+          <save-icon :width="'17px'" :height="'17px'" />
+        </template>
+      </save-button>
+
+      <save-button
+        :width="'250px'"
+        :height="'40px'"
+        :padding="'0 21px'"
+        :background="'#f26529'"
+        :label="$t('labels.dontSaveFlat')"
+        :icon-margin-left="'21px'"
+        @regularBtnClick="continueWithoutSaving"
       >
         <template>
           <save-icon :width="'17px'" :height="'17px'" />
@@ -33,6 +47,9 @@ export default {
   methods: {
     saveFlat() {
       this.$root.$emit('saveFlat')
+    },
+    continueWithoutSaving() {
+      this.$emit('callback', 'continueWithoutSaving')
     }
   }
 }
@@ -40,6 +57,7 @@ export default {
 
 <style lang="scss" scoped>
 .content {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -56,10 +74,11 @@ export default {
 }
 
 .buttons {
-  display: flex;
-  justify-self: flex-start;
-  align-self: flex-end;
   width: 100%;
+  display: flex;
+  align-self: flex-end;
+  justify-self: flex-start;
+  justify-content: space-between !important;
   margin-top: auto;
 }
 </style>

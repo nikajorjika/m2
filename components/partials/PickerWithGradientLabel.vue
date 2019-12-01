@@ -104,6 +104,7 @@ export default {
     &__label {
       padding: 17px 0 18px 33px;
       font-size: 13px;
+      margin-bottom: -5px;
       font-weight: bold;
     }
     &.active {
@@ -113,7 +114,7 @@ export default {
     &__checked {
       position: absolute;
       right: 19px;
-      top: 44%;
+      top: 49%;
       transform: translateY(-50%);
       border: dashed 1px #f26529;
       border-radius: 7px;

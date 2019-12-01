@@ -1,11 +1,11 @@
 <template>
   <div class="render">
-    <filter-render-svg @click="handleBlockChosing" />
+    <filter-render-svg :preselected="preselected" @click="handleBlockChosing" />
     <transition name="fade">
       <div
         v-if="activeBlockNumber && blockInfo"
         ref="infoBlock"
-        class="render__info"
+        class="render__info" 
       >
         <block-hover-info
           :flats-count="blockInfo.sellableFlats"
@@ -24,6 +24,12 @@ import BlockHoverInfo from '@/components/partials/BlockHoverInfo'
 import FilterRenderSvg from '@/components/partials/FilterRenderSvg'
 export default {
   components: { BlockHoverInfo, FilterRenderSvg },
+  props: {
+    preselected: {
+      type: [String, Number],
+      default: null
+    }
+  },
   data() {
     return {
       activeBlockNumber: null,

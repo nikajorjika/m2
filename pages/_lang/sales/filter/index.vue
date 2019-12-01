@@ -128,6 +128,7 @@ export default {
 }
 .page-flat-number {
   margin: 60px;
+  margin-bottom: 30px;
   display: flex;
   height: 100%;
   flex-direction: column;

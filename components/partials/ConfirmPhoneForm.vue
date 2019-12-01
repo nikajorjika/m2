@@ -75,6 +75,9 @@ export default {
       this.showErrors = true
     },
     handleResend() {
+      this.code = ''
+      this.showErrors = false
+      this.$emit('discardInvalidCodeErrorMessage')
       this.$emit('resend')
     },
     validateForm() {
@@ -104,7 +107,7 @@ export default {
   grid-template-columns: repeat(2, 288px);
   grid-template-rows: repeat(2, 46px);
   grid-column-gap: 53px;
-  grid-row-gap: 15px;
+  grid-row-gap: 50px;
   .error {
     font-size: 11px;
     color: red;

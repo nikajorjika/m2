@@ -5,7 +5,11 @@
 
       <div class="layout-modal-content">
         <keep-alive>
-          <component :is="componentName" v-if="componentName"></component>
+          <component
+            :is="componentName"
+            v-if="componentName"
+            @callback="handleCallback"
+          ></component>
         </keep-alive>
       </div>
     </div>
@@ -65,8 +69,14 @@ export default {
       this.componentData = componentData
     },
     closeModal() {
-      if (this.locationDescriptor) {
-        this.$router.push(this.locationDescriptor)
+      this.componentName = ''
+      this.componentData = ''
+    },
+    handleCallback(action) {
+      if (action === 'continueWithoutSaving') {
+        if (this.locationDescriptor) {
+          this.$router.push(this.locationDescriptor)
+        }
       }
     }
   }

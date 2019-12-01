@@ -206,6 +206,7 @@ export default {
     padding: 0 5px;
     margin: auto;
     width: auto;
+    width: 100%;
     min-width: 112px;
     letter-spacing: 1px;
     transition: width 0.7s opacity 0.2s;
