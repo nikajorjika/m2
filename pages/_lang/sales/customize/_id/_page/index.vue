@@ -88,6 +88,7 @@
         </div>
 
         <prompt-alert
+          class="top-margin-auto"
           v-if="flatExists"
           :color="promptColor"
           :text="promptText"
@@ -460,6 +461,12 @@ export default {
         align-items: center;
       }
     }
+  }
+}
+
+.app-content {
+  .top-margin-auto {
+    margin-top: auto;
   }
 }
 </style>
