@@ -9,7 +9,7 @@
             :is="componentName"
             v-if="componentName"
             @callback="handleCallback"
-          ></component>
+          />
         </keep-alive>
       </div>
     </div>
@@ -58,10 +58,12 @@ export default {
   mounted() {
     this.$eventBus.$on('openModal', this.openModal)
     this.$eventBus.$on('closeModal', this.closeModal)
+    this.$eventBus.$on('redirect', this.redirect)
   },
   beforeDestroy() {
     this.$eventBus.$off('openModal')
     this.$eventBus.$off('closeModal')
+    this.$eventBus.$off('redirect')
   },
   methods: {
     openModal(componentName, componentData) {
@@ -69,14 +71,17 @@ export default {
       this.componentData = componentData
     },
     closeModal() {
-      this.componentName = ''
-      this.componentData = ''
+      this.componentName = null
+      this.componentData = null
     },
     handleCallback(action) {
-      if (action === 'continueWithoutSaving') {
-        if (this.locationDescriptor) {
-          this.$router.push(this.locationDescriptor)
-        }
+      if (action === 'continueWithoutSaving' && this.locationDescriptor) {
+        this.$router.push(this.locationDescriptor)
+      }
+    },
+    redirect() {
+      if (this.locationDescriptor) {
+        this.$router.push(this.locationDescriptor)
       }
     }
   }

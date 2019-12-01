@@ -14,8 +14,10 @@ export default function({ app }) {
         if (!pattern.test(to.fullPath)) {
           if (!to.query.redirect) {
             const modalData = {
-              path: app.$router.history.pending.fullPath,
-              query: { redirect: 1 }
+              location: {
+                path: to.fullPath,
+                query: { redirect: 1 }
+              }
             }
 
             app.$eventBus.$emit(

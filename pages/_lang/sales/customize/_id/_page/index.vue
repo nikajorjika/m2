@@ -369,7 +369,7 @@ export default {
           })
           .then((response) => {
             if (response.status === 200 && response.data.success) {
-              this.$eventBus.$emit('closeModal')
+              this.$eventBus.$emit('redirect')
 
               resolve(response)
             }
