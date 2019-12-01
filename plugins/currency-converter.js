@@ -19,9 +19,9 @@ export default ({ store }, inject) => {
         process.env.SERVER_IP.replace(/\/$/, '') +
           '/currency?currency=' +
           currency
-      )
+      ).catch(err => console.log(err))
 
-      const rate = parseFloat(data)
+      const rate = parseFloat(data) 
 
       // Calculate price based on currency rate
 

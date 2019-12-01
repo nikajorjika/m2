@@ -63,7 +63,7 @@ export default {
           params: { lang: this.locale }
         }
       },
-      isLoggedIn: this.$auth.loggedIn
+      isLoggedIn: this.$cookies.get('auth._token.local')
     }
   },
   computed: {
@@ -101,7 +101,7 @@ export default {
           },
           path: `/${this.locale}/model/faq`,
           component: QuestionsIcon,
-          requiresLoggin: true
+          requiresLoggin: false
         }
       ]
     }

@@ -79,14 +79,12 @@ export default {
         'Alone',
         'Land',
       ]
-      let i = 0
-      return this.presets.map((item) => {
-        const icon =  this.icons[iconKeys[i]]
-        i++
+      return this.presets.map(({id, name}, index) => {
+        const icon =  this.icons[iconKeys[index]]
         return {
           icon: icon,
-          name: item.name,
-          value: item.id
+          name: name.hasOwnProperty(this.locale) ? name[this.locale] : name,
+          value: id
         }
       })
     }
@@ -108,7 +106,7 @@ export default {
         min_price: this.defaultFilters.min_price,
         bedroom_count: preset.bedrooms.split(', '),
         type: preset.flat_type,
-        wc: preset.wc
+        // wc: preset.wc
       }
       this.setFilterDefaults(filterData)
       this.setFilterLoader(true)

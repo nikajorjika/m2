@@ -16,7 +16,7 @@
       </div>
       <div class="flat-list" v-else>
         <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
-            <flat-card :loading="true"/>
+            <flat-card :loading="true" :flat-id="0"/>
         </div>
       </div>
   </div>

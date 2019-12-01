@@ -36,6 +36,7 @@ module.exports = {
   plugins: [
     '~/plugins/i18n',
     '~/plugins/hammer',
+    '~/plugins/load-preflight-data',
     {
       src: '~/plugins/nuxt-swiper',
       ssr: false
