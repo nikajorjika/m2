@@ -1,8 +1,9 @@
 <template>
   <div class="filter-list-page">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
-      <div v-if="!loading" class="flat-list">
-        <div v-for="(item, index) in flats" :key="index" class="flat-card">
+      <div v-if="!loading" class="list-scrollable-wrapper">
+        <div class="flat-list">
+          <div v-for="(item, index) in flats" :key="index" class="flat-card">
             <flat-card 
                 :title="item.title"
                 :sub-title="item.subTitle"
@@ -12,6 +13,7 @@
                 :bedroom-count="item.bedrooms_count"
                 :flat-id="item.id"
             />
+          </div>
         </div>
       </div>
       <div class="flat-list" v-else>
@@ -101,7 +103,7 @@ export default {
 <style lang="scss" scoped>
 .filter-list-page {
     margin: 0 40px;
-    max-height: calc(100% - 60px);
+    max-height: calc(100% - 76px);
     display: flex;
     padding-bottom: 12px;
     flex-direction: column;
@@ -109,12 +111,17 @@ export default {
 .page-title {
     margin: 50px 0;
 }
+.list-scrollable-wrapper {
+  max-height: calc(100% - 12px);
+  overflow-y: auto;
+  padding-right: 17px;
+}
 .flat-list {
     display: grid;
     grid-template-columns: repeat(4, 214px);
     width: 100%;
-    grid-column-gap: 72px;
+    grid-column-gap: 60px;
     grid-row-gap: 46px;
-    overflow-y: auto;
+    padding-bottom: 30px;
 }
 </style>

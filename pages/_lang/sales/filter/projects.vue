@@ -9,7 +9,7 @@
       </div>
       <!-- <picker-with-gradient-label :items="pickerData"/> -->
       <div class="page-flat-number__render">
-        <filter-render @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
+        <filter-render :preselected="block" @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
       </div>
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice"/>
     </div>
@@ -62,6 +62,9 @@ export default {
     }),
     nextUrl() {
       return `/${this.locale}/sales/filter/floor`
+    },
+    block() {
+      return this.filters.block
     }
   },
   methods: {
@@ -103,6 +106,7 @@ export default {
 }
 .page-flat-number {
   margin: 60px;
+  margin-bottom: 30px;
   display: flex;
   height: 100%;
   flex-direction: column;
