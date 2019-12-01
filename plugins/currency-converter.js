@@ -1,6 +1,4 @@
-import axios from 'axios'
-
-export default ({ store }, inject) => {
+export default ({ app, store }, inject) => {
   inject('currencyConverter', async (amount, currencyFrom, currencyTo) => {
     // Normalize price
 
@@ -15,13 +13,29 @@ export default ({ store }, inject) => {
 
       // Get currency rate
 
-      const { data } = await axios.get(
-        process.env.SERVER_IP.replace(/\/$/, '') +
-          '/currency?currency=' +
-          currency
-      )
+      let rate
+      const now = Date.now() / 1000
 
-      const rate = parseFloat(data)
+      if (
+        !store.state.currencyRate ||
+        !store.state.currencyUpdatedTime ||
+        now - store.state.currencyUpdatedTime > store.state.currencyTtl
+      ) {
+        const { data } = await app.$axios.get(
+          process.env.SERVER_IP.replace(/\/$/, '') +
+            '/currency?currency=' +
+            currency
+        )
+
+        rate = data
+
+        store.commit('SET_CURRENCY_RATE', rate)
+        store.commit('SET_CURRENCY_UPDATED_TIME', now)
+      } else {
+        rate = store.state.currencyRate
+      }
+
+      rate = parseFloat(rate)
 
       // Calculate price based on currency rate
 
@@ -30,6 +44,6 @@ export default ({ store }, inject) => {
 
     // Return formatted price
 
-    return new Intl.NumberFormat('ka-GE').format(price.toFixed(2))
+    return new Intl.NumberFormat('ka-GE').format(parseFloat(price.toFixed(2)))
   })
 }
