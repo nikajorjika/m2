@@ -27,7 +27,7 @@
       <button-main-orange
         :button-text="$t('buttons.cancelTheCall')"
         :text-padding="'0 0 0 12px'"
-        @click.native.prevent="summonSale"
+        @click.native.prevent="cancelSummonSale"
       >
         <template v-slot:icon>
           <sells width="13" height="13" icon-color="#3c2270" />
@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      planshetId: this.$cookies.get('paveleon-planshet'),
+      planshetId: this.$cookies.get('paveleon-planshet')
     }
   },
   methods: {
@@ -65,6 +65,24 @@ export default {
           })
           .then((response) => {
             if (response.status === 200) {
+              this.$eventBus.$emit('redirect')
+
+              resolve(response)
+            }
+          })
+          .catch((e) => {
+            reject(e)
+          })
+      })
+    },
+    cancelSummonSale() {
+      return new Promise((resolve, reject) => {
+        this.$axios
+          .post('user/cancel-summon-sale', {})
+          .then((response) => {
+            if (response.status === 200) {
+              this.$eventBus.$emit('redirect')
+
               resolve(response)
             }
           })

@@ -57,12 +57,6 @@ export default {
   data() {
     return {
       planshetId: this.$cookies.get('paveleon-planshet'),
-      modalData: {
-        location: {
-          name: 'lang-sales-waiting',
-          params: { lang: this.locale }
-        }
-      },
       isLoggedIn: !!this.$cookies.get('auth._token.local')
     }
   },
@@ -104,6 +98,14 @@ export default {
           requiresLoggin: false
         }
       ]
+    },
+    modalData() {
+      return {
+        location: {
+          name: 'lang-sales-waiting',
+          params: { lang: this.locale }
+        }
+      }
     }
   },
   methods: {
