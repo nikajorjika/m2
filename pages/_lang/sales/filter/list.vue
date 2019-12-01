@@ -38,7 +38,8 @@ export default {
     data() {
         return {
             loadingItems: [1,1,1,1,1,1,1,1],
-            page: 1
+            page: 1,
+            isEmpty: false
         }
     },
     computed: {
@@ -46,13 +47,11 @@ export default {
             locale: 'locale',
             filters: 'Filter/filters',
             filterDefaults: 'Filter/filterDefaults',
+            loading: 'Filter/filterLoading',
             flatsState: 'Filter/flats'
         }),
         computedFilters() {
             return { ...this.filters }
-        },
-        loading() {
-            return !this.flatsState.length
         },
         flats() {
             return this.flatsState.map((item) => {
@@ -95,6 +94,9 @@ export default {
         }),
         fetchFreshFlatData() {
             this.fetchFlats({page: this.page, fresh: true})
+                .then(response => {
+                    this.isEmpty = response.length
+                })
         }
     }
 }

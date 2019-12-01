@@ -11,8 +11,10 @@
         class="render__info"
       >
         <block-hover-info
-          :flats-count="blockInfo.sellableFlats"
-          :block-number="blockInfo.number"
+          :flats-count="0"
+          :top-label="$t('labels.flat')"
+          :block-number="chosenFlataNumber"
+          :display-bottom-block="false"
           @click="selectFlat"
         />
       </div>
@@ -66,6 +68,7 @@ export default {
     return {
       blockInfo: null,
       activeFlat: null,
+      chosenFlataNumber: null,
       loading: true,
       distance: 0,
       isDragging: false,
@@ -153,15 +156,15 @@ export default {
         })
       }
       let target = e.target.closest('[data-flat]')
-      let flatNumber = target.getAttribute('data-flat')
+      this.chosenFlataNumber = target.getAttribute('data-flat')
       this.$axios
         .get('/flats', {
-          params: { flat_number: flatNumber }
+          params: { flat_number: this.chosenFlataNumber }
         })
         .then(({ data }) => {
           if(data.data.length) {
             this.activeFlat = data.data[0]
-            this.$emit('flatSelected', flatNumber)
+            this.$emit('flatSelected', this.flatNumber)
           }else {
             this.activeFlat = null
           }

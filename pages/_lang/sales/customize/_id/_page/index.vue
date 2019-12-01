@@ -64,7 +64,6 @@
         </div>
       </div>
     </div>
-
     <app-footer>
       <template>
         <div class="sales">

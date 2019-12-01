@@ -6,7 +6,9 @@
         <title-with-line :title="cTitle" />
       </div>
       <div class="filter-flat__secondary-title">
-        <title-with-line :title="$t('titles.PleaseSelectBlockFromRender')" />
+        <title-with-line v-if="activeTab === 0" :title="$t('titles.PleaseSelectBlockFromRender')" />
+        <title-with-line v-if="activeTab === 1" :title="$t('titles.PleaseSelectFloorFromRender')" />
+        <title-with-line v-if="activeTab === 2" :title="$t('titles.PleaseSelectFlatFromRender')" />
         <small>{{$t('labels.select_only_one')}}</small>
       </div>
       <div class="filter-flat__content">
@@ -196,6 +198,7 @@ export default {
       this.activeTab = ++this.activeTab
     },
     selectedFlat(flatNumber) {
+      this.flat_number = flatNumber
       this.setFilterItem({
         key: 'flat_number',
         value: flatNumber
