@@ -282,11 +282,11 @@ export default {
       return [
         {
           label: this.$t('labels.block'),
-          value: this.flat.block
+          value: this.flat.block_number
         },
         {
           label: this.$t('labels.floor'),
-          value: this.flat.floor.number
+          value: this.flat.floor_number
         },
         {
           label: this.$t('labels.flat'),
