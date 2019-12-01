@@ -29,10 +29,7 @@ export default {
   },
   computed: {
     locationDescriptor() {
-      let locationDescriptor = {
-        path: this.$router.history.pending.fullPath,
-        query: { redirect: 1 }
-      }
+      let locationDescriptor = null
 
       if (this.componentData && this.componentData.hasOwnProperty('location')) {
         locationDescriptor = this.componentData.location
@@ -68,7 +65,9 @@ export default {
       this.componentData = componentData
     },
     closeModal() {
-      this.$router.push(this.locationDescriptor)
+      if (this.locationDescriptor) {
+        this.$router.push(this.locationDescriptor)
+      }
     }
   }
 }
