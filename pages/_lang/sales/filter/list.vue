@@ -2,7 +2,7 @@
   <div class="filter-list-page">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
       <div v-if="!loading" class="list-scrollable-wrapper">
-        <div class="flat-list">
+        <div v-if="flats.length" class="flat-list">
           <div v-for="(item, index) in flats" :key="index" class="flat-card">
             <flat-card 
                 :title="item.title"
@@ -14,6 +14,9 @@
                 :flat-id="item.id"
             />
           </div>
+        </div>
+        <div v-else>
+            <p>{{$t('labels.NoFlatsFound')}}</p>
         </div>
       </div>
       <div class="flat-list" v-else>
@@ -46,13 +49,11 @@ export default {
             locale: 'locale',
             filters: 'Filter/filters',
             filterDefaults: 'Filter/filterDefaults',
+            loading: 'Filter/filterLoading',
             flatsState: 'Filter/flats'
         }),
         computedFilters() {
             return { ...this.filters }
-        },
-        loading() {
-            return !this.flatsState.length
         },
         flats() {
             return this.flatsState.map((item) => {
@@ -95,6 +96,9 @@ export default {
         }),
         fetchFreshFlatData() {
             this.fetchFlats({page: this.page, fresh: true})
+                .then(response => {
+                    this.isEmpty = response.length
+                })
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="labels-combo">
-    <div v-for="(item, index) in info" :key="index">
+    <div v-for="(item, index) in info" :key="index" class="labels-combo__item">
       <gradient-shape
         v-if="item.value !== null"
         :value="item.value"
@@ -26,6 +26,12 @@ export default {
 <style lang="scss" scoped>
 .labels-combo {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  &__item {
+    margin-right: 17px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 </style>

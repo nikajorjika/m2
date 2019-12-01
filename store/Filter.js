@@ -240,8 +240,8 @@ export const actions = {
           }else {
             commit('SET_FLATS_DATA', data.data)
           }
-          resolve(data.data)
           commit('SET_FILTER_LOADER', false)
+          resolve(data.data)
         })
         .catch((e) => reject(e))
     })

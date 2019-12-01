@@ -2,11 +2,11 @@
   <gradient-block>
     <div class="block-info">
       <div class="block-info__number">
-        <div class="block-info__number__label">{{ $t('labels.block') }}</div>
+        <div class="block-info__number__label">{{ cTopLabel }}</div>
         <div class="block-info__number__value">{{ blockNumber }}</div>
       </div>
-      <div class="block-info__flats">
-        <div>{{ $t('labels.FlatsLeftInThisBlock') }}</div>
+      <div v-if="displayBottomBlock" class="block-info__flats">
+        <div>{{ cBottomLabel }}</div>
         <div>{{ flatsLeft }}</div>
       </div>
       <div class="block-info__button">
@@ -42,11 +42,29 @@ export default {
     flatsCount: {
       type: [String, Number],
       required: true
-    }
+    },
+    topLabel: {
+      type: [String, Number],
+      default: null
+    },
+    bottomLabel: {
+      type: [String, Number],
+      default: null
+    },
+    displayBottomBlock: {
+      type: Boolean,
+      default: true
+    },
   },
   computed: {
     flatsLeft() {
       return `${this.flatsCount} ${this.$t('labels.flat')}`
+    },
+    cBottomLabel() {
+      return this.bottomLabel ? this.bottomLabel : this.$t('labels.FlatsLeftInThisBlock') 
+    },
+    cTopLabel() {
+      return this.topLabel ? this.topLabel : this.$t('labels.block')
     }
   },
   methods: {
@@ -65,11 +83,14 @@ export default {
   letter-spacing: 0.6px;
   line-height: 1.6;
   text-align: center;
+  width: 155.05px;
+  display: flex;
+  flex-direction: column;
   &__number {
     display: flex;
     border: 1px solid #fff;
     border-radius: 35px;
-    width: 71%;
+    width: auto;
     margin: 0 auto 21px;
     &__label {
       padding: 20px 0 20px 8px;
@@ -82,7 +103,7 @@ export default {
       align-items: center;
       border: 1px solid #fff;
       border-radius: 50%;
-      margin: auto;
+      margin: auto 10px;
     }
   }
   &__flats {
