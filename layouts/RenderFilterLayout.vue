@@ -20,6 +20,9 @@
         <!-- <flat-navigation :nav-data="navigation"/> -->
         <nuxt />
       </div>
+      <template v-slot:viewFooter>
+        <filter-render-footer />
+      </template>
     </model-view>
     <modal />
   </div>
@@ -39,10 +42,12 @@ import CompletedIcon from '@/components/icons/Completed'
 import PopoverImage from '@/components/partials/PopoverImage'
 import SessionButton from '@/components/partials/SessionButton'
 import Modal from '@/components/partials/Modal'
+import FilterRenderFooter from '@/components/partials/FilterRenderFooter'
 export default {
   components: {
     SalesAppSidebar,
     ModelView,
+    FilterRenderFooter,
     SessionButton,
     FlatNavigation,
     BlockIcon,

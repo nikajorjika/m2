@@ -16,7 +16,7 @@
       </no-ssr>
       <transition name="fade">
         <div
-          v-if="block && blockInfo"
+          v-if="activeFloor !== null && block && blockInfo"
           ref="infoBlock"
           class="render__info"
         >
@@ -35,6 +35,7 @@ import BlockOne from '@/components/partials/renders/BlockOne'
 import BlockTwo from '@/components/partials/renders/BlockTwo'
 import BlockThree from '@/components/partials/renders/BlockThree'
 import BlockHoverInfo from '@/components/partials/BlockHoverInfo'
+import { mapMutations } from 'vuex'
 export default {
   components: {
     BlockOne,
@@ -55,11 +56,21 @@ export default {
           this.blockInfo = response.data
         })
         .catch((e) => console.error(e))
+    this.setFilter({
+      key: 'showFloorFooter',
+      value: true
+    })
+  },
+  beforeDestroy() {
+    this.setFilter({
+      key: 'showFloorFooter',
+      value: false
+    })
   },
   data() {
     return {
       blockInfo: null,
-      activeFloor: 0,
+      activeFloor: null,
       distance: 0,
       isDragging: false
     }
@@ -72,6 +83,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setFilter: 'Filter/SET' 
+    }),
     changeFloor(floor) {
       this.activeFloor = floor
       this.$emit('floorChosen', floor)

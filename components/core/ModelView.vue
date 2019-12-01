@@ -15,6 +15,7 @@
     </div>
     <flat-navigation class="flat-view__navigation" :nav-data="navigationData" />
     <slot />
+    <slot name="viewFooter" />
   </div>
 </template>
 
