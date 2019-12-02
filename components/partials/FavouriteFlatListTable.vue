@@ -67,7 +67,6 @@
           </custom-button>
         </div>
       </div>
-      <div v-if="!done" ref="Loading" class="center">Loading...</div>
     </div>
   </div>
 </template>
@@ -91,12 +90,7 @@ export default {
       timeout: null,
       page: 1,
       observer: null,
-      done: false,
-      requesting: false,
-      options: {
-        root: null,
-        threshold: 0
-      }
+      done: false
     }
   },
   computed: {
@@ -115,36 +109,12 @@ export default {
     this.$store.commit('Filter/SET_FLATS_DATA', [])
     this.$store.commit('Filter/SET_FLAT_NUMBER', null)
   },
-  mounted() {
-    if (this.totalFlatCount === 0) {
-      this.fetchFilteredDataCount()
-    }
-    this.observer = new IntersectionObserver(this.callback, this.options)
-    this.observer.observe(this.$refs.Loading)
-  },
   methods: {
     ...mapActions({
       lightUpFlat: 'Filter/lightUpFlat',
       fetchFlats: 'Filter/fetchFilteredFlats',
       fetchFilteredDataCount: 'Filter/fetchFilteredDataCount'
     }),
-    callback(entries, observer) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !this.done) {
-          console.log('Is Intersecting')
-          if(!this.requesting) {
-            this.requesting = true
-            this.fetchFlats({ page: this.page }).then((response) => {
-              this.page++
-              this.requesting = false
-              if (response.length < 10) {
-                this.done = true
-              }
-            })
-          }
-        }
-      })
-    },
     handleLightAllButton() {
       const planshetFlats = this.list.filter(
         (item) => item.planshet.id === this.chosenPlanshet

@@ -1,0 +1,177 @@
+<template>
+  <div class="flat-list">
+    <div class="flat-list__title">
+      <title-with-line :title="cTitle" />
+      <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
+      <transition name="fade-up">
+        <prompt-alert
+          v-if="showPrompt"
+          class="prompt"
+          :color="color"
+          :text="text"
+        />
+      </transition>
+    </div>
+    <flat-list-table
+      class="flat-list__table"
+      :list="flats"
+      @showLightBulb="showAnimation"
+      @showPrompt="handlePrompt"
+    />
+    <div v-if="animating" class="light-bulb-animation">
+      <light-icon  width="100%" height="100%" icon-color="#fff" />
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex'
+import TitleWithLine from '@/components/partials/TitleWithLine'
+import FlatListTable from '@/components/partials/FavouriteFlatListTable'
+import PromptAlert from '@/components/partials/PromptAlert'
+import LightIcon from '@/components/icons/Light'
+export default {
+  layout: 'FullHeightWithoutNavigation',
+  components: { TitleWithLine, FlatListTable, PromptAlert, LightIcon },
+  computed: {
+    ...mapGetters({
+      locale: 'locale',
+      temporaryToken: 'Sales/temporaryToken'
+    }),
+    cTitle() {
+      return this.$t('titles.FavouriteFlats')
+    }
+  },
+  data() {
+    return {
+      showPrompt: false,
+      text: null,
+      color: null,
+      loading: true,
+      user: null,
+      flats: [],
+      animating: false
+    }
+  },
+  mounted() {
+    this.loading = true
+    if(this.temporaryToken === null) {
+      this.$router.push({
+        name: 'lang-model-by-auth',
+        params: {
+          lang: this.locale
+        }
+      })
+      return;
+    }
+    this.$axios(`/user/current-user`, {
+      headers: {
+        Authorization: `Bearer ${this.temporaryToken}`
+      }
+    }).then(({data}) => {
+      this.user = data.user
+      this.getFlatList()
+    })
+    
+  },
+  methods: {
+    generateTextBasedOnColor(id) {
+      const planshetsObject = {
+        1: this.$t('colors.orange'),
+        2: this.$t('colors.purple'),
+        3: this.$t('colors.blue'),
+        4: this.$t('colors.green'),
+        5: this.$t('colors.red'),
+        6: this.$t('colors.yellow'),
+        7: this.$t('colors.pink')
+      }
+      const planshetNumbers = {
+        1: this.$t('colors.first'),
+        2: this.$t('colors.second'),
+        3: this.$t('colors.third'),
+        4: this.$t('colors.fourth'),
+        5: this.$t('colors.fifth'),
+        6: this.$t('colors.sixth'),
+        7: this.$t('colors.seventh')
+      }
+      return this.$t('alerts.planshetColorAlert')
+        .replace('%s', planshetsObject[id])
+        .replace('%n', planshetNumbers[id])
+    },
+    handlePrompt({ color, id }) {
+      this.showPrompt = true
+      this.color = `#${color}`
+      this.text = this.generateTextBasedOnColor(id)
+    },
+    getFlatList() {
+      this.$axios(`/user/${this.user.id}/saved-flats`, {
+        headers: {
+          Authorization: `Bearer ${this.temporaryToken}`
+        }
+      }).then(({data}) => {
+        this.flats = data.map(({flat})=> {
+          return flat
+        })
+        this.loading = false
+      })
+    },
+    showAnimation() {
+      this.animating = true;
+      setTimeout(() => {
+        this.animating = false
+      }, 300)
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.flat-list {
+  padding: 48px 0 0 61px;
+  height: 100%;
+  &__title {
+    flex-direction: column;
+    display: grid;
+    grid-template-areas: 'title prompt' 'sub-title prompt';
+    small {
+      font-size: 10px;
+      font-family: $font;
+      margin-top: 12px;
+      grid-area: sub-title;
+    }
+    .prompt {
+      grid-area: prompt;
+    }
+  }
+  &__table {
+    margin-top: 47px;
+    height: 80%;
+  }
+
+  .fade-up-enter-active,
+  .fade-ups-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-up-enter,
+  .fade-up-leave-to {
+    opacity: 0;
+  }
+}
+.light-bulb-animation {
+  position: fixed;
+  top: calc(50% - 35px);
+  left: calc(50% - 20px);
+  width: 40px;
+  height: 70px;
+  animation: lightScale 0.3s;
+}
+@keyframes lightScale {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+</style>
