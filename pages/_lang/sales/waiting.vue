@@ -1,5 +1,5 @@
 <template>
-  <div class="page-flat-container">
+  <div v-if="isLoggedIn" class="page-flat-container">
     <div class="page-flat-number">
       <queue-info />
     </div>
@@ -15,12 +15,15 @@ export default {
   },
   layout: 'SalesWithoutNavigation',
   auth: 'auth',
+  data() {
+    return {
+      isLoggedIn: !!this.$cookies.get('auth._token.local')
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale'
     })
-  },
-  methods: {
   }
 }
 </script>

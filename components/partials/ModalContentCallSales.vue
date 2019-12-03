@@ -1,9 +1,6 @@
 <template>
   <div>
-    <illustrated-button
-      :label="$t('labels.callSalesQuestion')"
-      @click.native.prevent="summonSale"
-    >
+    <illustrated-button :label="question" @click.native.prevent="summonSale">
       <template v-slot:illustration>
         <manager-icon
           :width="49"
@@ -15,8 +12,9 @@
 
     <div class="buttons">
       <button-main-orange
-        :button-text="$t('buttons.continue')"
+        :button-text="firstBtnLabel"
         :text-padding="'0 0 0 12px'"
+        class="summon-sale"
         @click.native.prevent="summonSale"
       >
         <template v-slot:icon>
@@ -25,8 +23,10 @@
       </button-main-orange>
 
       <button-main-orange
-        :button-text="$t('buttons.cancelTheCall')"
+        v-if="isUserAwaiting || !isAvailable"
+        :button-text="secondBtnLabel"
         :text-padding="'0 0 0 12px'"
+        class="cancel-summon-sale"
         @click.native.prevent="cancelSummonSale"
       >
         <template v-slot:icon>
@@ -50,10 +50,55 @@ export default {
     ButtonMainOrange,
     Sells
   },
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
-      planshetId: this.$cookies.get('paveleon-planshet')
+      planshetId: this.$cookies.get('paveleon-planshet'),
+      isAvailable: true
     }
+  },
+  computed: {
+    question() {
+      return !this.isSaleBusy
+        ? this.$t('labels.callSalesQuestion')
+        : this.$t('labels.saleIsBusy')
+    },
+    firstBtnLabel() {
+      return !this.isSaleBusy
+        ? this.$t('buttons.continue')
+        : this.$t('buttons.confirmCallSale')
+    },
+    secondBtnLabel() {
+      return !this.isSaleBusy
+        ? this.$t('buttons.cancelTheCall')
+        : this.$t('buttons.awaitSale')
+    },
+    isSaleBusy() {
+      return !this.isAvailable
+    },
+    isUserAwaiting() {
+      return this.data.hasOwnProperty('isUserAwaiting')
+        ? this.data.isUserAwaiting
+        : null
+    }
+  },
+  mounted() {
+    this.$axios
+      .post('/user/summon-sale', {
+        planshet_id: this.planshetId
+      })
+      .then((response) => {
+        if (response.data.success === 'pending') {
+          this.isAvailable = false
+        } else if (response.data.success) {
+          this.isAvailable = true
+        }
+      })
   },
   methods: {
     summonSale() {
@@ -65,7 +110,15 @@ export default {
           })
           .then((response) => {
             if (response.status === 200) {
-              this.$eventBus.$emit('redirect')
+              // Check if sales manager is busy
+
+              if (response.data.success === 'pending') {
+                this.isAvailable = false
+              } else if (response.data.success) {
+                // Go to waiting page
+
+                this.$eventBus.$emit('redirect')
+              }
 
               resolve(response)
             }
@@ -110,6 +163,7 @@ export default {
     background-color: rgba(241, 216, 202, 0.32);
 
     .label {
+      margin-right: fit(35, fitRaw(16));
       font-family: $font-caps;
       font-size: fit(24);
       letter-spacing: 1px;
@@ -131,7 +185,7 @@ export default {
   .btn {
     margin-top: fit(36);
 
-    &:first-child {
+    &.summon-sale {
       margin-right: fit(40);
     }
 
@@ -140,7 +194,7 @@ export default {
       border: none;
     }
 
-    &:last-child {
+    &.cancel-summon-sale {
       background-color: #fff;
       border: 1px solid rgba(60, 34, 112, 0.3);
 

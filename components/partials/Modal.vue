@@ -8,6 +8,7 @@
           <component
             :is="componentName"
             v-if="componentName"
+            :data="componentData"
             @callback="handleCallback"
           />
         </keep-alive>

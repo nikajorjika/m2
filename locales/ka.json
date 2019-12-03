@@ -74,7 +74,9 @@
     "ConfirmPhone": "ავტორიზაცია",
     "search": "ძებნა",
     "continue": "გაგრძელება",
-    "cancelTheCall": "გამოძახების გაუქმება"
+    "cancelTheCall": "გამოძახების გაუქმება",
+    "confirmCallSale": "დიახ",
+    "awaitSale": "დაველოდები"
   },
   "labels": {
     "FullArea": "სრული ფართი",
@@ -162,7 +164,8 @@
     "saveFlat": "შეინახე ეს ბინა",
     "dontSaveFlat": "არ მსურს შენახვა",
     "chosenAppliances": "შერჩეული ტექნიკა",
-    "callSalesQuestion": "ნამდვილად გსურთ გაყიდვების გამოძახება?"
+    "callSalesQuestion": "ნამდვილად გსურთ გაყიდვების გამოძახება?",
+    "saleIsBusy": "თქვენი გაყიდვების მენეჯერი დაკავებულია. გსურთ სხვა მენეჯერის გამოძახება?"
   },
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",

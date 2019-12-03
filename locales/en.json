@@ -60,7 +60,9 @@
     "select": "select",
     "ConfirmPhone": "login",
     "continue": "Continue",
-    "cancelTheCall": "Cancel the call"
+    "cancelTheCall": "Cancel the call",
+    "confirmCallSale": "Yes",
+    "awaitSale": "Wait"
   },
   "labels": {
     "FullArea": "Full Area",
@@ -148,7 +150,8 @@
     "flat_count_chosen_by_you": "Number of your chosen flats",
     "entrance": "entrance",
     "projects": "projects",
-    "callSalesQuestion": "Do you really want to call sales?"
+    "callSalesQuestion": "Do you really want to call sales?",
+    "saleIsBusy": "Your sales manager is busy. Do you want to call another manager?"
   },
   "titles": {
     "FlatPageTitleGinger": "Design ginger",

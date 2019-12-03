@@ -2,34 +2,65 @@
   <div class="queue-info">
     <div class="queue-info__illustration">
       <div class="queue-info__illustration__icon">
-        <img src="@/assets/illustrations/illustration-women.png" alt="Call For Sales">
+        <img
+          src="@/assets/illustrations/illustration-women.png"
+          alt="Call For Sales"
+        />
       </div>
       <div class="queue-info__illustration__title">
-        <h4>{{$t('labels.YouCalledForSales')}} <span class="color-orange">{{$t('labels.YouAreNumber').replace('%s', '-5')}}</span></h4>
+        <h4>
+          {{ $t('labels.YouCalledForSales') }}
+          <span class="color-orange">{{
+            $t('labels.YouAreNumber').replace('%s', '-5')
+          }}</span>
+        </h4>
       </div>
       <div class="queue-info__illustration__sub-title">
-       <p>{{$t('labels.ApproximateWaitingTime').replace('%s', '25')}}</p>
+        <p>{{ $t('labels.ApproximateWaitingTime').replace('%s', '25') }}</p>
       </div>
     </div>
     <div class="queue-info__info">
-      <p>{{$t('labels.WaitForSalesOrRequestInfo')}}</p>
+      <p>{{ $t('labels.WaitForSalesOrRequestInfo') }}</p>
     </div>
     <button class="queue-info__pdf-button">
-      <span>{{$t('labels.DetailsAsPdf')}}</span> <pdf-icon class="svg-icon" />
+      <span>{{ $t('labels.DetailsAsPdf') }}</span> <pdf-icon class="svg-icon" />
     </button>
-    <button class="queue-info__cancel-button">
-      <span>{{$t('labels.CancelSalesRequest')}}</span> <cancel-icon class="svg-icon" />
+    <button class="queue-info__cancel-button" @click="cancelSummonSale">
+      <span>{{ $t('labels.CancelSalesRequest') }}</span>
+      <cancel-icon class="svg-icon" />
     </button>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import PdfIcon from '@/assets/icons/PdfIcon.svg'
 import CancelIcon from '@/assets/icons/CancelIcon.svg'
 export default {
   components: {
     PdfIcon,
     CancelIcon
+  },
+  computed: {
+    ...mapGetters(['locale'])
+  },
+  methods: {
+    cancelSummonSale() {
+      return new Promise((resolve, reject) => {
+        this.$axios
+          .post('user/cancel-summon-sale', {})
+          .then((response) => {
+            if (response.status === 200) {
+              this.$router.push(`/${this.locale}/sales`)
+
+              resolve(response)
+            }
+          })
+          .catch((e) => {
+            reject(e)
+          })
+      })
+    }
   }
 }
 </script>
@@ -94,7 +125,7 @@ export default {
       background: transparent;
       color: $orange;
       border: 1px solid $orange;
-    } 
+    }
   }
   &__cancel-button {
     margin-top: 30px;

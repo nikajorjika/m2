@@ -1,248 +1,260 @@
 <template>
   <div class="flat">
-      <div class="flat__image" @click="goToFlat">
-          <div v-if="loading" class="loading"> </div>
-          <img v-else :src="image" :alt="title">
-          <gradient-block v-if="!loading" class="flat__bedroom-count">
-              <span>{{ bedroomCount }}</span>
-              <sleeping-room icon-color="#fff" height="13px" width="13px" />
-          </gradient-block>
-          <div v-if="!loading" class="flat__save" :class="{ active: isFavourite }" @click.stop="saveFlat()">
-              <favourite-icon class="icon" icon-color="#fff" height="13px" width="13px" />
-          </div>
+    <div class="flat__image" @click="goToFlat">
+      <div v-if="loading" class="loading"></div>
+      <img v-else :src="image" :alt="title" />
+      <gradient-block v-if="!loading" class="flat__bedroom-count">
+        <span>{{ bedroomCount }}</span>
+        <sleeping-room icon-color="#fff" height="13px" width="13px" />
+      </gradient-block>
+      <div
+        v-if="!loading"
+        class="flat__save"
+        :class="{ active: isFavourite }"
+        @click.stop="saveFlat()"
+      >
+        <favourite-icon
+          class="icon"
+          icon-color="#fff"
+          height="13px"
+          width="13px"
+        />
       </div>
-      <div class="flat__title">
-          <div v-if="loading" class="loading"> </div>
-          <h2 v-else>{{ title }}</h2>
-      </div>
-      <div class="flat__sub-title">
-          <div v-if="loading" class="loading"> </div>
-          <h4 v-else>{{ subTitle }}</h4>
-      </div>
-      <div class="flat__price">
-          <div v-if="loading" class="loading"> </div>
-          <gradient-label v-else :text="price" class="price-label" />
-      </div>
-      <div class="flat__see">
-          <div v-if="loading" class="loading"> </div>
-          <button v-else class="btn btn-orange" @click="goToFlat">
-                <span>{{$t('buttons.see')}}</span>
-                <div class="icon-wrapper">
-                    <arrow-right class="icon" width="13px" height="9px" icon-color="#fff" />
-                </div>
-          </button>
-      </div>
+    </div>
+    <div class="flat__title">
+      <div v-if="loading" class="loading"></div>
+      <h2 v-else>{{ title }}</h2>
+    </div>
+    <div class="flat__sub-title">
+      <div v-if="loading" class="loading"></div>
+      <h4 v-else>{{ subTitle }}</h4>
+    </div>
+    <div class="flat__price">
+      <div v-if="loading" class="loading"></div>
+      <gradient-label v-else :text="price" class="price-label" />
+    </div>
+    <div class="flat__see">
+      <div v-if="loading" class="loading"></div>
+      <button v-else class="btn btn-orange" @click="goToFlat">
+        <span>{{ $t('buttons.see') }}</span>
+        <div class="icon-wrapper">
+          <arrow-right
+            class="icon"
+            width="13px"
+            height="9px"
+            icon-color="#fff"
+          />
+        </div>
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import GradientLabel from '@/components/partials/GradientLabel'
 import GradientBlock from '@/components/partials/GradientBlock'
-import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import ArrowRight from '@/components/icons/ArrowRight'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import FavouriteIcon from '@/components/icons/Favourite'
 export default {
-    components: {
-        GradientLabel,
-        GradientBlock,
-        FavouriteIcon,
-        ButtonMainOrange,
-        SleepingRoom,
-        ArrowRight
+  components: {
+    GradientLabel,
+    GradientBlock,
+    FavouriteIcon,
+    SleepingRoom,
+    ArrowRight
+  },
+  props: {
+    image: {
+      type: String,
+      default: ''
     },
-    props: {
-        image: {
-            type: String,
-            default: ''
-        },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        title: {
-            type: String,
-            default: ''
-        },
-        subTitle: {
-            type: String,
-            default: ''
-        },
-        price: {
-            type: [String, Number],
-            default: ''
-        },
-        flatId: {
-            type: [String, Number],
-            required: true
-        },
-        bedroomCount: {
-            type: [String, Number],
-            default: 0
-        },
-        url: {
-            type: String,
-            default: ''
-        }
+    loading: {
+      type: Boolean,
+      default: false
     },
-    data() {
-        return {
-            isFavourite: false
-        }
+    title: {
+      type: String,
+      default: ''
     },
-    methods: {
-        goToFlat() {
-            this.$router.push(this.url)
-        },
-        saveFlat() {
-            this.$axios
-                .post('user/save-flat', {
-                    flat_id: this.flatId,
-                    renovation_id: null,
-                    furniture_id: null,
-                    decoration_id: null,
-                    appliances_ids: null
-                })
-                .then((response) => {
-                    if (response.status === 200 && response.success) {
-                        this.isFavourite = true
-                    }
-                })
-                .catch((e) => {
-                    console.error(e)
-                })
-        }
+    subTitle: {
+      type: String,
+      default: ''
     },
+    price: {
+      type: [String, Number],
+      default: ''
+    },
+    flatId: {
+      type: [String, Number],
+      required: true
+    },
+    bedroomCount: {
+      type: [String, Number],
+      default: 0
+    },
+    url: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      isFavourite: false
+    }
+  },
+  methods: {
+    goToFlat() {
+      this.$router.push(this.url)
+    },
+    saveFlat() {
+      this.$axios
+        .post('user/save-flat', {
+          flat_id: this.flatId,
+          renovation_id: null,
+          furniture_id: null,
+          decoration_id: null,
+          appliances_ids: null
+        })
+        .then((response) => {
+          if (response.status === 200 && response.data.success) {
+            this.isFavourite = true
+          }
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .flat {
-    display: grid;
-    grid-template-areas: 'image image' 'title title' 'subtitle subtitle' 'price button';
-    &__bedroom-count {
-        position: absolute;
-        top: 9px;
-        left: 12px;
-        display: inline-block;
-        padding: 10px 13px;
-        outline: none;
+  display: grid;
+  grid-template-areas: 'image image' 'title title' 'subtitle subtitle' 'price button';
+  &__bedroom-count {
+    position: absolute;
+    top: 9px;
+    left: 12px;
+    display: inline-block;
+    padding: 10px 13px;
+    outline: none;
+  }
+  &__save {
+    background: #7d70aa;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top: 9px;
+    right: 12px;
+    height: 33px;
+    width: 33px;
+    display: flex;
+    outline: none;
+    &.active {
+      background: $orange;
     }
-    &__save {
-        background: #7d70aa;
-        border-radius: 50%;
-        color: white;
-        position: absolute;
-        top: 9px;
-        right: 12px;
-        height: 33px;
-        width: 33px;
-        display: flex;
-        outline: none;
-        &.active  {
-            background: $orange; 
-        }
-        .icon {
-            margin: auto;
-        }
+    .icon {
+      margin: auto;
+    }
+  }
+  .loading {
+    background: #c7c7c7;
+    width: 100%;
+  }
+  &__image {
+    grid-area: image;
+    position: relative;
+    img {
+      width: 100%;
     }
     .loading {
-        background: #c7c7c7;
-        width: 100%;
+      height: 112px;
     }
-    &__image {
-        grid-area: image;
-        position: relative;
-        img {
-            width: 100%;
-        }
-        .loading {
-            height: 112px;
-        }
+  }
+  &__title {
+    grid-area: title;
+    color: #f26529;
+    font-family: $font-caps;
+    font-size: 11px;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    h2 {
+      font-size: inherit;
     }
-    &__title {
-        grid-area: title;
-        color: #f26529;
-        font-family: $font-caps;
-        font-size: 11px;
-        margin-top: 26px;
-        margin-bottom: 10px;
-        h2 {
-            font-size: inherit;
-
-        }
-        .loading {
-            height: 9px;
-            width: 79px;
-        }
+    .loading {
+      height: 9px;
+      width: 79px;
     }
-    &__sub-title {
-        grid-area: subtitle;
-        font-family: $font;
-        color: #615e5b;
-        font-size: 11px;
-        margin-bottom: 20px;
-        h4 {
-            font-size: inherit;
-        }
-        .loading {
-            height: 9px;
-            width: 153px;
-        }
+  }
+  &__sub-title {
+    grid-area: subtitle;
+    font-family: $font;
+    color: #615e5b;
+    font-size: 11px;
+    margin-bottom: 20px;
+    h4 {
+      font-size: inherit;
     }
-    &__price {
-        grid-area: price;
-        display: flex;
-        .price-label {
-            margin: auto auto auto 0;
-            font-size: 10px;
-            padding: 10px 13px;
-        }
-        .loading {
-            height: 33px;
-            width: 66px;
-            border-radius: 13px;
-        }
+    .loading {
+      height: 9px;
+      width: 153px;
     }
-    &__see {
-        .loading {
-            height: 33px;
-            width: 99px;
-            border-radius: 13px;
-            margin-left: auto;
-        }
+  }
+  &__price {
+    grid-area: price;
+    display: flex;
+    .price-label {
+      margin: auto auto auto 0;
+      font-size: 10px;
+      padding: 10px 13px;
     }
-    &__button {
-        grid-area: button;
-        justify-content: right;
+    .loading {
+      height: 33px;
+      width: 66px;
+      border-radius: 13px;
     }
+  }
+  &__see {
+    .loading {
+      height: 33px;
+      width: 99px;
+      border-radius: 13px;
+      margin-left: auto;
+    }
+  }
+  &__button {
+    grid-area: button;
+    justify-content: right;
+  }
 }
 .btn {
-    background: $orange;
-    border:none;
-    border-radius: 13px;
-    padding: 6px 23px;
+  background: $orange;
+  border: none;
+  border-radius: 13px;
+  padding: 6px 23px;
+  display: flex;
+  margin: auto;
+  margin-right: 0;
+  font-family: $font-caps;
+  color: #fff;
+  outline: none;
+  span {
+    margin: auto 0;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .icon-wrapper {
+    height: 19px;
+    width: 19px;
+    border: 1px dashed #fff;
+    border-radius: 50%;
+    margin-left: 12px;
     display: flex;
-    margin: auto;
-    margin-right: 0;
-    font-family: $font-caps;
-    color: #fff;
-    outline: none;
-    span {
-        margin: auto 0;
-        font-size: 11px;
-        font-weight: bold;
+    .icon {
+      margin: auto;
     }
-    .icon-wrapper{ 
-        height: 19px;
-        width: 19px;
-        border: 1px dashed #fff;
-        border-radius: 50%;
-        margin-left: 12px;
-        display: flex;
-        .icon {
-            margin: auto;
-        }
-    }
+  }
 }
 </style>

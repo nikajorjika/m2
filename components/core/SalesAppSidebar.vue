@@ -28,7 +28,7 @@
         </div>
       </nuxt-link>
     </div>
-    <div v-if="isLoggedIn" class="sidebar__sales">
+    <div v-if="isLoggedIn && !isWaitingPage" class="sidebar__sales">
       <button class="sidebar__sales__button" @click="callForSales">
         <sells-icon icon-color="white" width="12px" height="12px" />
         <span>
@@ -56,8 +56,8 @@ export default {
   },
   data() {
     return {
-      planshetId: this.$cookies.get('paveleon-planshet'),
-      isLoggedIn: !!this.$cookies.get('auth._token.local')
+      isLoggedIn: !!this.$cookies.get('auth._token.local'),
+      isAwaiting: false
     }
   },
   computed: {
@@ -104,17 +104,46 @@ export default {
         location: {
           name: 'lang-sales-waiting',
           params: { lang: this.locale }
-        }
+        },
+        isUserAwaiting: this.isUserAwaiting
       }
+    },
+    isUserAwaiting() {
+      return this.isAwaiting
+    },
+    isWaitingPage() {
+      return this.$route.name
+        ? this.$route.name === 'lang-sales-waiting'
+        : false
+    }
+  },
+  mounted() {
+    if (this.isLoggedIn) {
+      this.$axios.get('/user/awaiting-status').then((response) => {
+        this.isAwaiting = response.data.success
+      })
     }
   },
   methods: {
     callForSales() {
-      this.$eventBus.$emit(
-        'openModal',
-        'modal-content-call-sales',
-        this.modalData
-      )
+      // Check if sales manager is already called
+
+      if (!this.isUserAwaiting) {
+        // Open modal
+
+        this.$eventBus.$emit(
+          'openModal',
+          'modal-content-call-sales',
+          this.modalData
+        )
+      } else {
+        // Go to waiting page
+
+        this.$router.push({
+          name: 'lang-sales-waiting',
+          params: { lang: this.locale }
+        })
+      }
     }
   }
 }
