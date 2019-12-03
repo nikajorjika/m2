@@ -93,32 +93,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.regular-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-self: right;
-  align-self: center;
-
-  &__link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    font-family: $font-caps;
-
-    &.hide {
-      visibility: hidden;
-    }
-  }
-
-  &__label,
-  &__icon {
-    display: inline-flex;
-  }
-}
-
+<style lang="scss" scoped>
 .loading {
   position: absolute;
 
@@ -184,6 +159,33 @@ export default {
   }
   100% {
     transform: scale(0);
+  }
+}
+</style>
+
+<style lang="scss">
+.regular-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: right;
+  align-self: center;
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-family: $font-caps;
+
+    &.hide {
+      visibility: hidden;
+    }
+  }
+
+  &__label,
+  &__icon {
+    display: inline-flex;
   }
 }
 </style>
