@@ -6,9 +6,10 @@
 
         <save-button
           v-if="flatExists"
+          :loading="saveFlatBtnLoading"
           :height="'40px'"
           :padding="'0 21px'"
-          :label="$t('labels.saveFlat')"
+          :label="saveFlatBtnLabel"
           :icon-margin-left="'21px'"
           @regularBtnClick="saveFlat"
         >
@@ -87,8 +88,8 @@
         </div>
 
         <prompt-alert
-          class="top-margin-auto"
           v-if="flatExists"
+          class="top-margin-auto"
           :color="promptColor"
           :text="promptText"
         />
@@ -138,7 +139,9 @@ export default {
   middleware: 'isAuth',
   data() {
     return {
-      activeThumbnail: 0
+      activeThumbnail: 0,
+      saveFlatBtnLoading: false,
+      saveFlatBtnMsgShow: false
     }
   },
   computed: {
@@ -244,6 +247,11 @@ export default {
     },
     salesBtnLabel() {
       return this.$t('labels.callSaleManager')
+    },
+    saveFlatBtnLabel() {
+      return !this.saveFlatBtnMsgShow
+        ? this.$t('labels.saveFlat')
+        : this.$t('buttons.saved')
     }
   },
   mounted() {
@@ -358,6 +366,8 @@ export default {
       })
     },
     saveFlat() {
+      this.saveFlatBtnLoading = true
+
       return new Promise((resolve, reject) => {
         this.$axios
           .post('user/save-flat', {
@@ -369,12 +379,24 @@ export default {
           })
           .then((response) => {
             if (response.status === 200 && response.data.success) {
-              this.$eventBus.$emit('redirect')
+              this.$root.$emit('flatIsSaved')
 
-              resolve(response)
+              this.saveFlatBtnLoading = false
+              this.saveFlatBtnMsgShow = true
+
+              setTimeout(() => {
+                this.saveFlatBtnMsgShow = false
+              }, 3000)
+
+              this.$eventBus.$emit('redirect')
+            } else {
+              this.saveFlatBtnLoading = false
             }
+
+            resolve(response)
           })
           .catch((e) => {
+            this.saveFlatBtnLoading = false
             reject(e)
           })
       })

@@ -2,7 +2,7 @@ export default ({ app, store }, inject) => {
   inject('currencyConverter', async (amount, currencyFrom, currencyTo) => {
     // Normalize price
 
-    let price = parseFloat(amount.replace(',', ''))
+    let price = parseFloat(amount.toString().replace(',', ''))
 
     // Check if price is in default currency
 

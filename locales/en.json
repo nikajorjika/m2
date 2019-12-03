@@ -62,7 +62,8 @@
     "continue": "Continue",
     "cancelTheCall": "Cancel the call",
     "confirmCallSale": "Yes",
-    "awaitSale": "Wait"
+    "awaitSale": "Wait",
+    "saved": "saved"
   },
   "labels": {
     "FullArea": "Full Area",
