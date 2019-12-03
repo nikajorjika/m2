@@ -11,7 +11,7 @@
   "status": {
     "finished": "Finished",
     "ongoing": "Ongoing",
-    "planned": "Planneds"
+    "planned": "Planned"
   },
   "errors": {
     "NameFieldIsRequired": "Name field is required",

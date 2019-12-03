@@ -100,6 +100,7 @@
         </div>
 
         <prompt-alert
+          class="appliances__prompt"
           v-if="flatExists"
           :color="promptColor"
           :text="promptText"
@@ -362,6 +363,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.appliances__prompt {
+  margin-top: auto;
+}
 .flat-pages-container {
   width: 100%;
   height: calc(100% - #{fit(165)});
