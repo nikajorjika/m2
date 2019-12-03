@@ -99,7 +99,6 @@ import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   layout: 'SalesFlatLayout',
-  auth: 'auth',
   middleware: 'isAuth',
   components: {
     TitleWithLine,

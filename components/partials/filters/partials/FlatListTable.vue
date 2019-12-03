@@ -133,10 +133,10 @@ export default {
         this.$emit('showPrompt', item.planshet)
       } else {
         if (this.timeout) clearTimeout(this.timeout)
-        this.lightUpFlat([item]).then((timeout) => {
-          this.timeout = timeout
-        })
-        this.$emit('showLightBulb')
+          this.lightUpFlat([item]).then((timeout) => {
+            this.timeout = timeout
+          })
+          this.$emit('showLightBulb')
       }
     }
   }

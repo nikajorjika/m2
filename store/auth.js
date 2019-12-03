@@ -7,11 +7,7 @@ const state = function() {
 
 const getters = {
   user: (state) => state.user,
-  token: () => this.$cookies.get('auth._token.local'),
-  isLoggedIn() {
-    console.log(this)
-    return this.$cookies.get('auth._token.local') && state.user
-  }
+  token: () => state.token,
 }
 
 const actions = {

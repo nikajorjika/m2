@@ -38,30 +38,30 @@ export default {
         SelectRange
     },
     computed: {
-    ...mapGetters({
-      locale: 'locale',
-      filterDefaults: 'Filter/filterDefaults',
-      filters: 'Filter/filters'
-    }),
-    filterPrice() {
-      return this.filters.price
-    },
-    minPrice() {
-      return this.filterDefaults.min_price
-    },
-    maxPrice() {
-      return this.filterDefaults.max_price
-    }
-  },
-  data() {
-      return {
-          selected: {
-              min: null,
-              max: null
-          }
+      ...mapGetters({
+        locale: 'locale',
+        filterDefaults: 'Filter/filterDefaults',
+        filters: 'Filter/filters'
+      }),
+      filterPrice() {
+        return this.filters.price
+      },
+      minPrice() {
+        return this.filterDefaults.min_price
+      },
+      maxPrice() {
+        return this.filterDefaults.max_price
       }
-  },
-  methods: {
+    },
+    data() {
+        return {
+            selected: {
+                min: null,
+                max: null
+            }
+        }
+    },
+    methods: {
     ...mapMutations({
       setFilter: 'Filter/SET_FILTER_ITEM',
       setLoader: 'Filter/SET_FILTER_LOADER'
