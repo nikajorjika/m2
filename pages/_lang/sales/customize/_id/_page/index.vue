@@ -500,6 +500,9 @@ export default {
 
 .app-footer {
   .sales {
+    display: flex;
+    align-items: center;
+
     .button {
       width: auto;
 
