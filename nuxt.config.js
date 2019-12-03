@@ -36,6 +36,7 @@ module.exports = {
   plugins: [
     '~/plugins/i18n',
     '~/plugins/hammer',
+    '~/plugins/SetAuthHeader',
     '~/plugins/load-preflight-data',
     {
       src: '~/plugins/nuxt-swiper',
@@ -67,7 +68,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
+    // '@nuxtjs/auth',
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
     '@nuxtjs/pwa',
@@ -75,30 +76,30 @@ module.exports = {
     'nuxt-svg-loader'
   ],
 
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: '/user/verify', method: 'post', propertyName: 'token' },
-          logout: { url: '/user/sign-out', method: 'post' },
-          user: {
-            url: '/user/current-user',
-            method: 'get',
-            propertyName: 'user'
-          }
-        },
-        tokenRequired: true,
-        tokenType: 'bearer'
-      }
-    },
-    cookie: {
-      prefix: 'auth.',
-      options: {
-        path: '/',
-        maxAge: 3600
-      },
-    }
-  },
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: { url: '/user/verify', method: 'post', propertyName: 'token' },
+  //         logout: { url: '/user/sign-out', method: 'post' },
+  //         user: {
+  //           url: '/user/current-user',
+  //           method: 'get',
+  //           propertyName: 'user'
+  //         }
+  //       },
+  //       tokenRequired: true,
+  //       tokenType: 'bearer'
+  //     }
+  //   },
+  //   cookie: {
+  //     prefix: 'auth.',
+  //     options: {
+  //       path: '/',
+  //       maxAge: 3600
+  //     },
+  //   }
+  // },
 
   icon: {
     iconSrc: '~static/icon.png'

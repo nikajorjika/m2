@@ -7,21 +7,45 @@
 
 <script>
 import LoginIcon from '@/components/icons/Login'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: { LoginIcon },
   computed: {
+    ...mapGetters({
+      user: 'auth/user',
+      locale: 'locale'
+    }),
+    isLoggedIn() {
+      return this.user && this.$cookies.get('auth._token.local')
+    },
     buttonText() {
-      return this.$auth.loggedIn
+      return this.isLoggedIn
         ? this.$t('buttons.EndSession')
         : this.$t('buttons.authorize')
     }
   },
   methods: {
+    ...mapActions({
+      logout: 'auth/logout'
+    }),
     handleClick() {
-      if (this.$auth.loggedIn) {
-        this.$auth.logout()
+      if (this.isLoggedIn) {
+        this.logout().then(() => {
+          this.$router.push({ 
+            name: 'lang-sales',
+            params: {
+              lang: this.locale
+            }
+          })
+        })
+      } else {
+        this.$router.push({ 
+          name: 'lang-sales-login',
+          params: {
+            lang: this.locale
+          } 
+        })
       }
-      this.$router.push({ name: 'lang-sales-login' })
     }
   }
 }

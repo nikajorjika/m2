@@ -3,7 +3,7 @@ export default function ({ app, store }) {
     const questions = store.getters['FAQ/questionList']
     if(!questions.length) {
       store.dispatch('FAQ/fetchFAQ').then(response => {
-        console.log(response.status)
+        // console.log(response)
       }).catch(error => console.log(error))
     }
   }

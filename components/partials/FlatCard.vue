@@ -1,37 +1,37 @@
 <template>
   <div class="flat">
-      <div class="flat__image" @click="goToFlat">
-          <div v-if="loading" class="loading"> </div>
-          <img v-else :src="image" :alt="title">
-          <gradient-block v-if="!loading" class="flat__bedroom-count">
-              <span>{{ bedroomCount }}</span>
-              <sleeping-room icon-color="#fff" height="13px" width="13px" />
-          </gradient-block>
-          <div v-if="!loading" class="flat__save" :class="{ active: isFavourite }" @click.stop="saveFlat()">
-              <favourite-icon class="icon" icon-color="#fff" height="13px" width="13px" />
-          </div>
+    <div class="flat__image" @click="goToFlat">
+      <div v-if="loading" class="loading"> </div>
+      <img v-else :src="image" :alt="title">
+      <gradient-block v-if="!loading" class="flat__bedroom-count">
+          <span>{{ bedroomCount }}</span>
+          <sleeping-room icon-color="#fff" height="13px" width="13px" />
+      </gradient-block>
+      <div v-if="!loading" class="flat__save" :class="{ active: isFavourite }" @click.stop="saveFlat()">
+          <favourite-icon class="icon" icon-color="#fff" height="13px" width="13px" />
       </div>
-      <div class="flat__title">
-          <div v-if="loading" class="loading"> </div>
-          <h2 v-else>{{ title }}</h2>
-      </div>
-      <div class="flat__sub-title">
-          <div v-if="loading" class="loading"> </div>
-          <h4 v-else>{{ subTitle }}</h4>
-      </div>
-      <div class="flat__price">
-          <div v-if="loading" class="loading"> </div>
-          <gradient-label v-else :text="price" class="price-label" />
-      </div>
-      <div class="flat__see">
-          <div v-if="loading" class="loading"> </div>
-          <button v-else class="btn btn-orange" @click="goToFlat">
-                <span>{{$t('buttons.see')}}</span>
-                <div class="icon-wrapper">
-                    <arrow-right class="icon" width="13px" height="9px" icon-color="#fff" />
-                </div>
-          </button>
-      </div>
+    </div>
+    <div class="flat__title">
+      <div v-if="loading" class="loading"> </div>
+      <h2 v-else>{{ title }}</h2>
+    </div>
+    <div class="flat__sub-title">
+      <div v-if="loading" class="loading"> </div>
+      <h4 v-else>{{ subTitle }}</h4>
+    </div>
+    <div class="flat__price">
+      <div v-if="loading" class="loading"> </div>
+      <gradient-label v-else :text="price" class="price-label" />
+    </div>
+    <div class="flat__see">
+      <div v-if="loading" class="loading"> </div>
+      <button v-else class="btn btn-orange" @click="goToFlat">
+        <span>{{$t('buttons.see')}}</span>
+        <div class="icon-wrapper">
+          <arrow-right class="icon" width="13px" height="9px" icon-color="#fff" />
+        </div>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -44,73 +44,73 @@ import SleepingRoom from '@/components/icons/SleepingRoom'
 import FavouriteIcon from '@/components/icons/Favourite'
 export default {
     components: {
-        GradientLabel,
-        GradientBlock,
-        FavouriteIcon,
-        ButtonMainOrange,
-        SleepingRoom,
-        ArrowRight
+      GradientLabel,
+      GradientBlock,
+      FavouriteIcon,
+      ButtonMainOrange,
+      SleepingRoom,
+      ArrowRight
     },
     props: {
-        image: {
-            type: String,
-            default: ''
-        },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        title: {
-            type: String,
-            default: ''
-        },
-        subTitle: {
-            type: String,
-            default: ''
-        },
-        price: {
-            type: [String, Number],
-            default: ''
-        },
-        flatId: {
-            type: [String, Number],
-            required: true
-        },
-        bedroomCount: {
-            type: [String, Number],
-            default: 0
-        },
-        url: {
-            type: String,
-            default: ''
-        }
+      image: {
+        type: String,
+        default: ''
+      },
+      loading: {
+        type: Boolean,
+        default: false
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      subTitle: {
+        type: String,
+        default: ''
+      },
+      price: {
+        type: [String, Number],
+        default: ''
+      },
+      flatId: {
+        type: [String, Number],
+        required: true
+      },
+      bedroomCount: {
+        type: [String, Number],
+        default: 0
+      },
+      url: {
+        type: String,
+        default: ''
+      }
     },
     data() {
-        return {
-            isFavourite: false
-        }
+      return {
+        isFavourite: false
+      }
     },
     methods: {
         goToFlat() {
-            this.$router.push(this.url)
+          this.$router.push(this.url)
         },
         saveFlat() {
-            this.$axios
-                .post('user/save-flat', {
-                    flat_id: this.flatId,
-                    renovation_id: null,
-                    furniture_id: null,
-                    decoration_id: null,
-                    appliances_ids: null
-                })
-                .then((response) => {
-                    if (response.status === 200 && response.success) {
-                        this.isFavourite = true
-                    }
-                })
-                .catch((e) => {
-                    console.error(e)
-                })
+          this.$axios
+            .post('user/save-flat', {
+              flat_id: this.flatId,
+              renovation_id: null,
+              furniture_id: null,
+              decoration_id: null,
+              appliances_ids: null
+            })
+            .then((response) => {
+              if (response.status === 200) {
+                this.isFavourite = true
+              }
+            })
+            .catch((e) => {
+              console.error(e)
+            })
         }
     },
 }

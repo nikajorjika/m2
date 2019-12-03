@@ -66,25 +66,27 @@ export default {
   },
   methods: {
     ...mapActions({
-      loginUser: 'Sales/loginUser'
+      loginUser: 'Sales/loginUser',
+      login: 'auth/loginUser'
     }),
     handleLoginStageOne(data) {
       this.formData = { ...data }
-      this.loginUser(this.formData).then((response) => {
-        this.codeSent = true
-      }).catch(e =>
-        this.loginErrorMessage = this.$t('errors.NoSuchUserWithSelectedPhoneNumber')
-      )
+      this.login(this.formData)
+        .then(response => {
+          this.codeSent = true
+        }).catch(e => {
+          this.loginErrorMessage = this.$t('errors.NoSuchUserWithSelectedPhoneNumber')
+        })
     },
     handleLoginStageTwo(code) {
       this.formData = { ...this.formData, ...code }
-      this.loginUser(this.formData).then(({ data }) => {
-        if (data.hasOwnProperty('access_token')) {
-          this.$auth.setUserToken(data.access_token)
-        }
-      }).catch(e =>
-        this.invalidCodeErrorMessage = this.$t('errors.InvalidCode')
-      )
+      this.login(this.formData)
+        .then(response => {
+          this.$router.go(-1)
+        }).catch(e =>{
+          this.invalidCodeErrorMessage = this.$t('errors.InvalidCode')
+        })
+      
     },
     handleResend() {
       delete this.formData.code
