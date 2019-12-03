@@ -49,16 +49,18 @@ export default {
     computed: {
         ...mapGetters({
             locale: 'locale',
+            user: 'auth/user'
         })
     },
     methods: {
         fetchFreshFlatData() {
             this.loading = true
-            const userId = this.$auth.$state.user.id
+            const userId = this.user.id
+            // const userId = this.$auth.$state.user.id
             this.$axios(`/user/${userId}/saved-flats`).then(({data}) => {
               this.flats = data.map(item => {
                 return {
-                    id: item.id,
+                    id: item.flat.id,
                     bedrooms_count: item.bedrooms_count,
                     title: item.flat.project_name[this.locale],
                     price: `${item.flat.price} $`,
