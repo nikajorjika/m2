@@ -367,9 +367,6 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      &__prompt {
-        margin-top: auto;
-      }
       &__controls {
         display: flex;
         margin-left: auto;

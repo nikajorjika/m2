@@ -363,7 +363,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.appliances__prompt {
+.appliances__prompt.prompt {
   margin-top: auto;
 }
 .flat-pages-container {
