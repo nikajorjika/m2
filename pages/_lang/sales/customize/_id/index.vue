@@ -72,7 +72,7 @@
     <app-footer>
       <template>
         <prompt-alert
-          class="footer-items__prompt"
+          class="margin-top-auto"
           v-if="flatExists"
           :color="promptColor"
           :text="promptText"
@@ -376,6 +376,9 @@ export default {
       }
     }
   }
+}
+.margin-top-auto {
+  margin-top: auto;
 }
 </style>
 

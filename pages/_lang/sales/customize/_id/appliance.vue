@@ -363,7 +363,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.appliances__prompt.prompt {
+.appliances__prompt {
   margin-top: auto;
 }
 .flat-pages-container {
@@ -492,7 +492,8 @@ export default {
     width: 49.25%;
     font-size: 14px;
     line-height: 20px;
-    text-align: right;
+    text-align: left;
+    padding-left: 18px;
     color: #494949;
   }
 
