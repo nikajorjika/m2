@@ -20,7 +20,7 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   router: {
-    middleware: ['i18n', 'currency', 'before-each']
+    middleware: ['i18n', 'currency']
   },
   /*
    ** Customize the progress-bar color
@@ -38,6 +38,7 @@ module.exports = {
     '~/plugins/hammer',
     '~/plugins/SetAuthHeader',
     '~/plugins/load-preflight-data',
+    '~/plugins/before-each',
     {
       src: '~/plugins/nuxt-swiper',
       ssr: false
