@@ -2,7 +2,7 @@
   <div class="filter-list-page">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
       <div v-if="!loading" class="list-scrollable-wrapper">
-        <div v-if="flats.length" class="flat-list">
+        <div class="flat-list">
           <div v-for="(item, index) in flats" :key="index" class="flat-card">
             <flat-card 
                 :title="item.title"
@@ -15,7 +15,7 @@
             />
           </div>
         </div>
-        <div v-else>
+        <div v-if="!flats.length && !loading">
             <p>{{$t('labels.NoFlatsFound')}}</p>
         </div>
       </div>

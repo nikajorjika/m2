@@ -49,7 +49,7 @@
                 : '#fff'
             "
             width="16"
-            height="16"
+            height="18"
             class="flat-navigation__link__icon"
           />
           <span class="flat-navigation__link__text">{{ $t(item.title) }}</span>
