@@ -35,7 +35,7 @@ module.exports = {
    */
   plugins: [
     '~/plugins/i18n',
-    '~/plugins/hammer',
+    '~/plugins/auth',
     '~/plugins/SetAuthHeader',
     '~/plugins/load-preflight-data',
     {

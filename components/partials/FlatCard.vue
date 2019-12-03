@@ -31,7 +31,8 @@
     </div>
     <div class="flat__price">
       <div v-if="loading" class="loading"></div>
-      <gradient-label v-else :text="price" class="price-label" />
+      <price-component class="price-label" :price="price" v-else />
+      <!-- <gradient-label v-else :text="price" class="price-label" /> -->
     </div>
     <div class="flat__see">
       <div v-if="loading" class="loading"></div>
@@ -53,6 +54,7 @@
 <script>
 import GradientLabel from '@/components/partials/GradientLabel'
 import GradientBlock from '@/components/partials/GradientBlock'
+import PriceComponent from '@/components/partials/Price'
 import ArrowRight from '@/components/icons/ArrowRight'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import FavouriteIcon from '@/components/icons/Favourite'
@@ -60,6 +62,7 @@ export default {
   components: {
     GradientLabel,
     GradientBlock,
+    PriceComponent,
     FavouriteIcon,
     SleepingRoom,
     ArrowRight
@@ -209,6 +212,7 @@ export default {
       margin: auto auto auto 0;
       font-size: 10px;
       padding: 10px 13px;
+      height: 31px;
     }
     .loading {
       height: 33px;

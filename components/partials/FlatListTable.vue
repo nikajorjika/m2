@@ -224,7 +224,8 @@ export default {
   &__body {
     overflow-y: auto;
     max-height: 100%;
-
+    margin-right: 4px;
+    
     &::-webkit-scrollbar {
       width: 14px;
     }

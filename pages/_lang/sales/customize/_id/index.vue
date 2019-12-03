@@ -50,9 +50,9 @@
           <currency-switcher v-if="flatExists" />
 
           <div class="footer-items__controls">
-            <div class="footer-items__controls__skip">
+            <!-- <div class="footer-items__controls__skip">
               <skip-button :url="skipBtnUrl" />
-            </div>
+            </div> -->
 
             <div class="footer-items__controls__next">
               <button-main-orange
@@ -367,6 +367,11 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
+      
+      &__controls__next {
+        margin-left: auto;
+      }
+      
       &__controls {
         display: flex;
         margin-left: auto;

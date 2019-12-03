@@ -38,8 +38,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      defaultCurrency: 'GET_DEFAULT_CURRENCY',
-      currency: 'GET_CURRENCY'
+      defaultCurrency: 'settings/currency',
+      currency: 'settings/currency',
+      currencyRate: 'settings/currencyRate'
     }),
     classObject() {
       return {
@@ -53,23 +54,20 @@ export default {
   },
   created() {
     this.$store.watch(
-      (state, getters) => getters.GET_CURRENCY,
+      (state, getters) => getters['settings/currency'],
       (newValue, oldValue) => {
-        this.currencyConverter(this.price, oldValue, newValue)
+        this.currencyConverter(this.price, newValue)
       }
     )
   },
   methods: {
     formatPrice() {
-      this.currencyConverter(this.price, this.defaultCurrency, this.currency)
+      this.currencyConverter(this.price, this.currency)
     },
-    currencyConverter(price, currencyFrom, currencyTo) {
-      return this.$currencyConverter(price, currencyFrom, currencyTo).then(
-        (price) => {
-          this.formattedPrice = `${this.textBeforePrice} ${price} ${this.textAfterPrice}`
-          this.currencySymbol = this.getCurrencySymbol()
-        }
-      )
+    currencyConverter(price, currencyTo) {
+      const amount = this.$currencyConverter(price, currencyTo, true)
+      this.formattedPrice = `${this.textBeforePrice} ${amount} ${this.textAfterPrice}`
+      this.currencySymbol = this.getCurrencySymbol()
     },
     getCurrencySymbol() {
       switch (this.currency) {

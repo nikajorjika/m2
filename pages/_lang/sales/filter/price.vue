@@ -6,6 +6,7 @@
           class="page-flat-number__title"
           :title="$t('titles.PickPriceRange')"
         />
+        <currency-switcher />
       </div>
       <div class="warning" :class="{active: totalCount === 0}">
         <p>{{$t('errors.NoFlatsInThisPriceRange')}}</p>
@@ -30,11 +31,13 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   components: {
     SelectRange,
     SaleFilterFooter,
+    CurrencySwitcher,
     TitleWithLine,
   },
   layout: 'SalesFilterLayout',
@@ -44,16 +47,28 @@ export default {
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
       filters: 'Filter/filters',
+      currency: 'settings/currency',
       totalCount: 'Filter/totalCount'
     }),
     filterPrice() {
-      return this.filters.price
+        return {
+          min: this.currency === 'GEL' ?
+            this.$currencyConverter(this.filters.price.min, this.currency) :
+            this.filters.price.min,
+          max: this.currency === 'GEL' ?
+            this.$currencyConverter(this.filters.price.max, this.currency) :
+            this.filters.price.max
+        }
     },
     minPrice() {
-      return this.filterDefaults.min_price
+        return  this.currency === 'GEL' ?
+          this.$currencyConverter(this.filterDefaults.min_price, this.currency) :
+          this.filterDefaults.min_price
     },
     maxPrice() {
-      return this.filterDefaults.max_price
+        return  this.currency === 'GEL' ?
+          this.$currencyConverter(this.filterDefaults.min_price, this.currency) :
+          this.filterDefaults.max_price
     },
     nextUrl() {
       return `/${this.locale}/sales/filter/building-status`
@@ -113,8 +128,8 @@ export default {
   }
   &__title-container {
     display: flex;
-    flex-direction: column;
-
+    max-width: 684px;
+    justify-content: space-between;
     small {
       font-size: 10px;
       font-family: $font;
