@@ -47,12 +47,18 @@ export default {
             observer: null,
             isEmpty: false,
             shouldLoadMore: true,
+            isFetching: false,
             page: 1,
             options: {
                 root: null,
                 threshold: 0
             }
         }
+    },
+    watch: {
+      computedFilters: {
+        handler: 'updateQueryString'
+      }
     },
     computed: {
         ...mapGetters({
@@ -113,7 +119,8 @@ export default {
             })
         },
         callback(data) {
-          if(this.shouldLoadMore && data[0].isIntersecting) {
+          if(this.shouldLoadMore && data[0].isIntersecting && !this.isFetching) {
+            this.isFetching = true
             this.fetchFlats({ page: this.page, fresh: false, noLoading: true })
               .then(response => {
                 if(response.length < 16) {
@@ -122,12 +129,21 @@ export default {
                   this.page++
                   this.shouldLoadMore = true
                 }
+              this.isFetching = false
               })
           }
         },
         observe() {
           this.observer = new IntersectionObserver(this.callback, this.options)
           this.observer.observe(this.$refs.Loading)
+        },
+        updateQueryString() {
+          this.$router.push({
+            path: this.$router.path,
+            query: {
+              filters: JSON.stringify(this.filters)
+            }
+          })
         }
     }
 }

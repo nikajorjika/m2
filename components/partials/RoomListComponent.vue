@@ -111,7 +111,7 @@ export default {
         letter-spacing: 1px;
         &.small {
           margin-right: 11px;
-          padding: 5px 6px 7px 8px;
+          padding: 6px 6px 7px 8px;
         }
       }
       &__value {

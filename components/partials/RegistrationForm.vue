@@ -63,9 +63,9 @@ export default {
   },
   data() {
     return {
-      name: 'Nika',
-      phone: '595188880',
-      email: 'nikajojrjika@gmail.com',
+      name: '',
+      phone: '',
+      email: '',
       errors: {
         name: '',
         phone: '',

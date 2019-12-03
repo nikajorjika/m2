@@ -72,6 +72,7 @@
     <app-footer>
       <template>
         <prompt-alert
+          class="footer-items__prompt"
           v-if="flatExists"
           :color="promptColor"
           :text="promptText"
@@ -366,7 +367,9 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-
+      &__prompt {
+        margin-top: auto;
+      }
       &__controls {
         display: flex;
         margin-left: auto;
@@ -383,9 +386,5 @@ export default {
 .app-content {
   width: 100%;
   height: 100%;
-
-  .prompt {
-    margin-top: auto;
-  }
 }
 </style>
