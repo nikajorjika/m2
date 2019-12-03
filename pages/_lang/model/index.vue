@@ -12,6 +12,26 @@
       <div class="buttons">
         <illustrated-button
           v-if="hasColor"
+          :label="buttonLabels.byPhoneNumberLabel"
+          :to-route="{
+            name: 'lang-model-by-auth',
+            params: { lang: locale }
+          }"
+        >
+          <template v-slot:illustration>
+            <login-illustration
+              width="50px"
+              height="auto"
+              :margin="'0 0 0 -21px'"
+            />
+          </template>
+
+          <template v-slot:icon>
+            <phone-icon icon-color="#fff" width="18px" height="9px" />
+          </template>
+        </illustrated-button>
+        <illustrated-button
+          v-if="hasColor"
           :label="buttonLabels.byFlatNumberLabel"
           :to-route="{
             name: 'lang-model-by-flat-number',
@@ -27,7 +47,7 @@
           </template>
 
           <template v-slot:icon>
-            <search-by-flat-number width="18px" height="9px" />
+            <search-by-flat-number icon-color="#fff" width="18px" height="9px" />
           </template>
         </illustrated-button>
         <illustrated-button
@@ -64,11 +84,15 @@ import SearchByFlatNumber from '@/components/icons/SearchByFlatNumber'
 import FilterSearch from '@/components/icons/FilterSearch'
 import SearchByFlatNumberIllustration from '@/components/icons/SearchByFlatNumberIllustration'
 import FilterIconIllustration from '@/components/icons/FilterIllustration'
+import PhoneIcon from '@/components/icons/Phone'
+import LoginIllustration from '@/components/icons/SearchByPhoneNumberIllustration'
 
 export default {
   components: {
     ImageSlider,
     IllustratedButton,
+    LoginIllustration,
+    PhoneIcon,
     FilterIconIllustration,
     TitleWithLine,
     FilterSearch,
@@ -151,9 +175,9 @@ export default {
   .buttons {
     margin: fit(110) 0 0 fit(70); /* 110px 0 0 70px */
     display: flex;
-    .filter-icon {
-      margin-left: 20.46px;
-    }
+    .link {
+      margin-right: 20px;
+    } 
   }
   .filter-illustation-icon {
     margin: 0 0 0 -12px;

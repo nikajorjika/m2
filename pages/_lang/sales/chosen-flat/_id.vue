@@ -137,8 +137,7 @@ import PdfIcon from '@/assets/icons/PdfIcon.svg'
 
 export default {
   layout: 'SalesChosenFlatLayout',
-  auth: 'auth',
-  middleware: 'auth',
+  middleware: 'isAuth',
   components: {
     TitleWithLine,
     RenderViewer,

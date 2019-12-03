@@ -1,8 +1,8 @@
 <template>
   <div class="filter-list-page">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
-      <div v-if="!loading" class="list-scrollable-wrapper">
-        <div v-if="flats.length" class="flat-list">
+      <div v-show="!loading" class="list-scrollable-wrapper">
+        <div class="flat-list">
           <div v-for="(item, index) in flats" :key="index" class="flat-card">
             <flat-card 
                 :title="item.title"
@@ -15,11 +15,14 @@
             />
           </div>
         </div>
-        <div v-else>
+        <div v-if="isEmpty && !loading">
             <p>{{$t('labels.NoFlatsFound')}}</p>
         </div>
+        <div v-if="shouldLoadMore" ref="Loading" class="load-more">
+            loading...
+        </div>
       </div>
-      <div class="flat-list" v-else>
+      <div class="flat-list" v-if="loading">
         <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
             <flat-card :loading="true" :flat-id="0"/>
         </div>
@@ -41,7 +44,14 @@ export default {
     data() {
         return {
             loadingItems: [1,1,1,1,1,1,1,1],
-            page: 1
+            observer: null,
+            isEmpty: false,
+            shouldLoadMore: true,
+            page: 1,
+            options: {
+                root: null,
+                threshold: 0
+            }
         }
     },
     computed: {
@@ -95,10 +105,29 @@ export default {
             fetchFlats: 'Filter/fetchFilteredFlats'
         }),
         fetchFreshFlatData() {
-            this.fetchFlats({page: this.page, fresh: true})
-                .then(response => {
-                    this.isEmpty = response.length
-                })
+          this.fetchFlats({ page: this.page, fresh: true })
+            .then(response => {
+              this.isEmpty = !response.length
+              this.page++
+              this.observe()
+            })
+        },
+        callback(data) {
+          if(this.shouldLoadMore && data[0].isIntersecting) {
+            this.fetchFlats({ page: this.page, fresh: false, noLoading: true })
+              .then(response => {
+                if(response.length < 16) {
+                  this.shouldLoadMore = false
+                }else {
+                  this.page++
+                  this.shouldLoadMore = true
+                }
+              })
+          }
+        },
+        observe() {
+          this.observer = new IntersectionObserver(this.callback, this.options)
+          this.observer.observe(this.$refs.Loading)
         }
     }
 }
@@ -111,6 +140,9 @@ export default {
     display: flex;
     padding-bottom: 12px;
     flex-direction: column;
+}
+.load-more {
+  text-align: center;
 }
 .page-title {
     margin: 50px 0;

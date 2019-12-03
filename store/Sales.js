@@ -1,8 +1,14 @@
-const state = () => ({})
+const state = () => ({
+  temporaryToken: null
+})
 
-const getters = {}
+const getters = {
+  temporaryToken: (state) => state.temporaryToken
+}
 
-const mutations = {}
+const mutations = {
+  SET: (state, {key, value}) => state[key] = value
+}
 
 const actions = {
   registerUser(context, data) {

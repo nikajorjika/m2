@@ -28,7 +28,7 @@
         </div>
       </nuxt-link>
     </div>
-    <div v-if="isLoggedIn && !isWaitingPage" class="sidebar__sales">
+    <div v-if="showSummon" class="sidebar__sales">
       <button class="sidebar__sales__button" @click="callForSales">
         <sells-icon icon-color="white" width="12px" height="12px" />
         <span>
@@ -67,6 +67,9 @@ export default {
     },
     logoLink() {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
+    },
+    showSummon() {
+      return this.$router.name !== 'lang-sales-waiting' && this.isLoggedIn
     },
     items() {
       return [
@@ -110,11 +113,6 @@ export default {
     },
     isUserAwaiting() {
       return this.isAwaiting
-    },
-    isWaitingPage() {
-      return this.$route.name
-        ? this.$route.name === 'lang-sales-waiting'
-        : false
     }
   },
   mounted() {

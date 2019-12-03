@@ -1,8 +1,16 @@
 <template>
   <div class="building-status">
     <div class="checkboxes">
-        <div v-for="(item, index) in checkData" :key="index" class="custom-checkbox">
-            <checkbox-component :value="item" :checked="isActive(item)" :label="item.name" @check="handleCheck"/>
+        <div class="checkboxes__group">
+          <div v-for="(item, index) in checkData" :key="index" class="custom-checkbox">
+              <checkbox-component :value="item" :checked="isActive(item)" :label="item.name" @check="handleCheck"/>
+          </div>
+        </div>
+        <hr>
+        <div class="checkboxes__group">
+          <div v-for="(item, index) in roomTypes" :key="index" class="custom-checkbox">
+              <checkbox-component :value="item" :checked="activeType === item.value" :label="item.name" @check="handleTypeCheck"/>
+          </div>
         </div>
     </div>
     <div class="submit-filter">
@@ -26,36 +34,47 @@ import CaretRight from '@/components/icons/CaretRight'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
     components: {
-        CaretRight,
-        CheckboxComponent,
-        ButtonMainOrange
+      CaretRight,
+      CheckboxComponent,
+      ButtonMainOrange
     },
     data() {
-        return {
-            activeItems: [],
-            checkData: [
-                {
-                    name: this.$t('rooms.NoBedroom'),
-                    value: 0
-                },
-                {
-                    name: this.$t('rooms.OneBedroom'),
-                    value: 1
-                },
-                {
-                    name: this.$t('rooms.TwoBedrooms'),
-                    value: 2
-                },
-                {
-                    name: this.$t('rooms.ThreeBedrooms'),
-                    value: 3
-                },
-                {
-                    name: this.$t('rooms.FourBedrooms'),
-                    value: 4
-                },
-            ],
-        }
+      return {
+        activeItems: [],
+        activeType: null,
+        checkData: [
+          {
+            name: this.$t('rooms.NoBedroom'),
+            value: 0
+          },
+          {
+            name: this.$t('rooms.OneBedroom'),
+            value: 1
+          },
+          {
+            name: this.$t('rooms.TwoBedrooms'),
+            value: 2
+          },
+          {
+            name: this.$t('rooms.ThreeBedrooms'),
+            value: 3
+          },
+          {
+            name: this.$t('rooms.FourBedrooms'),
+            value: 4
+          },
+        ],
+        roomTypes: [
+          {
+            name: this.$t('rooms.KitchenDetached'),
+            value: 'normal'
+          },
+          {
+            name: this.$t('rooms.Studio'),
+            value: 'studio'
+          }
+        ]
+      }
     },
     computed: {
         ...mapGetters({
@@ -65,6 +84,7 @@ export default {
     mounted() {
         const activeBedroomsArray = this.filters.bedroom_count.map(item => item.hasOwnProperty('value') ? item.value : parseInt(item))
         this.activeItems = this.checkData.filter(item  => activeBedroomsArray.includes(item.value))
+        this.activeType = this.filters.type
     },
     methods: {
         ...mapMutations({
@@ -79,6 +99,13 @@ export default {
                 this.activeItems.push(data)
             }
         },
+        handleTypeCheck(data) {
+          if(this.activeType !== data.value) {
+            this.activeType = data.value
+          }else {
+            this.activeType = null
+          }
+        },
         handleFilter() {
             const activeItems = this.activeItems.map((item) => {
                 return item.value
@@ -86,6 +113,10 @@ export default {
             this.setFilterItem({
                 key: 'bedroom_count',
                 value: [...activeItems]
+            })
+            this.setFilterItem({
+                key: 'type',
+                value: this.activeType
             })
             this.$emit('change')
         },
@@ -98,24 +129,32 @@ export default {
 
 <style lang="scss" scoped>
 .building-status {
-    display: flex;
-    padding: 0 84px;
+  display: flex;
+  padding: 0 84px;
 }
 .checkboxes {
-    width: 73%;
+  width: 73%;
+  margin: 18px 0;
+  &__group {
     display: grid;
     grid-template-columns: repeat(3, 171px);
     grid-row-gap: 22px; 
     grid-column-gap: 59px; 
     flex-wrap: wrap;    
-    margin: auto 0;
     justify-content: space-between;
+    &:first-child {
+      margin-bottom: 20px;
+    }
+    &:not(:first-child) {
+      margin-top: 12px;
+    }
+  }
 }
 .submit-filter {
-    width: 218px;
-    margin-left: auto;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  width: 218px;
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 </style>

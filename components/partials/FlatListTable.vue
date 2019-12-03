@@ -92,6 +92,7 @@ export default {
       page: 1,
       observer: null,
       done: false,
+      requesting: false,
       options: {
         root: null,
         threshold: 0
@@ -130,12 +131,17 @@ export default {
     callback(entries, observer) {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !this.done) {
-          this.fetchFlats({ page: this.page }).then((response) => {
-            this.page++
-            if (response.length < 10) {
-              this.done = true
-            }
-          })
+          console.log('Is Intersecting')
+          if(!this.requesting) {
+            this.requesting = true
+            this.fetchFlats({ page: this.page }).then((response) => {
+              this.page++
+              this.requesting = false
+              if (response.length < 10) {
+                this.done = true
+              }
+            })
+          }
         }
       })
     },

@@ -1,6 +1,7 @@
 <template>
   <div class="gradient-label">
-    <span>{{ text }}</span>
+    <span v-if="!loading">{{ text }}</span>
+    <span v-else class="loading">...</span>
   </div>
 </template>
 <script>
@@ -9,6 +10,10 @@ export default {
     text: {
       type: [String, Object, Number],
       default: ''
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   }
 }

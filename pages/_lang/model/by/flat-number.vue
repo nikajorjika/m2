@@ -12,26 +12,48 @@
     </div>
     <div class="page-flat-number__buttons">
       <small>{{ $t('titles.ByFlatNumberButtonsTitle') }}</small>
-      <illustrated-button
-        :label="$t('labels.ByFilter')"
-        :to-route="{
-          name: 'lang-model-filter',
-          params: { lang: locale }
-        }"
-        class="filter-icon"
-      >
-        <template v-slot:illustration>
-          <filter-icon-illustration
-            class="filter-illustation-icon"
-            width="50px"
-            height="100%"
-          />
-        </template>
+      <div class="buttons">
+        <illustrated-button
+          class="buttons__button"
+          :label="buttonLabels.byPhoneNumberLabel"
+          :to-route="{
+            name: 'lang-model-by-auth',
+            params: { lang: locale }
+          }"
+        >
+          <template v-slot:illustration>
+            <login-illustration
+              width="50px"
+              height="auto"
+              :margin="'0 0 0 -21px'"
+            />
+          </template>
 
-        <template v-slot:icon>
-          <filter-search icon-color="#fff" width="18px" height="9px" />
-        </template>
-      </illustrated-button>
+          <template v-slot:icon>
+            <phone-icon icon-color="#fff" width="18px" height="9px" />
+          </template>
+        </illustrated-button>
+        <illustrated-button
+          class="buttons__button"
+          :label="buttonLabels.byFilterLabel"
+          :to-route="{
+            name: 'lang-model-filter',
+            params: { lang: locale }
+          }"
+        >
+          <template v-slot:illustration>
+            <filter-icon-illustration
+              class="filter-illustation-icon"
+              width="50px"
+              height="100%"
+            />
+          </template>
+
+          <template v-slot:icon>
+            <filter-search icon-color="#fff" width="18px" height="9px" />
+          </template>
+        </illustrated-button>
+      </div>
     </div>
   </div>
 </template>
@@ -43,8 +65,12 @@ import SearchForm from '@/components/partials/SearchForm'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import FilterSearch from '@/components/icons/FilterSearch'
 import FilterIconIllustration from '@/components/icons/FilterIllustration'
+import PhoneIcon from '@/components/icons/Phone'
+import LoginIllustration from '@/components/icons/SearchByPhoneNumberIllustration'
 export default {
   components: {
+    PhoneIcon,
+    LoginIllustration,
     TitleWithLine,
     SearchForm,
     FilterSearch,
@@ -56,6 +82,15 @@ export default {
     ...mapGetters({
       locale: 'locale'
     })
+  },
+  data() {
+    return {
+      buttonLabels: {
+        byPhoneNumberLabel: this.$t('labels.ByPhoneNumber'),
+        byFlatNumberLabel: this.$t('labels.ByFlatNumber'),
+        byFilterLabel: this.$t('labels.ByFilter')
+      },
+    }
   },
   methods: {
     ...mapActions({
@@ -73,6 +108,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.buttons {
+  display: flex;
+  &__button { 
+    margin-right: 20px;
+  }
+}
 .page-flat-number {
   margin: 124px 60px;
   height: calc(100% - 248px);

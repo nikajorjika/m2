@@ -31,32 +31,23 @@ export default {
         ButtonMainOrange
     },
     data() {
-        return {
-            activeItem: null,
-            checkData: [
-                // {
-                //     name: this.$t('addresses.m3_gelovani'),
-                //     value: 0
-                // }
-                {
-                    name: `I ${this.$t('labels.block')}`,
-                    value: 45
-                },
-                {
-                    name: `II ${this.$t('labels.block')}`,
-                    value: 46
-                },
-                {
-                    name: `III ${this.$t('labels.block')}`,
-                    value: 47
-                }
-            ],
-        }
+      return {
+        activeItem: null
+      }
     },
     computed: {
         ...mapGetters({
-            filters: 'Filter/filters'
-        })
+            filters: 'Filter/filters',
+            blocks: 'Filter/blocks'
+        }),
+        checkData() {
+          return this.blocks.map((item, index) => {
+            return {
+                    name: `${item.number} ${this.$t('labels.block')}`,
+                    value: item.id
+              }
+          })
+        }
     },
     mounted() {
         this.activeItem = this.checkData.find(item  => parseInt(this.filters.block) === parseInt(item.value))
@@ -69,9 +60,10 @@ export default {
             this.activeItem = this.activeItem === data ? null : data
         },
         handleFilter() {
+            
           this.setFilter({
             key: 'block',
-            value: this.activeItem.value
+            value: this.activeItem ? this.activeItem.value : null
           })
           this.$emit('change')
         },

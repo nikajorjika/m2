@@ -117,7 +117,7 @@ export default {
           appliances_ids: null
         })
         .then((response) => {
-          if (response.status === 200 && response.data.success) {
+          if (response.status === 200) {
             this.isFavourite = true
           }
         })

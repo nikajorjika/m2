@@ -19,6 +19,19 @@
       <div class="flat-list-table__header__title medium">
         {{ $t('labels.price') }}
       </div>
+      <div v-if="showLightAllButton" class="flat-list-table__header__button">
+        <custom-button
+          :label="$t('labels.LitUpAll')"
+          @click="handleLightAllButton"
+        >
+          <template v-slot:icon>
+            <light-icon
+              class="flat-list-table__header__button__icon"
+              icon-color="#fff"
+            />
+          </template>
+        </custom-button>
+      </div>
     </div>
     <div class="flat-list-table__body">
       <div
@@ -28,7 +41,6 @@
       >
         <flat-list-item
           :item="item"
-          :custom-redirect-route="`/${locale}/sales/customize/${item.id}`"
           class="flat-list-table__body__item__component"
         />
         <div
@@ -38,17 +50,23 @@
           <span :style="{ backgroundColor: `#${item.planshet.color}` }"></span>
         </div>
         <div class="flat-list-table__body__item__button">
-          <button-main-orange
-            :button-text="$t('buttons.see')"
-            @click="() => $router.push(`/${locale}/sales/customize/${item.id}`)"
+          <custom-button
+            v-if="showLightAllButton"
+            :label="$t('labels.LitIt')"
+            button-color="orange"
+            class="ma"
+            :disabled="item.planshet.id !== chosenPlanshet"
+            @click="litCurrentItem(item)"
           >
             <template v-slot:icon>
-              <arrow-right width="14" height="16" icon-color="#fff" />
+              <light-icon
+                class="flat-list-table__header__button__icon"
+                icon-color="#fff"
+              />
             </template>
-          </button-main-orange>
+          </custom-button>
         </div>
       </div>
-      <div v-if="!done" ref="Loading" class="center">Loading...</div>
     </div>
   </div>
 </template>
@@ -57,10 +75,10 @@
 import { mapActions, mapGetters } from 'vuex'
 import { timeout } from 'q'
 import FlatListItem from '@/components/partials/FlatListItem'
-import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import ArrowRight from '@/components/icons/ArrowRight'
+import CustomButton from '@/components/partials/CustomButton'
+import LightIcon from '@/components/icons/Light'
 export default {
-  components: { FlatListItem, ButtonMainOrange, ArrowRight },
+  components: { FlatListItem, CustomButton, LightIcon },
   props: {
     list: {
       type: Array,
@@ -72,16 +90,11 @@ export default {
       timeout: null,
       page: 1,
       observer: null,
-      done: false,
-      options: {
-        root: null,
-        threshold: 0
-      }
+      done: false
     }
   },
   computed: {
     ...mapGetters({
-      locale: 'locale',
       totalFlatCount: 'Filter/totalCount',
       flatNumber: 'Filter/flatNumber'
     }),
@@ -96,29 +109,12 @@ export default {
     this.$store.commit('Filter/SET_FLATS_DATA', [])
     this.$store.commit('Filter/SET_FLAT_NUMBER', null)
   },
-  mounted() {
-    this.fetchFilteredDataCount()
-    this.observer = new IntersectionObserver(this.callback, this.options)
-    this.observer.observe(this.$refs.Loading)
-  },
   methods: {
     ...mapActions({
       lightUpFlat: 'Filter/lightUpFlat',
       fetchFlats: 'Filter/fetchFilteredFlats',
       fetchFilteredDataCount: 'Filter/fetchFilteredDataCount'
     }),
-    callback(entries, observer) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !this.done) {
-          this.fetchFlats({ page: this.page }).then((response) => {
-            this.page++
-            if (response.length < 10) {
-              this.done = true
-            }
-          })
-        }
-      })
-    },
     handleLightAllButton() {
       const planshetFlats = this.list.filter(
         (item) => item.planshet.id === this.chosenPlanshet
@@ -128,15 +124,15 @@ export default {
         this.timeout = timeout
       })
     },
-    GoToFlat(item) {
+    litCurrentItem(item) {
       if (item.planshet.id !== this.chosenPlanshet) {
         this.$emit('showPrompt', item.planshet)
       } else {
         if (this.timeout) clearTimeout(this.timeout)
-          this.lightUpFlat([item]).then((timeout) => {
-            this.timeout = timeout
-          })
-          this.$emit('showLightBulb')
+        this.lightUpFlat([item]).then((timeout) => {
+          this.timeout = timeout
+        })
+        this.$emit('showLightBulb')
       }
     }
   }
@@ -166,9 +162,6 @@ export default {
       rgba(255, 255, 255, 0) 0%,
       rgba(242, 227, 211, 0.7) 100%
     );
-  }
-  .flat-list-button {
-    padding: 6px 18px;
   }
   .ma {
     margin: auto;

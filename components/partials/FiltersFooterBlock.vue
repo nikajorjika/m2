@@ -16,6 +16,7 @@
         <gradient-label
           class="filter-footer__flats__label__gradient"
           :text="totalCount"
+          :loading="loadingCount"
         />
         <span>{{ $t('labels.FlatEnglishPlural') }}</span>
       </div>
@@ -71,6 +72,7 @@ export default {
     ...mapGetters({
       locale: 'locale',
       totalCount: 'Filter/totalCount',
+      loadingCount: 'Filter/loadingCount',
       loading: 'Filter/filterLoading'
     })
   },

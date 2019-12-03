@@ -8,7 +8,7 @@
       <div class="page-sales__content__projects">
           <div class="project">
             <div class="project__image">
-              <img src="https://placehold.it/588x733" alt="">
+              <img src="@/assets/images/m3_saburtalo_ubani.jpg" alt="">
             </div>
             <div class="project__content">
               <h1>M2 გელოვანზე</h1>

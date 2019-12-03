@@ -3,6 +3,7 @@ export const state = () => ({
   presets: [],
   chosenBlockNumber: null,
   showFloorFooter: false,
+  loadingCount: true,
   filters: {
     block: null,
     floors: {
@@ -59,6 +60,7 @@ export const state = () => ({
   flatNumber: null,
   filterLoading: true,
   filteredTotalCount: 0,
+  blocks: [],
   customColor: ''
 })
 
@@ -66,6 +68,8 @@ export const getters = {
   flats: (state) => state.flats,
   filters: (state) => state.filters,
   presets: (state) => state.presets,
+  loadingCount: (state) => state.loadingCount,
+  blocks: (state) => state.blocks,
   view: (state) => state.filters.view,
   totalCount: (state) => state.filteredTotalCount,
   filterDefaults: (state) => state.filterDefaults,
@@ -196,8 +200,10 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchFilteredFlats({ commit, getters }, { page, fresh }) {
-    commit('SET_FILTER_LOADER', true)
+  fetchFilteredFlats({ commit, getters }, { page, fresh, noLoading }) {
+    if(!noLoading) {
+      commit('SET_FILTER_LOADER', true)
+    }
     fresh && commit('SET_FLATS_DATA', [])
     
     return new Promise((resolve, reject) => {
@@ -227,7 +233,8 @@ export const actions = {
         type,
         // wc,
         building_progress,
-        flat_number
+        flat_number,
+        page
       }
       if (views) {
         params.view_ides = views
@@ -235,12 +242,14 @@ export const actions = {
       this.$axios
         .get('/flats', { params })
         .then(({ data }) => {
-          if(fresh === undefined) {
+          if(fresh === undefined || fresh === false) {
             commit('UPPEND_FLATS_DATA', data.data)
           }else {
             commit('SET_FLATS_DATA', data.data)
           }
-          commit('SET_FILTER_LOADER', false)
+          if(!noLoading) {
+            commit('SET_FILTER_LOADER', false)
+          }
           resolve(data.data)
         })
         .catch((e) => reject(e))
@@ -248,6 +257,7 @@ export const actions = {
   },
 
   fetchFilteredDataCount({ commit, getters }) {
+    commit('SET', {key: 'loadingCount', value: true})
     // eslint-disable-next-line camelcase
     const {
       block,
@@ -282,6 +292,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       this.$axios.get('/flats/filtered/count', { params }).then(({ data }) => {
         commit('SET_TOTAL_COUNT', data.count)
+        commit('SET', {key: 'loadingCount', value: false})
         resolve(data)
       })
     })
