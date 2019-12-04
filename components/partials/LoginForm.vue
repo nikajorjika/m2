@@ -7,6 +7,7 @@
         type="text"
         :placeholder="$t('labels.phone')"
         @input="handleInput"
+        :disabled="loading"
       />
       <div v-if="errors.phone.length && showErrors" class="error">
         {{ errors.phone }}
@@ -43,7 +44,11 @@ export default {
         return this.$t('buttons.GetCode')
       }
     },
-    loginErrorMessage: ''
+    loginErrorMessage: '',
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {

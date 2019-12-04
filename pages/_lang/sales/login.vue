@@ -1,15 +1,23 @@
 <template>
   <div class="page-flat-container">
     <div class="page-flat-number">
-      <div class="page-flat-number__title-container">
+      <div v-if="!codeSent" class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
           :title="$t('titles.FillInPhoneNumber')"
         />
         <small>{{ $t('titles.FillInPhoneNumberSubTitle') }}</small>
       </div>
+      <div v-else class="page-flat-number__title-container">
+        <title-with-line
+          class="page-flat-number__title"
+          :title="$t('titles.CodeHasBeenSent')"
+        />
+        <small>{{ $t('titles.CodeHasBeenSentSubTitle') }}</small>
+      </div>
       <div v-if="!codeSent" class="page-flat-number__form">
         <login-form
+          :loading="loading"
           @submit="handleLoginStageOne"
           @discardLoginErrorMessage="discardLoginErrorMessage"
           :loginErrorMessage="loginErrorMessage"
@@ -22,6 +30,7 @@
       </div>
       <div v-else class="page-flat-number__confirm">
         <confirm-phone-form
+          :loading="loading"
           @submit="handleLoginStageTwo"
           @resend="handleResend"
           @discardInvalidCodeErrorMessage="discardInvalidCodeErrorMessage"
@@ -54,6 +63,7 @@ export default {
   data() {
     return {
       codeSent: false,
+      loading: false,
       formData: null,
       loginErrorMessage: '',
       invalidCodeErrorMessage: '',
@@ -70,21 +80,27 @@ export default {
       login: 'auth/loginUser'
     }),
     handleLoginStageOne(data) {
+      this.loading = true
       this.formData = { ...data }
       this.login(this.formData)
         .then(response => {
           this.codeSent = true
+          this.loading = false
         }).catch(e => {
+          this.loading = false
           this.loginErrorMessage = this.$t('errors.NoSuchUserWithSelectedPhoneNumber')
         })
     },
     handleLoginStageTwo(code) {
+      this.loading = true
       this.formData = { ...this.formData, ...code }
       this.login(this.formData)
         .then(response => {
           this.$router.go(-1)
+          this.loading = false
         }).catch(e =>{
           this.invalidCodeErrorMessage = this.$t('errors.InvalidCode')
+          this.loading = false
         })
       
     },

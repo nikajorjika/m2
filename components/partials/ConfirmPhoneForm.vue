@@ -6,6 +6,7 @@
         ref="code"
         type="text"
         placeholder="XXXX"
+        :disabled="loading"
         @input="handleInput"
       />
       <div v-if="errors.code.length && showErrors" class="error">
@@ -50,7 +51,11 @@ export default {
         return this.$t('buttons.ConfirmPhone')
       }
     },
-    invalidCodeErrorMessage: ''
+    invalidCodeErrorMessage: '',
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {

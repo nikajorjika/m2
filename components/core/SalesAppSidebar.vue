@@ -56,20 +56,26 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: !!this.$cookies.get('auth._token.local'),
       isAwaiting: false
     }
   },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters({
+      locale: 'locale',
+      user: 'auth/user',
+      token: 'auth/token'
+    }),
     isSales() {
       return !this.$cookies.get('paveleon-planshet')
+    },
+    isLoggedIn() {
+      return this.user && this.token
     },
     logoLink() {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
     },
     showSummon() {
-      return this.$router.name !== 'lang-sales-waiting' && this.isLoggedIn
+      return this.$router.name !== 'lang-sales-waiting'
     },
     items() {
       return [

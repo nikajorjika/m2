@@ -9,7 +9,7 @@
         <small v-html="subtitle"></small>
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
-        <registration-form @register="handleRegistration" />
+        <registration-form :loading="loading" :error="error" @register="handleRegistration" />
       </div>
       <div v-else class="page-flat-number__confirm">
         <confirm-phone-form
@@ -44,7 +44,9 @@ export default {
   data() {
     return {
       codeSent: false,
-      formData: null
+      loading: false,
+      formData: null,
+      error: ''
     }
   },
   computed: {
@@ -62,13 +64,30 @@ export default {
   },
   methods: {
     ...mapActions({
-      registerUser: 'Sales/registerUser'
+      registerUser: 'Sales/registerUser',
+      setUserData: 'auth/setUserData'
     }),
     sendVerifyPhoneRequest() {
+      this.loading = true
+      this.error = ''
       this.registerUser(this.formData).then(({ data }) => {
         this.codeSent = true
-        if (data.hasOwnProperty('access_token')) {
-          this.$auth.setUserToken(data.access_token)
+        this.loading = false
+        if(data.hasOwnProperty('access_token')) {
+          this.setUserData(data).then(() => {
+            this.$router.push({
+              name: 'lang-sales',
+              params: {
+                lang: this.locale
+              }
+            })
+          })
+        }
+      })
+      .catch(err => {
+        if(err.response.status === 400 ) {
+          this.loading = false
+          this.error = this.$t('errors.PhoneAlreadyRegistered')
         }
       })
     },

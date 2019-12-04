@@ -144,7 +144,10 @@ export default {
     border-bottom-right-radius: 25px;
     background-color: #ffffff;
     overflow: hidden;
-    transition: all 200ms ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    transition: transform 300ms linear;
   }
 
   .image {

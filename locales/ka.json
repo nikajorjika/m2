@@ -18,6 +18,7 @@
   },
   "errors": {
     "NoFlatsInThisPriceRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი ფასის რეინჯი",
+    "PhoneAlreadyRegistered": "მითითებული ნომერი უკვე დარეგისტრირებულია",
     "NoFlatsInThisFloorRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი სართულის რეინჯი",
     "NameFieldIsRequired": "სახელის ველი აუცილებელია",
     "PhoneFieldIsRequired": "გთხოვთ შეავსოთ ნომრის/ელ-ფოსტის ველი სწორი ფორმატით",
@@ -171,6 +172,8 @@
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",
     "IAmLookingFor": "მე ვეძებ ბინას",
+    "CodeHasBeenSent": "შეიყვანეთ 4 ნიშნა კოდი",
+    "CodeHasBeenSentSubTitle": "4 ნიშნა კოდი გამოგაზვნილია მითითებულ ტელეფონის ნომერზე",
     "FavouriteFlats": "შერჩეული ბინები",
     "ChooseYourSearchingMethod": "აირჩიე სასურველი ძიების მეთოდი",
     "PleaseSelectBlockFromRender": "გთხოვთ აირჩიოთ სასურველი ბლოკი",
