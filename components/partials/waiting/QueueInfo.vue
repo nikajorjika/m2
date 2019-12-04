@@ -1,5 +1,6 @@
 <template>
   <div class="queue-info">
+    <full-page-loader v-if="loading" />
     <div class="queue-info__illustration">
       <div class="queue-info__illustration__icon">
         <img
@@ -35,10 +36,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import FullPageLoader from '@/components/partials/FullPageLoader'
 import PdfIcon from '@/assets/icons/PdfIcon.svg'
 import CancelIcon from '@/assets/icons/CancelIcon.svg'
 export default {
   components: {
+    FullPageLoader,
     PdfIcon,
     CancelIcon
   },
@@ -47,6 +50,11 @@ export default {
       locale: 'locale',
       user: 'auth/user'
     })
+  },
+  data() {
+    return {
+      loading: false
+    }
   },
   methods: {
     cancelSummonSale() {
@@ -66,9 +74,13 @@ export default {
       })
     },
     sendPdf() {
+      this.loading = true
       this.$axios.get(`user-flats/1/send-pdf`)
         .then(({data}) => {
-          console.log(data)
+          this.loading = false
+        })
+        .catch(err => {
+          this.loading = false
         })
     }
   }
