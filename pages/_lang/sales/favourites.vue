@@ -1,6 +1,9 @@
 <template>
   <div class="filter-list-page">
-    <title-with-line :title="$t('titles.FavouriteFlats')" class="page-title"/>
+    <div class="title-wrapper">
+      <title-with-line :title="$t('titles.FavouriteFlats')" class="page-title"/>
+      <currency-switcher class="fav-switcher"/>
+    </div>
     <div v-if="!loading" class="flat-list">
       <div v-for="(item, index) in flats" :key="index" class="flat-card">
         <flat-card 
@@ -11,6 +14,7 @@
           :bedroom-count="item.bedrooms_count"
           :url="item.url"
           :flat-id="item.id"
+          :sold="item.status === 'sold'"
         />
       </div>
     </div>
@@ -28,9 +32,11 @@
 <script>
 import FlatCard from '@/components/partials/FlatCard'
 import TitleWithLine from '@/components/partials/TitleWithLine'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
     components: {
+        CurrencySwitcher,
         FlatCard,
         TitleWithLine
     },
@@ -69,6 +75,7 @@ export default {
                     title: item.flat.project_name[this.locale],
                     price: `${item.flat.price} $`,
                     image: item.flat.render_url,
+                    status: item.flat.status,
                     url: `/${this.locale}/sales/customize/${item.flat.id}`,
                     subTitle: this.$t('titles.FlatCardSubTitle').replace('%s',item.flat.total_area)
                 }
@@ -90,6 +97,12 @@ export default {
     display: flex;
     padding-bottom: 12px;
     flex-direction: column;
+}
+.title-wrapper {
+  display: flex;
+  .fav-switcher {
+    margin-left: auto;
+  }
 }
 .page-title {
     margin: 50px 0;

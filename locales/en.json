@@ -76,6 +76,7 @@
     "FlatArea": "Flat Area",
     "address": "Address",
     "name": "Full Name",
+    "IsSold": "Sold",
     "NoFlatsFound": "No flats found by your chosen criteria",
     "FlatsLeftOnThisFloor": "Flats left on this floor",
     "SeeAllFlatsOnThisFloor": "All flats on this floor",

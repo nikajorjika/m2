@@ -2,7 +2,12 @@
   <div class="flat">
     <div class="flat__image" @click="goToFlat">
       <div v-if="loading" class="loading"></div>
-      <img v-else :src="image" :alt="title" />
+      <div v-else class="image-wrapper">
+        <img :src="image" :alt="title" />
+        <div v-if="sold" class="sold">
+          <span>{{$t('labels.IsSold')}}</span>
+        </div>
+      </div>
       <gradient-block v-if="!loading" class="flat__bedroom-count">
         <span>{{ bedroomCount }}</span>
         <sleeping-room icon-color="#fff" height="13px" width="13px" />
@@ -72,6 +77,10 @@ export default {
       type: String,
       default: ''
     },
+    sold: {
+      type: Boolean,
+      default: false
+    },
     loading: {
       type: Boolean,
       default: false
@@ -136,6 +145,27 @@ export default {
 .flat {
   display: grid;
   grid-template-areas: 'image image' 'title title' 'subtitle subtitle' 'price button';
+  .image-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    .sold {
+      display: flex;
+      position: absolute;
+      z-index: 9;
+      background: rgba(125, 122, 170, 0.7);
+      color: #fff;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      span {
+        font-family: $font-caps;
+        margin: auto;
+        font-weight: bold;
+      }
+    }
+  }
   &__bedroom-count {
     position: absolute;
     top: 9px;
