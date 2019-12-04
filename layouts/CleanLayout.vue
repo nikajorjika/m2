@@ -9,11 +9,15 @@
       </svg>
       <nuxt />
     </div>
+    <modal />
   </div>
 </template>
 <script>
+import Modal from '@/components/partials/Modal'
 export default {
-
+  components: {
+    Modal
+  }
 }
 </script>
 <style lang="scss" scoped>
