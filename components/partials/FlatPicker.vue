@@ -164,7 +164,7 @@ export default {
         .then(({ data }) => {
           if(data.data.length) {
             this.activeFlat = data.data[0]
-            this.$emit('flatSelected', this.flatNumber)
+            this.$emit('flatSelected', this.chosenFlataNumber)
           }else {
             this.activeFlat = null
           }

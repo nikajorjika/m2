@@ -7,6 +7,7 @@
       <div class="filter-footer__flats__see">
         <button-main-orange
           :button-text="totalCount"
+          :disabled="!totalCount"
           :loading="filterLoading"
           class="custom-count-button"
           icon-width="20px"
@@ -40,6 +41,7 @@
       <div class="filter-footer__controls__next">
         <button-main-orange
           :button-text="$t('buttons.next')"
+          :disabled="!totalCount"
           @click="handleNext"
         >
           <template v-slot:icon>

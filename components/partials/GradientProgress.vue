@@ -4,7 +4,6 @@
     <div class="progress__values">
       <div v-if="percentage >= 7" class="progress__values__min">{{ min }}</div>
       <div
-        v-if="percentage !== 0 && percentage !== 100"
         class="progress__values__value"
         :style="{ left: `${percentage}%` }"
       >
@@ -71,6 +70,7 @@ export default {
       transform: translateX(-50%);
       bottom: 0;
       left: 10%;
+      transition: all 500ms ease;
     }
     &__max {
       margin-left: auto;
@@ -92,6 +92,7 @@ export default {
       top: 0;
       bottom: 0;
       left: 0;
+      transition: all 500ms ease;
     }
   }
 }

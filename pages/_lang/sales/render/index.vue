@@ -25,8 +25,8 @@
             class="filter-flat__content__info__progress"
             :label="$t('labels.sold_flat_count')"
             :min="0"
-            :max="350"
-            :value="58"
+            :max="totalFlats"
+            :value="soldFlats"
           />
           <gradient-progress
             class="filter-flat__content__info__progress"
@@ -112,7 +112,9 @@ export default {
       flat_number: null,
       activeBlock: null,
       flat: null,
-      builingStatus: 70,
+      builingStatus: 0,
+      soldFlats: 0,
+      totalFlats: 100,
       listCardData: [],
       activeTab: 0
     }
@@ -167,6 +169,8 @@ export default {
   },
   mounted () {
     this.setFilterDefaults(this.filterDefaults)
+    this.getProject()
+    this.getSoldCount()
   },
   destroyed () {
     this.setFilterDefaults(this.filterDefaults)
@@ -176,6 +180,22 @@ export default {
       setFilterItem: 'Filter/SET_FILTER_ITEM',
       setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
+    getSoldCount() {
+      this.$axios.get('/flats/count', {
+        params: {
+          status: 'sold' 
+        }
+      }).then(({data}) => {
+        this.totalFlats = data.total
+        this.soldFlats = data.count
+      })
+    },
+    getProject() {
+     this.$axios.get('/projects/13')
+      .then(({data}) => {
+        this.builingStatus = data.building_status
+      })
+    },
     handleFloorChosen(floor) {
       this.activeFloor = floor
       this.setFilterItem({
