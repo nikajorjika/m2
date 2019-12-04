@@ -18,7 +18,7 @@
           />
         </div>
       </div>
-      <div v-if="isEmpty && !loading">
+      <div v-show="isEmpty && !loading">
           <p>{{$t('labels.NoFlatsFound')}}</p>
       </div>
       <div v-show="shouldLoadMore" ref="Loading" class="load-more">

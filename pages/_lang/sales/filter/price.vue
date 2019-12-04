@@ -13,12 +13,13 @@
       </div>
       <select-range 
         class="range-picker"
-        v-if="minPrice >= 0 && maxPrice"
-        :min-value="minPrice"
-        :max-value="maxPrice"
-        :preset-min="filterPrice.min"
-        :preset-max="filterPrice.max"
+        v-if="minPrice !== null && maxPrice && !loading"
+        :min-value="parseInt(minPrice)"
+        :max-value="parseInt(maxPrice)"
+        :preset-min="parseInt(filterPrice.min)"
+        :preset-max="parseInt(filterPrice.max)"
         :step="1000"
+        :suffix="suffix"
         @change="handleChange"
         />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
@@ -42,12 +43,23 @@ export default {
   },
   layout: 'SalesFilterLayout',
   middleware: 'isAuth',
+  data() {
+    return {
+      loading: false
+    }
+  },
+  watch: {
+    suffix: {
+      handler: 'handleCurrencyChange'
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
       filters: 'Filter/filters',
       currency: 'settings/currency',
+      currencyRate: 'settings/currencyRate',
       totalCount: 'Filter/totalCount'
     }),
     filterPrice() {
@@ -67,11 +79,14 @@ export default {
     },
     maxPrice() {
         return  this.currency === 'GEL' ?
-          this.$currencyConverter(this.filterDefaults.min_price, this.currency) :
+          this.$currencyConverter(this.filterDefaults.max_price, this.currency) :
           this.filterDefaults.max_price
     },
     nextUrl() {
       return `/${this.locale}/sales/filter/building-status`
+    },
+    suffix() {
+      return this.currency === 'GEL' ? '₾' : '$'
     }
   },
   methods: {
@@ -82,6 +97,12 @@ export default {
     handleChange(data) {
       clearTimeout(this.timeout)
       this.setLoader(true)
+      if(this.currency === 'GEL') {
+        data = {
+          max: data.max / this.currencyRate,
+          min: data.min / this.currencyRate
+        }
+      }
       this.timeout = setTimeout(() => {
         this.setFilter({
           key: 'price',
@@ -93,6 +114,12 @@ export default {
       this.setFilter({
         key: 'price',
         value: this.filterPrice
+      })
+    },
+    handleCurrencyChange() {
+      this.loading = true
+      this.$nextTick(() => {
+        this.loading = false
       })
     }
   }

@@ -58,7 +58,6 @@ export default {
       } else {
         switcher.classList.add('on')
       }
-
       const currency =
         switcher.getAttribute('data-currency') === 'GEL' ? 'USD' : 'GEL'
 

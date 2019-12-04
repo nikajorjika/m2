@@ -43,7 +43,7 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchCurrencyValue({commit},currency) {
+  fetchCurrencyValue({commit}) {
     return new Promise((resolve, reject) => {
       this.$axios.get(
         process.env.SERVER_IP.replace(/\/$/, '') +
