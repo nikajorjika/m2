@@ -116,7 +116,7 @@ export default {
       })
     },
     showAnimation() {
-      this.animating = true;
+      this.animating = true
       setTimeout(() => {
         this.animating = false
       }, 300)

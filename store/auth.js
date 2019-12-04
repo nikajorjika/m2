@@ -1,29 +1,46 @@
-const state = function() {
-  return {
-    user: null,
-    token: null
-  }
-}
+const state = () => ({
+  user: null,
+  token: null
+})
 
 const getters = {
   user: (state) => state.user,
-  token: () => state.token,
+  token: (state) => state.token
 }
 
+const mutations = {
+  SET: (state, {key, value}) => {
+    state[key] = value
+  },
+  SET_TOKEN: (state, payload) => {
+    state.token = payload
+  }
+}
 const actions = {
-  loginUser({commit, dispatch}, data) {
+  loginUser({dispatch}, data) {
     return new Promise((resolve, reject) => {
       this.$axios
         .post(`/user/verify`, data)
         .then(({data}) => {
           if(data.hasOwnProperty('access_token')) {
-            commit('SET_TOKEN', data.access_token)
-            this.$cookies.set('auth._token.local', data.access_token)
-            dispatch('me')
+            dispatch('setUserData', data)
+              .then(() => {
+                resolve(data)
+              })
+          }else {
+            resolve()
           }
-          resolve(data)
         })
         .catch((e) => reject(e))
+    })
+  },
+  setUserData({commit, dispatch}, data) {
+    return new Promise((resolve, reject) => {
+      commit('SET_TOKEN', data.access_token)
+      this.$cookies.set('auth._token.local', data.access_token)
+      dispatch('me').then(() => {
+        resolve()
+      })
     })
   },
   me({commit}) {
@@ -48,15 +65,6 @@ const actions = {
       this.$cookies.set('auth._token.local', false) 
       resolve(true)
     })
-  }
-}
-
-const mutations = {
-  SET: (state, {key, value}) => {
-    state[key] = value
-  },
-  SET_TOKEN: (state, payload) => {
-    state.token = payload
   }
 }
 

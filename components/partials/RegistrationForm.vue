@@ -5,6 +5,7 @@
         v-model="name"
         type="text"
         :placeholder="$t('labels.name')"
+        :disabled="loading"
         @input="handleInput"
       />
       <div v-if="errors.name.length && showErrors" class="error">
@@ -16,10 +17,14 @@
         v-model="phone"
         type="text"
         :placeholder="$t('labels.phone')"
+        :disabled="loading"
         @input="handleInput"
       />
       <div v-if="errors.phone.length && showErrors" class="error">
         {{ errors.phone }}
+      </div>
+      <div class="error">
+        {{ error }}
       </div>
     </div>
     <div class="registration-form__input">
@@ -27,6 +32,7 @@
         v-model="email"
         type="text"
         :placeholder="$t('labels.email')"
+        :disabled="loading"
         @input="handleInput"
       />
       <div v-if="errors.email.length && showErrors" class="error">
@@ -59,6 +65,14 @@ export default {
       default() {
         return this.$t('buttons.register')
       }
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    error: {
+      type: String,
+      default: ''
     }
   },
   data() {

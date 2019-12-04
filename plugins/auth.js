@@ -2,6 +2,10 @@ export default async function ({ app, $axios, store }) {
   const token = app.$cookies.get('auth._token.local')
   const baseUrl = process.env.SERVER_IP
   if(token) {
+    app.store.commit('auth/SET', {
+      key: 'token',
+      value: token
+    })
     const normalized = `http:${baseUrl}/user/current-user`.replace('//user', '/user')
     await $axios.get(normalized, {
       headers: {

@@ -7,6 +7,7 @@
         :max-value="maxPrice"
         :preset-min="filterPrice.min"
         :preset-max="filterPrice.max"
+        :suffix="suffix"
         :step="1000"
         @change="handleChange"
         />
@@ -40,17 +41,33 @@ export default {
     computed: {
       ...mapGetters({
         locale: 'locale',
+        currency: 'settings/currency',
+        currencyRate: 'settings/currencyRate',
         filterDefaults: 'Filter/filterDefaults',
         filters: 'Filter/filters'
       }),
       filterPrice() {
-        return this.filters.price
+        return {
+          min: this.currency === 'GEL' ?
+            this.$currencyConverter(this.filters.price.min, this.currency) :
+            this.filters.price.min,
+          max: this.currency === 'GEL' ?
+            this.$currencyConverter(this.filters.price.max, this.currency) :
+            this.filters.price.max
+        }
       },
       minPrice() {
-        return this.filterDefaults.min_price
+        return  this.currency === 'GEL' ?
+          this.$currencyConverter(this.filterDefaults.min_price, this.currency) :
+          this.filterDefaults.min_price
       },
       maxPrice() {
-        return this.filterDefaults.max_price
+        return this.currency === 'GEL' ? 
+          this.$currencyConverter(this.filterDefaults.max_price, this.currency) :
+          this.filterDefaults.max_price
+      },
+      suffix() {
+        return this.currency === 'GEL' ? '₾' : '$'
       }
     },
     data() {
@@ -70,6 +87,12 @@ export default {
       this.selected = { ...data }
     },
     handleFilter() {
+      if(this.currency === 'GEL') {
+        this.selected = {
+          min: this.selected.min / this.currencyRate,
+          max: this.selected.max / this.currencyRate
+        }
+      }
       this.setFilter({
         key: 'price',
         value: this.selected
@@ -94,6 +117,11 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+.gel-icon {
+  font-family: 'lari-symbol-v2', Arial, 'Times New Roman', 'Bitstream Charter',
+    Times, serif !important;
+  font-style: normal !important;
 }
 </style>
 

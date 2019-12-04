@@ -335,6 +335,20 @@ export const actions = {
         .catch((e) => reject(e))
     })
   },
+  fetchFiltersInfo({commit}) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get('/flats/info')
+        .then(({ data }) => {
+          commit('SET', {
+            key: 'filterDefaults',
+            value: data
+          })
+          resolve(data)
+        })
+        .catch((e) => reject(e))
+    })
+  },
   lightUpFlat(context, flats) {
     return new Promise((resolve, reject) => {
       // context.commit('SET_MODEL_API_DATA', flats)

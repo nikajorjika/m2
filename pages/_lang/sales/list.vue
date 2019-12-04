@@ -3,14 +3,7 @@
     <div class="flat-list__title">
       <title-with-line :title="cTitle" />
       <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
-      <transition name="fade-up">
-        <prompt-alert
-          v-if="showPrompt"
-          class="prompt"
-          :color="color"
-          :text="text"
-        />
-      </transition>
+      <currency-switcher class="list-currency-switcher" />
     </div>
     <flat-list-table
       v-if="!loading"
@@ -29,11 +22,11 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import FlatListTable from '@/components/partials/filters/partials/FlatListTable'
-import PromptAlert from '@/components/partials/PromptAlert'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import LightIcon from '@/components/icons/Light'
 export default {
   layout: 'SalesWithoutNavigation',
-  components: { TitleWithLine, FlatListTable, PromptAlert, LightIcon },
+  components: { TitleWithLine, FlatListTable, CurrencySwitcher, LightIcon },
   computed: {
     ...mapGetters({
       flats: 'Filter/flats',
@@ -126,8 +119,10 @@ export default {
       margin-top: 12px;
       grid-area: sub-title;
     }
-    .prompt {
+    .list-currency-switcher {
       grid-area: prompt;
+      margin: auto;
+      margin-right: 60px;
     }
   }
   &__table {

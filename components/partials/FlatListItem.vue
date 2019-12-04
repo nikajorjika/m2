@@ -8,7 +8,7 @@
       <li class="flat-list-item__li large">{{ status }}</li>
       <li class="flat-list-item__li large">{{ views }}</li>
       <li class="flat-list-item__li medium">{{ area }}</li>
-      <li class="flat-list-item__li xs">{{ price }} $</li>
+      <li class="flat-list-item__li xs">{{ price }} {{suffix}}</li>
     </ul>
   </nuxt-link>
 </template>
@@ -29,7 +29,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      locale: 'locale'
+      locale: 'locale',
+      currency: 'settings/currency'
     }),
     redirectRoute() {
       return this.customRedirectRoute === null ? `/${this.locale}/model/flat/${this.item.id}` : this.customRedirectRoute
@@ -46,7 +47,10 @@ export default {
       return viewsLabels.length ? viewsLabels.join(', ') : ''
     },
     price() {
-      return this.item.price
+      return this.currency === 'GEL' ? this.$currencyConverter(this.item.price, this.currency, true) : this.item.price
+    },
+    suffix() {
+      return this.currency === 'GEL' ? '₾' : '$'
     },
     area() {
       return `${this.item.total_area} ${this.$t('labels.m2')}`

@@ -201,7 +201,7 @@ export default {
   &__body {
     overflow-y: auto;
     max-height: 100%;
-
+    margin-right: 4px;
     &::-webkit-scrollbar {
       width: 14px;
     }
@@ -226,7 +226,7 @@ export default {
     }
     &__item {
       border-top: 1px solid #faf4ed;
-      padding: 13px 58px 13px 47px;
+      padding: 13px 35px 13px 47px;
       display: flex;
       align-items: center;
       background: #f4e7d9;
@@ -254,6 +254,7 @@ export default {
         width: 166px;
         display: flex;
         justify-content: center;
+        margin-left: auto;
       }
     }
   }

@@ -1,49 +1,19 @@
 export default ({ app, store }, inject) => {
-  inject('currencyConverter', async (amount, currencyFrom, currencyTo) => {
-    // Normalize price
-
-    let price = parseFloat(amount.toString().replace(',', ''))
-
-    // Check if price is in default currency
-
-    if (store.state.defaultCurrency !== currencyTo) {
-      // Define exchange currency
-
-      const currency = currencyFrom !== 'GEL' ? currencyFrom : currencyTo
-
+  inject('currencyConverter', (amount, currency, format = false) => {
+    if(amount !== undefined && amount !== null) {
+      // Normalize price
+      let price = typeof amount === 'string' ? amount : amount.toString()
+      price = parseFloat(price.replace(',', ''))
+      
       // Get currency rate
-
-      let rate
-      const now = Date.now() / 1000
-
-      if (
-        !store.state.currencyRate ||
-        !store.state.currencyUpdatedTime ||
-        now - store.state.currencyUpdatedTime > store.state.currencyTtl
-      ) {
-        const { data } = await app.$axios.get(
-          process.env.SERVER_IP.replace(/\/$/, '') +
-            '/currency?currency=' +
-            currency
-        )
-
-        rate = data
-
-        store.commit('SET_CURRENCY_RATE', rate)
-        store.commit('SET_CURRENCY_UPDATED_TIME', now)
-      } else {
-        rate = store.state.currencyRate
-      }
-
+      let rate = store.getters['settings/currencyRate']
+      
       rate = parseFloat(rate)
-
+  
       // Calculate price based on currency rate
-
-      price = currency === 'GEL' ? price / rate : price * rate
+      price = currency === 'GEL' ? price * rate : price
+      // Return formatted price
+      return format ? new Intl.NumberFormat('ka-GE').format(parseFloat(price.toFixed(2))) : parseFloat(price.toFixed(2))
     }
-
-    // Return formatted price
-
-    return new Intl.NumberFormat('ka-GE').format(parseFloat(price.toFixed(2)))
   })
 }

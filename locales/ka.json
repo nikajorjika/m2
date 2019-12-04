@@ -18,8 +18,10 @@
   },
   "errors": {
     "NoFlatsInThisPriceRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი ფასის რეინჯი",
+    "PhoneAlreadyRegistered": "მითითებული ნომერი უკვე დარეგისტრირებულია",
     "NoFlatsInThisFloorRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი სართულის რეინჯი",
     "NameFieldIsRequired": "სახელის ველი აუცილებელია",
+    "NoItemsInYourFavourites": "თქვენ ფავორიტებში არ გაქვთ დამატებული არცერთი ბინა",
     "PhoneFieldIsRequired": "გთხოვთ შეავსოთ ნომრის/ელ-ფოსტის ველი სწორი ფორმატით",
     "emailIsNotValid": "გთხოვთ შეავსოთ ნომრის/ელ-ფოსტის ველი სწორი ფორმატით",
     "CodeFieldIsRequired": "კოდის ველი აუცილებელია და უნდა იყოს სწორი ფორმატით",
@@ -50,8 +52,8 @@
     "home": "Home"
   },
   "home": {
-    "title": "Welcome",
-    "introduction": "This is an introduction in English."
+    "m3text": "m2 წარმოდგინეთ ახალ უბანს m3 საბურთალო - ადგილს, სადაც თითოეული კუთხე შექმნილია თავისუფალი, კომფორტული და მრავალფეროვანი ცხოვრებისთვის.",
+    "m3sub1": "შეარჩიეთ თქვენთვის სასურველი ბინა, რომელსაც მთელი უბანი მოჰყვება."
   },
   "about": {
     "title": "About",
@@ -172,6 +174,8 @@
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",
     "IAmLookingFor": "მე ვეძებ ბინას",
+    "CodeHasBeenSent": "შეიყვანეთ 4 ნიშნა კოდი",
+    "CodeHasBeenSentSubTitle": "4 ნიშნა კოდი გამოგაზვნილია მითითებულ ტელეფონის ნომერზე",
     "FavouriteFlats": "შერჩეული ბინები",
     "ChooseYourSearchingMethod": "აირჩიე სასურველი ძიების მეთოდი",
     "PleaseSelectBlockFromRender": "გთხოვთ აირჩიოთ სასურველი ბლოკი",

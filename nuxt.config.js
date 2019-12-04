@@ -35,7 +35,7 @@ module.exports = {
    */
   plugins: [
     '~/plugins/i18n',
-    '~/plugins/hammer',
+    '~/plugins/auth',
     '~/plugins/SetAuthHeader',
     '~/plugins/load-preflight-data',
     '~/plugins/before-each',
@@ -45,7 +45,7 @@ module.exports = {
     },
     {
       src: '~/plugins/currency-converter',
-      mode: 'client'
+      ssr: true
     },
     {
       src: '~/plugins/pusher',

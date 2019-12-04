@@ -51,6 +51,13 @@ export default {
       default: 1
     }
   },
+  watch: {
+    minValue: {
+      handler: function (oldVal, newVal) { 
+        console.log(oldVal, newVal)
+      }
+    }
+  },
   data() {
     return {
       selectedMin: this.minValue,
@@ -67,12 +74,12 @@ export default {
       return `${this.formatPrice(this.selectedMax, '.')} ${this.suffix}`
     },
     minLabel() {
-      return `${this.$t('labels.min')} ${this.formatPrice(this.minValue)} ${
+      return `${this.$t('labels.min')} ${this.formatPrice(parseInt(this.minValue))} ${
         this.suffix
       }`
     },
     maxLabel() {
-      return `${this.$t('labels.max')} ${this.formatPrice(this.maxValue)} ${
+      return `${this.$t('labels.max')} ${this.formatPrice(parseInt(this.maxValue))} ${
         this.suffix
       }`
     }

@@ -54,15 +54,17 @@ export default {
       default: ''
     }
   },
-  data() {
-    return {
-      isLoggedIn: !!this.$cookies.get('auth._token.local')
-    }
-  },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters({
+      locale: 'locale',
+      user: 'auth/user',
+      token: 'auth/token'
+    }),
     isSales() {
       return !this.$cookies.get('paveleon-planshet')
+    },
+    isLoggedIn() {
+      return this.user && this.token
     },
     logoLink() {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
@@ -24,7 +24,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currency: 'GET_CURRENCY'
+      currency: 'settings/currency',
+      rate: 'settings/currencyRate'
     }),
     usdClassObject() {
       return {
@@ -40,11 +41,15 @@ export default {
     }
   },
   mounted() {
+    this.fetchCurrencyValue(this.currency)
     this.$nextTick(function() {
       this.loading = false
     })
   },
   methods: {
+    ...mapActions({
+      fetchCurrencyValue: 'settings/fetchCurrencyValue',
+    }),
     toggle(e) {
       const switcher = e.target.closest('.currency-switcher')
 
@@ -53,15 +58,16 @@ export default {
       } else {
         switcher.classList.add('on')
       }
-
       const currency =
         switcher.getAttribute('data-currency') === 'GEL' ? 'USD' : 'GEL'
 
       switcher.setAttribute('data-currency', currency)
 
       // Change currency
-
-      this.$store.commit('SET_CURRENCY', currency)
+      this.$store.commit('settings/SET', {
+        key: 'currency',
+        value: currency
+      })
     }
   }
 }

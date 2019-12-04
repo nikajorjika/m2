@@ -48,7 +48,7 @@ export default {
         this.filters.min_floor === null || 
         this.filters.max_floor === null
         ){
-        this.fetchFilterDefaults()
+        this.fetchFiltersInfo()
       }
       document.addEventListener('click', this.handleDocumentClick);
     },
@@ -96,7 +96,7 @@ export default {
     },
     methods: {
       ...mapActions({
-        fetchFilterDefaults: 'Filter/fetchFilterDefaults'
+        fetchFiltersInfo: 'Filter/fetchFiltersInfo'
       }),
       handleDocumentClick(e) {
         this.activeItem = null
