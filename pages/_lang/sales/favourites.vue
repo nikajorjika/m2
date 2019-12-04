@@ -19,7 +19,7 @@
           <flat-card :loading="true" :flat-id="0"/>
       </div>
     </div>
-    <div>
+    <div v-if="isEmpty">
         {{$t('errors.NoItemsInYourFavourites')}}
     </div>
   </div>
