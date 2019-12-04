@@ -21,9 +21,7 @@
       <div v-show="isEmpty && !loading">
           <p>{{$t('labels.NoFlatsFound')}}</p>
       </div>
-      <div v-show="shouldLoadMore" ref="Loading" class="load-more">
-          loading...
-      </div>
+      <list-loading v-show="shouldLoadMore" ref="Loading" class="load-more" @load="handleLoad"/>
     </div>
     <div class="flat-list" v-if="loading">
       <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
@@ -37,11 +35,13 @@
 import FlatCard from '@/components/partials/FlatCard'
 import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import TitleWithLine from '@/components/partials/TitleWithLine'
+import ListLoading from '@/components/partials/ListLoading'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
     components: {
         CurrencySwitcher,
         FlatCard,
+        ListLoading,
         TitleWithLine
     },
     middleware: 'isAuth',
@@ -49,7 +49,6 @@ export default {
     data() {
         return {
             loadingItems: [1,1,1,1,1,1,1,1],
-            observer: null,
             isEmpty: false,
             shouldLoadMore: false,
             isFetching: false,
@@ -120,11 +119,10 @@ export default {
               this.isEmpty = !response.length
               this.page++
               this.shouldLoadMore = true
-              this.observe()
             })
         },
-        callback(data) {
-          if(this.shouldLoadMore && data[0].isIntersecting && !this.isFetching) {
+        handleLoad(data) {
+          if(this.shouldLoadMore && !this.isFetching) {
             this.isFetching = true
             this.fetchFlats({ page: this.page, fresh: false, noLoading: true })
               .then(response => {
@@ -137,10 +135,6 @@ export default {
                 this.isFetching = false
               })
           }
-        },
-        observe() {
-          this.observer = new IntersectionObserver(this.callback, this.options)
-          this.observer.observe(this.$refs.Loading)
         },
         updateQueryString() {
           this.$router.push({

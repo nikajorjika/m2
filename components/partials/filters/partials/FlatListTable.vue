@@ -48,7 +48,7 @@
           </button-main-orange>
         </div>
       </div>
-      <div v-if="!done" ref="Loading" class="center">Loading...</div>
+      <list-loading v-show="!done" ref="Loading" class="load-more" @load="handleLoad"/>
     </div>
   </div>
 </template>
@@ -59,8 +59,9 @@ import { timeout } from 'q'
 import FlatListItem from '@/components/partials/FlatListItem'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import ArrowRight from '@/components/icons/ArrowRight'
+import ListLoading from '@/components/partials/ListLoading'
 export default {
-  components: { FlatListItem, ButtonMainOrange, ArrowRight },
+  components: { FlatListItem, ListLoading, ButtonMainOrange, ArrowRight },
   props: {
     list: {
       type: Array,
@@ -98,8 +99,6 @@ export default {
   },
   mounted() {
     this.fetchFilteredDataCount()
-    this.observer = new IntersectionObserver(this.callback, this.options)
-    this.observer.observe(this.$refs.Loading)
   },
   methods: {
     ...mapActions({
@@ -107,17 +106,15 @@ export default {
       fetchFlats: 'Filter/fetchFilteredFlats',
       fetchFilteredDataCount: 'Filter/fetchFilteredDataCount'
     }),
-    callback(entries, observer) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !this.done) {
-          this.fetchFlats({ page: this.page }).then((response) => {
-            this.page++
-            if (response.length < 10) {
-              this.done = true
-            }
-          })
-        }
-      })
+    handleLoad(entries, observer) {
+      if (!this.done) {
+        this.fetchFlats({ page: this.page }).then((response) => {
+          this.page++
+          if (response.length < 10) {
+            this.done = true
+          }
+        })
+      }
     },
     handleLightAllButton() {
       const planshetFlats = this.list.filter(

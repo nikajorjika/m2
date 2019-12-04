@@ -67,7 +67,7 @@
           </custom-button>
         </div>
       </div>
-      <div v-if="!done" ref="Loading" class="center">Loading...</div>
+      <list-loading v-if="!done" @load="handleLoadMore"/>
     </div>
   </div>
 </template>
@@ -77,9 +77,10 @@ import { mapActions, mapGetters } from 'vuex'
 import { timeout } from 'q'
 import FlatListItem from '@/components/partials/FlatListItem'
 import CustomButton from '@/components/partials/CustomButton'
+import ListLoading from '@/components/partials/ListLoading'
 import LightIcon from '@/components/icons/Light'
 export default {
-  components: { FlatListItem, CustomButton, LightIcon },
+  components: { FlatListItem, ListLoading, CustomButton, LightIcon },
   props: {
     list: {
       type: Array,
@@ -92,11 +93,7 @@ export default {
       page: 1,
       observer: null,
       done: false,
-      requesting: false,
-      options: {
-        root: null,
-        threshold: 0
-      }
+      requesting: false
     }
   },
   computed: {
@@ -119,8 +116,6 @@ export default {
     if (this.totalFlatCount === 0) {
       this.fetchFilteredDataCount()
     }
-    this.observer = new IntersectionObserver(this.callback, this.options)
-    this.observer.observe(this.$refs.Loading)
   },
   methods: {
     ...mapActions({
@@ -128,22 +123,17 @@ export default {
       fetchFlats: 'Filter/fetchFilteredFlats',
       fetchFilteredDataCount: 'Filter/fetchFilteredDataCount'
     }),
-    callback(entries, observer) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !this.done) {
-          console.log('Is Intersecting')
-          if(!this.requesting) {
-            this.requesting = true
-            this.fetchFlats({ page: this.page }).then((response) => {
-              this.page++
-              this.requesting = false
-              if (response.length < 10) {
-                this.done = true
-              }
-            })
+    handleLoadMore() {
+      if (!this.done && !this.requesting) {
+        this.requesting = true
+        this.fetchFlats({ page: this.page }).then((response) => {
+          this.page++
+          this.requesting = false
+          if (response.length < 10) {
+            this.done = true
           }
-        }
-      })
+        })
+      }
     },
     handleLightAllButton() {
       const planshetFlats = this.list.filter(

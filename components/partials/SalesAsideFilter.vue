@@ -111,7 +111,7 @@ import CheckIcon from '@/components/icons/Check'
     height: 40px;
     width: 99px;
     display: flex;
-    filter: contrast(0.5) drop-shadow(1px 1px 1px black);;
+    filter: contrast(0.5);
     .label {
       width: 79px;
     }
