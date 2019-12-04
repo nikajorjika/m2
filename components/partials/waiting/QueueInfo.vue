@@ -23,11 +23,12 @@
       <p>{{ $t('labels.WaitForSalesOrRequestInfo') }}</p>
     </div>
     <button class="queue-info__pdf-button">
-      <span>{{ $t('labels.DetailsAsPdf') }}</span> <pdf-icon class="svg-icon" />
+      <span>{{ $t('labels.DetailsAsPdf') }}</span>
+      <pdf-icon class="svg-icon" height="16px" />
     </button>
     <button class="queue-info__cancel-button" @click="cancelSummonSale">
       <span>{{ $t('labels.CancelSalesRequest') }}</span>
-      <cancel-icon class="svg-icon" />
+      <cancel-icon class="svg-icon" height="14px" />
     </button>
   </div>
 </template>
@@ -120,11 +121,15 @@ export default {
     border: 1px solid transparent;
     .svg-icon {
       margin-left: 12px;
+      fill: #fff;
     }
     &:active {
       background: transparent;
       color: $orange;
       border: 1px solid $orange;
+      .svg-icon {
+        fill: $orange;
+      }
     }
   }
   &__cancel-button {
@@ -141,10 +146,14 @@ export default {
     align-items: center;
     .svg-icon {
       margin-left: 12px;
+      stroke: #69558e;
     }
     &:active {
       background: #69558e;
       color: white;
+      .svg-icon {
+        stroke: white;
+      }
     }
   }
 }
