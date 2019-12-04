@@ -22,7 +22,7 @@
     <div class="queue-info__info">
       <p>{{ $t('labels.WaitForSalesOrRequestInfo') }}</p>
     </div>
-    <button class="queue-info__pdf-button">
+    <button class="queue-info__pdf-button" @click="sendPdf">
       <span>{{ $t('labels.DetailsAsPdf') }}</span>
       <pdf-icon class="svg-icon" height="16px" />
     </button>
@@ -43,7 +43,10 @@ export default {
     CancelIcon
   },
   computed: {
-    ...mapGetters(['locale'])
+    ...mapGetters({
+      locale: 'locale',
+      user: 'auth/user'
+    })
   },
   methods: {
     cancelSummonSale() {
@@ -61,6 +64,12 @@ export default {
             reject(e)
           })
       })
+    },
+    sendPdf() {
+      this.$axios.get(`user-flats/1/send-pdf`)
+        .then(({data}) => {
+          console.log(data)
+        })
     }
   }
 }
