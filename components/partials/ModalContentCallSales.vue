@@ -66,7 +66,7 @@ export default {
     return {
       planshetId: this.$cookies.get('paveleon-planshet'),
       isAvailable: true,
-      isWaiting: false
+      isWaiting: null
     }
   },
   computed: {
@@ -95,6 +95,7 @@ export default {
         })
         .then((response) => {
           if (response.status === 200) {
+            this.isWaiting = false
             if (response.data.has_old_sale) {
               // User has sales manager. Need to ask additional question
 
