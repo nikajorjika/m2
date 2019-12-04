@@ -100,8 +100,8 @@
         </div>
 
         <prompt-alert
-          class="appliances__prompt"
           v-if="flatExists"
+          class="appliances__prompt"
           :color="promptColor"
           :text="promptText"
         />
@@ -146,7 +146,9 @@ export default {
   layout: 'SalesFlatLayout',
   middleware: 'isAuth',
   data() {
-    return {}
+    return {
+      planshetId: this.$cookies.get('paveleon-planshet')
+    }
   },
   computed: {
     ...mapGetters({
@@ -212,6 +214,14 @@ export default {
     },
     subtitle() {
       return this.$t('titles.appliancesPageSubtitle')
+    },
+    modalData() {
+      return {
+        location: {
+          name: 'lang-sales-waiting',
+          params: { lang: this.locale }
+        }
+      }
     }
   },
   mounted() {
@@ -265,20 +275,25 @@ export default {
         .replace('%n', planshetNumbers[id])
     },
     summonSale() {
-      return new Promise((resolve, reject) => {
-        this.$axios
-          .post('user/summon-sale', {
-            flat_id: this.flat.id,
-            planshet_id: this.flat.planshet.id
+      this.$axios.get('/user/awaiting-status').then((response) => {
+        // Check if sales manager is already called
+
+        if (!response.data.status) {
+          // Open modal
+
+          this.$eventBus.$emit(
+            'openModal',
+            'modal-content-call-sales',
+            this.modalData
+          )
+        } else {
+          // Go to waiting page
+
+          this.$router.push({
+            name: 'lang-sales-waiting',
+            params: { lang: this.locale }
           })
-          .then((response) => {
-            if (response.status === 200) {
-              resolve(response)
-            }
-          })
-          .catch((e) => {
-            reject(e)
-          })
+        }
       })
     },
     saveFlat() {

@@ -4,14 +4,12 @@
       <div class="close-button" @click="closeModal">x</div>
 
       <div class="layout-modal-content">
-        <keep-alive>
-          <component
-            :is="componentName"
-            v-if="componentName"
-            :data="componentData"
-            @callback="handleCallback"
-          />
-        </keep-alive>
+        <component
+          :is="componentName"
+          v-if="componentName"
+          :data="componentData"
+          @callback="handleCallback"
+        />
       </div>
     </div>
   </div>

@@ -158,7 +158,8 @@
     "entrance": "entrance",
     "projects": "projects",
     "callSalesQuestion": "Do you really want to call sales?",
-    "saleIsBusy": "Your sales manager is busy. Do you want to call another manager?"
+    "saleIsBusy": "Your sales manager is busy. Do you want to call another manager?",
+    "acceptedCall": "The sales manager will talk to you soon"
   },
   "titles": {
     "FlatPageTitleGinger": "Design ginger",
