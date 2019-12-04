@@ -212,12 +212,12 @@ export default {
     }
     .sold {
       &::before {
-        background: #8393ca;
+        background: rgb(118, 120, 122);
       }
     }
     .available {
       &::before {
-        background: #f69679;
+        background: rgb(0, 152, 121);
       }
     }
     .reserved {
@@ -297,18 +297,18 @@ export default {
   polygon,
   g[data-flat]
   polygon {
-    fill: #8393ca !important;
+    fill: rgb(118, 120, 122) !important;
   }
   g[data-flat].for_sale {
-    fill: $orange !important;
+    fill: rgb(0, 152, 148) !important;
     polygon {
-      fill: $orange !important;
+      fill: rgb(0, 152, 148) !important;
     }
   }
   g[data-flat].sold {
-    fill: #8393ca !important;
+    fill: rgb(118, 120, 122) !important;
     polygon {
-      fill: #8393ca !important;
+     fill: rgb(118, 120, 122) !important;
     }
   }
   g[data-flat].reserved {
@@ -317,8 +317,8 @@ export default {
       fill: #bd8cbf !important;
     }
   }
-  g[data-flat].sold.active,
-  g[data-flat].sold:hover{ 
+  g[data-flat].for_sale.active,
+  g[data-flat].for_sale:hover{ 
     polygon {
       fill: $orange !important;
     }
