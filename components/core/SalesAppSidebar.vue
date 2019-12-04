@@ -56,8 +56,7 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: !!this.$cookies.get('auth._token.local'),
-      isAwaiting: false
+      isLoggedIn: !!this.$cookies.get('auth._token.local')
     }
   },
   computed: {
@@ -69,7 +68,7 @@ export default {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
     },
     showSummon() {
-      return this.$router.name !== 'lang-sales-waiting' && this.isLoggedIn
+      return this.$router.name !== 'lang-sales-waiting'
     },
     items() {
       return [
@@ -107,41 +106,46 @@ export default {
         location: {
           name: 'lang-sales-waiting',
           params: { lang: this.locale }
-        },
-        isUserAwaiting: this.isUserAwaiting
+        }
       }
-    },
-    isUserAwaiting() {
-      return this.isAwaiting
     }
   },
   mounted() {
-    if (this.isLoggedIn) {
-      this.$axios.get('/user/awaiting-status').then((response) => {
-        this.isAwaiting = response.data.success
+    // Listen pusher channel to notify user that sale accept the request
+
+    this.pusher.subscribe('confirmSaleUser', (channel) => {
+      channel.bind('App\\Events\\ConfirmSaleUser', (data) => {
+        if (data.status) {
+          this.$eventBus.$emit('openModal', 'modal-content-accepted-call')
+        }
       })
-    }
+    })
+  },
+  beforeDestroy() {
+    this.pusher.unsubscribe('confirmSaleUser')
   },
   methods: {
     callForSales() {
-      // Check if sales manager is already called
+      this.$axios.get('/user/awaiting-status').then((response) => {
+        // Check if sales manager is already called
 
-      if (!this.isUserAwaiting) {
-        // Open modal
+        if (!response.data.status) {
+          // Open modal
 
-        this.$eventBus.$emit(
-          'openModal',
-          'modal-content-call-sales',
-          this.modalData
-        )
-      } else {
-        // Go to waiting page
+          this.$eventBus.$emit(
+            'openModal',
+            'modal-content-call-sales',
+            this.modalData
+          )
+        } else {
+          // Go to waiting page
 
-        this.$router.push({
-          name: 'lang-sales-waiting',
-          params: { lang: this.locale }
-        })
-      }
+          this.$router.push({
+            name: 'lang-sales-waiting',
+            params: { lang: this.locale }
+          })
+        }
+      })
     }
   }
 }

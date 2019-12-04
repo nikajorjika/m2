@@ -141,7 +141,8 @@ export default {
     return {
       activeThumbnail: 0,
       saveFlatBtnLoading: false,
-      saveFlatBtnMsgShow: false
+      saveFlatBtnMsgShow: false,
+      planshetId: this.$cookies.get('paveleon-planshet')
     }
   },
   computed: {
@@ -252,15 +253,17 @@ export default {
       return !this.saveFlatBtnMsgShow
         ? this.$t('labels.saveFlat')
         : this.$t('buttons.saved')
+    },
+    modalData() {
+      return {
+        location: {
+          name: 'lang-sales-waiting',
+          params: { lang: this.locale }
+        }
+      }
     }
   },
   mounted() {
-    this.pusher.subscribe('confirmSaleUser', (channel) => {
-      channel.bind('App\\Events\\ConfirmSaleUser', (data) => {
-        // console.log(data)
-      })
-    })
-
     this.$root.$on('saveFlat', this.saveFlat)
 
     if (this.flat === undefined || !this.flat.length) {
@@ -284,7 +287,6 @@ export default {
     })
   },
   beforeDestroy() {
-    this.pusher.unsubscribe('confirmSaleUser')
     this.$root.$off('saveFlat')
   },
   methods: {
@@ -349,20 +351,25 @@ export default {
         .replace('%n', planshetNumbers[id])
     },
     summonSale() {
-      return new Promise((resolve, reject) => {
-        this.$axios
-          .post('user/summon-sale', {
-            flat_id: this.flat.id,
-            planshet_id: this.flat.planshet.id
+      this.$axios.get('/user/awaiting-status').then((response) => {
+        // Check if sales manager is already called
+
+        if (!response.data.status) {
+          // Open modal
+
+          this.$eventBus.$emit(
+            'openModal',
+            'modal-content-call-sales',
+            this.modalData
+          )
+        } else {
+          // Go to waiting page
+
+          this.$router.push({
+            name: 'lang-sales-waiting',
+            params: { lang: this.locale }
           })
-          .then((response) => {
-            if (response.status === 200) {
-              resolve(response)
-            }
-          })
-          .catch((e) => {
-            reject(e)
-          })
+        }
       })
     },
     saveFlat() {

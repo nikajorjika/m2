@@ -1,12 +1,12 @@
 <template>
   <nuxt-link :to="toRoute" class="link">
     <div class="button">
-      <slot name="illustration"></slot>
+      <slot name="illustration" />
 
       <span class="label">{{ label }}</span>
 
       <div class="svg-container">
-        <slot name="icon"></slot>
+        <slot name="icon" />
       </div>
     </div>
   </nuxt-link>
