@@ -1,24 +1,27 @@
 <template>
   <div class="filter-list-page">
-      <title-with-line :title="$t('titles.FavouriteFlats')" class="page-title"/>
-      <div v-if="!loading" class="flat-list">
-        <div v-for="(item, index) in flats" :key="index" class="flat-card">
-            <flat-card 
-                :title="item.title"
-                :sub-title="item.subTitle"
-                :price="item.price"
-                :image="item.image"
-                :bedroom-count="item.bedrooms_count"
-                :url="item.url"
-                :flat-id="item.id"
-            />
-        </div>
+    <title-with-line :title="$t('titles.FavouriteFlats')" class="page-title"/>
+    <div v-if="!loading" class="flat-list">
+      <div v-for="(item, index) in flats" :key="index" class="flat-card">
+        <flat-card 
+          :title="item.title"
+          :sub-title="item.subTitle"
+          :price="item.price"
+          :image="item.image"
+          :bedroom-count="item.bedrooms_count"
+          :url="item.url"
+          :flat-id="item.id"
+        />
       </div>
-      <div class="flat-list" v-else>
-        <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
-            <flat-card :loading="true" :flat-id="0"/>
-        </div>
+    </div>
+    <div class="flat-list" v-else>
+      <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
+          <flat-card :loading="true" :flat-id="0"/>
       </div>
+    </div>
+    <div>
+        {{$t('errors.NoItemsInYourFavourites')}}
+    </div>
   </div>
 </template>
 
@@ -38,6 +41,7 @@ export default {
             loadingItems: [1,1,1,1,1,1,1,1],
             page: 1,
             loading: true,
+            isEmpty: false,
             flats: []
         }
     },
@@ -70,6 +74,9 @@ export default {
                 }
               })
               this.loading = false
+              if(data.length === 0) {
+                  this.isEmpty = true
+              }
             })
         }
     }

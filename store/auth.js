@@ -1,9 +1,7 @@
-const state = function() {
-  return {
-    user: null,
-    token: null
-  }
-}
+const state = () => ({
+  user: null,
+  token: null
+})
 
 const getters = {
   user: (state) => state.user,
