@@ -6,10 +6,11 @@
 
     <div class="buttons">
       <save-button
+        :loading="saveFlatBtnLoading"
         :width="'250px'"
         :height="'40px'"
         :padding="'0 21px'"
-        :label="$t('labels.saveFlat')"
+        :label="saveFlatBtnLabel"
         :icon-margin-left="'21px'"
         @regularBtnClick="saveFlat"
       >
@@ -44,12 +45,38 @@ export default {
     SaveButton,
     SaveIcon
   },
+  data() {
+    return {
+      saveFlatBtnLoading: false,
+      saveFlatBtnMsgShow: false
+    }
+  },
+  computed: {
+    saveFlatBtnLabel() {
+      return !this.saveFlatBtnMsgShow
+        ? this.$t('labels.saveFlat')
+        : this.$t('buttons.saved')
+    }
+  },
+  mounted() {
+    this.$root.$on('flatIsSaved', this.flatIsSaved)
+  },
   methods: {
     saveFlat() {
+      this.saveFlatBtnLoading = true
+
       this.$root.$emit('saveFlat')
     },
     continueWithoutSaving() {
       this.$emit('callback', 'continueWithoutSaving')
+    },
+    flatIsSaved() {
+      this.saveFlatBtnLoading = false
+      this.saveFlatBtnMsgShow = true
+
+      setTimeout(() => {
+        this.saveFlatBtnMsgShow = false
+      }, 3000)
     }
   }
 }

@@ -85,27 +85,29 @@
 
     <app-footer>
       <template>
-        <button-main-orange
-          v-if="flatExists"
-          :button-text="$t('buttons.callSalesManager')"
-          :text-padding="'0 0 0 12px'"
-          @click.native.prevent="summonSale"
-        >
-          <template v-slot:icon>
-            <sells width="14" height="16" icon-color="#fff" />
-          </template>
-        </button-main-orange>
+        <div class="sales">
+          <button-main-orange
+            v-if="flatExists"
+            :button-text="$t('buttons.callSalesManager')"
+            :text-padding="'0 0 0 12px'"
+            @click.native.prevent="summonSale"
+          >
+            <template v-slot:icon>
+              <sells width="14" height="16" icon-color="#fff" />
+            </template>
+          </button-main-orange>
 
-        <button-main-orange
-          v-if="flatExists"
-          :button-text="$t('buttons.reservationRequest')"
-          :text-padding="'0 0 0 12px'"
-          @click.native.prevent="summonSale"
-        >
-          <template v-slot:icon>
-            <light width="14" height="16" icon-color="#fff" />
-          </template>
-        </button-main-orange>
+          <button-main-orange
+            v-if="flatExists"
+            :button-text="$t('buttons.reservationRequest')"
+            :text-padding="'0 0 0 12px'"
+            @click.native.prevent="summonSale"
+          >
+            <template v-slot:icon>
+              <light width="14" height="16" icon-color="#fff" />
+            </template>
+          </button-main-orange>
+        </div>
 
         <prompt-alert
           v-if="flatExists"
@@ -536,6 +538,11 @@ export default {
   .app-footer {
     align-items: initial;
     padding-left: fit(70);
+
+    .sales {
+      display: flex;
+      align-items: flex-start;
+    }
 
     .btn {
       margin-top: fit(36);
