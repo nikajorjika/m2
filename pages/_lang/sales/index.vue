@@ -19,11 +19,11 @@
                 <p>{{ $t('home.m3text') }}</p>
                 <ul>
                   <li>{{ $t('home.m3sub1') }}</li>
-                </ul>
+              </ul>
                 <div class="project__content__sold-info">
                   <h4>{{ $t('labels.sold_flat_count') }}</h4>
                   <div class="project__content__sold-info__progress">
-                    <white-progress :min="0" :max="100" suffix="%" :value="70" />
+                    <white-progress :min="0" :max="100" suffix="%" :value="progress" />
                   </div>
                 </div>
               </div>
@@ -104,6 +104,14 @@ export default {
   },
   layout: 'CleanLayout',
   auth: 'guest',
+  data() {
+    return {
+      project: null
+    }
+  },
+  mounted() {
+    this.getProjectInfo()
+  },
   computed: {
     ...mapGetters({
       locale: 'locale'
@@ -119,9 +127,19 @@ export default {
           link: `/${this.locale}/sales/render`
         }
       ]
+    },
+    progress() {
+      return this.project ? this.project.building_status : 0
     }
   },
-  methods: {}
+  methods: {
+    getProjectInfo() {
+      this.$axios.get('/projects/13')
+        .then(({data}) => {
+          this.project = data
+        })
+    }
+  }
 }
 </script>
 
