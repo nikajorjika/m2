@@ -221,7 +221,12 @@ export default {
         location: {
           name: 'lang-sales-waiting',
           params: { lang: this.locale }
-        }
+        },
+        flat: this.flat ? this.flat.id : null,
+        renovation_id: this.renovationId,
+        furniture_id: this.furnitureId,
+        decoration_id: this.decorationId,
+        appliances_ids: this.appliancesIds
       }
     }
   },
@@ -313,8 +318,12 @@ export default {
 
               resolve(response)
             }
+
+            this.$root.$emit('flatIsSaved')
           })
           .catch((e) => {
+            this.$root.$emit('flatIsSaved')
+
             reject(e)
           })
       })

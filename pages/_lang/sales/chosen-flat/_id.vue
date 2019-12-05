@@ -26,11 +26,11 @@
 
           <gradient-progress
             v-if="flatExists"
-            class="filter-render__aside__progress"
             :label="$t('labels.building_progress')"
             :min="0"
             :max="100"
             :value="buildingStatus"
+            class="filter-render__aside__progress"
             suffix="%"
           />
         </div>
@@ -38,17 +38,17 @@
         <div class="filter-flat__content__render">
           <render-viewer
             v-if="flatExists"
-            class="flat-viewer"
             :images="images"
             :gradient-text="imageLabel"
+            class="flat-viewer"
           />
 
           <room-list-component
             v-if="flatExists && rooms.length"
-            class="room-list-slider"
-            style-type="small"
             :room-list="rooms"
             :visible-rooms-number="7"
+            class="room-list-slider"
+            style-type="small"
           />
         </div>
       </div>
@@ -90,7 +90,7 @@
             v-if="flatExists"
             :button-text="$t('buttons.callSalesManager')"
             :text-padding="'0 0 0 12px'"
-            @click.native.prevent="summonSale"
+            @click.native.prevent="summonSale(false)"
           >
             <template v-slot:icon>
               <sells width="14" height="16" icon-color="#fff" />
@@ -101,7 +101,7 @@
             v-if="flatExists"
             :button-text="$t('buttons.reservationRequest')"
             :text-padding="'0 0 0 12px'"
-            @click.native.prevent="summonSale"
+            @click.native.prevent="summonSale(true)"
           >
             <template v-slot:icon>
               <light width="14" height="16" icon-color="#fff" />
@@ -174,7 +174,8 @@ export default {
         arrows: false,
         infinite: false,
         swipeToSlide: true
-      }
+      },
+      reservation: null
     }
   },
   computed: {
@@ -210,11 +211,15 @@ export default {
       const image = 'https://placehold.it/245x245'
 
       if (this.flatExists) {
-        images.push(this.flat.render_url ? this.flat.render_url : image)
-        images.push(this.flat.blueprint_url ? this.flat.blueprint_url : image)
         images.push(
-          this.flat.floor && this.flat.floor.render_url
-            ? this.flat.floor.render_url
+          this.flat.render_full_url ? this.flat.render_full_url : image
+        )
+        images.push(
+          this.flat.blueprint_full_url ? this.flat.blueprint_full_url : image
+        )
+        images.push(
+          this.flat.floor && this.flat.floor_render_full_url
+            ? this.flat.floor_render_full_url
             : image
         )
       }
@@ -244,9 +249,21 @@ export default {
       })
     },
     price() {
-      if (!this.flatExists) return 0
+      let price = 0
 
-      return `${this.flat.price} $`
+      if (this.flatExists) {
+        price += parseFloat(this.flat.price)
+
+        if (this.appliances && this.appliances.length) {
+          this.appliances.forEach((appliance) => {
+            if (appliance.price) {
+              price += parseFloat(appliance.price)
+            }
+          })
+        }
+      }
+
+      return `${price} $`
     },
     buildingStatus() {
       if (!this.flatExists || this.flat.building_status === '') return 0
@@ -362,6 +379,20 @@ export default {
       }
 
       return appliances
+    },
+    modalData() {
+      return {
+        location: {
+          name: 'lang-sales-waiting',
+          params: { lang: this.locale }
+        },
+        reservation: this.reservation,
+        flat: this.flat ? this.flat.id : null,
+        renovation_id: this.renovation ? this.renovation.id : null,
+        furniture_id: this.furniture ? this.renovation.id : null,
+        decoration_id: this.decoration ? this.renovation.id : null,
+        appliances_ids: this.appliances ? this.renovation.id : null
+      }
     }
   },
   mounted() {
@@ -394,21 +425,28 @@ export default {
         .replace('%s', planshetsObject[id])
         .replace('%n', planshetNumbers[id])
     },
-    summonSale() {
-      return new Promise((resolve, reject) => {
-        this.$axios
-          .post('user/summon-sale', {
-            flat_id: this.flat.id,
-            planshet_id: this.flat.planshet.id
+    summonSale(reservation) {
+      this.reservation = reservation
+
+      this.$axios.get('/user/awaiting-status').then((response) => {
+        // Check if sales manager is already called
+
+        if (!response.data.status) {
+          // Open modal
+
+          this.$eventBus.$emit(
+            'openModal',
+            'modal-content-call-sales',
+            this.modalData
+          )
+        } else {
+          // Go to waiting page
+
+          this.$router.push({
+            name: 'lang-sales-waiting',
+            params: { lang: this.locale }
           })
-          .then((response) => {
-            if (response.status === 200) {
-              resolve(response)
-            }
-          })
-          .catch((e) => {
-            reject(e)
-          })
+        }
       })
     },
     async sendPdf() {

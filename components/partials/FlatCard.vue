@@ -132,8 +132,12 @@ export default {
           if (response.status === 200) {
             this.isFavourite = true
           }
+
+          this.$root.$emit('flatIsSaved')
         })
         .catch((e) => {
+          this.$root.$emit('flatIsSaved')
+
           console.error(e)
         })
     }

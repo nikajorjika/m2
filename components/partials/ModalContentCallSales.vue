@@ -14,8 +14,8 @@
       <button-main-orange
         :button-text="firstBtnLabel"
         :text-padding="'0 0 0 12px'"
-        class="summon-sale"
         @click.native.prevent="summonSale"
+        class="summon-sale"
       >
         <template v-slot:icon>
           <sells width="15" height="15" icon-color="#fff" />
@@ -26,8 +26,8 @@
         v-if="isAvailable"
         :button-text="secondBtnLabel"
         :text-padding="'0 0 0 12px'"
-        class="cancel-summon-sale"
         @click.native.prevent="cancelSummonSale"
+        class="cancel-summon-sale"
       >
         <template v-slot:icon>
           <sells width="13" height="13" icon-color="#3c2270" />
@@ -38,8 +38,8 @@
         v-if="!isAvailable"
         :button-text="secondBtnLabel"
         :text-padding="'0 0 0 12px'"
-        class="cancel-summon-sale"
         @click.native.prevent="waitSale"
+        class="cancel-summon-sale"
       >
         <template v-slot:icon>
           <sells width="13" height="13" icon-color="#3c2270" />
@@ -61,6 +61,12 @@ export default {
     ManagerIcon,
     ButtonMainOrange,
     Sells
+  },
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
   },
   data() {
     return {
@@ -91,7 +97,13 @@ export default {
       this.$axios
         .post('user/summon-sale', {
           planshet_id: this.planshetId,
-          wait: this.isWaiting
+          wait: this.isWaiting,
+          reservation: this.data.reservation,
+          flat: this.data.flat,
+          renovation_id: this.data.renovation_id,
+          furniture_id: this.data.furniture_id,
+          decoration_id: this.data.decoration_id,
+          appliances_ids: this.data.appliances_ids
         })
         .then((response) => {
           if (response.status === 200) {
@@ -107,6 +119,11 @@ export default {
             }
           }
         })
+
+      // Reserve flat
+
+      if (this.data.reservation) {
+      }
     },
     cancelSummonSale() {
       this.$eventBus.$emit('closeModal')
