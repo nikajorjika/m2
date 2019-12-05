@@ -12,6 +12,7 @@ export default ({ app, store }, inject) => {
   
       // Calculate price based on currency rate
       price = currency === 'GEL' ? price * rate : price
+      price = parseInt(price)
       // Return formatted price
       return format ? new Intl.NumberFormat('ka-GE').format(parseFloat(price.toFixed(2))) : parseFloat(price.toFixed(2))
     }
