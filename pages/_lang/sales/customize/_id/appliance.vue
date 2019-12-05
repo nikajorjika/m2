@@ -36,7 +36,10 @@
               <img :src="image(item)" class="image" alt="Thumbnail" />
             </figure>
 
-            <div class="caption">{{ item.name[locale] }}</div>
+            <div class="caption">
+              <span>{{ item.name[locale] }}</span>
+              <span class="price">{{ $currencyConverter(item.price, currency) }} {{currencyLabel}}</span>
+            </div>
 
             <div class="checkbox">
               <span></span>
@@ -47,19 +50,15 @@
 
       <div class="flat-pages-footer">
         <div class="footer-items">
-          <div class="price-wrapper">
             <price-container
               v-if="price && rate"
               :price="price"
               :text-before-price="$t('labels.price')"
             />
-
             <price-container
-              v-for="(item, index) in additionalPrices" 
-              :key="index"
-              :price="item.price" 
+              v-if="additionalPrice && showAdditionals"
+              :price="additionalPrice"
             />
-          </div>
           
 
           <currency-switcher v-if="flatExists" />
@@ -154,13 +153,23 @@ export default {
   middleware: 'isAuth',
   data() {
     return {
+      showAdditionals: true,
       planshetId: this.$cookies.get('paveleon-planshet')
+    }
+  },
+  watch: {
+    additionalPrice: {
+      handler: function() {
+        this.showAdditionals = false
+        this.$nextTick(() => this.showAdditionals = true)
+      }
     }
   },
   computed: {
     ...mapGetters({
       locale: 'locale',
       flat: 'customize/flat',
+      currency: 'settings/currency',
       rate: 'settings/currencyRate',
       appliances: 'customize/appliances',
       renovationId: 'customize/renovationId',
@@ -182,6 +191,9 @@ export default {
     },
     items() {
       return this.appliances
+    },
+    currencyLabel() {
+      return this.currency === 'GEL' ? '₾' : '$'
     },
     itemPrice() {
       let price = 0
@@ -236,11 +248,14 @@ export default {
         appliances_ids: this.appliancesIds
       }
     },
-    additionalPrices() {
-      const activeItems = this.appliances.filter((item) => {
-        return this.appliancesIds.includes(item.id)
+    additionalPrice() {
+      let price = 0
+      this.appliances.map((item) => {
+        if(this.appliancesIds.includes(item.id)) {
+          price += item.price
+        }
       }) 
-      return activeItems
+      return price
     }
   },
   mounted() {
@@ -474,18 +489,6 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      .price-wrapper {
-        width: 730px;
-        overflow-x: auto;
-        display: flex;
-        margin-right: 12px;
-        .price-label {
-          min-width: 117px;
-          &:first-child {
-            min-width: 188px;
-          }
-        }
-      }
       &__controls {
         display: flex;
         margin-left: auto;
@@ -534,6 +537,7 @@ export default {
 
   .caption {
     display: flex;
+    flex-direction: column;
     position: relative;
     align-items: center;
     justify-content: center;
@@ -543,6 +547,15 @@ export default {
     text-align: left;
     padding-left: 18px;
     color: #494949;
+    span {
+      margin-right: auto;
+    }
+    .price {
+      color: $orange;
+      text-align: center;
+      text-align: left;
+      margin-top: 5px;
+    }
   }
 
   .checkbox {
