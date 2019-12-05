@@ -259,7 +259,12 @@ export default {
         location: {
           name: 'lang-sales-waiting',
           params: { lang: this.locale }
-        }
+        },
+        flat: this.flat ? this.flat.id : null,
+        renovation_id: this.renovationId,
+        furniture_id: this.furnitureId,
+        decoration_id: this.decorationId,
+        appliances_ids: this.appliancesIds
       }
     }
   },
@@ -386,8 +391,6 @@ export default {
           })
           .then((response) => {
             if (response.status === 200 && response.data.success) {
-              this.$root.$emit('flatIsSaved')
-
               this.saveFlatBtnLoading = false
               this.saveFlatBtnMsgShow = true
 
@@ -400,10 +403,15 @@ export default {
               this.saveFlatBtnLoading = false
             }
 
+            this.$root.$emit('flatIsSaved')
+
             resolve(response)
           })
           .catch((e) => {
             this.saveFlatBtnLoading = false
+
+            this.$root.$emit('flatIsSaved')
+
             reject(e)
           })
       })
