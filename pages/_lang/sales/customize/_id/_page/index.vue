@@ -384,13 +384,15 @@ export default {
       return new Promise((resolve, reject) => {
         this.$axios
           .post('user/save-flat', {
-            flat_id: this.flat.id,
+            flat_id: this.flat ? this.flat.id : null,
             renovation_id: this.renovationId,
             furniture_id: this.furnitureId,
             decoration_id: this.decorationId,
             appliances_ids: this.appliancesIds
           })
           .then((response) => {
+            this.$root.$emit('flatIsSaved')
+
             if (response.status === 200 && response.data.success) {
               this.saveFlatBtnLoading = false
               this.saveFlatBtnMsgShow = true
@@ -403,8 +405,6 @@ export default {
             } else {
               this.saveFlatBtnLoading = false
             }
-
-            this.$root.$emit('flatIsSaved')
 
             resolve(response)
           })

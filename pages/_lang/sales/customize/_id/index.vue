@@ -13,11 +13,11 @@
 
           <gradient-progress
             v-if="flatExists"
-            class="filter-render__aside__progress"
             :label="$t('labels.building_progress')"
             :min="0"
             :max="100"
             :value="buildingStatus"
+            class="filter-render__aside__progress"
             suffix="%"
           />
         </div>
@@ -25,16 +25,16 @@
         <div class="filter-flat__content__render">
           <render-viewer
             v-if="flatExists"
-            class="flat-viewer"
             :images="images"
             :gradient-text="imageLabel"
+            class="flat-viewer"
           />
 
           <room-list-component
             v-if="flatExists && rooms.length"
+            :room-list="rooms"
             class="room-list-slider"
             style-type="small"
-            :room-list="rooms"
           />
         </div>
       </div>
@@ -72,10 +72,10 @@
     <app-footer>
       <template>
         <prompt-alert
-          class="margin-top-auto"
           v-if="flatExists"
           :color="promptColor"
           :text="promptText"
+          class="margin-top-auto"
         />
       </template>
     </app-footer>
@@ -91,7 +91,7 @@ import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import SkipButton from '@/components/partials/SkipButton'
+// import SkipButton from '@/components/partials/SkipButton'
 import CaretRight from '@/components/icons/CaretRight'
 import AppFooter from '@/components/partials/AppFooter'
 import PromptAlert from '@/components/partials/PromptAlert'
@@ -109,7 +109,7 @@ export default {
     ListCard,
     GradientProgress,
     ButtonMainOrange,
-    SkipButton,
+    // SkipButton,
     CaretRight,
     AppFooter,
     PromptAlert,
@@ -127,8 +127,12 @@ export default {
       flat: 'customize/flat',
       renovations: 'customize/renovations',
       furniture: 'customize/furniture',
-      rate: 'settings/currencyRate',
       decorations: 'customize/decorations',
+      renovationId: 'customize/renovationId',
+      furnitureId: 'customize/furnitureId',
+      decorationId: 'customize/decorationId',
+      appliancesIds: 'customize/appliancesIds',
+      rate: 'settings/currencyRate',
       showPrompt: 'Filter/showPrompt'
     }),
     flatExists() {
@@ -251,6 +255,8 @@ export default {
   mounted() {
     this.prevFlatId = this.flat.id
 
+    this.$root.$on('saveFlat', this.saveFlat)
+
     this.fetchFlat(this.$route.params.id)
 
     this.$nextTick(function() {
@@ -264,6 +270,9 @@ export default {
     if (this.prevFlatId && this.prevFlatId !== this.flat.id) {
       this.mutateStore()
     }
+  },
+  beforeDestroy() {
+    this.$root.$off('saveFlat')
   },
   methods: {
     ...mapActions('customize', [
@@ -308,6 +317,32 @@ export default {
       this.$store.commit('customize/SET_FURNITURE_ID', null)
       this.$store.commit('customize/SET_DECORATION_ID', null)
       this.$store.commit('customize/SET_APPLIANCES_IDS', [])
+    },
+    saveFlat() {
+      return new Promise((resolve, reject) => {
+        this.$axios
+          .post('user/save-flat', {
+            flat_id: this.flat ? this.flat.id : null,
+            renovation_id: this.renovationId,
+            furniture_id: this.furnitureId,
+            decoration_id: this.decorationId,
+            appliances_ids: this.appliancesIds
+          })
+          .then((response) => {
+            this.$root.$emit('flatIsSaved')
+
+            if (response.status === 200 && response.data.success) {
+              this.$eventBus.$emit('redirect')
+            }
+
+            resolve(response)
+          })
+          .catch((e) => {
+            this.$root.$emit('flatIsSaved')
+
+            reject(e)
+          })
+      })
     }
   }
 }
@@ -368,11 +403,11 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      
+
       &__controls__next {
         margin-left: auto;
       }
-      
+
       &__controls {
         display: flex;
         margin-left: auto;
