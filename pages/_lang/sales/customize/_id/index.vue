@@ -3,6 +3,20 @@
     <div class="filter-flat">
       <div class="filter-flat__title">
         <title-with-line :title="cTitle" />
+
+        <save-button
+          v-if="flatExists"
+          :loading="saveFlatBtnLoading"
+          :height="'40px'"
+          :padding="'0 21px'"
+          :label="saveFlatBtnLabel"
+          :icon-margin-left="'21px'"
+          @regularBtnClick="saveFlat"
+        >
+          <template>
+            <save-icon width="17px" height="17px" color="#fff" />
+          </template>
+        </save-button>
       </div>
 
       <div class="filter-flat__content">
@@ -33,6 +47,7 @@
           <room-list-component
             v-if="flatExists && rooms.length"
             :room-list="rooms"
+            :visibleRoomsNumber="7"
             class="room-list-slider"
             style-type="small"
           />
@@ -97,6 +112,8 @@ import AppFooter from '@/components/partials/AppFooter'
 import PromptAlert from '@/components/partials/PromptAlert'
 import PriceContainer from '@/components/partials/Price'
 import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
+import SaveButton from '@/components/partials/RegularButton'
+import SaveIcon from '@/components/icons/SaveIcon'
 
 export default {
   layout: 'SalesFlatLayout',
@@ -114,11 +131,15 @@ export default {
     AppFooter,
     PromptAlert,
     PriceContainer,
-    CurrencySwitcher
+    CurrencySwitcher,
+    SaveButton,
+    SaveIcon
   },
   data() {
     return {
-      prevFlatId: null
+      prevFlatId: null,
+      saveFlatBtnLoading: false,
+      saveFlatBtnMsgShow: false
     }
   },
   computed: {
@@ -250,6 +271,11 @@ export default {
       return this.flatExists
         ? this.generateTextBasedOnColor(this.flat.planshet.id)
         : ''
+    },
+    saveFlatBtnLabel() {
+      return !this.saveFlatBtnMsgShow
+        ? this.$t('labels.saveFlat')
+        : this.$t('buttons.saved')
     }
   },
   mounted() {
@@ -319,6 +345,8 @@ export default {
       this.$store.commit('customize/SET_APPLIANCES_IDS', [])
     },
     saveFlat() {
+      this.saveFlatBtnLoading = true
+
       return new Promise((resolve, reject) => {
         this.$axios
           .post('user/save-flat', {
@@ -332,12 +360,23 @@ export default {
             this.$root.$emit('flatIsSaved')
 
             if (response.status === 200 && response.data.success) {
+              this.saveFlatBtnLoading = false
+              this.saveFlatBtnMsgShow = true
+
+              setTimeout(() => {
+                this.saveFlatBtnMsgShow = false
+              }, 3000)
+
               this.$eventBus.$emit('redirect')
+            } else {
+              this.saveFlatBtnLoading = false
             }
 
             resolve(response)
           })
           .catch((e) => {
+            this.saveFlatBtnLoading = false
+
             this.$root.$emit('flatIsSaved')
 
             reject(e)
@@ -350,24 +389,30 @@ export default {
 
 <style lang="scss" scoped>
 .filter-flat {
-  height: calc(100% - #{fit(165)});
   width: 100%;
+  height: calc(100% - #{fit(165)});
   padding: fit(49) fit(60) fit(38) fit(46);
   display: grid;
   grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
-  grid-template-rows: 12% 75% 13%;
+  grid-template-rows: 50px auto 50px;
   background: $bg-color-2;
   box-shadow: 0 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
 
   &__title {
     grid-area: header;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &__content {
     grid-area: content;
-    height: 100%;
     display: flex;
     width: 100%;
+    height: fit(510);
+    margin: 20px auto 20px;
+    overflow: auto;
 
     &__info {
       width: 199px;
