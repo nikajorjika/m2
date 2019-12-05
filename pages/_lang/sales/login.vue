@@ -97,12 +97,12 @@ export default {
       this.login(this.formData)
         .then(response => {
           this.loading = false
-          this.$toast.success('Successfully authenticated')
+          // this.$toast.success('Successfully authenticated')
           this.$router.go(-1)
         }).catch(e =>{
           this.invalidCodeErrorMessage = this.$t('errors.InvalidCode')
           this.loading = false
-          this.$toast.error('Error while authenticating')
+          // this.$toast.error('Error while authenticating')
         })
       
     },
