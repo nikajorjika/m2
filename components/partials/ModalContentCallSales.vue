@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="modal-content-call-sales">
     <illustrated-button :label="question">
       <template v-slot:illustration>
         <manager-icon
@@ -138,7 +138,7 @@ export default {
 </script>
 
 <style lang="scss">
-.layout-modal {
+.layout-modal.modal-content-call-sales {
   justify-content: center;
   width: fit(1060) !important;
   height: fit(760) !important;

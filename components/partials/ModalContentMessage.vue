@@ -1,31 +1,34 @@
 <template>
-  <div>
-    <illustrated-button :label="$t('labels.acceptedCall')">
-      <template v-slot:illustration>
-        <manager-icon
-          :width="49"
-          :height="114"
-          :style="{ marginTop: '-3px' }"
-        />
-      </template>
-    </illustrated-button>
+  <div class="modal-content-message">
+    <illustrated-button :label="msg" />
   </div>
 </template>
 
 <script>
 import IllustratedButton from '@/components/partials/IllustratedButton'
-import ManagerIcon from '@/assets/icons/Manager1.svg'
 
 export default {
   components: {
-    IllustratedButton,
-    ManagerIcon
+    IllustratedButton
+  },
+  props: {
+    data: {
+      type: Object,
+      default: null
+    }
+  },
+  computed: {
+    msg() {
+      return this.data.hasOwnProperty('message') && this.data.message
+        ? this.data.message
+        : ''
+    }
   }
 }
 </script>
 
 <style lang="scss">
-.layout-modal {
+.layout-modal.modal-content-message {
   justify-content: center;
   width: fit(1060) !important;
   height: fit(760) !important;
@@ -34,12 +37,12 @@ export default {
   .button {
     width: fit(780);
     height: fit(122);
-    padding-left: 25px;
+    padding-left: 0;
     border-radius: 30px;
     background-color: rgba(241, 216, 202, 0.32);
 
     .label {
-      margin-right: fit(35, fitRaw(16));
+      margin: auto;
       font-family: $font-caps;
       font-size: fit(24);
       letter-spacing: 1px;

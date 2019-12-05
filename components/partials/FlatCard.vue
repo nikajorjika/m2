@@ -1,11 +1,11 @@
 <template>
   <div class="flat">
-    <div class="flat__image" @click="goToFlat">
+    <div @click="goToFlat" class="flat__image">
       <div v-if="loading" class="loading"></div>
       <div v-else class="image-wrapper">
         <img :src="image" :alt="title" />
         <div v-if="sold" class="sold">
-          <span>{{$t('labels.IsSold')}}</span>
+          <span>{{ $t('labels.IsSold') }}</span>
         </div>
       </div>
       <gradient-block v-if="!loading" class="flat__bedroom-count">
@@ -14,9 +14,9 @@
       </gradient-block>
       <div
         v-if="!loading"
-        class="flat__save"
         :class="{ active: isFavourite }"
         @click.stop="saveFlat()"
+        class="flat__save"
       >
         <favourite-icon
           class="icon"
@@ -36,12 +36,12 @@
     </div>
     <div class="flat__price">
       <div v-if="loading" class="loading"></div>
-      <price-component class="price-label" :price="price" v-else />
+      <price-component :price="price" v-else class="price-label" />
       <!-- <gradient-label v-else :text="price" class="price-label" /> -->
     </div>
     <div class="flat__see">
       <div v-if="loading" class="loading"></div>
-      <button v-else class="btn btn-orange" @click="goToFlat">
+      <button v-else @click="goToFlat" class="btn btn-orange">
         <span>{{ $t('buttons.see') }}</span>
         <div class="icon-wrapper">
           <arrow-right
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import GradientLabel from '@/components/partials/GradientLabel'
+// import GradientLabel from '@/components/partials/GradientLabel'
 import GradientBlock from '@/components/partials/GradientBlock'
 import PriceComponent from '@/components/partials/Price'
 import ArrowRight from '@/components/icons/ArrowRight'
@@ -65,7 +65,7 @@ import SleepingRoom from '@/components/icons/SleepingRoom'
 import FavouriteIcon from '@/components/icons/Favourite'
 export default {
   components: {
-    GradientLabel,
+    // GradientLabel,
     GradientBlock,
     PriceComponent,
     FavouriteIcon,
@@ -115,6 +115,18 @@ export default {
       isFavourite: false
     }
   },
+  computed: {
+    modalMessageSavedFlat() {
+      return {
+        message: this.$t('messages.savedFlat')
+      }
+    },
+    modalMessageRemovedFlat() {
+      return {
+        message: this.$t('messages.removedFlat')
+      }
+    }
+  },
   methods: {
     goToFlat() {
       this.$router.push(this.url)
@@ -131,13 +143,33 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.isFavourite = true
-          }
 
-          this.$root.$emit('flatIsSaved')
+            this.$eventBus.$emit(
+              'openModal',
+              'modal-content-message',
+              this.modalMessageSavedFlat
+            )
+          }
         })
         .catch((e) => {
-          this.$root.$emit('flatIsSaved')
-
+          console.error(e)
+        })
+    },
+    removeFlat() {
+      this.$axios
+        .post('user/remove-flat', {
+          flat_id: this.flatId
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            this.$eventBus.$emit(
+              'openModal',
+              'modal-content-message',
+              this.modalMessageRemovedFlat
+            )
+          }
+        })
+        .catch((e) => {
           console.error(e)
         })
     }

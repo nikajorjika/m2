@@ -110,6 +110,11 @@ export default {
           params: { lang: this.locale }
         }
       }
+    },
+    modalMessage() {
+      return {
+        message: this.$t('labels.acceptedCall')
+      }
     }
   },
   mounted() {
@@ -118,7 +123,11 @@ export default {
     this.pusher.subscribe('confirmSaleUser', (channel) => {
       channel.bind('App\\Events\\ConfirmSaleUser', (data) => {
         if (data.status) {
-          this.$eventBus.$emit('openModal', 'modal-content-accepted-call')
+          this.$eventBus.$emit(
+            'openModal',
+            'modal-content-message',
+            this.modalMessage
+          )
         }
       })
     })

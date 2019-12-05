@@ -28,6 +28,10 @@
     "NoSuchUserWithSelectedPhoneNumber": "ასეთი ტელეფონის ნომრით მომხარებელი არ მოიძებნა",
     "InvalidCode": "კოდი არასწორია"
   },
+  "messages": {
+    "savedFlat": "თქვენს მიერ შერჩეული ბინა წარმატებით შეინახა",
+    "removedFlat": "თქვენს მიერ შერჩეული ბინა წარმატებით წაიშალა"
+  },
   "navigation": {
     "flat": "ბინა",
     "renovation": "რემონტი",
