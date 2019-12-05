@@ -56,10 +56,6 @@ module.exports = {
       mode: 'client'
     }
   ],
-  toast: {
-    position: 'top-center',
-    register: []
-  },
   /*
    ** Nuxt.js dev-modules
    */
@@ -84,14 +80,14 @@ module.exports = {
   toast: {
     position: 'top-center',
     register: [
-        {
-          name: 'generalError',
-          message: 'Oops...Something went wrong',
-          options: {
-            type: 'error'
-          }
+      {
+        name: 'generalError',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
         }
-      ]
+      }
+    ]
   },
   icon: {
     iconSrc: '~static/icon.png'
