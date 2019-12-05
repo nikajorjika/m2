@@ -47,13 +47,20 @@
 
       <div class="flat-pages-footer">
         <div class="footer-items">
-          <price-container
-            v-if="price && rate"
-            :price="price"
-            :text-before-price="$t('labels.price')"
-          />
+          <div class="price-wrapper">
+            <price-container
+              v-if="price && rate"
+              :price="price"
+              :text-before-price="$t('labels.price')"
+            />
 
-          <price-container v-if="flatExists && itemPrice" :price="itemPrice" />
+            <price-container
+              v-for="(item, index) in additionalPrices" 
+              :key="index"
+              :price="item.price" 
+            />
+          </div>
+          
 
           <currency-switcher v-if="flatExists" />
 
@@ -228,6 +235,12 @@ export default {
         decoration_id: this.decorationId,
         appliances_ids: this.appliancesIds
       }
+    },
+    additionalPrices() {
+      const activeItems = this.appliances.filter((item) => {
+        return this.appliancesIds.includes(item.id)
+      }) 
+      return activeItems
     }
   },
   mounted() {
@@ -351,7 +364,6 @@ export default {
     },
     selectItem(item, index, event) {
       // Set active class
-
       const parent = event.target.closest('.slider-thumbnail')
 
       if (!parent.classList.contains('active')) {
@@ -399,7 +411,7 @@ export default {
   grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
   grid-template-rows: 50px auto 50px;
   background: $bg-color-2;
-  box-shadow: 0 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
+  // box-shadow: 0 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
 
   .flat-pages-header {
     grid-area: header;
@@ -462,7 +474,18 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-
+      .price-wrapper {
+        width: 730px;
+        overflow-x: auto;
+        display: flex;
+        margin-right: 12px;
+        .price-label {
+          min-width: 117px;
+          &:first-child {
+            min-width: 188px;
+          }
+        }
+      }
       &__controls {
         display: flex;
         margin-left: auto;
