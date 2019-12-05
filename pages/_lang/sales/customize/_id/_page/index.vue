@@ -37,7 +37,7 @@
       <div class="flat-pages-footer">
         <div class="footer-items">
           <price-container
-            v-if="price"
+            v-if="price && rate"
             :price="price"
             :text-before-price="$t('labels.price')"
           />
@@ -152,6 +152,7 @@ export default {
       renovations: 'customize/renovations',
       furniture: 'customize/furniture',
       decorations: 'customize/decorations',
+      rate: 'settings/currencyRate',
       renovationId: 'customize/renovationId',
       furnitureId: 'customize/furnitureId',
       decorationId: 'customize/decorationId',

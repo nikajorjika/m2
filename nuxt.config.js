@@ -56,6 +56,10 @@ module.exports = {
       mode: 'client'
     }
   ],
+  toast: {
+    position: 'top-center',
+    register: []
+  },
   /*
    ** Nuxt.js dev-modules
    */
@@ -73,35 +77,22 @@ module.exports = {
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
     '@nuxtjs/pwa',
+    '@nuxtjs/toast',
     '@nuxtjs/dotenv',
     'nuxt-svg-loader'
   ],
-
-  // auth: {
-  //   strategies: {
-  //     local: {
-  //       endpoints: {
-  //         login: { url: '/user/verify', method: 'post', propertyName: 'token' },
-  //         logout: { url: '/user/sign-out', method: 'post' },
-  //         user: {
-  //           url: '/user/current-user',
-  //           method: 'get',
-  //           propertyName: 'user'
-  //         }
-  //       },
-  //       tokenRequired: true,
-  //       tokenType: 'bearer'
-  //     }
-  //   },
-  //   cookie: {
-  //     prefix: 'auth.',
-  //     options: {
-  //       path: '/',
-  //       maxAge: 3600
-  //     },
-  //   }
-  // },
-
+  toast: {
+    position: 'top-center',
+    register: [
+        {
+          name: 'generalError',
+          message: 'Oops...Something went wrong',
+          options: {
+            type: 'error'
+          }
+        }
+      ]
+  },
   icon: {
     iconSrc: '~static/icon.png'
   },

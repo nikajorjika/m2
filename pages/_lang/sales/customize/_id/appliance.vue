@@ -48,7 +48,7 @@
       <div class="flat-pages-footer">
         <div class="footer-items">
           <price-container
-            v-if="price"
+            v-if="price && rate"
             :price="price"
             :text-before-price="$t('labels.price')"
           />
@@ -154,6 +154,7 @@ export default {
     ...mapGetters({
       locale: 'locale',
       flat: 'customize/flat',
+      rate: 'settings/currencyRate',
       appliances: 'customize/appliances',
       renovationId: 'customize/renovationId',
       furnitureId: 'customize/furnitureId',

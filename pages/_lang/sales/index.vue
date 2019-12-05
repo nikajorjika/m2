@@ -111,6 +111,7 @@ export default {
   },
   mounted() {
     this.getProjectInfo()
+    // this.$toast.generalError()
   },
   computed: {
     ...mapGetters({

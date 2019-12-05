@@ -42,7 +42,7 @@
       <div class="filter-flat__footer">
         <div class="footer-items">
           <price-container
-            v-if="price"
+            v-if="price && rate"
             :price="price"
             :text-before-price="$t('labels.price')"
           />
@@ -127,6 +127,7 @@ export default {
       flat: 'customize/flat',
       renovations: 'customize/renovations',
       furniture: 'customize/furniture',
+      rate: 'settings/currencyRate',
       decorations: 'customize/decorations',
       showPrompt: 'Filter/showPrompt'
     }),
@@ -187,7 +188,7 @@ export default {
     },
     price() {
       if (!this.flatExists) return 0
-      return `${this.flat.price} $`
+      return this.flat.price
     },
     buildingStatus() {
       if (!this.flatExists) return 0
