@@ -164,16 +164,14 @@ export default {
         slidesToScroll: 1,
         variableWidth: true,
         arrows: false,
-        infinite: false,
-        swipeToSlide: true
+        infinite: false
       },
       slickOptions2: {
         slidesToShow: 5,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         variableWidth: true,
         arrows: false,
-        infinite: false,
-        swipeToSlide: true
+        infinite: false
       },
       reservation: null
     }
@@ -266,7 +264,7 @@ export default {
       return `${price} $`
     },
     buildingStatus() {
-      if (!this.flatExists || this.flat.building_status === '') return 0
+      if (!this.flatExists || isNaN(this.flat.building_status)) return 0
 
       return parseInt(this.flat.building_status)
     },

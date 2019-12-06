@@ -3,6 +3,20 @@
     <div class="filter-flat">
       <div class="filter-flat__title">
         <title-with-line :title="cTitle" />
+
+        <save-button
+          v-if="flatExists"
+          :loading="saveFlatBtnLoading"
+          :height="'40px'"
+          :padding="'0 21px'"
+          :label="saveFlatBtnLabel"
+          :icon-margin-left="'21px'"
+          @regularBtnClick="saveFlat"
+        >
+          <template>
+            <save-icon width="17px" height="17px" color="#fff" />
+          </template>
+        </save-button>
       </div>
 
       <div class="filter-flat__content">
@@ -13,11 +27,11 @@
 
           <gradient-progress
             v-if="flatExists"
-            class="filter-render__aside__progress"
             :label="$t('labels.building_progress')"
             :min="0"
             :max="100"
             :value="buildingStatus"
+            class="filter-render__aside__progress"
             suffix="%"
           />
         </div>
@@ -25,16 +39,17 @@
         <div class="filter-flat__content__render">
           <render-viewer
             v-if="flatExists"
-            class="flat-viewer"
             :images="images"
             :gradient-text="imageLabel"
+            class="flat-viewer"
           />
 
           <room-list-component
             v-if="flatExists && rooms.length"
+            :room-list="rooms"
+            :visibleRoomsNumber="7"
             class="room-list-slider"
             style-type="small"
-            :room-list="rooms"
           />
         </div>
       </div>
@@ -72,10 +87,10 @@
     <app-footer>
       <template>
         <prompt-alert
-          class="margin-top-auto"
           v-if="flatExists"
           :color="promptColor"
           :text="promptText"
+          class="margin-top-auto"
         />
       </template>
     </app-footer>
@@ -91,12 +106,14 @@ import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import SkipButton from '@/components/partials/SkipButton'
+// import SkipButton from '@/components/partials/SkipButton'
 import CaretRight from '@/components/icons/CaretRight'
 import AppFooter from '@/components/partials/AppFooter'
 import PromptAlert from '@/components/partials/PromptAlert'
 import PriceContainer from '@/components/partials/Price'
 import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
+import SaveButton from '@/components/partials/RegularButton'
+import SaveIcon from '@/components/icons/SaveIcon'
 
 export default {
   layout: 'SalesFlatLayout',
@@ -109,16 +126,20 @@ export default {
     ListCard,
     GradientProgress,
     ButtonMainOrange,
-    SkipButton,
+    // SkipButton,
     CaretRight,
     AppFooter,
     PromptAlert,
     PriceContainer,
-    CurrencySwitcher
+    CurrencySwitcher,
+    SaveButton,
+    SaveIcon
   },
   data() {
     return {
-      prevFlatId: null
+      prevFlatId: null,
+      saveFlatBtnLoading: false,
+      saveFlatBtnMsgShow: false
     }
   },
   computed: {
@@ -127,8 +148,12 @@ export default {
       flat: 'customize/flat',
       renovations: 'customize/renovations',
       furniture: 'customize/furniture',
-      rate: 'settings/currencyRate',
       decorations: 'customize/decorations',
+      renovationId: 'customize/renovationId',
+      furnitureId: 'customize/furnitureId',
+      decorationId: 'customize/decorationId',
+      appliancesIds: 'customize/appliancesIds',
+      rate: 'settings/currencyRate',
       showPrompt: 'Filter/showPrompt'
     }),
     flatExists() {
@@ -246,10 +271,17 @@ export default {
       return this.flatExists
         ? this.generateTextBasedOnColor(this.flat.planshet.id)
         : ''
+    },
+    saveFlatBtnLabel() {
+      return !this.saveFlatBtnMsgShow
+        ? this.$t('labels.saveFlat')
+        : this.$t('buttons.saved')
     }
   },
   mounted() {
     this.prevFlatId = this.flat.id
+
+    this.$root.$on('saveFlat', this.saveFlat)
 
     this.fetchFlat(this.$route.params.id)
 
@@ -264,6 +296,9 @@ export default {
     if (this.prevFlatId && this.prevFlatId !== this.flat.id) {
       this.mutateStore()
     }
+  },
+  beforeDestroy() {
+    this.$root.$off('saveFlat')
   },
   methods: {
     ...mapActions('customize', [
@@ -308,6 +343,45 @@ export default {
       this.$store.commit('customize/SET_FURNITURE_ID', null)
       this.$store.commit('customize/SET_DECORATION_ID', null)
       this.$store.commit('customize/SET_APPLIANCES_IDS', [])
+    },
+    saveFlat() {
+      this.saveFlatBtnLoading = true
+
+      return new Promise((resolve, reject) => {
+        this.$axios
+          .post('user/save-flat', {
+            flat_id: this.flat ? this.flat.id : null,
+            renovation_id: this.renovationId,
+            furniture_id: this.furnitureId,
+            decoration_id: this.decorationId,
+            appliances_ids: this.appliancesIds
+          })
+          .then((response) => {
+            this.$root.$emit('flatIsSaved')
+
+            if (response.status === 200 && response.data.success) {
+              this.saveFlatBtnLoading = false
+              this.saveFlatBtnMsgShow = true
+
+              setTimeout(() => {
+                this.saveFlatBtnMsgShow = false
+              }, 3000)
+
+              this.$eventBus.$emit('redirect')
+            } else {
+              this.saveFlatBtnLoading = false
+            }
+
+            resolve(response)
+          })
+          .catch((e) => {
+            this.saveFlatBtnLoading = false
+
+            this.$root.$emit('flatIsSaved')
+
+            reject(e)
+          })
+      })
     }
   }
 }
@@ -315,24 +389,30 @@ export default {
 
 <style lang="scss" scoped>
 .filter-flat {
-  height: calc(100% - #{fit(165)});
   width: 100%;
+  height: calc(100% - #{fit(165)});
   padding: fit(49) fit(60) fit(38) fit(46);
   display: grid;
   grid-template-areas: 'header header header' 'content content content' 'footer footer footer';
-  grid-template-rows: 12% 75% 13%;
+  grid-template-rows: 50px auto 50px;
   background: $bg-color-2;
   box-shadow: 0 7px 34.56px 1.44px rgba(242, 101, 41, 0.16);
 
   &__title {
     grid-area: header;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &__content {
     grid-area: content;
-    height: 100%;
     display: flex;
     width: 100%;
+    height: fit(510);
+    margin: 20px auto 20px;
+    overflow: auto;
 
     &__info {
       width: 199px;
@@ -368,11 +448,11 @@ export default {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      
+
       &__controls__next {
         margin-left: auto;
       }
-      
+
       &__controls {
         display: flex;
         margin-left: auto;

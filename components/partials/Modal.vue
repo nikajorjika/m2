@@ -1,7 +1,7 @@
 <template>
   <div class="layout-modal-container">
-    <div class="layout-modal">
-      <div class="close-button" @click="closeModal">x</div>
+    <div :class="['layout-modal', componentName]">
+      <div @click="closeModal" class="close-button">x</div>
 
       <div class="layout-modal-content">
         <component
@@ -18,11 +18,13 @@
 <script>
 import ModalContentSaveFlat from '@/components/partials/ModalContentSaveFlat'
 import ModalContentCallSales from '@/components/partials/ModalContentCallSales'
+import ModalContentMessage from '@/components/partials/ModalContentMessage'
 
 export default {
   components: {
     ModalContentSaveFlat,
-    ModalContentCallSales
+    ModalContentCallSales,
+    ModalContentMessage
   },
   data() {
     return {
@@ -87,7 +89,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .layout-modal-container {
   visibility: hidden;
   pointer-events: none;

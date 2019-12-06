@@ -29,6 +29,10 @@
     "NoFlatsInThisPriceRange": "There are no flats in this price range",
     "NoFlatsInThisFloorRange": "There are no flats in this floor range"
   },
+  "messages": {
+    "savedFlat": "Your chosen flats is saved successfully",
+    "removedFlat": "Your chosen flats is removed successfully"
+  },
   "navigation": {
     "flat": "Flat",
     "renovation": "Renovation",

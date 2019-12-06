@@ -2,7 +2,7 @@
   <div class="app-content">
     <div class="flat-pages-container">
       <div class="flat-pages-header">
-        <title-with-line class="flat-pages-title" :title="title" />
+        <title-with-line :title="title" class="flat-pages-title" />
 
         <h3 class="flat-pages-subtitle">{{ subtitle }}</h3>
 
@@ -38,7 +38,10 @@
 
             <div class="caption">
               <span>{{ item.name[locale] }}</span>
-              <span class="price">{{ $currencyConverter(item.price, currency) }} {{currencyLabel}}</span>
+              <!--              <span class="price"-->
+              <!--                >{{ $currencyConverter(item.price, currency) }}-->
+              <!--                {{ currencyLabel }}</span-->
+              <!--              >-->
             </div>
 
             <div class="checkbox">
@@ -50,16 +53,15 @@
 
       <div class="flat-pages-footer">
         <div class="footer-items">
-            <price-container
-              v-if="price && rate"
-              :price="price"
-              :text-before-price="$t('labels.price')"
-            />
-            <price-container
-              v-if="additionalPrice && showAdditionals"
-              :price="additionalPrice"
-            />
-          
+          <price-container
+            v-if="price && rate"
+            :price="price"
+            :text-before-price="$t('labels.price')"
+          />
+          <!--          <price-container-->
+          <!--            v-if="additionalPrice && showAdditionals"-->
+          <!--            :price="additionalPrice"-->
+          <!--          />-->
 
           <currency-switcher v-if="flatExists" />
 
@@ -107,9 +109,9 @@
 
         <prompt-alert
           v-if="flatExists"
-          class="appliances__prompt"
           :color="promptColor"
           :text="promptText"
+          class="appliances__prompt"
         />
       </template>
     </app-footer>
@@ -153,16 +155,8 @@ export default {
   middleware: 'isAuth',
   data() {
     return {
-      showAdditionals: true,
+      // showAdditionals: true,
       planshetId: this.$cookies.get('paveleon-planshet')
-    }
-  },
-  watch: {
-    additionalPrice: {
-      handler: function() {
-        this.showAdditionals = false
-        this.$nextTick(() => this.showAdditionals = true)
-      }
     }
   },
   computed: {
@@ -247,17 +241,25 @@ export default {
         decoration_id: this.decorationId,
         appliances_ids: this.appliancesIds
       }
-    },
-    additionalPrice() {
-      let price = 0
-      this.appliances.map((item) => {
-        if(this.appliancesIds.includes(item.id)) {
-          price += item.price
-        }
-      }) 
-      return price
     }
+    // additionalPrice() {
+    //   let price = 0
+    //   this.appliances.map((item) => {
+    //     if (this.appliancesIds.includes(item.id)) {
+    //       price += item.price
+    //     }
+    //   })
+    //   return price
+    // }
   },
+  // watch: {
+  //   additionalPrice: {
+  //     handler() {
+  //       this.showAdditionals = false
+  //       this.$nextTick(() => (this.showAdditionals = true))
+  //     }
+  //   }
+  // },
   mounted() {
     this.$root.$on('saveFlat', this.saveFlat)
 
@@ -334,20 +336,20 @@ export default {
       return new Promise((resolve, reject) => {
         this.$axios
           .post('user/save-flat', {
-            flat_id: this.flat.id,
+            flat_id: this.flat ? this.flat.id : null,
             renovation_id: this.renovationId,
             furniture_id: this.furnitureId,
             decoration_id: this.decorationId,
             appliances_ids: this.appliancesIds
           })
           .then((response) => {
+            this.$root.$emit('flatIsSaved')
+
             if (response.status === 200 && response.data.success) {
               this.$eventBus.$emit('redirect')
-
-              resolve(response)
             }
 
-            this.$root.$emit('flatIsSaved')
+            resolve(response)
           })
           .catch((e) => {
             this.$root.$emit('flatIsSaved')
