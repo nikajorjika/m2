@@ -2,7 +2,7 @@
   <div class="app-content">
     <div class="flat-pages-container">
       <div class="flat-pages-header">
-        <title-with-line class="flat-pages-title" :title="title" />
+        <title-with-line :title="title" class="flat-pages-title" />
 
         <save-button
           v-if="flatExists"
@@ -89,9 +89,9 @@
 
         <prompt-alert
           v-if="flatExists"
-          class="top-margin-auto"
           :color="promptColor"
           :text="promptText"
+          class="top-margin-auto"
         />
       </template>
     </app-footer>
