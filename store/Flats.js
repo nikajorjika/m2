@@ -54,15 +54,16 @@ export const actions = {
   fetchFlat({ commit }) {
     const id = this.$cookies.get('paveleon-flat')
     return new Promise((resolve, reject) => {
-      const url = `http:${process.env.SERVER_IP}renovation-flats/${id}`
-      console.log(url)
       this.$axios
-        .get(url)
+        .get(`renovation-flats/${id}`)
         .then(({ data }) => {
           commit('SET_FLAT_STATE', data.data)
           resolve(data.data)
         })
-        .catch((e) => reject(e))
+        .catch((e) => {
+          console.error(e)
+          reject(e)
+        })
     })
   },
   chooseFlatFromFlats({ commit }, data) {

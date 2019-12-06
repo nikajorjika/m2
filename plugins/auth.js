@@ -6,8 +6,9 @@ export default async function ({ app, $axios, store }) {
       key: 'token',
       value: token
     })
-    const normalized = `http:${baseUrl}/user/current-user`.replace('//user', '/user')
-    await $axios.get(normalized, {
+    // const normalized = `https:${baseUrl}/user/current-user`.replace('//user', '/user')
+    await $axios.get('user/current-user', {
+      rejectUnauthorized: false,
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -19,7 +20,7 @@ export default async function ({ app, $axios, store }) {
       })
     })
     .catch((err) => {
-      if(err.response.status === 401) {
+      if(err.response && err.response.status === 401) {
         const token = app.$cookies.set('auth._token.local', false)
         app.store.commit('auth/SET', {
           key: 'user',
