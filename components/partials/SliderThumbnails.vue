@@ -13,7 +13,7 @@
         <figure>
           <img :src="image(item, index)" class="image" alt="Thumbnail" />
 
-          <figcaption class="caption">{{ item.name }}</figcaption>
+          <figcaption class="caption">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : item.name }}</figcaption>
 
           <div class="checkbox">
             <span></span>
@@ -40,7 +40,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('customize', ['renovationId', 'furnitureId', 'decorationId'])
+    ...mapGetters({
+      locale: 'locale',
+      renovationId: 'customize/renovationId',
+      furnitureId: 'customize/furnitureId',
+      decorationId: 'customize/decorationId'
+    })
   },
   mounted() {
     if (this.storeMutationIsRequired()) {
