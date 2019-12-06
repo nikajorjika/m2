@@ -86,6 +86,26 @@
 
     <app-footer>
       <template>
+        <div class="sales">
+          <illustrated-button
+            v-if="flatExists"
+            :label="salesBtnLabel"
+            @click.native.prevent="summonSale"
+          >
+            <template v-slot:illustration>
+              <manager-icon
+                :width="53"
+                :height="80"
+                :style="{ marginTop: '-20px' }"
+              />
+            </template>
+
+            <template v-slot:icon>
+              <sales-icon width="12" height="12" fill="#fff" />
+            </template>
+          </illustrated-button>
+        </div>
+
         <prompt-alert
           v-if="flatExists"
           :color="promptColor"
@@ -114,6 +134,9 @@ import PriceContainer from '@/components/partials/Price'
 import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
+import IllustratedButton from '@/components/partials/IllustratedButton'
+import ManagerIcon from '@/assets/icons/Manager1.svg'
+import SalesIcon from '@/components/icons/Alone'
 
 export default {
   layout: 'SalesFlatLayout',
@@ -133,7 +156,10 @@ export default {
     PriceContainer,
     CurrencySwitcher,
     SaveButton,
-    SaveIcon
+    SaveIcon,
+    IllustratedButton,
+    ManagerIcon,
+    SalesIcon
   },
   data() {
     return {
@@ -276,6 +302,22 @@ export default {
       return !this.saveFlatBtnMsgShow
         ? this.$t('labels.saveFlat')
         : this.$t('buttons.saved')
+    },
+    salesBtnLabel() {
+      return this.$t('labels.callSaleManager')
+    },
+    modalData() {
+      return {
+        location: {
+          name: 'lang-sales-waiting',
+          params: { lang: this.locale }
+        },
+        flat: this.flat ? this.flat.id : null,
+        renovation_id: this.renovationId,
+        furniture_id: this.furnitureId,
+        decoration_id: this.decorationId,
+        appliances_ids: this.appliancesIds
+      }
     }
   },
   mounted() {
@@ -381,6 +423,28 @@ export default {
 
             reject(e)
           })
+      })
+    },
+    summonSale() {
+      this.$axios.get('/user/awaiting-status').then((response) => {
+        // Check if sales manager is already called
+
+        if (!response.data.status) {
+          // Open modal
+
+          this.$eventBus.$emit(
+            'openModal',
+            'modal-content-call-sales',
+            this.modalData
+          )
+        } else {
+          // Go to waiting page
+
+          this.$router.push({
+            name: 'lang-sales-waiting',
+            params: { lang: this.locale }
+          })
+        }
       })
     }
   }
