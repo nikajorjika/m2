@@ -36,11 +36,15 @@ module.exports = {
   plugins: [
     '~/plugins/i18n',
     '~/plugins/auth',
-    '~/plugins/SetAuthHeader',
+    '~/plugins/axiosBeforeEach',
     '~/plugins/load-preflight-data',
     '~/plugins/before-each',
     {
       src: '~/plugins/nuxt-swiper',
+      ssr: false
+    },
+    {
+      src: '~/plugins/tablet',
       ssr: false
     },
     {
@@ -78,12 +82,13 @@ module.exports = {
     'nuxt-svg-loader'
   ],
   toast: {
-    position: 'top-center',
+    position: 'top-right',
     register: [
       {
         name: 'generalError',
         message: 'Oops...Something went wrong',
         options: {
+          icon: 'error_outline',
           type: 'error'
         }
       }

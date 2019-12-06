@@ -26,6 +26,7 @@
     "NoItemsInYourFavourites": "No flats in your favourite list",
     "NoSuchUserWithSelectedPhoneNumber": "No such user with selected phone number",
     "InvalidCode": "Invalid code",
+    "unauthorized": "You don't have permission to access requested resource",
     "NoFlatsInThisPriceRange": "There are no flats in this price range",
     "NoFlatsInThisFloorRange": "There are no flats in this floor range"
   },
