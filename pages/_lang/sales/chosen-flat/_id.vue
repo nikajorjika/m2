@@ -72,7 +72,7 @@
 
           <div class="price-container">
             <price-container
-              v-if="flatExists && price"
+              v-if="flatExists && currencyRate"
               :price="price"
               :text-before-price="$t('labels.price')"
             />
@@ -168,10 +168,10 @@ export default {
       },
       slickOptions2: {
         slidesToShow: 5,
-        slidesToScroll: 1,
+        slidesToScroll: 3,
         variableWidth: true,
         arrows: false,
-        infinite: true
+        infinite: false
       },
       reservation: null
     }
@@ -179,6 +179,7 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
+      currencyRate: 'settings/currencyRate',
       chosenFlat: 'chosen-flat/chosenFlat',
       flat: 'chosen-flat/flat',
       renovation: 'chosen-flat/renovation',
@@ -264,14 +265,11 @@ export default {
       return `${price} $`
     },
     buildingStatus() {
-      if (
-        !this.flatExists ||
-        !this.flat.building_status ||
-        isNaN(this.flat.building_status)
-      )
-        return 0
+      if (!this.flatExists) return 0
 
-      return parseInt(this.flat.building_status)
+      return this.flat.building_progress
+        ? parseInt(this.flat.building_progress)
+        : 0
     },
     listCardData() {
       if (!this.flatExists) return

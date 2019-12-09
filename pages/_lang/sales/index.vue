@@ -1,6 +1,6 @@
 <template>
   <div class="page-sales">
-    <sales-app-sidebar class="page-sales__index__sidebar"/>
+    <sales-app-sidebar class="page-sales__index__sidebar" :no-margin="true"/>
     <div class="page-content">
       <div class="page-sales__content">
         <div class="page-sales__content__header">

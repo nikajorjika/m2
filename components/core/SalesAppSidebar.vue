@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="{'no-margin': noMargin}">
     <nuxt-link class="link" :to="logoLink">
       <logo class="sidebar__logo" />
     </nuxt-link>
@@ -52,6 +52,10 @@ export default {
     homepage: {
       type: [String, Object],
       default: ''
+    },
+    noMargin: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -173,6 +177,9 @@ export default {
   margin-right: 3%;
   border-top-right-radius: 80px;
   box-shadow: 2px 3px 21.76px 10.24px rgba(67, 34, 114, 0.07);
+  &.no-margin {
+    margin-right: 0;
+  }
   .link {
     display: inherit;
   }
