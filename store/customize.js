@@ -7,7 +7,8 @@ const state = () => ({
   renovationId: null,
   furnitureId: null,
   decorationId: null,
-  appliancesIds: []
+  appliancesIds: [],
+  configurations: []
 })
 
 const getters = {
@@ -19,7 +20,8 @@ const getters = {
   renovationId: (state) => state.renovationId,
   furnitureId: (state) => state.furnitureId,
   decorationId: (state) => state.decorationId,
-  appliancesIds: (state) => state.appliancesIds
+  appliancesIds: (state) => state.appliancesIds,
+  configurations: (state) => state.configurations
 }
 
 const mutations = {
@@ -49,6 +51,9 @@ const mutations = {
   },
   SET_APPLIANCES_IDS(state, ids) {
     state.appliancesIds = ids
+  },
+  SET_CONFIGURATIONS(state, config) {
+    state.configurations = config
   }
 }
 
