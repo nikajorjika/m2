@@ -8,15 +8,19 @@
         :class="['slider-thumbnail', activeElIndex === index ? 'active' : '']"
         @click="selectItem(item, index, $event)"
       >
-        <span class="index" v-text="normalizeIndex(index)"></span>
+        <span class="index" v-text="normalizeIndex(index)" />
 
         <figure>
           <img :src="image(item, index)" class="image" alt="Thumbnail" />
 
-          <figcaption class="caption">{{ item.name.hasOwnProperty(locale) ? item.name[locale] : item.name }}</figcaption>
+          <figcaption class="caption">
+            {{
+              item.name.hasOwnProperty(locale) ? item.name[locale] : item.name
+            }}
+          </figcaption>
 
           <div class="checkbox">
-            <span></span>
+            <span />
           </div>
         </figure>
       </li>
@@ -66,27 +70,36 @@ export default {
         : require('@/assets/icons/custom-renovation.png')
     },
     selectItem(item, index, event) {
-      // Remove old active class
+      const parent = event.target.closest('.slider-thumbnail')
 
-      this.$el
-        .querySelector('.slider-thumbnail.active')
-        .classList.remove('active')
+      if (!parent.classList.contains('active')) {
+        // Set active class
 
-      // Set active class
+        parent.classList.add('active')
 
-      event.target.closest('.slider-thumbnail').classList.add('active')
+        // Set active element index
 
-      // Set active element index
+        this.activeElIndex = index
 
-      this.activeElIndex = index
+        // Mutate store value
 
-      // Mutate store value
+        this.mutateStore(item.id)
 
-      this.mutateStore(item.id)
+        // Emit custom event
 
-      // Emit custom event
+        this.$emit('thumbnailChanged', this.activeElIndex)
+      } else {
+        // Remove active class
 
-      this.$emit('thumbnailChanged', this.activeElIndex)
+        parent.classList.remove('active')
+        // Set active element index
+
+        this.activeElIndex = null
+
+        // Mutate store value
+
+        this.mutateStore(null)
+      }
     },
     mutateStore(id) {
       switch (this.$route.params.page) {
