@@ -30,6 +30,15 @@
     "NoFlatsInThisPriceRange": "There are no flats in this price range",
     "NoFlatsInThisFloorRange": "There are no flats in this floor range"
   },
+
+  "modal": {
+    "end_session_prompt": "Are you sure, that you want to end current session ?",
+    "are_you_sure_question": "Are you sure, that you want to continue with this action ?",
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No"
+  },
   "messages": {
     "savedFlat": "Your chosen flats is saved successfully",
     "removedFlat": "Your chosen flats is removed successfully"

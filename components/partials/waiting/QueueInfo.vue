@@ -23,10 +23,10 @@
     <div class="queue-info__info">
       <p>{{ $t('labels.WaitForSalesOrRequestInfo') }}</p>
     </div>
-    <button class="queue-info__pdf-button" @click="sendPdf">
+    <!-- <button class="queue-info__pdf-button" @click="sendPdf">
       <span>{{ $t('labels.DetailsAsPdf') }}</span>
       <pdf-icon class="svg-icon" height="16px" />
-    </button>
+    </button> -->
     <button class="queue-info__cancel-button" @click="cancelSummonSale">
       <span>{{ $t('labels.CancelSalesRequest') }}</span>
       <cancel-icon class="svg-icon" height="14px" />

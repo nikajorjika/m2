@@ -484,7 +484,7 @@ export default {
     display: flex;
     width: 100%;
     height: fit(510);
-    margin: 20px auto 20px;
+    margin: 15px auto 15px;
     overflow: auto;
 
     &__info {

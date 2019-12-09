@@ -267,9 +267,7 @@ export default {
     buildingStatus() {
       if (!this.flatExists) return 0
 
-      return this.flat.building_progress
-        ? parseInt(this.flat.building_progress)
-        : 0
+      return this.flat.building_progress ? parseInt(this.flat.building_progress) : 0
     },
     listCardData() {
       if (!this.flatExists) return
@@ -541,9 +539,7 @@ export default {
     }
   }
 }
-</style>
 
-<style lang="scss">
 .app-content {
   width: 100%;
   height: 100%;
