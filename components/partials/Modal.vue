@@ -2,7 +2,6 @@
   <div class="layout-modal-container">
     <div :class="['layout-modal', componentName]">
       <div @click="closeModal" class="close-button">x</div>
-
       <div class="layout-modal-content">
         <component
           :is="componentName"
@@ -89,7 +88,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .layout-modal-container {
   visibility: hidden;
   pointer-events: none;

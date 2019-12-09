@@ -1,7 +1,7 @@
 import https from 'https'
 
-export default function ({app, $axios }) {
-  const agent = new https.Agent({  
+export default function({ app, $axios }) {
+  const agent = new https.Agent({
     rejectUnauthorized: false
   })
   $axios.onRequest((config) => {
@@ -12,34 +12,41 @@ export default function ({app, $axios }) {
     if (process.server) {
       config.baseURL = `https:${config.baseURL}`
     }
-    
-    if(token) {
+
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`
-    }else {
+    } else {
       config.headers.Authorization = false
     }
-    return config;
+    return config
   })
   $axios.onError((error) => {
     // Do something with request error
-    if(process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production') {
       app.$toast.global.generalError().goAway(1500)
-    }else {
+    } else {
       const response = error.response
-      if(response) {
-        if(response.status === 400 && response.data.hasOwnProperty('msg')) {
-          for(let i in response.data.msg) {
-            if(response.data.msg.hasOwnProperty(i)) {
-              const message = response.data.msg[i] instanceof Array ? response.data.msg[i][0] : response.data.msg[i]
-              app.$toast.show(message, {
-                type: 'error'
-              }).goAway(1500)
+      if (response) {
+        if (response.status === 400 && response.data.hasOwnProperty('msg')) {
+          // eslint-disable-next-line no-unused-vars
+          for (const index in response.data.msg) {
+            if (response.data.msg.hasOwnProperty(index)) {
+              const message = Array.isArray(response.data.msg[index])
+                ? response.data.msg[index][0]
+                : response.data.msg[index]
+              app.$toast
+                .show(message, {
+                  type: 'error'
+                })
+                .goAway(1500)
             }
           }
-        } else if(response.status === 401) {
-          app.$toast.show(app.$t('errors.unauthorized'), {
-            type: 'error'
-          }).goAway(1500)
+        } else if (response.status === 401) {
+          app.$toast
+            .show(app.$t('errors.unauthorized'), {
+              type: 'error'
+            })
+            .goAway(1500)
         } else {
           app.$toast.global.generalError().goAway(1500)
         }
@@ -47,6 +54,6 @@ export default function ({app, $axios }) {
         app.$toast.global.generalError().goAway(1500)
       }
     }
-    return Promise.reject(error);
+    return Promise.reject(error)
   })
 }
