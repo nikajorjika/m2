@@ -254,7 +254,7 @@ export default {
   margin-top: 16px; 
 }
 .filter-flat {
-  height: 580px;
+  height: 561px;
   width: 100%;
   padding: 49px 60px 38px 46px;
   display: grid;

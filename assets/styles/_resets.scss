@@ -12,6 +12,7 @@ html {
 
 input, p{
   font-family: $font;
+  user-select: all !important;
 }
 *,
 *:before,

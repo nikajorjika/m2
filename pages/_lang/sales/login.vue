@@ -22,7 +22,7 @@
           @discardLoginErrorMessage="discardLoginErrorMessage"
           :loginErrorMessage="loginErrorMessage"
         />
-        <nuxt-link :to="`/${this.locale}/sales/registration`">
+        <nuxt-link :to="registrationUrl">
           <small class="color-orange">
             {{$t('buttons.register')}}
           </small>
@@ -72,7 +72,11 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale'
-    })
+    }),
+    registrationUrl() {
+      const redirectUrl = this.$route.query.hasOwnProperty('redirect') ? `?redirect=${this.$route.query.redirect}` : ''
+      return `/${this.locale}/sales/registration${redirectUrl}`
+    }
   },
   methods: {
     ...mapActions({
@@ -98,7 +102,18 @@ export default {
         .then(response => {
           this.loading = false
           // this.$toast.success('Successfully authenticated')
-          this.$router.go(-1)
+          if(this.$route.query.hasOwnProperty('redirect')) {
+            this.$router.push(
+              {
+                name: this.$route.query.redirect,
+                params: {
+                  lang: this.locale
+                }
+              }
+            )
+          } else {
+            this.$router.go(-1)
+          }
         }).catch(e =>{
           this.invalidCodeErrorMessage = this.$t('errors.InvalidCode')
           this.loading = false

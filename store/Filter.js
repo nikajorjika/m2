@@ -41,7 +41,7 @@ export const state = () => ({
         Apartments: []
       }
     ],
-    Animate:true
+    Animate: true
   },
   showPrompt: {
     show: false,
@@ -113,8 +113,11 @@ export const mutations = {
     state.filters.view = []
     state.filters.flat_number = null
     state.filters.building_progress = []
-    state.filters.bedroom_count = data.hasOwnProperty('bedroom_count') ? data.bedroom_count : []
-    state.filters.type = data.hasOwnProperty('type') && data.type ? data.type : null
+    state.filters.bedroom_count = data.hasOwnProperty('bedroom_count')
+      ? data.bedroom_count
+      : []
+    state.filters.type =
+      data.hasOwnProperty('type') && data.type ? data.type : null
     state.filters.wc = data.hasOwnProperty('wc') && data.wc ? data.wc : null
   },
   SET_CHOSEN_BLOCK: (state, data) => {
@@ -132,8 +135,12 @@ export const mutations = {
         max: data.max_price
       },
       view: data.hasOwnProperty('view') ? data.view : [],
-      bedroom_count: data.hasOwnProperty('bedroom_count') ? data.bedroom_count : [],
-      building_progress: data.hasOwnProperty('building_progress') ? data.building_progress : [],
+      bedroom_count: data.hasOwnProperty('bedroom_count')
+        ? data.bedroom_count
+        : [],
+      building_progress: data.hasOwnProperty('building_progress')
+        ? data.building_progress
+        : [],
       type: data.hasOwnProperty('type') && data.type ? data.type : null,
       wc: data.hasOwnProperty('wc') && data.wc ? data.wc : null
     }
@@ -156,9 +163,9 @@ export const mutations = {
           Apartments: []
         }
       ],
-      Animate:true
+      Animate: true
     }
-  
+
     state.modelApiData.TabletId = this.$cookies.get('paveleon-planshet')
     flats.map((item) => {
       state.modelApiData.block[parseInt(item.block) - 1].Apartments.push({
@@ -183,7 +190,7 @@ export const mutations = {
           Apartments: []
         }
       ],
-      Animate:true
+      Animate: true
     }
   },
   SET_FILTER_ITEM: (state, { key, value }) => {
@@ -194,18 +201,18 @@ export const mutations = {
   SET_FILTER_VIEWS: (state, views) => {
     state.filters.view = views
   },
-  SET: (state, {key, value}) => {
+  SET: (state, { key, value }) => {
     state[key] = value
   }
 }
 
 export const actions = {
   fetchFilteredFlats({ commit, getters }, { page, fresh, noLoading }) {
-    if(!noLoading) {
+    if (!noLoading) {
       commit('SET_FILTER_LOADER', true)
     }
     fresh && commit('SET_FLATS_DATA', [])
-    
+
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line camelcase
       const {
@@ -222,7 +229,9 @@ export const actions = {
         building_progress
       } = getters.filters
       const views = getters.filters.view.map((item) => item.value)
-      const bedroomCount = bedroom_count.map((item) => item.hasOwnProperty('value') ? item.value : parseInt(item) )
+      const bedroomCount = bedroom_count.map((item) =>
+        item.hasOwnProperty('value') ? item.value : parseInt(item)
+      )
       const params = {
         block_id: block,
         max_price: price.max,
@@ -242,12 +251,12 @@ export const actions = {
       this.$axios
         .get('/flats', { params })
         .then(({ data }) => {
-          if(fresh === undefined || fresh === false) {
+          if (fresh === undefined || fresh === false) {
             commit('UPPEND_FLATS_DATA', data.data)
-          }else {
+          } else {
             commit('SET_FLATS_DATA', data.data)
           }
-          if(!noLoading) {
+          if (!noLoading) {
             commit('SET_FILTER_LOADER', false)
           }
           resolve(data.data)
@@ -257,7 +266,7 @@ export const actions = {
   },
 
   fetchFilteredDataCount({ commit, getters }) {
-    commit('SET', {key: 'loadingCount', value: true})
+    commit('SET', { key: 'loadingCount', value: true })
     // eslint-disable-next-line camelcase
     const {
       block,
@@ -273,7 +282,9 @@ export const actions = {
       building_progress
     } = getters.filters
     const views = getters.filters.view.map((item) => item.value)
-    const bedroomCount = bedroom_count.map((item) => item.hasOwnProperty('value') ? item.value : parseInt(item) )
+    const bedroomCount = bedroom_count.map((item) =>
+      item.hasOwnProperty('value') ? item.value : parseInt(item)
+    )
     const params = {
       block_id: block,
       max_price: price.max,
@@ -292,7 +303,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       this.$axios.get('/flats/filtered/count', { params }).then(({ data }) => {
         commit('SET_TOTAL_COUNT', data.count)
-        commit('SET', {key: 'loadingCount', value: false})
+        commit('SET', { key: 'loadingCount', value: false })
         resolve(data)
       })
     })
@@ -335,7 +346,7 @@ export const actions = {
         .catch((e) => reject(e))
     })
   },
-  fetchFiltersInfo({commit}) {
+  fetchFiltersInfo({ commit }) {
     return new Promise((resolve, reject) => {
       this.$axios
         .get('/flats/info')
@@ -361,7 +372,7 @@ export const actions = {
       })
       this.$axios
         .post('model/light/on', {
-          tabletId: tabletId,
+          tabletId,
           flats: formattedFlats
         })
         .then((response) => {
@@ -378,11 +389,9 @@ export const actions = {
       flats
     }
     return new Promise((resolve, reject) => {
-      this.$axios
-        .post('model/light/off', data)
-        .then((response) => {
-          resolve(response)
-        })
+      this.$axios.post('model/light/off', data).then((response) => {
+        resolve(response)
+      })
     })
   }
 }

@@ -10,6 +10,7 @@
         <block-hover-info
           :flats-count="blockInfo.sellableFlats"
           :block-number="blockInfo.number"
+          :display-button="false"
           @click="handleChoosingBlock"
         />
       </div>

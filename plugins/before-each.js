@@ -1,10 +1,9 @@
-export default function({ app }) {
+export default function({ app, store }) {
   app.router.beforeEach((to, from, next) => {
     const pattern = new RegExp(
       '^\\/((?:[^\\/]+?))\\/sales\\/customize\\/((?:[^\\/]+?))(?:\\/(?=$))?(\\/(makeover|furniture|decoration|appliance))*(\\/)?$',
       'i'
     )
-
     if (pattern.test(from.fullPath)) {
       if (!pattern.test(to.fullPath)) {
         if (!to.query.redirect) {
@@ -22,7 +21,6 @@ export default function({ app }) {
         }
       }
     }
-
     next()
   })
 }

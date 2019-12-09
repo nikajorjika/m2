@@ -75,12 +75,16 @@ export default {
         this.loading = false
         if(data.hasOwnProperty('access_token')) {
           this.setUserData(data).then(() => {
-            this.$router.push({
-              name: 'lang-sales',
-              params: {
-                lang: this.locale
-              }
-            })
+            if(this.$route.query.hasOwnProperty('redirect')){
+              this.$router.push({
+                  name: this.$route.query.redirect,
+                  params: {
+                    lang: this.locale
+                  }
+                })
+            } else {
+              this.$router.go(-1)
+            }
           })
         }
       })

@@ -248,7 +248,7 @@ export default {
     },
     price() {
       let price = 0
-
+      
       if (this.flatExists) {
         price += parseFloat(this.flat.price)
 
@@ -264,7 +264,7 @@ export default {
       return `${price} $`
     },
     buildingStatus() {
-      if (!this.flatExists || isNaN(this.flat.building_status)) return 0
+      if (!this.flatExists || (isNaN(this.flat.building_status) && !this.flat.building_status)) return 0
 
       return parseInt(this.flat.building_status)
     },

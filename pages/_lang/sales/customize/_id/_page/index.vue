@@ -48,7 +48,7 @@
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
-              <skip-button :url="skipBtnUrl" @omit="skipBtnClickHandler" />
+              <skip-button v-show="$route.params.page !== 'makeover'" :url="skipBtnUrl" @omit="skipBtnClickHandler" />
             </div>
 
             <div class="footer-items__controls__next">

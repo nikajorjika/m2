@@ -9,7 +9,7 @@
         <div>{{ cBottomLabel }}</div>
         <div>{{ flatsLeft }}</div>
       </div>
-      <div class="block-info__button">
+      <div v-if="displayButton" class="block-info__button">
         <button-main-orange
           class="button"
           icon="arrow-right"
@@ -52,6 +52,10 @@ export default {
       default: null
     },
     displayBottomBlock: {
+      type: Boolean,
+      default: true
+    },
+    displayButton: {
       type: Boolean,
       default: true
     },

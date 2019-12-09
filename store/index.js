@@ -19,6 +19,9 @@ export const getters = {
   },
   allLocales: (state) => {
     return state.locales
+  },
+  browserHistory: (state) => {
+    return state.browserHistory
   }
 }
 

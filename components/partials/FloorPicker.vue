@@ -58,10 +58,7 @@ export default {
           this.blockInfo = response.data
         })
         .catch((e) => console.error(e))
-    this.setFilter({
-      key: 'showFloorFooter',
-      value: true
-    })
+  
   },
   beforeDestroy() {
     this.setFilter({
@@ -94,7 +91,11 @@ export default {
       setFilter: 'Filter/SET' 
     }),
     changeFloor(floor) {
-      this.activeFloor = floor
+      this.activeFloor = floor  
+      this.setFilter({
+        key: 'showFloorFooter',
+        value: true
+      })
       this.$emit('floorChosen', floor)
     },
     selectFloor() {

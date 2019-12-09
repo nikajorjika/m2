@@ -140,9 +140,9 @@ export default {
 <style lang="scss">
 .layout-modal.modal-content-call-sales {
   justify-content: center;
-  width: fit(1060) !important;
-  height: fit(760) !important;
-  padding: fit(160) fit(140) fit(140) !important;
+  width: fit(1060);
+  height: 390px;
+  padding: fit(160) fit(140) fit(140);
 
   .button {
     width: fit(780);

@@ -27,7 +27,7 @@ export const getters = {
   tabletType: (state) => state.tabletType,
   subApp: (state) => state.subApp,
   currencyRate: (state) => state.currencyRate,
-  currency: (state) => state.currency,
+  currency: (state) => state.currency
 }
 
 export const mutations = {
@@ -37,23 +37,24 @@ export const mutations = {
   SET_SUB_APP: (state, data) => {
     state.subApp = data
   },
-  SET: (state, {key, value}) => {
+  SET: (state, { key, value }) => {
     state[key] = value
   }
 }
 
 export const actions = {
-  fetchCurrencyValue({commit}) {
+  fetchCurrencyValue({ commit }) {
     return new Promise((resolve, reject) => {
-      this.$axios.get(
-        process.env.SERVER_IP.replace(/\/$/, '') +
-          '/currency?currency=USD'
-      ).then(({data}) => {
-        commit('SET', {
-          key: 'currencyRate',
-          value: data
+      this.$axios
+        .get(
+          process.env.SERVER_IP.replace(/\/$/, '') + '/currency?currency=USD'
+        )
+        .then(({ data }) => {
+          commit('SET', {
+            key: 'currencyRate',
+            value: data
+          })
         })
-      })
     })
   }
 }
