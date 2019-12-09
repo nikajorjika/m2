@@ -168,10 +168,10 @@ export default {
       },
       slickOptions2: {
         slidesToShow: 5,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
         variableWidth: true,
         arrows: false,
-        infinite: false
+        infinite: true
       },
       reservation: null
     }
@@ -248,7 +248,7 @@ export default {
     },
     price() {
       let price = 0
-      
+
       if (this.flatExists) {
         price += parseFloat(this.flat.price)
 
@@ -264,7 +264,12 @@ export default {
       return `${price} $`
     },
     buildingStatus() {
-      if (!this.flatExists || (isNaN(this.flat.building_status) && !this.flat.building_status)) return 0
+      if (
+        !this.flatExists ||
+        !this.flat.building_status ||
+        isNaN(this.flat.building_status)
+      )
+        return 0
 
       return parseInt(this.flat.building_status)
     },
