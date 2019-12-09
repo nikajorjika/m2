@@ -450,8 +450,8 @@ export default {
   .flat-pages-content {
     grid-area: content;
     width: calc(100% + 25px);
-    height: fit(460);
-    margin: fit(50) auto 20px -10px;
+    height: fit(330);
+    margin: auto auto auto -10px;
     padding: 0 15px 0 10px;
     overflow: auto;
 
