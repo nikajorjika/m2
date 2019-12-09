@@ -2,14 +2,27 @@
   <button class="session" @click="handleClick">
     <span>{{ buttonText }}</span>
     <login-icon :width="12" icon-color="#3c2270" />
+    <popup-confirm
+      v-if="showModal"
+      :question="$t('modal.end_session_prompt')"
+      @accept="handleLogout"
+      @decline="showModal = false"
+      @closed="showModal = false"
+    />
   </button>
 </template>
 
 <script>
 import LoginIcon from '@/components/icons/Login'
+import PopupConfirm from '@/components/partials/modals/PopupWithConfirmation'
 import { mapActions, mapGetters } from 'vuex'
 export default {
-  components: { LoginIcon },
+  components: { LoginIcon, PopupConfirm },
+  data() {
+    return {
+      showModal: false
+    }
+  },
   computed: {
     ...mapGetters({
       user: 'auth/user',
@@ -30,14 +43,7 @@ export default {
     }),
     handleClick() {
       if (this.isLoggedIn) {
-        this.logout().then(() => {
-          this.$router.push({ 
-            name: 'lang-sales',
-            params: {
-              lang: this.locale
-            }
-          })
-        })
+        this.showModal = true
       } else {
         this.$router.push({ 
           name: 'lang-sales-login',
@@ -46,6 +52,17 @@ export default {
           } 
         })
       }
+    },
+    handleLogout() {
+      this.logout().then(() => {
+        this.showModal = false
+        this.$router.push({ 
+          name: 'lang-sales',
+          params: {
+            lang: this.locale
+          }
+        })
+      })
     }
   }
 }

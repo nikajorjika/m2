@@ -1,8 +1,8 @@
 <template>
-  <div class="layout-modal-container">
+  <div class="layout-modal-container" @click="closeModal">
     <div :class="['layout-modal', componentName]">
       <div @click="closeModal" class="close-button">x</div>
-      <div class="layout-modal-content">
+      <div class="layout-modal-content" @click.stop>
         <component
           :is="componentName"
           v-if="componentName"
