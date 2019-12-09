@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
 
@@ -45,6 +46,12 @@ export default {
     SaveButton,
     SaveIcon
   },
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       saveFlatBtnLoading: false,
@@ -52,6 +59,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['locale']),
     saveFlatBtnLabel() {
       return !this.saveFlatBtnMsgShow
         ? this.$t('labels.saveFlat')
@@ -68,7 +76,24 @@ export default {
       this.$root.$emit('saveFlat')
     },
     continueWithoutSaving() {
-      this.$emit('callback', 'continueWithoutSaving')
+      if (
+        this.$route.name === 'lang-sales-customize-id-appliance' &&
+        this.data.location &&
+        this.data.location.path &&
+        this.data.location.path.split('?')[0] ===
+          `/${this.locale}/sales/chosen-flat/${this.$route.params.id}`
+      ) {
+        // Go to sales main page
+
+        this.$router.push({
+          path: `/${this.locale}/sales`,
+          query: { redirect: 1 }
+        })
+      } else {
+        // Go to saved flat page
+
+        this.$emit('callback', 'continueWithoutSaving')
+      }
     },
     flatIsSaved() {
       this.saveFlatBtnLoading = false

@@ -72,7 +72,7 @@
 
           <div class="price-container">
             <price-container
-              v-if="price"
+              v-if="flatExists && price"
               :price="price"
               :text-before-price="$t('labels.price')"
             />
