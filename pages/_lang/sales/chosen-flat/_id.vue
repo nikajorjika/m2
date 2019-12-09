@@ -72,7 +72,7 @@
 
           <div class="price-container">
             <price-container
-              v-if="flatExists && price"
+              v-if="flatExists && currencyRate"
               :price="price"
               :text-before-price="$t('labels.price')"
             />
@@ -179,6 +179,7 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
+      currencyRate: 'settings/currencyRate',
       chosenFlat: 'chosen-flat/chosenFlat',
       flat: 'chosen-flat/flat',
       renovation: 'chosen-flat/renovation',
@@ -248,7 +249,7 @@ export default {
     },
     price() {
       let price = 0
-      
+
       if (this.flatExists) {
         price += parseFloat(this.flat.price)
 
@@ -264,9 +265,9 @@ export default {
       return `${price} $`
     },
     buildingStatus() {
-      if (!this.flatExists || (isNaN(this.flat.building_status) && !this.flat.building_status)) return 0
-
-      return parseInt(this.flat.building_status)
+      if (!this.flatExists) return 0
+      
+      return this.flat.building_progress ? parseInt(this.flat.building_progress) : 0
     },
     listCardData() {
       if (!this.flatExists) return
