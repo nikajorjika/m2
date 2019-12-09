@@ -168,7 +168,7 @@ export default {
       },
       slickOptions2: {
         slidesToShow: 5,
-        slidesToScroll: 2,
+        slidesToScroll: 3,
         variableWidth: true,
         arrows: false,
         infinite: false
