@@ -23,7 +23,8 @@ export const state = () => ({
       min: null,
       max: null
     },
-    type: null
+    type: null,
+    sort: 'price|asc'
   },
   modelApiData: {
     TabletId: null,
@@ -113,6 +114,7 @@ export const mutations = {
     state.filters.view = []
     state.filters.flat_number = null
     state.filters.building_progress = []
+    state.filters.sort = 'price|asc'
     state.filters.bedroom_count = data.hasOwnProperty('bedroom_count')
       ? data.bedroom_count
       : []
@@ -135,6 +137,7 @@ export const mutations = {
         max: data.max_price
       },
       view: data.hasOwnProperty('view') ? data.view : [],
+      sort: data.hasOwnProperty('sort') ? data.sort : 'price|asc',
       bedroom_count: data.hasOwnProperty('bedroom_count')
         ? data.bedroom_count
         : [],
@@ -223,6 +226,7 @@ export const actions = {
         flat_number,
         // eslint-disable-next-line camelcase
         bedroom_count,
+        sort,
         type,
         // wc,
         // eslint-disable-next-line camelcase
@@ -232,6 +236,8 @@ export const actions = {
       const bedroomCount = bedroom_count.map((item) =>
         item.hasOwnProperty('value') ? item.value : parseInt(item)
       )
+      console.log(sort)
+
       const params = {
         block_id: block,
         max_price: price.max,
@@ -240,6 +246,7 @@ export const actions = {
         min_floor: floors.min,
         bedroom_count: bedroomCount,
         type,
+        sort,
         // wc,
         building_progress,
         flat_number,

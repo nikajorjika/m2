@@ -1,5 +1,5 @@
 <template>
-  <div class="select" :class="{open: open}">
+  <div class="select" :class="{open: open}" @click.stop>
     <div class="select__current" @click="open = !open">
       <span v-if="!selectedValue">{{placeholder}}</span>
       <span class="selected" v-else>
@@ -10,6 +10,9 @@
           {{ selected.valueLabel }}
         </span>
       </span>
+      <div class="arrow" :class="{open: open}">
+        <arrow-icon icon-color="#f26529" />
+      </div>
     </div>
     <div v-if="open" class="select__options">
       <div v-for="(item, index) in cOptions" :key="index" class="select__options__option" @click="selectItem(item)">
@@ -25,7 +28,11 @@
 </template>
 
 <script>
+import ArrowIcon from '@/components/icons/CaretRight'
 export default {
+  components: {
+    ArrowIcon,
+  },
   props: {
     placeholder: {
       type: [Number, String],
@@ -39,6 +46,18 @@ export default {
       type: [Object, String, Number],
       default: null
     }
+  },
+  mounted() {
+    if(process.client) {
+      this.$root.$el.addEventListener('click', () => {
+        this.open = false
+      })
+    }
+  },
+  destroyed() {
+      this.$root.$el.removeEventListener('click', () => {
+        this.open = false
+      })
   },
   data() {
     return {
@@ -65,6 +84,8 @@ export default {
   methods: {
     selectItem(item) {
       this.selectedValue = item.value
+      this.open = false
+      this.$emit('change', this.selectedValue)
     }
   },
 }
@@ -87,27 +108,49 @@ export default {
   }
   .gray {
     color: #494949;
-    min-width: 70px;
+    min-width: 62px;
   }
   &__current {
     padding: 15px 20px;
     display: flex;
     width: 180px;
+    justify-content: space-between;
+    position: relative;
+    .arrow {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      svg {
+        transform: rotate(90deg);
+      }
+      &.open {
+        svg {
+          transform: rotate(-90deg);
+        }
+      }
+    }
   }
   &__options {
     padding: 15px 20px; 
     display: flex;  
     position: absolute;
-    flex-direction: column;   
+    flex-direction: column; 
     width: 180px;
     top: 100%;
     left: 0;
-    z-index: 99;
+    z-index: 2;
     background: #f2d0ba;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
     &__option {
       display: flex;
+      padding: 12px 0;
+      &:first-child {
+        padding-top: 0;
+      }
+      &:last-child {
+        padding-bottom: 0;
+      }
     }
   }
 }

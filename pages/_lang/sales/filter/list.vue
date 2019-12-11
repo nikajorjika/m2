@@ -4,7 +4,7 @@
       <div class="label">
         {{$t('labels.sort')}}
       </div>
-      <select-box :options="sortData" />
+      <select-box v-if="!sortLoading" :options="sortData" :preselected="computedFilters.sort" @change="handleSort" />
     </div>
     <div class="filter-list-page__header">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title" />
@@ -66,6 +66,7 @@ export default {
       isEmpty: false,
       shouldLoadMore: false,
       isFetching: false,
+      sortLoading: true,
       page: 1,
       options: {
         root: null,
@@ -138,6 +139,7 @@ export default {
       filters.max_price = parseInt(filters.price.max)
       this.setFilters(filters)
     }
+    this.sortLoading = false
     this.fetchFreshFlatData()
   },
   beforeDestroy() {
@@ -146,6 +148,7 @@ export default {
   methods: {
     ...mapMutations({
       setLoader: 'Filter/SET_FILTER_LOADER',
+      setFilterItem: 'Filter/SET_FILTER_ITEM',
       setFilters: 'Filter/SET_FILTERS_BULK',
       setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
@@ -158,6 +161,13 @@ export default {
         this.page++
         this.shouldLoadMore = true
       })
+    },
+    handleSort(value) {
+      this.setFilterItem({
+        key: 'sort',
+        value: value
+      })
+      this.fetchFreshFlatData()
     },
     handleLoad(data) {
       if (this.shouldLoadMore && !this.isFetching) {
@@ -195,11 +205,6 @@ export default {
   max-height: calc(100% - 76px);
   display: flex;
   padding-bottom: 12px;
-  flex-direction: column;
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 12px;
     flex-direction: column;
     &__header {
       display: flex;
@@ -214,7 +219,6 @@ export default {
         margin: auto 20px auto 0;
       }
     }
-  }
 }
 .load-more {
   text-align: center;
