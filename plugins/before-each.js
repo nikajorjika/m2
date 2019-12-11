@@ -29,6 +29,10 @@ export default function({ app, store }) {
               modalData
             )
 
+            app.$eventBus.$on('continue', () => {
+              console.log('next')
+              next()
+            })
             return next(false)
           }
         }

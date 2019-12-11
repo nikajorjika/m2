@@ -414,7 +414,9 @@ export default {
                 this.saveFlatBtnMsgShow = false
               }, 3000)
 
-              this.$eventBus.$emit('redirect')
+              // this.$eventBus.$emit('redirect')
+
+              this.$eventBus.$emit('continue')
             } else {
               this.saveFlatBtnLoading = false
             }

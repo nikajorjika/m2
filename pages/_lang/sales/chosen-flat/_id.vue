@@ -1,7 +1,13 @@
 <template>
   <div class="app-content">
+    <confirm-email-modal 
+      v-if="confirmModalShow" 
+      :preset="user.email"
+      :loading="confirmModalLoading" 
+      @accept="sendToEmail" 
+      @closed="confirmModalShow = false"
+    />
     <div class="gradient-line"></div>
-
     <div class="filter-flat">
       <div class="filter-flat__title">
         <title-with-line :title="cTitle" />
@@ -10,10 +16,10 @@
           v-if="flatExists"
           :button-text="$t('labels.DetailsAsPdf')"
           :text-padding="'0 0 0 12px'"
-          @click.prevent="sendPdf"
+          @click="sendPdf"
         >
           <template v-slot:icon>
-            <pdf-icon />
+            <pdf-icon height="14px" width="14px" fill="#fff" />
           </template>
         </button-main-orange>
       </div>
@@ -136,6 +142,7 @@ import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import Sells from '@/components/icons/Sells'
 import Light from '@/components/icons/Light'
 import PdfIcon from '@/assets/icons/PdfIcon.svg'
+import ConfirmEmailModal from '@/components/partials/modals/confirmEmailAddress'
 
 export default {
   layout: 'SalesChosenFlatLayout',
@@ -155,10 +162,13 @@ export default {
     ButtonMainOrange,
     Sells,
     Light,
+    ConfirmEmailModal,
     PdfIcon
   },
   data() {
     return {
+      confirmModalShow: false,
+      confirmModalLoading: false,
       slickOptions1: {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -182,6 +192,7 @@ export default {
       currencyRate: 'settings/currencyRate',
       chosenFlat: 'chosen-flat/chosenFlat',
       flat: 'chosen-flat/flat',
+      user: 'auth/user',
       renovation: 'chosen-flat/renovation',
       furniture: 'chosen-flat/furniture',
       decoration: 'chosen-flat/decoration',
@@ -448,14 +459,23 @@ export default {
         }
       })
     },
-    async sendPdf() {
-      const response = await this.$axios.get(
-        `/user-flats/${this.flat.id}/send-pdf`
-      )
-
-      if (response.data.success) {
-        // console.log(response)
-      }
+    sendPdf() {
+      this.confirmModalShow = true
+    },
+    sendToEmail(email) {
+      this.confirmModalLoading = true
+      this.$axios.get(`/user-flats/${this.chosenFlat.id}/send-pdf`, {
+        params: {
+          email
+        }
+      })
+      .then(response => {
+        this.confirmModalShow = false
+        this.confirmModalLoading = false
+      })
+      .catch(err => {
+        this.confirmModalLoading = false
+      })
     }
   }
 }

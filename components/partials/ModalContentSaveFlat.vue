@@ -91,8 +91,8 @@ export default {
         })
       } else {
         // Go to saved flat page
-
-        this.$emit('callback', 'continueWithoutSaving')
+        this.$eventBus.$emit('continue')
+        // this.$emit('callback', 'continueWithoutSaving')
       }
     },
     flatIsSaved() {

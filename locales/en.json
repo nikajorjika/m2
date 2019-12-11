@@ -37,7 +37,9 @@
     "continue": "Continue",
     "cancel": "Cancel",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "please_confirm_email": "Please confirm e-mail",
+    "send": "Send"
   },
   "messages": {
     "savedFlat": "Your chosen flats is saved successfully",
