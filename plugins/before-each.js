@@ -30,7 +30,6 @@ export default function({ app, store }) {
             )
 
             app.$eventBus.$on('continue', () => {
-              console.log('next')
               next()
             })
             return next(false)
