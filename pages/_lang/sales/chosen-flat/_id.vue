@@ -142,7 +142,7 @@ import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import Sells from '@/components/icons/Sells'
 import Light from '@/components/icons/Light'
 import PdfIcon from '@/assets/icons/PdfIcon.svg'
-import ConfirmEmailModal from '@/components/partials/modals/confirmEmailAddress'
+import ConfirmEmailModal from '@/components/partials/modals/ConfirmEmailAddress'
 
 export default {
   layout: 'SalesChosenFlatLayout',
