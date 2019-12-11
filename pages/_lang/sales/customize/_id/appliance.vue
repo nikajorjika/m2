@@ -8,9 +8,10 @@
 
         <save-button
           v-if="flatExists"
+          :loading="saveFlatBtnLoading"
           :height="'40px'"
           :padding="'0 21px'"
-          :label="$t('labels.saveFlat')"
+          :label="saveFlatBtnLabel"
           :icon-margin-left="'21px'"
           @regularBtnClick="saveFlat"
         >
@@ -45,7 +46,7 @@
             </div>
 
             <div class="checkbox">
-              <span></span>
+              <span />
             </div>
           </li>
         </ul>
@@ -156,6 +157,8 @@ export default {
   data() {
     return {
       // showAdditionals: true,
+      saveFlatBtnLoading: false,
+      saveFlatBtnMsgShow: false,
       planshetId: this.$cookies.get('paveleon-planshet')
     }
   },
@@ -241,6 +244,11 @@ export default {
         decoration_id: this.decorationId,
         appliances_ids: this.appliancesIds
       }
+    },
+    saveFlatBtnLabel() {
+      return !this.saveFlatBtnMsgShow
+        ? this.$t('labels.saveFlat')
+        : this.$t('buttons.saved')
     }
     // additionalPrice() {
     //   let price = 0
@@ -333,25 +341,47 @@ export default {
       })
     },
     saveFlat() {
+      this.saveFlatBtnLoading = true
+      const data = {
+        flat_id: this.flat ? this.flat.id : null,
+        renovation_id: this.renovationId,
+        furniture_id: this.furnitureId,
+        decoration_id: this.decorationId,
+        appliances_ids: this.appliancesIds
+      }
+
+      // Reset flat configurations
+
+      this.$store.commit('customize/SET_CONFIGURATIONS', [])
+
       return new Promise((resolve, reject) => {
         this.$axios
-          .post('user/save-flat', {
-            flat_id: this.flat ? this.flat.id : null,
-            renovation_id: this.renovationId,
-            furniture_id: this.furnitureId,
-            decoration_id: this.decorationId,
-            appliances_ids: this.appliancesIds
-          })
+          .post('user/save-flat', data)
           .then((response) => {
             this.$root.$emit('flatIsSaved')
 
+            // Store flat configurations
+
+            this.$store.commit('customize/SET_CONFIGURATIONS', data)
+
             if (response.status === 200 && response.data.success) {
+              this.saveFlatBtnLoading = false
+              this.saveFlatBtnMsgShow = true
+
+              setTimeout(() => {
+                this.saveFlatBtnMsgShow = false
+              }, 3000)
+
               this.$eventBus.$emit('redirect')
+            } else {
+              this.saveFlatBtnLoading = false
             }
 
             resolve(response)
           })
           .catch((e) => {
+            this.saveFlatBtnLoading = false
+
             this.$root.$emit('flatIsSaved')
 
             reject(e)
@@ -450,7 +480,7 @@ export default {
   .flat-pages-content {
     grid-area: content;
     width: calc(100% + 25px);
-    height: fit(330);
+    height: fit(360);
     margin: auto auto auto -10px;
     padding: 0 15px 0 10px;
     overflow: auto;
@@ -554,7 +584,6 @@ export default {
     }
     .price {
       color: $orange;
-      text-align: center;
       text-align: left;
       margin-top: 5px;
     }

@@ -108,11 +108,10 @@ export default {
     url: {
       type: String,
       default: ''
-    }
-  },
-  data() {
-    return {
-      isFavourite: false
+    },
+    favourite: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -125,6 +124,9 @@ export default {
       return {
         message: this.$t('messages.removedFlat')
       }
+    },
+    isFavourite() {
+      return this.favourite
     }
   },
   methods: {

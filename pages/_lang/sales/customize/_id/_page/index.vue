@@ -48,7 +48,11 @@
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
-              <skip-button v-show="$route.params.page !== 'makeover'" :url="skipBtnUrl" @omit="skipBtnClickHandler" />
+              <skip-button
+                v-show="$route.params.page !== 'makeover'"
+                :url="skipBtnUrl"
+                @omit="skipBtnClickHandler"
+              />
             </div>
 
             <div class="footer-items__controls__next">
@@ -380,18 +384,27 @@ export default {
     },
     saveFlat() {
       this.saveFlatBtnLoading = true
+      const data = {
+        flat_id: this.flat ? this.flat.id : null,
+        renovation_id: this.renovationId,
+        furniture_id: this.furnitureId,
+        decoration_id: this.decorationId,
+        appliances_ids: this.appliancesIds
+      }
+
+      // Reset flat configurations
+
+      this.$store.commit('customize/SET_CONFIGURATIONS', [])
 
       return new Promise((resolve, reject) => {
         this.$axios
-          .post('user/save-flat', {
-            flat_id: this.flat ? this.flat.id : null,
-            renovation_id: this.renovationId,
-            furniture_id: this.furnitureId,
-            decoration_id: this.decorationId,
-            appliances_ids: this.appliancesIds
-          })
+          .post('user/save-flat', data)
           .then((response) => {
             this.$root.$emit('flatIsSaved')
+
+            // Store flat configurations
+
+            this.$store.commit('customize/SET_CONFIGURATIONS', data)
 
             if (response.status === 200 && response.data.success) {
               this.saveFlatBtnLoading = false

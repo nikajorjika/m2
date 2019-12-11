@@ -1,8 +1,8 @@
 <template>
-  <div class="layout-modal-container" @click="closeModal">
+  <div @click="closeModal" class="layout-modal-container">
     <div :class="['layout-modal', componentName]">
       <div @click="closeModal" class="close-button">x</div>
-      <div class="layout-modal-content" @click.stop>
+      <div @click.stop class="layout-modal-content">
         <component
           :is="componentName"
           v-if="componentName"
@@ -95,7 +95,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: -1;
