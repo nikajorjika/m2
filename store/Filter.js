@@ -236,7 +236,6 @@ export const actions = {
       const bedroomCount = bedroom_count.map((item) =>
         item.hasOwnProperty('value') ? item.value : parseInt(item)
       )
-      console.log(sort)
 
       const params = {
         block_id: block,
