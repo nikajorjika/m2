@@ -1,5 +1,11 @@
 <template>
   <div class="filter-list-page">
+    <div class="filter-list-page__sort">
+      <div class="label">
+        {{$t('labels.sort')}}
+      </div>
+      <select-box :options="sortData" />
+    </div>
     <div class="filter-list-page__header">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title"/>
       <currency-switcher />
@@ -36,12 +42,14 @@ import FlatCard from '@/components/partials/FlatCard'
 import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import ListLoading from '@/components/partials/ListLoading'
+import SelectBox from '@/components/partials/SelectBox'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
     components: {
         CurrencySwitcher,
         FlatCard,
         ListLoading,
+        SelectBox,
         TitleWithLine
     },
     middleware: 'isAuth',
@@ -56,7 +64,29 @@ export default {
             options: {
                 root: null,
                 threshold: 0
-            }
+            },
+            sortData: [
+              {
+                indexLabel: this.$t('labels.price'),
+                valueLabel: this.$t('labels.asc'),
+                value: 'price|asc'
+              },
+              {
+                indexLabel: this.$t('labels.price'),
+                valueLabel: this.$t('labels.desc'),
+                value: 'price|desc'
+              },
+              {
+                indexLabel: this.$t('labels.area'),
+                valueLabel: this.$t('labels.asc'),
+                value: 'area|asc'
+              },
+              {
+                indexLabel: this.$t('labels.area'),
+                valueLabel: this.$t('labels.desc'),
+                value: 'area|desc'
+              }
+            ]
         }
     },
     watch: {
@@ -159,12 +189,21 @@ export default {
       display: flex;
       justify-content: space-between;
     }
+    &__sort {
+      margin-top: 30px;
+      display: flex;
+      .label {
+        font-family: $font-caps;
+        color: #494949;
+        margin: auto 20px auto 0;
+      }
+    }
 }
 .load-more {
   text-align: center;
 }
 .page-title {
-    margin: 50px 0;
+  margin: 20px 0 50px;
 }
 .list-scrollable-wrapper {
   max-height: calc(100% - 12px);
