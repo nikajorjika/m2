@@ -40,6 +40,7 @@
         <div class="filter-flat__content__render">
           <filter-render 
             v-if="activeTab === 0" 
+            :display-button="true"
             @seleted="handleBlockSelect" 
             @changeNumber="handleBlockChange" 
           />

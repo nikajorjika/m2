@@ -10,7 +10,7 @@
         <block-hover-info
           :flats-count="blockInfo.sellableFlats"
           :block-number="blockInfo.number"
-          :display-button="false"
+          :display-button="displayButton"
           @click="handleChoosingBlock"
         />
       </div>
@@ -29,6 +29,10 @@ export default {
     preselected: {
       type: [String, Number],
       default: null
+    },
+    displayButton: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
