@@ -27,7 +27,7 @@
       <span>{{ $t('labels.DetailsAsPdf') }}</span>
       <pdf-icon class="svg-icon" height="16px" />
     </button> -->
-    <button class="queue-info__cancel-button" @click="cancelSummonSale">
+    <button @click="cancelSummonSale" class="queue-info__cancel-button">
       <span>{{ $t('labels.CancelSalesRequest') }}</span>
       <cancel-icon class="svg-icon" height="14px" />
     </button>
@@ -37,12 +37,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import FullPageLoader from '@/components/partials/FullPageLoader'
-import PdfIcon from '@/assets/icons/PdfIcon.svg'
+// import PdfIcon from '@/assets/icons/PdfIcon.svg'
 import CancelIcon from '@/assets/icons/CancelIcon.svg'
 export default {
   components: {
     FullPageLoader,
-    PdfIcon,
+    // PdfIcon,
     CancelIcon
   },
   computed: {
@@ -62,11 +62,11 @@ export default {
         this.$axios
           .post('user/cancel-summon-sale', {})
           .then((response) => {
-            if (response.status === 200) {
+            if (response.status === 200 && response.data.status) {
               this.$router.push(`/${this.locale}/sales`)
-
-              resolve(response)
             }
+
+            resolve(response)
           })
           .catch((e) => {
             reject(e)
@@ -75,11 +75,12 @@ export default {
     },
     sendPdf() {
       this.loading = true
-      this.$axios.get(`user-flats/1/send-pdf`)
-        .then(({data}) => {
+      this.$axios
+        .get(`user-flats/1/send-pdf`)
+        .then(({ data }) => {
           this.loading = false
         })
-        .catch(err => {
+        .catch(() => {
           this.loading = false
         })
     }
