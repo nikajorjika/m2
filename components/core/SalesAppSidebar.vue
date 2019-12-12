@@ -74,7 +74,7 @@ export default {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
     },
     showSummon() {
-      return this.$router.name !== 'lang-sales-waiting'
+      return this.$router.name !== 'lang-sales-waiting' && this.isLoggedIn
     },
     items() {
       return [
