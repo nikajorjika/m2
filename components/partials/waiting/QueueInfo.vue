@@ -12,13 +12,13 @@
         <h4>
           {{ $t('labels.YouCalledForSales') }}
           <span class="color-orange">{{
-            $t('labels.YouAreNumber').replace('%s', '-5')
+            $t('labels.YouAreNumber').replace('%s', currentQueueNumber)
           }}</span>
         </h4>
       </div>
-      <div class="queue-info__illustration__sub-title">
-        <p>{{ $t('labels.ApproximateWaitingTime').replace('%s', '25') }}</p>
-      </div>
+      <!--      <div class="queue-info__illustration__sub-title">-->
+      <!--        <p>{{ $t('labels.ApproximateWaitingTime').replace('%s', '25') }}</p>-->
+      <!--      </div>-->
     </div>
     <div class="queue-info__info">
       <p>{{ $t('labels.WaitForSalesOrRequestInfo') }}</p>
@@ -45,22 +45,41 @@ export default {
     // PdfIcon,
     CancelIcon
   },
+  data() {
+    return {
+      loading: false,
+      queueNumber: null
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale',
       user: 'auth/user'
-    })
-  },
-  data() {
-    return {
-      loading: false
+    }),
+    currentQueueNumber() {
+      if (!this.queueNumber) return ''
+
+      const prefix = this.locale === 'ka' ? 'მე - ' : ''
+
+      return parseInt(this.queueNumber) === 1
+        ? this.locale === 'ka'
+          ? 'პირველი'
+          : 'One'
+        : prefix + this.queueNumber
     }
+  },
+  mounted() {
+    this.$axios.get('user/queue-number').then((response) => {
+      if (response.status === 200 && response.data.queue_number) {
+        this.queueNumber = response.data.queue_number
+      }
+    })
   },
   methods: {
     cancelSummonSale() {
       return new Promise((resolve, reject) => {
         this.$axios
-          .post('user/cancel-summon-sale', {})
+          .post('user/cancel-summon-sale')
           .then((response) => {
             if (response.status === 200 && response.data.status) {
               this.$router.push(`/${this.locale}/sales`)
@@ -95,11 +114,12 @@ export default {
   justify-content: center;
   align-items: center;
   &__illustration {
+    display: flex;
+    align-items: center;
     background: #f1e6dd;
-    width: 514px;
+    min-height: fit(120);
     position: relative;
-    padding: 18px;
-    padding-left: 85px;
+    padding: 18px 18px 18px 85px;
     border-radius: 20px;
     &__icon {
       height: 107.5px;

@@ -100,7 +100,7 @@
     "available": "დარჩენილია",
     "reserved": "შერჩეულია",
     "YouCalledForSales": "თქვენ გამოიძახეთ გაყიდვები",
-    "YouAreNumber": "რიგში ხართ მე %s",
+    "YouAreNumber": "თქვენ რიგში ხართ %s",
     "ApproximateWaitingTime": "სავარაუდო ლოდინის დრო %s წუთი",
     "DetailsAsPdf": "დეტალები PDF ვერსიად",
     "CancelSalesRequest": "გაყიდვების გაუქმება",

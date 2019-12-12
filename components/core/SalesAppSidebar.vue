@@ -1,6 +1,6 @@
 <template>
-  <div class="sidebar" :class="{'no-margin': noMargin}">
-    <nuxt-link class="link" :to="logoLink">
+  <div :class="{ 'no-margin': noMargin }" class="sidebar">
+    <nuxt-link :to="logoLink" class="link">
       <logo class="sidebar__logo" />
     </nuxt-link>
     <div class="sidebar__list">
@@ -8,12 +8,12 @@
         v-for="(item, index) in items"
         :key="index"
         :to="item.path"
-        class="sidebar__list__item"
         :class="{
           hide:
             (!isSales && item.path === `/${locale}/sales/registration`) ||
             (!isLoggedIn && item.requiresLoggin)
         }"
+        class="sidebar__list__item"
       >
         <div class="sidebar__list__item__icon">
           <component
@@ -29,7 +29,7 @@
       </nuxt-link>
     </div>
     <div v-if="showSummon" class="sidebar__sales">
-      <button class="sidebar__sales__button" @click="callForSales">
+      <button @click="callForSales" class="sidebar__sales__button">
         <sells-icon icon-color="white" width="12px" height="12px" />
         <span>
           {{ $t('buttons.Sales') }}
@@ -74,7 +74,7 @@ export default {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
     },
     showSummon() {
-      return this.$router.name !== 'lang-sales-waiting' && this.isLoggedIn
+      return this.$route.name !== 'lang-sales-waiting' && this.isLoggedIn
     },
     items() {
       return [
