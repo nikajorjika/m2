@@ -22,11 +22,16 @@
           @discardLoginErrorMessage="discardLoginErrorMessage"
           :loginErrorMessage="loginErrorMessage"
         />
-        <nuxt-link :to="registrationUrl">
-          <small class="color-orange">
-            {{$t('buttons.register')}}
-          </small>
-        </nuxt-link>
+        <div class="register-suggestion">
+          <p>
+            {{$t('titles.not_already_registered')}}
+          </p>
+          <button class="session" @click="redirectToRegistration">
+            <span>{{ $t('buttons.register') }}</span>
+            <login-icon :width="12" icon-color="#3c2270" />
+          </button>
+        </div>
+       
       </div>
       <div v-else class="page-flat-number__confirm">
         <confirm-phone-form
@@ -44,6 +49,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
+import LoginIcon from '@/components/icons/Login'
 import LoginForm from '@/components/partials/LoginForm'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
@@ -52,6 +58,7 @@ import FilterIconIllustration from '@/components/icons/FilterIllustration'
 export default {
   components: {
     TitleWithLine,
+    LoginIcon,
     LoginForm,
     ConfirmPhoneForm,
     FilterSearch,
@@ -127,6 +134,14 @@ export default {
         this.codeSent = true
       })
     },
+    redirectToRegistration() {
+      this.$router.push({
+        name: 'lang-sales-registration',
+        params: {
+          lang: this.locale
+        }
+      })
+    },
     discardLoginErrorMessage() {
       this.loginErrorMessage = '';
     },
@@ -142,6 +157,29 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+.register-suggestion {
+  display: flex;
+  p {
+    margin: auto 30px auto 0;
+    font-size: 12px;
+    color: #424242;
+  }
+}
+.session {
+  outline: none;
+  border-radius: 18px;
+  color: $purple;
+  border: 1px solid $purple;
+  padding: 7px 20px;
+  background: transparent;
+  display: flex;
+  justify-items: center;
+  font-family: $font;
+  span {
+    margin: auto;
+    margin-right: 18px;
+  }
 }
 a {
   text-decoration: none;

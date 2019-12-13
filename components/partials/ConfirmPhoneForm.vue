@@ -16,6 +16,13 @@
       <div v-if="! (errors.code.length && showErrors) && invalidCodeErrorMessage" class="error">
         {{ invalidCodeErrorMessage }}
       </div>
+
+      <a class="confirm-form__resend" @click.prevent="handleResend">
+        <small>
+          <span class="label">{{ $t('labels.SendCodeAgain') }}</span>
+          <paper-plane-icon icon-color="#f26529" width="10" height="12" />
+        </small>
+      </a>
     </div>
     <div class="confirm-form__button">
       <button-main-orange :button-text="buttonText">
@@ -29,12 +36,6 @@
         </template>
       </button-main-orange>
     </div>
-    <a class="confirm-form__resend" @click.prevent="handleResend">
-      <small
-        ><paper-plane-icon icon-color="#f26529" width="10" height="12" />
-        <span>{{ $t('labels.SendCodeAgain') }}</span></small
-      >
-    </a>
   </form>
 </template>
 
@@ -114,7 +115,7 @@ export default {
   grid-column-gap: 53px;
   grid-row-gap: 50px;
   .error {
-    font-size: 11px;
+    font-size: 12px;
     color: red;
     margin-left: 8px;
     margin-top: 5px;
@@ -137,13 +138,16 @@ export default {
   }
   &__resend {
     color: $orange;
-    font-size: 12px;
+    font-size: 13px;
     margin-left: 18px;
+    margin-top: 18px;
+    display: block;
+    font-weight: bold;
     small {
       display: flex;
       align-items: center;
       span {
-        margin-left: 13px;
+        margin-right: 13px;
       }
     }
   }

@@ -183,6 +183,7 @@
   "titles": {
     "FlatPageTitleGinger": "რემონტი ჯინჯერი",
     "IAmLookingFor": "მე ვეძებ ბინას",
+    "not_already_registered": "თუ არ ხართ დარეგისტრირებული",
     "CodeHasBeenSent": "შეიყვანეთ 4 ნიშნა კოდი",
     "CodeHasBeenSentSubTitle": "4 ნიშნა კოდი გამოგაზვნილია მითითებულ ტელეფონის ნომერზე",
     "FavouriteFlats": "შერჩეული ბინები",
