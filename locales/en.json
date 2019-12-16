@@ -38,7 +38,9 @@
     "yes": "Yes",
     "no": "No",
     "please_confirm_email": "Please confirm e-mail",
-    "send": "Send"
+    "send": "Send",
+    "successfulReservation": "Your chosen flat is already booked",
+    "failedReservation": "Your chosen flat couldn't be booked"
   },
   "messages": {
     "savedFlat": "Your chosen flats is saved successfully",

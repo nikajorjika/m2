@@ -98,7 +98,6 @@ export default {
         .post('user/summon-sale', {
           planshet_id: this.planshetId,
           wait: this.isWaiting,
-          reservation: this.data.reservation,
           flat: this.data.flat,
           renovation_id: this.data.renovation_id,
           furniture_id: this.data.furniture_id,
@@ -119,11 +118,6 @@ export default {
             }
           }
         })
-
-      // Reserve flat
-
-      if (this.data.reservation) {
-      }
     },
     cancelSummonSale() {
       this.$eventBus.$emit('closeModal')
