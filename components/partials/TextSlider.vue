@@ -5,9 +5,9 @@
     </div>
 
     <div
+      ref="slick"
       :is="slickComponent"
       v-if="items && items.length"
-      ref="slick"
       :options="slickOptions"
       class="text-slider"
     >
@@ -42,9 +42,25 @@ export default {
       slickComponent: ''
     }
   },
+  watch: {
+    items() {
+      const currIndex = this.$refs.slick.currentSlide()
+
+      this.$refs.slick.destroy()
+
+      this.$nextTick(() => {
+        this.$refs.slick.create()
+        this.$refs.slick.goTo(currIndex, true)
+      })
+    }
+  },
   mounted() {
     this.$nextTick(function() {
       this.slickComponent = 'Slick'
+    })
+
+    this.$nextTick(function() {
+      if (this.$refs.slick) this.$refs.slick.reSlick()
     })
   },
   beforeUpdate() {
