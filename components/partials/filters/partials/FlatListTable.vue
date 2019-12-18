@@ -48,7 +48,12 @@
           </button-main-orange>
         </div>
       </div>
-      <list-loading v-show="!done" ref="Loading" class="load-more" @load="handleLoad"/>
+      <list-loading
+        v-show="!done"
+        ref="Loading"
+        class="load-more"
+        @load="handleLoad"
+      />
     </div>
   </div>
 </template>
@@ -130,10 +135,10 @@ export default {
         this.$emit('showPrompt', item.planshet)
       } else {
         if (this.timeout) clearTimeout(this.timeout)
-          this.lightUpFlat([item]).then((timeout) => {
-            this.timeout = timeout
-          })
-          this.$emit('showLightBulb')
+        this.lightUpFlat([item]).then((timeout) => {
+          this.timeout = timeout
+        })
+        this.$emit('showLightBulb')
       }
     }
   }

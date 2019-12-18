@@ -18,28 +18,27 @@
       <div v-if="!codeSent" class="page-flat-number__form">
         <login-form
           :loading="loading"
+          :login-error-message="loginErrorMessage"
           @submit="handleLoginStageOne"
           @discardLoginErrorMessage="discardLoginErrorMessage"
-          :loginErrorMessage="loginErrorMessage"
         />
         <div class="register-suggestion">
           <p>
-            {{$t('titles.not_already_registered')}}
+            {{ $t('titles.not_already_registered') }}
           </p>
           <button class="session" @click="redirectToRegistration">
             <span>{{ $t('buttons.register') }}</span>
             <login-icon :width="12" icon-color="#3c2270" />
           </button>
         </div>
-       
       </div>
       <div v-else class="page-flat-number__confirm">
         <confirm-phone-form
           :loading="loading"
+          :invalid-code-error-message="invalidCodeErrorMessage"
           @submit="handleLoginStageTwo"
           @resend="handleResend"
           @discardInvalidCodeErrorMessage="discardInvalidCodeErrorMessage"
-          :invalidCodeErrorMessage="invalidCodeErrorMessage"
         />
       </div>
     </div>
@@ -51,19 +50,13 @@ import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import LoginIcon from '@/components/icons/Login'
 import LoginForm from '@/components/partials/LoginForm'
-import IllustratedButton from '@/components/partials/IllustratedButton'
 import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
-import FilterSearch from '@/components/icons/FilterSearch'
-import FilterIconIllustration from '@/components/icons/FilterIllustration'
 export default {
   components: {
     TitleWithLine,
     LoginIcon,
     LoginForm,
-    ConfirmPhoneForm,
-    FilterSearch,
-    IllustratedButton,
-    FilterIconIllustration
+    ConfirmPhoneForm
   },
   layout: 'SalesWithoutNavigation',
   auth: 'guest',
@@ -73,7 +66,7 @@ export default {
       loading: false,
       formData: null,
       loginErrorMessage: '',
-      invalidCodeErrorMessage: '',
+      invalidCodeErrorMessage: ''
     }
   },
   computed: {
@@ -81,7 +74,9 @@ export default {
       locale: 'locale'
     }),
     registrationUrl() {
-      const redirectUrl = this.$route.query.hasOwnProperty('redirect') ? `?redirect=${this.$route.query.redirect}` : ''
+      const redirectUrl = this.$route.query.hasOwnProperty('redirect')
+        ? `?redirect=${this.$route.query.redirect}`
+        : ''
       return `/${this.locale}/sales/registration${redirectUrl}`
     }
   },
@@ -94,39 +89,40 @@ export default {
       this.loading = true
       this.formData = { ...data }
       this.login(this.formData)
-        .then(response => {
+        .then((response) => {
           this.codeSent = true
           this.loading = false
-        }).catch(e => {
+        })
+        .catch((e) => {
           this.loading = false
-          this.loginErrorMessage = this.$t('errors.NoSuchUserWithSelectedPhoneNumber')
+          this.loginErrorMessage = this.$t(
+            'errors.NoSuchUserWithSelectedPhoneNumber'
+          )
         })
     },
     handleLoginStageTwo(code) {
       this.loading = true
       this.formData = { ...this.formData, ...code }
       this.login(this.formData)
-        .then(response => {
+        .then((response) => {
           this.loading = false
           // this.$toast.success('Successfully authenticated')
-          if(this.$route.query.hasOwnProperty('redirect')) {
-            this.$router.push(
-              {
-                name: this.$route.query.redirect,
-                params: {
-                  lang: this.locale
-                }
+          if (this.$route.query.hasOwnProperty('redirect')) {
+            this.$router.push({
+              name: this.$route.query.redirect,
+              params: {
+                lang: this.locale
               }
-            )
+            })
           } else {
             this.$router.go(-1)
           }
-        }).catch(e =>{
+        })
+        .catch((e) => {
           this.invalidCodeErrorMessage = this.$t('errors.InvalidCode')
           this.loading = false
           // this.$toast.error('Error while authenticating')
         })
-      
     },
     handleResend() {
       delete this.formData.code
@@ -143,10 +139,10 @@ export default {
       })
     },
     discardLoginErrorMessage() {
-      this.loginErrorMessage = '';
+      this.loginErrorMessage = ''
     },
     discardInvalidCodeErrorMessage() {
-      this.invalidCodeErrorMessage = '';
+      this.invalidCodeErrorMessage = ''
     }
   }
 }

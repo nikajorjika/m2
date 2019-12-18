@@ -31,7 +31,12 @@ import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import SelectRange from '@/components/partials/SelectRange'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
 export default {
-  components: { TitleWithLine, CurrencySwitcher, SelectRange, FiltersFooterBlock },
+  components: {
+    TitleWithLine,
+    CurrencySwitcher,
+    SelectRange,
+    FiltersFooterBlock
+  },
   layout: 'ModelFilterLayout',
   middleware: 'RedirectIfNoModel',
   data() {
@@ -55,12 +60,14 @@ export default {
     }),
     filterPrice() {
       return {
-        min: this.currency === 'GEL' ?
-          this.$currencyConverter(this.filters.price.min, this.currency) :
-          this.filters.price.min,
-        max: this.currency === 'GEL' ?
-          this.$currencyConverter(this.filters.price.max, this.currency) :
-          this.filters.price.max
+        min:
+          this.currency === 'GEL'
+            ? this.$currencyConverter(this.filters.price.min, this.currency)
+            : this.filters.price.min,
+        max:
+          this.currency === 'GEL'
+            ? this.$currencyConverter(this.filters.price.max, this.currency)
+            : this.filters.price.max
       }
     },
     nextUrl() {
@@ -68,12 +75,20 @@ export default {
     },
     price() {
       return {
-        min: this.currency === 'GEL' ?
-          this.$currencyConverter(this.filterDefaults.min_price, this.currency) :
-          this.filterDefaults.min_price,
-        max: this.currency === 'GEL' ?
-          this.$currencyConverter(this.filterDefaults.max_price, this.currency) :
-          this.filterDefaults.max_price
+        min:
+          this.currency === 'GEL'
+            ? this.$currencyConverter(
+                this.filterDefaults.min_price,
+                this.currency
+              )
+            : this.filterDefaults.min_price,
+        max:
+          this.currency === 'GEL'
+            ? this.$currencyConverter(
+                this.filterDefaults.max_price,
+                this.currency
+              )
+            : this.filterDefaults.max_price
       }
     },
     suffix() {
@@ -91,7 +106,7 @@ export default {
       })
     },
     handleRangeChange(data) {
-      if(this.currency === 'GEL') {
+      if (this.currency === 'GEL') {
         data = {
           min: data.min / this.currencyRate,
           max: data.max / this.currencyRate
@@ -127,7 +142,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  &__currency-switcher{
+  &__currency-switcher {
     margin-left: auto;
   }
   &__title {

@@ -9,9 +9,14 @@
       </div>
       <!-- <picker-with-gradient-label :items="pickerData"/> -->
       <div class="page-flat-number__render">
-        <filter-render :preselected="block" @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
+        <filter-render
+          :preselected="block"
+          @seleted="handleBlockSelect"
+          @change="handleBlockChange"
+          @beforeChange="handleBeforeChange"
+        />
       </div>
-      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice"/>
+      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
@@ -51,7 +56,7 @@ export default {
           icon: InProgressIcon,
           name: this.$t('status.ongoing'),
           value: 'ongoing'
-        },
+        }
       ]
     }
   },
@@ -83,7 +88,7 @@ export default {
       this.setloader(true)
     },
     handleBlockChange(value) {
-      if(this.filters.block === value) { 
+      if (this.filters.block === value) {
         this.setloader(false)
       }
       this.setFilter({

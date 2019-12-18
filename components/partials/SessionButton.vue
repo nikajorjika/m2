@@ -13,9 +13,9 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import LoginIcon from '@/components/icons/Login'
 import PopupConfirm from '@/components/partials/modals/PopupWithConfirmation'
-import { mapActions, mapGetters } from 'vuex'
 export default {
   components: { LoginIcon, PopupConfirm },
   data() {
@@ -45,18 +45,18 @@ export default {
       if (this.isLoggedIn) {
         this.showModal = true
       } else {
-        this.$router.push({ 
+        this.$router.push({
           name: 'lang-sales-login',
           params: {
             lang: this.locale
-          } 
+          }
         })
       }
     },
     handleLogout() {
       this.logout().then(() => {
         this.showModal = false
-        this.$router.push({ 
+        this.$router.push({
           name: 'lang-sales',
           params: {
             lang: this.locale

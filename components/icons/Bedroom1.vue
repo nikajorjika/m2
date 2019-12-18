@@ -5,9 +5,7 @@
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {}
 </script>
 
 <style lang="scss" scoped>
@@ -17,7 +15,7 @@
   .rectangle {
     height: 10px;
     width: 10px;
-    background:#796b93;
+    background: #796b93;
     border-radius: 3px;
     margin: auto;
   }

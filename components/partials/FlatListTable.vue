@@ -67,7 +67,7 @@
           </custom-button>
         </div>
       </div>
-      <list-loading v-if="!done" @load="handleLoadMore"/>
+      <list-loading v-if="!done" @load="handleLoadMore" />
     </div>
   </div>
 </template>
@@ -215,7 +215,7 @@ export default {
     overflow-y: auto;
     max-height: 100%;
     margin-right: 4px;
-    
+
     &::-webkit-scrollbar {
       width: 14px;
     }

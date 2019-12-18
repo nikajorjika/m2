@@ -1,10 +1,10 @@
 <template>
   <div class="app-content">
-    <confirm-email-modal 
-      v-if="confirmModalShow" 
+    <confirm-email-modal
+      v-if="confirmModalShow"
       :preset="user.email"
-      :loading="confirmModalLoading" 
-      @accept="sendToEmail" 
+      :loading="confirmModalLoading"
+      @accept="sendToEmail"
       @closed="confirmModalShow = false"
     />
     <div class="gradient-line"></div>
@@ -278,7 +278,9 @@ export default {
     buildingStatus() {
       if (!this.flatExists) return 0
 
-      return this.flat.building_progress ? parseInt(this.flat.building_progress) : 0
+      return this.flat.building_progress
+        ? parseInt(this.flat.building_progress)
+        : 0
     },
     listCardData() {
       if (!this.flatExists) return
@@ -464,18 +466,19 @@ export default {
     },
     sendToEmail(email) {
       this.confirmModalLoading = true
-      this.$axios.get(`/user-flats/${this.chosenFlat.id}/send-pdf`, {
-        params: {
-          email
-        }
-      })
-      .then(response => {
-        this.confirmModalShow = false
-        this.confirmModalLoading = false
-      })
-      .catch(err => {
-        this.confirmModalLoading = false
-      })
+      this.$axios
+        .get(`/user-flats/${this.chosenFlat.id}/send-pdf`, {
+          params: {
+            email
+          }
+        })
+        .then((response) => {
+          this.confirmModalShow = false
+          this.confirmModalLoading = false
+        })
+        .catch((err) => {
+          this.confirmModalLoading = false
+        })
     }
   }
 }

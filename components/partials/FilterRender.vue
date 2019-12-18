@@ -5,7 +5,7 @@
       <div
         v-if="activeBlockNumber && blockInfo"
         ref="infoBlock"
-        class="render__info" 
+        class="render__info"
       >
         <block-hover-info
           :flats-count="blockInfo.sellableFlats"

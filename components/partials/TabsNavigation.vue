@@ -7,17 +7,13 @@
         class="flat-navigation__list__item"
       >
         <div
-          @click="handleTabChange(index)"
           class="flat-navigation__link"
-          :class="{active: index === activeTabIndex}"
+          :class="{ active: index === activeTabIndex }"
+          @click="handleTabChange(index)"
         >
           <component
             :is="item.component"
-            :icon-color="
-              index === activeTabIndex
-                ? 'url(#gradient)'
-                : '#fff'
-            "
+            :icon-color="index === activeTabIndex ? 'url(#gradient)' : '#fff'"
             width="16"
             height="16"
             class="flat-navigation__link__icon"

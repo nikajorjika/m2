@@ -27,7 +27,7 @@
       <span>{{ $t('labels.DetailsAsPdf') }}</span>
       <pdf-icon class="svg-icon" height="16px" />
     </button> -->
-    <button @click="cancelSummonSale" class="queue-info__cancel-button">
+    <button class="queue-info__cancel-button" @click="cancelSummonSale">
       <span>{{ $t('labels.CancelSalesRequest') }}</span>
       <cancel-icon class="svg-icon" height="14px" />
     </button>

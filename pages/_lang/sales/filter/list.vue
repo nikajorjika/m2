@@ -2,9 +2,14 @@
   <div class="filter-list-page">
     <div class="filter-list-page__sort">
       <div class="label">
-        {{$t('labels.sort')}}
+        {{ $t('labels.sort') }}
       </div>
-      <select-box v-if="!sortLoading" :options="sortData" :preselected="computedFilters.sort" @change="handleSort" />
+      <select-box
+        v-if="!sortLoading"
+        :options="sortData"
+        :preselected="computedFilters.sort"
+        @change="handleSort"
+      />
     </div>
     <div class="filter-list-page__header">
       <title-with-line :title="$t('titles.SearchResults')" class="page-title" />
@@ -29,10 +34,10 @@
         <p>{{ $t('labels.NoFlatsFound') }}</p>
       </div>
       <list-loading
-        ref="Loading"
         v-show="shouldLoadMore"
-        @load="handleLoad"
+        ref="Loading"
         class="load-more"
+        @load="handleLoad"
       />
     </div>
     <div v-if="loading" class="flat-list">
@@ -165,7 +170,7 @@ export default {
     handleSort(value) {
       this.setFilterItem({
         key: 'sort',
-        value: value
+        value
       })
       this.fetchFreshFlatData()
     },
@@ -205,20 +210,20 @@ export default {
   max-height: calc(100% - 76px);
   display: flex;
   padding-bottom: 12px;
-    flex-direction: column;
-    &__header {
-      display: flex;
-      justify-content: space-between;
+  flex-direction: column;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__sort {
+    margin-top: 30px;
+    display: flex;
+    .label {
+      font-family: $font-caps;
+      color: #494949;
+      margin: auto 20px auto 0;
     }
-    &__sort {
-      margin-top: 30px;
-      display: flex;
-      .label {
-        font-family: $font-caps;
-        color: #494949;
-        margin: auto 20px auto 0;
-      }
-    }
+  }
 }
 .load-more {
   text-align: center;

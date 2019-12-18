@@ -6,18 +6,27 @@
           class="page-flat-number__title"
           :title="$t('titles.ChooseBedroomCount')"
         />
-        <small>{{$t('titles.YouCanSelectMultipe')}}</small>
+        <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
       </div>
-      <range-picker :ranges="bedroomsPickerData" :preselected="preselectedBedrooms" @change="handleBedroomsChange"/>
+      <range-picker
+        :ranges="bedroomsPickerData"
+        :preselected="preselectedBedrooms"
+        @change="handleBedroomsChange"
+      />
       <div class="border-line"></div>
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
           :title="$t('titles.ChooseFlatType')"
         />
-        <small>{{$t('titles.YouCanSelectOnlyOne')}}</small>
+        <small>{{ $t('titles.YouCanSelectOnlyOne') }}</small>
       </div>
-      <range-picker :ranges="flatTypes" :preselected="preselectedFlatType" :multiple="false" @change="handleTypesChange" />
+      <range-picker
+        :ranges="flatTypes"
+        :preselected="preselectedFlatType"
+        :multiple="false"
+        @change="handleTypesChange"
+      />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
@@ -70,7 +79,7 @@ export default {
           icon: Bedroom4,
           name: this.$t('rooms.FourBedrooms'),
           value: 4
-        },
+        }
       ],
       flatTypes: [
         {
@@ -93,21 +102,21 @@ export default {
     }),
     preselectedBedrooms() {
       const filtersBedrooms = this.filters.bedroom_count.map((item) => {
-        if(item.hasOwnProperty('value')) {
+        if (item.hasOwnProperty('value')) {
           return item.value
-        }else {
+        } else {
           return parseInt(item)
         }
       })
-      return this.bedroomsPickerData.filter(item => {
+      return this.bedroomsPickerData.filter((item) => {
         return filtersBedrooms.includes(item.value)
       })
     },
     preselectedFlatType() {
-      return this.flatTypes.filter(item => {
-        if(item.hasOwnProperty('value')) {
+      return this.flatTypes.filter((item) => {
+        if (item.hasOwnProperty('value')) {
           return item.value === this.filters.type
-        }else {
+        } else {
           return item === this.filters.type
         }
       })
@@ -126,15 +135,15 @@ export default {
       this.setFilter({
         key: 'type',
         value: data.length > 0 ? data[0].value : null
-       })
+      })
     },
     handleBedroomsChange(data) {
       this.setLoader(true)
-      data = data.map(item => item.value)
+      data = data.map((item) => item.value)
       this.setFilter({
         key: 'bedroom_count',
         value: data
-       })
+      })
     },
     skipPrice() {
       this.$router.push(this.nextUrl)

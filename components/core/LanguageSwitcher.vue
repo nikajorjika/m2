@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -19,6 +19,7 @@ export default {
   },
   created() {
     if (process.client) {
+      // eslint-disable-next-line nuxt/no-globals-in-created
       const html = document.documentElement
       html.setAttribute('lang', this.locale)
     }

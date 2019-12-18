@@ -49,9 +49,9 @@ export default {
     isSales() {
       return !this.$cookies.get('paveleon-planshet')
     },
-    defaultHomepage: function() {
+    defaultHomepage() {
       const app = this.$cookies.get('paveleon-app')
-      return this.homepage !== '' ? this.homepage :`/${this.locale}/${app}`
+      return this.homepage !== '' ? this.homepage : `/${this.locale}/${app}`
     }
   }
 }

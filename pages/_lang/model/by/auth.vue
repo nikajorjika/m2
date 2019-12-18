@@ -9,17 +9,17 @@
         <small>{{ $t('titles.FillInPhoneNumberSubTitle') }}</small>
         <div v-if="!codeSent" class="page-flat-number__form">
           <login-form
+            :login-error-message="loginErrorMessage"
             @submit="handleLoginStageOne"
             @discardLoginErrorMessage="discardLoginErrorMessage"
-            :loginErrorMessage="loginErrorMessage"
           />
         </div>
         <div v-else class="page-flat-number__confirm">
           <confirm-phone-form
+            :invalid-code-error-message="invalidCodeErrorMessage"
             @submit="handleLoginStageTwo"
             @resend="handleResend"
             @discardInvalidCodeErrorMessage="discardInvalidCodeErrorMessage"
-            :invalidCodeErrorMessage="invalidCodeErrorMessage"
           />
         </div>
       </div>
@@ -43,7 +43,11 @@
             </template>
 
             <template v-slot:icon>
-              <search-by-flat-number icon-color="#fff" width="18px" height="9px" />
+              <search-by-flat-number
+                icon-color="#fff"
+                width="18px"
+                height="9px"
+              />
             </template>
           </illustrated-button>
           <illustrated-button
@@ -106,7 +110,7 @@ export default {
         byPhoneNumberLabel: this.$t('labels.ByPhoneNumber'),
         byFlatNumberLabel: this.$t('labels.ByFlatNumber'),
         byFilterLabel: this.$t('labels.ByFilter')
-      },
+      }
     }
   },
   computed: {
@@ -124,27 +128,34 @@ export default {
     }),
     handleLoginStageOne(data) {
       this.formData = { ...data }
-      this.loginUser(this.formData).then((response) => {
-        this.codeSent = true
-      }).catch(e =>
-        this.loginErrorMessage = this.$t('errors.NoSuchUserWithSelectedPhoneNumber')
-      )
+      this.loginUser(this.formData)
+        .then((response) => {
+          this.codeSent = true
+        })
+        .catch(
+          (e) =>
+            (this.loginErrorMessage = this.$t(
+              'errors.NoSuchUserWithSelectedPhoneNumber'
+            ))
+        )
     },
     handleLoginStageTwo(code) {
       this.formData = { ...this.formData, ...code }
-      this.loginUser(this.formData).then(({data}) => {
-        if (data.hasOwnProperty('access_token')) {
-          this.setItem({key: 'temporaryToken', value: data.access_token })
-          this.$router.push({
-            name: 'lang-model-favourites',
-            params: {
-              lang: this.locale
-            }
-          })
-        }
-      }).catch(e =>
-        this.invalidCodeErrorMessage = this.$t('errors.InvalidCode')
-      )
+      this.loginUser(this.formData)
+        .then(({ data }) => {
+          if (data.hasOwnProperty('access_token')) {
+            this.setItem({ key: 'temporaryToken', value: data.access_token })
+            this.$router.push({
+              name: 'lang-model-favourites',
+              params: {
+                lang: this.locale
+              }
+            })
+          }
+        })
+        .catch(
+          (e) => (this.invalidCodeErrorMessage = this.$t('errors.InvalidCode'))
+        )
     },
     handleResend() {
       delete this.formData.code
@@ -153,10 +164,10 @@ export default {
       })
     },
     discardLoginErrorMessage() {
-      this.loginErrorMessage = '';
+      this.loginErrorMessage = ''
     },
     discardInvalidCodeErrorMessage() {
-      this.invalidCodeErrorMessage = '';
+      this.invalidCodeErrorMessage = ''
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <svg-icon :style="customStyles"/>
+  <svg-icon :style="customStyles" />
 </template>
 
 <script>

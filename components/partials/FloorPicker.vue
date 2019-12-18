@@ -1,70 +1,71 @@
 <template>
   <div v-if="blockInfo" class="floor-picker">
-      <block-one v-if="block === 1" :active-floor="activeFloor" @change="changeFloor"/>
-      <block-two v-if="block === 2" :active-floor="activeFloor"  @change="changeFloor"/>
-      <block-three v-if="block === 3" :active-floor="activeFloor"  @change="changeFloor"/>
-      <no-ssr>
-        <div class="floor-slider" v-show="blockInfo" ref="SliderInner">
-          <div class="floor-slider-inner">
-            <div v-for="(item, index) in sortedFloors" :key="index">
-              <div class="floor-item" :class="{active: activeFloor === item}">
-                <span v-show="item === activeFloor">{{ item }} </span> <span class="line" :class="{active: activeFloor === item}"></span>
-              </div>
+    <block-one
+      v-if="block === 1"
+      :active-floor="activeFloor"
+      @change="changeFloor"
+    />
+    <block-two
+      v-if="block === 2"
+      :active-floor="activeFloor"
+      @change="changeFloor"
+    />
+    <block-three
+      v-if="block === 3"
+      :active-floor="activeFloor"
+      @change="changeFloor"
+    />
+    <no-ssr>
+      <div v-show="blockInfo" ref="SliderInner" class="floor-slider">
+        <div class="floor-slider-inner">
+          <div v-for="(item, index) in sortedFloors" :key="index">
+            <div class="floor-item" :class="{ active: activeFloor === item }">
+              <span v-show="item === activeFloor">{{ item }} </span>
+              <span
+                class="line"
+                :class="{ active: activeFloor === item }"
+              ></span>
             </div>
           </div>
         </div>
-      </no-ssr>
-      <transition name="fade">
-        <div
-          v-if="activeFloor !== null && block && blockInfo"
-          ref="infoBlock"
-          class="render__info"
-        >
-          <block-hover-info
-            :flats-count="floorFlatCount"
-            :block-number="activeFloor"
-            :top-label="$t('labels.floor')"
-            :bottom-label="$t('labels.FlatsLeftOnThisFloor')"
-            @click="selectFloor"
-          />
-        </div>
-      </transition>
+      </div>
+    </no-ssr>
+    <transition name="fade">
+      <div
+        v-if="activeFloor !== null && block && blockInfo"
+        ref="infoBlock"
+        class="render__info"
+      >
+        <block-hover-info
+          :flats-count="floorFlatCount"
+          :block-number="activeFloor"
+          :top-label="$t('labels.floor')"
+          :bottom-label="$t('labels.FlatsLeftOnThisFloor')"
+          @click="selectFloor"
+        />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import BlockOne from '@/components/partials/renders/BlockOne'
 import BlockTwo from '@/components/partials/renders/BlockTwo'
 import BlockThree from '@/components/partials/renders/BlockThree'
 import BlockHoverInfo from '@/components/partials/BlockHoverInfo'
-import { mapMutations } from 'vuex'
 export default {
   components: {
     BlockOne,
     BlockHoverInfo,
     BlockTwo,
-    BlockThree,
+    BlockThree
   },
   props: {
     block: {
       type: Number,
       default: 3
     }
-  },
-  mounted() {
-    this.$axios
-        .get(`/block/21/${this.block}`)
-        .then((response) => {
-          this.blockInfo = response.data
-        })
-        .catch((e) => console.error(e))
-  
-  },
-  beforeDestroy() {
-    this.setFilter({
-      key: 'showFloorFooter',
-      value: false
-    })
   },
   data() {
     return {
@@ -76,22 +77,40 @@ export default {
   },
   computed: {
     sortedFloors() {
-      if(!this.blockInfo) return
-      const floors = this.blockInfo.floors.map(item => item.number)
+      if (!this.blockInfo) return
+      const floors = this.blockInfo.floors.map((item) => item.number)
       return floors.sort((a, b) => b - a)
     },
     floorFlatCount() {
-      const floor = this.blockInfo.floors.find(item => item.number === this.activeFloor)
-      const sellableFlats = floor.flats.filter(flat => flat.status === 'for_sale')
+      const floor = this.blockInfo.floors.find(
+        (item) => item.number === this.activeFloor
+      )
+      const sellableFlats = floor.flats.filter(
+        (flat) => flat.status === 'for_sale'
+      )
       return sellableFlats.length
     }
   },
+  mounted() {
+    this.$axios
+      .get(`/block/21/${this.block}`)
+      .then((response) => {
+        this.blockInfo = response.data
+      })
+      .catch((e) => console.error(e))
+  },
+  beforeDestroy() {
+    this.setFilter({
+      key: 'showFloorFooter',
+      value: false
+    })
+  },
   methods: {
     ...mapMutations({
-      setFilter: 'Filter/SET' 
+      setFilter: 'Filter/SET'
     }),
     changeFloor(floor) {
-      this.activeFloor = floor  
+      this.activeFloor = floor
       this.setFilter({
         key: 'showFloorFooter',
         value: true
@@ -101,7 +120,7 @@ export default {
     selectFloor() {
       this.$emit('floorSelect', this.activeFloor)
     }
-  },
+  }
 }
 </script>
 
@@ -140,7 +159,7 @@ export default {
         width: 25px;
         display: flex;
         margin-left: auto;
-        &:after{ 
+        &:after {
           content: '';
           display: inline-block;
           width: 6px;
@@ -150,7 +169,7 @@ export default {
           margin: auto 0 auto auto;
         }
         &.active {
-          &:after{ 
+          &:after {
             width: 19px;
             opacity: 1;
           }

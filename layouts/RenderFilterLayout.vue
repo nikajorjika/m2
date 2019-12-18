@@ -68,11 +68,14 @@ export default {
       default: false
     }
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.setFilterDefaults(this.filterDefaults)
   },
   computed: {
-    ...mapGetters({ locale: 'locale', filterDefaults: 'Filter/filterDefaults' }),
+    ...mapGetters({
+      locale: 'locale',
+      filterDefaults: 'Filter/filterDefaults'
+    }),
     items() {
       return [
         {

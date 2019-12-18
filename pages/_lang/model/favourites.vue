@@ -20,7 +20,7 @@
       @showPrompt="handlePrompt"
     />
     <div v-if="animating" class="light-bulb-animation">
-      <light-icon  width="100%" height="100%" icon-color="#fff" />
+      <light-icon width="100%" height="100%" icon-color="#fff" />
     </div>
   </div>
 </template>
@@ -34,7 +34,13 @@ import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import LightIcon from '@/components/icons/Light'
 export default {
   layout: 'FullHeightWithoutNavigation',
-  components: { TitleWithLine, CurrencySwitcher, FlatListTable, PromptAlert, LightIcon },
+  components: {
+    TitleWithLine,
+    CurrencySwitcher,
+    FlatListTable,
+    PromptAlert,
+    LightIcon
+  },
   computed: {
     ...mapGetters({
       locale: 'locale',
@@ -57,24 +63,23 @@ export default {
   },
   mounted() {
     this.loading = true
-    if(this.temporaryToken === null) {
+    if (this.temporaryToken === null) {
       this.$router.push({
         name: 'lang-model-by-auth',
         params: {
           lang: this.locale
         }
       })
-      return;
+      return
     }
     this.$axios(`/user/current-user`, {
       headers: {
         Authorization: `Bearer ${this.temporaryToken}`
       }
-    }).then(({data}) => {
+    }).then(({ data }) => {
       this.user = data.user
       this.getFlatList()
     })
-    
   },
   methods: {
     generateTextBasedOnColor(id) {
@@ -110,8 +115,8 @@ export default {
         headers: {
           Authorization: `Bearer ${this.temporaryToken}`
         }
-      }).then(({data}) => {
-        this.flats = data.map(({flat})=> {
+      }).then(({ data }) => {
+        this.flats = data.map(({ flat }) => {
           return flat
         })
         this.loading = false

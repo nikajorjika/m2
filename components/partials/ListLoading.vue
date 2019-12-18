@@ -1,38 +1,43 @@
 <template>
-  <div class="loading" ref="Loading">
-    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+  <div ref="Loading" class="loading">
+    <div class="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      shouldLoadMore: {
-        type: Boolean,
-        default: true
-      },
-      isFetching: {
-        type: Boolean,
-        default: true
+export default {
+  props: {
+    shouldLoadMore: {
+      type: Boolean,
+      default: true
+    },
+    isFetching: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data() {
+    return {
+      observer: null
+    }
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(this.callback, this.options)
+    this.observer.observe(this.$refs.Loading)
+  },
+  methods: {
+    callback(data) {
+      if (data[0].isIntersecting) {
+        this.$emit('load')
       }
-    },
-    data() {
-      return {
-        observer: null
-      }
-    },
-    mounted() {
-        this.observer = new IntersectionObserver(this.callback, this.options)
-        this.observer.observe(this.$refs.Loading)
-    },
-    methods: {
-      callback(data) {
-        if(data[0].isIntersecting) {
-          this.$emit('load')
-        }
-      },
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -96,5 +101,4 @@
     transform: translate(24px, 0);
   }
 }
-
 </style>

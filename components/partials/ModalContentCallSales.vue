@@ -14,8 +14,8 @@
       <button-main-orange
         :button-text="firstBtnLabel"
         :text-padding="'0 0 0 12px'"
-        @click.native.prevent="summonSale"
         class="summon-sale"
+        @click.native.prevent="summonSale"
       >
         <template v-slot:icon>
           <sells width="15" height="15" icon-color="#fff" />
@@ -26,8 +26,8 @@
         v-if="isAvailable"
         :button-text="secondBtnLabel"
         :text-padding="'0 0 0 12px'"
-        @click.native.prevent="cancelSummonSale"
         class="cancel-summon-sale"
+        @click.native.prevent="cancelSummonSale"
       >
         <template v-slot:icon>
           <sells width="13" height="13" icon-color="#3c2270" />
@@ -38,8 +38,8 @@
         v-if="!isAvailable"
         :button-text="secondBtnLabel"
         :text-padding="'0 0 0 12px'"
-        @click.native.prevent="waitSale"
         class="cancel-summon-sale"
+        @click.native.prevent="waitSale"
       >
         <template v-slot:icon>
           <sells width="13" height="13" icon-color="#3c2270" />

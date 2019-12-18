@@ -8,14 +8,14 @@
     <div class="swiper__pagination">
       <div
         class="swiper__pagination__button swiper__pagination__button--prev"
-        :class="{hidden: items.length === 1}"
+        :class="{ hidden: items.length === 1 }"
         @click="prevSlide"
       >
         <ArrowRight :icon-color="activeIndex === 0 ? '#f0bda2' : '#ec7547'" />
       </div>
       <div
         class="swiper__pagination__button swiper__pagination__button--next"
-        :class="{hidden: items.length === 1}"
+        :class="{ hidden: items.length === 1 }"
         @click="nextSlide"
       >
         <ArrowRight

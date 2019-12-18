@@ -1,24 +1,40 @@
 <template>
   <div class="render-page">
-    <tabs-navigation :tab-data="navigation" :active-tab-index="activeTab" @tabChange="handleTabChange"/>
+    <tabs-navigation
+      :tab-data="navigation"
+      :active-tab-index="activeTab"
+      @tabChange="handleTabChange"
+    />
     <div class="filter-flat">
       <div class="filter-flat__title">
         <title-with-line :title="cTitle" />
       </div>
       <div class="filter-flat__secondary-title">
-        <title-with-line v-if="activeTab === 0" :title="$t('titles.PleaseSelectBlockFromRender')" />
-        <title-with-line v-if="activeTab === 1" :title="$t('titles.PleaseSelectFloorFromRender')" />
-        <title-with-line v-if="activeTab === 2" :title="$t('titles.PleaseSelectFlatFromRender')" />
-        <small>{{$t('labels.select_only_one')}}</small>
+        <title-with-line
+          v-if="activeTab === 0"
+          :title="$t('titles.PleaseSelectBlockFromRender')"
+        />
+        <title-with-line
+          v-if="activeTab === 1"
+          :title="$t('titles.PleaseSelectFloorFromRender')"
+        />
+        <title-with-line
+          v-if="activeTab === 2"
+          :title="$t('titles.PleaseSelectFlatFromRender')"
+        />
+        <small>{{ $t('labels.select_only_one') }}</small>
       </div>
       <div class="filter-flat__content">
         <div class="filter-flat__content__info">
-          <flat-gradient-info class="filter-flat__content__info__combo" :info="flatLocationInfo" />
+          <flat-gradient-info
+            class="filter-flat__content__info__combo"
+            :info="flatLocationInfo"
+          />
           <!-- <list-card :items="listCardData" /> -->
-          <gradient-block class="filter-flat__content__info__address"> 
+          <gradient-block class="filter-flat__content__info__address">
             <div class="address">
-              <h3>{{$t('labels.address')}}:</h3>
-              <p>{{$t('addresses.marshal_gelovani')}}</p>
+              <h3>{{ $t('labels.address') }}:</h3>
+              <p>{{ $t('addresses.marshal_gelovani') }}</p>
             </div>
           </gradient-block>
           <gradient-progress
@@ -38,23 +54,23 @@
           />
         </div>
         <div class="filter-flat__content__render">
-          <filter-render 
-            v-if="activeTab === 0" 
+          <filter-render
+            v-if="activeTab === 0"
             :display-button="true"
-            @seleted="handleBlockSelect" 
-            @changeNumber="handleBlockChange" 
+            @seleted="handleBlockSelect"
+            @changeNumber="handleBlockChange"
           />
           <floor-picker
-            v-if="activeTab === 1" 
-            :block="activeBlock" 
-            @seleted="handleFloorSelect" 
+            v-if="activeTab === 1"
+            :block="activeBlock"
+            @seleted="handleFloorSelect"
             @floorChosen="handleFloorChosen"
-            @floorSelect="handleFloorSelect" 
+            @floorSelect="handleFloorSelect"
           />
           <flat-picker
             v-if="activeTab === 2"
-            :block="activeBlock" 
-            :floor="filters.floors.min" 
+            :block="activeBlock"
+            :floor="filters.floors.min"
             @flatSelected="selectedFlat"
           />
         </div>
@@ -147,7 +163,11 @@ export default {
       ]
     },
     cTitle() {
-      return `${this.$t('labels.project')}: <span class="color-orange">${this.$t('projects.m3_gelovani')}</span>  `
+      return `${this.$t(
+        'labels.project'
+      )}: <span class="color-orange">${this.$t(
+        'projects.m3_gelovani'
+      )}</span>  `
     },
     flatLocationInfo() {
       const block = this.block ? this.block : this.activeBlock
@@ -168,12 +188,12 @@ export default {
       return infoArray
     }
   },
-  mounted () {
+  mounted() {
     this.setFilterDefaults(this.filterDefaults)
     this.getProject()
     this.getSoldCount()
   },
-  destroyed () {
+  destroyed() {
     this.setFilterDefaults(this.filterDefaults)
   },
   methods: {
@@ -182,18 +202,19 @@ export default {
       setFilterDefaults: 'Filter/SET_FILTER_DEFAULTS'
     }),
     getSoldCount() {
-      this.$axios.get('/flats/count', {
-        params: {
-          status: 'sold' 
-        }
-      }).then(({data}) => {
-        this.totalFlats = data.total
-        this.soldFlats = data.count
-      })
+      this.$axios
+        .get('/flats/count', {
+          params: {
+            status: 'sold'
+          }
+        })
+        .then(({ data }) => {
+          this.totalFlats = data.total
+          this.soldFlats = data.count
+        })
     },
     getProject() {
-     this.$axios.get('/projects/13')
-      .then(({data}) => {
+      this.$axios.get('/projects/13').then(({ data }) => {
         this.builingStatus = data.building_status
       })
     },
@@ -233,15 +254,15 @@ export default {
       this.activeTab = ++this.activeTab
     },
     handleTabChange(index) {
-      if(index === 0) {
+      if (index === 0) {
         this.activeTab = index
       }
-      if(index === 1 && this.activeBlock) {
+      if (index === 1 && this.activeBlock) {
         this.activeTab = index
       }
-      if(index === 2 && this.activeBlock && this.floor) {
+      if (index === 2 && this.activeBlock && this.floor) {
         this.activeTab = index
-      } 
+      }
     },
     handleBlockChange(id) {
       this.activeBlock = id
@@ -252,7 +273,7 @@ export default {
 
 <style lang="scss" scoped>
 .render-page {
-  margin-top: 16px; 
+  margin-top: 16px;
 }
 .filter-flat {
   height: 561px;

@@ -1,6 +1,6 @@
 <template>
   <div class="faq-view">
-    <language-switcher class="faq-switcher"/>
+    <language-switcher class="faq-switcher" />
     <slot />
     <div class="close-container">
       <close-button :button-text="$t('buttons.CLOSE')" @click="goBack" />

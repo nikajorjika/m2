@@ -1,17 +1,21 @@
 <template>
   <div class="confirm-modal" @click.stop="closeModal">
     <div class="confirm-modal__wrapper" @click.stop>
-      <div @click="closeModal" class="close-button">x</div>
-        <div class="confirm-modal__content">
-          <h4>{{ $t('modal.please_confirm_email') }}</h4>
-          <div class="confirm-modal__buttons">
-            <div class="input">
-              <input type="text" v-model="email" :disabled="loading">
-            </div>
-            <button @click="accept" :disabled="loading" class="button button-accept">
-              {{ $t('modal.send') }}
-            </button>
+      <div class="close-button" @click="closeModal">x</div>
+      <div class="confirm-modal__content">
+        <h4>{{ $t('modal.please_confirm_email') }}</h4>
+        <div class="confirm-modal__buttons">
+          <div class="input">
+            <input v-model="email" type="text" :disabled="loading" />
           </div>
+          <button
+            :disabled="loading"
+            class="button button-accept"
+            @click="accept"
+          >
+            {{ $t('modal.send') }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -58,7 +62,7 @@ export default {
   bottom: 0;
   right: 0;
   display: flex;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 999;
   animation: fadeIn;
   &__wrapper {
@@ -89,11 +93,11 @@ export default {
     flex-direction: column;
     height: 100%;
     h4 {
-      font: 22px/1 "BPG Nino Mtavruli", sans-serif;
+      font: 22px/1 'BPG Nino Mtavruli', sans-serif;
       color: #494949;
     }
   }
-  
+
   &__buttons {
     margin-top: 40px;
     display: flex;
@@ -115,14 +119,14 @@ export default {
       border: none;
       border-radius: 18px;
       background: $orange;
-      color: #fff;    
+      color: #fff;
       padding: 10px 27px;
       font-size: 16px;
       outline: none;
       &-cancel {
         background: #8178b7;
       }
-      &[disabled="disabled"] {
+      &[disabled='disabled'] {
         pointer-events: none;
         opacity: 0.6;
       }

@@ -12,7 +12,9 @@
             >
               <div class="list-slider__list__item__number" :class="styleType">
                 <span>
-                  {{ turnToLeadingZero(index * visibleRoomsNumber + (key + 1)) }}
+                  {{
+                    turnToLeadingZero(index * visibleRoomsNumber + (key + 1))
+                  }}
                 </span>
               </div>
               <div class="list-slider__list__item__label" :class="styleType">

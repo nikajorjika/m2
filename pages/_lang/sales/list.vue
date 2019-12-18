@@ -13,7 +13,7 @@
       @showPrompt="handlePrompt"
     />
     <div v-if="animating" class="light-bulb-animation">
-      <light-icon  width="100%" height="100%" icon-color="#fff" />
+      <light-icon width="100%" height="100%" icon-color="#fff" />
     </div>
   </div>
 </template>
@@ -41,15 +41,15 @@ export default {
     }
   },
   mounted() {
-      if(this.$route.query.hasOwnProperty('filters')){
-          const filters = JSON.parse(this.$route.query.filters)
-          filters.min_floor = filters.floors.min
-          filters.max_floor = filters.floors.max
-          filters.min_price = filters.price.min
-          filters.max_price = filters.price.max
-          this.setFilters(filters)
-      }
-      this.loading = false
+    if (this.$route.query.hasOwnProperty('filters')) {
+      const filters = JSON.parse(this.$route.query.filters)
+      filters.min_floor = filters.floors.min
+      filters.max_floor = filters.floors.max
+      filters.min_price = filters.price.min
+      filters.max_price = filters.price.max
+      this.setFilters(filters)
+    }
+    this.loading = false
   },
   data() {
     return {
@@ -96,7 +96,7 @@ export default {
       this.text = this.generateTextBasedOnColor(id)
     },
     showAnimation() {
-      this.animating = true;
+      this.animating = true
       setTimeout(() => {
         this.animating = false
       }, 300)

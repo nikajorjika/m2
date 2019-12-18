@@ -1,12 +1,20 @@
 <template>
   <div class="full-page-loader">
-    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
@@ -17,7 +25,7 @@ export default {
   left: 0;
   right: 0;
   z-index: 9999;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   display: flex;
   .lds-roller {
     display: inline-block;
@@ -31,7 +39,7 @@ export default {
     transform-origin: 40px 40px;
   }
   .lds-roller div:after {
-    content: " ";
+    content: ' ';
     display: block;
     position: absolute;
     width: 7px;
