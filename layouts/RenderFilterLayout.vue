@@ -28,17 +28,11 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import ModelView from '@/components/core/ModelView'
-import BlockIcon from '@/components/icons/Block'
-import FlatNavigation from '@/components/core/FlatNavigation'
-import FloorIcon from '@/components/icons/Floor'
 import QuestionsIcon from '@/components/icons/Questions'
-import Registration from '@/components/icons/Registration'
-import ProjectIcon from '@/components/icons/Project'
 import MainIcon from '@/components/icons/Main'
-import CompletedIcon from '@/components/icons/Completed'
 import PopoverImage from '@/components/partials/PopoverImage'
 import SessionButton from '@/components/partials/SessionButton'
 import Modal from '@/components/partials/Modal'
@@ -49,13 +43,7 @@ export default {
     ModelView,
     FilterRenderFooter,
     SessionButton,
-    FlatNavigation,
-    BlockIcon,
     PopoverImage,
-    MainIcon,
-    QuestionsIcon,
-    Registration,
-    FloorIcon,
     Modal
   },
   props: {
@@ -68,11 +56,11 @@ export default {
       default: false
     }
   },
-  beforeDestroy () {
-    this.setFilterDefaults(this.filterDefaults)
-  },
   computed: {
-    ...mapGetters({ locale: 'locale', filterDefaults: 'Filter/filterDefaults' }),
+    ...mapGetters({
+      locale: 'locale',
+      filterDefaults: 'Filter/filterDefaults'
+    }),
     items() {
       return [
         {
@@ -93,6 +81,9 @@ export default {
         }
       ]
     }
+  },
+  beforeDestroy() {
+    this.setFilterDefaults(this.filterDefaults)
   },
   methods: {
     ...mapMutations({

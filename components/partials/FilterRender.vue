@@ -5,7 +5,7 @@
       <div
         v-if="activeBlockNumber && blockInfo"
         ref="infoBlock"
-        class="render__info" 
+        class="render__info"
       >
         <block-hover-info
           :flats-count="blockInfo.sellableFlats"
@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { objectMethod } from '@babel/types'
 import BlockHoverInfo from '@/components/partials/BlockHoverInfo'
 import FilterRenderSvg from '@/components/partials/FilterRenderSvg'
 export default {

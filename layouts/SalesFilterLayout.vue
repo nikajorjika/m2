@@ -22,18 +22,23 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import SaleFilterView from '@/components/core/SaleFilterView'
-import SidebarWithItems from '@/components/core/SidebarWithItems'
 import PopoverImage from '@/components/partials/PopoverImage'
 import SalesAsideFilter from '@/components/partials/SalesAsideFilter'
 import Registration from '@/components/icons/Registration'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
-import { mapGetters, mapMutations } from 'vuex'
 import Modal from '@/components/partials/Modal'
 export default {
-  components: { SalesAppSidebar, SaleFilterView, PopoverImage, SalesAsideFilter, Modal },
+  components: {
+    SalesAppSidebar,
+    SaleFilterView,
+    PopoverImage,
+    SalesAsideFilter,
+    Modal
+  },
   props: {
     image: {
       type: String,
@@ -43,9 +48,6 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  beforeDestroy () {
-    this.setFilterDefaults(this.filterDefaults)
   },
   computed: {
     ...mapGetters({
@@ -81,6 +83,9 @@ export default {
         }
       ]
     }
+  },
+  beforeDestroy() {
+    this.setFilterDefaults(this.filterDefaults)
   },
   methods: {
     ...mapMutations({

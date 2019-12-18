@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchCurrencyValue: 'settings/fetchCurrencyValue',
+      fetchCurrencyValue: 'settings/fetchCurrencyValue'
     }),
     toggle(e) {
       const switcher = e.target.closest('.currency-switcher')

@@ -31,7 +31,6 @@ import ListBlock from '@/components/partials/ListCard'
 import TitleWithBorder from '@/components/partials/TitleWithLine'
 import RenderViewer from '@/components/partials/FlatRenderViewer'
 import RoomListComponent from '@/components/partials/RoomListComponent'
-import { formatPrice } from '@/utils/Mixed'
 export default {
   components: { ListBlock, TitleWithBorder, RenderViewer, RoomListComponent },
   layout: 'RenovationsLayout',

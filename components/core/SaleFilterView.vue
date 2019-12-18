@@ -41,20 +41,6 @@ export default {
     LanguageSwitcher,
     SessionButton
   },
-  mounted() {
-    this.fetchPresets()
-      .then((data) => {
-        // console.log(data)
-      })
-      .catch((err) => console.log(err))
-    if(this.filterDefaults.min_floor === null || this.filterDefaults.max_floor === null) {
-      this.fetchFilterDefaults()
-        .then((data) => {
-          // console.log(data)
-        })
-        .catch((err) => console.log(err))
-    }
-  },
   computed: {
     ...mapGetters({
       locale: 'locale',
@@ -126,6 +112,23 @@ export default {
       }
     }
   },
+  mounted() {
+    this.fetchPresets()
+      .then((data) => {
+        // console.log(data)
+      })
+      .catch((err) => console.error(err))
+    if (
+      this.filterDefaults.min_floor === null ||
+      this.filterDefaults.max_floor === null
+    ) {
+      this.fetchFilterDefaults()
+        .then((data) => {
+          // console.log(data)
+        })
+        .catch((err) => console.error(err))
+    }
+  },
   methods: {
     ...mapActions({
       fetchPresets: 'Filter/fetchFilterPresets',
@@ -178,6 +181,5 @@ export default {
   .faq-container {
     margin: auto 0;
   }
-   
 }
 </style>

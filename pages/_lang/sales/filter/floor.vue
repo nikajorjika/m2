@@ -7,12 +7,12 @@
           :title="$t('titles.PickFloorRange')"
         />
       </div>
-      <div class="warning" :class="{active: totalCount === 0}">
-        <p>{{$t('errors.NoFlatsInThisFloorRange')}}</p>
+      <div class="warning" :class="{ active: totalCount === 0 }">
+        <p>{{ $t('errors.NoFlatsInThisFloorRange') }}</p>
       </div>
-      <select-range 
-        class="range-picker"
+      <select-range
         v-if="minFloor >= 0 && maxFloor"
+        class="range-picker"
         :min-value="minFloor"
         :max-value="maxFloor"
         :preset-min="filterFloor.min"
@@ -20,14 +20,14 @@
         :step="1"
         :suffix="$t('labels.floorShort')"
         @change="handleChange"
-        />
+      />
       <sale-filter-footer :next-url="nextUrl" @skip="skipFloor" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -36,7 +36,7 @@ export default {
   components: {
     SelectRange,
     SaleFilterFooter,
-    TitleWithLine,
+    TitleWithLine
   },
   middleware: 'isAuth',
   layout: 'SalesFilterLayout',

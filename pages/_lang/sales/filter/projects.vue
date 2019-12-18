@@ -9,17 +9,21 @@
       </div>
       <!-- <picker-with-gradient-label :items="pickerData"/> -->
       <div class="page-flat-number__render">
-        <filter-render :preselected="block" @seleted="handleBlockSelect" @change="handleBlockChange" @beforeChange="handleBeforeChange" />
+        <filter-render
+          :preselected="block"
+          @seleted="handleBlockSelect"
+          @change="handleBlockChange"
+          @beforeChange="handleBeforeChange"
+        />
       </div>
-      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice"/>
+      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
 import CompletedIcon from '@/components/icons/Completed'
 import PlannedIcon from '@/components/icons/Planned'
@@ -28,7 +32,6 @@ import FilterRender from '@/components/partials/FilterRender'
 export default {
   components: {
     TitleWithLine,
-    PickerWithGradientLabel,
     FilterRender,
     SaleFilterFooter
   },
@@ -51,7 +54,7 @@ export default {
           icon: InProgressIcon,
           name: this.$t('status.ongoing'),
           value: 'ongoing'
-        },
+        }
       ]
     }
   },
@@ -83,7 +86,7 @@ export default {
       this.setloader(true)
     },
     handleBlockChange(value) {
-      if(this.filters.block === value) { 
+      if (this.filters.block === value) {
         this.setloader(false)
       }
       this.setFilter({

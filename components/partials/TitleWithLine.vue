@@ -1,5 +1,6 @@
 <template>
   <h2 class="bordered-title">
+    <!-- eslint-disable-next-line vue/no-v-html -->
     <span class="text" v-html="title" />
   </h2>
 </template>

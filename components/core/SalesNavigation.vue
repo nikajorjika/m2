@@ -1,9 +1,6 @@
 <template>
   <div class="flat-navigation">
-    <ul 
-      class="flat-navigation__list" 
-      :class="{inactive: !isFilter}"
-      >
+    <ul class="flat-navigation__list" :class="{ inactive: !isFilter }">
       <li
         v-for="(item, index) in navData.filter"
         :key="index"
@@ -28,10 +25,7 @@
         </nuxt-link>
       </li>
     </ul>
-    <ul 
-      class="flat-navigation__list" 
-      :class="{inactive: !isCustomize}" 
-    >
+    <ul class="flat-navigation__list" :class="{ inactive: !isCustomize }">
       <li
         v-for="(item, index) in navData.customize"
         :key="index"
@@ -82,15 +76,17 @@ export default {
   methods: {
     isSamePath: (a, b) => isSamePath(a, b),
     openInactive(module) {
-      if(!this.isThisRoute(module)) {
-        this.$router.push({name: `lang-sales-${module}`, params: {lang: this.locale}})
+      if (!this.isThisRoute(module)) {
+        this.$router.push({
+          name: `lang-sales-${module}`,
+          params: { lang: this.locale }
+        })
       }
     },
     isThisRoute(module) {
       const regex = new RegExp(`^\\/\\w*\\/sales\\/${module}\\/?(.*)$`, 'i')
       const str = this.$route.fullPath
-      let m;
-      if ((m = regex.exec(str)) !== null) {
+      if (regex.exec(str) !== null) {
         return true
       }
     }
@@ -130,7 +126,7 @@ export default {
         margin-right: 54px;
       }
     }
-    &.inactive &{
+    &.inactive & {
       &__item {
         background: white;
         min-width: 0;

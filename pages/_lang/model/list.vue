@@ -20,7 +20,7 @@
       @showPrompt="handlePrompt"
     />
     <div v-if="animating" class="light-bulb-animation">
-      <light-icon  width="100%" height="100%" icon-color="#fff" />
+      <light-icon width="100%" height="100%" icon-color="#fff" />
     </div>
   </div>
 </template>
@@ -34,7 +34,21 @@ import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import LightIcon from '@/components/icons/Light'
 export default {
   layout: 'FullHeightWithoutNavigation',
-  components: { TitleWithLine, CurrencySwitcher, FlatListTable, PromptAlert, LightIcon },
+  components: {
+    TitleWithLine,
+    CurrencySwitcher,
+    FlatListTable,
+    PromptAlert,
+    LightIcon
+  },
+  data() {
+    return {
+      showPrompt: false,
+      text: null,
+      color: null,
+      animating: false
+    }
+  },
   computed: {
     ...mapGetters({
       flats: 'Filter/flats',
@@ -46,14 +60,6 @@ export default {
         '%s',
         this.totalFlatCount
       )
-    }
-  },
-  data() {
-    return {
-      showPrompt: false,
-      text: null,
-      color: null,
-      animating: false
     }
   },
   methods: {
@@ -89,7 +95,7 @@ export default {
       this.text = this.generateTextBasedOnColor(id)
     },
     showAnimation() {
-      this.animating = true;
+      this.animating = true
       setTimeout(() => {
         this.animating = false
       }, 300)

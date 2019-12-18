@@ -2,8 +2,8 @@
   <form class="confirm-form" @submit.prevent="handleSubmit">
     <div class="confirm-form__input">
       <input
-        v-model="code"
         ref="code"
+        v-model="code"
         type="text"
         placeholder="XXXX"
         :disabled="loading"
@@ -13,7 +13,10 @@
         {{ errors.code }}
       </div>
 
-      <div v-if="! (errors.code.length && showErrors) && invalidCodeErrorMessage" class="error">
+      <div
+        v-if="!(errors.code.length && showErrors) && invalidCodeErrorMessage"
+        class="error"
+      >
         {{ invalidCodeErrorMessage }}
       </div>
 
@@ -52,7 +55,10 @@ export default {
         return this.$t('buttons.ConfirmPhone')
       }
     },
-    invalidCodeErrorMessage: '',
+    invalidCodeErrorMessage: {
+      type: String,
+      default: ''
+    },
     loading: {
       type: Boolean,
       default: false

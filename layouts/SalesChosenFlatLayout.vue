@@ -27,12 +27,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Modal from '../components/partials/Modal'
 import SalesChosenFlatView from '@/components/core/SalesChosenFlatView'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import PopoverImage from '@/components/partials/PopoverImage'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
-import Modal from "../components/partials/Modal";
 
 export default {
   components: {

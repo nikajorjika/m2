@@ -16,5 +16,5 @@ export default {
   },
   GET_CURRENCY_TTL(state) {
     return state.currencyTtl
-  } 
+  }
 }

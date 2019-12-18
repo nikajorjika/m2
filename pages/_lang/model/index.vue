@@ -6,6 +6,7 @@
       <title-with-line class="name" :title="name" />
 
       <div class="description">
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <p v-html="hasColor ? description : mainDescription"></p>
       </div>
 
@@ -47,7 +48,11 @@
           </template>
 
           <template v-slot:icon>
-            <search-by-flat-number icon-color="#fff" width="18px" height="9px" />
+            <search-by-flat-number
+              icon-color="#fff"
+              width="18px"
+              height="9px"
+            />
           </template>
         </illustrated-button>
         <illustrated-button
@@ -177,7 +182,7 @@ export default {
     display: flex;
     .link {
       margin-right: 20px;
-    } 
+    }
   }
   .filter-illustation-icon {
     margin: 0 0 0 -12px;

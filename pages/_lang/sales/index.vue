@@ -1,6 +1,6 @@
 <template>
   <div class="page-sales">
-    <sales-app-sidebar class="page-sales__index__sidebar" :no-margin="true"/>
+    <sales-app-sidebar class="page-sales__index__sidebar" :no-margin="true" />
     <div class="page-content">
       <div class="page-sales__content">
         <div class="page-sales__content__header">
@@ -8,26 +8,31 @@
           <language-switcher class="page-sales__content__header__language" />
         </div>
         <div class="page-sales__content__projects">
-            <div class="project">
-              <div class="project__image">
-                <div class="img-wrapper">
-                  <img src="@/assets/images/m3_saburtalo_ubani.jpg" alt="">
-                </div>
+          <div class="project">
+            <div class="project__image">
+              <div class="img-wrapper">
+                <img src="@/assets/images/m3_saburtalo_ubani.jpg" alt="" />
               </div>
-              <div class="project__content">
-                <h1>M2 გელოვანზე</h1>
-                <p>{{ $t('home.m3text') }}</p>
-                <ul>
-                  <li>{{ $t('home.m3sub1') }}</li>
+            </div>
+            <div class="project__content">
+              <h1>M2 გელოვანზე</h1>
+              <p>{{ $t('home.m3text') }}</p>
+              <ul>
+                <li>{{ $t('home.m3sub1') }}</li>
               </ul>
-                <div class="project__content__sold-info">
-                  <h4>{{ $t('labels.sold_flat_count') }}</h4>
-                  <div class="project__content__sold-info__progress">
-                    <white-progress :min="0" :max="100" suffix="%" :value="progress" />
-                  </div>
+              <div class="project__content__sold-info">
+                <h4>{{ $t('labels.sold_flat_count') }}</h4>
+                <div class="project__content__sold-info__progress">
+                  <white-progress
+                    :min="0"
+                    :max="100"
+                    suffix="%"
+                    :value="progress"
+                  />
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
       <div class="page-sales__footer">
@@ -39,10 +44,10 @@
           <small>{{ $t('titles.ChooseYourSearchingMethod') }}</small>
         </div>
         <div class="index-illustrated-button">
-          <illustrated-button 
-            :label="$t('labels.ByRender')" 
-            :to-route="`/${this.locale}/sales/render`"
-          > 
+          <illustrated-button
+            :label="$t('labels.ByRender')"
+            :to-route="`/${locale}/sales/render`"
+          >
             <template v-slot:illustration>
               <render-illustration
                 class="index-illustation-icon"
@@ -51,15 +56,15 @@
               />
             </template>
             <template v-slot:icon>
-              <render-icon icon-color="#fff" height="14px"  width="14px"/>
+              <render-icon icon-color="#fff" height="14px" width="14px" />
             </template>
           </illustrated-button>
         </div>
         <div class="index-illustrated-button">
-          <illustrated-button 
-            :label="$t('labels.ByFilter')" 
-            :to-route="`/${this.locale}/sales/filter`"
-          > 
+          <illustrated-button
+            :label="$t('labels.ByFilter')"
+            :to-route="`/${locale}/sales/filter`"
+          >
             <template v-slot:illustration>
               <filter-illustration
                 class="index-illustation-icon"
@@ -68,7 +73,7 @@
               />
             </template>
             <template v-slot:icon>
-              <filter-search icon-color="#fff" height="9px"  width="12px"/>
+              <filter-search icon-color="#fff" height="9px" width="12px" />
             </template>
           </illustrated-button>
         </div>
@@ -78,7 +83,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import LanguageSwitcher from '@/components/core/LanguageSwitcher'
@@ -100,7 +105,7 @@ export default {
     RenderIllustration,
     RenderIcon,
     FilterSearch,
-    LanguageSwitcher,
+    LanguageSwitcher
   },
   layout: 'CleanLayout',
   auth: 'guest',
@@ -108,10 +113,6 @@ export default {
     return {
       project: null
     }
-  },
-  mounted() {
-    this.getProjectInfo()
-    // this.$toast.generalError()
   },
   computed: {
     ...mapGetters({
@@ -133,12 +134,15 @@ export default {
       return this.project ? this.project.building_status : 0
     }
   },
+  mounted() {
+    this.getProjectInfo()
+    // this.$toast.generalError()
+  },
   methods: {
     getProjectInfo() {
-      this.$axios.get('/projects/13')
-        .then(({data}) => {
-          this.project = data
-        })
+      this.$axios.get('/projects/13').then(({ data }) => {
+        this.project = data
+      })
     }
   }
 }
@@ -200,7 +204,7 @@ export default {
   display: flex;
   &__image {
     width: 500px;
-    padding-right:90px;
+    padding-right: 90px;
     overflow: hidden;
     box-sizing: content-box;
     background: url('~@/assets/images/pattern-lines.png') no-repeat;
@@ -223,7 +227,7 @@ export default {
   &__content {
     width: 468.6px;
 
-    h1 { 
+    h1 {
       color: $orange;
       font-size: 23px;
       font-family: $font-caps;
@@ -235,19 +239,19 @@ export default {
       font-size: 13.2px;
       line-height: 1.9;
       color: #494949;
-      letter-spacing: .7px;
+      letter-spacing: 0.7px;
       margin: 46px 0;
     }
     ul {
       display: flex;
       flex-direction: column;
-      list-style:none;
+      list-style: none;
       padding-left: 33px;
       li {
         font-size: 13.2px;
         line-height: 1.4;
         color: #494949;
-        letter-spacing: .7px;
+        letter-spacing: 0.7px;
         margin-bottom: 16px;
         position: relative;
         &:before {

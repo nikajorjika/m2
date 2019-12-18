@@ -20,13 +20,13 @@
       @showPrompt="handlePrompt"
     />
     <div v-if="animating" class="light-bulb-animation">
-      <light-icon  width="100%" height="100%" icon-color="#fff" />
+      <light-icon width="100%" height="100%" icon-color="#fff" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import FlatListTable from '@/components/partials/FavouriteFlatListTable'
 import PromptAlert from '@/components/partials/PromptAlert'
@@ -34,15 +34,12 @@ import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 import LightIcon from '@/components/icons/Light'
 export default {
   layout: 'FullHeightWithoutNavigation',
-  components: { TitleWithLine, CurrencySwitcher, FlatListTable, PromptAlert, LightIcon },
-  computed: {
-    ...mapGetters({
-      locale: 'locale',
-      temporaryToken: 'Sales/temporaryToken'
-    }),
-    cTitle() {
-      return this.$t('titles.FavouriteFlats')
-    }
+  components: {
+    TitleWithLine,
+    CurrencySwitcher,
+    FlatListTable,
+    PromptAlert,
+    LightIcon
   },
   data() {
     return {
@@ -55,26 +52,34 @@ export default {
       animating: false
     }
   },
+  computed: {
+    ...mapGetters({
+      locale: 'locale',
+      temporaryToken: 'Sales/temporaryToken'
+    }),
+    cTitle() {
+      return this.$t('titles.FavouriteFlats')
+    }
+  },
   mounted() {
     this.loading = true
-    if(this.temporaryToken === null) {
+    if (this.temporaryToken === null) {
       this.$router.push({
         name: 'lang-model-by-auth',
         params: {
           lang: this.locale
         }
       })
-      return;
+      return
     }
     this.$axios(`/user/current-user`, {
       headers: {
         Authorization: `Bearer ${this.temporaryToken}`
       }
-    }).then(({data}) => {
+    }).then(({ data }) => {
       this.user = data.user
       this.getFlatList()
     })
-    
   },
   methods: {
     generateTextBasedOnColor(id) {
@@ -110,8 +115,8 @@ export default {
         headers: {
           Authorization: `Bearer ${this.temporaryToken}`
         }
-      }).then(({data}) => {
-        this.flats = data.map(({flat})=> {
+      }).then(({ data }) => {
+        this.flats = data.map(({ flat }) => {
           return flat
         })
         this.loading = false

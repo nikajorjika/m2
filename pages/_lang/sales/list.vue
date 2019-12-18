@@ -13,7 +13,7 @@
       @showPrompt="handlePrompt"
     />
     <div v-if="animating" class="light-bulb-animation">
-      <light-icon  width="100%" height="100%" icon-color="#fff" />
+      <light-icon width="100%" height="100%" icon-color="#fff" />
     </div>
   </div>
 </template>
@@ -27,6 +27,15 @@ import LightIcon from '@/components/icons/Light'
 export default {
   layout: 'SalesWithoutNavigation',
   components: { TitleWithLine, FlatListTable, CurrencySwitcher, LightIcon },
+  data() {
+    return {
+      showPrompt: false,
+      text: null,
+      color: null,
+      loading: true,
+      animating: false
+    }
+  },
   computed: {
     ...mapGetters({
       flats: 'Filter/flats',
@@ -41,24 +50,15 @@ export default {
     }
   },
   mounted() {
-      if(this.$route.query.hasOwnProperty('filters')){
-          const filters = JSON.parse(this.$route.query.filters)
-          filters.min_floor = filters.floors.min
-          filters.max_floor = filters.floors.max
-          filters.min_price = filters.price.min
-          filters.max_price = filters.price.max
-          this.setFilters(filters)
-      }
-      this.loading = false
-  },
-  data() {
-    return {
-      showPrompt: false,
-      text: null,
-      color: null,
-      loading: true,
-      animating: false
+    if (this.$route.query.hasOwnProperty('filters')) {
+      const filters = JSON.parse(this.$route.query.filters)
+      filters.min_floor = filters.floors.min
+      filters.max_floor = filters.floors.max
+      filters.min_price = filters.price.min
+      filters.max_price = filters.price.max
+      this.setFilters(filters)
     }
+    this.loading = false
   },
   methods: {
     ...mapMutations({
@@ -96,7 +96,7 @@ export default {
       this.text = this.generateTextBasedOnColor(id)
     },
     showAnimation() {
-      this.animating = true;
+      this.animating = true
       setTimeout(() => {
         this.animating = false
       }, 300)

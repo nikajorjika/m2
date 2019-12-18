@@ -4,18 +4,23 @@
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
-          :title="$t('titles.BuildingProgress')" 
+          :title="$t('titles.BuildingProgress')"
         />
         <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
       </div>
-      <picker-with-gradient-label class="caps" :items="pickerData" :preselected="preselectedData" @change="handleChange" />
+      <picker-with-gradient-label
+        class="caps"
+        :items="pickerData"
+        :preselected="preselectedData"
+        @change="handleChange"
+      />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -47,7 +52,7 @@ export default {
           icon: InProgressIcon,
           name: this.$t('status.ongoing'),
           value: 'ongoing'
-        },
+        }
       ]
     }
   },
@@ -57,7 +62,9 @@ export default {
       filters: 'Filter/filters'
     }),
     preselectedData() {
-      return this.pickerData.filter(item => this.filters.building_progress.includes(item.value))
+      return this.pickerData.filter((item) =>
+        this.filters.building_progress.includes(item.value)
+      )
     },
     nextUrl() {
       return `/${this.locale}/sales/filter/bedrooms`
@@ -73,13 +80,13 @@ export default {
     },
     handleChange(data) {
       this.setLoader(true)
-      const progress = data.map(item => {
+      const progress = data.map((item) => {
         return item.value
       })
       this.setFilter({
         key: 'building_progress',
         value: progress
-       })
+      })
     }
   }
 }

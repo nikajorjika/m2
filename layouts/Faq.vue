@@ -35,12 +35,12 @@
   </no-ssr>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import Sidebar from '@/components/core/Sidebar'
 import FaqView from '@/components/core/FaqView'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import QuestionIcon from '@/components/icons/Questions'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
-import { mapGetters } from 'vuex'
 
 export default {
   components: { FaqView, QuestionIcon, TitleWithLine },

@@ -9,7 +9,7 @@ const getters = {
 }
 
 const mutations = {
-  SET: (state, {key, value}) => {
+  SET: (state, { key, value }) => {
     state[key] = value
   },
   SET_TOKEN: (state, payload) => {
@@ -17,24 +17,23 @@ const mutations = {
   }
 }
 const actions = {
-  loginUser({dispatch}, data) {
+  loginUser({ dispatch }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
         .post(`/user/verify`, data)
-        .then(({data}) => {
-          if(data.hasOwnProperty('access_token')) {
-            dispatch('setUserData', data)
-              .then(() => {
-                resolve(data)
-              })
-          }else {
+        .then(({ data }) => {
+          if (data.hasOwnProperty('access_token')) {
+            dispatch('setUserData', data).then(() => {
+              resolve(data)
+            })
+          } else {
             resolve()
           }
         })
         .catch((e) => reject(e))
     })
   },
-  setUserData({commit, dispatch}, data) {
+  setUserData({ commit, dispatch }, data) {
     return new Promise((resolve, reject) => {
       commit('SET_TOKEN', data.access_token)
       this.$cookies.set('auth._token.local', data.access_token)
@@ -43,26 +42,26 @@ const actions = {
       })
     })
   },
-  me({commit}) {
+  me({ commit }) {
     return new Promise((resolve, reject) => {
       this.$axios
         .get(`/user/current-user`)
-        .then(({data}) => {
-          commit('SET', {key: 'user', value: data.user})
+        .then(({ data }) => {
+          commit('SET', { key: 'user', value: data.user })
           resolve()
         })
         .catch((e) => {
-          if(e.response.status === 401) {
+          if (e.response.status === 401) {
             this.$cookies.set('auth._token.local', false)
           }
           reject(e)
         })
     })
   },
-  logout({commit}) {
+  logout({ commit }) {
     return new Promise((resolve, reject) => {
-      commit('SET', {key: 'user', value: false})
-      this.$cookies.set('auth._token.local', false) 
+      commit('SET', { key: 'user', value: false })
+      this.$cookies.set('auth._token.local', false)
       resolve(true)
     })
   }

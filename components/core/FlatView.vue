@@ -23,12 +23,7 @@ export default {
   components: {
     FlatNavigation,
     FaqButton,
-    LanguageSwitcher,
-    FlatIcon,
-    RenovationIcon,
-    FurnitureIcon,
-    SupplyIcon,
-    DecorationIcon
+    LanguageSwitcher
   },
   computed: {
     ...mapGetters(['locale']),

@@ -1,8 +1,8 @@
 <template>
-  <div class="select" :class="{open: open}" @click.stop>
+  <div class="select" :class="{ open: open }" @click.stop>
     <div class="select__current" @click="open = !open">
-      <span v-if="!selectedValue">{{placeholder}}</span>
-      <span class="selected" v-else>
+      <span v-if="!selectedValue">{{ placeholder }}</span>
+      <span v-else class="selected">
         <span class="gray">
           {{ selected.label }}
         </span>
@@ -10,12 +10,17 @@
           {{ selected.valueLabel }}
         </span>
       </span>
-      <div class="arrow" :class="{open: open}">
+      <div class="arrow" :class="{ open: open }">
         <arrow-icon icon-color="#f26529" />
       </div>
     </div>
     <div v-if="open" class="select__options">
-      <div v-for="(item, index) in cOptions" :key="index" class="select__options__option" @click="selectItem(item)">
+      <div
+        v-for="(item, index) in cOptions"
+        :key="index"
+        class="select__options__option"
+        @click="selectItem(item)"
+      >
         <span class="gray">
           {{ item.label }}
         </span>
@@ -31,12 +36,12 @@
 import ArrowIcon from '@/components/icons/CaretRight'
 export default {
   components: {
-    ArrowIcon,
+    ArrowIcon
   },
   props: {
     placeholder: {
       type: [Number, String],
-      default: 'Select' 
+      default: 'Select'
     },
     options: {
       type: Array,
@@ -46,18 +51,6 @@ export default {
       type: [Object, String, Number],
       default: null
     }
-  },
-  mounted() {
-    if(process.client) {
-      this.$root.$el.addEventListener('click', () => {
-        this.open = false
-      })
-    }
-  },
-  destroyed() {
-      this.$root.$el.removeEventListener('click', () => {
-        this.open = false
-      })
   },
   data() {
     return {
@@ -72,14 +65,27 @@ export default {
       })
     },
     cOptions() {
-      return this.options.map(({value, indexLabel, valueLabel}) => {
+      return this.options.map(({ value, indexLabel, valueLabel }) => {
         return {
           label: indexLabel,
-          valueLabel: valueLabel,
-          value: value
+          valueLabel,
+          value
         }
       })
     }
+  },
+  mounted() {
+    // eslint-disable-next-line nuxt/no-env-in-hooks
+    if (process.client) {
+      this.$root.$el.addEventListener('click', () => {
+        this.open = false
+      })
+    }
+  },
+  destroyed() {
+    this.$root.$el.removeEventListener('click', () => {
+      this.open = false
+    })
   },
   methods: {
     selectItem(item) {
@@ -87,7 +93,7 @@ export default {
       this.open = false
       this.$emit('change', this.selectedValue)
     }
-  },
+  }
 }
 </script>
 
@@ -131,10 +137,10 @@ export default {
     }
   }
   &__options {
-    padding: 15px 20px; 
-    display: flex;  
+    padding: 15px 20px;
+    display: flex;
     position: absolute;
-    flex-direction: column; 
+    flex-direction: column;
     width: 180px;
     top: 100%;
     left: 0;

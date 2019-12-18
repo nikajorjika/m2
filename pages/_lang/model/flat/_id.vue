@@ -67,10 +67,8 @@ import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
 import GradientLabel from '@/components/partials/GradientLabel'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
-import { formatPrice } from '@/utils/Mixed'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
-import CaretRight from '@/components/icons/CaretRight'
 
 export default {
   layout: 'WithoutNavigation',
@@ -83,9 +81,7 @@ export default {
     GradientProgress,
     GradientLabel,
     ButtonMainOrange,
-    LightIcon,
-    CaretRight,
-    GradientLabel
+    LightIcon
   },
   data() {
     return {

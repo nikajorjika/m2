@@ -4,11 +4,22 @@
       <div class="image"></div>
     </div>
     <div class="checboxes">
-      <div v-for="(item,index) in checkboxData" :key="index" class="checbox" @click="activate(item)">
-        <div class="checkbox-container" :class="{active: activeItems.includes(item.value)}">
+      <div
+        v-for="(item, index) in checkboxData"
+        :key="index"
+        class="checbox"
+        @click="activate(item)"
+      >
+        <div
+          class="checkbox-container"
+          :class="{ active: activeItems.includes(item.value) }"
+        >
           <span class="label">{{ item.name[locale] }}</span>
-          <div v-if="activeItems.includes(item.value)" class="checbox-icon-container">
-            <check-icon 
+          <div
+            v-if="activeItems.includes(item.value)"
+            class="checbox-icon-container"
+          >
+            <check-icon
               class="checbox-icon-container__icon"
               icon-color="#f26529"
               width="8px"
@@ -24,70 +35,65 @@
 <script>
 import { mapGetters } from 'vuex'
 import CheckIcon from '@/components/icons/Check'
-  export default {
-    components: {
-      CheckIcon
-    },
-    data() {
-      return {
-        activeItems: [2]
-      }
-    },
-    computed: {
-      ...mapGetters({
-        locale: 'locale'
-      }),
-      checkboxData() {
-        return [
-          {
-            name: {
-              ka: 'შავი კარკასი',
-              en: 'შავი კარკასი'
-            },
-            value: 0
+export default {
+  components: {
+    CheckIcon
+  },
+  data() {
+    return {
+      activeItems: [2]
+    }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'locale'
+    }),
+    checkboxData() {
+      return [
+        {
+          name: {
+            ka: 'შავი კარკასი',
+            en: 'შავი კარკასი'
           },
-          {
-            name: {
-              ka: 'თეთრი კარკასი',
-              en: 'თეთრი კარკასი'
-            },
-            value: 1
+          value: 0
+        },
+        {
+          name: {
+            ka: 'თეთრი კარკასი',
+            en: 'თეთრი კარკასი'
           },
-          {
-            name: {
-              ka: 'რემონტით',
-              en: 'Renovated'
-            },
-            value: 2
+          value: 1
+        },
+        {
+          name: {
+            ka: 'რემონტით',
+            en: 'Renovated'
           },
-          {
-            name: {
-              ka: 'ავეჯით',
-              en: 'Furnitured'
-            },
-            value: 3
+          value: 2
+        },
+        {
+          name: {
+            ka: 'ავეჯით',
+            en: 'Furnitured'
           },
-          {
-            name: {
-              ka: 'ავეჯით და დეკორით',
-              en: 'Furnitured and Decorated'
-            },
-            value: 4
-          }
-        ]
-      }
-    },
-    methods: {
-      activate(item) {
-        return false
-        if(this.activeItems.includes(item.value)){
-          this.activeItems = this.activeItems.filter(id => item.value !== id)
-        }else {
-          this.activeItems.push(item.value)
+          value: 3
+        },
+        {
+          name: {
+            ka: 'ავეჯით და დეკორით',
+            en: 'Furnitured and Decorated'
+          },
+          value: 4
         }
-      }
-    },
+      ]
+    }
+  },
+  methods: {
+    activate(item) {
+      return false
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -98,7 +104,7 @@ import CheckIcon from '@/components/icons/Check'
     display: inline-block;
     position: relative;
     height: 452px;
-    width:452px;
+    width: 452px;
     .image {
       background: url('~@/assets/images/sidebar-bg.png');
       background-size: 100%;
@@ -123,16 +129,16 @@ import CheckIcon from '@/components/icons/Check'
       top: 24%;
       left: -13%;
     }
-    &:nth-child(3) {    
+    &:nth-child(3) {
       top: 43%;
       left: -18%;
     }
-    &:nth-child(4) {    
-      top: 63%;   
+    &:nth-child(4) {
+      top: 63%;
       left: -14%;
     }
-    &:nth-child(5) {    
-      top: 82%;  
+    &:nth-child(5) {
+      top: 82%;
       left: -2%;
     }
     .checkbox-container {

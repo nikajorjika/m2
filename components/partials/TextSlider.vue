@@ -5,9 +5,9 @@
     </div>
 
     <div
-      ref="slick"
       :is="slickComponent"
       v-if="items && items.length"
+      ref="slick"
       :options="slickOptions"
       class="text-slider"
     >

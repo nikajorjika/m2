@@ -1,15 +1,12 @@
 <template>
   <div class="floor-picker">
     <div v-if="loading" class="loading">
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <div class="lds-default" v-html="generateLoadingDivs()" />
     </div>
-    <component v-show="!loading" :is="render" class="flat-picker render-svg"/>
+    <component :is="render" v-show="!loading" class="flat-picker render-svg" />
     <transition name="fade">
-      <div
-        v-if="activeFlat && !loading"
-        ref="infoBlock"
-        class="render__info"
-      >
+      <div v-if="activeFlat && !loading" ref="infoBlock" class="render__info">
         <block-hover-info
           :flats-count="0"
           :top-label="$t('labels.flat')"
@@ -21,33 +18,30 @@
     </transition>
     <div class="legend">
       <div class="sold legend-item">
-        {{$t('labels.sold')}}
+        {{ $t('labels.sold') }}
       </div>
       <div class="available legend-item">
-        {{$t('labels.available')}}
+        {{ $t('labels.available') }}
       </div>
       <div class="reserved legend-item">
-        {{$t('labels.reserved')}}
+        {{ $t('labels.reserved') }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import upperFirst from 'lodash/upperFirst'
-import camelCase from 'lodash/camelCase'
+import { mapGetters } from 'vuex'
 import BlockOne from '@/components/partials/renders/BlockOne'
 import BlockTwo from '@/components/partials/renders/BlockTwo'
 import BlockThree from '@/components/partials/renders/BlockThree'
 import BlockHoverInfo from '@/components/partials/BlockHoverInfo'
-import { mapGetters } from 'vuex'
 export default {
   components: {
     BlockOne,
     BlockHoverInfo,
     BlockTwo,
-    BlockThree,
+    BlockThree
   },
   props: {
     block: {
@@ -58,11 +52,6 @@ export default {
       type: Number,
       default: 0
     }
-  },
-  mounted() {
-    this.fetchBlockInfo()
-    this.floorRender()
-    // this.renderSvgs()
   },
   data() {
     return {
@@ -82,26 +71,31 @@ export default {
       locale: 'locale'
     }),
     sortedFloors() {
-      if(!this.blockInfo) return
-      const floors = this.blockInfo.floors.map(item => item.number)
+      if (!this.blockInfo) return
+      const floors = this.blockInfo.floors.map((item) => item.number)
       return floors.sort((a, b) => b - a)
     }
+  },
+  mounted() {
+    this.fetchBlockInfo()
+    this.floorRender()
+    // this.renderSvgs()
   },
   methods: {
     fetchBlockInfo() {
       return new Promise((resolve, reject) => {
-       this.$axios
-        .get(`/block/21/${this.block}`)
-        .then((response) => {
-          this.blockInfo = response.data
-          resolve(response)
-        })
-        .catch((e) => reject(e))
+        this.$axios
+          .get(`/block/21/${this.block}`)
+          .then((response) => {
+            this.blockInfo = response.data
+            resolve(response)
+          })
+          .catch((e) => reject(e))
       })
     },
     generateLoadingDivs() {
       let divs = ''
-      for(let i = 0; i < 12; i++ ) {
+      for (let i = 0; i < 12; i++) {
         divs += '<div></div>'
       }
       return divs
@@ -111,61 +105,67 @@ export default {
       this.$emit('floorChosen', floor)
     },
     floorRender() {
-      this.render = () => import(`@/components/floor-renders/block-${this.block}/block-${this.block}-${this.floor}.vue`)
+      this.render = () =>
+        import(
+          `@/components/floor-renders/block-${this.block}/block-${this.block}-${this.floor}.vue`
+        )
       this.registerEvents()
     },
     registerEvents() {
       this.renderList = document.querySelectorAll('g[data-flat]')
-      if(this.renderList.length === 0) {
+      if (this.renderList.length === 0) {
         setTimeout(() => {
           this.registerEvents()
         }, 200)
       } else {
         this.fetchFlatStatuses()
-        this.renderList.forEach(element => {
-            element.addEventListener('click', this.chooseFlat)
-        });
+        this.renderList.forEach((element) => {
+          element.addEventListener('click', this.chooseFlat)
+        })
       }
     },
     fetchFlatStatuses() {
-      this.$axios.get(`get/floor/${this.block}/${this.floor}`)
-        .then(({data}) => {
+      this.$axios
+        .get(`get/floor/${this.block}/${this.floor}`)
+        .then(({ data }) => {
           data.map((item) => {
-            const domObject = document.querySelector(`g[data-flat="${item.flat_number}"]`)
-            if(domObject && item.status) {  
+            const domObject = document.querySelector(
+              `g[data-flat="${item.flat_number}"]`
+            )
+            if (domObject && item.status) {
               domObject.classList.add(item.status)
             }
           })
-          window.setTimeout(() => this.loading = false, 200)
+          window.setTimeout(() => (this.loading = false), 200)
         })
     },
     chooseFlat(e) {
-      if(!this.blockInfo) {
+      if (!this.blockInfo) {
         this.fetchBlockInfo().then((response) => {
           this.handleClickEvent(e)
         })
-      }else {
+      } else {
         this.handleClickEvent(e)
       }
     },
-    handleClickEvent(e){ 
+    handleClickEvent(e) {
       const selected = document.querySelectorAll('g[data-flat].active')
-      if(selected.length){
-        selected.forEach(element => { 
+      if (selected.length) {
+        selected.forEach((element) => {
           element.classList.remove('active')
         })
       }
-      let target = e.target.closest('[data-flat]')
+      const target = e.target.closest('[data-flat]')
       this.chosenFlataNumber = target.getAttribute('data-flat')
       this.$axios
         .get('/flats', {
           params: { flat_number: this.chosenFlataNumber }
         })
         .then(({ data }) => {
-          if(data.data.length) {
+          if (data.data.length) {
             this.activeFlat = data.data[0]
             this.$emit('flatSelected', this.chosenFlataNumber)
-          }else {
+          } else {
             this.activeFlat = null
           }
         })
@@ -179,7 +179,7 @@ export default {
         }
       })
     }
-  },
+  }
 }
 </script>
 
@@ -248,7 +248,7 @@ export default {
         width: 25px;
         display: flex;
         margin-left: auto;
-        &:after{ 
+        &:after {
           content: '';
           display: inline-block;
           width: 6px;
@@ -258,7 +258,7 @@ export default {
           margin: auto 0 auto auto;
         }
         &.active {
-          &:after{ 
+          &:after {
             width: 19px;
             opacity: 1;
           }
@@ -292,11 +292,10 @@ export default {
 }
 </style>
 <style lang="scss">
-.flat-picker  {
+.flat-picker {
   g[data-flat],
   polygon,
-  g[data-flat]
-  polygon {
+  g[data-flat] polygon {
     fill: rgb(118, 120, 122) !important;
   }
   g[data-flat].for_sale {
@@ -308,7 +307,7 @@ export default {
   g[data-flat].sold {
     fill: rgb(118, 120, 122) !important;
     polygon {
-     fill: rgb(118, 120, 122) !important;
+      fill: rgb(118, 120, 122) !important;
     }
   }
   g[data-flat].reserved {
@@ -318,7 +317,7 @@ export default {
     }
   }
   g[data-flat].for_sale.active,
-  g[data-flat].for_sale:hover{ 
+  g[data-flat].for_sale:hover {
     polygon {
       fill: $orange !important;
     }
@@ -403,7 +402,10 @@ export default {
     left: 62px;
   }
   @keyframes lds-default {
-    0%, 20%, 80%, 100% {
+    0%,
+    20%,
+    80%,
+    100% {
       transform: scale(1);
     }
     50% {

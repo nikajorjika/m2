@@ -24,7 +24,6 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import RangePicker from '@/components/partials/RangePicker'
 import SelectRange from '@/components/partials/SelectRange'
 import FiltersFooterBlock from '@/components/partials/FiltersFooterBlock'
 export default {

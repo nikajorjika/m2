@@ -8,12 +8,12 @@
         />
         <currency-switcher />
       </div>
-      <div class="warning" :class="{active: totalCount === 0}">
-        <p>{{$t('errors.NoFlatsInThisPriceRange')}}</p>
+      <div class="warning" :class="{ active: totalCount === 0 }">
+        <p>{{ $t('errors.NoFlatsInThisPriceRange') }}</p>
       </div>
-      <select-range 
-        class="range-picker"
+      <select-range
         v-if="minPrice !== null && maxPrice && !loading"
+        class="range-picker"
         :min-value="parseInt(minPrice)"
         :max-value="parseInt(maxPrice)"
         :preset-min="parseInt(filterPrice.min)"
@@ -21,14 +21,14 @@
         :step="1000"
         :suffix="suffix"
         @change="handleChange"
-        />
+      />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -39,18 +39,13 @@ export default {
     SelectRange,
     SaleFilterFooter,
     CurrencySwitcher,
-    TitleWithLine,
+    TitleWithLine
   },
   layout: 'SalesFilterLayout',
   middleware: 'isAuth',
   data() {
     return {
       loading: false
-    }
-  },
-  watch: {
-    suffix: {
-      handler: 'handleCurrencyChange'
     }
   },
   computed: {
@@ -63,30 +58,37 @@ export default {
       totalCount: 'Filter/totalCount'
     }),
     filterPrice() {
-        return {
-          min: this.currency === 'GEL' ?
-            this.$currencyConverter(this.filters.price.min, this.currency) :
-            this.filters.price.min,
-          max: this.currency === 'GEL' ?
-            this.$currencyConverter(this.filters.price.max, this.currency) :
-            this.filters.price.max
-        }
+      return {
+        min:
+          this.currency === 'GEL'
+            ? this.$currencyConverter(this.filters.price.min, this.currency)
+            : this.filters.price.min,
+        max:
+          this.currency === 'GEL'
+            ? this.$currencyConverter(this.filters.price.max, this.currency)
+            : this.filters.price.max
+      }
     },
     minPrice() {
-        return  this.currency === 'GEL' ?
-          this.$currencyConverter(this.filterDefaults.min_price, this.currency) :
-          this.filterDefaults.min_price
+      return this.currency === 'GEL'
+        ? this.$currencyConverter(this.filterDefaults.min_price, this.currency)
+        : this.filterDefaults.min_price
     },
     maxPrice() {
-        return  this.currency === 'GEL' ?
-          this.$currencyConverter(this.filterDefaults.max_price, this.currency) :
-          this.filterDefaults.max_price
+      return this.currency === 'GEL'
+        ? this.$currencyConverter(this.filterDefaults.max_price, this.currency)
+        : this.filterDefaults.max_price
     },
     nextUrl() {
       return `/${this.locale}/sales/filter/building-status`
     },
     suffix() {
       return this.currency === 'GEL' ? '₾' : '$'
+    }
+  },
+  watch: {
+    suffix: {
+      handler: 'handleCurrencyChange'
     }
   },
   methods: {
@@ -97,7 +99,7 @@ export default {
     handleChange(data) {
       clearTimeout(this.timeout)
       this.setLoader(true)
-      if(this.currency === 'GEL') {
+      if (this.currency === 'GEL') {
         data = {
           max: data.max / this.currencyRate,
           min: data.min / this.currencyRate

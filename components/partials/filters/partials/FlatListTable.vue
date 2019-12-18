@@ -48,14 +48,18 @@
           </button-main-orange>
         </div>
       </div>
-      <list-loading v-show="!done" ref="Loading" class="load-more" @load="handleLoad"/>
+      <list-loading
+        v-show="!done"
+        ref="Loading"
+        class="load-more"
+        @load="handleLoad"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { timeout } from 'q'
 import FlatListItem from '@/components/partials/FlatListItem'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import ArrowRight from '@/components/icons/ArrowRight'
@@ -65,7 +69,7 @@ export default {
   props: {
     list: {
       type: Array,
-      default: []
+      default: () => []
     }
   },
   data() {
@@ -130,10 +134,10 @@ export default {
         this.$emit('showPrompt', item.planshet)
       } else {
         if (this.timeout) clearTimeout(this.timeout)
-          this.lightUpFlat([item]).then((timeout) => {
-            this.timeout = timeout
-          })
-          this.$emit('showLightBulb')
+        this.lightUpFlat([item]).then((timeout) => {
+          this.timeout = timeout
+        })
+        this.$emit('showLightBulb')
       }
     }
   }

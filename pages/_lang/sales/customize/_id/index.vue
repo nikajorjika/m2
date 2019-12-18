@@ -47,7 +47,7 @@
           <room-list-component
             v-if="flatExists && rooms.length"
             :room-list="rooms"
-            :visibleRoomsNumber="7"
+            :visible-rooms-number="7"
             class="room-list-slider"
             style-type="small"
           />

@@ -78,19 +78,19 @@ export default {
     FilterIconIllustration
   },
   layout: 'WithoutNavigation',
-  computed: {
-    ...mapGetters({
-      locale: 'locale'
-    })
-  },
   data() {
     return {
       buttonLabels: {
         byPhoneNumberLabel: this.$t('labels.ByPhoneNumber'),
         byFlatNumberLabel: this.$t('labels.ByFlatNumber'),
         byFilterLabel: this.$t('labels.ByFilter')
-      },
+      }
     }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'locale'
+    })
   },
   methods: {
     ...mapActions({
@@ -110,7 +110,7 @@ export default {
 <style lang="scss" scoped>
 .buttons {
   display: flex;
-  &__button { 
+  &__button {
     margin-right: 20px;
   }
 }

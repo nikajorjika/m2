@@ -45,18 +45,16 @@ export default {
   },
   methods: {
     checkItem(item) {
-      if(this.multiple) {
+      if (this.multiple) {
         if (this.isActive(item)) {
           this.selected = this.selected.filter((i) => i !== item)
         } else {
           this.selected = [...this.selected, item]
         }
-      }else {
-        if(this.selected.filter((i) => i === item).length > 0) {
-          this.selected = []
-        } else {
-          this.selected = [ item ]
-        }
+      } else if (this.selected.filter((i) => i === item).length > 0) {
+        this.selected = []
+      } else {
+        this.selected = [item]
       }
       this.$emit('change', this.selected)
     },

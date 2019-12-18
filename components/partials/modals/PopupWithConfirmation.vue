@@ -1,29 +1,24 @@
 <template>
   <div class="confirm-modal" @click.stop="closeModal">
     <div class="confirm-modal__wrapper" @click.stop>
-      <div @click="closeModal" class="close-button">x</div>
-        <div class="confirm-modal__content">
-          <h4>{{ cQuestion }}</h4>
-          <div class="confirm-modal__buttons">
-            <button @click="accept" class="button button-accept">
-              {{ cYesText }}
-            </button>
-            <button @click="decline" class="button button-cancel">
-              {{ cNoText }}
-            </button>
-          </div>
+      <div class="close-button" @click="closeModal">x</div>
+      <div class="confirm-modal__content">
+        <h4>{{ cQuestion }}</h4>
+        <div class="confirm-modal__buttons">
+          <button class="button button-accept" @click="accept">
+            {{ cYesText }}
+          </button>
+          <button class="button button-cancel" @click="decline">
+            {{ cNoText }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-
 export default {
-  components: {
-    ButtonMainOrange
-  },
   props: {
     question: {
       type: String,
@@ -36,22 +31,22 @@ export default {
     noText: {
       type: String,
       default: null
-    },
-  },
-  mounted() {
-
+    }
   },
   computed: {
     cQuestion() {
-      return this.question ? this.question : this.$t('modal.are_you_sure_question')
+      return this.question
+        ? this.question
+        : this.$t('modal.are_you_sure_question')
     },
     cYesText() {
       return this.yesText ? this.yesText : this.$t('modal.yes')
     },
     cNoText() {
       return this.noText ? this.noText : this.$t('modal.no')
-    },
+    }
   },
+  mounted() {},
   methods: {
     closeModal() {
       this.$emit('closed')
@@ -74,7 +69,7 @@ export default {
   bottom: 0;
   right: 0;
   display: flex;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 999;
   animation: fadeIn;
   &__wrapper {
@@ -105,18 +100,18 @@ export default {
     flex-direction: column;
     height: 100%;
     h4 {
-      font: 22px/1 "BPG Nino Mtavruli", sans-serif;
+      font: 22px/1 'BPG Nino Mtavruli', sans-serif;
       color: #494949;
     }
   }
-  
+
   &__buttons {
     margin-top: 40px;
     .button {
       border: none;
       border-radius: 18px;
       background: $orange;
-      color: #fff;    
+      color: #fff;
       padding: 10px 27px;
       font-size: 16px;
       outline: none;

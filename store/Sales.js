@@ -7,7 +7,7 @@ const getters = {
 }
 
 const mutations = {
-  SET: (state, {key, value}) => state[key] = value
+  SET: (state, { key, value }) => (state[key] = value)
 }
 
 const actions = {

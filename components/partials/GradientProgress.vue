@@ -3,10 +3,7 @@
     <div class="progress__label">{{ label }}</div>
     <div class="progress__values">
       <div v-if="percentage >= 7" class="progress__values__min">{{ min }}</div>
-      <div
-        class="progress__values__value"
-        :style="{ left: `${percentage}%` }"
-      >
+      <div class="progress__values__value" :style="{ left: `${percentage}%` }">
         {{ `${value}${suffix}` }}
       </div>
       <div class="progress__values__max">{{ max }}</div>

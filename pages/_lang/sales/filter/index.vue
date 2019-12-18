@@ -6,9 +6,9 @@
           class="page-flat-number__title"
           :title="$t('titles.IAmLookingFor')"
         />
-      <small>{{ $t('titles.YouCanSelectOnlyOne') }}</small>
+        <small>{{ $t('titles.YouCanSelectOnlyOne') }}</small>
       </div>
-      <picker-with-gradient-label 
+      <picker-with-gradient-label
         :items="normalizePresets"
         :multiselect="false"
         class="caps"
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -57,13 +57,15 @@ export default {
       }
     },
     chosenPreset() {
-      if(!this.chosenPresetArray.length) return null
-      return this.presets.find(item => this.chosenPresetArray[0].value === item.id)
+      if (!this.chosenPresetArray.length) return null
+      return this.presets.find(
+        (item) => this.chosenPresetArray[0].value === item.id
+      )
     },
     bedroomCount() {
-      if(!this.chosenPreset) return null
-      const bedroomsArray =  this.chosenPreset.preset.bedrooms.split(', ')
-      return bedroomsArray.map(item => {
+      if (!this.chosenPreset) return null
+      const bedroomsArray = this.chosenPreset.preset.bedrooms.split(', ')
+      return bedroomsArray.map((item) => {
         return {
           name: `# of Bedrooms ${item}`,
           value: parseInt(item)
@@ -77,12 +79,12 @@ export default {
         'Investment',
         'Parents',
         'Alone',
-        'Land',
+        'Land'
       ]
-      return this.presets.map(({id, name}, index) => {
-        const icon =  this.icons[iconKeys[index]]
+      return this.presets.map(({ id, name }, index) => {
+        const icon = this.icons[iconKeys[index]]
         return {
-          icon: icon,
+          icon,
           name: name.hasOwnProperty(this.locale) ? name[this.locale] : name,
           value: id
         }
@@ -105,7 +107,7 @@ export default {
         max_price: this.defaultFilters.max_price,
         min_price: this.defaultFilters.min_price,
         bedroom_count: preset.bedrooms.split(', '),
-        type: preset.flat_type,
+        type: preset.flat_type
         // wc: preset.wc
       }
       this.setFilterDefaults(filterData)

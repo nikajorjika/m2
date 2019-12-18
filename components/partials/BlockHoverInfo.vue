@@ -58,14 +58,16 @@ export default {
     displayButton: {
       type: Boolean,
       default: true
-    },
+    }
   },
   computed: {
     flatsLeft() {
       return `${this.flatsCount} ${this.$t('labels.flat')}`
     },
     cBottomLabel() {
-      return this.bottomLabel ? this.bottomLabel : this.$t('labels.FlatsLeftInThisBlock') 
+      return this.bottomLabel
+        ? this.bottomLabel
+        : this.$t('labels.FlatsLeftInThisBlock')
     },
     cTopLabel() {
       return this.topLabel ? this.topLabel : this.$t('labels.block')

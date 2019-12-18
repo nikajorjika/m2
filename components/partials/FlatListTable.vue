@@ -67,14 +67,13 @@
           </custom-button>
         </div>
       </div>
-      <list-loading v-if="!done" @load="handleLoadMore"/>
+      <list-loading v-if="!done" @load="handleLoadMore" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { timeout } from 'q'
 import FlatListItem from '@/components/partials/FlatListItem'
 import CustomButton from '@/components/partials/CustomButton'
 import ListLoading from '@/components/partials/ListLoading'
@@ -84,7 +83,7 @@ export default {
   props: {
     list: {
       type: Array,
-      default: []
+      default: () => []
     }
   },
   data() {
@@ -215,7 +214,7 @@ export default {
     overflow-y: auto;
     max-height: 100%;
     margin-right: 4px;
-    
+
     &::-webkit-scrollbar {
       width: 14px;
     }

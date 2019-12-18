@@ -45,14 +45,13 @@ export default {
   },
   methods: {
     checkItem(item) {
-      if(this.multiselect){
+      if (this.multiselect) {
         if (this.isActive(item)) {
           this.selected = this.selected.filter((i) => i.value !== item.value)
         } else {
           this.selected = [...this.selected, item]
         }
-      }
-      else {
+      } else {
         this.selected = [item]
       }
       this.$emit('change', this.selected)

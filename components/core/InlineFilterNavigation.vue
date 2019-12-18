@@ -1,15 +1,16 @@
 <template>
   <div class="flat-navigation">
-    <ul 
-      class="flat-navigation__list" 
-      >
+    <ul class="flat-navigation__list">
       <li
         v-for="(item, index) in navigation"
         :key="index"
         class="flat-navigation__list__item to-left"
         @click.stop="handleFilterToggle(item)"
       >
-        <div class="flat-navigation__link" :class="{active: activeItem === item}">
+        <div
+          class="flat-navigation__link"
+          :class="{ active: activeItem === item }"
+        >
           <component
             :is="item.component"
             :icon-color="activeItem === item ? 'url(#gradient)' : '#fff'"
@@ -20,7 +21,12 @@
           <span class="flat-navigation__link__text">{{ $t(item.title) }}</span>
         </div>
         <div class="filter" @click.stop>
-          <component v-if="activeItem === item" :is="item.filter" class="filter-block" @change="$emit('change')" />
+          <component
+            :is="item.filter"
+            v-if="activeItem === item"
+            class="filter-block"
+            @change="$emit('change')"
+          />
         </div>
       </li>
     </ul>
@@ -41,82 +47,82 @@ import BedroomsFilter from '@/components/partials/filters/Bedrooms'
 import BuildingStatusFilter from '@/components/partials/filters/BuildingStatus'
 
 export default {
-    mounted() {
-      if(
-        this.filters.min_price === null || 
-        this.filters.max_price === null || 
-        this.filters.min_floor === null || 
-        this.filters.max_floor === null
-        ){
-        this.fetchFiltersInfo()
-      }
-      document.addEventListener('click', this.handleDocumentClick);
-    },
-    beforeDestroy() {
-      document.removeEventListener('click', this.handleDocumentClick);
-    },
-    data() {
-      return {
-          activeItem: null,
-          navigation: [
-          {
-            title: 'navigation.price',
-            component: CostIcon,
-            filter: PriceFilter
-          },
-          {
-            title: 'navigation.BuildingStatus',
-            component: StatusIcon,
-            filter: BuildingStatusFilter,
-          },
-          {
-            title: 'navigation.bedrooms',
-            component: SleepingRoom,
-            filter: BedroomsFilter,
-          },
-          {
-            title: 'navigation.projects',
-            component: ProjectIcon,
-            filter: ProjectsFilter
-          },
-          {
-            title: 'navigation.floor',
-            component: FloorIcon,
-            filter: FloorFilter,
-          }
-        ]
-      }
-    },
-    computed: {
-        ...mapGetters({
-          locale: 'locale',
-          filterDefaults: 'Filter/filterDefaults',
-          filters: 'Filter/filterDefaults'
-        })
-    },
-    methods: {
-      ...mapActions({
-        fetchFiltersInfo: 'Filter/fetchFiltersInfo'
-      }),
-      handleDocumentClick(e) {
-        this.activeItem = null
-      },
-      handleFilterToggle(item) {
-        this.activeItem = this.activeItem === item ? null : item
-      }
+  data() {
+    return {
+      activeItem: null,
+      navigation: [
+        {
+          title: 'navigation.price',
+          component: CostIcon,
+          filter: PriceFilter
+        },
+        {
+          title: 'navigation.BuildingStatus',
+          component: StatusIcon,
+          filter: BuildingStatusFilter
+        },
+        {
+          title: 'navigation.bedrooms',
+          component: SleepingRoom,
+          filter: BedroomsFilter
+        },
+        {
+          title: 'navigation.projects',
+          component: ProjectIcon,
+          filter: ProjectsFilter
+        },
+        {
+          title: 'navigation.floor',
+          component: FloorIcon,
+          filter: FloorFilter
+        }
+      ]
     }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'locale',
+      filterDefaults: 'Filter/filterDefaults',
+      filters: 'Filter/filterDefaults'
+    })
+  },
+  mounted() {
+    if (
+      this.filters.min_price === null ||
+      this.filters.max_price === null ||
+      this.filters.min_floor === null ||
+      this.filters.max_floor === null
+    ) {
+      this.fetchFiltersInfo()
+    }
+    document.addEventListener('click', this.handleDocumentClick)
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.handleDocumentClick)
+  },
+  methods: {
+    ...mapActions({
+      fetchFiltersInfo: 'Filter/fetchFiltersInfo'
+    }),
+    handleDocumentClick(e) {
+      this.activeItem = null
+    },
+    handleFilterToggle(item) {
+      this.activeItem = this.activeItem === item ? null : item
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .filter-block {
-    background: #fff;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    z-index: 3;
-    min-height: 172px;
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  min-height: 172px;
 }
 .flat-navigation {
   background: $gradient-2;
@@ -156,7 +162,7 @@ export default {
     opacity: 1;
     position: relative;
     white-space: nowrap;
-    &.active{
+    &.active {
       color: inherit;
     }
     &__text {

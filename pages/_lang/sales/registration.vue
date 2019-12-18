@@ -6,10 +6,15 @@
           class="page-flat-number__title"
           :title="$t('titles.FillPrivateInformation')"
         />
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <small v-html="subtitle"></small>
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
-        <registration-form :loading="loading" :error="error" @register="handleRegistration" />
+        <registration-form
+          :loading="loading"
+          :error="error"
+          @register="handleRegistration"
+        />
       </div>
       <div v-else class="page-flat-number__confirm">
         <confirm-phone-form
@@ -26,18 +31,12 @@
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RegistrationForm from '@/components/partials/RegistrationForm'
-import IllustratedButton from '@/components/partials/IllustratedButton'
 import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
-import FilterSearch from '@/components/icons/FilterSearch'
-import FilterIconIllustration from '@/components/icons/FilterIllustration'
 export default {
   components: {
     TitleWithLine,
     RegistrationForm,
-    ConfirmPhoneForm,
-    FilterSearch,
-    IllustratedButton,
-    FilterIconIllustration
+    ConfirmPhoneForm
   },
   layout: 'SalesWithoutNavigation',
   auth: 'guest',
@@ -70,30 +69,31 @@ export default {
     sendVerifyPhoneRequest() {
       this.loading = true
       this.error = ''
-      this.registerUser(this.formData).then(({ data }) => {
-        this.codeSent = true
-        this.loading = false
-        if(data.hasOwnProperty('access_token')) {
-          this.setUserData(data).then(() => {
-            if(this.$route.query.hasOwnProperty('redirect')){
-              this.$router.push({
+      this.registerUser(this.formData)
+        .then(({ data }) => {
+          this.codeSent = true
+          this.loading = false
+          if (data.hasOwnProperty('access_token')) {
+            this.setUserData(data).then(() => {
+              if (this.$route.query.hasOwnProperty('redirect')) {
+                this.$router.push({
                   name: this.$route.query.redirect,
                   params: {
                     lang: this.locale
                   }
                 })
-            } else {
-              this.$router.go(-1)
-            }
-          })
-        }
-      })
-      .catch(err => {
-        if(err.response.status === 400 ) {
-          this.loading = false
-          this.error = this.$t('errors.PhoneAlreadyRegistered')
-        }
-      })
+              } else {
+                this.$router.go(-1)
+              }
+            })
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            this.loading = false
+            this.error = this.$t('errors.PhoneAlreadyRegistered')
+          }
+        })
     },
     handleResendVerifyPhoneRequest(code) {
       this.formData = { resend: true, ...this.formData }

@@ -22,9 +22,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import ArrowRight from '@/components/icons/ArrowRight'
-import { mapGetters } from 'vuex'
 export default {
   components: {
     ArrowRight,
@@ -36,15 +36,15 @@ export default {
         width: '100px',
         height: '31px'
       },
-      textStyles: { 
-        fontSize: '11px', 
-        paddingLeft: '12px' 
+      textStyles: {
+        fontSize: '11px',
+        paddingLeft: '12px'
       },
       iconStyles: {
-        height: '19px', 
+        height: '19px',
         width: '19px',
-        marginLeft: '0', 
-        marginRight: '0' 
+        marginLeft: '0',
+        marginRight: '0'
       }
     }
   },
@@ -67,7 +67,7 @@ export default {
         }
       })
     }
-  },
+  }
 }
 </script>
 
@@ -75,7 +75,7 @@ export default {
 .render-footer {
   display: flex;
   flex: 1;
- &__flats {
+  &__flats {
     display: flex;
     margin: auto 0;
     align-items: center;

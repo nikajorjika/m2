@@ -2,18 +2,21 @@
   <form class="confirm-form" @submit.prevent="handleSubmit">
     <div class="confirm-form__input">
       <input
-        v-model="phone"
         ref="phone"
+        v-model="phone"
         type="text"
         :placeholder="$t('labels.phone')"
-        @input="handleInput"
         :disabled="loading"
+        @input="handleInput"
       />
       <div v-if="errors.phone.length && showErrors" class="error">
         {{ errors.phone }}
       </div>
 
-      <div v-if="! (errors.phone.length && showErrors) && loginErrorMessage" class="error">
+      <div
+        v-if="!(errors.phone.length && showErrors) && loginErrorMessage"
+        class="error"
+      >
         {{ loginErrorMessage }}
       </div>
     </div>
@@ -44,7 +47,10 @@ export default {
         return this.$t('buttons.GetCode')
       }
     },
-    loginErrorMessage: '',
+    loginErrorMessage: {
+      type: String,
+      default: ''
+    },
     loading: {
       type: Boolean,
       default: false
