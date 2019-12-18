@@ -96,7 +96,7 @@
             v-if="flatExists"
             :button-text="$t('buttons.callSalesManager')"
             :text-padding="'0 0 0 12px'"
-            @click.native.prevent="summonSale(false)"
+            @click.native.prevent="summonSale"
           >
             <template v-slot:icon>
               <sells width="14" height="16" icon-color="#fff" />
@@ -107,7 +107,7 @@
             v-if="flatExists"
             :button-text="$t('buttons.reservationRequest')"
             :text-padding="'0 0 0 12px'"
-            @click.native.prevent="summonSale(true)"
+            @click.native.prevent="reserveFlat"
           >
             <template v-slot:icon>
               <light width="14" height="16" icon-color="#fff" />
@@ -177,13 +177,12 @@ export default {
         infinite: false
       },
       slickOptions2: {
-        slidesToShow: 5,
-        slidesToScroll: 3,
+        // slidesToShow: 5,
+        // slidesToScroll: 3,
         variableWidth: true,
         arrows: false,
         infinite: false
-      },
-      reservation: null
+      }
     }
   },
   computed: {
@@ -398,7 +397,6 @@ export default {
           name: 'lang-sales-waiting',
           params: { lang: this.locale }
         },
-        reservation: this.reservation,
         flat: this.flat ? this.flat.id : null,
         renovation_id: this.renovation ? this.renovation.id : null,
         furniture_id: this.furniture ? this.renovation.id : null,
@@ -437,9 +435,7 @@ export default {
         .replace('%s', planshetsObject[id])
         .replace('%n', planshetNumbers[id])
     },
-    summonSale(reservation) {
-      this.reservation = reservation
-
+    summonSale() {
       this.$axios.get('/user/awaiting-status').then((response) => {
         // Check if sales manager is already called
 
@@ -461,6 +457,29 @@ export default {
         }
       })
     },
+    reserveFlat() {
+      this.$axios
+        .post('/flats/reserve', {
+          flat_id: this.$route.params.id
+        })
+        .then((response) => {
+          // Check if flat is reserved successfully
+
+          if (response.data.status) {
+            // Open modal and display success message
+
+            this.$eventBus.$emit('openModal', 'modal-content-message', {
+              message: this.$t('modal.successfulReservation')
+            })
+          } else {
+            // Open modal and display fail message
+
+            this.$eventBus.$emit('openModal', 'modal-content-message', {
+              message: this.$t('modal.failedReservation')
+            })
+          }
+        })
+    },
     sendPdf() {
       this.confirmModalShow = true
     },
@@ -472,11 +491,11 @@ export default {
             email
           }
         })
-        .then((response) => {
+        .then(() => {
           this.confirmModalShow = false
           this.confirmModalLoading = false
         })
-        .catch((err) => {
+        .catch(() => {
           this.confirmModalLoading = false
         })
     }

@@ -42,7 +42,7 @@
             :text-before-price="$t('labels.price')"
           />
 
-          <price-container v-if="flatExists && itemPrice" :price="itemPrice" />
+          <!-- <price-container v-if="flatExists && itemPrice" :price="itemPrice" /> -->
 
           <currency-switcher v-if="flatExists" />
 
@@ -198,23 +198,23 @@ export default {
 
       return images
     },
-    itemPrice() {
-      let price = 0
-      const items = this.getItems()
-
-      if (items) {
-        items.forEach((item, index) => {
-          if (this.activeThumbnail === index && item.price) {
-            price = item.price
-          }
-        })
-      }
-
-      return price
-    },
-    formattedItemPrice() {
-      return `+ ${this.itemPrice} $`
-    },
+    // itemPrice() {
+    //   let price = 0
+    //   const items = this.getItems()
+    //
+    //   if (items) {
+    //     items.forEach((item, index) => {
+    //       if (this.activeThumbnail === index && item.price) {
+    //         price = item.price
+    //       }
+    //     })
+    //   }
+    //
+    //   return price
+    // },
+    // formattedItemPrice() {
+    //   return `+ ${this.itemPrice} $`
+    // },
     getNextPage() {
       let page = ''
 
