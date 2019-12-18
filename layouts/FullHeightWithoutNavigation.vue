@@ -21,13 +21,9 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import SidebarWithItems from '@/components/core/SidebarWithItems'
 import ModelView from '@/components/core/ModelView'
-import BlockIcon from '@/components/icons/Block'
-import CostIcon from '@/components/icons/Cost'
-import FloorIcon from '@/components/icons/Floor'
-import CompassIcon from '@/components/icons/Compass'
 import QuestionsIcon from '@/components/icons/Questions'
 import Registration from '@/components/icons/Registration'
 import PopoverImage from '@/components/partials/PopoverImage'
@@ -36,14 +32,7 @@ export default {
   components: {
     SidebarWithItems,
     ModelView,
-    BlockIcon,
-    PopoverImage,
-    MainIcon,
-    QuestionsIcon,
-    CostIcon,
-    Registration,
-    FloorIcon,
-    CompassIcon
+    PopoverImage
   },
   props: {
     image: {

@@ -91,11 +91,6 @@ export default {
   methods: {
     activate(item) {
       return false
-      if (this.activeItems.includes(item.value)) {
-        this.activeItems = this.activeItems.filter((id) => item.value !== id)
-      } else {
-        this.activeItems.push(item.value)
-      }
     }
   }
 }

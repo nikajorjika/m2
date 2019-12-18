@@ -75,6 +75,7 @@ export default {
     }
   },
   mounted() {
+    // eslint-disable-next-line nuxt/no-env-in-hooks
     if (process.client) {
       this.$root.$el.addEventListener('click', () => {
         this.open = false

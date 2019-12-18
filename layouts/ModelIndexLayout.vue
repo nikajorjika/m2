@@ -28,7 +28,7 @@ import Registration from '@/components/icons/Registration'
 import PopoverImage from '@/components/partials/PopoverImage'
 import MainIcon from '@/components/icons/Main'
 export default {
-  components: { SidebarWithItems, ModelView, PopoverImage, MainIcon },
+  components: { SidebarWithItems, ModelView, PopoverImage },
   computed: {
     ...mapGetters(['locale']),
     items() {

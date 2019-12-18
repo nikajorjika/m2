@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import FlatListTable from '@/components/partials/FavouriteFlatListTable'
 import PromptAlert from '@/components/partials/PromptAlert'
@@ -41,15 +41,6 @@ export default {
     PromptAlert,
     LightIcon
   },
-  computed: {
-    ...mapGetters({
-      locale: 'locale',
-      temporaryToken: 'Sales/temporaryToken'
-    }),
-    cTitle() {
-      return this.$t('titles.FavouriteFlats')
-    }
-  },
   data() {
     return {
       showPrompt: false,
@@ -59,6 +50,15 @@ export default {
       user: null,
       flats: [],
       animating: false
+    }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'locale',
+      temporaryToken: 'Sales/temporaryToken'
+    }),
+    cTitle() {
+      return this.$t('titles.FavouriteFlats')
     }
   },
   mounted() {

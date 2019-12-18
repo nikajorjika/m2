@@ -47,7 +47,10 @@ export default {
         return this.$t('buttons.GetCode')
       }
     },
-    loginErrorMessage: ,
+    loginErrorMessage: {
+      type: String,
+      default: ''
+    },
     loading: {
       type: Boolean,
       default: false

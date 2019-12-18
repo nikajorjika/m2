@@ -92,7 +92,6 @@ export default {
     LoginForm,
     SearchByFlatNumberIllustration,
     SearchByFlatNumber,
-    LoginForm,
     ConfirmPhoneForm,
     FilterSearch,
     IllustratedButton,

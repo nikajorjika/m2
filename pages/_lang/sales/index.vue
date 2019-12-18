@@ -46,7 +46,7 @@
         <div class="index-illustrated-button">
           <illustrated-button
             :label="$t('labels.ByRender')"
-            :to-route="`/${this.locale}/sales/render`"
+            :to-route="`/${locale}/sales/render`"
           >
             <template v-slot:illustration>
               <render-illustration
@@ -63,7 +63,7 @@
         <div class="index-illustrated-button">
           <illustrated-button
             :label="$t('labels.ByFilter')"
-            :to-route="`/${this.locale}/sales/filter`"
+            :to-route="`/${locale}/sales/filter`"
           >
             <template v-slot:illustration>
               <filter-illustration
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import LanguageSwitcher from '@/components/core/LanguageSwitcher'
@@ -114,10 +114,6 @@ export default {
       project: null
     }
   },
-  mounted() {
-    this.getProjectInfo()
-    // this.$toast.generalError()
-  },
   computed: {
     ...mapGetters({
       locale: 'locale'
@@ -137,6 +133,10 @@ export default {
     progress() {
       return this.project ? this.project.building_status : 0
     }
+  },
+  mounted() {
+    this.getProjectInfo()
+    // this.$toast.generalError()
   },
   methods: {
     getProjectInfo() {

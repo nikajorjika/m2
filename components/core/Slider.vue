@@ -57,7 +57,12 @@ export default {
     ArrowRight,
     MaximizeImage
   },
-  props: ['items'],
+  props: {
+    items: {
+      type: [Array, Object],
+      default: () => []
+    }
+  },
   data() {
     return {
       activeIndex: 0,

@@ -32,16 +32,7 @@ import { mapGetters, mapActions } from 'vuex'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import ModelView from '@/components/core/ModelView'
 import InlineFilterNavigation from '@/components/core/InlineFilterNavigation'
-import BlockIcon from '@/components/icons/Block'
-import CostIcon from '@/components/icons/Cost'
-import FloorIcon from '@/components/icons/Floor'
-import CompassIcon from '@/components/icons/Compass'
 import QuestionsIcon from '@/components/icons/Questions'
-import Registration from '@/components/icons/Registration'
-import ToFind from '@/components/icons/ToFind'
-import StatusIcon from '@/components/icons/Status'
-import SleepingRoom from '@/components/icons/SleepingRoom'
-import ProjectIcon from '@/components/icons/Project'
 import PopoverImage from '@/components/partials/PopoverImage'
 import MainIcon from '@/components/icons/Main'
 import SessionButton from '@/components/partials/SessionButton'
@@ -51,15 +42,8 @@ export default {
     SalesAppSidebar,
     ModelView,
     InlineFilterNavigation,
-    BlockIcon,
     PopoverImage,
-    MainIcon,
-    QuestionsIcon,
-    CostIcon,
-    Registration,
     SessionButton,
-    FloorIcon,
-    CompassIcon,
     Modal
   },
   props: {

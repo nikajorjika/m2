@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
@@ -46,11 +46,6 @@ export default {
   data() {
     return {
       loading: false
-    }
-  },
-  watch: {
-    suffix: {
-      handler: 'handleCurrencyChange'
     }
   },
   computed: {
@@ -89,6 +84,11 @@ export default {
     },
     suffix() {
       return this.currency === 'GEL' ? '₾' : '$'
+    }
+  },
+  watch: {
+    suffix: {
+      handler: 'handleCurrencyChange'
     }
   },
   methods: {

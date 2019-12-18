@@ -1,6 +1,7 @@
 <template>
   <div class="floor-picker">
     <div v-if="loading" class="loading">
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <div class="lds-default" v-html="generateLoadingDivs()" />
     </div>
     <component :is="render" v-show="!loading" class="flat-picker render-svg" />
@@ -30,9 +31,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import upperFirst from 'lodash/upperFirst'
-import camelCase from 'lodash/camelCase'
 import { mapGetters } from 'vuex'
 import BlockOne from '@/components/partials/renders/BlockOne'
 import BlockTwo from '@/components/partials/renders/BlockTwo'
@@ -68,11 +66,6 @@ export default {
       flat: null
     }
   },
-  mounted() {
-    this.fetchBlockInfo()
-    this.floorRender()
-    // this.renderSvgs()
-  },
   computed: {
     ...mapGetters({
       locale: 'locale'
@@ -82,6 +75,11 @@ export default {
       const floors = this.blockInfo.floors.map((item) => item.number)
       return floors.sort((a, b) => b - a)
     }
+  },
+  mounted() {
+    this.fetchBlockInfo()
+    this.floorRender()
+    // this.renderSvgs()
   },
   methods: {
     fetchBlockInfo() {

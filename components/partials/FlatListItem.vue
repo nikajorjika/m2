@@ -15,7 +15,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { formatPrice } from '@/utils/Mixed'
 export default {
   props: {
     item: {

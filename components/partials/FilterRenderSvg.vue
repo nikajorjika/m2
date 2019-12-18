@@ -55,9 +55,7 @@
 </template>
 
 <script>
-import SvgRenderImage from '@/assets/renders/block.svg'
 export default {
-  components: { SvgRenderImage },
   props: {
     preselected: {
       type: Number,

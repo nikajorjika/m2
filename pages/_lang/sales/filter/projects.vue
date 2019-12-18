@@ -22,9 +22,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import PickerWithGradientLabel from '@/components/partials/PickerWithGradientLabel'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
 import CompletedIcon from '@/components/icons/Completed'
 import PlannedIcon from '@/components/icons/Planned'
@@ -33,7 +32,6 @@ import FilterRender from '@/components/partials/FilterRender'
 export default {
   components: {
     TitleWithLine,
-    PickerWithGradientLabel,
     FilterRender,
     SaleFilterFooter
   },

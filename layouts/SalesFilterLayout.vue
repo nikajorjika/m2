@@ -25,7 +25,6 @@
 import { mapGetters, mapMutations } from 'vuex'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import SaleFilterView from '@/components/core/SaleFilterView'
-import SidebarWithItems from '@/components/core/SidebarWithItems'
 import PopoverImage from '@/components/partials/PopoverImage'
 import SalesAsideFilter from '@/components/partials/SalesAsideFilter'
 import Registration from '@/components/icons/Registration'
@@ -49,9 +48,6 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  beforeDestroy() {
-    this.setFilterDefaults(this.filterDefaults)
   },
   computed: {
     ...mapGetters({
@@ -87,6 +83,9 @@ export default {
         }
       ]
     }
+  },
+  beforeDestroy() {
+    this.setFilterDefaults(this.filterDefaults)
   },
   methods: {
     ...mapMutations({

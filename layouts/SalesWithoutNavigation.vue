@@ -25,14 +25,9 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import ModelView from '@/components/core/ModelView'
-import BlockIcon from '@/components/icons/Block'
-import CostIcon from '@/components/icons/Cost'
-import FloorIcon from '@/components/icons/Floor'
-import CompassIcon from '@/components/icons/Compass'
-import Registration from '@/components/icons/Registration'
 import PopoverImage from '@/components/partials/PopoverImage'
 import SessionButton from '@/components/partials/SessionButton'
 import Modal from '@/components/partials/Modal'
@@ -40,13 +35,8 @@ export default {
   components: {
     SalesAppSidebar,
     ModelView,
-    BlockIcon,
     PopoverImage,
     SessionButton,
-    CostIcon,
-    Registration,
-    FloorIcon,
-    CompassIcon,
     Modal
   },
   props: {

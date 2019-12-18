@@ -25,13 +25,16 @@ export default {
   components: { gradientLabel, SlideSwitch, MaximizeImage },
   props: {
     renderImage: {
-      type: String
+      type: String,
+      default: ''
     },
     planImage: {
-      type: String
+      type: String,
+      default: ''
     },
     gradientText: {
-      type: [Object, String]
+      type: [Object, String],
+      default: ''
     }
   },
   data() {

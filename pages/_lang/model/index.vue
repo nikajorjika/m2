@@ -6,6 +6,7 @@
       <title-with-line class="name" :title="name" />
 
       <div class="description">
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <p v-html="hasColor ? description : mainDescription"></p>
       </div>
 

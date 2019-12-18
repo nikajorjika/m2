@@ -41,6 +41,14 @@ export default {
     PromptAlert,
     LightIcon
   },
+  data() {
+    return {
+      showPrompt: false,
+      text: null,
+      color: null,
+      animating: false
+    }
+  },
   computed: {
     ...mapGetters({
       flats: 'Filter/flats',
@@ -52,14 +60,6 @@ export default {
         '%s',
         this.totalFlatCount
       )
-    }
-  },
-  data() {
-    return {
-      showPrompt: false,
-      text: null,
-      color: null,
-      animating: false
     }
   },
   methods: {

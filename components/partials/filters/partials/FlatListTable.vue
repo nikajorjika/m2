@@ -60,7 +60,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { timeout } from 'q'
 import FlatListItem from '@/components/partials/FlatListItem'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import ArrowRight from '@/components/icons/ArrowRight'
@@ -70,7 +69,7 @@ export default {
   props: {
     list: {
       type: Array,
-      default: []
+      default: () => []
     }
   },
   data() {

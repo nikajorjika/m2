@@ -80,23 +80,12 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
-import RenderViewer from '@/components/partials/FlatRenderViewer'
-import RoomListComponent from '@/components/partials/RoomListComponent'
-import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
-import GradientLabel from '@/components/partials/GradientLabel'
 import GradientBlock from '@/components/partials/GradientBlock'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
-import { formatPrice } from '@/utils/Mixed'
-import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import LightIcon from '@/components/icons/Light'
-import CaretRight from '@/components/icons/CaretRight'
 import FilterRender from '@/components/partials/FilterRender'
-import ProjectIcon from '@/components/icons/Project'
-import MainIcon from '@/components/icons/Main'
-import CompletedIcon from '@/components/icons/Completed'
 import FloorIcon from '@/components/icons/Floor'
 import BlockIcon from '@/components/icons/Block'
 import FloorPicker from '@/components/partials/FloorPicker'
@@ -108,20 +97,13 @@ export default {
   middleware: 'isAuth',
   components: {
     TitleWithLine,
-    RenderViewer,
     FilterRender,
     FloorPicker,
-    RoomListComponent,
     FlatGradientInfo,
     FlatPicker,
     TabsNavigation,
-    ListCard,
     GradientProgress,
-    GradientLabel,
-    GradientBlock,
-    ButtonMainOrange,
-    LightIcon,
-    CaretRight
+    GradientBlock
   },
   data() {
     return {
@@ -170,7 +152,6 @@ export default {
       )}</span>  `
     },
     flatLocationInfo() {
-      const block = this.block ? this.block : this.activeBlock
       const infoArray = [
         {
           label: this.$t('labels.block'),

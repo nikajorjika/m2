@@ -26,15 +26,13 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import SelectRange from '@/components/partials/DashedSelectRange'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import ArrowRight from '@/components/icons/ArrowRight'
 import CaretRight from '@/components/icons/CaretRight'
 export default {
   components: {
     ButtonMainOrange,
-    ArrowRight,
     CaretRight,
     SelectRange
   },
@@ -46,6 +44,14 @@ export default {
       filterDefaults: 'Filter/filterDefaults',
       filters: 'Filter/filters'
     }),
+    data() {
+      return {
+        selected: {
+          min: null,
+          max: null
+        }
+      }
+    },
     filterPrice() {
       return {
         min:
@@ -70,14 +76,6 @@ export default {
     },
     suffix() {
       return this.currency === 'GEL' ? '₾' : '$'
-    }
-  },
-  data() {
-    return {
-      selected: {
-        min: null,
-        max: null
-      }
     }
   },
   methods: {

@@ -78,11 +78,6 @@ export default {
     FilterIconIllustration
   },
   layout: 'WithoutNavigation',
-  computed: {
-    ...mapGetters({
-      locale: 'locale'
-    })
-  },
   data() {
     return {
       buttonLabels: {
@@ -91,6 +86,11 @@ export default {
         byFilterLabel: this.$t('labels.ByFilter')
       }
     }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'locale'
+    })
   },
   methods: {
     ...mapActions({

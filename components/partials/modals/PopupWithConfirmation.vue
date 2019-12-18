@@ -18,12 +18,7 @@
 </template>
 
 <script>
-import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-
 export default {
-  components: {
-    ButtonMainOrange
-  },
   props: {
     question: {
       type: String,

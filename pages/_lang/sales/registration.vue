@@ -6,6 +6,7 @@
           class="page-flat-number__title"
           :title="$t('titles.FillPrivateInformation')"
         />
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <small v-html="subtitle"></small>
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
@@ -30,18 +31,12 @@
 import { mapGetters, mapActions } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RegistrationForm from '@/components/partials/RegistrationForm'
-import IllustratedButton from '@/components/partials/IllustratedButton'
 import ConfirmPhoneForm from '@/components/partials/ConfirmPhoneForm'
-import FilterSearch from '@/components/icons/FilterSearch'
-import FilterIconIllustration from '@/components/icons/FilterIllustration'
 export default {
   components: {
     TitleWithLine,
     RegistrationForm,
-    ConfirmPhoneForm,
-    FilterSearch,
-    IllustratedButton,
-    FilterIconIllustration
+    ConfirmPhoneForm
   },
   layout: 'SalesWithoutNavigation',
   auth: 'guest',

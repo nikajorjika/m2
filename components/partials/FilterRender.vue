@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { objectMethod } from '@babel/types'
 import BlockHoverInfo from '@/components/partials/BlockHoverInfo'
 import FilterRenderSvg from '@/components/partials/FilterRenderSvg'
 export default {

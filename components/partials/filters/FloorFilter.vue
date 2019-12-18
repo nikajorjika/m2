@@ -26,17 +26,23 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import SelectRange from '@/components/partials/DashedSelectRange'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
-import ArrowRight from '@/components/icons/ArrowRight'
 import CaretRight from '@/components/icons/CaretRight'
 export default {
   components: {
     ButtonMainOrange,
-    ArrowRight,
     CaretRight,
     SelectRange
+  },
+  data() {
+    return {
+      selected: {
+        min: null,
+        max: null
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -52,14 +58,6 @@ export default {
     },
     maxFloor() {
       return this.filterDefaults.max_floor
-    }
-  },
-  data() {
-    return {
-      selected: {
-        min: null,
-        max: null
-      }
     }
   },
   methods: {

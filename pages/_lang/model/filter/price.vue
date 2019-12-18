@@ -45,11 +45,6 @@ export default {
       loading: false
     }
   },
-  watch: {
-    suffix: {
-      handler: 'handleCurrencyChange'
-    }
-  },
   computed: {
     ...mapGetters({
       locale: 'locale',
@@ -93,6 +88,11 @@ export default {
     },
     suffix() {
       return this.currency === 'GEL' ? '₾' : '$'
+    }
+  },
+  watch: {
+    suffix: {
+      handler: 'handleCurrencyChange'
     }
   },
   methods: {

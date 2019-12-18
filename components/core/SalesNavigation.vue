@@ -86,8 +86,7 @@ export default {
     isThisRoute(module) {
       const regex = new RegExp(`^\\/\\w*\\/sales\\/${module}\\/?(.*)$`, 'i')
       const str = this.$route.fullPath
-      let m
-      if ((m = regex.exec(str)) !== null) {
+      if (regex.exec(str) !== null) {
         return true
       }
     }

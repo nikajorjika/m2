@@ -27,6 +27,15 @@ import LightIcon from '@/components/icons/Light'
 export default {
   layout: 'SalesWithoutNavigation',
   components: { TitleWithLine, FlatListTable, CurrencySwitcher, LightIcon },
+  data() {
+    return {
+      showPrompt: false,
+      text: null,
+      color: null,
+      loading: true,
+      animating: false
+    }
+  },
   computed: {
     ...mapGetters({
       flats: 'Filter/flats',
@@ -50,15 +59,6 @@ export default {
       this.setFilters(filters)
     }
     this.loading = false
-  },
-  data() {
-    return {
-      showPrompt: false,
-      text: null,
-      color: null,
-      loading: true,
-      animating: false
-    }
   },
   methods: {
     ...mapMutations({
