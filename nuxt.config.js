@@ -40,6 +40,10 @@ module.exports = {
     '~/plugins/load-preflight-data',
     '~/plugins/before-each',
     {
+      src: '~/plugins/fullscreen',
+      ssr: false
+    },
+    {
       src: '~/plugins/nuxt-swiper',
       ssr: false
     },
