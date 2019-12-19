@@ -80,7 +80,7 @@ export default {
     border-bottom-right-radius: 22px;
     padding-right: 45px;
     font-family: $font;
-    min-height: 63px;
+    height: 63px;
     color: #676766;
     font-size: 11px;
     display: flex;
@@ -88,7 +88,7 @@ export default {
     position: relative;
     transition: transform 200ms;
     overflow: hidden;
-    height: 100%;
+    // height: 100%;
     .compass-icon {
       transform: rotate(-45deg);
     }

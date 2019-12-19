@@ -28,7 +28,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   &__item {
-    margin-right: 17px;
+    margin-right: 8px;
     &:last-child {
       margin-right: 0;
     }

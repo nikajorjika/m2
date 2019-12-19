@@ -156,7 +156,7 @@ export default {
   .page-content {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: calc(100% - 81px);
   }
   &__index__sidebar {
     margin-right: 0;
@@ -173,7 +173,7 @@ export default {
     &__projects {
       display: flex;
       max-width: 1039px;
-      margin: 0 auto;
+      margin: 0 33px;
       height: 480px;
     }
   }
@@ -182,7 +182,7 @@ export default {
     background: #f2e3d3;
     margin-top: auto;
     display: flex;
-    padding: 0 100px;
+    padding: 0 33px;
     justify-content: space-between;
     &__title-wrapper {
       display: flex;
@@ -204,7 +204,7 @@ export default {
   display: flex;
   &__image {
     width: 500px;
-    padding-right: 90px;
+    padding-right: 60px;
     overflow: hidden;
     box-sizing: content-box;
     background: url('~@/assets/images/pattern-lines.png') no-repeat;
@@ -225,8 +225,7 @@ export default {
     }
   }
   &__content {
-    width: 468.6px;
-
+    width: 400px;
     h1 {
       color: $orange;
       font-size: 23px;

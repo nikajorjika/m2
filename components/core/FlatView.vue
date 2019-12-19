@@ -75,6 +75,7 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin-left: auto;
   &__switcher {
     margin-right: 67px;
   }

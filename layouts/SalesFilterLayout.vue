@@ -144,7 +144,7 @@ body {
   }
   .sidebar-filter {
     position: absolute;
-    right: -318px;
+    right: -358px;
     top: 14px;
   }
 }

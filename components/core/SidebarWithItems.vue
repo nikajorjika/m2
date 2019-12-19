@@ -60,7 +60,7 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   background: #fff;
-  width: 7%;
+  width: 81px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;

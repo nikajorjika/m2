@@ -40,9 +40,10 @@ export default {
 
 <style lang="scss" scoped>
 .flat-view {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  width: calc(100% - 99px);
+  margin-left: auto;
 
   &__back-button {
     color: #3c2270;

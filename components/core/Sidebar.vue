@@ -22,7 +22,7 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   background: #fff;
-  width: 7%;
+  width: 81px;
   display: flex;
   min-height: 100vh;
   margin-right: 3%;

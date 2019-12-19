@@ -263,7 +263,7 @@ export default {
   display: grid;
   grid-template-areas: 'header second-header' 'content content';
   grid-template-rows: 79px 415px;
-  grid-template-columns: 240px 805px;
+  grid-template-columns: 240px 653px;
   box-sizing: border-box;
 
   &__title {
@@ -311,7 +311,7 @@ export default {
       }
     }
     &__render {
-      width: 804px;
+      width: 653px;
       margin-left: auto;
       display: flex;
       .room-list-slider {

@@ -169,12 +169,12 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   background: #fff;
-  width: 7%;
+  width: 81px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  margin-right: 3%;
+  // margin-right: 3%;
   border-top-right-radius: 80px;
   box-shadow: 2px 3px 21.76px 10.24px rgba(67, 34, 114, 0.07);
   &.no-margin {

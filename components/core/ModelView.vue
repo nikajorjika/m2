@@ -59,6 +59,7 @@ export default {
   max-width: 90%;
   display: flex;
   flex-direction: column;
+  margin-left: auto;
   max-height: 100vh;
   &__back-button {
     color: #3c2270;
