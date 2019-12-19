@@ -1,12 +1,10 @@
 const viewportDimentions = getViewport()
-if (process.env.NODE_ENV !== 'production') {
-  document.body.innerHTML +=
-    '<div style="position: absolute; left:0; top:0; padding: 12px; background: #fff;">' +
-    viewportDimentions[0] +
-    'X' +
-    viewportDimentions[1] +
-    '</div>'
-}
+document.body.innerHTML +=
+  '<div style="position: absolute; left:0; top:0; padding: 12px; background: #fff;">' +
+  viewportDimentions[0] +
+  'X' +
+  viewportDimentions[1] +
+  '</div>'
 
 function getViewport() {
   let viewPortWidth
