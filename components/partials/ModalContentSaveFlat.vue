@@ -7,31 +7,25 @@
     <div class="buttons">
       <save-button
         :loading="saveFlatBtnLoading"
-        :width="'250px'"
+        :width="'auto'"
         :height="'40px'"
         :padding="'0 21px'"
-        :label="saveFlatBtnLabel"
-        :icon-margin-left="'21px'"
+        :label="$t('modal.yes')"
+        :icon-margin-left="'0'"
         @regularBtnClick="saveFlat"
-      >
-        <template>
-          <save-icon :width="'17px'" :height="'17px'" />
-        </template>
-      </save-button>
+      />
 
       <save-button
-        :width="'250px'"
+        :width="'auto'"
         :height="'40px'"
         :padding="'0 21px'"
-        :background="'#f26529'"
-        :label="$t('labels.dontSaveFlat')"
-        :icon-margin-left="'21px'"
+        :border="'1px solid #3c2270'"
+        :background="'transparent'"
+        :label="$t('modal.no')"
+        :label-color="'#3c2270'"
+        :icon-margin-left="'0'"
         @regularBtnClick="continueWithoutSaving"
-      >
-        <template>
-          <save-icon :width="'17px'" :height="'17px'" />
-        </template>
-      </save-button>
+      />
     </div>
   </div>
 </template>
@@ -39,12 +33,10 @@
 <script>
 import { mapGetters } from 'vuex'
 import SaveButton from '@/components/partials/RegularButton'
-import SaveIcon from '@/components/icons/SaveIcon'
 
 export default {
   components: {
-    SaveButton,
-    SaveIcon
+    SaveButton
   },
   props: {
     data: {
@@ -59,12 +51,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['locale']),
-    saveFlatBtnLabel() {
-      return !this.saveFlatBtnMsgShow
-        ? this.$t('labels.saveFlat')
-        : this.$t('buttons.saved')
-    }
+    ...mapGetters(['locale'])
   },
   mounted() {
     this.$root.$on('flatIsSaved', this.flatIsSaved)
@@ -128,9 +115,12 @@ export default {
 .buttons {
   width: 100%;
   display: flex;
-  align-self: flex-end;
+  align-self: flex-start;
   justify-self: flex-start;
-  justify-content: space-between !important;
-  margin-top: auto;
+  margin-top: fit(40);
+
+  .regular-btn:first-child {
+    margin-right: fit(30);
+  }
 }
 </style>

@@ -1,15 +1,16 @@
 <template>
   <div
-    class="regular-btn"
     :style="{
       width: width,
       height: height,
       padding: padding,
       background: background,
+      border: border,
       borderRadius: borderRadius
     }"
+    class="regular-btn"
   >
-    <div v-if="loading" class="loading" :style="loadingStyles">
+    <div v-if="loading" :style="loadingStyles" class="loading">
       <div class="lds-ellipsis">
         <div></div>
         <div></div>
@@ -28,7 +29,7 @@
         {{ label }}
       </span>
 
-      <span class="regular-btn__icon" :style="{ marginLeft: iconMarginLeft }">
+      <span :style="{ marginLeft: iconMarginLeft }" class="regular-btn__icon">
         <slot />
       </span>
     </a>
@@ -53,6 +54,10 @@ export default {
     background: {
       type: String,
       default: 'rgba(75, 63, 153, 0.7)'
+    },
+    border: {
+      type: String,
+      default: 'none'
     },
     borderRadius: {
       type: String,
