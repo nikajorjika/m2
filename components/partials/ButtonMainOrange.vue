@@ -1,11 +1,11 @@
 <template>
   <button
-    class="btn btn-standard btn-standard--orange btn-standard--large"
     :class="{ 'btn-standard--disabled': disabled || loading }"
     :style="buttonCustomStyles"
     @click="handleClick"
+    class="btn btn-standard btn-standard--orange btn-standard--large"
   >
-    <div v-if="loading" class="loading" :style="textCustomStyles">
+    <div v-if="loading" :style="textCustomStyles" class="loading">
       <div class=" lds-ellipsis">
         <div></div>
         <div></div>
@@ -13,10 +13,10 @@
         <div></div>
       </div>
     </div>
-    <span v-else class="btn-standard__text" :style="textCustomStyles">
+    <span v-else :style="textCustomStyles" class="btn-standard__text">
       <span class="center-font">{{ buttonText }}</span>
     </span>
-    <span class="btn-standard__icon" :style="iconCustomStyles">
+    <span :style="iconCustomStyles" class="btn-standard__icon">
       <slot name="icon" />
     </span>
   </button>
@@ -111,10 +111,10 @@ export default {
     align-items: center;
     margin: auto;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   }
   &__icon {
-    margin: auto 22px;
+    margin: 0 5px 0 8px;
     border-radius: 50%;
     border: 1px #fff dashed;
     box-sizing: border-box;

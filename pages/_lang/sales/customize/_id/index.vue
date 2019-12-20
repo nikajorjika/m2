@@ -484,9 +484,10 @@ export default {
   &__content {
     grid-area: content;
     display: flex;
+    align-self: center;
     width: 100%;
     height: fit(510);
-    margin: 15px auto 15px;
+    margin: auto;
     overflow: auto;
 
     &__info {

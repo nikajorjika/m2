@@ -39,10 +39,10 @@
 
             <div class="caption">
               <span>{{ item.name[locale] }}</span>
-              <!--              <span class="price"-->
-              <!--                >{{ $currencyConverter(item.price, currency) }}-->
-              <!--                {{ currencyLabel }}</span-->
-              <!--              >-->
+              <!-- <span class="price" -->
+              <!--  >{{ $currencyConverter(item.price, currency) }} -->
+              <!--   {{ currencyLabel }} </span -->
+              <!-- >-->
             </div>
 
             <div class="checkbox">
@@ -540,7 +540,7 @@ export default {
     minmax(fit(400), 400px)
     minmax(fit(400), 400px)
     minmax(fit(400), 400px);
-  grid-gap: fit(60) fit(114);
+  grid-gap: fit(60) fit(104);
   padding: 0;
 }
 

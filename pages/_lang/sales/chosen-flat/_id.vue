@@ -1,5 +1,5 @@
 <template>
-  <div class="app-content">
+  <div class="app-content chosen-flat">
     <confirm-email-modal
       v-if="confirmModalShow"
       :preset="user.email"
@@ -532,7 +532,7 @@ export default {
     }
 
     &__render {
-      width: fit(1096);
+      width: fit(1000);
       margin-left: auto;
       display: flex;
 
@@ -552,25 +552,32 @@ export default {
   &__footer {
     grid-area: footer;
     display: flex;
+    align-items: center;
+    margin: 15px 0;
     overflow: hidden;
 
     .footer-items {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       width: 100%;
+      height: 100%;
 
       .text-sliders-container {
         display: flex;
         flex-direction: column;
+        justify-content: space-evenly;
         width: 100%;
         max-width: 100%;
-        margin-top: fit(50);
+        margin: auto 0;
+        height: 66%;
         overflow: hidden;
 
-        .text-slider-container:first-child {
-          margin-bottom: fit(30);
+        .text-slider-container {
+          display: flex;
+          justify-self: auto;
+          margin: auto 0;
         }
       }
 
@@ -625,7 +632,7 @@ export default {
       margin-top: fit(36);
 
       &:first-child {
-        margin-right: fit(40);
+        margin-right: 15px;
       }
 
       .btn-standard__icon {
@@ -636,6 +643,14 @@ export default {
 
   .prompt {
     margin-top: fit(40);
+  }
+}
+</style>
+
+<style lang="scss">
+.chosen-flat {
+  .switch__inner__item {
+    letter-spacing: 0 !important;
   }
 }
 </style>

@@ -8,7 +8,7 @@
         :class="['slider-thumbnail', activeElIndex === index ? 'active' : '']"
         @click="selectItem(item, index, $event)"
       >
-        <span class="index" v-text="normalizeIndex(index)" />
+        <span v-text="normalizeIndex(index)" class="index" />
 
         <figure>
           <img :src="image(item, index)" class="image" alt="Thumbnail" />
@@ -136,6 +136,7 @@ export default {
 .slider-thumbnails {
   display: grid;
   grid-gap: 15px;
+  padding-left: fit(15);
 }
 
 .slider-thumbnail {
@@ -145,7 +146,7 @@ export default {
     display: flex;
     align-items: center;
     margin-right: 42px;
-    font-family: 'Roboto';
+    font-family: 'Roboto', serif;
     font-size: 14px;
     line-height: 30px;
     font-weight: 700;

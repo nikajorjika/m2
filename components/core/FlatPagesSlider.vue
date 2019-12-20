@@ -7,10 +7,7 @@
     </div>
 
     <div class="right-content">
-      <slot
-        name="slider-right-content"
-        @thumbnailChanged="thumbnailChanged"
-      ></slot>
+      <slot @thumbnailChanged="thumbnailChanged" name="slider-right-content" />
     </div>
   </div>
 </template>
@@ -59,12 +56,12 @@ export default {
 }
 
 .left-content {
-  width: 670px;
+  width: 570px;
   margin-right: 4%;
 }
 
 .right-content {
-  width: calc(100% - 5% - 670px);
+  width: calc(100% - 5% - 570px);
 }
 </style>
 
