@@ -66,8 +66,10 @@ export default {
 <style lang="scss" scoped>
 .views-picker {
   display: grid;
-  grid-template-columns: repeat(3, 251px);
-  grid-column-gap: 47px;
+  // grid-template-columns: repeat(3, 251px);
+  grid-column-gap: 23px;
+  grid-template-columns: repeat(3, 233px);
+  // grid-column-gap: 47px;
   grid-row-gap: 44px;
   &.caps & {
     &__item {
@@ -101,7 +103,7 @@ export default {
       justify-content: center;
     }
     &__label {
-      padding: 17px 0 18px 33px;
+      padding: 17px 0 18px 20px;
       font-size: 13px;
       margin-bottom: -5px;
       font-weight: bold;

@@ -240,7 +240,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 214px);
   width: 100%;
-  grid-column-gap: 60px;
+  grid-column-gap: 16px;
   grid-row-gap: 46px;
   padding-bottom: 30px;
 }
