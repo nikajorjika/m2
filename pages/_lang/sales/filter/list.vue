@@ -207,7 +207,7 @@ export default {
 <style lang="scss" scoped>
 .filter-list-page {
   margin: 0 40px;
-  max-height: calc(100% - 76px);
+  max-height: calc(100% - 89px);
   display: flex;
   padding-bottom: 12px;
   flex-direction: column;

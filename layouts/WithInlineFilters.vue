@@ -137,7 +137,7 @@ body {
     }
   }
   .app {
-    height: 100%;
+    height: calc(100% - 66px);
     background: $bg-color-2;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
