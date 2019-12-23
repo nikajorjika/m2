@@ -189,7 +189,7 @@ export default {
     height: 100%;
     display: flex;
     .room-list-slider {
-      width: 42.11%;
+      width: 45%;
       background: #f7ede2;
       border-top-right-radius: 17px;
       border-bottom-right-radius: 17px;
