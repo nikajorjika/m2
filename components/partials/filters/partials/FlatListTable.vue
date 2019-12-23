@@ -176,9 +176,9 @@ export default {
   }
   &__header {
     display: flex;
-    padding-left: 80px;
+    padding-left: 47px;
     padding-right: 58px;
-    height: 92px;
+    height: 45px;
     align-items: center;
     font-size: 12px;
     font-family: $font-caps;
@@ -201,7 +201,7 @@ export default {
   }
   &__body {
     overflow-y: auto;
-    max-height: 100%;
+    max-height: calc(100% - 45px);
     margin-right: 4px;
     &::-webkit-scrollbar {
       width: 14px;
@@ -227,7 +227,7 @@ export default {
     }
     &__item {
       border-top: 1px solid #faf4ed;
-      padding: 13px 35px 13px 47px;
+      padding: 13px 0px 13px 22px;
       display: flex;
       align-items: center;
       background: #f4e7d9;
@@ -248,11 +248,12 @@ export default {
         }
       }
       &__component {
-        margin-right: 35px;
+        margin-right: auto;
         max-height: 61%;
       }
       &__button {
-        width: 166px;
+        width: 114px;
+        margin-right: 10px;
         display: flex;
         justify-content: center;
         margin-left: auto;

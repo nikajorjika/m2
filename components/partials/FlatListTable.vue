@@ -187,8 +187,8 @@ export default {
   }
   &__header {
     display: flex;
-    padding-left: 80px;
-    padding-right: 58px;
+    padding-left: 47px;
+    padding-right: 0;
     height: 92px;
     align-items: center;
     font-size: 12px;
@@ -205,6 +205,7 @@ export default {
     }
     &__button {
       margin: auto;
+      margin-right: 11px;
       &__icon {
         margin-left: 22px;
       }
@@ -212,7 +213,7 @@ export default {
   }
   &__body {
     overflow-y: auto;
-    max-height: 100%;
+    max-height: calc(100% - 92px);
     margin-right: 4px;
 
     &::-webkit-scrollbar {
@@ -239,7 +240,7 @@ export default {
     }
     &__item {
       border-top: 1px solid #faf4ed;
-      padding: 13px 58px 13px 47px;
+      padding: 13px 0px 13px 22px;
       display: flex;
       align-items: center;
       background: #f4e7d9;
@@ -260,11 +261,13 @@ export default {
         }
       }
       &__component {
-        margin-right: 35px;
+        margin-right: auto;
         max-height: 61%;
       }
       &__button {
-        width: 166px;
+        width: 114px;
+        margin-right: 10px;
+        margin-left: auto;
         display: flex;
         justify-content: center;
       }

@@ -106,7 +106,7 @@ export default {
 
 <style lang="scss" scoped>
 .flat-list {
-  padding: 48px 0 0 61px;
+  padding: 48px 0 0 28px;
   height: 100%;
   &__title {
     flex-direction: column;
