@@ -86,12 +86,12 @@ export default {
 }
 
 .left-content {
-  width: 680px;
+  width: 650px;
   margin-right: 4%;
 }
 
 .right-content {
-  width: calc(100% - 5% - 680px);
+  width: calc(95% - 650px);
 }
 
 .price-button {

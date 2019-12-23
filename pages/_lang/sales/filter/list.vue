@@ -161,6 +161,7 @@ export default {
       fetchFlats: 'Filter/fetchFilteredFlats'
     }),
     fetchFreshFlatData() {
+      this.page = 1
       this.fetchFlats({ page: this.page, fresh: true }).then((response) => {
         this.isEmpty = !response.length
         this.page++

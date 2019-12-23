@@ -105,7 +105,7 @@ export default {
         background: #fff;
         border-radius: 10px;
         padding: 11px 10px 9px;
-        margin-right: 45px;
+        margin-right: 22px;
         color: #4b3f99;
         font-size: 11px;
         font-weight: bold;
