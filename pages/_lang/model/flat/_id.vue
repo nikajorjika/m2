@@ -338,5 +338,9 @@ export default {
       padding-left: 15px !important;
     }
   }
+
+  .list-slider__list__container {
+    width: 90%;
+  }
 }
 </style>

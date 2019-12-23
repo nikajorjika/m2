@@ -1,23 +1,25 @@
 <template>
   <div class="flat-list-table">
     <div class="flat-list-table__header">
-      <div class="flat-list-table__header__title medium">
-        {{ $t('labels.floor') }}
-      </div>
-      <div class="flat-list-table__header__title medium">
-        {{ $t('labels.number') }}
-      </div>
-      <div class="flat-list-table__header__title large">
-        {{ $t('labels.status') }}
-      </div>
-      <div class="flat-list-table__header__title large">
-        {{ $t('labels.view') }}
-      </div>
-      <div class="flat-list-table__header__title medium">
-        {{ $t('labels.area') }}
-      </div>
-      <div class="flat-list-table__header__title medium">
-        {{ $t('labels.price') }}
+      <div class="flat-list-table__header__left">
+        <div class="flat-list-table__header__title medium">
+          {{ $t('labels.floor') }}
+        </div>
+        <div class="flat-list-table__header__title medium">
+          {{ $t('labels.number') }}
+        </div>
+        <div class="flat-list-table__header__title large">
+          {{ $t('labels.status') }}
+        </div>
+        <div class="flat-list-table__header__title large">
+          {{ $t('labels.view') }}
+        </div>
+        <div class="flat-list-table__header__title medium">
+          {{ $t('labels.area') }}
+        </div>
+        <div class="flat-list-table__header__title medium">
+          {{ $t('labels.price') }}
+        </div>
       </div>
       <div v-if="showLightAllButton" class="flat-list-table__header__button">
         <custom-button
@@ -44,19 +46,19 @@
           class="flat-list-table__body__item__component"
         />
         <div
-          class="flat-list-table__body__item__color-mark"
           :style="{ backgroundColor: `#${item.planshet.color}` }"
+          class="flat-list-table__body__item__color-mark"
         >
-          <span :style="{ backgroundColor: `#${item.planshet.color}` }"></span>
+          <span :style="{ backgroundColor: `#${item.planshet.color}` }" />
         </div>
         <div class="flat-list-table__body__item__button">
           <custom-button
             v-if="showLightAllButton"
             :label="$t('labels.LitIt')"
-            button-color="orange"
-            class="ma"
             :disabled="item.planshet.id !== chosenPlanshet"
             @click="litCurrentItem(item)"
+            button-color="orange"
+            class="ma"
           >
             <template v-slot:icon>
               <light-icon
@@ -187,20 +189,26 @@ export default {
   }
   &__header {
     display: flex;
+    margin-right: 4px;
     padding-left: 80px;
     padding-right: 58px;
-    height: 92px;
+    min-height: 72px;
     align-items: center;
     font-size: 12px;
     font-family: $font-caps;
     color: #7e73ae;
     font-weight: 800;
+    &__left {
+      display: flex;
+      width: 100%;
+      margin-right: 35px;
+    }
     &__title {
       &.medium {
-        width: 104px;
+        width: 16.66%; // 104px;
       }
       &.large {
-        width: 136px;
+        width: 16.66%; // 136px;
       }
     }
     &__button {
@@ -244,8 +252,9 @@ export default {
       align-items: center;
       background: #f4e7d9;
       &__color-mark {
-        width: 14px;
-        height: 14px;
+        min-width: 14px;
+        min-height: 14px;
+        margin-right: 10px;
         border-radius: 50%;
         position: relative;
         span {

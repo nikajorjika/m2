@@ -69,17 +69,16 @@ export default {
 
 <style lang="scss" scoped>
 .flat-list-link {
+  width: 100%;
   text-decoration: none;
 }
 .flat-list-item {
   background: linear-gradient(85deg, #ae9ba8 0%, #eba5a9 100%);
   display: flex;
   list-style: none;
-  padding: 0;
+  padding: 0 0 0 36px;
   justify-content: space-between;
   align-items: center;
-  padding-left: 36px;
-  padding-right: 40px;
   height: 46px;
   border-radius: 11px;
   width: 100%;
@@ -98,13 +97,13 @@ export default {
       line-height: 14px;
     }
     &.medium {
-      width: 104px;
+      width: 16.66%; // 104px;
     }
     &.large {
-      width: 136px;
+      width: 16.66%; // 136px;
     }
     &.xs {
-      width: 86px;
+      width: 16.66%; // 86px;
     }
   }
 }
