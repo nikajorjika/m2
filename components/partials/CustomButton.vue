@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="customClasses" @click="handleClick">
+  <button :class="customClasses" @click="handleClick" class="btn">
     <div class="btn__prefix">
       <slot name="iconLeft" />
     </div>
@@ -75,6 +75,9 @@ export default {
   }
   &--large {
     padding: 8px 22px;
+  }
+  &__label {
+    white-space: nowrap;
   }
 }
 </style>

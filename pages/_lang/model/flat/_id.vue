@@ -1,5 +1,5 @@
 <template>
-  <div class="filter-flat">
+  <div class="filter-flat model-flat">
     <div class="filter-flat__title">
       <title-with-line :title="cTitle" />
     </div>
@@ -8,32 +8,39 @@
         <flat-gradient-info :info="flatLocationInfo" />
         <list-card :items="listCardData" />
         <gradient-progress
-          class="filter-render__aside__progress"
           :label="$t('labels.building_progress')"
           :min="0"
           :max="100"
           :value="builingStatus"
+          class="filter-render__aside__progress"
           suffix="%"
         />
       </div>
       <div class="filter-flat__content__render">
         <render-viewer
-          class="flat-viewer"
           :render-image="renderUrl"
           :plan-image="blueprintUrl"
           :gradient-text="imageLabel"
+          class="flat-viewer"
         />
         <room-list-component
           v-if="rooms.length"
+          :room-list="rooms"
           class="room-list-slider"
           style-type="small"
-          :room-list="rooms"
         />
       </div>
     </div>
     <div class="filter-flat__footer">
       <div class="footer-items">
-        <gradient-label :text="price" class="price-label" />
+        <price-container
+          v-if="price && rate"
+          :price="price"
+          :text-before-price="$t('labels.price')"
+        />
+
+        <currency-switcher v-if="flat" />
+
         <div class="footer-items__controls">
           <div class="footer-items__controls__skip"></div>
           <div class="footer-items__controls__next">
@@ -59,16 +66,17 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import RenderViewer from '@/components/partials/FlatRenderViewer'
 import RoomListComponent from '@/components/partials/RoomListComponent'
 import ListCard from '@/components/partials/ListCard'
 import GradientProgress from '@/components/partials/GradientProgress'
-import GradientLabel from '@/components/partials/GradientLabel'
 import FlatGradientInfo from '@/components/partials/combinations/FlatGradientInfo'
 import ButtonMainOrange from '@/components/partials/ButtonMainOrange'
 import LightIcon from '@/components/icons/Light'
+import PriceContainer from '@/components/partials/Price'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   layout: 'WithoutNavigation',
@@ -79,9 +87,10 @@ export default {
     FlatGradientInfo,
     ListCard,
     GradientProgress,
-    GradientLabel,
     ButtonMainOrange,
-    LightIcon
+    LightIcon,
+    PriceContainer,
+    CurrencySwitcher
   },
   data() {
     return {
@@ -91,7 +100,8 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      showPrompt: 'Filter/showPrompt'
+      showPrompt: 'Filter/showPrompt',
+      rate: 'settings/currencyRate'
     }),
     planshetColor() {
       return !!this.$cookies.get('paveleon-planshet')
@@ -135,7 +145,8 @@ export default {
     },
     price() {
       if (!this.flat) return 0
-      return `${this.flat.price} $`
+
+      return this.flat.price
     },
     builingStatus() {
       if (!this.flat) return 0
@@ -165,7 +176,8 @@ export default {
     },
     flatLocationInfo() {
       if (!this.flat) return null
-      const infoArray = [
+
+      return [
         {
           label: this.$t('labels.block'),
           value: this.flat.block
@@ -179,7 +191,6 @@ export default {
           value: this.flat.flat_number
         }
       ]
-      return infoArray
     }
   },
   mounted() {
@@ -251,7 +262,7 @@ export default {
   }
   &__content {
     grid-area: content;
-    height: 100%;
+    height: fit(562);
     display: flex;
     width: 100%;
     &__info {
@@ -261,7 +272,7 @@ export default {
       justify-content: space-between;
     }
     &__render {
-      width: 724px;
+      width: 650px;
       margin-left: auto;
       display: flex;
       .room-list-slider {
@@ -294,7 +305,6 @@ export default {
         align-items: center;
         &__skip {
           color: #432272;
-          font-size: 10px;
           font-size: $font;
           display: flex;
           align-items: center;
@@ -308,6 +318,24 @@ export default {
           }
         }
       }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.model-flat {
+  .flat-view__image {
+    height: 60%;
+  }
+
+  .price-label {
+    margin-right: 15px !important;
+  }
+
+  .footer-items__controls__next {
+    .btn-standard__text {
+      padding-left: 15px !important;
     }
   }
 }
