@@ -263,6 +263,7 @@ export default {
       &__component {
         margin-right: auto;
         max-height: 61%;
+        width: auto;
       }
       &__button {
         width: 114px;

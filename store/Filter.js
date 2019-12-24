@@ -282,6 +282,7 @@ export const actions = {
       flat_number,
       // eslint-disable-next-line camelcase
       bedroom_count,
+      sort,
       type,
       // wc,
       // eslint-disable-next-line camelcase
@@ -291,6 +292,7 @@ export const actions = {
     const bedroomCount = bedroom_count.map((item) =>
       item.hasOwnProperty('value') ? item.value : parseInt(item)
     )
+
     const params = {
       block_id: block,
       max_price: price.max,
@@ -299,9 +301,11 @@ export const actions = {
       min_floor: floors.min,
       bedroom_count: bedroomCount,
       type,
+      sort,
       // wc,
       building_progress,
-      flat_number
+      flat_number,
+      page
     }
     if (views) {
       params.view_ides = views

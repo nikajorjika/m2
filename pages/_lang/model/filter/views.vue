@@ -62,7 +62,10 @@ export default {
     handleNext() {
       this.$router.push({
         name: 'lang-model-list',
-        params: { lang: this.locale }
+        params: { lang: this.locale },
+        query: {
+          filter: JSON.stringify(this.filters)
+        }
       })
     }
   }

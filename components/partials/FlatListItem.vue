@@ -99,7 +99,7 @@ export default {
       width: 104px; // 104px;
     }
     &.large {
-      width: 136px; // 136px;
+      width: 148px; // 136px;
     }
     &.xs {
       width: 16.66%; // 86px;

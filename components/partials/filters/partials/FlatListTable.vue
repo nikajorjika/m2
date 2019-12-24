@@ -186,10 +186,10 @@ export default {
     font-weight: 800;
     &__title {
       &.medium {
-        width: 16.66%; // 104px;
+        width: 104px; // 104px;
       }
       &.large {
-        width: 16.66%; // 136px;
+        width: 136px; // 136px;
       }
     }
     &__button {
@@ -251,6 +251,7 @@ export default {
       &__component {
         margin-right: auto;
         max-height: 61%;
+        width: auto;
       }
       &__button {
         width: 114px;
