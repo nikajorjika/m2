@@ -3,11 +3,10 @@
     <article>
       <ImageSlider :images="model && model.images ? model.images : []" />
 
-      <title-with-line class="name" :title="name" />
+      <title-with-line :title="name" class="name" />
 
       <div class="description">
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <p v-html="hasColor ? description : mainDescription"></p>
+        <p v-html="hasColor ? description : mainDescription" />
       </div>
 
       <div class="buttons">
@@ -21,9 +20,9 @@
         >
           <template v-slot:illustration>
             <login-illustration
+              :margin="'0 0 0 -21px'"
               width="50px"
               height="auto"
-              :margin="'0 0 0 -21px'"
             />
           </template>
 
@@ -41,9 +40,9 @@
         >
           <template v-slot:illustration>
             <search-by-flat-number-illustration
+              :margin="'0 0 0 -21px'"
               width="50px"
               height="auto"
-              :margin="'0 0 0 -21px'"
             />
           </template>
 
@@ -140,6 +139,7 @@ export default {
 <style lang="scss" scoped>
 .model-page {
   width: 100%;
+  overflow: hidden;
 
   .name {
     max-width: fit(804); /* 804px */
@@ -180,12 +180,30 @@ export default {
   .buttons {
     margin: fit(110) 0 0 fit(70); /* 110px 0 0 70px */
     display: flex;
-    .link {
-      margin-right: 20px;
-    }
   }
+
   .filter-illustation-icon {
     margin: 0 0 0 -12px;
+  }
+}
+</style>
+
+<style lang="scss">
+.model-page {
+  .link {
+    margin-right: fit(30, fitRaw(16));
+
+    .button {
+      width: auto;
+
+      .label {
+        margin-right: fit(35, fitRaw(16));
+      }
+    }
+  }
+
+  .swiper-pagination-bullet {
+    margin: 0 8px !important;
   }
 }
 </style>

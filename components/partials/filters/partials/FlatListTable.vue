@@ -32,10 +32,10 @@
           class="flat-list-table__body__item__component"
         />
         <div
-          class="flat-list-table__body__item__color-mark"
           :style="{ backgroundColor: `#${item.planshet.color}` }"
+          class="flat-list-table__body__item__color-mark"
         >
-          <span :style="{ backgroundColor: `#${item.planshet.color}` }"></span>
+          <span :style="{ backgroundColor: `#${item.planshet.color}` }" />
         </div>
         <div class="flat-list-table__body__item__button">
           <button-main-orange
@@ -186,10 +186,10 @@ export default {
     font-weight: 800;
     &__title {
       &.medium {
-        width: 104px;
+        width: 16.66%; // 104px;
       }
       &.large {
-        width: 136px;
+        width: 16.66%; // 136px;
       }
     }
     &__button {
@@ -232,8 +232,9 @@ export default {
       align-items: center;
       background: #f4e7d9;
       &__color-mark {
-        width: 14px;
-        height: 14px;
+        min-width: 14px;
+        min-height: 14px;
+        margin-right: 10px;
         border-radius: 50%;
         position: relative;
         span {
