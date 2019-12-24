@@ -77,7 +77,6 @@ export default {
   display: flex;
   list-style: none;
   padding: 0 0 0 36px;
-  justify-content: space-between;
   align-items: center;
   height: 46px;
   border-radius: 11px;
@@ -97,10 +96,10 @@ export default {
       line-height: 14px;
     }
     &.medium {
-      width: 16.66%; // 104px;
+      width: 104px; // 104px;
     }
     &.large {
-      width: 16.66%; // 136px;
+      width: 148px; // 136px;
     }
     &.xs {
       width: 16.66%; // 86px;

@@ -71,6 +71,7 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
+      filters: 'Filter/filters',
       totalCount: 'Filter/totalCount',
       loadingCount: 'Filter/loadingCount',
       loading: 'Filter/filterLoading'
@@ -83,7 +84,10 @@ export default {
     handleFilter() {
       this.$router.push({
         name: 'lang-model-list',
-        params: { lang: this.locale }
+        params: { lang: this.locale },
+        query: {
+          filters: JSON.stringify(this.filters)
+        }
       })
     },
     handleNext() {

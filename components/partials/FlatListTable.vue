@@ -1,25 +1,23 @@
 <template>
   <div class="flat-list-table">
     <div class="flat-list-table__header">
-      <div class="flat-list-table__header__left">
-        <div class="flat-list-table__header__title medium">
-          {{ $t('labels.floor') }}
-        </div>
-        <div class="flat-list-table__header__title medium">
-          {{ $t('labels.number') }}
-        </div>
-        <div class="flat-list-table__header__title large">
-          {{ $t('labels.status') }}
-        </div>
-        <div class="flat-list-table__header__title large">
-          {{ $t('labels.view') }}
-        </div>
-        <div class="flat-list-table__header__title medium">
-          {{ $t('labels.area') }}
-        </div>
-        <div class="flat-list-table__header__title medium">
-          {{ $t('labels.price') }}
-        </div>
+      <div class="flat-list-table__header__title medium">
+        {{ $t('labels.floor') }}
+      </div>
+      <div class="flat-list-table__header__title medium">
+        {{ $t('labels.number') }}
+      </div>
+      <div class="flat-list-table__header__title large">
+        {{ $t('labels.status') }}
+      </div>
+      <div class="flat-list-table__header__title large">
+        {{ $t('labels.view') }}
+      </div>
+      <div class="flat-list-table__header__title medium">
+        {{ $t('labels.area') }}
+      </div>
+      <div class="flat-list-table__header__title medium">
+        {{ $t('labels.price') }}
       </div>
       <div v-if="showLightAllButton" class="flat-list-table__header__button">
         <custom-button
@@ -46,19 +44,19 @@
           class="flat-list-table__body__item__component"
         />
         <div
-          :style="{ backgroundColor: `#${item.planshet.color}` }"
           class="flat-list-table__body__item__color-mark"
+          :style="{ backgroundColor: `#${item.planshet.color}` }"
         >
-          <span :style="{ backgroundColor: `#${item.planshet.color}` }" />
+          <span :style="{ backgroundColor: `#${item.planshet.color}` }"></span>
         </div>
         <div class="flat-list-table__body__item__button">
           <custom-button
             v-if="showLightAllButton"
             :label="$t('labels.LitIt')"
-            :disabled="item.planshet.id !== chosenPlanshet"
-            @click="litCurrentItem(item)"
             button-color="orange"
             class="ma"
+            :disabled="item.planshet.id !== chosenPlanshet"
+            @click="litCurrentItem(item)"
           >
             <template v-slot:icon>
               <light-icon
@@ -189,30 +187,25 @@ export default {
   }
   &__header {
     display: flex;
-    margin-right: 4px;
-    padding-left: 80px;
-    padding-right: 58px;
-    min-height: 72px;
+    padding-left: 47px;
+    padding-right: 0;
+    height: 92px;
     align-items: center;
     font-size: 12px;
     font-family: $font-caps;
     color: #7e73ae;
     font-weight: 800;
-    &__left {
-      display: flex;
-      width: 100%;
-      margin-right: 35px;
-    }
     &__title {
       &.medium {
-        width: 16.66%; // 104px;
+        width: 104px;
       }
       &.large {
-        width: 16.66%; // 136px;
+        width: 136px;
       }
     }
     &__button {
       margin: auto;
+      margin-right: 11px;
       &__icon {
         margin-left: 22px;
       }
@@ -220,7 +213,7 @@ export default {
   }
   &__body {
     overflow-y: auto;
-    max-height: 100%;
+    max-height: calc(100% - 92px);
     margin-right: 4px;
 
     &::-webkit-scrollbar {
@@ -247,14 +240,13 @@ export default {
     }
     &__item {
       border-top: 1px solid #faf4ed;
-      padding: 13px 58px 13px 47px;
+      padding: 13px 0px 13px 22px;
       display: flex;
       align-items: center;
       background: #f4e7d9;
       &__color-mark {
-        min-width: 14px;
-        min-height: 14px;
-        margin-right: 10px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
         position: relative;
         span {
@@ -269,11 +261,14 @@ export default {
         }
       }
       &__component {
-        margin-right: 35px;
+        margin-right: auto;
         max-height: 61%;
+        width: auto;
       }
       &__button {
-        width: 166px;
+        width: 114px;
+        margin-right: 10px;
+        margin-left: auto;
         display: flex;
         justify-content: center;
       }

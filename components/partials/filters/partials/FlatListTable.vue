@@ -49,10 +49,10 @@
         </div>
       </div>
       <list-loading
-        ref="Loading"
         v-show="!done"
-        @load="handleLoad"
+        ref="Loading"
         class="load-more"
+        @load="handleLoad"
       />
     </div>
   </div>
@@ -176,10 +176,9 @@ export default {
   }
   &__header {
     display: flex;
-    margin-right: 4px;
-    padding-left: 80px;
+    padding-left: 47px;
     padding-right: 58px;
-    min-height: 72px;
+    height: 45px;
     align-items: center;
     font-size: 12px;
     font-family: $font-caps;
@@ -187,10 +186,10 @@ export default {
     font-weight: 800;
     &__title {
       &.medium {
-        width: 16.66%; // 104px;
+        width: 104px; // 104px;
       }
       &.large {
-        width: 16.66%; // 136px;
+        width: 136px; // 136px;
       }
     }
     &__button {
@@ -202,7 +201,7 @@ export default {
   }
   &__body {
     overflow-y: auto;
-    max-height: 100%;
+    max-height: calc(100% - 45px);
     margin-right: 4px;
     &::-webkit-scrollbar {
       width: 14px;
@@ -228,7 +227,7 @@ export default {
     }
     &__item {
       border-top: 1px solid #faf4ed;
-      padding: 13px 35px 13px 47px;
+      padding: 13px 0px 13px 22px;
       display: flex;
       align-items: center;
       background: #f4e7d9;
@@ -250,11 +249,13 @@ export default {
         }
       }
       &__component {
-        margin-right: 35px;
+        margin-right: auto;
         max-height: 61%;
+        width: auto;
       }
       &__button {
-        width: 166px;
+        width: 114px;
+        margin-right: 10px;
         display: flex;
         justify-content: center;
         margin-left: auto;
