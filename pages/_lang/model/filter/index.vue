@@ -1,5 +1,5 @@
 <template>
-  <div class="filter-render">
+  <div class="filter-render model-filter-render">
     <div class="filter-render__project-name">
       <div class="filter-render__project-name__inner">
         <span>{{ $t('labels.project') }}:</span>
@@ -22,19 +22,19 @@
         </p>
       </gradient-block>
       <gradient-progress
-        class="filter-render__aside__progress"
         :label="$t('labels.sold_flat_count')"
         :min="0"
         :max="391"
         :value="179"
+        class="filter-render__aside__progress"
       />
       <!-- project.flats_quantity -->
       <gradient-progress
-        class="filter-render__aside__progress"
         :label="$t('labels.building_progress')"
         :min="0"
         :max="100"
         :value="3"
+        class="filter-render__aside__progress"
         suffix="%"
       />
       <!-- project.building_status -->
@@ -153,6 +153,20 @@ export default {
     background: #fff;
     border-radius: 12px;
     overflow: hidden;
+  }
+}
+</style>
+
+<style lang="scss">
+.model-filter-render {
+  .render {
+    & > div {
+      height: 100%;
+
+      & > svg {
+        height: 100%;
+      }
+    }
   }
 }
 </style>
