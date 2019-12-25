@@ -53,14 +53,14 @@ export default {
         {
           name: {
             ka: 'შავი კარკასი',
-            en: 'შავი კარკასი'
+            en: 'Black Frame'
           },
           value: 0
         },
         {
           name: {
             ka: 'თეთრი კარკასი',
-            en: 'თეთრი კარკასი'
+            en: 'White Frame'
           },
           value: 1
         },

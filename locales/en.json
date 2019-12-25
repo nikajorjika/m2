@@ -9,8 +9,8 @@
     "en": "ENG"
   },
   "home": {
-    "m3text": "m² წარმოდგინეთ ახალ უბანს m³ საბურთალო - ადგილს, სადაც თითოეული კუთხე შექმნილია თავისუფალი, კომფორტული და მრავალფეროვანი ცხოვრებისთვის.",
-    "m3sub1": "შეარჩიეთ თქვენთვის სასურველი ბინა, რომელსაც მთელი უბანი მოჰყვება."
+    "m3text": "m² presents a new district m³ Saburtalo - a place where every corner is designed for a free, comfortable and diverse life",
+    "m3sub1": "Select the apartment you want, followed by the whole district"
   },
   "status": {
     "finished": "Finished",
@@ -161,7 +161,7 @@
     "FlatsLeftInThisBlock": "Flats left in this block",
     "ByFlatNumber": "Search by flat number",
     "ByFilter": "Search By Filter",
-    "ByRender": "Search By Render",
+    "ByRender": "Search By Project",
     "callSaleManager": "Call the sales manager and book this flat",
     "saveFlat": "Save this flat",
     "dontSaveFlat": "Don't save",
@@ -174,13 +174,18 @@
     "ApproximateWaitingTime": "Estimated waiting time %s minutes",
     "DetailsAsPdf": "Details as PDF",
     "CancelSalesRequest": "Cancel Sales Call",
-    "WaitForSalesOrRequestInfo": "Call for sales or ask for details on email",
+    "WaitForSalesOrRequestInfo": "Call for sales managers or ask for details on email",
     "flat_count_chosen_by_you": "Number of your chosen flats",
     "entrance": "entrance",
     "projects": "projects",
     "callSalesQuestion": "Do you really want to call sales?",
     "saleIsBusy": "Your sales manager is busy. Do you want to call another manager?",
-    "acceptedCall": "The sales manager will talk to you soon"
+    "acceptedCall": "The sales manager will talk to you soon",
+    "forRent": "For rent",
+    "forMyBigFamily": "For my big family",
+    "forYoungFamily": "For a young family",
+    "forCouple": "For a couple",
+    "forAlone": "Alone for one"
   },
   "titles": {
     "FlatPageTitleGinger": "Design ginger",
@@ -206,7 +211,7 @@
     "YouCanSelectMultipe": "You can select multiple",
     "YourChosenFlat": "Your chosen flat",
     "FlatPagesTitle": "Choose your desire %s",
-    "appliancesPageSubtitle": "Select by same color",
+    "appliancesPageSubtitle": "Select the desired appliances",
     "flatPagesModal": "Do you want to save this apartment?",
     "FavouriteFlats": "Favourite Flats",
     "PleaseSelectBlockFromRender": "Please select block",

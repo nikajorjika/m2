@@ -78,7 +78,7 @@ export default {
     margin-bottom: 16px;
   }
   &__image {
-    height: 223px;
+    height: 56%;
     img {
       width: 100%;
       height: 100%;
