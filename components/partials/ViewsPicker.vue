@@ -3,9 +3,9 @@
     <div
       v-for="(item, index) in views"
       :key="index"
-      class="views-picker__item"
       :class="{ active: isActive(item) }"
       @click="checkItem(item)"
+      class="views-picker__item"
     >
       <div class="views-picker__item__direction">
         <compass-icon
@@ -16,7 +16,7 @@
         />
       </div>
       <div class="views-picker__item__label">
-        {{ item.name }}
+        {{ itemName(item.name) }}
       </div>
       <div v-show="isActive(item)" class="views-picker__item__checked">
         <check-icon icon-color="#f26529" height="11px" width="9px" />
@@ -56,6 +56,22 @@ export default {
     },
     isActive(item) {
       return this.selected.find((i) => i.value === item.value)
+    },
+    itemName(name) {
+      switch (name) {
+        case 'გასაქირავებლად':
+          return this.$t('labels.forRent')
+        case 'ჩემი დიდი ოჯახისთვის':
+          return this.$t('labels.forMyBigFamily')
+        case 'ახალგაზრდა ოჯახისთვის':
+          return this.$t('labels.forYoungFamily')
+        case 'წყვილისთვის':
+          return this.$t('labels.forCouple')
+        case 'მარტო ერთისთვის':
+          return this.$t('labels.forAlone')
+        default:
+          return name
+      }
     }
   }
 }
@@ -94,10 +110,11 @@ export default {
     &__label {
       padding: 17px 11px 18px 33px;
       font-size: 13px;
+      text-transform: uppercase;
     }
     &.active {
       transform: scale(1.1);
-      box-shadow: 0px 4px 21.7px 10.24px rgba(242, 101, 41, 0.1);
+      box-shadow: 0 4px 21.7px 10.24px rgba(242, 101, 41, 0.1);
     }
     &__checked {
       position: absolute;

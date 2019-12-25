@@ -15,7 +15,7 @@
               </div>
             </div>
             <div class="project__content">
-              <h1>M2 გელოვანზე</h1>
+              <h1>{{ $t('projects.m3_gelovani') }}</h1>
               <p>{{ $t('home.m3text') }}</p>
               <ul>
                 <li>{{ $t('home.m3sub1') }}</li>

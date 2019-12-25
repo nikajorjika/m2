@@ -3,15 +3,15 @@
     <div
       v-for="(item, index) in items"
       :key="index"
-      class="views-picker__item"
       :class="{ active: isActive(item) }"
       @click="checkItem(item)"
+      class="views-picker__item"
     >
       <div class="views-picker__item__direction">
         <component :is="item.icon" />
       </div>
       <div class="views-picker__item__label">
-        {{ item.name }}
+        {{ itemName(item.name) }}
       </div>
       <div v-show="isActive(item)" class="views-picker__item__checked">
         <check-icon icon-color="#f26529" height="11px" width="9px" />
@@ -58,6 +58,22 @@ export default {
     },
     isActive(item) {
       return this.selected.find((i) => i.value === item.value)
+    },
+    itemName(name) {
+      switch (name) {
+        case 'გასაქირავებლად':
+          return this.$t('labels.forRent')
+        case 'ჩემი დიდი ოჯახისთვის':
+          return this.$t('labels.forMyBigFamily')
+        case 'ახალგაზრდა ოჯახისთვის':
+          return this.$t('labels.forYoungFamily')
+        case 'წყვილისთვის':
+          return this.$t('labels.forCouple')
+        case 'მარტო ერთისთვის':
+          return this.$t('labels.forAlone')
+        default:
+          return name
+      }
     }
   }
 }
@@ -107,6 +123,7 @@ export default {
       font-size: 13px;
       margin-bottom: -5px;
       font-weight: bold;
+      text-transform: uppercase;
     }
     &.active {
       transform: scale(1.1);

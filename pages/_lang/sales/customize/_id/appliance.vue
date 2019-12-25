@@ -54,17 +54,18 @@
 
       <div class="flat-pages-footer">
         <div class="footer-items">
-          <price-container
-            v-if="price && rate"
-            :price="price"
-            :text-before-price="$t('labels.price')"
-          />
+          <!--          <price-container-->
+          <!--            v-if="price && rate"-->
+          <!--            :price="price"-->
+          <!--            :text-before-price="$t('labels.price')"-->
+          <!--          />-->
+
           <!--          <price-container-->
           <!--            v-if="additionalPrice && showAdditionals"-->
           <!--            :price="additionalPrice"-->
           <!--          />-->
 
-          <currency-switcher v-if="flatExists" />
+          <!--          <currency-switcher v-if="flatExists" />-->
 
           <div class="footer-items__controls">
             <div class="footer-items__controls__skip">
@@ -133,8 +134,8 @@ import ManagerIcon from '@/assets/icons/Manager1.svg'
 import SalesIcon from '@/components/icons/Alone'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
-import PriceContainer from '@/components/partials/Price'
-import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
+// import PriceContainer from '@/components/partials/Price'
+// import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   components: {
@@ -148,9 +149,9 @@ export default {
     ManagerIcon,
     SalesIcon,
     SaveButton,
-    SaveIcon,
-    PriceContainer,
-    CurrencySwitcher
+    SaveIcon
+    // PriceContainer,
+    // CurrencySwitcher
   },
   layout: 'SalesFlatLayout',
   middleware: 'isAuth',
