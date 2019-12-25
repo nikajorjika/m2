@@ -64,7 +64,7 @@ export default {
         name: 'lang-model-list',
         params: { lang: this.locale },
         query: {
-          filter: JSON.stringify(this.filters)
+          filters: JSON.stringify(this.filters)
         }
       })
     }
