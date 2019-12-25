@@ -540,7 +540,7 @@ export default {
   }
 }
 .margin-top-auto {
-  margin-top: auto;
+  margin-top: auto !important;
 }
 </style>
 

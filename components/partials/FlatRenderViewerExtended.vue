@@ -133,7 +133,7 @@ export default {
   }
 
   &__image {
-    height: 223px;
+    height: 56%;
 
     img {
       display: none;

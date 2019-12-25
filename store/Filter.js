@@ -304,8 +304,7 @@ export const actions = {
       sort,
       // wc,
       building_progress,
-      flat_number,
-      page
+      flat_number
     }
     if (views) {
       params.view_ides = views
