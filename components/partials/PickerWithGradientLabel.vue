@@ -4,8 +4,8 @@
       v-for="(item, index) in items"
       :key="index"
       :class="{ active: isActive(item) }"
-      @click="checkItem(item)"
       class="views-picker__item"
+      @click="checkItem(item)"
     >
       <div class="views-picker__item__direction">
         <component :is="item.icon" />
@@ -123,7 +123,7 @@ export default {
       font-size: 13px;
       margin-bottom: -5px;
       font-weight: bold;
-      text-transform: uppercase;
+      // text-transform: uppercase;
     }
     &.active {
       transform: scale(1.1);
