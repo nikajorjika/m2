@@ -1,8 +1,8 @@
 <template>
-  <div class="layout-modal-container" @click="closeModal">
+  <div @click="closeModal" class="layout-modal-container">
     <div :class="['layout-modal', componentName]">
-      <div class="close-button" @click="closeModal">x</div>
-      <div class="layout-modal-content" @click.stop>
+      <div @click="closeModal" class="close-button">x</div>
+      <div @click.stop class="layout-modal-content">
         <component
           :is="componentName"
           v-if="componentName"
@@ -18,12 +18,14 @@
 import ModalContentSaveFlat from '@/components/partials/ModalContentSaveFlat'
 import ModalContentCallSales from '@/components/partials/ModalContentCallSales'
 import ModalContentMessage from '@/components/partials/ModalContentMessage'
+import ModalContentAboutPreConfig from '@/components/partials/ModalContentAboutPreConfig'
 
 export default {
   components: {
     ModalContentSaveFlat,
     ModalContentCallSales,
-    ModalContentMessage
+    ModalContentMessage,
+    ModalContentAboutPreConfig
   },
   data() {
     return {

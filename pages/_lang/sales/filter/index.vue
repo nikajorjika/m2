@@ -3,16 +3,16 @@
     <div class="page-flat-number">
       <div class="page-flat-number__title-container">
         <title-with-line
-          class="page-flat-number__title"
           :title="$t('titles.IAmLookingFor')"
+          class="page-flat-number__title"
         />
         <small>{{ $t('titles.YouCanSelectOnlyOne') }}</small>
       </div>
       <picker-with-gradient-label
         :items="normalizePresets"
         :multiselect="false"
-        class="caps"
         @change="handleChange"
+        class="caps"
       />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
@@ -34,7 +34,8 @@ export default {
   middleware: 'isAuth',
   data() {
     return {
-      chosenPresetArray: []
+      chosenPresetArray: [],
+      openModal: true
     }
   },
   computed: {
@@ -98,6 +99,16 @@ export default {
       setFilterDefaults: 'Filter/SET_FILTERS_BULK'
     }),
     handleChange(data) {
+      // Open modal
+
+      if (this.openModal) {
+        this.openModal = false
+
+        this.$eventBus.$emit('openModal', 'modal-content-about-pre-config', {})
+      }
+
+      // Configure
+
       this.setFilterDefaults(this.defaultFilters)
       this.chosenPresetArray = data
       const preset = this.chosenPreset.preset
