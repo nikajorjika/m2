@@ -193,7 +193,7 @@ export default {
     &__button {
       background: $orange;
       border: none;
-      width: 75px;
+      width: 72px;
       height: 65px;
       border-radius: 20px;
       color: white;
@@ -239,7 +239,7 @@ export default {
         padding: 6px 20px;
       }
       &__label {
-        font-size: 12px;
+        font-size: 10px;
         font-family: $font-caps;
         margin-top: 15px;
         font-weight: 600;
