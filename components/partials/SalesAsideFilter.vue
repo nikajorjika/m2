@@ -117,7 +117,6 @@ export default {
     height: 40px;
     width: 99px;
     display: flex;
-    filter: contrast(0.5);
     .label {
       width: 79px;
     }
@@ -155,8 +154,22 @@ export default {
       background: white;
       border-radius: 32px;
       transition: all 0.2s;
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 32px;
+        background: rgba(255, 255, 255, 0.4);
+      }
       &.active {
         transform: scale(1.2);
+        &:after {
+          background: transparent;
+        }
       }
     }
     .checbox-icon-container {

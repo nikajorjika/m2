@@ -76,7 +76,7 @@ export default {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
     },
     showSummon() {
-      return this.$route.name !== 'lang-sales-waiting' && this.isLoggedIn
+      return this.$route.name !== 'lang-sales-waiting'
     },
     items() {
       return [
@@ -143,6 +143,15 @@ export default {
   },
   methods: {
     callForSales() {
+      if (!this.isLoggedIn) {
+        this.$router.push({
+          name: 'lang-sales-login',
+          params: {
+            lang: this.locale
+          }
+        })
+        return
+      }
       this.$axios.get('/user/awaiting-status').then((response) => {
         // Check if sales manager is already called
 
