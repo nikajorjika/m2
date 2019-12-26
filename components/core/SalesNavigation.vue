@@ -215,7 +215,7 @@ export default {
       margin-top: 10px;
       font-size: 10px;
       font-weight: 900;
-      text-transform: uppercase;
+      // text-transform: uppercase;
     }
     &__icon {
       z-index: 1;

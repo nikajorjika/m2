@@ -4,8 +4,8 @@
       v-for="(item, index) in views"
       :key="index"
       :class="{ active: isActive(item) }"
-      @click="checkItem(item)"
       class="views-picker__item"
+      @click="checkItem(item)"
     >
       <div class="views-picker__item__direction">
         <compass-icon
@@ -110,7 +110,7 @@ export default {
     &__label {
       padding: 17px 11px 18px 33px;
       font-size: 13px;
-      text-transform: uppercase;
+      // text-transform: uppercase;
     }
     &.active {
       transform: scale(1.1);

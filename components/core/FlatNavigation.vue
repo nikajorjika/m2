@@ -84,7 +84,7 @@ export default {
       margin-top: 10px;
       font-size: 12px;
       font-weight: 900;
-      text-transform: uppercase;
+      // text-transform: uppercase;
       white-space: nowrap;
     }
     &__icon {

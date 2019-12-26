@@ -193,7 +193,7 @@ export default {
     &__button {
       background: $orange;
       border: none;
-      width: 65px;
+      width: 75px;
       height: 65px;
       border-radius: 20px;
       color: white;
@@ -244,7 +244,7 @@ export default {
         margin-top: 15px;
         font-weight: 600;
         text-align: center;
-        text-transform: uppercase;
+        // text-transform: uppercase;
       }
     }
   }
