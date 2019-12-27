@@ -227,7 +227,7 @@ export default {
           this.flat.blueprint_full_url ? this.flat.blueprint_full_url : image
         )
         images.push(
-          this.flat.floor && this.flat.floor_render_full_url
+          this.flat && this.flat.floor_render_full_url
             ? this.flat.floor_render_full_url
             : image
         )

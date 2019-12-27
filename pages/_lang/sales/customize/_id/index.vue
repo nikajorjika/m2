@@ -208,8 +208,8 @@ export default {
         images.push(this.flat.render_url ? this.flat.render_url : image)
         images.push(this.flat.blueprint_url ? this.flat.blueprint_url : image)
         images.push(
-          this.flat.floor && this.flat.floor.render_url
-            ? this.flat.floor.render_url
+          this.flat && this.flat.floor_render_full_url
+            ? this.flat.floor_render_full_url
             : image
         )
       }
