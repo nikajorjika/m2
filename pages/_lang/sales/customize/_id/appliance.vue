@@ -235,7 +235,12 @@ export default {
       return this.$t('labels.callSaleManager')
     },
     subtitle() {
-      return this.$t('titles.appliancesPageSubtitle')
+      return this.$t('titles.flatPagesSubtitle').replace(
+        '%s',
+        this.locale === 'ka'
+          ? this.$t('navigation.appliance').replace('ა', 'ი')
+          : this.$t('navigation.appliance')
+      )
     },
     modalData() {
       return {

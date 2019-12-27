@@ -214,7 +214,7 @@
     "YouCanSelectMultipe": "You can select multiple",
     "YourChosenFlat": "Your chosen flat",
     "FlatPagesTitle": "Choose your desire %s",
-    "appliancesPageSubtitle": "Appliances price is not included in the price of the apartment and its choice is optional",
+    "renovationPageSubtitle": "Renovation price is included in the price of the apartment and its choice is mandatory",
     "flatPagesSubtitle": "%s price is not included in the price of the apartment and its choice is optional",
     "flatPagesModal": "Do you want to save this apartment?",
     "FavouriteFlats": "Favourite Flats",

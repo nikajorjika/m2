@@ -185,10 +185,12 @@ export default {
           ? 'renovation'
           : this.$route.params.page
 
-      return this.$t('titles.flatPagesSubtitle').replace(
-        '%s',
-        this.$t('navigation.' + key)
-      )
+      return this.$route.params.page === 'makeover'
+        ? this.$t('titles.renovationPageSubtitle')
+        : this.$t('titles.flatPagesSubtitle').replace(
+            '%s',
+            this.$t('navigation.' + key)
+          )
     },
     price() {
       return this.flat.price
