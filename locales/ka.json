@@ -225,7 +225,8 @@
     "FrequentlyAskedQuestions": "ხშირად დასმული კითხვები",
     "ModelIndexPage": "ბინის შერჩევა იწყება აქ!",
     "FlatPagesTitle": "აირჩიე შენთვის სასურველი %s",
-    "appliancesPageSubtitle": "აირჩიეთ სასურველი ტექნიკა",
+    "appliancesPageSubtitle": "ტექნიკის ფასი არ შედის ბინის ფასში და მისი არჩევა არასავალდებულოა",
+    "flatPagesSubtitle": "%sს ფასი არ შედის ბინის ფასში და მისი არჩევა არასავალდებულოა",
     "flatPagesModal": "გსურთ ამ ბინის შენახვა?"
   },
   "modal": {

@@ -4,6 +4,12 @@
       <div class="flat-pages-header">
         <title-with-line :title="title" class="flat-pages-title" />
 
+        <h3 class="flat-pages-subtitle">
+          <img src="@/assets/illustrations/illustration-authorisation.png" />
+
+          {{ subtitle }}
+        </h3>
+
         <save-button
           v-if="flatExists"
           :loading="saveFlatBtnLoading"
@@ -169,6 +175,17 @@ export default {
           : this.$route.params.page
 
       return this.$t('titles.FlatPagesTitle').replace(
+        '%s',
+        this.$t('navigation.' + key)
+      )
+    },
+    subtitle() {
+      const key =
+        this.$route.params.page === 'makeover'
+          ? 'renovation'
+          : this.$route.params.page
+
+      return this.$t('titles.flatPagesSubtitle').replace(
         '%s',
         this.$t('navigation.' + key)
       )
@@ -488,10 +505,26 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+
+    .flat-pages-subtitle {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      font: 14px/1 $font;
+      color: #f26529;
+
+      img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+      }
+    }
   }
 
   .flat-pages-content {
     grid-area: content;
+    /*height: fit(510);*/
     margin-top: 6px;
   }
 

@@ -4,7 +4,11 @@
       <div class="flat-pages-header">
         <title-with-line :title="title" class="flat-pages-title" />
 
-        <h3 class="flat-pages-subtitle">{{ subtitle }}</h3>
+        <h3 class="flat-pages-subtitle">
+          <img src="@/assets/illustrations/illustration-authorisation.png" />
+
+          {{ subtitle }}
+        </h3>
 
         <save-button
           v-if="flatExists"
@@ -476,7 +480,13 @@ export default {
       top: 100%;
       left: 0;
       font: 14px/1 $font;
-      color: #424242;
+      color: #f26529;
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
     }
   }
 
