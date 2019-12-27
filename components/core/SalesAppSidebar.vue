@@ -76,7 +76,7 @@ export default {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
     },
     showSummon() {
-      return this.$route.name !== 'lang-sales-waiting' && this.isLoggedIn
+      return this.$route.name !== 'lang-sales-waiting'
     },
     items() {
       return [
@@ -143,6 +143,15 @@ export default {
   },
   methods: {
     callForSales() {
+      if (!this.isLoggedIn) {
+        this.$router.push({
+          name: 'lang-sales-login',
+          params: {
+            lang: this.locale
+          }
+        })
+        return
+      }
       this.$axios.get('/user/awaiting-status').then((response) => {
         // Check if sales manager is already called
 
@@ -193,7 +202,7 @@ export default {
     &__button {
       background: $orange;
       border: none;
-      width: 75px;
+      width: 72px;
       height: 65px;
       border-radius: 20px;
       color: white;
@@ -239,7 +248,7 @@ export default {
         padding: 6px 20px;
       }
       &__label {
-        font-size: 12px;
+        font-size: 10px;
         font-family: $font-caps;
         margin-top: 15px;
         font-weight: 600;

@@ -40,9 +40,15 @@
         @load="handleLoad"
       />
     </div>
-    <div v-if="loading" class="flat-list">
-      <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
-        <flat-card :loading="true" :flat-id="0" />
+    <div v-if="loading" class="list-scrollable-wrapper">
+      <div class="flat-list">
+        <div
+          v-for="(item, index) in loadingItems"
+          :key="index"
+          class="flat-card"
+        >
+          <flat-card :loading="true" :flat-id="0" />
+        </div>
       </div>
     </div>
   </div>
@@ -208,7 +214,7 @@ export default {
 <style lang="scss" scoped>
 .filter-list-page {
   margin: 0 40px;
-  max-height: calc(100% - 89px);
+  height: calc(100% - 60px);
   display: flex;
   padding-bottom: 12px;
   flex-direction: column;
@@ -219,6 +225,7 @@ export default {
   &__sort {
     margin-top: 30px;
     display: flex;
+    height: 46px;
     .label {
       font-family: $font-caps;
       color: #494949;
@@ -233,9 +240,10 @@ export default {
   margin: 20px 0 50px;
 }
 .list-scrollable-wrapper {
-  max-height: calc(100% - 12px);
+  // max-height: calc(100% - 12px);
   overflow-y: auto;
   padding-right: 17px;
+  height: calc(100% - 160px);
 }
 .flat-list {
   display: grid;

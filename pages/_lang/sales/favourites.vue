@@ -103,7 +103,7 @@ export default {
 <style lang="scss" scoped>
 .filter-list-page {
   margin: 0 40px;
-  max-height: 100%;
+  height: 100%;
   display: flex;
   padding-bottom: 12px;
   flex-direction: column;
@@ -121,6 +121,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 214px);
   width: 100%;
+  height: 100%;
   grid-column-gap: 16px;
   grid-row-gap: 46px;
   padding-bottom: 30px;

@@ -32,8 +32,8 @@ export default {
   },
   data() {
     return {
-      formattedPrice: '',
-      currencySymbol: ''
+      formattedPrice: null,
+      currencySymbol: null
     }
   },
   computed: {
