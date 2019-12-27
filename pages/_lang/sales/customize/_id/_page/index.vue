@@ -526,8 +526,7 @@ export default {
 
   .flat-pages-content {
     grid-area: content;
-    /*height: fit(510);*/
-    margin-top: 6px;
+    margin-top: 30px;
   }
 
   .flat-pages-footer {
