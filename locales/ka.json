@@ -17,9 +17,10 @@
     "en": "ENG"
   },
   "errors": {
-    "NoFlatsInThisPriceRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი ფასის რეინჯი",
+    "NoFlatsInThisAreaRange": "მითითებულ ფართში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი ფართის დიაპაზონი",
+    "NoFlatsInThisPriceRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი ფასის დიაპაზონი",
     "PhoneAlreadyRegistered": "მითითებული ნომერი უკვე დარეგისტრირებულია",
-    "NoFlatsInThisFloorRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი სართულის რეინჯი",
+    "NoFlatsInThisFloorRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი სართულის დიაპაზონი",
     "NameFieldIsRequired": "სახელის ველი აუცილებელია",
     "NoItemsInYourFavourites": "თქვენ ფავორიტებში არ გაქვთ დამატებული არცერთი ბინა",
     "PhoneFieldIsRequired": "გთხოვთ შეავსოთ ნომრის/ელ-ფოსტის ველი სწორი ფორმატით",
@@ -35,6 +36,7 @@
   },
   "navigation": {
     "flat": "ბინა",
+    "area": "ფართი",
     "renovation": "რემონტი",
     "furniture": "ავეჯი",
     "decoration": "დეკორი",
@@ -206,6 +208,7 @@
     "BuildingProgress": "მშენებლობის სტატუსი",
     "PickFloorRange": "აირჩიეთ სართულების დიაპაზონი",
     "PickPriceRange": "აირჩიეთ ფასების დიაპაზონი",
+    "PickAreaRange": "აირჩიეთ ფართის დიაპაზონი",
     "FillInPhoneNumberSubTitle": "მიუთითე ნომერი, რომელიც უკვე რეგისტრირებულია",
     "FlatPageTitleMuscat": "რემონტი მუსკატი",
     "YouWillRecieveCode": "კოდს მიიღებთ ტელეფონის ნომერზე",

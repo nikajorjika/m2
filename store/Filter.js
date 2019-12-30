@@ -55,6 +55,8 @@ export const state = () => ({
     max_floor: null,
     max_price: null,
     min_price: null,
+    min_area: null,
+    max_area: null,
     view: [],
     flat_number: null
   },
@@ -110,6 +112,8 @@ export const mutations = {
     state.filters.floors.max = data.max_floor
     state.filters.price.max = data.max_price
     state.filters.price.min = data.min_price
+    state.filters.area.max = data.max_area
+    state.filters.area.min = data.min_area
     state.filters.block = null
     state.filters.view = []
     state.filters.flat_number = null
@@ -135,6 +139,10 @@ export const mutations = {
       price: {
         min: data.min_price,
         max: data.max_price
+      },
+      area: {
+        min: data.min_area,
+        max: data.max_area
       },
       view: data.hasOwnProperty('view') ? data.view : [],
       sort: data.hasOwnProperty('sort') ? data.sort : 'price|asc',
@@ -228,6 +236,7 @@ export const actions = {
         bedroom_count,
         sort,
         type,
+        area,
         // wc,
         // eslint-disable-next-line camelcase
         building_progress
@@ -243,6 +252,8 @@ export const actions = {
         min_price: price.min,
         max_floor: floors.max,
         min_floor: floors.min,
+        min_area: area.min,
+        max_area: area.max,
         bedroom_count: bedroomCount,
         type,
         sort,
@@ -283,6 +294,7 @@ export const actions = {
       // eslint-disable-next-line camelcase
       bedroom_count,
       sort,
+      area,
       type,
       // wc,
       // eslint-disable-next-line camelcase
@@ -299,6 +311,8 @@ export const actions = {
       min_price: price.min,
       max_floor: floors.max,
       min_floor: floors.min,
+      min_area: area.min,
+      max_area: area.max,
       bedroom_count: bedroomCount,
       type,
       sort,

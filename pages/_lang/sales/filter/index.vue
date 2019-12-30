@@ -11,8 +11,8 @@
       <picker-with-gradient-label
         :items="normalizePresets"
         :multiselect="false"
-        @change="handleChange"
         class="caps"
+        @change="handleChange"
       />
       <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
@@ -45,7 +45,7 @@ export default {
       defaultFilters: 'Filter/filterDefaults'
     }),
     nextUrl() {
-      return `/${this.locale}/sales/filter/price`
+      return `/${this.locale}/sales/filter/area`
     },
     icons() {
       return {

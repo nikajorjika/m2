@@ -84,6 +84,11 @@ export default {
             component: ToFind
           },
           {
+            route: `/sales/filter/area`,
+            title: 'navigation.area',
+            component: CostIcon
+          },
+          {
             route: `/sales/filter/price`,
             title: 'navigation.price',
             component: CostIcon

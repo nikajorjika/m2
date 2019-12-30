@@ -28,6 +28,7 @@
     "InvalidCode": "Invalid code",
     "unauthorized": "You don't have permission to access requested resource",
     "NoFlatsInThisPriceRange": "There are no flats in this price range",
+    "NoFlatsInThisAreaRange": "There are no flats in this area range",
     "NoFlatsInThisFloorRange": "There are no flats in this floor range"
   },
   "modal": {
@@ -51,6 +52,7 @@
   },
   "navigation": {
     "flat": "Flat",
+    "area": "Area",
     "renovation": "Renovation",
     "furniture": "Furniture",
     "decoration": "Decoration",
@@ -227,6 +229,7 @@
     "ChooseSearchOption": "Search Options",
     "FlatCardSubTitle": "Flat area %sm²",
     "BuildingProgress": "Building status",
+    "PickAreaRange": "Pick area range",
     "PickFloorRange": "Pick floor range",
     "PickPriceRange": "Pick price range",
     "ChooseProject": "Choose project",

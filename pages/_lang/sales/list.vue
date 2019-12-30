@@ -56,6 +56,8 @@ export default {
       filters.max_floor = filters.floors.max
       filters.min_price = filters.price.min
       filters.max_price = filters.price.max
+      filters.min_area = filters.area.min
+      filters.max_area = filters.area.max
       this.setFilters(filters)
     }
     this.loading = false

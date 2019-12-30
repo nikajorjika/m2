@@ -4,24 +4,25 @@
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
-          :title="$t('titles.PickFloorRange')"
+          :title="$t('titles.PickAreaRange')"
         />
+        <currency-switcher />
       </div>
       <div class="warning" :class="{ active: totalCount === 0 }">
-        <p>{{ $t('errors.NoFlatsInThisFloorRange') }}</p>
+        <p>{{ $t('errors.NoFlatsInThisAreaRange') }}</p>
       </div>
       <select-range
-        v-if="minFloor >= 0 && maxFloor"
+        v-if="minArea !== null && maxArea && !loading"
         class="range-picker"
-        :min-value="minFloor"
-        :max-value="maxFloor"
-        :preset-min="filterFloor.min"
-        :preset-max="filterFloor.max"
+        :min-value="parseInt(minArea)"
+        :max-value="parseInt(maxArea)"
+        :preset-min="parseInt(filterArea.min)"
+        :preset-max="parseInt(filterArea.max)"
         :step="1"
-        :suffix="$t('labels.floorShort')"
+        :suffix="suffix"
         @change="handleChange"
       />
-      <sale-filter-footer :next-url="nextUrl" @skip="skipFloor" />
+      <sale-filter-footer :next-url="nextUrl" @skip="skipPrice" />
     </div>
   </div>
 </template>
@@ -31,43 +32,53 @@ import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
+import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   components: {
     SelectRange,
     SaleFilterFooter,
+    CurrencySwitcher,
     TitleWithLine
   },
-  middleware: 'isAuth',
   layout: 'SalesFilterLayout',
+  middleware: 'isAuth',
+  data() {
+    return {
+      loading: false
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
       filters: 'Filter/filters',
+      currency: 'settings/currency',
+      currencyRate: 'settings/currencyRate',
       totalCount: 'Filter/totalCount'
     }),
-    filterFloor() {
-      return this.filters.floors
+    filterArea() {
+      return {
+        min: this.filters.area.min,
+        max: this.filters.area.max
+      }
     },
-    minFloor() {
-      return this.filterDefaults.min_floor
+    minArea() {
+      return this.filterDefaults.min_area
     },
-    maxFloor() {
-      return this.filterDefaults.max_floor
+    maxArea() {
+      return this.filterDefaults.max_area
     },
     nextUrl() {
-      const filterString = JSON.stringify(this.filters)
-      console.log(filterString)
-      return {
-        name: 'lang-sales-filter-list',
-        params: {
-          lang: this.locale
-        },
-        query: {
-          filters: filterString
-        }
-      }
+      return `/${this.locale}/sales/filter/price`
+    },
+    suffix() {
+      return this.$t('labels.m2')
+    }
+  },
+  watch: {
+    suffix: {
+      handler: 'handleCurrencyChange'
     }
   },
   methods: {
@@ -80,15 +91,21 @@ export default {
       this.setLoader(true)
       this.timeout = setTimeout(() => {
         this.setFilter({
-          key: 'floors',
+          key: 'area',
           value: data
         })
       }, 500)
     },
-    skipFloor() {
+    skipPrice() {
       this.setFilter({
-        key: 'floors',
-        value: this.filterFloor
+        key: 'area',
+        value: this.filterArea
+      })
+    },
+    handleCurrencyChange() {
+      this.loading = true
+      this.$nextTick(() => {
+        this.loading = false
       })
     }
   }
@@ -124,8 +141,8 @@ export default {
   }
   &__title-container {
     display: flex;
-    flex-direction: column;
-
+    max-width: 684px;
+    justify-content: space-between;
     small {
       font-size: 10px;
       font-family: $font;

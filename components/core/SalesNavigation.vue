@@ -103,7 +103,8 @@ export default {
     list-style: none;
     display: flex;
     justify-content: space-between;
-    margin-right: 60px;
+    margin-right: 25px;
+    padding-left: 10px;
     width: 100%;
     transition: 0.4s;
     &__item {
@@ -213,7 +214,7 @@ export default {
     }
     &__text {
       margin-top: 10px;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 900;
       // text-transform: uppercase;
     }

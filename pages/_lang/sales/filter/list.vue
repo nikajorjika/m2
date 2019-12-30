@@ -148,6 +148,8 @@ export default {
       filters.max_floor = parseInt(filters.floors.max)
       filters.min_price = parseInt(filters.price.min)
       filters.max_price = parseInt(filters.price.max)
+      filters.max_area = parseInt(filters.area.max)
+      filters.min_area = parseInt(filters.area.min)
       this.setFilters(filters)
     }
     this.sortLoading = false
