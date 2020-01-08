@@ -110,7 +110,11 @@ export default {
             if (response.data.has_old_sale) {
               // User has sales manager. Need to ask additional question
 
-              this.isAvailable = false
+              if (response.data.is_available) {
+                this.waitSale()
+              } else {
+                this.isAvailable = false
+              }
             } else {
               // Sales manager is called. Go to waiting page
 
