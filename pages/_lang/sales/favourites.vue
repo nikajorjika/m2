@@ -80,7 +80,7 @@ export default {
         this.flats = flats.map((item) => {
           return {
             id: item.flat.id,
-            bedrooms_count: item.bedrooms_count,
+            bedrooms_count: item.flat.bedrooms_count,
             title: item.flat.project_name[this.locale],
             price: `${item.flat.price} $`,
             image: item.flat.render_url,

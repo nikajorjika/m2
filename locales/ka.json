@@ -106,7 +106,7 @@
     "ApproximateWaitingTime": "სავარაუდო ლოდინის დრო %s წუთი",
     "DetailsAsPdf": "დეტალები PDF ვერსიად",
     "CancelSalesRequest": "გაყიდვების გაუქმება",
-    "WaitForSalesOrRequestInfo": "დაელოდეთ გაყიდვების მენეჯერებს ან მოითხოვე დეტალები მეილზე",
+    "WaitForSalesOrRequestInfo": "დაელოდეთ გაყიდვების მენეჯერს",
     "name": "სახელი და გვარი",
     "phone": "ტელეფონის ნომერი",
     "SendCodeAgain": "ახლიდან გაგზავნა",
