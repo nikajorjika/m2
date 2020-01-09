@@ -1,5 +1,5 @@
 <template>
-  <div class="flat">
+  <div :id="'flat-' + id" class="flat">
     <div @click="goToFlat" class="flat__image">
       <div v-if="loading" class="loading"></div>
       <div v-else class="image-wrapper">
@@ -186,6 +186,8 @@ export default {
               'modal-content-message',
               this.modalMessageRemovedFlat
             )
+
+            this.removeElement('flat-' + id)
           }
         })
         .catch((e) => {
@@ -194,6 +196,11 @@ export default {
     },
     isFavouritesPage() {
       return this.$route.name === 'lang-sales-favourites'
+    },
+    removeElement(elementId) {
+      const element = document.getElementById(elementId)
+
+      element.parentNode.parentNode.removeChild(element.parentNode)
     }
   }
 }
