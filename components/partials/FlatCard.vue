@@ -1,6 +1,6 @@
 <template>
   <div class="flat">
-    <div class="flat__image" @click="goToFlat">
+    <div @click="goToFlat" class="flat__image">
       <div v-if="loading" class="loading"></div>
       <div v-else class="image-wrapper">
         <img :src="image" :alt="title" />
@@ -15,8 +15,8 @@
       <div
         v-if="!loading"
         :class="{ active: isFavourite }"
+        @click.stop="saveFlat"
         class="flat__save"
-        @click.stop="saveFlat()"
       >
         <favourite-icon
           class="icon"
@@ -41,7 +41,7 @@
     </div>
     <div class="flat__see">
       <div v-if="loading" class="loading"></div>
-      <button v-else class="btn btn-orange" @click="goToFlat">
+      <button v-else @click="goToFlat" class="btn btn-orange">
         <span>{{ $t('buttons.see') }}</span>
         <div class="icon-wrapper">
           <arrow-right
@@ -114,6 +114,11 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      saved: this.favourite
+    }
+  },
   computed: {
     modalMessageSavedFlat() {
       return {
@@ -125,8 +130,14 @@ export default {
         message: this.$t('messages.removedFlat')
       }
     },
-    isFavourite() {
-      return this.favourite
+    isFavourite: {
+      get() {
+        return this.saved
+      },
+
+      set(val) {
+        this.saved = val
+      }
     }
   },
   methods: {
@@ -134,6 +145,8 @@ export default {
       this.$router.push(this.url)
     },
     saveFlat() {
+      if (this.isFavourite) return
+
       this.$axios
         .post('user/save-flat', {
           flat_id: this.flatId,
