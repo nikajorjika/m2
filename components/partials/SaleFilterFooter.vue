@@ -42,6 +42,7 @@
         <button-main-orange
           :button-text="$t('buttons.next')"
           :disabled="!totalCount"
+          text-padding="0 15px 0 32px"
           @click="handleNext"
         >
           <template v-slot:icon>

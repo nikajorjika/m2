@@ -126,7 +126,7 @@ export default {
       // text-transform: uppercase;
     }
     &.active {
-      transform: scale(1.1);
+      transform: scale(1.06);
       box-shadow: 0px 4px 21.7px 10.24px rgba(242, 101, 41, 0.1);
     }
     &__checked {

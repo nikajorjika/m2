@@ -40,6 +40,7 @@
         <div class="flat-list-table__body__item__button">
           <button-main-orange
             :button-text="$t('buttons.see')"
+            text-padding="0 15px 0 32px"
             @click="() => $router.push(`/${locale}/sales/customize/${item.id}`)"
           >
             <template v-slot:icon>

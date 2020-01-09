@@ -2,8 +2,8 @@
   <button
     :class="{ 'btn-standard--disabled': disabled || loading }"
     :style="buttonCustomStyles"
-    @click="handleClick"
     class="btn btn-standard btn-standard--orange btn-standard--large"
+    @click="handleClick"
   >
     <div v-if="loading" :style="textCustomStyles" class="loading">
       <div class=" lds-ellipsis">
