@@ -75,7 +75,7 @@ export default {
     position: absolute;
     opacity: 0.99;
     top: 19%;
-    left: 68%;
+    left: 66%;
   }
   img {
     width: 100%;

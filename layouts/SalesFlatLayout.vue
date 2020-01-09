@@ -116,7 +116,8 @@ body {
   }
 
   .app {
-    height: 100%;
+    // height: 100%;
+    height: calc(100% - 138px);
     background: transparent;
     box-shadow: initial;
   }
