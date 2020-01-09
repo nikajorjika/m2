@@ -42,7 +42,6 @@ export default {
     color: #494949;
     font-family: $font;
     font-size: 11px;
-    letter-spacing: 0.6px;
   }
 }
 </style>
