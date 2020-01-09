@@ -30,9 +30,9 @@ export default {
 <style lang="scss">
 .layout-modal.modal-content-message {
   justify-content: center;
-  width: fit(1060) !important;
-  height: fit(760) !important;
-  padding: fit(160) fit(140) fit(140) !important;
+  width: fit(880) !important;
+  height: fit(430) !important;
+  padding: fit(138) fit(52) fit(120) !important;
 
   .button {
     width: fit(780);

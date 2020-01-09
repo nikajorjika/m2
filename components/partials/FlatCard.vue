@@ -1,6 +1,6 @@
 <template>
-  <div class="flat">
-    <div class="flat__image" @click="goToFlat">
+  <div :id="'flat-' + id" class="flat">
+    <div @click="goToFlat" class="flat__image">
       <div v-if="loading" class="loading"></div>
       <div v-else class="image-wrapper">
         <img :src="image" :alt="title" />
@@ -15,14 +15,23 @@
       <div
         v-if="!loading"
         :class="{ active: isFavourite }"
+        @click.stop="!isFavouritesPage ? saveFlat : removeFlat(id)"
         class="flat__save"
-        @click.stop="saveFlat()"
       >
         <favourite-icon
+          v-if="!isFavouritesPage"
           class="icon"
           icon-color="#fff"
           height="13px"
           width="13px"
+        />
+
+        <remove-favourite-icon
+          v-if="isFavouritesPage"
+          class="icon"
+          icon-color="#fff"
+          height="18px"
+          width="18px"
         />
       </div>
     </div>
@@ -41,7 +50,7 @@
     </div>
     <div class="flat__see">
       <div v-if="loading" class="loading"></div>
-      <button v-else class="btn btn-orange" @click="goToFlat">
+      <button v-else @click="goToFlat" class="btn btn-orange">
         <span>{{ $t('buttons.see') }}</span>
         <div class="icon-wrapper">
           <arrow-right
@@ -63,16 +72,22 @@ import PriceComponent from '@/components/partials/Price'
 import ArrowRight from '@/components/icons/ArrowRight'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import FavouriteIcon from '@/components/icons/Favourite'
+import RemoveFavouriteIcon from '@/components/icons/RemoveFavourite'
 export default {
   components: {
     // GradientLabel,
     GradientBlock,
     PriceComponent,
     FavouriteIcon,
+    RemoveFavouriteIcon,
     SleepingRoom,
     ArrowRight
   },
   props: {
+    id: {
+      type: Number,
+      default: 0
+    },
     image: {
       type: String,
       default: ''
@@ -114,19 +129,25 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      saved: this.favourite
+    }
+  },
   computed: {
     modalMessageSavedFlat() {
       return {
         message: this.$t('messages.savedFlat')
       }
     },
-    modalMessageRemovedFlat() {
-      return {
-        message: this.$t('messages.removedFlat')
+    isFavourite: {
+      get() {
+        return this.saved
+      },
+
+      set(val) {
+        this.saved = val
       }
-    },
-    isFavourite() {
-      return this.favourite
     }
   },
   methods: {
@@ -134,6 +155,8 @@ export default {
       this.$router.push(this.url)
     },
     saveFlat() {
+      if (this.isFavourite) return
+
       this.$axios
         .post('user/save-flat', {
           flat_id: this.flatId,
@@ -157,23 +180,17 @@ export default {
           console.error(e)
         })
     },
-    removeFlat() {
-      this.$axios
-        .post('user/remove-flat', {
-          flat_id: this.flatId
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            this.$eventBus.$emit(
-              'openModal',
-              'modal-content-message',
-              this.modalMessageRemovedFlat
-            )
-          }
-        })
-        .catch((e) => {
-          console.error(e)
-        })
+    removeFlat(id) {
+      this.$eventBus.$emit('openModal', 'modal-content-delete-flat', {
+        id,
+        location: {
+          name: 'lang-sales-favourites',
+          params: { lang: this.locale }
+        }
+      })
+    },
+    isFavouritesPage() {
+      return this.$route.name === 'lang-sales-favourites'
     }
   }
 }

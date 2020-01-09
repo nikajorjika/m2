@@ -101,6 +101,7 @@ export default {
   display: flex;
   border: none;
   outline: none;
+  white-space: nowrap;
 }
 .btn-standard {
   border-radius: 35px;

@@ -652,5 +652,17 @@ export default {
   .switch__inner__item {
     letter-spacing: 0 !important;
   }
+
+  .list-slider__list {
+    padding: 25px 30px 17px !important;
+  }
+
+  .list-slider__list__item__label {
+    white-space: nowrap;
+  }
+
+  .list-card__item--white {
+    padding: 19px 12px 14px;
+  }
 }
 </style>

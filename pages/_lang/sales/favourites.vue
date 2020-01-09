@@ -13,13 +13,14 @@
     <div v-else-if="!loading" class="flat-list">
       <div v-for="(item, index) in flats" :key="index" class="flat-card">
         <flat-card
+          :id="item.id"
           :title="item.title"
           :sub-title="item.subTitle"
           :price="item.price"
           :image="item.image"
           :bedroom-count="item.bedrooms_count"
           :url="item.url"
-          :flat-id="item.id"
+          :flat-id="item.flat_id"
           :sold="item.status === 'sold'"
         />
       </div>
@@ -79,7 +80,8 @@ export default {
 
         this.flats = flats.map((item) => {
           return {
-            id: item.flat.id,
+            id: item.id,
+            flat_id: item.flat.id,
             bedrooms_count: item.flat.bedrooms_count,
             title: item.flat.project_name[this.locale],
             price: `${item.flat.price} $`,
