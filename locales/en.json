@@ -44,7 +44,8 @@
     "failedReservation": "Your chosen flat couldn't be booked",
     "aboutFilterTitle": "About filters",
     "aboutFilterDesc": "By selecting this filter, we will offer you the recommended pre-filters, which you can change",
-    "ok": "OK"
+    "ok": "OK",
+    "favouritesPageModal": "Do you really want to remove this flat?"
   },
   "messages": {
     "savedFlat": "Your chosen flats is saved successfully",

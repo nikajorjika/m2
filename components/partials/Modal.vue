@@ -16,6 +16,7 @@
 
 <script>
 import ModalContentSaveFlat from '@/components/partials/ModalContentSaveFlat'
+import ModalContentDeleteFlat from '@/components/partials/ModalContentDeleteFlat'
 import ModalContentCallSales from '@/components/partials/ModalContentCallSales'
 import ModalContentMessage from '@/components/partials/ModalContentMessage'
 import ModalContentAboutPreConfig from '@/components/partials/ModalContentAboutPreConfig'
@@ -23,6 +24,7 @@ import ModalContentAboutPreConfig from '@/components/partials/ModalContentAboutP
 export default {
   components: {
     ModalContentSaveFlat,
+    ModalContentDeleteFlat,
     ModalContentCallSales,
     ModalContentMessage,
     ModalContentAboutPreConfig

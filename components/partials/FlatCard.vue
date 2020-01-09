@@ -19,10 +19,19 @@
         class="flat__save"
       >
         <favourite-icon
+          v-if="!isFavouritesPage"
           class="icon"
           icon-color="#fff"
           height="13px"
           width="13px"
+        />
+
+        <remove-favourite-icon
+          v-if="isFavouritesPage"
+          class="icon"
+          icon-color="#fff"
+          height="18px"
+          width="18px"
         />
       </div>
     </div>
@@ -63,12 +72,14 @@ import PriceComponent from '@/components/partials/Price'
 import ArrowRight from '@/components/icons/ArrowRight'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import FavouriteIcon from '@/components/icons/Favourite'
+import RemoveFavouriteIcon from '@/components/icons/RemoveFavourite'
 export default {
   components: {
     // GradientLabel,
     GradientBlock,
     PriceComponent,
     FavouriteIcon,
+    RemoveFavouriteIcon,
     SleepingRoom,
     ArrowRight
   },
@@ -129,11 +140,6 @@ export default {
         message: this.$t('messages.savedFlat')
       }
     },
-    modalMessageRemovedFlat() {
-      return {
-        message: this.$t('messages.removedFlat')
-      }
-    },
     isFavourite: {
       get() {
         return this.saved
@@ -175,32 +181,16 @@ export default {
         })
     },
     removeFlat(id) {
-      this.$axios
-        .post('user/remove-flat', {
-          user_flat_id: id
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            this.$eventBus.$emit(
-              'openModal',
-              'modal-content-message',
-              this.modalMessageRemovedFlat
-            )
-
-            this.removeElement('flat-' + id)
-          }
-        })
-        .catch((e) => {
-          console.error(e)
-        })
+      this.$eventBus.$emit('openModal', 'modal-content-delete-flat', {
+        id,
+        location: {
+          name: 'lang-sales-favourites',
+          params: { lang: this.locale }
+        }
+      })
     },
     isFavouritesPage() {
       return this.$route.name === 'lang-sales-favourites'
-    },
-    removeElement(elementId) {
-      const element = document.getElementById(elementId)
-
-      element.parentNode.parentNode.removeChild(element.parentNode)
     }
   }
 }
