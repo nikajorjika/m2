@@ -257,15 +257,15 @@ export default {
       return [
         {
           value: `${this.flat.total_area} ${this.$t('labels.m2')}`,
-          label: this.$t('labels.total_area')
+          label: this.$t('titles.total_area')
         },
         {
           value: `${flatArea} ${this.$t('labels.m2')}`,
-          label: this.$t('labels.flat_area')
+          label: this.$t('titles.flat_area')
         },
         {
           value: `${this.flat.balcony_area} ${this.$t('labels.m2')}`,
-          label: this.$t('labels.balcony_area_slash_terrace')
+          label: this.$t('titles.balcony_area_slash_terrace')
         }
       ]
     },
@@ -486,7 +486,8 @@ export default {
     display: flex;
     align-self: center;
     width: 100%;
-    height: fit(510);
+    // height: fit(510);
+    height: 358px;
     margin: auto;
     overflow: auto;
 

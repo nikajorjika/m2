@@ -79,7 +79,7 @@ export default {
     justify-content: space-between;
     z-index: 1;
     &--white {
-      padding: 19px 23px 14px 25px;
+      padding: 19px 9px 14px 9px;
     }
     &--gradient {
       padding: 19px 9px 19px 25px;

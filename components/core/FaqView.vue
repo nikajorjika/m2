@@ -24,10 +24,12 @@ export default {
 <style lang="scss" scoped>
 .faq-view {
   flex: 1;
+  width: calc(100% - 81px);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   .close-container {
-    margin: auto 0;
+    margin: auto 50px;
   }
   .faq-switcher {
     margin-right: 67px;

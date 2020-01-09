@@ -92,7 +92,7 @@ export default {
       box-shadow: 0px 4px 21.7px 10.24px rgba(242, 101, 41, 0.1);
     }
     &__icon {
-      width: 61px;
+      width: 50px;
       height: 100%;
       margin: auto;
       display: flex;

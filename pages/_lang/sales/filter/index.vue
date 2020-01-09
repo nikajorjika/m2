@@ -115,6 +115,8 @@ export default {
       const filterData = {
         min_floor: preset.floors_from,
         max_floor: preset.floors_to,
+        min_area: preset.square_meters_from,
+        max_area: preset.square_meters_to,
         max_price: this.defaultFilters.max_price,
         min_price: this.defaultFilters.min_price,
         bedroom_count: preset.bedrooms.split(', '),
