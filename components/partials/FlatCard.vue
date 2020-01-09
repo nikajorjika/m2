@@ -15,7 +15,7 @@
       <div
         v-if="!loading"
         :class="{ active: isFavourite }"
-        @click.stop="saveFlat"
+        @click.stop="!isFavouritesPage ? saveFlat : removeFlat(id)"
         class="flat__save"
       >
         <favourite-icon
@@ -73,6 +73,10 @@ export default {
     ArrowRight
   },
   props: {
+    id: {
+      type: Number,
+      default: 0
+    },
     image: {
       type: String,
       default: ''
@@ -170,10 +174,10 @@ export default {
           console.error(e)
         })
     },
-    removeFlat() {
+    removeFlat(id) {
       this.$axios
         .post('user/remove-flat', {
-          flat_id: this.flatId
+          user_flat_id: id
         })
         .then((response) => {
           if (response.status === 200) {
@@ -187,6 +191,9 @@ export default {
         .catch((e) => {
           console.error(e)
         })
+    },
+    isFavouritesPage() {
+      return this.$route.name === 'lang-sales-favourites'
     }
   }
 }
