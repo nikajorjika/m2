@@ -15,6 +15,7 @@
       <button-main-orange
         class="button"
         :button-text="$t('buttons.select')"
+        text-padding="0 15px 0 32px"
         @click="handleFilter"
       >
         <template v-slot:icon>

@@ -1,14 +1,14 @@
 <template>
   <div class="price-filters">
     <select-range
-      v-if="minPrice >= 0 && maxPrice"
+      v-if="minArea >= 0 && maxArea"
       class="range-picker"
-      :min-value="minPrice"
-      :max-value="maxPrice"
-      :preset-min="filterPrice.min"
-      :preset-max="filterPrice.max"
-      :suffix="suffix"
-      :step="1000"
+      :min-value="minArea"
+      :max-value="maxArea"
+      :preset-min="filterArea.min"
+      :preset-max="filterArea.max"
+      :suffix="$t('labels.m2')"
+      :step="1"
       @change="handleChange"
     />
     <div class="submit-filter">
@@ -53,30 +53,14 @@ export default {
         }
       }
     },
-    filterPrice() {
-      return {
-        min:
-          this.currency === 'GEL'
-            ? this.$currencyConverter(this.filters.price.min, this.currency)
-            : this.filters.price.min,
-        max:
-          this.currency === 'GEL'
-            ? this.$currencyConverter(this.filters.price.max, this.currency)
-            : this.filters.price.max
-      }
+    filterArea() {
+      return this.filters.area
     },
-    minPrice() {
-      return this.currency === 'GEL'
-        ? this.$currencyConverter(this.filterDefaults.min_price, this.currency)
-        : this.filterDefaults.min_price
+    minArea() {
+      return this.filterDefaults.min_area
     },
-    maxPrice() {
-      return this.currency === 'GEL'
-        ? this.$currencyConverter(this.filterDefaults.max_price, this.currency)
-        : this.filterDefaults.max_price
-    },
-    suffix() {
-      return this.currency === 'GEL' ? '₾' : '$'
+    maxArea() {
+      return this.filterDefaults.max_area
     }
   },
   methods: {
@@ -88,14 +72,8 @@ export default {
       this.selected = { ...data }
     },
     handleFilter() {
-      if (this.currency === 'GEL') {
-        this.selected = {
-          min: this.selected.min / this.currencyRate,
-          max: this.selected.max / this.currencyRate
-        }
-      }
       this.setFilter({
-        key: 'price',
+        key: 'area',
         value: this.selected
       })
       this.$emit('change')
