@@ -37,11 +37,13 @@
 import { mapGetters, mapActions } from 'vuex'
 import CostIcon from '@/components/icons/Cost'
 import FloorIcon from '@/components/icons/Floor'
+import AreaIcon from '@/components/icons/Area'
 import StatusIcon from '@/components/icons/Status'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import ProjectIcon from '@/components/icons/Project'
 import PriceFilter from '@/components/partials/filters/PriceFilter'
 import FloorFilter from '@/components/partials/filters/FloorFilter'
+import AreaFilter from '@/components/partials/filters/AreaFilter'
 import ProjectsFilter from '@/components/partials/filters/ProjectsFilter'
 import BedroomsFilter from '@/components/partials/filters/Bedrooms'
 import BuildingStatusFilter from '@/components/partials/filters/BuildingStatus'
@@ -70,6 +72,11 @@ export default {
           title: 'navigation.projects',
           component: ProjectIcon,
           filter: ProjectsFilter
+        },
+        {
+          title: 'navigation.area',
+          component: AreaIcon,
+          filter: AreaFilter
         },
         {
           title: 'navigation.floor',

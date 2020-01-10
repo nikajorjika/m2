@@ -21,6 +21,7 @@ import { mapGetters, mapActions } from 'vuex'
 import SalesNavigation from './SalesNavigation'
 import ToFind from '@/components/icons/ToFind'
 import CostIcon from '@/components/icons/Cost'
+import AreaIcon from '@/components/icons/Area'
 import StatusIcon from '@/components/icons/Status'
 import SleepingRoom from '@/components/icons/SleepingRoom'
 import ProjectIcon from '@/components/icons/Project'
@@ -86,7 +87,7 @@ export default {
           {
             route: `/sales/filter/area`,
             title: 'navigation.area',
-            component: CostIcon
+            component: AreaIcon
           },
           {
             route: `/sales/filter/price`,
