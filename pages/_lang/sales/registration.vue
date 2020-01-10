@@ -3,15 +3,16 @@
     <div class="page-flat-number">
       <div class="page-flat-number__title-container">
         <title-with-line
-          class="page-flat-number__title"
           :title="$t('titles.FillPrivateInformation')"
+          class="page-flat-number__title"
         />
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <small v-html="subtitle"></small>
+        <small v-html="subtitle" />
       </div>
       <div v-if="!codeSent" class="page-flat-number__form">
         <registration-form
           :loading="loading"
+          :errorKey="errorKey"
           :error="error"
           @removeErrors="() => (error = '')"
           @register="handleRegistration"
@@ -46,6 +47,7 @@ export default {
       codeSent: false,
       loading: false,
       formData: null,
+      errorKey: '',
       error: ''
     }
   },
@@ -69,6 +71,7 @@ export default {
     }),
     sendVerifyPhoneRequest() {
       this.loading = true
+      this.errorKey = ''
       this.error = ''
       this.registerUser(this.formData)
         .then(({ data }) => {
@@ -92,7 +95,14 @@ export default {
         .catch((err) => {
           if (err.response.status === 400) {
             this.loading = false
-            this.error = this.$t('errors.PhoneAlreadyRegistered')
+
+            if (err.response.data.msg.hasOwnProperty('email')) {
+              this.errorKey = 'email'
+              this.error = this.$t('errors.EmailAlreadyRegistered')
+            } else {
+              this.errorKey = 'phone'
+              this.error = this.$t('errors.PhoneAlreadyRegistered')
+            }
           }
         })
     },

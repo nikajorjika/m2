@@ -20,6 +20,7 @@
   "errors": {
     "NameFieldIsRequired": "Name field is required",
     "PhoneAlreadyRegistered": "Phone number is already registered",
+    "EmailAlreadyRegistered": "Email is already registered",
     "PhoneFieldIsRequired": "Phone Number field is required and must be numeric value",
     "PhoneOnlyFieldIsRequired": "Phone Number field is required and must be numeric value",
     "emailIsNotValid": "Email field is required and must be correct format",
