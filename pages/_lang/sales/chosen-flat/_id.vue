@@ -72,7 +72,7 @@
               v-if="flatExists && flatAppliances.length"
               :items="flatAppliances"
               :slick-options="slickOptions2"
-              :swipe-icon="true"
+              :swipe-icon="swipeIconVisibility"
             />
           </div>
 
@@ -169,6 +169,7 @@ export default {
     return {
       confirmModalShow: false,
       confirmModalLoading: false,
+      showSwipeIcon: false,
       slickOptions1: {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -403,10 +404,18 @@ export default {
         decoration_id: this.decoration ? this.renovation.id : null,
         appliances_ids: this.appliances ? this.renovation.id : null
       }
+    },
+    swipeIconVisibility() {
+      return this.showSwipeIcon
     }
   },
   mounted() {
     this.getChosenFlat(this.$route.params.id)
+  },
+  updated() {
+    this.$nextTick(function() {
+      this.displaySwipeIcon()
+    })
   },
   methods: {
     ...mapActions('chosen-flat', ['getChosenFlat']),
@@ -498,6 +507,16 @@ export default {
         .catch(() => {
           this.confirmModalLoading = false
         })
+    },
+    displaySwipeIcon() {
+      const containers = document.querySelectorAll('.text-slider-container')
+      const container = containers.length === 1 ? containers[0] : containers[1]
+      const els = container.getElementsByClassName('slick-track')
+      const el = els.length !== 0 ? els[0] : null
+
+      if (el !== null && container.clientWidth < el.clientWidth) {
+        this.showSwipeIcon = true
+      }
     }
   }
 }
