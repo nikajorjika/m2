@@ -5,7 +5,7 @@
         <title-with-line :title="title" class="flat-pages-title" />
 
         <h3 class="flat-pages-subtitle">
-          <img src="@/assets/illustrations/illustration-authorisation.png" />
+          <warning-icon :width="16" :height="16" :iconColor="'#f26529'" />
 
           {{ subtitle }}
         </h3>
@@ -124,6 +124,7 @@ import ManagerIcon from '@/assets/icons/Manager1.svg'
 import SalesIcon from '@/components/icons/Alone'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
+import WarningIcon from '@/components/icons/Warning'
 // import PriceContainer from '@/components/partials/Price'
 // import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
@@ -141,7 +142,8 @@ export default {
     ManagerIcon,
     SalesIcon,
     SaveButton,
-    SaveIcon
+    SaveIcon,
+    WarningIcon
     // PriceContainer,
     // CurrencySwitcher
   },
@@ -516,10 +518,8 @@ export default {
       font: 14px/1 $font;
       color: #f26529;
 
-      img {
-        width: 20px;
-        height: 20px;
-        vertical-align: middle;
+      svg {
+        vertical-align: bottom;
       }
     }
   }
