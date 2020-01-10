@@ -1,12 +1,12 @@
 <template>
-  <form class="registration-form" @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit" class="registration-form">
     <div class="registration-form__input">
       <input
         v-model="name"
-        type="text"
         :placeholder="$t('labels.name')"
         :disabled="loading"
         @input="handleInput"
+        type="text"
       />
       <div v-if="errors.name.length && showErrors" class="error">
         {{ errors.name }}
@@ -15,28 +15,31 @@
     <div class="registration-form__input">
       <input
         v-model="phone"
-        type="text"
         :placeholder="$t('labels.phone')"
         :disabled="loading"
         @input="handleInput"
+        type="text"
       />
       <div v-if="errors.phone.length && showErrors" class="error">
         {{ errors.phone }}
       </div>
-      <div class="error">
+      <div v-if="errorKey === 'phone'" class="error">
         {{ error }}
       </div>
     </div>
     <div class="registration-form__input">
       <input
         v-model="email"
-        type="text"
         :placeholder="$t('labels.email')"
         :disabled="loading"
         @input="handleInput"
+        type="text"
       />
       <div v-if="errors.email.length && showErrors" class="error">
         {{ errors.email }}
+      </div>
+      <div v-if="errorKey === 'email'" class="error">
+        {{ error }}
       </div>
     </div>
     <div class="registration-form__button">
@@ -69,6 +72,10 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    errorKey: {
+      type: String,
+      default: ''
     },
     error: {
       type: String,
@@ -142,7 +149,6 @@ export default {
 
 <style lang="scss" scoped>
 .registration-form {
-  display: flex;
   align-items: center;
   display: grid;
   grid-template-columns: repeat(2, 288px);
