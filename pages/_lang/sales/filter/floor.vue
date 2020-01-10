@@ -58,7 +58,6 @@ export default {
     },
     nextUrl() {
       const filterString = JSON.stringify(this.filters)
-      console.log(filterString)
       return {
         name: 'lang-sales-filter-list',
         params: {

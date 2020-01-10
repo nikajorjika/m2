@@ -83,7 +83,7 @@ export default {
         phone: ''
       }
       if (!this.phone.length) {
-        this.errors.phone = this.$t('errors.PhoneFieldIsRequired')
+        this.errors.phone = this.$t('errors.PhoneOnlyFieldIsRequired')
       } else {
         this.$emit('discardLoginErrorMessage')
       }

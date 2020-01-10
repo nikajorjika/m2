@@ -110,6 +110,8 @@ export default {
       this.showErrors = true
     },
     validateForm() {
+      this.$emit('removeErrors')
+
       this.errors = {
         name: '',
         phone: '',

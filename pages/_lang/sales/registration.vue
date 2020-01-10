@@ -14,6 +14,7 @@
           :loading="loading"
           :errorKey="errorKey"
           :error="error"
+          @removeErrors="() => (error = '')"
           @register="handleRegistration"
         />
       </div>
