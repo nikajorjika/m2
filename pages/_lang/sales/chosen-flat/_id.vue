@@ -517,7 +517,8 @@ export default {
       this.$axios
         .get(`/user-flats/${this.chosenFlat.id}/send-pdf`, {
           params: {
-            email
+            email,
+            locale: this.locale
           }
         })
         .then(() => {
