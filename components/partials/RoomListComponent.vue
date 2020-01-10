@@ -135,6 +135,11 @@ export default {
 </style>
 
 <style lang="scss">
+[lang='en'] {
+  .list-slider__list__item__label {
+    font-weight: bold;
+  }
+}
 .list-slider {
   .swiper-container {
     height: 100%;

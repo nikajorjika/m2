@@ -182,7 +182,7 @@ export default {
       align-items: center;
       width: 33.33%;
       height: 100%;
-      padding: 4px 0 0;
+      padding: 0;
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 1px;

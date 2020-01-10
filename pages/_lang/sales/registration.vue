@@ -13,6 +13,7 @@
         <registration-form
           :loading="loading"
           :error="error"
+          @removeErrors="() => (error = '')"
           @register="handleRegistration"
         />
       </div>

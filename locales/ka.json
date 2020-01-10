@@ -23,8 +23,9 @@
     "NoFlatsInThisFloorRange": "მითითებულ ფასში ბინა არ მოიძებნა, გთხოვთ, მიუთითოთ ახალი სართულის დიაპაზონი",
     "NameFieldIsRequired": "სახელის ველი აუცილებელია",
     "NoItemsInYourFavourites": "თქვენ ფავორიტებში არ გაქვთ დამატებული არცერთი ბინა",
-    "PhoneFieldIsRequired": "გთხოვთ შეავსოთ ნომრის/ელ-ფოსტის ველი სწორი ფორმატით",
-    "emailIsNotValid": "გთხოვთ შეავსოთ ნომრის/ელ-ფოსტის ველი სწორი ფორმატით",
+    "PhoneFieldIsRequired": "გთხოვთ შეავსოთ ნომრის ველი სწორი ფორმატით",
+    "PhoneOnlyFieldIsRequired": "გთხოვთ შეავსოთ ნომრის ველი სწორი ფორმატით",
+    "emailIsNotValid": "გთხოვთ შეავსოთ ელ-ფოსტის ველი სწორი ფორმატით",
     "CodeFieldIsRequired": "კოდის ველი აუცილებელია და უნდა იყოს სწორი ფორმატით",
     "NoSuchUserWithSelectedPhoneNumber": "ასეთი ტელეფონის ნომრით მომხარებელი არ მოიძებნა",
     "InvalidCode": "კოდი არასწორია",
@@ -50,7 +51,7 @@
     "bedrooms": "საძინებლები",
     "project": "პროექტი",
     "projects": "პროექტები",
-    "BuildingStatus": "მშენებლობის სტატუსი"
+    "BuildingStatus": "სტატუსი"
   },
   "sidebar": {
     "logo_meta": "m² Some text"

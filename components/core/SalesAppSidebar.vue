@@ -209,7 +209,7 @@ export default {
       text-align: center;
       font-family: $font-caps;
       font-weight: bold;
-      font-size: 10px;
+      font-size: 9px;
       letter-spacing: 0.6px;
       outline: none;
       span {
