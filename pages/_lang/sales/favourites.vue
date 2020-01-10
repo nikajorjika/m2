@@ -5,9 +5,12 @@
         :title="$t('titles.FavouriteFlats')"
         class="page-title"
       />
-      <currency-switcher class="fav-switcher" />
+      <currency-switcher v-if="!isEmpty && !loading" class="fav-switcher" />
     </div>
-    <div v-if="!loading" class="flat-list">
+    <div v-if="isEmpty">
+      {{ $t('errors.NoItemsInYourFavourites') }}
+    </div>
+    <div v-else-if="!loading" class="flat-list">
       <div v-for="(item, index) in flats" :key="index" class="flat-card">
         <flat-card
           :id="item.id"
@@ -26,9 +29,6 @@
       <div v-for="(item, index) in loadingItems" :key="index" class="flat-card">
         <flat-card :loading="true" :flat-id="0" />
       </div>
-    </div>
-    <div v-if="isEmpty">
-      {{ $t('errors.NoItemsInYourFavourites') }}
     </div>
   </div>
 </template>

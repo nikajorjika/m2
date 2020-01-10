@@ -6,7 +6,6 @@
           class="page-flat-number__title"
           :title="$t('titles.PickAreaRange')"
         />
-        <currency-switcher />
       </div>
       <div class="warning" :class="{ active: totalCount === 0 }">
         <p>{{ $t('errors.NoFlatsInThisAreaRange') }}</p>
@@ -32,13 +31,11 @@ import { mapGetters, mapMutations } from 'vuex'
 import TitleWithLine from '@/components/partials/TitleWithLine'
 import SelectRange from '@/components/partials/SelectRange'
 import SaleFilterFooter from '@/components/partials/SaleFilterFooter'
-import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   components: {
     SelectRange,
     SaleFilterFooter,
-    CurrencySwitcher,
     TitleWithLine
   },
   layout: 'SalesFilterLayout',
