@@ -100,7 +100,8 @@ export default {
     flex-direction: column;
     height: 100%;
     h4 {
-      font: 22px/1 'BPG Nino Mtavruli', sans-serif;
+      font: 22px 'BPG Nino Mtavruli', sans-serif;
+      line-height: 26px;
       color: #494949;
     }
   }
@@ -110,11 +111,13 @@ export default {
     .button {
       border: none;
       border-radius: 18px;
+      font-family: $font-caps;
       background: $orange;
       color: #fff;
       padding: 10px 27px;
       font-size: 16px;
       outline: none;
+      margin-right: 18px;
       &-cancel {
         background: #8178b7;
       }
