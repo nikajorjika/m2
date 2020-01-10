@@ -47,7 +47,8 @@
     "aboutFilterTitle": "About filters",
     "aboutFilterDesc": "By selecting this filter, we will offer you the recommended pre-filters, which you can change",
     "ok": "OK",
-    "favouritesPageModal": "Do you really want to remove this flat?"
+    "favouritesPageModal": "Do you really want to remove this flat?",
+    "sentSuccessfully": "Your email sent successfully"
   },
   "messages": {
     "savedFlat": "Your chosen flats is saved successfully",

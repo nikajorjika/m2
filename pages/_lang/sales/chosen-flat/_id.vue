@@ -69,6 +69,7 @@
             />
 
             <TextSlider
+              id="appliances-slider"
               v-if="flatExists && flatAppliances.length"
               :items="flatAppliances"
               :slick-options="slickOptions2"
@@ -170,6 +171,8 @@ export default {
       confirmModalShow: false,
       confirmModalLoading: false,
       showSwipeIcon: false,
+      intervalHandle: null,
+      textSliderTrack: false,
       slickOptions1: {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -407,15 +410,32 @@ export default {
     },
     swipeIconVisibility() {
       return this.showSwipeIcon
+    },
+    modalMessage() {
+      return {
+        message: this.$t('modal.sentSuccessfully')
+      }
+    }
+  },
+  watch: {
+    textSliderTrack(newVal, oldVal) {
+      if (oldVal !== newVal) {
+        clearInterval(this.intervalHandle)
+      }
     }
   },
   mounted() {
     this.getChosenFlat(this.$route.params.id)
-  },
-  updated() {
-    this.$nextTick(function() {
-      this.displaySwipeIcon()
-    })
+
+    const that = this
+
+    this.intervalHandle = setInterval(
+      () => {
+        that.textSliderTrack = that.displaySwipeIcon()
+      },
+      500,
+      that
+    )
   },
   methods: {
     ...mapActions('chosen-flat', ['getChosenFlat']),
@@ -504,20 +524,34 @@ export default {
         .then(() => {
           this.confirmModalShow = false
           this.confirmModalLoading = false
+
+          this.$eventBus.$emit(
+            'openModal',
+            'modal-content-message',
+            this.modalMessage
+          )
         })
         .catch(() => {
           this.confirmModalLoading = false
         })
     },
     displaySwipeIcon() {
-      const containers = document.querySelectorAll('.text-slider-container')
-      const container = containers.length === 1 ? containers[0] : containers[1]
-      const els = container.getElementsByClassName('slick-track')
-      const el = els.length !== 0 ? els[0] : null
+      const container = document.getElementById('appliances-slider')
 
-      if (el !== null && container.clientWidth < el.clientWidth) {
-        this.showSwipeIcon = true
+      if (container) {
+        const els = container.getElementsByClassName('slick-track')
+        const el = els.length !== 0 ? els[0] : null
+
+        if (el && container.clientWidth < el.clientWidth) {
+          this.showSwipeIcon = true
+        }
+
+        return el !== null
+      } else {
+        clearInterval(this.intervalHandle)
       }
+
+      return container !== null
     }
   }
 }

@@ -15,7 +15,7 @@
       <div
         v-if="!loading"
         :class="{ active: isFavourite }"
-        @click.stop="!isFavouritesPage ? saveFlat : removeFlat(id)"
+        @click.stop="!isFavouritesPage ? saveFlat() : removeFlat(id)"
         class="flat__save"
       >
         <favourite-icon
@@ -131,7 +131,8 @@ export default {
   },
   data() {
     return {
-      saved: this.favourite
+      saved: this.favourite,
+      isFavouritesPage: false
     }
   },
   computed: {
@@ -149,6 +150,9 @@ export default {
         this.saved = val
       }
     }
+  },
+  mounted() {
+    this.checkIfFavouritesPage()
   },
   methods: {
     goToFlat() {
@@ -189,8 +193,8 @@ export default {
         }
       })
     },
-    isFavouritesPage() {
-      return this.$route.name === 'lang-sales-favourites'
+    checkIfFavouritesPage() {
+      this.isFavouritesPage = this.$route.name === 'lang-sales-favourites'
     }
   }
 }
