@@ -19,6 +19,7 @@
       <div class="flat-list">
         <div v-for="(item, index) in flats" :key="index" class="flat-card">
           <flat-card
+            :id="item.id"
             :title="item.title"
             :sub-title="item.subTitle"
             :price="item.price"
@@ -34,10 +35,10 @@
         <p>{{ $t('labels.NoFlatsFound') }}</p>
       </div>
       <list-loading
-        v-show="shouldLoadMore"
         ref="Loading"
-        class="load-more"
+        v-show="shouldLoadMore"
         @load="handleLoad"
+        class="load-more"
       />
     </div>
     <div v-if="loading" class="list-scrollable-wrapper">
@@ -121,9 +122,9 @@ export default {
     flats() {
       return this.flatsState.map((item) => {
         return {
+          id: item.id,
           title: item.project_name[this.locale],
           bedrooms_count: item.bedrooms_count,
-          id: item.id,
           price: `${item.price} $`,
           image: item.render_url,
           url: `/${this.locale}/sales/customize/${item.id}`,
