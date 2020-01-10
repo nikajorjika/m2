@@ -69,6 +69,7 @@
             />
 
             <TextSlider
+              id="appliances-slider"
               v-if="flatExists && flatAppliances.length"
               :items="flatAppliances"
               :slick-options="slickOptions2"
@@ -534,16 +535,22 @@ export default {
         })
     },
     displaySwipeIcon() {
-      const containers = document.querySelectorAll('.text-slider-container')
-      const container = containers.length === 1 ? containers[0] : containers[1]
-      const els = container.getElementsByClassName('slick-track')
-      const el = els.length !== 0 ? els[0] : null
+      const container = document.getElementById('appliances-slider')
 
-      if (el !== null && container.clientWidth < el.clientWidth) {
-        this.showSwipeIcon = true
+      if (container) {
+        const els = container.getElementsByClassName('slick-track')
+        const el = els.length !== 0 ? els[0] : null
+
+        if (el && container.clientWidth < el.clientWidth) {
+          this.showSwipeIcon = true
+        }
+
+        return el !== null
+      } else {
+        clearInterval(this.intervalHandle)
       }
 
-      return el !== null
+      return container !== null
     }
   }
 }

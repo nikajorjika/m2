@@ -500,7 +500,7 @@ export default {
     width: calc(100% + 25px);
     height: fit(360);
     margin: auto auto auto -10px;
-    padding: 0 15px 0 10px;
+    padding: 4px 15px 4px 10px;
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -573,8 +573,10 @@ export default {
   figure {
     display: flex;
     justify-content: center;
+    position: relative;
+    top: 0;
     width: 37.5%;
-    height: 100%;
+    height: calc(100% + 2px);
     padding: 12px;
     background-color: #f2cab1;
   }
@@ -629,8 +631,11 @@ export default {
         z-index: 1;
         width: 6px;
         height: 12px;
-        border: solid #f26529;
-        border-width: 0 2px 2px 0;
+        border-right-width: 2px;
+        border-bottom-width: 2px;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        border-color: #f26529;
         transform: rotate(45deg);
       }
     }
