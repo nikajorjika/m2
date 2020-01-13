@@ -102,7 +102,7 @@ export default {
             en: 'FAQ',
             ka: 'კითხვები'
           },
-          path: `/${this.locale}/model/faq`,
+          path: `/${this.locale}/model/faq?redirect=${this.$route.name}`,
           component: QuestionsIcon
         }
       ]

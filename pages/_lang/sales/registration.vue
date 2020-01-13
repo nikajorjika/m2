@@ -12,7 +12,7 @@
       <div v-if="!codeSent" class="page-flat-number__form">
         <registration-form
           :loading="loading"
-          :errorKey="errorKey"
+          :error-key="errorKey"
           :error="error"
           @removeErrors="() => (error = '')"
           @register="handleRegistration"
@@ -41,7 +41,7 @@ export default {
     ConfirmPhoneForm
   },
   layout: 'SalesWithoutNavigation',
-  auth: 'guest',
+  middleware: 'onlyGuest',
   data() {
     return {
       codeSent: false,
