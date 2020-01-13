@@ -26,12 +26,13 @@ export default {
   },
   methods: {
     toggleLanguage() {
-      const { params, name } = this.$route
+      const { params, name, query } = this.$route
       const html = document.documentElement
       html.setAttribute('lang', this.opositeLocale)
       this.$router.push({
         name,
-        params: { ...params, lang: this.opositeLocale }
+        params: { ...params, lang: this.opositeLocale },
+        query
       })
     }
   }

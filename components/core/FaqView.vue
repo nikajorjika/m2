@@ -9,13 +9,28 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import LanguageSwitcher from '@/components/core/LanguageSwitcher'
 import CloseButton from '@/components/partials/CloseButton'
 export default {
   components: { CloseButton, LanguageSwitcher },
+  computed: {
+    ...mapGetters({ locale: 'locale' })
+  },
   methods: {
     goBack() {
-      this.$router.go(-1)
+      const query = this.$route.query
+      console.log(query.hasOwnProperty('redirect'))
+      if (query.hasOwnProperty('redirect')) {
+        this.$router.push({
+          name: query.redirect,
+          params: {
+            lang: this.locale
+          }
+        })
+      } else {
+        this.$router.go(-1)
+      }
     }
   }
 }
