@@ -23,6 +23,17 @@ export default {
         ? this.data.message
         : ''
     }
+  },
+  mounted() {
+    const that = this
+
+    setTimeout(
+      () => {
+        that.$eventBus.$emit('closeModal')
+      },
+      3000,
+      that
+    )
   }
 }
 </script>
