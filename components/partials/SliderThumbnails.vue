@@ -88,7 +88,7 @@ export default {
         // Emit custom event
 
         this.$emit('thumbnailChanged', this.activeElIndex)
-      } else {
+      } else if (this.$route.params.page !== 'makeover') {
         // Remove active class
 
         parent.classList.remove('active')

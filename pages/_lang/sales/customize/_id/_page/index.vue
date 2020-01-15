@@ -294,6 +294,13 @@ export default {
       }
     }
   },
+  created() {
+    if (!this.renovationId) {
+      this.$router.push(
+        `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
+      )
+    }
+  },
   mounted() {
     this.$root.$on('saveFlat', this.saveFlat)
 
