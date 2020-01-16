@@ -428,8 +428,6 @@ export default {
         this.$axios
           .post('user/save-flat', data)
           .then((response) => {
-            this.$root.$emit('flatIsSaved')
-
             if (response.status === 200 && response.data.success) {
               this.saveFlatBtnLoading = false
               this.saveFlatBtnMsgShow = true
@@ -441,10 +439,6 @@ export default {
               // Store flat configurations
 
               this.$store.commit('customize/SET_CONFIGURATIONS', data)
-
-              // this.$eventBus.$emit('redirect')
-
-              // this.$eventBus.$emit('continue')
             } else {
               this.saveFlatBtnLoading = false
             }
@@ -453,8 +447,6 @@ export default {
           })
           .catch((e) => {
             this.saveFlatBtnLoading = false
-
-            this.$root.$emit('flatIsSaved')
 
             reject(e)
           })
