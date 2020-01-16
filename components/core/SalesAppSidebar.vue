@@ -30,7 +30,7 @@
     </div>
     <no-ssr>
       <div v-if="showSummon" class="sidebar__sales">
-        <button class="sidebar__sales__button" @click="callForSales">
+        <button @click="callForSales" class="sidebar__sales__button">
           <sells-icon icon-color="white" width="12px" height="12px" />
           <span>
             {{ $t('buttons.Sales') }}
@@ -58,6 +58,11 @@ export default {
     noMargin: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      loading: false
     }
   },
   computed: {
@@ -152,26 +157,33 @@ export default {
         })
         return
       }
-      this.$axios.get('/user/awaiting-status').then((response) => {
-        // Check if sales manager is already called
 
-        if (!response.data.status) {
-          // Open modal
+      if (!this.loading) {
+        this.loading = true
 
-          this.$eventBus.$emit(
-            'openModal',
-            'modal-content-call-sales',
-            this.modalData
-          )
-        } else {
-          // Go to waiting page
+        this.$axios.get('/user/awaiting-status').then((response) => {
+          this.loading = false
 
-          this.$router.push({
-            name: 'lang-sales-waiting',
-            params: { lang: this.locale }
-          })
-        }
-      })
+          // Check if sales manager is already called
+
+          if (!response.data.status) {
+            // Open modal
+
+            this.$eventBus.$emit(
+              'openModal',
+              'modal-content-call-sales',
+              this.modalData
+            )
+          } else {
+            // Go to waiting page
+
+            this.$router.push({
+              name: 'lang-sales-waiting',
+              params: { lang: this.locale }
+            })
+          }
+        })
+      }
     }
   }
 }
