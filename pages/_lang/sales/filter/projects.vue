@@ -4,7 +4,7 @@
       <div class="page-flat-number__title-container">
         <title-with-line
           class="page-flat-number__title"
-          :title="$t('titles.ChooseProjects')"
+          :title="$t('titles.ChooseBlock')"
         />
       </div>
       <!-- <picker-with-gradient-label :items="pickerData"/> -->

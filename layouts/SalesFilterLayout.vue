@@ -15,7 +15,7 @@
     <sale-filter-view>
       <div class="app">
         <nuxt />
-        <sales-aside-filter class="sidebar-filter" />
+        <!-- <sales-aside-filter class="sidebar-filter" /> -->
       </div>
     </sale-filter-view>
     <modal />
@@ -26,7 +26,6 @@ import { mapGetters, mapMutations } from 'vuex'
 import SalesAppSidebar from '@/components/core/SalesAppSidebar'
 import SaleFilterView from '@/components/core/SaleFilterView'
 import PopoverImage from '@/components/partials/PopoverImage'
-import SalesAsideFilter from '@/components/partials/SalesAsideFilter'
 import Registration from '@/components/icons/Registration'
 import QuestionsIcon from '@/components/icons/Questions'
 import MainIcon from '@/components/icons/Main'
@@ -36,7 +35,6 @@ export default {
     SalesAppSidebar,
     SaleFilterView,
     PopoverImage,
-    SalesAsideFilter,
     Modal
   },
   props: {

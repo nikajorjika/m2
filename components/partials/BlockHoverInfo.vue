@@ -6,8 +6,8 @@
         <div class="block-info__number__value">{{ blockNumber }}</div>
       </div>
       <div v-if="displayBottomBlock" class="block-info__flats">
-        <div>{{ cBottomLabel }}</div>
         <div>{{ flatsLeft }}</div>
+        <div>{{ cBottomLabel }}</div>
       </div>
       <div v-if="displayButton" class="block-info__button">
         <button-main-orange
@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     flatsLeft() {
-      return `${this.flatsCount} ${this.$t('labels.flat')}`
+      return `${this.flatsCount}`
     },
     cBottomLabel() {
       return this.bottomLabel
