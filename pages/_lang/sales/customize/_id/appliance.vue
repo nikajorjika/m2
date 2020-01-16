@@ -372,10 +372,6 @@ export default {
           .then((response) => {
             this.$root.$emit('flatIsSaved')
 
-            // Store flat configurations
-
-            this.$store.commit('customize/SET_CONFIGURATIONS', data)
-
             if (response.status === 200 && response.data.success) {
               this.saveFlatBtnLoading = false
               this.saveFlatBtnMsgShow = true
@@ -384,9 +380,13 @@ export default {
                 this.saveFlatBtnMsgShow = false
               }, 3000)
 
+              // Store flat configurations
+
+              this.$store.commit('customize/SET_CONFIGURATIONS', data)
+
               // this.$eventBus.$emit('redirect')
 
-              this.$eventBus.$emit('continue')
+              // this.$eventBus.$emit('continue')
             } else {
               this.saveFlatBtnLoading = false
             }

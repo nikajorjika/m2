@@ -46,8 +46,7 @@ export default {
   },
   data() {
     return {
-      saveFlatBtnLoading: false,
-      saveFlatBtnMsgShow: false
+      saveFlatBtnLoading: false
     }
   },
   computed: {
@@ -84,11 +83,8 @@ export default {
     },
     flatIsSaved() {
       this.saveFlatBtnLoading = false
-      this.saveFlatBtnMsgShow = true
 
-      setTimeout(() => {
-        this.saveFlatBtnMsgShow = false
-      }, 3000)
+      this.$eventBus.$emit('continue')
     }
   }
 }
