@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       blockInfo: null,
-      activeFloor: null,
+      activeFloor: 1,
       distance: 0,
       isDragging: false
     }

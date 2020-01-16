@@ -10,9 +10,12 @@ html {
   box-sizing: border-box;
 }
 
-input, p{
+input {
   font-family: $font;
   user-select: all !important;
+}
+p {
+  font-family: $font;
 }
 *,
 *:before,

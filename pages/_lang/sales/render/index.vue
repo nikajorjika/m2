@@ -22,7 +22,7 @@
           v-if="activeTab === 2"
           :title="$t('titles.PleaseSelectFlatFromRender')"
         />
-        <small>{{ $t('labels.select_only_one') }}</small>
+        <!-- <small>{{ $t('labels.select_only_one') }}</small> -->
       </div>
       <div class="filter-flat__content">
         <div class="filter-flat__content__info">
