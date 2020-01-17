@@ -49,16 +49,13 @@ export default {
       }
     }
   },
+  watch: {
+    price(newValue) {
+      this.currencyConverter(this.price, newValue)
+    }
+  },
   mounted() {
     this.formatPrice()
-  },
-  created() {
-    this.$store.watch(
-      (state, getters) => getters['settings/currency'],
-      (newValue, oldValue) => {
-        this.currencyConverter(this.price, newValue)
-      }
-    )
   },
   methods: {
     formatPrice() {
