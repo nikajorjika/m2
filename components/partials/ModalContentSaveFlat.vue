@@ -46,21 +46,57 @@ export default {
   },
   data() {
     return {
-      saveFlatBtnLoading: false,
-      saveFlatBtnMsgShow: false
+      saveFlatBtnLoading: false
     }
   },
   computed: {
-    ...mapGetters(['locale'])
-  },
-  mounted() {
-    this.$root.$on('flatIsSaved', this.flatIsSaved)
+    ...mapGetters({
+      locale: 'locale',
+      flat: 'customize/flat',
+      renovationId: 'customize/renovationId',
+      furnitureId: 'customize/furnitureId',
+      decorationId: 'customize/decorationId',
+      appliancesIds: 'customize/appliancesIds'
+    })
   },
   methods: {
     saveFlat() {
       this.saveFlatBtnLoading = true
 
-      this.$root.$emit('saveFlat')
+      const data = {
+        flat_id: this.flat ? this.flat.id : null,
+        renovation_id: this.renovationId,
+        furniture_id: this.furnitureId,
+        decoration_id: this.decorationId,
+        appliances_ids: this.appliancesIds
+      }
+
+      // Reset flat configurations
+
+      this.$store.commit('customize/SET_CONFIGURATIONS', [])
+
+      return new Promise((resolve, reject) => {
+        this.$axios
+          .post('user/save-flat', data)
+          .then((response) => {
+            if (response.status === 200 && response.data.success) {
+              // Store flat configurations
+
+              this.$store.commit('customize/SET_CONFIGURATIONS', data)
+
+              this.$eventBus.$emit('continue')
+            }
+
+            this.saveFlatBtnLoading = false
+
+            resolve(response)
+          })
+          .catch((e) => {
+            this.saveFlatBtnLoading = false
+
+            reject(e)
+          })
+      })
     },
     continueWithoutSaving() {
       if (
@@ -81,14 +117,6 @@ export default {
         this.$eventBus.$emit('continue')
         // this.$emit('callback', 'continueWithoutSaving')
       }
-    },
-    flatIsSaved() {
-      this.saveFlatBtnLoading = false
-      this.saveFlatBtnMsgShow = true
-
-      setTimeout(() => {
-        this.saveFlatBtnMsgShow = false
-      }, 3000)
     }
   }
 }

@@ -1,44 +1,54 @@
 export default function({ app, store }) {
+  /**
+   * Run this function for each page.
+   */
   app.router.beforeEach((to, from, next) => {
+    // Pattern to test pages against.
+
     const pattern = new RegExp(
       '^\\/((?:[^\\/]+?))\\/sales\\/customize\\/((?:[^\\/]+?))(?:\\/(?=$))?(\\/(makeover|furniture|decoration|appliance))*(\\/)?$',
       'i'
     )
 
-    // Check page
+    // Check page if we are on flat configurations pages
 
-    if (pattern.test(from.fullPath)) {
-      if (!pattern.test(to.fullPath)) {
-        if (!to.query.redirect) {
-          // Compare states
+    if (
+      pattern.test(from.fullPath) &&
+      !pattern.test(to.fullPath) &&
+      !to.query.redirect
+    ) {
+      // Compare states to detect if flat configuration is updated during navigation
 
-          if (!isObjectsEqual(configs(store), prevConfigs(store))) {
-            const redirect = from.name !== 'lang-sales-waiting' ? 1 : 0
-            const modalData = {
-              location: {
-                path: to.fullPath,
-                query: { redirect }
-              }
+      isObjectsEqual(configs(store), prevConfigs(store)).then((equal) => {
+        if (!equal) {
+          const redirect = from.name !== 'lang-sales-waiting' ? 1 : 0
+          const modalData = {
+            location: {
+              path: to.fullPath,
+              query: { redirect }
             }
-
-            // Open modal
-
-            app.$eventBus.$emit(
-              'openModal',
-              'modal-content-save-flat',
-              modalData
-            )
-
-            app.$eventBus.$on('continue', () => {
-              next()
-            })
-            return next(false)
           }
-        }
-      }
-    }
 
-    next()
+          // Open modal to suggest flat saving
+
+          app.$eventBus.$emit('openModal', 'modal-content-save-flat', modalData)
+
+          // Direct redirect
+
+          app.$eventBus.$on('continue', () => {
+            next()
+          })
+
+          // Prevent redirect
+
+          return next(false)
+        } else {
+          next()
+        }
+      })
+    } else {
+      next()
+    }
   })
 
   /**
@@ -76,7 +86,7 @@ export default function({ app, store }) {
    * @param second
    * @returns {boolean}
    */
-  const isObjectsEqual = (first, second) => {
+  const isObjectsEqual = async (first, second) => {
     const firstKeys = Object.keys(first)
     const secondKeys = Object.keys(second)
 
@@ -87,7 +97,10 @@ export default function({ app, store }) {
     let firstKey
 
     for (firstKey of firstKeys) {
-      if (first[firstKey] !== second[firstKey]) {
+      const a = await first[firstKey]
+      const b = await second[firstKey]
+
+      if (a !== b) {
         return false
       }
     }
