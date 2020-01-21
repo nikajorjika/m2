@@ -207,7 +207,7 @@ export default {
     padding-right: 60px;
     overflow: hidden;
     box-sizing: content-box;
-    background: url('~@/assets/images/pattern-lines.png') no-repeat;
+    // background: url('~@/assets/images/pattern-lines.png') no-repeat;
     background-size: 11%;
     background-position: 86% top;
     .img-wrapper {
@@ -220,8 +220,8 @@ export default {
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: 60% top;
+      object-fit: contain;
+      object-position: center;
     }
   }
   &__content {
