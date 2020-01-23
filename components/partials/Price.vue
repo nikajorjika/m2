@@ -38,6 +38,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      locale: 'locale',
       defaultCurrency: 'settings/currency',
       currency: 'settings/currency',
       currencyRate: 'settings/currencyRate'
@@ -51,8 +52,16 @@ export default {
   },
   watch: {
     price(newValue) {
-      this.currencyConverter(this.price, newValue)
+      this.currencyConverter(newValue, this.currency)
     }
+  },
+  created() {
+    this.$store.watch(
+      (state, getters) => getters['settings/currency'],
+      (newValue) => {
+        this.currencyConverter(this.price, newValue)
+      }
+    )
   },
   mounted() {
     this.formatPrice()
