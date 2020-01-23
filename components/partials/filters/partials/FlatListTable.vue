@@ -256,7 +256,7 @@ export default {
       }
       &__button {
         width: 114px;
-        margin-right: 10px;
+        margin-right: 20px;
         display: flex;
         justify-content: center;
         margin-left: auto;

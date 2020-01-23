@@ -91,7 +91,6 @@ module.exports = {
         name: 'generalError',
         message: 'Oops...Something went wrong',
         options: {
-          icon: 'error_outline',
           type: 'error'
         }
       }

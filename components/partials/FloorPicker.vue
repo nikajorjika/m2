@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       blockInfo: null,
-      activeFloor: 1,
+      activeFloor: null,
       distance: 0,
       isDragging: false
     }
@@ -92,6 +92,7 @@ export default {
     }
   },
   mounted() {
+    this.changeFloor(1)
     this.$axios
       .get(`/block/21/${this.block}`)
       .then((response) => {

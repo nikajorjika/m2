@@ -1,13 +1,15 @@
 <template>
   <div class="flat-view">
     <div class="flat-view__top-block">
-      <div v-if="!isLogin" class="flat-view__back-button" @click="handleBack">
-        <span class="flat-view__back-button__icon">
-          <caret-right width="10" height="12" icon-color="#432272" />
-          <caret-right width="10" height="12" icon-color="#432272" />
-        </span>
-        <span>{{ $t('labels.back') }}</span>
-      </div>
+      <slot name="backButton">
+        <div v-if="!isLogin" class="flat-view__back-button" @click="handleBack">
+          <span class="flat-view__back-button__icon">
+            <caret-right width="10" height="12" icon-color="#432272" />
+            <caret-right width="10" height="12" icon-color="#432272" />
+          </span>
+          <span>{{ $t('labels.back') }}</span>
+        </div>
+      </slot>
       <div class="flat-view__top-block__session">
         <slot name="sessionStatus" />
       </div>

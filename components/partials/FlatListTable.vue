@@ -205,7 +205,7 @@ export default {
     }
     &__button {
       margin: auto;
-      margin-right: 11px;
+      margin-right: 20px;
       &__icon {
         margin-left: 22px;
       }

@@ -295,29 +295,34 @@ export default {
 .flat-picker {
   g[data-flat],
   polygon,
+  rect,
   g[data-flat] polygon {
     fill: rgb(118, 120, 122) !important;
   }
   g[data-flat].for_sale {
     fill: rgb(0, 152, 148) !important;
+    rect,
     polygon {
       fill: rgb(0, 152, 148) !important;
     }
   }
   g[data-flat].sold {
     fill: rgb(118, 120, 122) !important;
+    rect,
     polygon {
       fill: rgb(118, 120, 122) !important;
     }
   }
   g[data-flat].reserved {
     fill: #bd8cbf !important;
+    rect,
     polygon {
       fill: #bd8cbf !important;
     }
   }
   g[data-flat].for_sale.active,
   g[data-flat].for_sale:hover {
+    rect,
     polygon {
       fill: $orange !important;
     }

@@ -69,8 +69,8 @@
             />
 
             <TextSlider
-              id="appliances-slider"
               v-if="flatExists && flatAppliances.length"
+              id="appliances-slider"
               :items="flatAppliances"
               :slick-options="slickOptions2"
               :swipe-icon="swipeIconVisibility"
@@ -716,7 +716,7 @@ export default {
   }
 
   .list-card__item--white {
-    padding: 19px 12px 14px;
+    padding: 13px 12px 12px;
   }
 }
 </style>

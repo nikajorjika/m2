@@ -22,6 +22,9 @@ export default function({ app, $axios }) {
   })
   $axios.onError((error) => {
     // Do something with request error
+    if (error.response.status !== 500) {
+      return Promise.reject(error)
+    }
     if (process.env.NODE_ENV === 'production') {
       app.$toast.global.generalError().goAway(1500)
     } else {

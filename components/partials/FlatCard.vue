@@ -1,6 +1,6 @@
 <template>
   <div :id="'flat-' + id" class="flat">
-    <div @click="goToFlat" class="flat__image">
+    <div class="flat__image" @click="goToFlat">
       <div v-if="loading" class="loading"></div>
       <div v-else class="image-wrapper">
         <img :src="image" :alt="title" />
@@ -15,8 +15,8 @@
       <div
         v-if="!loading"
         :class="{ active: isFavourite }"
-        @click.stop="!isFavouritesPage ? saveFlat() : removeFlat(id)"
         class="flat__save"
+        @click.stop="!isFavouritesPage ? saveFlat() : removeFlat(id)"
       >
         <favourite-icon
           v-if="!isFavouritesPage"
@@ -50,7 +50,7 @@
     </div>
     <div class="flat__see">
       <div v-if="loading" class="loading"></div>
-      <button v-else @click="goToFlat" class="btn btn-orange">
+      <button v-else class="btn btn-orange" @click="goToFlat">
         <span>{{ $t('buttons.see') }}</span>
         <div class="icon-wrapper">
           <arrow-right
