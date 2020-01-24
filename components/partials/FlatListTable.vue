@@ -45,9 +45,9 @@
         />
         <div
           class="flat-list-table__body__item__color-mark"
-          :style="{ backgroundColor: `#${item.planshet.color}` }"
+          :style="{ backgroundColor: `${item.planshet.color}` }"
         >
-          <span :style="{ backgroundColor: `#${item.planshet.color}` }"></span>
+          <span :style="{ backgroundColor: `${item.planshet.color}` }"></span>
         </div>
         <div class="flat-list-table__body__item__button">
           <custom-button

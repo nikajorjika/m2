@@ -292,7 +292,7 @@ export default {
       return `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
     },
     promptColor() {
-      return this.flatExists ? '#' + this.flat.planshet.color : ''
+      return this.flatExists ? this.flat.planshet.color : ''
     },
     promptText() {
       return this.flatExists
