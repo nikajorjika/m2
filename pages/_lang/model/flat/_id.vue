@@ -200,7 +200,7 @@ export default {
         this.setAlertData({
           show: true,
           text: this.generateTextBasedOnColor(this.flat.planshet.id),
-          color: `#${this.flat.planshet.color}`
+          color: `${this.flat.planshet.color}`
         })
       }
     })
