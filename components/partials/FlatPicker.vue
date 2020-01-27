@@ -16,6 +16,9 @@
         />
       </div>
     </transition>
+    <div class="compass" :class="`compass__direction--${block}`">
+      <compass-icon width="50px" height="50px" />
+    </div>
     <div class="legend">
       <div class="sold legend-item">
         {{ $t('labels.sold') }}
@@ -36,10 +39,12 @@ import BlockOne from '@/components/partials/renders/BlockOne'
 import BlockTwo from '@/components/partials/renders/BlockTwo'
 import BlockThree from '@/components/partials/renders/BlockThree'
 import BlockHoverInfo from '@/components/partials/BlockHoverInfo'
+import CompassIcon from '@/assets/icons/block-compass.svg'
 export default {
   components: {
     BlockOne,
     BlockHoverInfo,
+    CompassIcon,
     BlockTwo,
     BlockThree
   },
@@ -190,6 +195,22 @@ export default {
   background: white;
   position: relative;
   font-family: $font;
+  .compass {
+    position: absolute;
+    bottom: 30px;
+    right: 50px;
+    &__direction {
+      &--1 {
+        transform: rotate(-50deg);
+      }
+      &--2 {
+        transform: rotate(-140deg);
+      }
+      &--3 {
+        transform: rotate(25deg);
+      }
+    }
+  }
   .legend {
     display: flex;
     margin-left: 42px;
