@@ -1,13 +1,13 @@
 <template>
   <div
-    v-if="formattedPrice && currencySymbol"
+    v-if="currencyRate && formattedPrice && currencySymbol"
     class="gradient-label price-label"
   >
     <span>
-      {{ formattedPrice
-      }}<i :class="classObject" style="font-style: normal">{{
-        currencySymbol
-      }}</i>
+      {{ formattedPrice }}
+      <i :class="classObject" style="font-style: normal">
+        {{ currencySymbol }}
+      </i>
     </span>
   </div>
 </template>
@@ -43,6 +43,12 @@ export default {
       currency: 'settings/currency',
       currencyRate: 'settings/currencyRate'
     }),
+    computedCurrencyRate() {
+      return this.currencyRate
+    },
+    computedCurrency() {
+      return this.currency
+    },
     classObject() {
       return {
         'gel-sign': this.currencySymbol === 'i',
@@ -53,15 +59,13 @@ export default {
   watch: {
     price(newValue) {
       this.currencyConverter(newValue, this.currency)
+    },
+    computedCurrencyRate() {
+      this.currencyConverter(this.price, this.currency)
+    },
+    computedCurrency(newValue) {
+      this.currencyConverter(this.price, newValue)
     }
-  },
-  created() {
-    this.$store.watch(
-      (state, getters) => getters['settings/currency'],
-      (newValue) => {
-        this.currencyConverter(this.price, newValue)
-      }
-    )
   },
   mounted() {
     this.formatPrice()

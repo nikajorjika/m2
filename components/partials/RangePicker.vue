@@ -84,7 +84,7 @@ export default {
     position: relative;
     transition: transform 200ms;
     &__label {
-      padding: 17px 10px;
+      padding: 17px 10px 17px 5px;
       flex: 1;
     }
     &.active {
