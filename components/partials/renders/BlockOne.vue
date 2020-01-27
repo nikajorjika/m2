@@ -13,7 +13,7 @@
     >
       <style type="text/css">
         .block-one-0 {
-          opacity: 0.45;
+          opacity: 0;
         }
       </style>
       <image
@@ -120,6 +120,7 @@ svg {
 }
 .block-one-0 {
   &.active {
+    opacity: 0.45;
     fill: #e28d39;
   }
 }

@@ -15,7 +15,7 @@
         fill: #e28d39;
       }
       .block-three-1 {
-        opacity: 0.45;
+        opacity: 0;
       }
     </style>
     <image
@@ -161,6 +161,7 @@ svg {
 }
 .block-three-1 {
   &.active {
+    opacity: 0.45;
     fill: #e28d39;
   }
 }

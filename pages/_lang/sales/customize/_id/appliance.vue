@@ -5,7 +5,7 @@
         <title-with-line :title="title" class="flat-pages-title" />
 
         <h3 class="flat-pages-subtitle">
-          <warning-icon :width="16" :height="16" :iconColor="'#f26529'" />
+          <warning-icon :width="16" :height="16" :icon-color="'#f26529'" />
 
           {{ subtitle }}
         </h3>

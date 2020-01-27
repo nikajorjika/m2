@@ -41,7 +41,7 @@
             class="title"
             :title="$t('titles.ChooseSearchOption')"
           />
-          <small>{{ $t('titles.ChooseYourSearchingMethod') }}</small>
+          <!-- <small>{{ $t('titles.ChooseYourSearchingMethod') }}</small> -->
         </div>
         <div class="index-illustrated-button">
           <illustrated-button

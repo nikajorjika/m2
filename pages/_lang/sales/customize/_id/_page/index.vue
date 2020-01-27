@@ -5,7 +5,7 @@
         <title-with-line :title="title" class="flat-pages-title" />
 
         <h3 class="flat-pages-subtitle">
-          <warning-icon :width="16" :height="16" :iconColor="'#f26529'" />
+          <warning-icon :width="16" :height="16" :icon-color="'#f26529'" />
 
           {{ subtitle }}
         </h3>
@@ -125,8 +125,6 @@ import SalesIcon from '@/components/icons/Alone'
 import SaveButton from '@/components/partials/RegularButton'
 import SaveIcon from '@/components/icons/SaveIcon'
 import WarningIcon from '@/components/icons/Warning'
-// import PriceContainer from '@/components/partials/Price'
-// import CurrencySwitcher from '@/components/partials/CurrencySwitcher'
 
 export default {
   components: {
@@ -144,8 +142,6 @@ export default {
     SaveButton,
     SaveIcon,
     WarningIcon
-    // PriceContainer,
-    // CurrencySwitcher
   },
   layout: 'SalesFlatLayout',
   middleware: 'isAuth',
@@ -219,23 +215,6 @@ export default {
 
       return images
     },
-    // itemPrice() {
-    //   let price = 0
-    //   const items = this.getItems()
-    //
-    //   if (items) {
-    //     items.forEach((item, index) => {
-    //       if (this.activeThumbnail === index && item.price) {
-    //         price = item.price
-    //       }
-    //     })
-    //   }
-    //
-    //   return price
-    // },
-    // formattedItemPrice() {
-    //   return `+ ${this.itemPrice} $`
-    // },
     getNextPage() {
       let page = ''
 
