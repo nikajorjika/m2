@@ -1,5 +1,5 @@
 <template>
-  <client-only>
+  <no-ssr>
     <div class="default-faq-layout">
       <svg width="0" height="0">
         <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
@@ -32,7 +32,7 @@
         </div>
       </faq-view>
     </div>
-  </client-only>
+  </no-ssr>
 </template>
 <script>
 import { mapGetters } from 'vuex'

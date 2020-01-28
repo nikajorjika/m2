@@ -28,7 +28,7 @@
         </div>
       </nuxt-link>
     </div>
-    <client-only>
+    <no-ssr>
       <div v-if="showSummon" class="sidebar__sales">
         <button class="sidebar__sales__button" @click="callForSales">
           <sells-icon icon-color="white" width="12px" height="12px" />
@@ -37,7 +37,7 @@
           </span>
         </button>
       </div>
-    </client-only>
+    </no-ssr>
   </div>
 </template>
 
