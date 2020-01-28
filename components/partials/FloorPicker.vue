@@ -15,7 +15,7 @@
       :active-floor="activeFloor"
       @change="changeFloor"
     />
-    <no-ssr>
+    <client-only>
       <div v-show="blockInfo" ref="SliderInner" class="floor-slider">
         <div class="floor-slider-inner">
           <div v-for="(item, index) in sortedFloors" :key="index">
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-    </no-ssr>
+    </client-only>
     <transition name="fade">
       <div
         v-if="activeFloor !== null && block && blockInfo"

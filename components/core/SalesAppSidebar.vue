@@ -28,16 +28,16 @@
         </div>
       </nuxt-link>
     </div>
-    <no-ssr>
+    <client-only>
       <div v-if="showSummon" class="sidebar__sales">
-        <button @click="callForSales" class="sidebar__sales__button">
+        <button class="sidebar__sales__button" @click="callForSales">
           <sells-icon icon-color="white" width="12px" height="12px" />
           <span>
             {{ $t('buttons.Sales') }}
           </span>
         </button>
       </div>
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 
