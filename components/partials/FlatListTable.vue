@@ -44,6 +44,7 @@
           class="flat-list-table__body__item__component"
         />
         <div
+          v-if="item.planshet"
           class="flat-list-table__body__item__color-mark"
           :style="{ backgroundColor: `${item.planshet.color}` }"
         >
@@ -55,7 +56,7 @@
             :label="$t('labels.LitIt')"
             button-color="orange"
             class="ma"
-            :disabled="item.planshet.id !== chosenPlanshet"
+            :disabled="!item.planshet || item.planshet.id !== chosenPlanshet"
             @click="litCurrentItem(item)"
           >
             <template v-slot:icon>
