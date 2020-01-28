@@ -209,6 +209,8 @@
     "balcony_area": "BALCONY/TERRACE",
     "balcony_area_slash_terrace": "BALCONY/TERRACE",
     "YouCanSelectOnlyOne": "You can select only one",
+    "CodeHasBeenSent": "PLEASE ENTER 4 DIGIT CODE",
+    "CodeHasBeenSentSubTitle": "4 digit code has been sent to your number",
     "FillInPhoneNumberSubTitle": "Fill in phone number with already registered phone",
     "FlatPageTitleMuscat": "DESIGN MUSCAT",
     "FlatPageTitleVanilla": "DESIGN VANILLA",
