@@ -11,11 +11,6 @@
       style="enable-background:new 0 0 772 389;"
       xml:space="preserve"
     >
-      <style type="text/css">
-        .filter-render-class-1 {
-          fill: #f26529;
-        }
-      </style>
       <image
         style="overflow:visible;enable-background:new;"
         width="100%"
@@ -90,6 +85,7 @@ export default {
 <style lang="scss" scoped>
 .filter-render-class-1 {
   opacity: 0;
+  fill: #f26529;
   &.active {
     opacity: 0.85;
   }
