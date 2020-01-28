@@ -137,6 +137,7 @@ svg {
   width: auto;
 }
 .block-two-0 {
+  opacity: 0;
   &.active {
     opacity: 0.45;
     fill: #e28d39;

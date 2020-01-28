@@ -160,6 +160,7 @@ svg {
   width: auto;
 }
 .block-three-1 {
+  opacity: 0;
   &.active {
     opacity: 0.45;
     fill: #e28d39;
