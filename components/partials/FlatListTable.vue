@@ -136,7 +136,7 @@ export default {
     },
     handleLightAllButton() {
       const planshetFlats = this.list.filter(
-        (item) => item.planshet.id === this.chosenPlanshet
+        (item) => item.planshet && item.planshet.id === this.chosenPlanshet
       )
       if (this.timeout) clearTimeout(this.timeout)
       this.lightUpFlat(planshetFlats).then((timeout) => {
@@ -144,9 +144,9 @@ export default {
       })
     },
     litCurrentItem(item) {
-      if (item.planshet.id !== this.chosenPlanshet) {
+      if (item.planshet && item.planshet.id !== this.chosenPlanshet) {
         this.$emit('showPrompt', item.planshet)
-      } else {
+      } else if (item.planshet) {
         if (this.timeout) clearTimeout(this.timeout)
         this.lightUpFlat([item]).then((timeout) => {
           this.timeout = timeout
