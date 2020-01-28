@@ -35,10 +35,10 @@
         <p>{{ $t('labels.NoFlatsFound') }}</p>
       </div>
       <list-loading
-        ref="Loading"
         v-show="shouldLoadMore"
-        @load="handleLoad"
+        ref="Loading"
         class="load-more"
+        @load="handleLoad"
       />
     </div>
     <div v-if="loading" class="list-scrollable-wrapper">

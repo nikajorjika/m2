@@ -300,7 +300,7 @@ export default {
 .render__info {
   position: absolute;
   opacity: 0.99;
-  top: 19%;
+  top: 4px;
   left: 68%;
 }
 .fade-enter-active,
@@ -321,10 +321,11 @@ export default {
     fill: rgb(118, 120, 122) !important;
   }
   g[data-flat].for_sale {
-    fill: rgb(0, 152, 148) !important;
+    fill: $orange !important;
+    opacity: 0.5;
     rect,
     polygon {
-      fill: rgb(0, 152, 148) !important;
+      fill: $orange !important;
     }
   }
   g[data-flat].sold {
@@ -343,9 +344,11 @@ export default {
   }
   g[data-flat].for_sale.active,
   g[data-flat].for_sale:hover {
+    opacity: 1;
     rect,
     polygon {
       fill: $orange !important;
+      opacity: 1;
     }
   }
 }

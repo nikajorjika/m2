@@ -11,9 +11,9 @@
       <div class="queue-info__illustration__title">
         <h4>
           {{ $t('labels.YouCalledForSales') }}
-          <span class="color-orange">{{
+          <!-- <span class="color-orange">{{
             $t('labels.YouAreNumber').replace('%s', currentQueueNumber)
-          }}</span>
+          }}</span> -->
         </h4>
       </div>
       <!--      <div class="queue-info__illustration__sub-title">-->
