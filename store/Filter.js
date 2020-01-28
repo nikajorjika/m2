@@ -390,7 +390,7 @@ export const actions = {
       const formattedFlats = flats.map((item) => {
         return {
           block: item.block,
-          id: item.id
+          id: item.flat_number
         }
       })
       this.$axios
