@@ -47,7 +47,7 @@ export default {
   computed: {
     ...mapGetters('Flats', ['flat']),
     items() {
-      return this.flat.appliance.appliance_info
+      return this.flat.appliances
     },
     itemsData() {
       const arr = []

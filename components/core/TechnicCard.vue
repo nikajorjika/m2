@@ -1,8 +1,8 @@
 <template>
   <div class="card">
     <div
-      class="card__image"
       :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
+      class="card__image"
     ></div>
     <div class="card__content">
       <div class="card__title card__title--red">
@@ -51,6 +51,12 @@ export default {
   computed: {
     ...mapGetters(['locale']),
     imageUrl() {
+      if (this.$route.name === 'lang-renovations-appliance') {
+        return this.item.hasOwnProperty('images') && this.item.images.length
+          ? this.item.images[0].full_url
+          : ''
+      }
+
       return this.item.image ? this.item.image.url : ''
     }
   }
