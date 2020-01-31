@@ -94,7 +94,7 @@
       <template>
         <div class="sales">
           <button-main-orange
-            v-if="flatExists"
+            v-if="flatExists && canSummon"
             :button-text="$t('buttons.callSalesManager')"
             :text-padding="'0 0 0 12px'"
             @click.native.prevent="summonSale"
@@ -105,7 +105,7 @@
           </button-main-orange>
 
           <button-main-orange
-            v-if="flatExists"
+            v-if="flatExists && canSummon"
             :button-text="$t('buttons.reservationRequest')"
             :text-padding="'0 0 0 12px'"
             @click.native.prevent="reserveFlat"
@@ -203,6 +203,9 @@ export default {
     }),
     flatExists() {
       return !!this.flat && Object.keys(this.flat).length
+    },
+    canSummon() {
+      return this.$cookies.get('paveleon-planshet')
     },
     cTitle() {
       let projectName = ''

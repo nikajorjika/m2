@@ -87,7 +87,7 @@
 
     <app-footer>
       <template>
-        <div class="sales">
+        <div v-if="canSummon" class="sales">
           <illustrated-button
             v-if="flatExists"
             :label="salesBtnLabel"
@@ -216,6 +216,9 @@ export default {
       }
 
       return images
+    },
+    canSummon() {
+      return this.$cookies.get('paveleon-planshet')
     },
     imageLabel() {
       if (!this.flatExists)

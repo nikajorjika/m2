@@ -1,6 +1,6 @@
 <template>
   <div class="select" :class="{ open: open }" @click.stop>
-    <div class="select__current" @click="open = !open">
+    <div class="select__current" :class="locale" @click="open = !open">
       <span v-if="!selectedValue">{{ placeholder }}</span>
       <span v-else class="selected">
         <span class="gray">
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ArrowIcon from '@/components/icons/CaretRight'
 export default {
   components: {
@@ -59,19 +60,28 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      locale: 'locale'
+    }),
     selected() {
-      return this.cOptions.find((item) => {
+      const { value, indexLabel, valueLabel } = this.options.find((item) => {
         return item.value === this.selectedValue
       })
+      return {
+        label: indexLabel,
+        valueLabel,
+        value
+      }
     },
     cOptions() {
-      return this.options.map(({ value, indexLabel, valueLabel }) => {
+      const options = this.options.map(({ value, indexLabel, valueLabel }) => {
         return {
           label: indexLabel,
           valueLabel,
           value
         }
       })
+      return options.filter((item) => item.value !== this.selectedValue)
     }
   },
   mounted() {
@@ -122,6 +132,9 @@ export default {
     width: 180px;
     justify-content: space-between;
     position: relative;
+    &.en {
+      line-height: 11px;
+    }
     .arrow {
       position: absolute;
       top: 10px;

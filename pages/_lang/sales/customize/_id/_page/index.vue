@@ -79,7 +79,7 @@
       <template>
         <div class="sales">
           <illustrated-button
-            v-if="flatExists"
+            v-if="flatExists && canSummon"
             :label="salesBtnLabel"
             @click.native.prevent="summonSale"
           >
@@ -176,6 +176,9 @@ export default {
         '%s',
         this.$t('navigation.' + key)
       )
+    },
+    canSummon() {
+      return this.$cookies.get('paveleon-planshet')
     },
     subtitle() {
       const key =

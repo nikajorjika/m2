@@ -81,7 +81,10 @@ export default {
       return this.homepage.length > 0 ? this.homepage : `/${this.locale}/sales`
     },
     showSummon() {
-      return this.$route.name !== 'lang-sales-waiting'
+      return (
+        this.$route.name !== 'lang-sales-waiting' &&
+        this.$cookies.get('paveleon-planshet')
+      )
     },
     items() {
       return [

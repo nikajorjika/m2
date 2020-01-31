@@ -105,7 +105,7 @@
     "IsSold": "Sold",
     "asc": "min-max",
     "desc": "max-min",
-    "sort": "sort",
+    "sort": "SORT",
     "NoFlatsFound": "No flats found by your chosen criteria",
     "FlatsLeftOnThisFloor": "Flats left on this floor",
     "SeeAllFlatsOnThisFloor": "All flats on this floor",

@@ -87,7 +87,7 @@ export default {
                   }
                 })
               } else {
-                this.$router.go(-1)
+                this.$router.push(`/${this.locale}/sales`)
               }
             })
           }
