@@ -72,8 +72,8 @@
             <div class="footer-items__controls__next">
               <button-main-orange
                 :button-text="$t('buttons.next')"
-                text-padding="0 15px 0 32px"
                 @click="nextBtnClickHandler"
+                text-padding="0 15px 0 32px"
               >
                 <template v-slot:icon>
                   <caret-right width="14" height="16" icon-color="#fff" />
@@ -330,6 +330,52 @@ export default {
     this.$root.$on('saveFlat', this.saveFlat)
 
     this.fetchFlat(this.$route.params.id)
+
+    if (
+      !this.renovationId &&
+      this.$route.query.hasOwnProperty('renovationId') &&
+      this.$route.query.renovationId
+    ) {
+      this.$store.commit(
+        'customize/SET_RENOVATION_ID',
+        parseInt(this.$route.query.renovationId)
+      )
+    }
+
+    if (
+      !this.furnitureId &&
+      this.$route.query.hasOwnProperty('furnitureId') &&
+      this.$route.query.furnitureId
+    ) {
+      this.$store.commit(
+        'customize/SET_FURNITURE_ID',
+        parseInt(this.$route.query.furnitureId)
+      )
+    }
+
+    if (
+      !this.decorationId &&
+      this.$route.query.hasOwnProperty('decorationId') &&
+      this.$route.query.decorationId
+    ) {
+      this.$store.commit(
+        'customize/SET_DECORATION_ID',
+        parseInt(this.$route.query.decorationId)
+      )
+    }
+
+    if (
+      !this.appliancesIds.length &&
+      this.$route.query.hasOwnProperty('appliancesIds') &&
+      this.$route.query.appliancesIds
+    ) {
+      this.$store.commit(
+        'customize/SET_APPLIANCES_IDS',
+        this.$route.query.appliancesIds.split(',').map((applianceId) => {
+          return parseInt(applianceId)
+        })
+      )
+    }
 
     this.$nextTick(function() {
       this.fetchRenovations()

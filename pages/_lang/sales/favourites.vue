@@ -87,7 +87,7 @@ export default {
             price: `${item.flat.price} $`,
             image: item.flat.render_url,
             status: item.flat.status,
-            url: `/${this.locale}/sales/customize/${item.flat.id}`,
+            url: this.flatUrl(item),
             subTitle: this.$t('titles.FlatCardSubTitle').replace(
               '%s',
               item.flat.total_area
@@ -97,6 +97,35 @@ export default {
 
         this.loading = false
       })
+    },
+    flatUrl(item) {
+      const params = new URLSearchParams()
+
+      if (item.config.renovation) {
+        params.append('renovationId', item.config.renovation.id)
+      }
+
+      if (item.config.furniture) {
+        params.append('furnitureId', item.config.furniture.id)
+      }
+
+      if (item.config.decoration) {
+        params.append('decorationId', item.config.decoration.id)
+      }
+
+      if (item.config.appliances.length) {
+        const appliancesIds = []
+
+        item.config.appliances.map((appliance) => {
+          appliancesIds.push(appliance.id)
+        })
+
+        params.append('appliancesIds', appliancesIds.join(','))
+      }
+
+      return [...params].length
+        ? `/${this.locale}/sales/customize/${item.flat.id}` + '?' + params
+        : ''
     }
   }
 }
