@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      activeElIndex: 0
+      activeElIndex: null // 0
     }
   },
   computed: {
@@ -52,9 +52,9 @@ export default {
     })
   },
   mounted() {
-    if (this.storeMutationIsRequired()) {
-      this.mutateStore(this.items[0].id)
-    }
+    // if (this.storeMutationIsRequired()) {
+    //   this.mutateStore(this.items[0].id)
+    // }
   },
   methods: {
     normalizeIndex(index) {

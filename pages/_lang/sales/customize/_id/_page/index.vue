@@ -341,6 +341,8 @@ export default {
     },
     thumbnailChanged(activeThumbnail) {
       this.activeThumbnail = activeThumbnail
+
+      this.selectItems()
     },
     nextBtnClickHandler() {
       this.$router.push(this.nextBtnUrl)
