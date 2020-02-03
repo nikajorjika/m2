@@ -99,6 +99,7 @@ export default {
       })
     },
     flatUrl(item) {
+      const url = `/${this.locale}/sales/customize/${item.flat.id}`
       const params = new URLSearchParams()
 
       if (item.config.renovation) {
@@ -123,9 +124,7 @@ export default {
         params.append('appliancesIds', appliancesIds.join(','))
       }
 
-      return [...params].length
-        ? `/${this.locale}/sales/customize/${item.flat.id}` + '?' + params
-        : ''
+      return [...params].length ? url + '?' + params : url
     }
   }
 }
