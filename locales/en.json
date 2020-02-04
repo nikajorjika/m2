@@ -185,7 +185,7 @@
     "ApproximateWaitingTime": "Estimated waiting time %s minutes",
     "DetailsAsPdf": "Details as PDF",
     "CancelSalesRequest": "Cancel Sales Call",
-    "WaitForSalesOrRequestInfo": "Wait for sales manager",
+    "WaitForSalesOrRequestInfo": "The sales manager will come to your table, please wait",
     "flat_count_chosen_by_you": "Number of flats available in this range",
     "entrance": "entrance",
     "projects": "projects",

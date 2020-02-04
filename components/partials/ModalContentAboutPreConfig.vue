@@ -14,7 +14,7 @@
         :label="$t('modal.ok')"
         :label-color="'#3c2270'"
         :icon-margin-left="'0'"
-        @regularBtnClick="close"
+        @regularBtnClick="closeAndRedirect"
       />
     </div>
   </div>
@@ -48,8 +48,16 @@ export default {
     }
   },
   methods: {
-    close() {
-      this.$eventBus.$emit('closeModal')
+    closeAndRedirect() {
+      const that = this
+
+      return new Promise(function(resolve) {
+        resolve(that.$eventBus.$emit('closeModal'))
+      }).then(function() {
+        if (that.data.hasOwnProperty('to')) {
+          that.$router.push(that.data.to)
+        }
+      })
     }
   }
 }

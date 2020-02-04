@@ -104,7 +104,9 @@ export default {
       if (this.openModal) {
         this.openModal = false
 
-        this.$eventBus.$emit('openModal', 'modal-content-about-pre-config', {})
+        this.$eventBus.$emit('openModal', 'modal-content-about-pre-config', {
+          to: this.nextUrl
+        })
       }
 
       // Configure
