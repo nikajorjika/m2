@@ -73,6 +73,14 @@ export default {
       this.loading = true
       this.errorKey = ''
       this.error = ''
+
+      if (
+        this.formData.hasOwnProperty('email') &&
+        !this.formData.email.length
+      ) {
+        delete this.formData.email
+      }
+
       this.registerUser(this.formData)
         .then(({ data }) => {
           this.codeSent = true

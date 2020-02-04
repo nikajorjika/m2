@@ -127,9 +127,9 @@ export default {
       ) {
         this.errors.phone = this.$t('errors.PhoneFieldIsRequired')
       }
-      if (!this.email.length || !this.validateEmail(this.email)) {
-        this.errors.email = this.$t('errors.emailIsNotValid')
-      }
+      // if (!this.email.length || !this.validateEmail(this.email)) {
+      //   this.errors.email = this.$t('errors.emailIsNotValid')
+      // }
       return (
         !this.errors.name.length &&
         !this.errors.phone.length &&

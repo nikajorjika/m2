@@ -135,7 +135,8 @@ export default {
         name: 'lang-sales-registration',
         params: {
           lang: this.locale
-        }
+        },
+        query: this.$route.query
       })
     },
     discardLoginErrorMessage() {
