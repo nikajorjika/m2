@@ -1,4 +1,6 @@
 export default function({ app, store }) {
+  const _ = require('lodash')
+
   /**
    * Run this function for each page.
    */
@@ -19,33 +21,31 @@ export default function({ app, store }) {
     ) {
       // Compare states to detect if flat configuration is updated during navigation
 
-      isObjectsEqual(configs(store), prevConfigs(store)).then((equal) => {
-        if (!equal) {
-          const redirect = from.name !== 'lang-sales-waiting' ? 1 : 0
-          const modalData = {
-            location: {
-              path: to.fullPath,
-              query: { redirect }
-            }
+      if (!_.isEqual(configs(store), prevConfigs(store))) {
+        const redirect = from.name !== 'lang-sales-waiting' ? 1 : 0
+        const modalData = {
+          location: {
+            path: to.fullPath,
+            query: { redirect }
           }
-
-          // Open modal to suggest flat saving
-
-          app.$eventBus.$emit('openModal', 'modal-content-save-flat', modalData)
-
-          // Direct redirect
-
-          app.$eventBus.$on('continue', () => {
-            next()
-          })
-
-          // Prevent redirect
-
-          return next(false)
-        } else {
-          next()
         }
-      })
+
+        // Open modal to suggest flat saving
+
+        app.$eventBus.$emit('openModal', 'modal-content-save-flat', modalData)
+
+        // Direct redirect
+
+        app.$eventBus.$on('continue', () => {
+          next()
+        })
+
+        // Prevent redirect
+
+        return next(false)
+      } else {
+        next()
+      }
     } else {
       next()
     }
@@ -77,34 +77,5 @@ export default function({ app, store }) {
    */
   const prevConfigs = (store) => {
     return store.getters['customize/configurations']
-  }
-
-  /**
-   * Compare objects.
-   *
-   * @param first
-   * @param second
-   * @returns {boolean}
-   */
-  const isObjectsEqual = async (first, second) => {
-    const firstKeys = Object.keys(first)
-    const secondKeys = Object.keys(second)
-
-    if (firstKeys.length !== secondKeys.length) {
-      return false
-    }
-
-    let firstKey
-
-    for (firstKey of firstKeys) {
-      const a = await first[firstKey]
-      const b = await second[firstKey]
-
-      if (a !== b) {
-        return false
-      }
-    }
-
-    return true
   }
 }
