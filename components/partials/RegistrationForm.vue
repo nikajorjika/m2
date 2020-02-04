@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="handleSubmit" class="registration-form">
-    <div class="registration-form__input">
+    <div class="registration-form__input required">
       <input
         v-model="name"
         :placeholder="$t('labels.name')"
@@ -12,7 +12,7 @@
         {{ errors.name }}
       </div>
     </div>
-    <div class="registration-form__input">
+    <div class="registration-form__input required">
       <input
         v-model="phone"
         :placeholder="$t('labels.phone')"
@@ -164,6 +164,7 @@ export default {
     margin-top: 5px;
   }
   &__input {
+    position: relative;
     height: 100%;
     input {
       height: 100%;
@@ -176,6 +177,15 @@ export default {
       &:focus {
         outline: none;
       }
+    }
+    &.required::after {
+      content: '*';
+      position: absolute;
+      top: -10px;
+      right: -5px;
+      z-index: 1;
+      color: red;
+      transform: scale3d(1.35, 1.35, 1.35);
     }
   }
   &__button {
