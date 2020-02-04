@@ -46,14 +46,14 @@ export default {
           value: 'finished'
         },
         {
-          icon: PlannedIcon,
-          name: this.$t('status.planned'),
-          value: 'planned'
-        },
-        {
           icon: InProgressIcon,
           name: this.$t('status.ongoing'),
           value: 'ongoing'
+        },
+        {
+          icon: PlannedIcon,
+          name: this.$t('status.planned'),
+          value: 'planned'
         }
       ]
     }

@@ -1,8 +1,8 @@
 <template>
   <div class="content">
-    <h1 class="title">{{ $t('modal.aboutFilterTitle') }}</h1>
+    <h1 class="title">{{ title }}</h1>
 
-    <p class="description">{{ $t('modal.aboutFilterDesc') }}</p>
+    <p class="description">{{ description }}</p>
 
     <div class="buttons">
       <confirm-button
@@ -35,7 +35,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['locale'])
+    ...mapGetters(['locale']),
+    title() {
+      return this.data.hasOwnProperty('title')
+        ? this.data.title
+        : this.$t('modal.aboutFilterTitle')
+    },
+    description() {
+      return this.data.hasOwnProperty('description')
+        ? this.data.description
+        : this.$t('modal.aboutFilterDesc')
+    }
   },
   methods: {
     close() {

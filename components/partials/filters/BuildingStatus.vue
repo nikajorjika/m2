@@ -49,12 +49,12 @@ export default {
           value: 'finished'
         },
         {
-          name: this.$t('status.planned'),
-          value: 'planned'
-        },
-        {
           name: this.$t('status.ongoing'),
           value: 'ongoing'
+        },
+        {
+          name: this.$t('status.planned'),
+          value: 'planned'
         }
       ]
     }

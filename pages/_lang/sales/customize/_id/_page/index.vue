@@ -278,10 +278,16 @@ export default {
   },
   created() {
     if (!this.renovationId) {
-      this.$router.push(
+      this.$router.replace(
         `/${this.locale}/sales/customize/${this.$route.params.id}/makeover`
       )
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.redirectOrOpenModal(to, from, next)
+  },
+  beforeRouteLeave(to, from, next) {
+    this.redirectOrOpenModal(to, from, next)
   },
   mounted() {
     this.$root.$on('saveFlat', this.saveFlat)
@@ -469,6 +475,24 @@ export default {
             item.classList.remove('active')
           }
         })
+      }
+    },
+    redirectOrOpenModal(to, from, next) {
+      if (
+        !this.renovationId &&
+        (to.name === 'lang-sales-customize-id-page' ||
+          to.name === 'lang-sales-customize-id-appliance')
+      ) {
+        // If renovation isn't selected display modal message
+
+        this.$eventBus.$emit('openModal', 'modal-content-about-pre-config', {
+          title: this.$t('modal.renovationIsRequiredTitle'),
+          description: this.$t('modal.renovationIsRequiredDesc')
+        })
+      } else {
+        // If renovation selected redirect to the next page
+
+        next()
       }
     }
   }

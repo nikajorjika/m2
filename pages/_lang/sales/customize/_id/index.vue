@@ -324,6 +324,19 @@ export default {
       }
     }
   },
+  beforeRouteLeave(to, from, next) {
+    if (
+      to.name === 'lang-sales-customize-id-page' &&
+      to.params.hasOwnProperty('page') &&
+      to.params.page !== 'makeover'
+    ) {
+      next(`/${this.locale}/sales/customize/${this.$route.params.id}/makeover`)
+    } else if (to.name === 'lang-sales-customize-id-appliance') {
+      next(`/${this.locale}/sales/customize/${this.$route.params.id}/makeover`)
+    }
+
+    next()
+  },
   mounted() {
     this.prevFlatId = this.flat.id
 

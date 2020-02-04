@@ -45,10 +45,12 @@
     "successfulReservation": "Your chosen flat is already booked",
     "failedReservation": "Your chosen flat couldn't be booked",
     "aboutFilterTitle": "About filters",
-    "aboutFilterDesc": "By selecting this filter, we will offer you the recommended pre-filters, which you can change",
+    "aboutFilterDesc": "The selected filters are filled by the recommendation of m2 and you can adjust them",
     "ok": "OK",
     "favouritesPageModal": "Do you really want to remove this flat?",
-    "sentSuccessfully": "Your email sent successfully"
+    "sentSuccessfully": "Your email sent successfully",
+    "renovationIsRequiredTitle": "About renovation",
+    "renovationIsRequiredDesc": "The cost of renovation is included in the cost of the apartment and its selection is mandatory"
   },
   "messages": {
     "savedFlat": "Your chosen flats is saved successfully",
