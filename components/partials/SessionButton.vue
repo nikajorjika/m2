@@ -47,10 +47,15 @@ export default {
     }),
     handleInactivity() {
       if (this.isLoggedIn) {
-        const app = this.$cookies.get('paveleon-app')
-        const redirectUrl = `/${this.locale}/${app}`
-        this.logout()
-        this.$router.push(redirectUrl)
+        this.$axios.get('user/has-summoned').then(({ data }) => {
+          const { hasSummoned } = data
+          if (!hasSummoned) {
+            const app = this.$cookies.get('paveleon-app')
+            const redirectUrl = `/${this.locale}/${app}`
+            this.logout()
+            this.$router.push(redirectUrl)
+          }
+        })
       }
     },
     handleClick() {
