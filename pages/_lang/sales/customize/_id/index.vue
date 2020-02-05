@@ -72,8 +72,8 @@
             <div class="footer-items__controls__next">
               <button-main-orange
                 :button-text="$t('buttons.next')"
-                @click="nextBtnClickHandler"
                 text-padding="0 15px 0 32px"
+                @click="nextBtnClickHandler"
               >
                 <template v-slot:icon>
                   <caret-right width="14" height="16" icon-color="#fff" />

@@ -26,6 +26,7 @@ export default {
   computed: {
     ...mapGetters({
       user: 'auth/user',
+      summonStatus: 'Sales/hasSummonedSale',
       locale: 'locale'
     }),
     isLoggedIn() {
@@ -37,10 +38,21 @@ export default {
         : this.$t('buttons.authorize')
     }
   },
+  mounted() {
+    this.$eventBus.$on('inactive', this.handleInactivity)
+  },
   methods: {
     ...mapActions({
       logout: 'auth/logout'
     }),
+    handleInactivity() {
+      if (this.isLoggedIn) {
+        const app = this.$cookies.get('paveleon-app')
+        const redirectUrl = `/${this.locale}/${app}`
+        this.logout()
+        this.$router.push(redirectUrl)
+      }
+    },
     handleClick() {
       if (this.isLoggedIn) {
         this.showModal = true

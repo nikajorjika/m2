@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Logo from '@/components/core/Logo'
 import MainIcon from '@/components/icons/Main'
 import QuestionsIcon from '@/components/icons/Questions'
@@ -150,6 +150,9 @@ export default {
     this.pusher.unsubscribe('confirmSaleUser')
   },
   methods: {
+    ...mapMutations({
+      setSalesState: 'Sales/SET'
+    }),
     callForSales() {
       if (!this.isLoggedIn) {
         this.$router.push({
@@ -177,6 +180,10 @@ export default {
               'modal-content-call-sales',
               this.modalData
             )
+            this.setSalesState({
+              key: 'hasSummonedSale',
+              value: true
+            })
           } else {
             // Go to waiting page
 

@@ -1,9 +1,11 @@
 const state = () => ({
-  temporaryToken: null
+  temporaryToken: null,
+  hasSummonedSale: false
 })
 
 const getters = {
-  temporaryToken: (state) => state.temporaryToken
+  temporaryToken: (state) => state.temporaryToken,
+  hasSummonedSale: (state) => state.hasSummonedSale
 }
 
 const mutations = {
