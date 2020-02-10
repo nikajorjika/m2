@@ -53,6 +53,7 @@ export default {
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
       filters: 'Filter/filters',
+      setByPresets: 'Filter/setByPresets',
       currency: 'settings/currency',
       currencyRate: 'settings/currencyRate',
       totalCount: 'Filter/totalCount'
@@ -91,6 +92,12 @@ export default {
       handler: 'handleCurrencyChange'
     }
   },
+  mounted() {
+    this.$eventBus.$on('closeModal', () => {
+      this.loading = true
+      this.$nextTick(() => (this.loading = false))
+    })
+  },
   methods: {
     ...mapMutations({
       setFilter: 'Filter/SET_FILTER_ITEM',
@@ -98,18 +105,34 @@ export default {
     }),
     handleChange(data) {
       clearTimeout(this.timeout)
-      this.setLoader(true)
-      if (this.currency === 'GEL') {
-        data = {
-          max: data.max / this.currencyRate,
-          min: data.min / this.currencyRate
-        }
-      }
       this.timeout = setTimeout(() => {
-        this.setFilter({
-          key: 'price',
-          value: data
-        })
+        if (this.currency === 'GEL') {
+          data = {
+            max: data.max / this.currencyRate,
+            min: data.min / this.currencyRate
+          }
+        }
+        const filter = { ...this.filters.price }
+        data.min = data.min ? data.min : 0
+        filter.min = filter.min ? filter.min : 0
+        const isInitial =
+          parseInt(filter.min) === parseInt(Math.round(data.min)) &&
+          parseInt(filter.max) === parseInt(Math.round(data.max))
+        if (this.setByPresets && !isInitial) {
+          this.$eventBus.$emit('openModal', 'modal-remove-preset-filters', {
+            filters: { ...this.filters },
+            change: {
+              key: 'price',
+              value: data
+            }
+          })
+        } else {
+          this.setLoader(true)
+          this.setFilter({
+            key: 'price',
+            value: data
+          })
+        }
       }, 500)
     },
     skipPrice() {

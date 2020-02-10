@@ -11,7 +11,7 @@
         <p>{{ $t('errors.NoFlatsInThisFloorRange') }}</p>
       </div>
       <select-range
-        v-if="minFloor >= 0 && maxFloor"
+        v-if="minFloor >= 0 && maxFloor && !loading"
         class="range-picker"
         :min-value="minFloor"
         :max-value="maxFloor"
@@ -40,11 +40,17 @@ export default {
   },
   middleware: 'isAuth',
   layout: 'SalesFilterLayout',
+  data() {
+    return {
+      loading: false
+    }
+  },
   computed: {
     ...mapGetters({
       locale: 'locale',
       filterDefaults: 'Filter/filterDefaults',
       filters: 'Filter/filters',
+      setByPresets: 'Filter/setByPresets',
       totalCount: 'Filter/totalCount'
     }),
     filterFloor() {
@@ -69,6 +75,12 @@ export default {
       }
     }
   },
+  mounted() {
+    this.$eventBus.$on('closeModal', () => {
+      this.loading = true
+      this.$nextTick(() => (this.loading = false))
+    })
+  },
   methods: {
     ...mapMutations({
       setFilter: 'Filter/SET_FILTER_ITEM',
@@ -76,12 +88,29 @@ export default {
     }),
     handleChange(data) {
       clearTimeout(this.timeout)
-      this.setLoader(true)
       this.timeout = setTimeout(() => {
-        this.setFilter({
-          key: 'floors',
-          value: data
-        })
+        const filter = { ...this.filterFloor }
+        data.min = data.min ? data.min : 0
+        filter.min = filter.min ? filter.min : 0
+        const isInitial =
+          parseInt(filter.min) === parseInt(data.min) &&
+          parseInt(filter.max) === parseInt(data.max)
+
+        if (this.setByPresets && !isInitial) {
+          this.$eventBus.$emit('openModal', 'modal-remove-preset-filters', {
+            filters: { ...this.filters },
+            change: {
+              key: 'floors',
+              value: data
+            }
+          })
+        } else {
+          this.setLoader(true)
+          this.setFilter({
+            key: 'floors',
+            value: data
+          })
+        }
       }, 500)
     },
     skipFloor() {

@@ -96,6 +96,7 @@ export default {
     ...mapMutations({
       setFilterItem: 'Filter/SET_FILTER_ITEM',
       setFilterLoader: 'Filter/SET_FILTER_LOADER',
+      setState: 'Filter/SET',
       setFilterDefaults: 'Filter/SET_FILTERS_BULK'
     }),
     handleChange(data) {
@@ -108,6 +109,11 @@ export default {
           to: this.nextUrl
         })
       }
+
+      this.setState({
+        key: 'setByPresets',
+        value: true
+      })
 
       // Configure
 

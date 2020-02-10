@@ -1,6 +1,7 @@
 export const state = () => ({
   flats: [],
   presets: [],
+  setByPresets: false,
   chosenBlockNumber: null,
   showFloorFooter: false,
   loadingCount: true,
@@ -74,6 +75,7 @@ export const getters = {
   loadingCount: (state) => state.loadingCount,
   blocks: (state) => state.blocks,
   view: (state) => state.filters.view,
+  setByPresets: (state) => state.setByPresets,
   totalCount: (state) => state.filteredTotalCount,
   filterDefaults: (state) => state.filterDefaults,
   chosenBlockNumber: (state) => state.chosenBlockNumber,

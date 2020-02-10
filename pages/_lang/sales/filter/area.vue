@@ -52,7 +52,8 @@ export default {
       filters: 'Filter/filters',
       currency: 'settings/currency',
       currencyRate: 'settings/currencyRate',
-      totalCount: 'Filter/totalCount'
+      totalCount: 'Filter/totalCount',
+      setByPresets: 'Filter/setByPresets'
     }),
     filterArea() {
       return {
@@ -78,6 +79,12 @@ export default {
       handler: 'handleCurrencyChange'
     }
   },
+  mounted() {
+    this.$eventBus.$on('closeModal', () => {
+      this.loading = true
+      this.$nextTick(() => (this.loading = false))
+    })
+  },
   methods: {
     ...mapMutations({
       setFilter: 'Filter/SET_FILTER_ITEM',
@@ -85,12 +92,29 @@ export default {
     }),
     handleChange(data) {
       clearTimeout(this.timeout)
-      this.setLoader(true)
       this.timeout = setTimeout(() => {
-        this.setFilter({
-          key: 'area',
-          value: data
-        })
+        const filter = { ...this.filterArea }
+        data.min = data.min ? data.min : 0
+        filter.min = filter.min ? filter.min : 0
+        const isInitial =
+          parseInt(filter.min) === parseInt(data.min) &&
+          parseInt(filter.max) === parseInt(data.max)
+
+        if (this.setByPresets && !isInitial) {
+          this.$eventBus.$emit('openModal', 'modal-remove-preset-filters', {
+            filters: { ...this.filters },
+            change: {
+              key: 'area',
+              value: data
+            }
+          })
+        } else {
+          this.setLoader(true)
+          this.setFilter({
+            key: 'area',
+            value: data
+          })
+        }
       }, 500)
     },
     skipPrice() {
