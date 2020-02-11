@@ -64,6 +64,12 @@
 
           <currency-switcher v-if="flatExists" />
 
+          <div class="about-payment-methods">
+            {{ $t('descriptions.aboutPaymentMethods') }}
+
+            <info-icon :fill="'#f26529'" :width="12" :height="12" />
+          </div>
+
           <div class="footer-items__controls">
             <!-- <div class="footer-items__controls__skip">
               <skip-button :url="skipBtnUrl" />
@@ -72,8 +78,8 @@
             <div class="footer-items__controls__next">
               <button-main-orange
                 :button-text="$t('buttons.next')"
-                text-padding="0 15px 0 32px"
                 @click="nextBtnClickHandler"
+                text-padding="0 15px 0 32px"
               >
                 <template v-slot:icon>
                   <caret-right width="14" height="16" icon-color="#fff" />
@@ -138,6 +144,7 @@ import SaveIcon from '@/components/icons/SaveIcon'
 import IllustratedButton from '@/components/partials/IllustratedButton'
 import ManagerIcon from '@/assets/icons/Manager1.svg'
 import SalesIcon from '@/components/icons/Alone'
+import InfoIcon from '@/components/icons/Info'
 
 export default {
   layout: 'SalesFlatLayout',
@@ -160,7 +167,8 @@ export default {
     SaveIcon,
     IllustratedButton,
     ManagerIcon,
-    SalesIcon
+    SalesIcon,
+    InfoIcon
   },
   data() {
     return {
@@ -591,6 +599,23 @@ export default {
         width: 264px;
         justify-content: space-between;
         align-items: center;
+      }
+
+      .about-payment-methods {
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-left: 15px;
+        font-family: $font;
+        font-size: 12px;
+        color: $orange;
+        white-space: nowrap;
+
+        svg {
+          position: absolute;
+          top: 4px;
+          right: -12px;
+        }
       }
     }
   }

@@ -278,7 +278,8 @@
   "descriptions": {
     "ModelIndexPage": "In order to choose the most suitable home for you follow the navigation of our APP.<br><br>We present innovative project of m² - new district m³. Filters will simplify the process of choosing your future home.<br><br>Find your new home in the new district of m² - m³ Saburtalo.",
     "ModelMainIndexPage": "In order to choose the most suitable home for you follow the navigation of our APP.<br><br>We present innovative project of m² - new district m³. Filters will simplify the process of choosing your future home.<br><br>Find your new home in the new district of m² - m³ Saburtalo.",
-    "flatPagesModal": "If you don't add your apartment it will automatically be lost"
+    "flatPagesModal": "If you don't add your apartment it will automatically be lost",
+    "aboutPaymentMethods": "Contact your sales manager about payment methods"
   },
   "alerts": {
     "planshetColorAlert": "To light up this flat please proceed to %s area"
