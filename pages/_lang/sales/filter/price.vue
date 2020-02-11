@@ -93,7 +93,7 @@ export default {
     }
   },
   mounted() {
-    this.$eventBus.$on('closeModal', () => {
+    this.$eventBus.$on('reset-filters', () => {
       this.loading = true
       this.$nextTick(() => (this.loading = false))
     })
@@ -116,8 +116,8 @@ export default {
         data.min = data.min ? data.min : 0
         filter.min = filter.min ? filter.min : 0
         const isInitial =
-          parseInt(filter.min) === parseInt(Math.round(data.min)) &&
-          parseInt(filter.max) === parseInt(Math.round(data.max))
+          parseInt(Math.round(filter.min)) === parseInt(Math.round(data.min)) &&
+          parseInt(Math.round(filter.max)) === parseInt(Math.round(data.max))
         if (this.setByPresets && !isInitial) {
           this.$eventBus.$emit('openModal', 'modal-remove-preset-filters', {
             filters: { ...this.filters },

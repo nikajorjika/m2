@@ -9,6 +9,7 @@
         <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
       </div>
       <range-picker
+        v-if="!loading"
         :ranges="bedroomsPickerData"
         :preselected="preselectedBedrooms"
         @change="handleBedroomsChange"
@@ -22,6 +23,7 @@
         <small>{{ $t('titles.YouCanSelectOnlyOne') }}</small>
       </div>
       <range-picker
+        v-if="!loading"
         :ranges="flatTypes"
         :preselected="preselectedFlatType"
         :multiple="false"
@@ -54,6 +56,7 @@ export default {
   middleware: 'isAuth',
   data() {
     return {
+      loading: false,
       bedroomsPickerData: [
         {
           icon: Bedroom0,
@@ -98,7 +101,8 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      filters: 'Filter/filters'
+      filters: 'Filter/filters',
+      setByPresets: 'Filter/setByPresets'
     }),
     preselectedBedrooms() {
       const filtersBedrooms = this.filters.bedroom_count.map((item) => {
@@ -125,25 +129,51 @@ export default {
       return `/${this.locale}/sales/filter/projects`
     }
   },
+  mounted() {
+    this.$eventBus.$on('reset-filters', () => {
+      this.loading = true
+      this.$nextTick(() => (this.loading = false))
+    })
+  },
   methods: {
     ...mapMutations({
       setFilter: 'Filter/SET_FILTER_ITEM',
       setLoader: 'Filter/SET_FILTER_LOADER'
     }),
     handleTypesChange(data) {
-      this.setLoader(true)
-      this.setFilter({
-        key: 'type',
-        value: data.length > 0 ? data[0].value : null
-      })
+      if (this.setByPresets) {
+        this.$eventBus.$emit('openModal', 'modal-remove-preset-filters', {
+          filters: { ...this.filters },
+          change: {
+            key: 'type',
+            value: data.length > 0 ? data[0].value : null
+          }
+        })
+      } else {
+        this.setLoader(true)
+        this.setFilter({
+          key: 'type',
+          value: data.length > 0 ? data[0].value : null
+        })
+      }
     },
     handleBedroomsChange(data) {
-      this.setLoader(true)
       data = data.map((item) => item.value)
-      this.setFilter({
-        key: 'bedroom_count',
-        value: data
-      })
+      if (this.setByPresets) {
+        this.$eventBus.$emit('openModal', 'modal-remove-preset-filters', {
+          filters: { ...this.filters },
+          change: {
+            key: 'bedroom_count',
+            value: data
+          }
+        })
+      } else {
+        this.setLoader(true)
+        this.setFilter({
+          key: 'bedroom_count',
+          value: data
+        })
+      }
     },
     skipPrice() {
       this.$router.push(this.nextUrl)

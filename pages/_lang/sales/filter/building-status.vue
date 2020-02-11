@@ -9,6 +9,7 @@
         <small>{{ $t('titles.YouCanSelectMultipe') }}</small>
       </div>
       <picker-with-gradient-label
+        v-if="!loading"
         class="caps"
         :items="pickerData"
         :preselected="preselectedData"
@@ -37,6 +38,7 @@ export default {
   middleware: 'isAuth',
   data() {
     return {
+      loading: false,
       pickerData: [
         {
           icon: CompletedIcon,
@@ -59,7 +61,8 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      filters: 'Filter/filters'
+      filters: 'Filter/filters',
+      setByPresets: 'Filter/setByPresets'
     }),
     preselectedData() {
       return this.pickerData.filter((item) =>
@@ -69,6 +72,12 @@ export default {
     nextUrl() {
       return `/${this.locale}/sales/filter/bedrooms`
     }
+  },
+  mounted() {
+    this.$eventBus.$on('reset-filters', () => {
+      this.loading = true
+      this.$nextTick(() => (this.loading = false))
+    })
   },
   methods: {
     ...mapMutations({
@@ -83,10 +92,21 @@ export default {
       const progress = data.map((item) => {
         return item.value
       })
-      this.setFilter({
-        key: 'building_progress',
-        value: progress
-      })
+      if (this.setByPresets) {
+        this.$eventBus.$emit('openModal', 'modal-remove-preset-filters', {
+          filters: { ...this.filters },
+          change: {
+            key: 'building_progress',
+            value: progress
+          }
+        })
+      } else {
+        this.setLoader(true)
+        this.setFilter({
+          key: 'building_progress',
+          value: progress
+        })
+      }
     }
   }
 }

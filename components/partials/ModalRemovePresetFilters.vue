@@ -48,7 +48,8 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale',
-      filterDefaults: 'Filter/filterDefaults'
+      filterDefaults: 'Filter/filterDefaults',
+      filters: 'Filter/filters'
     }),
     title() {
       return this.data.hasOwnProperty('title')
@@ -80,6 +81,7 @@ export default {
           key: 'setByPresets',
           value: false
         })
+        this.$eventBus.$emit('reset-filters')
       })
     },
     close() {
@@ -90,6 +92,7 @@ export default {
           key: this.data.change.key,
           value: this.data.filters[this.data.change.key]
         })
+        this.$eventBus.$emit('reset-filters')
       })
     }
   }

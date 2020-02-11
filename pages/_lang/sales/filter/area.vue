@@ -80,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    this.$eventBus.$on('closeModal', () => {
+    this.$eventBus.$on('reset-filters', () => {
       this.loading = true
       this.$nextTick(() => (this.loading = false))
     })
