@@ -549,7 +549,6 @@ export default {
       &__controls {
         display: flex;
         margin-left: auto;
-        width: 264px;
         justify-content: space-between;
         align-items: center;
       }
