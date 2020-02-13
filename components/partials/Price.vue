@@ -108,6 +108,7 @@ export default {
   border-radius: 14px;
   overflow: hidden;
   letter-spacing: 0.8px;
+  white-space: nowrap;
   transition: width 200ms ease-in;
 
   span {

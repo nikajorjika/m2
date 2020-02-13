@@ -6,7 +6,7 @@
       <div class="progress__values__value" :style="{ left: `${percentage}%` }">
         {{ `${value}${suffix}` }}
       </div>
-      <div class="progress__values__max">{{ max }}</div>
+      <div class="progress__values__max">{{ `${max}${suffix}` }}</div>
     </div>
     <div class="progress__bar">
       <div
