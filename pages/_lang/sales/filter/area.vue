@@ -2,10 +2,7 @@
   <div class="page-flat-container">
     <div class="page-flat-number">
       <div class="page-flat-number__title-container">
-        <title-with-line
-          class="page-flat-number__title"
-          :title="$t('titles.PickAreaRange')"
-        />
+        <title-with-line class="page-flat-number__title" :title="$t('titles.PickAreaRange')" />
       </div>
       <div class="warning" :class="{ active: totalCount === 0 }">
         <p>{{ $t('errors.NoFlatsInThisAreaRange') }}</p>
@@ -96,9 +93,12 @@ export default {
         const filter = { ...this.filterArea }
         data.min = data.min ? data.min : 0
         filter.min = filter.min ? filter.min : 0
+        console.log('min max', data.min, filter.min)
         const isInitial =
           parseInt(filter.min) === parseInt(data.min) &&
           parseInt(filter.max) === parseInt(data.max)
+        console.log(filter.min, filter.max)
+        console.log(data.min, data.max)
 
         if (this.setByPresets && !isInitial) {
           this.$eventBus.$emit('openModal', 'modal-remove-preset-filters', {
