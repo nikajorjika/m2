@@ -4,7 +4,7 @@ export default function({ app, $axios, store }) {
     clearInterval(interval)
     interval = setInterval(() => {
       app.$eventBus.$emit('inactive')
-    }, 30 * 60 * 1000)
+    }, 5 * 60 * 1000)
   }
   refresh()
   document.addEventListener('click', refresh)
