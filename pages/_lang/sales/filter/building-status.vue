@@ -88,7 +88,6 @@ export default {
       this.$router.push(this.nextUrl)
     },
     handleChange(data) {
-      this.setLoader(true)
       const progress = data.map((item) => {
         return item.value
       })

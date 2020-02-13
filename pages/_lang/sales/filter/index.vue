@@ -42,6 +42,7 @@ export default {
     ...mapGetters({
       locale: 'locale',
       presets: 'Filter/presets',
+      filters: 'Filter/filters',
       defaultFilters: 'Filter/filterDefaults'
     }),
     nextUrl() {
@@ -121,16 +122,33 @@ export default {
       this.chosenPresetArray = data
       const preset = this.chosenPreset.preset
       const filterData = {
-        min_floor: preset.floors_from,
-        max_floor: preset.floors_to,
-        min_area: preset.square_meters_from,
-        max_area: preset.square_meters_to,
+        min_floor:
+          parseInt(preset.floors_from) < this.filters.floors.min ||
+          !preset.floors_from.length
+            ? this.filters.floors.min
+            : preset.floors_from,
+        max_floor:
+          parseInt(preset.floors_to) > this.filters.floors.max ||
+          !preset.floors_to.length
+            ? this.filters.floors.max
+            : parseInt(preset.floors_to),
+        min_area:
+          parseInt(preset.square_meters_from) < this.filters.area.min ||
+          !preset.square_meters_from.length
+            ? this.filters.area.min
+            : parseInt(preset.square_meters_from),
+        max_area:
+          parseInt(preset.square_meters_to) > this.filters.area.max ||
+          !preset.square_meters_to.length
+            ? this.filters.area.max
+            : preset.square_meters_to,
         max_price: this.defaultFilters.max_price,
         min_price: this.defaultFilters.min_price,
         bedroom_count: preset.bedrooms.split(', '),
         type: preset.flat_type
         // wc: preset.wc
       }
+      console.log(filterData)
       this.setFilterDefaults(filterData)
       this.setFilterLoader(true)
     },

@@ -11,6 +11,7 @@
           :flats-count="blockInfo.sellableFlats"
           :block-number="blockInfo.number"
           :display-button="displayButton"
+          :bottom-label="bottomLabel"
           @click="handleChoosingBlock"
         />
       </div>
@@ -37,6 +38,17 @@ export default {
     return {
       activeBlockNumber: null,
       blockInfo: null
+    }
+  },
+  computed: {
+    bottomLabel() {
+      return this.$tc(
+        'labels.FlatsLeftInThisBlock',
+        this.blockInfo.sellableFlats,
+        {
+          count: this.blockInfo.sellableFlats
+        }
+      )
     }
   },
   methods: {

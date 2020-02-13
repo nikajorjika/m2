@@ -40,7 +40,11 @@
           :flats-count="floorFlatCount"
           :block-number="activeFloor"
           :top-label="$t('labels.floor')"
-          :bottom-label="$t('labels.FlatsLeftOnThisFloor')"
+          :bottom-label="
+            $tc('labels.FlatsLeftOnThisFloor', floorFlatCount, {
+              count: floorFlatCount
+            })
+          "
           @click="selectFloor"
         />
       </div>
