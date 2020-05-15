@@ -16,9 +16,9 @@
         }}
       </div>
       <div class="card__button">
-        <GradientButton
-          >{{ $t('labels.appliancePrice') }}: {{ item.price }} $</GradientButton
-        >
+        <GradientButton v-if="item.price">
+          {{ $t('labels.appliancePrice') }}: {{ item.price }} $
+        </GradientButton>
       </div>
     </div>
     <div class="card__maximaze-item">
