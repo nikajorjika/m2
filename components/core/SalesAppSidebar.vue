@@ -106,15 +106,15 @@ export default {
           component: Favourite,
           requiresLoggin: true
         },
-        {
-          title: {
-            en: 'FAQ',
-            ka: 'კითხვები'
-          },
-          path: `/${this.locale}/model/faq?redirect=${this.$route.name}`,
-          component: QuestionsIcon,
-          requiresLoggin: false
-        }
+        // {
+        //   title: {
+        //     en: 'FAQ',
+        //     ka: 'კითხვები'
+        //   },
+        //   path: `/${this.locale}/model/faq?redirect=${this.$route.name}`,
+        //   component: QuestionsIcon,
+        //   requiresLoggin: false
+        // }
       ]
     },
     modalData() {

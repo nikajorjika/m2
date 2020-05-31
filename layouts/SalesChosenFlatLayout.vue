@@ -63,14 +63,14 @@ export default {
           path: `/${this.locale}/sales`,
           component: MainIcon
         },
-        {
-          title: {
-            en: 'FAQ',
-            ka: 'კითხვები'
-          },
-          path: `/${this.locale}/model/faq?redirect=${this.$route.name}`,
-          component: QuestionsIcon
-        }
+        // {
+        //   title: {
+        //     en: 'FAQ',
+        //     ka: 'კითხვები'
+        //   },
+        //   path: `/${this.locale}/model/faq?redirect=${this.$route.name}`,
+        //   component: QuestionsIcon
+        // }
       ]
     }
   },
