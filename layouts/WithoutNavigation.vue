@@ -77,14 +77,14 @@ export default {
           path: `/${this.locale}/sales/registration`,
           component: Registration
         },
-        {
-          title: {
-            en: 'FAQ',
-            ka: 'კითხვები'
-          },
-          path: `/${this.locale}/renovations/faq`,
-          component: QuestionsIcon
-        }
+        // {
+        //   title: {
+        //     en: 'FAQ',
+        //     ka: 'კითხვები'
+        //   },
+        //   path: `/${this.locale}/renovations/faq`,
+        //   component: QuestionsIcon
+        // }
       ]
     }
   },
