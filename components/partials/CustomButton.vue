@@ -1,5 +1,5 @@
 <template>
-  <button :class="customClasses" @click="handleClick" class="btn">
+  <button :class="customClasses" class="btn" @click="handleClick">
     <div class="btn__prefix">
       <slot name="iconLeft" />
     </div>

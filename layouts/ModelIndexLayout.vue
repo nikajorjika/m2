@@ -48,7 +48,7 @@ export default {
           },
           path: `/${this.locale}/sales/registration`,
           component: Registration
-        },
+        }
         // {
         //   title: {
         //     en: 'FAQ',

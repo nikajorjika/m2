@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="registration-form">
+  <form class="registration-form" @submit.prevent="handleSubmit">
     <div class="registration-form__input required">
       <input
         v-model="name"
         :placeholder="$t('labels.name')"
         :disabled="loading"
-        @input="handleInput"
         type="text"
+        @input="handleInput"
       />
       <div v-if="errors.name.length && showErrors" class="error">
         {{ errors.name }}
@@ -17,8 +17,8 @@
         v-model="phone"
         :placeholder="$t('labels.phone')"
         :disabled="loading"
-        @input="handleInput"
         type="text"
+        @input="handleInput"
       />
       <div v-if="errors.phone.length && showErrors" class="error">
         {{ errors.phone }}
@@ -32,8 +32,8 @@
         v-model="email"
         :placeholder="$t('labels.email')"
         :disabled="loading"
-        @input="handleInput"
         type="text"
+        @input="handleInput"
       />
       <div v-if="errors.email.length && showErrors" class="error">
         {{ errors.email }}

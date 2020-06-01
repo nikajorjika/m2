@@ -70,7 +70,7 @@ export default {
           },
           path: `/${this.locale}/sales`,
           component: MainIcon
-        },
+        }
         // {
         //   title: {
         //     en: 'FAQ',
