@@ -7,7 +7,7 @@
     </div>
 
     <div class="right-content">
-      <slot @thumbnailChanged="thumbnailChanged" name="slider-right-content" />
+      <slot name="slider-right-content" @thumbnailChanged="thumbnailChanged" />
     </div>
   </div>
 </template>

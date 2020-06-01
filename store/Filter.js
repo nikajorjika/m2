@@ -275,6 +275,7 @@ export const actions = {
           } else {
             commit('SET_FLATS_DATA', data.data)
           }
+          commit('SET_TOTAL_COUNT', data.meta.total)
           if (!noLoading) {
             commit('SET_FILTER_LOADER', false)
           }
@@ -325,6 +326,7 @@ export const actions = {
     if (views) {
       params.view_ides = views
     }
+    console.log(params)
     return new Promise((resolve, reject) => {
       this.$axios.get('/flats/filtered/count', { params }).then(({ data }) => {
         commit('SET_TOTAL_COUNT', data.count)

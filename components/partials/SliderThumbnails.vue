@@ -8,7 +8,7 @@
         :class="['slider-thumbnail', activeElIndex === index ? 'active' : '']"
         @click="selectItem(item, index, $event)"
       >
-        <span v-text="normalizeIndex(index)" class="index" />
+        <span class="index" v-text="normalizeIndex(index)" />
 
         <figure>
           <img :src="image(item, index)" class="image" alt="Thumbnail" />

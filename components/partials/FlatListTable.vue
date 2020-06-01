@@ -113,9 +113,9 @@ export default {
     this.$store.commit('Filter/SET_FLAT_NUMBER', null)
   },
   mounted() {
-    if (this.totalFlatCount === 0) {
-      this.fetchFilteredDataCount()
-    }
+    // if (this.totalFlatCount === 0) {
+    //   this.fetchFilteredDataCount()
+    // }
   },
   methods: {
     ...mapActions({
@@ -126,13 +126,15 @@ export default {
     handleLoadMore() {
       if (!this.done && !this.requesting) {
         this.requesting = true
-        this.fetchFlats({ page: this.page }).then((response) => {
-          this.page++
-          this.requesting = false
-          if (response.length < 10) {
-            this.done = true
+        this.fetchFlats({ page: this.page, fresh: this.page === 1 }).then(
+          (response) => {
+            this.page++
+            this.requesting = false
+            if (response.length < 10) {
+              this.done = true
+            }
           }
-        })
+        )
       }
     },
     handleLightAllButton() {

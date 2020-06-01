@@ -54,9 +54,9 @@
             v-if="showLightAllButton"
             :label="$t('labels.LitIt')"
             :disabled="item.planshet.id !== chosenPlanshet"
-            @click="litCurrentItem(item)"
             button-color="orange"
             class="ma"
+            @click="litCurrentItem(item)"
           >
             <template v-slot:icon>
               <light-icon

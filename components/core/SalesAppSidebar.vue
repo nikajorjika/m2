@@ -105,7 +105,7 @@ export default {
           path: `/${this.locale}/sales/favourites`,
           component: Favourite,
           requiresLoggin: true
-        },
+        }
         // {
         //   title: {
         //     en: 'FAQ',
