@@ -40,7 +40,9 @@
       <!-- project.building_status -->
     </div>
     <div class="filter-render__render">
-      <filter-render :display-button="true" @seleted="handleBlockSelect" />
+      <!-- <filter-render :display-button="true" @seleted="handleBlockSelect" /> -->
+
+      <filter-render-map></filter-render-map>
     </div>
   </div>
 </template>
@@ -51,9 +53,10 @@ import TitleWithLine from '@/components/partials/TitleWithLine'
 import GradientBlock from '@/components/partials/GradientBlock'
 import GradientProgress from '@/components/partials/GradientProgress'
 import FilterRender from '@/components/partials/FilterRender'
+import FilterRenderMap from '@/components/partials/FilterRenderMap'
 
 export default {
-  components: { TitleWithLine, GradientBlock, GradientProgress, FilterRender },
+  components: { TitleWithLine, GradientBlock, GradientProgress, FilterRender, FilterRenderMap },
   layout: 'ModelFilterLayout',
   middleware: 'RedirectIfNoModel',
   computed: {
