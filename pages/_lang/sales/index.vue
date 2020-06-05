@@ -131,7 +131,7 @@ export default {
       ]
     },
     progress() {
-      return this.project ? this.project.building_status : 0
+      return this.project && this.project.data ? this.project.data.building_status : 0
     }
   },
   mounted() {
