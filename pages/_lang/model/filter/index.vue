@@ -40,9 +40,9 @@
       <!-- project.building_status -->
     </div>
     <div class="filter-render__render">
-      <!-- <filter-render :display-button="true" @seleted="handleBlockSelect" /> -->
+      <filter-render :display-button="true" @seleted="handleBlockSelect" />
 
-      <filter-render-map></filter-render-map>
+      <!-- <filter-render-map></filter-render-map> -->
     </div>
   </div>
 </template>
